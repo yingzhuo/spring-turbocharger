@@ -1,0 +1,42 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        maven {
+            name = '阿里云'
+            url = 'https://maven.aliyun.com/repository/gradle-plugin'
+            allowInsecureProtocol = true
+        }
+        gradlePluginPortal()
+    }
+}
+
+plugins {
+    id 'io.spring.dependency-management' version '1.1.7' apply false
+}
+
+dependencyResolutionManagement {
+    repositories {
+        mavenLocal()
+        maven { name = '阿里云'; url = 'https://maven.aliyun.com/repository/public/' }
+        maven { name = '阿里云(Spring)'; url = 'https://maven.aliyun.com/repository/spring/' }
+        maven { name = 'Spring(GA)'; url = 'https://repo.spring.io/release' }
+        maven { name = 'Spring(Milestone)'; url = 'https://repo.spring.io/milestone' }
+        maven { name = 'Spring(Snapshot)'; url = 'https://repo.spring.io/snapshot' }
+        mavenCentral()
+        google()
+    }
+}
+
+rootProject.name = 'spring-turbocharger'
+includeBuild 'gradle/plugin'
+
+include 'projects:spring-turbo-core'
+include 'projects:spring-turbo-configuration'
+include 'projects:spring-turbo-jackson'
+include 'projects:spring-turbo-jdbc'
+include 'projects:spring-turbo-jwt'
+include 'projects:spring-turbo-webcli'
+include 'projects:spring-turbo-redis'
+include 'projects:spring-turbo-webmvc'
+include 'projects:spring-turbo-security'
+include 'projects:spring-turbo-misc'

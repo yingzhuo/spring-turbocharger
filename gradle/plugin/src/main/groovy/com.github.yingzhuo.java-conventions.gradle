@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'idea'
+    id 'io.spring.dependency-management'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+    options.addBooleanOption('Xdoclint:none', true)
+}
+
+processResources {
+}
+
+test {
+    useJUnitPlatform()
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+configurations.configureEach { config ->
+    exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
+    exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+}

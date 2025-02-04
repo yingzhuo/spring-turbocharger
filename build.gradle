@@ -1,0 +1,10 @@
+plugins {
+}
+
+ext {
+    set('springBootVersion', '3.4.2')
+}
+
+group = 'com.github.yingzhuo'
+version = '3.4.2'
+description = 'Another enhancement library of SpringBoot/SpringFramework. Have fun.'
