@@ -2,9 +2,9 @@ plugins {
 }
 
 ext {
-    set('springBootVersion', '3.4.2')
+    set('springBootVersion', '3.4.3-SNAPSHOT')
 }
 
 group = 'com.github.yingzhuo'
-version = '3.4.2'
+version = '3.4.3-SNAPSHOT'
 description = 'Another enhancement library of SpringBoot/SpringFramework. Have fun.'
