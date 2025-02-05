@@ -1,5 +1,6 @@
 package examples;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -8,8 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 import spring.turbo.module.configuration.env.HoconPropertySourceFactory;
 
+@Slf4j
+@PropertySource(value = "classpath:examples.conf", factory = HoconPropertySourceFactory.class)
 @SpringBootApplication
-@PropertySource(value = {"classpath:examples.conf"}, factory = HoconPropertySourceFactory.class)
 public class ApplicationBoot implements ApplicationRunner {
 
     @Value("${github.url}")
@@ -20,10 +22,10 @@ public class ApplicationBoot implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
-        System.out.println("---");
-        System.out.println(githubUrl);
-        System.out.println("---");
+    public void run(ApplicationArguments args) {
+        log.debug("-----");
+        log.debug("githubUrl: {}", githubUrl);
+        log.debug("-----");
     }
 
 }
