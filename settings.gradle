@@ -30,6 +30,10 @@ dependencyResolutionManagement {
 rootProject.name = 'spring-turbocharger'
 includeBuild 'gradle/plugin'
 
+// 演示程序
+// include 'examples'
+
+// 核心项目
 include 'projects:spring-turbo-core'
 include 'projects:spring-turbo-configuration'
 include 'projects:spring-turbo-jackson'
