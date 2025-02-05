@@ -12,6 +12,7 @@ pluginManagement {
 
 plugins {
     id 'io.spring.dependency-management' version '1.1.7' apply false
+    id 'org.springframework.boot' version '3.4.2' apply false
 }
 
 dependencyResolutionManagement {
@@ -31,7 +32,7 @@ rootProject.name = 'spring-turbocharger'
 includeBuild 'gradle/plugin'
 
 // 演示程序
-// include 'examples'
+include 'examples:use-hocon-as-config-file'
 
 // 核心项目
 include 'projects:spring-turbo-core'

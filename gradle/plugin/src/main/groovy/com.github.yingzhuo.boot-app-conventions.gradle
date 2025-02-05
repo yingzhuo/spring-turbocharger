@@ -1,0 +1,15 @@
+plugins {
+    id 'org.springframework.boot'
+}
+
+tasks.named('jar') { task ->
+    enabled = true
+}
+
+tasks.named('bootJar') { task ->
+    enabled = false
+}
+
+tasks.named('bootBuildImage') { task ->
+    enabled = false
+}
