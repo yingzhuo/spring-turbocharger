@@ -33,6 +33,7 @@ includeBuild 'gradle/plugin'
 
 // 演示程序
 include 'examples:use-hocon-as-config-file'
+include 'examples:qrcode-gen'
 
 // 核心项目
 include 'projects:spring-turbo-core'

@@ -1,7 +1,7 @@
 package spring.turbo.module.misc.captcha.support;
 
 import org.springframework.beans.factory.InitializingBean;
-import spring.turbo.bean.injection.ApplicationName;
+import org.springframework.beans.factory.annotation.Value;
 import spring.turbo.util.StringUtils;
 import spring.turbo.util.UUIDGenerators;
 
@@ -15,7 +15,8 @@ import static spring.turbo.util.StringPool.EMPTY;
  */
 public class SimpleAccessKeyGenerator implements AccessKeyGenerator, InitializingBean {
 
-    @ApplicationName
+//    @ApplicationName
+    @Value("spring.application.name:unknown-application")
     private String applicationName;
 
     @Override

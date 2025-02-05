@@ -45,6 +45,7 @@ publishing {
                         id = 'yingzhuo'
                         name = '应卓'
                         email = 'yingzhor@gmail.com'
+                        roles = ['owner']
                     }
                 }
                 scm {
