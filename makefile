@@ -2,6 +2,7 @@ usage:
 	@echo '==============================================================================================================='
 	@echo 'usage:                         显示本菜单'
 	@echo 'clean:                         清理本项目'
+	@echo 'compile:                       编译项目'
 	@echo 'build:                         构建项目'
 	@echo 'install:                       安装到本地maven仓库'
 	@echo 'publish:                       推送到 oss.sonatype.org'
@@ -14,6 +15,9 @@ information:
 
 clean:
 	@$(CURDIR)/gradlew -q clean
+
+compile:
+	@$(CURDIR)/gradlew classes
 
 build:
 	@$(CURDIR)/gradlew -Dorg.gradle.parallel=true -x test build
@@ -33,4 +37,4 @@ github:
 	@git commit -m "$(shell /bin/date "+%F %T")"
 	@git push
 
-.PHONY: usage information clean build publish install gradle-wrapper github
+.PHONY: usage information clean compile build publish install gradle-wrapper github

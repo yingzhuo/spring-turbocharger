@@ -1,12 +1,12 @@
 package com.github.yingzhuo.turbocharger
 
-import com.github.yingzhuo.turbocharger.support.AbstractPlugin
+import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 /**
  * 显示项目信息插件
  */
-class InformationPlugin extends AbstractPlugin {
+class InformationPlugin extends AbstractPlugin implements Plugin<Project> {
 
 	private static final String TASK_NAME_INFO = 'information'
 
@@ -18,7 +18,7 @@ class InformationPlugin extends AbstractPlugin {
 	private void registerTaskInfo(Project project) {
 		setExtensionsBean(project, TASK_NAME_INFO, new ConfigData())
 		project.tasks.register(TASK_NAME_INFO) { task ->
-			task.group = "help"
+			task.group = "group"
 			task.description = "Show project information"
 			task.doLast {
 				ConfigData config = getExtensionsBean(project, TASK_NAME_INFO)
