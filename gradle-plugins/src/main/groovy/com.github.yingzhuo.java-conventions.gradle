@@ -1,0 +1,60 @@
+plugins {
+    id "java"
+    id "java-library"
+    id "io.spring.dependency-management"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+compileJava {
+    options.compilerArgs += [
+            "-parameters",
+            "-Xlint:unchecked",
+            "-Xlint:cast",
+            "-Xlint:rawtypes",
+            "-Xlint:overloads",
+            "-Xlint:divzero",
+            "-Xlint:finally",
+            "-Xlint:static",
+            // "-Werror",
+    ]
+}
+
+jar {
+    manifest {
+        attributes([
+                "Module-Name"           : "${project.name}",
+                "Build-Time"            : "${buildTimestamp}",
+                "Built-By"              : "Gradle ${gradle.gradleVersion}",
+                "Implementation-Version": "${rootProject.version}",
+        ])
+    }
+}
+
+javadoc {
+    options.addBooleanOption("html5", true)
+    options.addBooleanOption("Xdoclint:none", true)
+}
+
+processResources {
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,18 @@
+import java.time.LocalDateTime
+
+plugins {
+    id "io.spring.dependency-management" version "1.1.7" apply false
+    id "com.github.yingzhuo.information" apply true
+}
+
+ext {
+    // 核心框架版本
+    set("springBootVersion", "3.4.2")
+
+    // 项目相关
+    set("buildTimestamp", "${LocalDateTime.now().format('yyyy-MM-dd HH:mm:ss')}")
+}
+
+group = "com.github.yingzhuo"
+version = "3.4.2.10003"
+description = "Another enhancement library of SpringBoot & SpringFramework. Have fun."
