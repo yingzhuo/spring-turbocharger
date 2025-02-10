@@ -1,6 +1,9 @@
+import java.time.LocalDateTime
+
 plugins {
     id "java"
     id "java-library"
+    id "idea"
     id "io.spring.dependency-management"
 }
 
@@ -40,9 +43,9 @@ jar {
     manifest {
         attributes([
                 "Module-Name"           : "${project.name}",
-                "Build-Time"            : "${buildTimestamp}",
-                "Built-By"              : "Gradle ${gradle.gradleVersion}",
                 "Implementation-Version": "${rootProject.version}",
+                "Built-By"              : "Gradle ${gradle.gradleVersion}",
+                "Build-Time"            : "${LocalDateTime.now().format("yyyy-MM-dd HH:mm:ss")}",
         ])
     }
 }
@@ -53,6 +56,13 @@ javadoc {
 }
 
 processResources {
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = false
+    }
 }
 
 test {
