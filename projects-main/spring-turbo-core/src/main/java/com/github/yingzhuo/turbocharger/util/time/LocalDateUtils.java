@@ -94,7 +94,7 @@ public final class LocalDateUtils {
 	public static boolean isSameDay(LocalDate date1, LocalDate date2) {
 		Assert.notNull(date1, "date1 is required");
 		Assert.notNull(date2, "date2 is required");
-		return date1.compareTo(date2) == 0;
+		return date1.isEqual(date2);
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------

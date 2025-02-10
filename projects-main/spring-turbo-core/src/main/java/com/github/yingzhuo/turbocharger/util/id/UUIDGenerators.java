@@ -16,7 +16,7 @@
  *
  */
 
-package com.github.yingzhuo.turbocharger.util;
+package com.github.yingzhuo.turbocharger.util.id;
 
 import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
 import static com.github.yingzhuo.turbocharger.util.StringPool.HYPHEN;

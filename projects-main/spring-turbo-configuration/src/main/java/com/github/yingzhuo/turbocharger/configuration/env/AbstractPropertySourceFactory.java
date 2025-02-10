@@ -19,7 +19,7 @@
 package com.github.yingzhuo.turbocharger.configuration.env;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
-import com.github.yingzhuo.turbocharger.util.UUIDGenerators;
+import com.github.yingzhuo.turbocharger.util.id.UUIDGenerators;
 import org.springframework.boot.env.PropertySourceLoader;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.support.EncodedResource;

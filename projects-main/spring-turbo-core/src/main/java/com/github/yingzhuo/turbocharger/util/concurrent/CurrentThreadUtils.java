@@ -18,7 +18,7 @@
 
 package com.github.yingzhuo.turbocharger.util.concurrent;
 
-import com.github.yingzhuo.turbocharger.util.UUIDGenerators;
+import com.github.yingzhuo.turbocharger.util.id.UUIDGenerators;
 
 /**
  * 当前线程相关小工具

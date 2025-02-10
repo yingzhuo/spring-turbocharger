@@ -19,7 +19,7 @@
 package com.github.yingzhuo.turbocharger.misc.captcha.support;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
-import com.github.yingzhuo.turbocharger.util.UUIDGenerators;
+import com.github.yingzhuo.turbocharger.util.id.UUIDGenerators;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 

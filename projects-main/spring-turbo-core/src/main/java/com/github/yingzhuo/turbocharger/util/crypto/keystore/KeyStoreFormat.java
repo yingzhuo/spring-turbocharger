@@ -18,6 +18,7 @@
 
 package com.github.yingzhuo.turbocharger.util.crypto.keystore;
 
+import lombok.Getter;
 import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
@@ -34,6 +35,7 @@ import java.io.Serializable;
  * @author 应卓
  * @since 3.3.1
  */
+@Getter
 public enum KeyStoreFormat implements Serializable {
 
 	/**
@@ -93,10 +95,6 @@ public enum KeyStoreFormat implements Serializable {
 	 */
 	public static KeyStoreFormat getDefault() {
 		return PKCS12;
-	}
-
-	public String getValue() {
-		return value;
 	}
 
 }

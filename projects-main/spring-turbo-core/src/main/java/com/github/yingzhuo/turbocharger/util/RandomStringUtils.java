@@ -18,6 +18,7 @@
 
 package com.github.yingzhuo.turbocharger.util;
 
+import com.github.yingzhuo.turbocharger.util.id.UUIDGenerators;
 import org.springframework.lang.Nullable;
 
 import java.util.Random;

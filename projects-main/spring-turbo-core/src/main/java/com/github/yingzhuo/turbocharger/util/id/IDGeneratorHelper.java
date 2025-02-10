@@ -18,8 +18,6 @@
 
 package com.github.yingzhuo.turbocharger.util.id;
 
-import com.github.yingzhuo.turbocharger.util.UUIDGenerators;
-
 import java.net.InetAddress;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
