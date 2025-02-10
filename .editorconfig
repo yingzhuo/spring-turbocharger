@@ -42,5 +42,9 @@ indent_size = 2
 indent_style = tab
 indent_size = 2
 
+[*.gradle]
+indent_style = tab
+indent_size = 2
+
 [*.{bat,cmd}]
 end_of_line = crlf

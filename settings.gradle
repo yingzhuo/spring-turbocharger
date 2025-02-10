@@ -1,24 +1,24 @@
 pluginManagement {
-    repositories {
-        mavenLocal()
-        gradlePluginPortal()
-        maven { name = "阿里云"; url = "https://maven.aliyun.com/repository/gradle-plugin" }
-        mavenCentral()
-        google()
-    }
+	repositories {
+		mavenLocal()
+		gradlePluginPortal()
+		maven { name = "阿里云"; url = "https://maven.aliyun.com/repository/gradle-plugin" }
+		mavenCentral()
+		google()
+	}
 }
 
 dependencyResolutionManagement {
-    repositories {
-        mavenLocal()
-        maven { name = "阿里云"; url = "https://maven.aliyun.com/repository/public/" }
-        maven { name = "阿里云(Spring)"; url = "https://maven.aliyun.com/repository/spring/" }
-        maven { name = "Spring(GA)"; url = "https://repo.spring.io/release" }
-        maven { name = "Spring(Milestone)"; url = "https://repo.spring.io/milestone" }
-        maven { name = "Spring(Snapshot)"; url = "https://repo.spring.io/snapshot" }
-        mavenCentral()
-        google()
-    }
+	repositories {
+		mavenLocal()
+		maven { name = "阿里云"; url = "https://maven.aliyun.com/repository/public/" }
+		maven { name = "阿里云(Spring)"; url = "https://maven.aliyun.com/repository/spring/" }
+		maven { name = "Spring(GA)"; url = "https://repo.spring.io/release" }
+		maven { name = "Spring(Milestone)"; url = "https://repo.spring.io/milestone" }
+		maven { name = "Spring(Snapshot)"; url = "https://repo.spring.io/snapshot" }
+		mavenCentral()
+		google()
+	}
 }
 
 rootProject.name = "spring-turbocharger"

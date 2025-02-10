@@ -1,70 +1,70 @@
 import java.time.LocalDateTime
 
 plugins {
-    id "java"
-    id "java-library"
-    id "idea"
-    id "io.spring.dependency-management"
+	id "java"
+	id "java-library"
+	id "idea"
+	id "io.spring.dependency-management"
 }
 
 dependencyManagement {
-    imports {
-        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
-    }
+	imports {
+		mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+	}
 }
 
 java {
-    withSourcesJar()
-    withJavadocJar()
+	withSourcesJar()
+	withJavadocJar()
 
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
 }
 
 compileJava {
-    options.compilerArgs += [
-            "-parameters",
-            "-Xlint:unchecked",
-            "-Xlint:cast",
-            "-Xlint:rawtypes",
-            "-Xlint:overloads",
-            "-Xlint:divzero",
-            "-Xlint:finally",
-            "-Xlint:static",
-            // "-Werror",
-    ]
+	options.compilerArgs += [
+		"-parameters",
+		"-Xlint:unchecked",
+		"-Xlint:cast",
+		"-Xlint:rawtypes",
+		"-Xlint:overloads",
+		"-Xlint:divzero",
+		"-Xlint:finally",
+		"-Xlint:static",
+		// "-Werror",
+	]
 }
 
 jar {
-    manifest {
-        attributes([
-                "Module-Name"           : "${project.name}",
-                "Implementation-Version": "${rootProject.version}",
-                "Built-By"              : "Gradle ${gradle.gradleVersion}",
-                "Build-Time"            : "${LocalDateTime.now().format("yyyy-MM-dd HH:mm:ss")}",
-        ])
-    }
+	manifest {
+		attributes([
+			"Module-Name"           : "${project.name}",
+			"Implementation-Version": "${rootProject.version}",
+			"Built-By"              : "Gradle ${gradle.gradleVersion}",
+			"Build-Time"            : "${LocalDateTime.now().format("yyyy-MM-dd HH:mm:ss")}",
+		])
+	}
 }
 
 javadoc {
-    options.addBooleanOption("html5", true)
-    options.addBooleanOption("Xdoclint:none", true)
+	options.addBooleanOption("html5", true)
+	options.addBooleanOption("Xdoclint:none", true)
 }
 
 processResources {
 }
 
 idea {
-    module {
-        downloadSources = true
-        downloadJavadoc = false
-    }
+	module {
+		downloadSources = true
+		downloadJavadoc = false
+	}
 }
 
 test {
-    useJUnitPlatform()
+	useJUnitPlatform()
 }
