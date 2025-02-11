@@ -18,7 +18,7 @@ class InformationPlugin extends AbstractPlugin implements Plugin<Project> {
 	private void registerTaskInfo(Project project) {
 		setExtensionsBean(project, TASK_NAME_INFO, new ConfigData())
 		project.tasks.register(TASK_NAME_INFO) { task ->
-			task.group = "group"
+			task.group = "help"
 			task.description = "Show project information"
 			task.doLast {
 				ConfigData config = getExtensionsBean(project, TASK_NAME_INFO)

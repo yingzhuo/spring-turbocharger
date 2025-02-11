@@ -12,6 +12,10 @@ group = "com.github.yingzhuo"
 version = "3.4.2.10004"
 description = "Another enhancement library of SpringBoot & SpringFramework. Have fun."
 
+tasks.named('wrapper') { task ->
+	distributionUrl = 'https://mirrors.cloud.tencent.com/gradle/gradle-8.12.1-bin.zip'
+}
+
 information {
 	text = """
     |Project:
