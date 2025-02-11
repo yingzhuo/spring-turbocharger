@@ -18,9 +18,5 @@ dependencies {
 
 gradlePlugin {
 	plugins {
-		informationPlugin {
-			id = "com.github.yingzhuo.information"
-			implementationClass = "com.github.yingzhuo.turbocharger.InformationPlugin"
-		}
 	}
 }

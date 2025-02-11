@@ -16,9 +16,8 @@
  *
  */
 
-package com.github.yingzhuo.turbocharger.jdbc.util;
+package com.github.yingzhuo.turbocharger.jdbc.datasource;
 
-import com.github.yingzhuo.turbocharger.jdbc.datasource.HikariProperties;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.autoconfigure.jdbc.JdbcConnectionDetails;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -31,6 +30,7 @@ import javax.sql.DataSource;
  * 数据源创建工具
  *
  * @author 应卓
+ * @see HikariDataSource
  * @since 3.4.1
  */
 @SuppressWarnings("unchecked")
@@ -40,6 +40,7 @@ public final class DataSourceFactories {
 	 * 私有构造方法
 	 */
 	private DataSourceFactories() {
+		super();
 	}
 
 	public static <T> T createDataSource(JdbcConnectionDetails connectionDetails, Class<? extends DataSource> type, @Nullable ClassLoader classLoader) {

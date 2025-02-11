@@ -10,9 +10,6 @@ usage:
 	@echo 'github:                        提交文件'
 	@echo '==============================================================================================================='
 
-information:
-	@$(CURDIR)/gradlew -q :information
-
 clean:
 	@$(CURDIR)/gradlew -q clean
 
@@ -37,4 +34,4 @@ github:
 	@git commit -m "$(shell /bin/date "+%F %T")"
 	@git push
 
-.PHONY: usage information clean compile build publish install gradle-wrapper github
+.PHONY: usage clean compile build publish install gradle-wrapper github
