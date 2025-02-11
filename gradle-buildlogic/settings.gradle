@@ -4,4 +4,4 @@ dependencyResolutionManagement {
 	}
 }
 
-rootProject.name = 'build-source'
+rootProject.name = 'gradle-buildlogic'
