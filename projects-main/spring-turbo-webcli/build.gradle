@@ -1,45 +1,45 @@
 plugins {
-	id "buildlogic.java-conventions"
-	id "buildlogic.maven-conventions"
+	id 'buildlogic.java-conventions'
+	id 'buildlogic.maven-conventions'
 }
 
 compileJava {
 	options.compilerArgs += [
-		"-parameters"
+		'-parameters'
 	]
 }
 
 dependencies {
 	// spring-boot & spring
-	testImplementation "org.springframework.boot:spring-boot-starter-test"
-	compileOnly "org.springframework.boot:spring-boot-autoconfigure"
-	compileOnly "org.springframework.boot:spring-boot-starter-aop"
-	compileOnly "org.springframework.boot:spring-boot-starter-web"
-	compileOnly "org.springframework.boot:spring-boot-starter-security"
-	compileOnly "org.springframework.boot:spring-boot-starter-logging"
-	compileOnly "org.springframework.boot:spring-boot-starter-validation"
-	compileOnly "org.springframework.boot:spring-boot-starter-jdbc"
-	compileOnly "org.springframework.boot:spring-boot-configuration-processor"
-	compileOnly "org.springframework.boot:spring-boot-starter-data-redis"
-	compileOnly "org.springframework.boot:spring-boot-autoconfigure-processor"
-	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compileOnly 'org.springframework.boot:spring-boot-autoconfigure'
+	compileOnly 'org.springframework.boot:spring-boot-starter-aop'
+	compileOnly 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.springframework.boot:spring-boot-starter-security'
+	compileOnly 'org.springframework.boot:spring-boot-starter-logging'
+	compileOnly 'org.springframework.boot:spring-boot-starter-validation'
+	compileOnly 'org.springframework.boot:spring-boot-starter-jdbc'
+	compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+	compileOnly 'org.springframework.boot:spring-boot-starter-data-redis'
+	compileOnly 'org.springframework.boot:spring-boot-autoconfigure-processor'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
 	// spring-turbocharger
-	implementation project(":projects-main:spring-turbo-core")
+	implementation project(':projects-main:spring-turbo-core')
 
 	// apache-client (v5)
-	implementation "org.apache.httpcomponents.client5:httpclient5"
-	implementation "org.apache.httpcomponents.client5:httpclient5-fluent"
-	implementation "org.apache.httpcomponents:httpcore"
-	implementation "org.apache.httpcomponents:httpclient:4.5.14"
+	implementation 'org.apache.httpcomponents.client5:httpclient5'
+	implementation 'org.apache.httpcomponents.client5:httpclient5-fluent'
+	implementation 'org.apache.httpcomponents:httpcore'
+	implementation 'org.apache.httpcomponents:httpclient:4.5.14'
 
 	// netty-client
-	compileOnly "io.projectreactor.netty:reactor-netty-http"
+	compileOnly 'io.projectreactor.netty:reactor-netty-http'
 
 	// lombok
-	compileOnly "org.projectlombok:lombok"
-	annotationProcessor "org.projectlombok:lombok"
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 
 	// slf4j
-	implementation "org.slf4j:slf4j-api"
+	implementation 'org.slf4j:slf4j-api'
 }

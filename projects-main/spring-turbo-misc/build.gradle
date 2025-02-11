@@ -1,43 +1,43 @@
 plugins {
-	id "buildlogic.java-conventions"
-	id "buildlogic.maven-conventions"
+	id 'buildlogic.java-conventions'
+	id 'buildlogic.maven-conventions'
 }
 
 dependencies {
 	// spring-boot & spring
-	testImplementation "org.springframework.boot:spring-boot-starter-test"
-	compileOnly "org.springframework.boot:spring-boot-autoconfigure"
-	compileOnly "org.springframework.boot:spring-boot-starter-aop"
-	compileOnly "org.springframework.boot:spring-boot-starter-web"
-	compileOnly "org.springframework.boot:spring-boot-starter-security"
-	compileOnly "org.springframework.boot:spring-boot-starter-logging"
-	compileOnly "org.springframework.boot:spring-boot-starter-validation"
-	compileOnly "org.springframework.boot:spring-boot-starter-jdbc"
-	compileOnly "org.springframework.boot:spring-boot-configuration-processor"
-	compileOnly "org.springframework.boot:spring-boot-starter-data-redis"
-	compileOnly "org.springframework.boot:spring-boot-autoconfigure-processor"
-	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compileOnly 'org.springframework.boot:spring-boot-autoconfigure'
+	compileOnly 'org.springframework.boot:spring-boot-starter-aop'
+	compileOnly 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.springframework.boot:spring-boot-starter-security'
+	compileOnly 'org.springframework.boot:spring-boot-starter-logging'
+	compileOnly 'org.springframework.boot:spring-boot-starter-validation'
+	compileOnly 'org.springframework.boot:spring-boot-starter-jdbc'
+	compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+	compileOnly 'org.springframework.boot:spring-boot-starter-data-redis'
+	compileOnly 'org.springframework.boot:spring-boot-autoconfigure-processor'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
 	// spring-turbocharger
-	implementation project(":projects-main:spring-turbo-core")
+	implementation project(':projects-main:spring-turbo-core')
 
 	// zxing (qrcode tool)
-	compileOnly "com.google.zxing:core:3.5.3"
-	compileOnly "com.google.zxing:javase:3.5.3"
+	compileOnly 'com.google.zxing:core:3.5.3'
+	compileOnly 'com.google.zxing:javase:3.5.3'
 
 	// hutool
-	compileOnly "cn.hutool:hutool-all:5.8.35"
+	compileOnly 'cn.hutool:hutool-all:5.8.35'
 
 	// mustache (text template tool)
-	compileOnly "com.github.spullara.mustache.java:compiler:0.9.14"
+	compileOnly 'com.github.spullara.mustache.java:compiler:0.9.14'
 
 	// pinyin4j
-	compileOnly "com.belerweb:pinyin4j:2.5.1"
+	compileOnly 'com.belerweb:pinyin4j:2.5.1'
 
 	// lombok
-	compileOnly "org.projectlombok:lombok"
-	annotationProcessor "org.projectlombok:lombok"
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 
 	// slf4j
-	implementation "org.slf4j:slf4j-api"
+	implementation 'org.slf4j:slf4j-api'
 }

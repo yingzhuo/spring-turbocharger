@@ -2,7 +2,7 @@ pluginManagement {
 	repositories {
 		mavenLocal()
 		gradlePluginPortal()
-		maven { name = "阿里云"; url = "https://maven.aliyun.com/repository/gradle-plugin" }
+		maven { name = '阿里云'; url = 'https://maven.aliyun.com/repository/gradle-plugin' }
 		mavenCentral()
 		google()
 	}
@@ -11,36 +11,36 @@ pluginManagement {
 dependencyResolutionManagement {
 	repositories {
 		mavenLocal()
-		maven { name = "阿里云"; url = "https://maven.aliyun.com/repository/public/" }
-		maven { name = "阿里云(Spring)"; url = "https://maven.aliyun.com/repository/spring/" }
-		maven { name = "Spring(GA)"; url = "https://repo.spring.io/release" }
-		maven { name = "Spring(Milestone)"; url = "https://repo.spring.io/milestone" }
-		maven { name = "Spring(Snapshot)"; url = "https://repo.spring.io/snapshot" }
+		maven { name = '阿里云'; url = 'https://maven.aliyun.com/repository/public/' }
+		maven { name = '阿里云(Spring)'; url = 'https://maven.aliyun.com/repository/spring/' }
+		maven { name = 'Spring(GA)'; url = 'https://repo.spring.io/release' }
+		maven { name = 'Spring(Milestone)'; url = 'https://repo.spring.io/milestone' }
+		maven { name = 'Spring(Snapshot)'; url = 'https://repo.spring.io/snapshot' }
 		mavenCentral()
 		google()
 	}
 }
 
-rootProject.name = "spring-turbocharger"
-includeBuild "build-source"
+rootProject.name = 'spring-turbocharger'
+includeBuild 'build-source'
 
 // 核心项目
-include "projects-main:spring-turbo-core"
-include "projects-main:spring-turbo-configuration"
-include "projects-main:spring-turbo-jackson"
-include "projects-main:spring-turbo-jdbc"
-include "projects-main:spring-turbo-jwt"
-include "projects-main:spring-turbo-webcli"
-include "projects-main:spring-turbo-redis"
-include "projects-main:spring-turbo-webmvc"
-include "projects-main:spring-turbo-security"
-include "projects-main:spring-turbo-misc"
+include 'projects-main:spring-turbo-core'
+include 'projects-main:spring-turbo-configuration'
+include 'projects-main:spring-turbo-jackson'
+include 'projects-main:spring-turbo-jdbc'
+include 'projects-main:spring-turbo-jwt'
+include 'projects-main:spring-turbo-webcli'
+include 'projects-main:spring-turbo-redis'
+include 'projects-main:spring-turbo-webmvc'
+include 'projects-main:spring-turbo-security'
+include 'projects-main:spring-turbo-misc'
 
 // 演示项目
-include "projects-examples:use-hocon-as-config-file"
-include "projects-examples:qrcode-gen"
-include "projects-examples:stateless-captcha"
-include "projects-examples:stateful-captcha"
-include "projects-examples:spring-security-jwt"
-include "projects-examples:routing-data-source"
-include "projects-examples:web-client"
+include 'projects-examples:use-hocon-as-config-file'
+include 'projects-examples:qrcode-gen'
+include 'projects-examples:stateless-captcha'
+include 'projects-examples:stateful-captcha'
+include 'projects-examples:spring-security-jwt'
+include 'projects-examples:routing-data-source'
+include 'projects-examples:web-client'

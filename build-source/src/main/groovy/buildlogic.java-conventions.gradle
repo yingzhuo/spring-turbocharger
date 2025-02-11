@@ -1,10 +1,10 @@
 import java.time.LocalDateTime
 
 plugins {
-	id "java"
-	id "java-library"
-	id "idea"
-	id "io.spring.dependency-management"
+	id 'java'
+	id 'java-library'
+	id 'idea'
+	id 'io.spring.dependency-management'
 }
 
 dependencyManagement {
@@ -27,15 +27,15 @@ java {
 
 compileJava {
 	options.compilerArgs += [
-		"-parameters",
-		"-Xlint:unchecked",
-		"-Xlint:cast",
-		"-Xlint:rawtypes",
-		"-Xlint:overloads",
-		"-Xlint:divzero",
-		"-Xlint:finally",
-		"-Xlint:static",
-		// "-Werror",
+		'-parameters',
+		'-Xlint:unchecked',
+		'-Xlint:cast',
+		'-Xlint:rawtypes',
+		'-Xlint:overloads',
+		'-Xlint:divzero',
+		'-Xlint:finally',
+		'-Xlint:static',
+		// '-Werror',
 	]
 }
 

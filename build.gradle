@@ -1,15 +1,15 @@
 plugins {
-	id "io.spring.dependency-management" version "1.1.7" apply false
+	id 'io.spring.dependency-management' version '1.1.7' apply false
 }
 
 ext {
 	// 核心框架版本
-	set("springBootVersion", "3.4.2")
+	set('springBootVersion', '3.4.2')
 }
 
-group = "com.github.yingzhuo"
-version = "3.4.2.10005"
-description = "Another enhancement library of SpringBoot & SpringFramework"
+group = 'com.github.yingzhuo'
+version = '3.4.2.10005'
+description = 'Another enhancement library of SpringBoot & SpringFramework'
 
 tasks.named('wrapper') { task ->
 	distributionUrl = 'https://mirrors.cloud.tencent.com/gradle/gradle-8.12.1-bin.zip'
