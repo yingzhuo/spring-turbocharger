@@ -29,15 +29,15 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public class KeyPairPemJwtSignerFactoryBean implements FactoryBean<KeyPairJwtSigner>, InitializingBean {
 
-	private final PemAsymmetricKeyBundleFactoryBean innerFactory = new PemAsymmetricKeyBundleFactoryBean();
+	private final PemAsymmetricKeyBundleFactoryBean delegatingFactory = new PemAsymmetricKeyBundleFactoryBean();
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public KeyPairJwtSigner getObject() {
-		innerFactory.afterPropertiesSet();
-		var bundle = innerFactory.getObject();
+		delegatingFactory.afterPropertiesSet();
+		var bundle = delegatingFactory.getObject();
 		return new KeyPairJwtSigner(bundle.getKeyPair());
 	}
 
@@ -46,7 +46,7 @@ public class KeyPairPemJwtSignerFactoryBean implements FactoryBean<KeyPairJwtSig
 	 */
 	@Override
 	public void afterPropertiesSet() {
-		this.innerFactory.afterPropertiesSet();
+		delegatingFactory.afterPropertiesSet();
 	}
 
 	/**
@@ -58,23 +58,23 @@ public class KeyPairPemJwtSignerFactoryBean implements FactoryBean<KeyPairJwtSig
 	}
 
 	public void setCertificateLocation(String certificateLocation) {
-		innerFactory.setCertificateLocation(certificateLocation);
+		delegatingFactory.setCertificateLocation(certificateLocation);
 	}
 
 	public void setPrivateKeyLocation(String privateKeyLocation) {
-		innerFactory.setPrivateKeyLocation(privateKeyLocation);
+		delegatingFactory.setPrivateKeyLocation(privateKeyLocation);
 	}
 
 	public void setCertificateContent(String certificateContent) {
-		innerFactory.setCertificateContent(certificateContent);
+		delegatingFactory.setCertificateContent(certificateContent);
 	}
 
 	public void setPrivateKeyContent(String privateKeyContent) {
-		innerFactory.setPrivateKeyContent(privateKeyContent);
+		delegatingFactory.setPrivateKeyContent(privateKeyContent);
 	}
 
 	public void setPrivateKeyPassword(String privateKeyPassword) {
-		innerFactory.setPrivateKeyPassword(privateKeyPassword);
+		delegatingFactory.setPrivateKeyPassword(privateKeyPassword);
 	}
 
 }

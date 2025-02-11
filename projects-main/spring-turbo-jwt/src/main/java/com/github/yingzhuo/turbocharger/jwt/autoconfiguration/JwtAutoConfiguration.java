@@ -30,6 +30,8 @@ import org.springframework.context.annotation.Bean;
  * 自动配置类
  *
  * @author 应卓
+ * @see com.github.yingzhuo.turbocharger.jwt.alg.KeyPairPemJwtSignerFactoryBean
+ * @see com.github.yingzhuo.turbocharger.jwt.alg.KeyPairStoreJwtSignerFactoryBean
  * @since 3.3.2
  */
 @AutoConfiguration

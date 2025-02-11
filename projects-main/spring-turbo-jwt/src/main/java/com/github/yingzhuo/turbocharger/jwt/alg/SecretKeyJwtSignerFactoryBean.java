@@ -69,7 +69,7 @@ public class SecretKeyJwtSignerFactoryBean implements FactoryBean<SecretKeyJwtSi
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	public void afterPropertiesSet() {
 		// noop
 	}
 

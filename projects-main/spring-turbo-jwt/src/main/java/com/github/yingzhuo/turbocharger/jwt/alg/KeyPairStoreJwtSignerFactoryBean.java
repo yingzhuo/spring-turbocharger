@@ -30,7 +30,7 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public class KeyPairStoreJwtSignerFactoryBean implements FactoryBean<KeyPairJwtSigner>, InitializingBean {
 
-	private final KeyStoreAsymmetricKeyBundleFactoryBean innerFactory = new KeyStoreAsymmetricKeyBundleFactoryBean();
+	private final KeyStoreAsymmetricKeyBundleFactoryBean delegatingFactory = new KeyStoreAsymmetricKeyBundleFactoryBean();
 
 	/**
 	 * 默认构造方法
@@ -44,8 +44,8 @@ public class KeyPairStoreJwtSignerFactoryBean implements FactoryBean<KeyPairJwtS
 	 */
 	@Override
 	public KeyPairJwtSigner getObject() throws Exception {
-		innerFactory.afterPropertiesSet();
-		var bundle = innerFactory.getObject();
+		delegatingFactory.afterPropertiesSet();
+		var bundle = delegatingFactory.getObject();
 		return new KeyPairJwtSigner(bundle.getKeyPair());
 	}
 
@@ -54,7 +54,7 @@ public class KeyPairStoreJwtSignerFactoryBean implements FactoryBean<KeyPairJwtS
 	 */
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		this.innerFactory.afterPropertiesSet();
+		delegatingFactory.afterPropertiesSet();
 	}
 
 	/**
@@ -66,23 +66,23 @@ public class KeyPairStoreJwtSignerFactoryBean implements FactoryBean<KeyPairJwtS
 	}
 
 	public void setLocation(String keyStoreLocation) {
-		innerFactory.setLocation(keyStoreLocation);
+		delegatingFactory.setLocation(keyStoreLocation);
 	}
 
 	public void setFormat(KeyStoreFormat keyStoreFormat) {
-		innerFactory.setFormat(keyStoreFormat);
+		delegatingFactory.setFormat(keyStoreFormat);
 	}
 
 	public void setStorepass(String storepass) {
-		innerFactory.setStorepass(storepass);
+		delegatingFactory.setStorepass(storepass);
 	}
 
 	public void setAlias(String alias) {
-		innerFactory.setAlias(alias);
+		delegatingFactory.setAlias(alias);
 	}
 
 	public void setKeypass(String keypass) {
-		innerFactory.setKeypass(keypass);
+		delegatingFactory.setKeypass(keypass);
 	}
 
 }

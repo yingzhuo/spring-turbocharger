@@ -24,7 +24,6 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.AuthenticationException;
 
-
 /**
  * 认证失败事件
  *

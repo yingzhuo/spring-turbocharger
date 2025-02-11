@@ -31,8 +31,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import static cn.hutool.core.util.ReflectUtil.newInstance;
 import static com.github.yingzhuo.turbocharger.util.StringUtils.isNotBlank;
+import static com.github.yingzhuo.turbocharger.util.reflection.InstanceUtils.newInstance;
 
 /**
  * {@link PasswordEncoder} 创建工具
@@ -132,7 +132,7 @@ public final class PasswordEncoderFactories {
 	@Nullable
 	private static PasswordEncoder loadInstance(String classname) {
 		try {
-			return newInstance(classname);
+			return (PasswordEncoder) newInstance(classname).orElse(null);
 		} catch (Throwable ignored) {
 			// 加载失败的主要原因:
 			// 1. 没有默认构造方法

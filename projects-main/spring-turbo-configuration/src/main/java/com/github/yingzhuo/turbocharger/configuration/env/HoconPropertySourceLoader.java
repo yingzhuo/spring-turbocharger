@@ -36,6 +36,13 @@ import java.util.*;
 @SuppressWarnings("unchecked")
 public class HoconPropertySourceLoader implements PropertySourceLoader {
 
+	/**
+	 * 默认构造方法
+	 */
+	public HoconPropertySourceLoader() {
+		super();
+	}
+
 	@Override
 	public String[] getFileExtensions() {
 		return new String[]{"conf"};
