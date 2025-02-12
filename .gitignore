@@ -37,6 +37,9 @@ bin/
 !/**/src/**/build
 !/**/src/**/bin
 
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
 # --------------------------------------
 # 构建产物等
 # --------------------------------------
