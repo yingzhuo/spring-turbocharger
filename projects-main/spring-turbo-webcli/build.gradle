@@ -3,12 +3,6 @@ plugins {
 	id 'buildlogic.maven-conventions'
 }
 
-compileJava {
-	options.compilerArgs += [
-		'-parameters'
-	]
-}
-
 dependencies {
 	// spring-boot & spring
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -32,9 +26,6 @@ dependencies {
 	implementation 'org.apache.httpcomponents.client5:httpclient5-fluent'
 	implementation 'org.apache.httpcomponents:httpcore'
 	implementation 'org.apache.httpcomponents:httpclient:4.5.14'
-
-	// netty-client
-	compileOnly 'io.projectreactor.netty:reactor-netty-http'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

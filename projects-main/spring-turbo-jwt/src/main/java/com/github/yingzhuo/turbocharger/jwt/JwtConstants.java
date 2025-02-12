@@ -112,6 +112,7 @@ public final class JwtConstants {
 	 * 私有构造方法
 	 */
 	private JwtConstants() {
+		super();
 	}
 
 }

@@ -24,6 +24,7 @@ import com.github.yingzhuo.turbocharger.jwt.alg.SecretKeyJwtSigner;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SecurityException;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.crypto.SecretKey;
@@ -39,7 +40,13 @@ public class JwtServiceImpl implements JwtService {
 
 	private final JwtSigner signer;
 
+	/**
+	 * 构造方法
+	 *
+	 * @param signer 签名器
+	 */
 	public JwtServiceImpl(JwtSigner signer) {
+		Assert.notNull(signer, "signer must not be null");
 		this.signer = signer;
 	}
 

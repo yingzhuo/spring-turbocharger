@@ -33,6 +33,7 @@ import com.github.yingzhuo.turbocharger.misc.captcha.google.word.AdaptiveRandomW
 public class GoogleCaptchaService extends AbstractGoogleCaptchaService implements CaptchaService {
 
 	public GoogleCaptchaService() {
+		super();
 		backgroundFactory = new SingleColorBackgroundFactory();
 		wordFactory = new AdaptiveRandomWordFactory();
 		fontFactory = new RandomFontFactory();

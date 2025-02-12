@@ -43,7 +43,6 @@ public class MustacheServiceImpl implements MustacheService {
 	 * 默认构造方法
 	 */
 	public MustacheServiceImpl() {
-
 		this.mustacheFactory = new DefaultMustacheFactory(new ClasspathResolver());
 	}
 

@@ -19,6 +19,7 @@
 package com.github.yingzhuo.turbocharger.misc.captcha;
 
 import com.github.yingzhuo.turbocharger.util.io.ImageUtils;
+import lombok.Getter;
 import org.springframework.util.Assert;
 
 import java.awt.image.BufferedImage;
@@ -36,6 +37,8 @@ import java.util.Objects;
 public final class EncodedCaptcha implements Serializable {
 
 	private final Captcha captcha;
+
+	@Getter
 	private final String encodedImage;
 
 	/**
@@ -74,10 +77,6 @@ public final class EncodedCaptcha implements Serializable {
 
 	public BufferedImage getImage() {
 		return captcha.getImage();
-	}
-
-	public String getEncodedImage() {
-		return encodedImage;
 	}
 
 }
