@@ -18,6 +18,9 @@
 
 package com.github.yingzhuo.turbocharger.security.token;
 
+import lombok.Getter;
+
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -25,16 +28,18 @@ import java.util.Objects;
  * @see BasicTokenResolver
  * @since 1.2.3
  */
-public final class BasicToken implements Token {
+public final class BasicToken implements Token, Serializable {
 
 	/**
 	 * 用户名
 	 */
+	@Getter
 	private final String username;
 
 	/**
 	 * 口令
 	 */
+	@Getter
 	private final String password;
 
 	/**
@@ -53,14 +58,6 @@ public final class BasicToken implements Token {
 		this.username = username;
 		this.password = password;
 		this.string = stringValue;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 
 	@Override

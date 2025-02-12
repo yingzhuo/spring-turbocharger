@@ -45,6 +45,7 @@ public final class AuthorityUtils {
 	 * 私有构造方法
 	 */
 	private AuthorityUtils() {
+		super();
 	}
 
 	/**

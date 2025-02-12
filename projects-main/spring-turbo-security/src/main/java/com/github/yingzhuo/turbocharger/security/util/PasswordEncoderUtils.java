@@ -33,6 +33,7 @@ public final class PasswordEncoderUtils {
 	 * 私有构造方法
 	 */
 	private PasswordEncoderUtils() {
+		super();
 	}
 
 	public String encode(CharSequence rawPwd) {

@@ -46,6 +46,7 @@ public final class AuthorizationManagerFactories {
 	 * 私有构造方法
 	 */
 	private AuthorizationManagerFactories() {
+		super();
 	}
 
 	/**
