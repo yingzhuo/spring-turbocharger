@@ -3,6 +3,9 @@ plugins {
 }
 
 ext {
+	// GradleWrapper版本
+	set('gradleWrapperVersion', '8.12.1')
+
 	// 核心框架版本
 	set('springBootVersion', '3.4.2')
 }
@@ -12,5 +15,5 @@ version = '3.4.2.10005'
 description = 'Another enhancement library of SpringBoot & SpringFramework'
 
 tasks.named('wrapper') { task ->
-	distributionUrl = 'https://mirrors.cloud.tencent.com/gradle/gradle-8.12.1-bin.zip'
+	distributionUrl = "https://mirrors.cloud.tencent.com/gradle/gradle-${gradleWrapperVersion}-bin.zip"
 }
