@@ -11,7 +11,7 @@ ext {
 }
 
 group = 'com.github.yingzhuo'
-version = '3.4.2.10005'
+version = '3.4.2.10006'
 description = 'Another enhancement library of SpringBoot & SpringFramework'
 
 tasks.named('wrapper') { task ->
