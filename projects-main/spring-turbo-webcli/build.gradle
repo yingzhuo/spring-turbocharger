@@ -19,7 +19,7 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
 	// spring-turbocharger
-	implementation project(':projects-main:spring-turbo-core')
+	api project(':projects-main:spring-turbo-core')
 
 	// apache-client (v5)
 	implementation 'org.apache.httpcomponents.client5:httpclient5'
