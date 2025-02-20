@@ -33,7 +33,7 @@ import java.io.Serializable;
  * @see MessageSourceResolvable#getDefaultMessage()
  * @since 3.3.1
  */
-public final record StringMessageSourceResolvable(
+public record StringMessageSourceResolvable(
 	String defaultMessage) implements MessageSourceResolvable, Serializable {
 
 	/**
