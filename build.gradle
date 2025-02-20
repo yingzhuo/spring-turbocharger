@@ -7,7 +7,7 @@ ext {
 	set('gradleWrapperVersion', '8.12.1')
 
 	// 核心框架版本
-	set('springBootVersion', '3.4.2')
+	set('springBootVersion', '3.4.3')
 
 	// SpringBoot BOM 微调
 	// https://docs.spring.io/spring-boot/appendix/dependency-versions/coordinates.html
@@ -16,7 +16,7 @@ ext {
 }
 
 group = 'com.github.yingzhuo'
-version = '3.4.2.10006'
+version = '3.4.3-SNAPSHOT'
 description = 'Another enhancement library of SpringBoot & SpringFramework'
 
 tasks.named('wrapper') { task ->

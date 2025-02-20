@@ -6,7 +6,7 @@ usage:
 	@echo 'build:                         构建项目'
 	@echo 'install:                       安装到本地maven仓库'
 	@echo 'publish:                       推送到 oss.sonatype.org'
-	@echo 'gradle-wrapper:                初始化 gradle-wrapper'
+	@echo 'setup-gradle-wrapper:          初始化 setup-gradle-wrapper'
 	@echo 'github:                        提交文件'
 	@echo '==============================================================================================================='
 
@@ -25,7 +25,7 @@ install:
 publish:
 	@$(CURDIR)/gradlew -Dorg.gradle.parallel=false -x test publish
 
-gradle-wrapper:
+setup-gradle-wrapper:
 	@gradle wrapper
 
 github:
@@ -34,4 +34,4 @@ github:
 	@git commit -m "$(shell /bin/date "+%F %T")"
 	@git push
 
-.PHONY: usage clean compile build publish install gradle-wrapper github
+.PHONY: usage clean compile build publish install setup-gradle-wrapper github
