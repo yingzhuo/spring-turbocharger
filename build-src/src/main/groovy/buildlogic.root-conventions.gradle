@@ -19,19 +19,18 @@ tasks.named('wrapper') { task ->
 	} else {
 		distributionUrl = url
 	}
-
 }
 
 tasks.register('addJavaLicenseHeader') { task ->
 	group = 'license'
 	description = 'Adds a license header for the Java source files'
 
-	var header = layout.projectDirectory.file('build-src/src/main/resources/java_header.txt').asFile.text
+	var header = file("${rootDir}/build-src/src/main/resources/java_header.txt").text
 	if (!header.endsWith("\n")) {
 		header += "\n"
 	}
 
-	fileTree(layout.projectDirectory) {
+	fileTree(rootDir) {
 		include '**/*.java'
 	}.each { file ->
 		def content = file.text
@@ -41,4 +40,5 @@ tasks.register('addJavaLicenseHeader') { task ->
 			)
 		}
 	}
+
 }
