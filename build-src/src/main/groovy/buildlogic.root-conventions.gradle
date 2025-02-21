@@ -9,7 +9,7 @@ tasks.named('wrapper') { task ->
 	if (url == null || url.isBlank()) {
 		var errorMessage = """
 		|配置问题:
-		|	${propertyName} 配置确实
+		|	${propertyName} 配置缺失
 		|请检查:
 		|	gradle.properties
 		""".stripMargin('|')
