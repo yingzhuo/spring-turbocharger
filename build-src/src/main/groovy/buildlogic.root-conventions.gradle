@@ -1,0 +1,44 @@
+plugins {
+	id 'base'
+}
+
+tasks.named('wrapper') { task ->
+	var propertyName = 'project.gradle-wrapper.distribution-url'
+
+	var url = providers.gradleProperty(propertyName).getOrNull()
+	if (url == null || url.isBlank()) {
+		var errorMessage = """
+		|配置问题:
+		|	${propertyName} 配置确实
+		|请检查:
+		|	gradle.properties
+		""".stripMargin('|')
+			.trim()
+
+		throw new StopExecutionException(errorMessage)
+	} else {
+		distributionUrl = url
+	}
+
+}
+
+tasks.register('addJavaLicenseHeader') { task ->
+	group = 'license'
+	description = 'Adds a license header for the Java source files'
+
+	var header = layout.projectDirectory.file('build-src/src/main/resources/java_header.txt').asFile.text
+	if (!header.endsWith("\n")) {
+		header += "\n"
+	}
+
+	fileTree(layout.projectDirectory) {
+		include '**/*.java'
+	}.each { file ->
+		def content = file.text
+		if (!content.startsWith(header)) {
+			file.setText(
+				header + content
+			)
+		}
+	}
+}

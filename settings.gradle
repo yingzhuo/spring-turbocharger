@@ -12,7 +12,7 @@ dependencyResolutionManagement {
 	repositories {
 		mavenLocal()
 		maven { name = '阿里云'; url = 'https://maven.aliyun.com/repository/public/' }
-		maven { name = '阿里云(Spring)'; url = 'https://maven.aliyun.com/repository/spring/' }
+		maven { name = '腾讯云'; url = 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
 		maven { name = 'Spring(GA)'; url = 'https://repo.spring.io/release' }
 		maven { name = 'Spring(Milestone)'; url = 'https://repo.spring.io/milestone' }
 		maven { name = 'Spring(Snapshot)'; url = 'https://repo.spring.io/snapshot' }
@@ -24,7 +24,7 @@ dependencyResolutionManagement {
 rootProject.name = 'spring-turbocharger'
 
 // 构建逻辑
-includeBuild 'gradle'
+includeBuild 'build-src'
 
 // 核心项目
 include 'projects-main:spring-turbo-core'
