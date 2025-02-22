@@ -20,93 +20,101 @@ package com.github.yingzhuo.turbocharger.webcli.cli;
 import com.github.yingzhuo.turbocharger.util.CastUtils;
 import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
 import org.springframework.core.io.Resource;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.lang.Nullable;
 
 import java.time.Duration;
+import java.util.concurrent.Executor;
 
 /**
- * {@link HttpComponentsClientHttpRequestFactory} 生成工具
+ * 创建{@link JdkClientHttpRequestFactory} 通用工具
  *
  * @author 应卓
- * @see Apache5ClientHttpRequestFactoryBean
- * @since 3.3.1
+ * @see JDKClientHttpRequestFactoryBean
+ * @since 3.4.3
  */
-public final class Apache5ClientHttpRequestFactoryFactories {
+public final class JDKClientHttpRequestFactoryFactories {
 
 	/**
 	 * 私有构造方法
 	 */
-	private Apache5ClientHttpRequestFactoryFactories() {
-		super();
+	private JDKClientHttpRequestFactoryFactories() {
 	}
 
 	/**
-	 * 创建 {@link HttpComponentsClientHttpRequestFactory} 默认对象
+	 * 创建 {@link JdkClientHttpRequestFactory} 对象
 	 *
-	 * @return {@link HttpComponentsClientHttpRequestFactory} 默认对象
+	 * @return {@link JdkClientHttpRequestFactory} 对象
 	 */
-	public static HttpComponentsClientHttpRequestFactory create() {
-		return create(null, null, null, null, null);
+	public static JdkClientHttpRequestFactory create() {
+		return create(null, null, null, null, null, null);
 	}
 
 	/**
-	 * 创建 {@link HttpComponentsClientHttpRequestFactory} 对象
-	 *
-	 * @param connectTimeout 连接超时时间
-	 * @param requestTimeout 请求超时时间
-	 * @return {@link HttpComponentsClientHttpRequestFactory} 对象
-	 */
-	public static HttpComponentsClientHttpRequestFactory create(
-		@Nullable Duration connectTimeout,
-		@Nullable Duration requestTimeout) {
-		return create(null, null, null, connectTimeout, requestTimeout);
-	}
-
-	/**
-	 * 创建 {@link HttpComponentsClientHttpRequestFactory} 对象
+	 * 创建 {@link JdkClientHttpRequestFactory} 对象
 	 *
 	 * @param clientCertificate         SSL客户端证书
 	 * @param clientCertificateFormat   SSL客户端证书类型
 	 * @param clientCertificatePassword SSL客户端证书密码
-	 * @return {@link HttpComponentsClientHttpRequestFactory} 对象
+	 * @return {@link JdkClientHttpRequestFactory} 对象
 	 */
-	public static HttpComponentsClientHttpRequestFactory create(
+	public static JdkClientHttpRequestFactory create(
 		@Nullable Resource clientCertificate,
 		@Nullable KeyStoreFormat clientCertificateFormat,
 		@Nullable String clientCertificatePassword) {
-
-		return create(clientCertificate, clientCertificateFormat, clientCertificatePassword, null, null);
+		return create(clientCertificate, clientCertificateFormat, clientCertificatePassword, null, null, null);
 	}
 
 	/**
-	 * 创建 {@link HttpComponentsClientHttpRequestFactory} 对象
+	 * 创建 {@link JdkClientHttpRequestFactory} 对象
 	 *
 	 * @param clientCertificate         SSL客户端证书
 	 * @param clientCertificateFormat   SSL客户端证书类型
 	 * @param clientCertificatePassword SSL客户端证书密码
-	 * @param connectTimeout                连接超时时间
-	 * @param requestTimeout                请求超时时间
-	 * @return {@link HttpComponentsClientHttpRequestFactory} 对象
+	 * @param connectTimeout            连接超时时间
+	 * @param requestTimeout            请求超时时间
+	 * @return {@link JdkClientHttpRequestFactory} 对象
 	 */
-	public static HttpComponentsClientHttpRequestFactory create(
+	public static JdkClientHttpRequestFactory create(
 		@Nullable Resource clientCertificate,
 		@Nullable KeyStoreFormat clientCertificateFormat,
 		@Nullable String clientCertificatePassword,
 		@Nullable Duration connectTimeout,
 		@Nullable Duration requestTimeout) {
+		return create(clientCertificate, clientCertificateFormat, clientCertificatePassword, connectTimeout, requestTimeout, null);
+	}
 
+	/**
+	 * 创建 {@link JdkClientHttpRequestFactory} 对象
+	 *
+	 * @param clientCertificate         SSL客户端证书
+	 * @param clientCertificateFormat   SSL客户端证书类型
+	 * @param clientCertificatePassword SSL客户端证书密码
+	 * @param connectTimeout            连接超时时间
+	 * @param requestTimeout            请求超时时间
+	 * @param executor                  线程池
+	 * @return {@link JdkClientHttpRequestFactory} 对象
+	 */
+	public static JdkClientHttpRequestFactory create(
+		@Nullable Resource clientCertificate,
+		@Nullable KeyStoreFormat clientCertificateFormat,
+		@Nullable String clientCertificatePassword,
+		@Nullable Duration connectTimeout,
+		@Nullable Duration requestTimeout,
+		@Nullable Executor executor
+	) {
 		try {
-			var factoryBean = new Apache5ClientHttpRequestFactoryBean();
+			var factoryBean = new JDKClientHttpRequestFactoryBean();
 			factoryBean.setClientCertificate(clientCertificate);
 			factoryBean.setClientCertificateFormat(clientCertificateFormat);
 			factoryBean.setClientCertificatePassword(clientCertificatePassword);
 			factoryBean.setConnectTimeout(connectTimeout);
 			factoryBean.setRequestTimeout(requestTimeout);
+			factoryBean.setExecutor(executor);
 			factoryBean.afterPropertiesSet();
 			var beanObject = factoryBean.getObject();
 			if (beanObject == null) {
-				throw new IllegalArgumentException("Cannot create HttpComponentsClientHttpRequestFactory instance");
+				throw new IllegalArgumentException("Cannot create JDKClientHttpRequestFactoryBean instance");
 			}
 			return CastUtils.castNonNull(beanObject);
 		} catch (IllegalArgumentException e) {

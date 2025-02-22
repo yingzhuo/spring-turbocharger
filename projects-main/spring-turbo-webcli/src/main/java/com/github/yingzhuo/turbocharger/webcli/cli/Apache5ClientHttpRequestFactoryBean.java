@@ -54,15 +54,15 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 
 	@Setter
 	@Nullable
-	private Resource clientSideCertificate;
+	private Resource clientCertificate;
 
 	@Setter
 	@Nullable
-	private KeyStoreFormat clientSideCertificateFormat = KeyStoreFormat.PKCS12;
+	private KeyStoreFormat clientCertificateFormat = KeyStoreFormat.PKCS12;
 
 	@Setter
 	@Nullable
-	private String clientSideCertificatePassword;
+	private String clientCertificatePassword;
 
 	@Setter
 	@Nullable
@@ -104,9 +104,9 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 	@SuppressWarnings("deprecation")
 	public void afterPropertiesSet() {
 		var sslContext = SSLContextFactories.createInsecureSSLContext(
-			this.clientSideCertificate,
-			this.clientSideCertificateFormat,
-			this.clientSideCertificatePassword
+			this.clientCertificate,
+			this.clientCertificateFormat,
+			this.clientCertificatePassword
 		);
 
 		// 这里大量使用已过时的代码

@@ -65,13 +65,15 @@ public class GithubRepoImpl implements GithubRepo, InitializingBean {
 		}
 
 		this.restClient = RestClient.builder()
-			.requestFactory(Apache5ClientHttpRequestFactoryFactories.create(
+			.requestFactory(
+				Apache5ClientHttpRequestFactoryFactories.create(
 				new ClassPathResource("keys/certificate.jks"),
 				KeyStoreFormat.JKS,
 				"123456",
 				Duration.ofSeconds(5L),
 				Duration.ofSeconds(5L)
-			))
+				)
+			)
 			.baseUrl("https://api.github.com:443/")
 			.defaultHeaders(headers -> {
 				headers.add("X-GitHub-Api-Version", "2022-11-28");
