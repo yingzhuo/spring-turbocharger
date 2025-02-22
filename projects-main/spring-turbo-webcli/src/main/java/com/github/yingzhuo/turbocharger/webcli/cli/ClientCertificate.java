@@ -17,14 +17,13 @@
  */
 package com.github.yingzhuo.turbocharger.webcli.cli;
 
+import com.github.yingzhuo.turbocharger.core.ResourceUtils;
 import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.io.ApplicationResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
-import org.springframework.util.ClassUtils;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -37,18 +36,27 @@ import java.util.Objects;
  */
 public interface ClientCertificate extends Serializable {
 
+	public static ClientCertificate of(String resourceLocation, String password) {
+		return of(resourceLocation, KeyStoreFormat.PKCS12, password);
+	}
+
 	public static ClientCertificate of(String resourceLocation, @Nullable KeyStoreFormat keyStoreFormat, String password) {
 		return of(
-			ApplicationResourceLoader.get(ClassUtils.getDefaultClassLoader()).getResource(resourceLocation),
+			ResourceUtils.loadResource(resourceLocation),
 			keyStoreFormat,
 			password
 		);
 	}
 
+	public static ClientCertificate of(Resource resource, String password) {
+		return of(resource, KeyStoreFormat.PKCS12, password);
+	}
+
 	public static ClientCertificate of(Resource resource, @Nullable KeyStoreFormat format, String password) {
 		Assert.notNull(resource, "resource must not be null");
 		Assert.hasLength(password, "password must not be empty");
-		var cert = new Default();
+
+		final var cert = new Default();
 		cert.setResource(resource);
 		cert.setKeyStoreFormat(Objects.requireNonNullElse(format, KeyStoreFormat.PKCS12));
 		cert.setPassword(password);
@@ -78,11 +86,14 @@ public interface ClientCertificate extends Serializable {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
+	/**
+	 * 默认实现
+	 */
 	@Getter
 	@Setter
-	static final class Default implements ClientCertificate {
+	static class Default implements ClientCertificate {
 		private Resource resource;
-		private KeyStoreFormat keyStoreFormat;
+		private KeyStoreFormat keyStoreFormat = KeyStoreFormat.PKCS12;
 		private String password;
 	}
 
