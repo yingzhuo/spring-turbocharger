@@ -28,6 +28,7 @@ import java.util.function.Supplier;
  * @author 应卓
  * @since 3.3.1
  */
+@Deprecated(forRemoval = true)
 public interface ArgumentResolversSupplier extends Supplier<Collection<HttpServiceArgumentResolver>> {
 
 	@Nullable

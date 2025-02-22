@@ -38,6 +38,7 @@ import static com.github.yingzhuo.turbocharger.bean.classpath.TypeFilterFactorie
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")
+@Deprecated(forRemoval = true)
 class EnableRestClientInterfacesConfiguration implements ImportBeanDefinitionRegistrar {
 
 	private static final Class<EnableRestClientInterfaces> IMPORTING_ANNOTATION_CLASS = EnableRestClientInterfaces.class;

@@ -30,6 +30,7 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
  * @author 应卓
  * @since 3.3.1
  */
+@Deprecated(forRemoval = true)
 class RestClientInterfaceGen implements GenericGenerator {
 
 	private final ClassDefinition classDef;

@@ -27,6 +27,7 @@ import java.util.function.Supplier;
  * @since 3.3.1
  */
 @FunctionalInterface
+@Deprecated(forRemoval = true)
 public interface RestClientSupplier extends Supplier<RestClient> {
 
 	@Override

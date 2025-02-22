@@ -31,6 +31,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Import(EnableRestClientInterfacesConfiguration.class)
+@Deprecated(forRemoval = true)
 public @interface EnableRestClientInterfaces {
 
 	@AliasFor("basePackages")

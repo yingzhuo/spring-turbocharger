@@ -30,6 +30,7 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
+@Deprecated(forRemoval = true)
 public @interface RestClientInterface {
 
 	/**

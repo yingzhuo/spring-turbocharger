@@ -17,6 +17,7 @@
  */
 @NonNullApi
 @NonNullFields
+@Deprecated(forRemoval = true)
 package com.github.yingzhuo.turbocharger.webcli.annotation;
 
 import org.springframework.lang.NonNullApi;

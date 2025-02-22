@@ -12,7 +12,8 @@ tasks.named('wrapper') { task ->
 		|	${propertyName} 配置缺失
 		|请检查:
 		|	gradle.properties
-		""".stripMargin('|')
+		"""
+			.stripMargin('|')
 			.trim()
 
 		throw new StopExecutionException(errorMessage)
@@ -25,10 +26,7 @@ tasks.register('addJavaLicenseHeader') { task ->
 	group = 'license'
 	description = 'Adds a license header for the Java source files'
 
-	var header = file("${rootDir}/build-src/src/main/resources/java_header.txt").text
-	if (!header.endsWith("\n")) {
-		header += "\n"
-	}
+	var header = getJavaLicense()
 
 	fileTree(rootDir) {
 		include '**/*.java'
@@ -41,4 +39,12 @@ tasks.register('addJavaLicenseHeader') { task ->
 		}
 	}
 
+}
+
+String getJavaLicense() {
+	var header = file('.github/java_header.txt').text
+	if (!header.endsWith("\n")) {
+		header += "\n"
+	}
+	return header;
 }
