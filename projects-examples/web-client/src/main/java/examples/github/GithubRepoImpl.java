@@ -18,14 +18,12 @@
 package examples.github;
 
 import com.github.yingzhuo.turbocharger.jackson.util.JsonUtils;
-import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
-import com.github.yingzhuo.turbocharger.webcli.cli.Apache5ClientHttpRequestFactoryFactories;
+import com.github.yingzhuo.turbocharger.webcli.cli.Apache5ClientHttpRequestFactoryBean;
 import com.github.yingzhuo.turbocharger.webcli.error.NoopResponseErrorHandler;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -64,16 +62,13 @@ public class GithubRepoImpl implements GithubRepo, InitializingBean {
 			throw new BeanCreationException("token is null or blank");
 		}
 
+		var factoryBean = new Apache5ClientHttpRequestFactoryBean();
+		factoryBean.setConnectTimeout(Duration.ofSeconds(10));
+		factoryBean.setRequestTimeout(Duration.ofSeconds(10));
+		var factory = factoryBean.getObject();
+
 		this.restClient = RestClient.builder()
-			.requestFactory(
-				Apache5ClientHttpRequestFactoryFactories.create(
-				new ClassPathResource("keys/certificate.jks"),
-				KeyStoreFormat.JKS,
-				"123456",
-				Duration.ofSeconds(5L),
-				Duration.ofSeconds(5L)
-				)
-			)
+			.requestFactory(factory)
 			.baseUrl("https://api.github.com:443/")
 			.defaultHeaders(headers -> {
 				headers.add("X-GitHub-Api-Version", "2022-11-28");

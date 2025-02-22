@@ -17,9 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.webcli.cli;
 
-import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
-import com.github.yingzhuo.turbocharger.webcli.ssl.SSLContextFactories;
-import lombok.Setter;
+import com.github.yingzhuo.turbocharger.webcli.cli.support.AbstractClientHttpRequestFactoryBean;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
 import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
@@ -29,15 +27,9 @@ import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.apache.hc.client5.http.ssl.TrustAllStrategy;
 import org.apache.hc.core5.http.URIScheme;
 import org.apache.hc.core5.http.config.RegistryBuilder;
-import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.core.io.Resource;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.lang.Nullable;
-import org.springframework.util.Assert;
 
-import java.time.Duration;
 import java.util.Optional;
 
 /**
@@ -50,64 +42,15 @@ import java.util.Optional;
  * @see org.springframework.web.client.RestTemplate
  * @since 3.3.1
  */
-public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHttpRequestFactory>, InitializingBean {
-
-	@Setter
-	@Nullable
-	private Resource clientCertificate;
-
-	@Setter
-	@Nullable
-	private KeyStoreFormat clientCertificateFormat = KeyStoreFormat.PKCS12;
-
-	@Setter
-	@Nullable
-	private String clientCertificatePassword;
-
-	@Setter
-	@Nullable
-	private Duration connectTimeout;
-
-	@Setter
-	@Nullable
-	private Duration requestTimeout;
-
-	private @Nullable HttpComponentsClientHttpRequestFactory factory = null;
-
-	/**
-	 * 默认构造方法
-	 */
-	public Apache5ClientHttpRequestFactoryBean() {
-	}
+@SuppressWarnings("deprecation")
+public class Apache5ClientHttpRequestFactoryBean extends AbstractClientHttpRequestFactoryBean {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public ClientHttpRequestFactory getObject() {
-		Assert.notNull(this.factory, "factory is not set");
-		return factory;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Class<?> getObjectType() {
-		return ClientHttpRequestFactory.class;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@SuppressWarnings("deprecation")
-	public void afterPropertiesSet() {
-		var sslContext = SSLContextFactories.createInsecureSSLContext(
-			this.clientCertificate,
-			this.clientCertificateFormat,
-			this.clientCertificatePassword
-		);
+		var sslContext = super.getSslContext();
 
 		// 这里大量使用已过时的代码
 		var socketRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
@@ -120,9 +63,14 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 			.setConnectionManagerShared(true)
 			.build();
 
-		this.factory = new HttpComponentsClientHttpRequestFactory(httpClient);
-		Optional.ofNullable(this.requestTimeout).ifPresent(d -> factory.setConnectionRequestTimeout(d));
-		Optional.ofNullable(this.connectTimeout).ifPresent(d -> factory.setConnectTimeout(d));
+		var bean = new HttpComponentsClientHttpRequestFactory(httpClient);
+
+		Optional.ofNullable(super.requestTimeout)
+			.ifPresent(bean::setConnectionRequestTimeout);
+		Optional.ofNullable(super.connectTimeout)
+			.ifPresent(bean::setConnectTimeout);
+
+		return bean;
 	}
 
 }

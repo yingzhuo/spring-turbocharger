@@ -17,91 +17,42 @@
  */
 package com.github.yingzhuo.turbocharger.webcli.cli;
 
-import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
-import com.github.yingzhuo.turbocharger.webcli.ssl.SSLContextFactories;
+import com.github.yingzhuo.turbocharger.webcli.cli.support.AbstractClientHttpRequestFactoryBean;
 import lombok.Setter;
-import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.core.io.Resource;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.lang.Nullable;
-import org.springframework.util.Assert;
 
 import java.net.http.HttpClient;
-import java.time.Duration;
+import java.util.Optional;
 import java.util.concurrent.Executor;
 
 /**
  * @author 应卓
  * @since 3.4.3
  */
-public class JDKClientHttpRequestFactoryBean implements FactoryBean<ClientHttpRequestFactory>, InitializingBean {
+@Setter
+public class JDKClientHttpRequestFactoryBean extends AbstractClientHttpRequestFactoryBean {
 
-	@Setter
-	@Nullable
-	private Resource clientCertificate;
-
-	@Setter
-	@Nullable
-	private KeyStoreFormat clientCertificateFormat = KeyStoreFormat.PKCS12;
-
-	@Setter
-	@Nullable
-	private String clientCertificatePassword;
-
-	@Setter
-	@Nullable
-	private Duration connectTimeout;
-
-	@Setter
-	@Nullable
-	private Duration requestTimeout;
-
-	@Setter
 	@Nullable
 	private Executor executor;
 
 	@Nullable
-	private JdkClientHttpRequestFactory factory = null;
-
-	@Nullable
 	@Override
 	public ClientHttpRequestFactory getObject() {
-		Assert.notNull(this.factory, "factory is not set");
-		return factory;
-	}
-
-	@Nullable
-	@Override
-	public Class<?> getObjectType() {
-		return ClientHttpRequestFactory.class;
-	}
-
-	@Override
-	public void afterPropertiesSet() {
-		var sslContext = SSLContextFactories.createInsecureSSLContext(
-			this.clientCertificate,
-			this.clientCertificateFormat,
-			this.clientCertificatePassword
-		);
+		var sslContext = super.getSslContext();
 
 		var httpClientBuilder = HttpClient.newBuilder()
 			.sslContext(sslContext);
 
-		if (this.requestTimeout != null) {
-			httpClientBuilder.connectTimeout(this.requestTimeout);
-		}
-
-		if (this.connectTimeout != null) {
-			httpClientBuilder.connectTimeout(this.connectTimeout);
-		}
+		Optional.ofNullable(connectTimeout).ifPresent(httpClientBuilder::connectTimeout);
+		Optional.ofNullable(executor).ifPresent(httpClientBuilder::executor);
 
 		if (this.executor != null) {
 			httpClientBuilder.executor(this.executor);
 		}
 
-		this.factory = new JdkClientHttpRequestFactory(httpClientBuilder.build());
+		return new JdkClientHttpRequestFactory(httpClientBuilder.build());
 	}
 
 }
