@@ -50,13 +50,6 @@ public final class NoopResponseErrorHandler implements ResponseErrorHandler {
 		return false;
 	}
 
-	@Override
-	public void handleError(ClientHttpResponse response) {
-		// no operation
-	}
-
-	// -----------------------------------------------------------------------------------------------------------------
-
 	// 延迟加载
 	private static class SyncAvoid {
 		private static final NoopResponseErrorHandler INSTANCE = new NoopResponseErrorHandler();

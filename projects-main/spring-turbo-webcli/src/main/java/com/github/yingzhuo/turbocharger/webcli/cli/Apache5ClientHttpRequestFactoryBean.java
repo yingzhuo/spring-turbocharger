@@ -19,6 +19,7 @@
 package com.github.yingzhuo.turbocharger.webcli.cli;
 
 import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
+import com.github.yingzhuo.turbocharger.webcli.cli.support.InsecureTrustStrategy;
 import com.github.yingzhuo.turbocharger.webcli.x509.TrustAllX509TrustManager;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
@@ -28,18 +29,17 @@ import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.apache.hc.core5.http.URIScheme;
 import org.apache.hc.core5.http.config.RegistryBuilder;
-import org.apache.http.ssl.SSLContextBuilder;
-import org.apache.http.ssl.TrustStrategy;
+import org.apache.hc.core5.ssl.SSLContextBuilder;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
 
 import javax.net.ssl.SSLContext;
 import java.security.KeyStore;
-import java.security.cert.X509Certificate;
 import java.time.Duration;
 import java.util.Optional;
 
@@ -55,15 +55,13 @@ import java.util.Optional;
  */
 public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHttpRequestFactory>, InitializingBean {
 
-	private static final String HTTPS = URIScheme.HTTPS.getId();
-	private static final String HTTP = URIScheme.HTTP.getId();
-
 	private @Nullable Resource clientSideCertificate;
 	private @Nullable KeyStoreFormat clientSideCertificateFormat = KeyStoreFormat.PKCS12;
 	private @Nullable String clientSideCertificatePassword;
 	private @Nullable Duration connectTimeout;
 	private @Nullable Duration requestTimeout;
-	private HttpComponentsClientHttpRequestFactory factory = null;
+
+	private @Nullable HttpComponentsClientHttpRequestFactory factory = null;
 
 	/**
 	 * 默认构造方法
@@ -76,6 +74,7 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 	 */
 	@Override
 	public ClientHttpRequestFactory getObject() {
+		Assert.notNull(this.factory, "factory is not set");
 		return factory;
 	}
 
@@ -99,6 +98,7 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 	 * {@inheritDoc}
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	public void afterPropertiesSet() throws Exception {
 		var sslContext = createSSLContext(
 			this.clientSideCertificate,
@@ -106,10 +106,15 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 			this.clientSideCertificatePassword
 		);
 
+		// 这里大量使用已过时的代码
 		var socketRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
-			.register(HTTPS, new SSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE))
-			.register(HTTP, new PlainConnectionSocketFactory())
+			.register(URIScheme.HTTPS.getId(), new SSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE))
+			.register(URIScheme.HTTP.getId(), new PlainConnectionSocketFactory())
 			.build();
+
+//		var connectionManager = PoolingHttpClientConnectionManagerBuilder.create()
+//			.setTlsSocketStrategy(new DefaultClientTlsStrategy(sslContext, NoopHostnameVerifier.INSTANCE))
+//			.build();
 
 		var httpClient = HttpClientBuilder.create()
 			.setConnectionManager(new PoolingHttpClientConnectionManager(socketRegistry))
@@ -139,7 +144,7 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 
 		var contextBuilder =
 			SSLContextBuilder.create()
-				.loadTrustMaterial(new TrustEverythingTrustStrategy());
+				.loadTrustMaterial(InsecureTrustStrategy.getInstance());
 
 		if (keyStore != null) {
 			contextBuilder.loadKeyMaterial(keyStore, clientSideCertificatePassword.toCharArray());
@@ -166,15 +171,6 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 
 	public void setConnectTimeout(@Nullable Duration connectTimeout) {
 		this.connectTimeout = connectTimeout;
-	}
-
-	// -----------------------------------------------------------------------------------------------------------------
-
-	private static class TrustEverythingTrustStrategy implements TrustStrategy {
-		@Override
-		public boolean isTrusted(X509Certificate[] chain, String authType) {
-			return true;
-		}
 	}
 
 }
