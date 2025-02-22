@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.webcli.annotation;
 
 import org.springframework.context.annotation.Import;

@@ -15,18 +15,16 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.webcli.cli;
 
 import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
-import com.github.yingzhuo.turbocharger.webcli.cli.support.InsecureTrustStrategy;
-import com.github.yingzhuo.turbocharger.webcli.x509.TrustAllX509TrustManager;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
 import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
 import org.apache.hc.client5.http.socket.PlainConnectionSocketFactory;
 import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
+import org.apache.hc.client5.http.ssl.TrustAllStrategy;
 import org.apache.hc.core5.http.URIScheme;
 import org.apache.hc.core5.http.config.RegistryBuilder;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
@@ -45,7 +43,7 @@ import java.util.Optional;
 
 /**
  * {@link ClientHttpRequestFactory} 的 <a href="https://hc.apache.org/httpcomponents-client-ga/">ApacheHttpComponents官方文档</a> 版本的实现 <br>
- * <em>注意: 使用本类产生的 ClientHttpRequestFactory 默认使用 {@link TrustAllX509TrustManager}。自担风险</em>
+ * <em>注意: 使用本类产生的 ClientHttpRequestFactory 默认使用 {@link TrustAllStrategy}。自担风险</em>
  *
  * @author 杨洋
  * @author 应卓
@@ -67,6 +65,7 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 	 * 默认构造方法
 	 */
 	public Apache5ClientHttpRequestFactoryBean() {
+		super();
 	}
 
 	/**
@@ -112,10 +111,6 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 			.register(URIScheme.HTTP.getId(), new PlainConnectionSocketFactory())
 			.build();
 
-//		var connectionManager = PoolingHttpClientConnectionManagerBuilder.create()
-//			.setTlsSocketStrategy(new DefaultClientTlsStrategy(sslContext, NoopHostnameVerifier.INSTANCE))
-//			.build();
-
 		var httpClient = HttpClientBuilder.create()
 			.setConnectionManager(new PoolingHttpClientConnectionManager(socketRegistry))
 			.setConnectionManagerShared(true)
@@ -144,7 +139,7 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 
 		var contextBuilder =
 			SSLContextBuilder.create()
-				.loadTrustMaterial(InsecureTrustStrategy.getInstance());
+				.loadTrustMaterial(TrustAllStrategy.INSTANCE);
 
 		if (keyStore != null) {
 			contextBuilder.loadKeyMaterial(keyStore, clientSideCertificatePassword.toCharArray());

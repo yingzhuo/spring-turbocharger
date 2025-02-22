@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.webcli.cli;
 
 import com.github.yingzhuo.turbocharger.util.CastUtils;
@@ -39,6 +38,7 @@ public final class Apache5ClientHttpRequestFactoryFactories {
 	 * 私有构造方法
 	 */
 	private Apache5ClientHttpRequestFactoryFactories() {
+		super();
 	}
 
 	/**

@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.webcli.annotation;
 
 import com.github.yingzhuo.turbocharger.webcli.error.NoopResponseErrorHandler;
