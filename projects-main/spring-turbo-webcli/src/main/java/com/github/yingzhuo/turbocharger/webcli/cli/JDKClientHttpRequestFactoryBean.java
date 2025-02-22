@@ -19,6 +19,7 @@ package com.github.yingzhuo.turbocharger.webcli.cli;
 
 import com.github.yingzhuo.turbocharger.webcli.cli.support.AbstractClientHttpRequestFactoryBean;
 import lombok.Setter;
+import org.apache.hc.client5.http.ssl.TrustAllStrategy;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.lang.Nullable;
@@ -28,7 +29,12 @@ import java.util.Optional;
 import java.util.concurrent.Executor;
 
 /**
+ * {@link JdkClientHttpRequestFactory} 工厂。<br>
+ * <em>注意: 使用本类产生的 ClientHttpRequestFactory 默认使用 {@link TrustAllStrategy}。自担风险</em>
+ *
  * @author 应卓
+ * @see org.springframework.web.client.RestClient
+ * @see org.springframework.web.client.RestTemplate
  * @since 3.4.3
  */
 @Setter
