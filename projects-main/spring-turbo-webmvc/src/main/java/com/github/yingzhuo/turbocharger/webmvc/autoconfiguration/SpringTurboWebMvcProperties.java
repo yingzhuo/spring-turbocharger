@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.webmvc.autoconfiguration;
 
 import lombok.Getter;

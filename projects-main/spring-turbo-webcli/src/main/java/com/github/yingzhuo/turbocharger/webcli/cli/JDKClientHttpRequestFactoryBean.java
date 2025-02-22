@@ -43,6 +43,11 @@ public class JDKClientHttpRequestFactoryBean extends AbstractClientHttpRequestFa
 	@Nullable
 	private Executor executor;
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @return {@link ClientHttpRequestFactory} 实例
+	 */
 	@Nullable
 	@Override
 	public ClientHttpRequestFactory getObject() {

@@ -18,6 +18,8 @@
 package com.github.yingzhuo.turbocharger.webcli.cli;
 
 import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.io.ApplicationResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.lang.Nullable;
@@ -31,7 +33,7 @@ import java.util.Objects;
  * 客户端证书
  *
  * @author 应卓
- * @since 3.4.0
+ * @since 3.4.3
  */
 public interface ClientCertificate extends Serializable {
 
@@ -46,7 +48,7 @@ public interface ClientCertificate extends Serializable {
 	public static ClientCertificate of(Resource resource, @Nullable KeyStoreFormat format, String password) {
 		Assert.notNull(resource, "resource must not be null");
 		Assert.hasLength(password, "password must not be empty");
-		var cert = new ClientCertificateImpl();
+		var cert = new Default();
 		cert.setResource(resource);
 		cert.setKeyStoreFormat(Objects.requireNonNullElse(format, KeyStoreFormat.PKCS12));
 		cert.setPassword(password);
@@ -73,5 +75,15 @@ public interface ClientCertificate extends Serializable {
 	 * @return 证书密码
 	 */
 	public String getPassword();
+
+	// -----------------------------------------------------------------------------------------------------------------
+
+	@Getter
+	@Setter
+	static final class Default implements ClientCertificate {
+		private Resource resource;
+		private KeyStoreFormat keyStoreFormat;
+		private String password;
+	}
 
 }
