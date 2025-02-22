@@ -18,6 +18,8 @@
 package com.github.yingzhuo.turbocharger.webcli.cli;
 
 import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
+import com.github.yingzhuo.turbocharger.webcli.ssl.SSLContextFactories;
+import lombok.Setter;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
 import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
@@ -27,7 +29,6 @@ import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.apache.hc.client5.http.ssl.TrustAllStrategy;
 import org.apache.hc.core5.http.URIScheme;
 import org.apache.hc.core5.http.config.RegistryBuilder;
-import org.apache.hc.core5.ssl.SSLContextBuilder;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
@@ -36,8 +37,6 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
-import javax.net.ssl.SSLContext;
-import java.security.KeyStore;
 import java.time.Duration;
 import java.util.Optional;
 
@@ -53,11 +52,25 @@ import java.util.Optional;
  */
 public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHttpRequestFactory>, InitializingBean {
 
-	private @Nullable Resource clientSideCertificate;
-	private @Nullable KeyStoreFormat clientSideCertificateFormat = KeyStoreFormat.PKCS12;
-	private @Nullable String clientSideCertificatePassword;
-	private @Nullable Duration connectTimeout;
-	private @Nullable Duration requestTimeout;
+	@Setter
+	@Nullable
+	private Resource clientSideCertificate;
+
+	@Setter
+	@Nullable
+	private KeyStoreFormat clientSideCertificateFormat = KeyStoreFormat.PKCS12;
+
+	@Setter
+	@Nullable
+	private String clientSideCertificatePassword;
+
+	@Setter
+	@Nullable
+	private Duration connectTimeout;
+
+	@Setter
+	@Nullable
+	private Duration requestTimeout;
 
 	private @Nullable HttpComponentsClientHttpRequestFactory factory = null;
 
@@ -65,7 +78,6 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 	 * 默认构造方法
 	 */
 	public Apache5ClientHttpRequestFactoryBean() {
-		super();
 	}
 
 	/**
@@ -89,17 +101,9 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isSingleton() {
-		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	@SuppressWarnings("deprecation")
-	public void afterPropertiesSet() throws Exception {
-		var sslContext = createSSLContext(
+	public void afterPropertiesSet() {
+		var sslContext = SSLContextFactories.createInsecureSSLContext(
 			this.clientSideCertificate,
 			this.clientSideCertificateFormat,
 			this.clientSideCertificatePassword
@@ -119,53 +123,6 @@ public class Apache5ClientHttpRequestFactoryBean implements FactoryBean<ClientHt
 		this.factory = new HttpComponentsClientHttpRequestFactory(httpClient);
 		Optional.ofNullable(this.requestTimeout).ifPresent(d -> factory.setConnectionRequestTimeout(d));
 		Optional.ofNullable(this.connectTimeout).ifPresent(d -> factory.setConnectTimeout(d));
-	}
-
-	private SSLContext createSSLContext(
-		@Nullable Resource clientSideCertificate,
-		@Nullable KeyStoreFormat clientSideCertificateFormat,
-		@Nullable String clientSideCertificatePassword) throws Exception {
-
-		KeyStore keyStore = null;
-
-		if (clientSideCertificate != null && clientSideCertificatePassword != null) {
-			var ksf = Optional.ofNullable(clientSideCertificateFormat)
-				.map(KeyStoreFormat::getValue)
-				.orElseGet(KeyStore::getDefaultType);
-
-			keyStore = KeyStore.getInstance(ksf);
-			keyStore.load(clientSideCertificate.getInputStream(), clientSideCertificatePassword.toCharArray());
-		}
-
-		var contextBuilder =
-			SSLContextBuilder.create()
-				.loadTrustMaterial(TrustAllStrategy.INSTANCE);
-
-		if (keyStore != null) {
-			contextBuilder.loadKeyMaterial(keyStore, clientSideCertificatePassword.toCharArray());
-		}
-
-		return contextBuilder.build();
-	}
-
-	public void setClientSideCertificate(@Nullable Resource clientSideCertificate) {
-		this.clientSideCertificate = clientSideCertificate;
-	}
-
-	public void setClientSideCertificateFormat(@Nullable KeyStoreFormat clientSideCertificateFormat) {
-		this.clientSideCertificateFormat = clientSideCertificateFormat;
-	}
-
-	public void setClientSideCertificatePassword(@Nullable String clientSideCertificatePassword) {
-		this.clientSideCertificatePassword = clientSideCertificatePassword;
-	}
-
-	public void setRequestTimeout(@Nullable Duration requestTimeout) {
-		this.requestTimeout = requestTimeout;
-	}
-
-	public void setConnectTimeout(@Nullable Duration connectTimeout) {
-		this.connectTimeout = connectTimeout;
 	}
 
 }
