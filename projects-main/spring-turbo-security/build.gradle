@@ -24,7 +24,7 @@ dependencies {
 	api project(':projects-main:spring-turbo-jwt')
 
 	// hutool
-	compileOnly 'cn.hutool:hutool-all:5.8.35'
+	compileOnly 'cn.hutool:hutool-all:5.8.36'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

@@ -26,7 +26,7 @@ dependencies {
 	compileOnly 'com.google.zxing:javase:3.5.3'
 
 	// hutool
-	compileOnly 'cn.hutool:hutool-all:5.8.35'
+	compileOnly 'cn.hutool:hutool-all:5.8.36'
 
 	// mustache (text template tool)
 	compileOnly 'com.github.spullara.mustache.java:compiler:0.9.14'
