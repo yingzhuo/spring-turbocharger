@@ -48,7 +48,6 @@ public class JDKClientHttpRequestFactoryBean extends AbstractClientHttpRequestFa
 	 *
 	 * @return {@link ClientHttpRequestFactory} 实例
 	 */
-	@Nullable
 	@Override
 	public ClientHttpRequestFactory getObject() {
 		var sslContext = super.getSslContext();
@@ -63,7 +62,11 @@ public class JDKClientHttpRequestFactoryBean extends AbstractClientHttpRequestFa
 			httpClientBuilder.executor(this.executor);
 		}
 
-		return new JdkClientHttpRequestFactory(httpClientBuilder.build());
+		var bean = new JdkClientHttpRequestFactory(httpClientBuilder.build());
+		if (requestTimeout != null) {
+			bean.setReadTimeout(requestTimeout);
+		}
+		return bean;
 	}
 
 }
