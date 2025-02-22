@@ -24,15 +24,23 @@ import java.time.Duration;
 import java.util.concurrent.Executor;
 
 /**
+ * {@link JdkClientHttpRequestFactory} 生成工具
+ *
  * @author 应卓
+ * @see JdkClientHttpRequestFactoryBean
  * @since 3.4.3
  */
-public final class JDKClientHttpRequestFactoryFactories {
+public final class JdkClientHttpRequestFactoryFactories {
 
 	/**
 	 * 私有构造方法
 	 */
-	private JDKClientHttpRequestFactoryFactories() {
+	private JdkClientHttpRequestFactoryFactories() {
+		super();
+	}
+
+	public static JdkClientHttpRequestFactory create() {
+		return create(null, null, null, null);
 	}
 
 	public static JdkClientHttpRequestFactory create(
@@ -41,7 +49,7 @@ public final class JDKClientHttpRequestFactoryFactories {
 		@Nullable Duration readTimeout,
 		@Nullable Executor executor
 	) {
-		var factoryBean = new JDKClientHttpRequestFactoryBean();
+		var factoryBean = new JdkClientHttpRequestFactoryBean();
 		factoryBean.setClientCertificate(certificate);
 		factoryBean.setConnectTimeout(connectTimeout);
 		factoryBean.setRequestTimeout(readTimeout);

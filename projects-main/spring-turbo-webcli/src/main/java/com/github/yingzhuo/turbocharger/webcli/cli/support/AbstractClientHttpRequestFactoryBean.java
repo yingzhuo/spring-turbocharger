@@ -45,6 +45,16 @@ public abstract class AbstractClientHttpRequestFactoryBean implements FactoryBea
 	@Nullable
 	protected Duration requestTimeout;
 
+	/**
+	 * 构造方法
+	 */
+	protected AbstractClientHttpRequestFactoryBean() {
+		super();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public final Class<?> getObjectType() {
 		return ClientHttpRequestFactory.class;

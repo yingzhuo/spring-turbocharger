@@ -38,7 +38,7 @@ import java.util.concurrent.Executor;
  * @since 3.4.3
  */
 @Setter
-public class JDKClientHttpRequestFactoryBean extends AbstractClientHttpRequestFactoryBean {
+public class JdkClientHttpRequestFactoryBean extends AbstractClientHttpRequestFactoryBean {
 
 	@Nullable
 	private Executor executor;
