@@ -47,7 +47,13 @@ public final class SSLContextFactories {
 	 * @return SSL上下文
 	 */
 	public static SSLContext createInsecureSSLContext() {
-		return createInsecureSSLContext(null, null, null);
+		try {
+			return SSLContextBuilder.create()
+				.loadTrustMaterial(TrustAllStrategy.INSTANCE)
+				.build();
+		} catch (Exception e) {
+			throw new IllegalArgumentException(e);
+		}
 	}
 
 	/**
@@ -89,7 +95,7 @@ public final class SSLContextFactories {
 
 			return builder.build();
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new IllegalArgumentException(e);
 		}
 	}
 
