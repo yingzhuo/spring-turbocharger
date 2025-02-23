@@ -63,5 +63,4 @@ addLicenseHeader {
 		"""
 		.stripMargin('|')
 		.trim()
-
 }
