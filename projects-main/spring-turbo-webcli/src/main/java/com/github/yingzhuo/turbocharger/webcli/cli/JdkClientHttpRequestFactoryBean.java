@@ -37,6 +37,7 @@ import java.util.concurrent.Executor;
  * @see org.springframework.web.client.RestTemplate
  * @since 3.4.3
  */
+@Deprecated
 @Setter
 public class JdkClientHttpRequestFactoryBean extends AbstractClientHttpRequestFactoryBean {
 

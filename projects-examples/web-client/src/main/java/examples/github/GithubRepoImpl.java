@@ -18,7 +18,7 @@
 package examples.github;
 
 import com.github.yingzhuo.turbocharger.jackson.util.JsonUtils;
-import com.github.yingzhuo.turbocharger.webcli.cli.JdkClientHttpRequestFactoryFactories;
+import com.github.yingzhuo.turbocharger.webcli.cli.Apache5ClientHttpRequestFactoryFactories;
 import com.github.yingzhuo.turbocharger.webcli.error.NoopResponseErrorHandler;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.InitializingBean;
@@ -62,7 +62,7 @@ public class GithubRepoImpl implements GithubRepo, InitializingBean {
 		}
 
 		this.restClient = RestClient.builder()
-			.requestFactory(JdkClientHttpRequestFactoryFactories.create())
+			.requestFactory(Apache5ClientHttpRequestFactoryFactories.create())
 			.baseUrl("https://api.github.com:443/")
 			.defaultHeaders(headers -> {
 				headers.add("X-GitHub-Api-Version", "2022-11-28");

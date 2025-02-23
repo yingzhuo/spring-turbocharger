@@ -30,6 +30,7 @@ import java.util.concurrent.Executor;
  * @see JdkClientHttpRequestFactoryBean
  * @since 3.4.3
  */
+@Deprecated
 public final class JdkClientHttpRequestFactoryFactories {
 
 	/**

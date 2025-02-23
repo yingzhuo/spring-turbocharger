@@ -36,30 +36,43 @@ import java.util.Objects;
  */
 public interface ClientCertificate extends Serializable {
 
-	public static ClientCertificate of(String resourceLocation, String password) {
-		return of(resourceLocation, KeyStoreFormat.PKCS12, password);
-	}
-
-	public static ClientCertificate of(String resourceLocation, @Nullable KeyStoreFormat keyStoreFormat, String password) {
+	/**
+	 * 创建实例
+	 *
+	 * @param resourceLocation 证书资源位置
+	 * @param format           证书格式
+	 * @param storePassword    store密码
+	 * @param keyPassword      key密码
+	 * @return 实例
+	 */
+	public static ClientCertificate of(String resourceLocation, @Nullable KeyStoreFormat format, String storePassword, String keyPassword) {
 		return of(
 			ResourceUtils.loadResource(resourceLocation),
-			keyStoreFormat,
-			password
+			format,
+			storePassword,
+			keyPassword
 		);
 	}
 
-	public static ClientCertificate of(Resource resource, String password) {
-		return of(resource, KeyStoreFormat.PKCS12, password);
-	}
-
-	public static ClientCertificate of(Resource resource, @Nullable KeyStoreFormat format, String password) {
+	/**
+	 * 创建实例
+	 *
+	 * @param resource      证书资源
+	 * @param format        证书格式
+	 * @param storePassword store密码
+	 * @param keyPassword   key密码
+	 * @return 实例
+	 */
+	public static ClientCertificate of(Resource resource, @Nullable KeyStoreFormat format, String storePassword, String keyPassword) {
 		Assert.notNull(resource, "resource must not be null");
-		Assert.hasLength(password, "password must not be empty");
+		Assert.notNull(storePassword, "storePassword must not be null");
+		Assert.notNull(keyPassword, "keyPassword must not be null");
 
 		final var cert = new Default();
 		cert.setResource(resource);
 		cert.setKeyStoreFormat(Objects.requireNonNullElse(format, KeyStoreFormat.PKCS12));
-		cert.setPassword(password);
+		cert.setStorePassword(storePassword);
+		cert.setKeyPassword(keyPassword);
 		return cert;
 	}
 
@@ -78,11 +91,17 @@ public interface ClientCertificate extends Serializable {
 	public KeyStoreFormat getKeyStoreFormat();
 
 	/**
-	 * 证书密码
+	 * KeyStore密码
 	 *
-	 * @return 证书密码
+	 * @return KeyStore密码
 	 */
-	public String getPassword();
+	public String getStorePassword();
+
+	/**
+	 * Key密码
+	 * @return Key密码
+	 */
+	public String getKeyPassword();
 
 	// -----------------------------------------------------------------------------------------------------------------
 
@@ -91,10 +110,11 @@ public interface ClientCertificate extends Serializable {
 	 */
 	@Getter
 	@Setter
-	static class Default implements ClientCertificate {
+	class Default implements ClientCertificate {
 		private Resource resource;
 		private KeyStoreFormat keyStoreFormat = KeyStoreFormat.PKCS12;
-		private String password;
+		private String storePassword;
+		private String keyPassword;
 	}
 
 }

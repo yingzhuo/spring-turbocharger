@@ -32,6 +32,7 @@ import javax.net.ssl.SSLContext;
  * @author 应卓
  * @since 3.4.3
  */
+@Deprecated(forRemoval = false)
 public final class SSLContextFactories {
 
 	/**

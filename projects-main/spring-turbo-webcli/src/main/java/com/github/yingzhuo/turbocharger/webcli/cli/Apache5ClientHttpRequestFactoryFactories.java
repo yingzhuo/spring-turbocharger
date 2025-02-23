@@ -35,6 +35,7 @@ public final class Apache5ClientHttpRequestFactoryFactories {
 	 * 私有构造方法
 	 */
 	private Apache5ClientHttpRequestFactoryFactories() {
+		super();
 	}
 
 	public static HttpComponentsClientHttpRequestFactory create() {

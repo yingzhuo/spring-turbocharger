@@ -17,9 +17,12 @@
  */
 package com.github.yingzhuo.turbocharger.webcli.cli.support;
 
+import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreHelper;
 import com.github.yingzhuo.turbocharger.webcli.cli.ClientCertificate;
-import com.github.yingzhuo.turbocharger.webcli.ssl.SSLContextFactories;
 import lombok.Setter;
+import lombok.SneakyThrows;
+import org.apache.hc.client5.http.ssl.TrustAllStrategy;
+import org.apache.hc.core5.ssl.SSLContextBuilder;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.lang.Nullable;
@@ -60,14 +63,21 @@ public abstract class AbstractClientHttpRequestFactoryBean implements FactoryBea
 		return ClientHttpRequestFactory.class;
 	}
 
+	@SneakyThrows
 	protected final SSLContext getSslContext() {
-		return clientCertificate == null ?
-			SSLContextFactories.createInsecureSSLContext() :
-			SSLContextFactories.createInsecureSSLContext(
-				clientCertificate.getResource(),
+		var builder = SSLContextBuilder.create()
+			.loadTrustMaterial(TrustAllStrategy.INSTANCE);
+
+		if (clientCertificate != null) {
+			var keyStore = KeyStoreHelper.loadKeyStore(
+				clientCertificate.getResource().getInputStream(),
 				clientCertificate.getKeyStoreFormat(),
-				clientCertificate.getPassword()
+				clientCertificate.getStorePassword()
 			);
+			builder.loadKeyMaterial(keyStore, clientCertificate.getKeyPassword().toCharArray());
+		}
+
+		return builder.build();
 	}
 
 }
