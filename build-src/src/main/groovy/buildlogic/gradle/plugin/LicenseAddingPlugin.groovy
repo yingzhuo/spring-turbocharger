@@ -31,7 +31,7 @@ class LicenseAddingPlugin implements Plugin<Project> {
 
 	@Override
 	void apply(Project project) {
-		project.extensions.add(TASK_NAME_ADD_LICENSE_HEADER, new Ext())
+		project.extensions.add(TASK_NAME_ADD_LICENSE_HEADER, new Config())
 		project.getTasks()
 			.register(TASK_NAME_ADD_LICENSE_HEADER, AddLicenseHeaderTask, project)
 	}
@@ -43,13 +43,13 @@ class LicenseAddingPlugin implements Plugin<Project> {
 		AddLicenseHeaderTask(Project project) {
 			this.project = project
 			this.group = 'license'
-			this.description = 'Adds license header for the Java source files'
+			this.description = 'Add license header to the source files'
 		}
 
 		@TaskAction
 		void execute() {
-			var ext = project.extensions.getByName(TASK_NAME_ADD_LICENSE_HEADER) as Ext
-			var header = ext.javaHeader
+			var config = project.extensions.getByName(TASK_NAME_ADD_LICENSE_HEADER) as Config
+			var header = config.javaHeader
 			if (!header.endsWith('\n')) {
 				header += '\n'
 			}
@@ -71,7 +71,7 @@ class LicenseAddingPlugin implements Plugin<Project> {
 		}
 	}
 
-	static class Ext {
+	static class Config {
 		String javaHeader = ''
 	}
 

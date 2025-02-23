@@ -115,7 +115,7 @@ gradle publishToMavenLocal -x test
 
 #### 更新记录
 
-* [CHANGELOG](.github/CHANGELOG.md)
+* [CHANGELOG](CHANGELOG.md)
 
 #### 联系我
 

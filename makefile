@@ -34,7 +34,7 @@ setup-gradle-wrapper:
 	@gradle wrapper
 
 add-license-header:
-	@$(CURDIR)/gradlew :addLicenseHeader
+	@$(CURDIR)/gradlew addLicenseHeader
 
 github:
 	@git status
