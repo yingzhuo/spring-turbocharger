@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2022-2025 the original author or authors.
+ * Copyright 2022-present the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,13 +18,12 @@
 package buildlogic.gradle.plugin
 
 import org.gradle.api.DefaultTask
-import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.StopExecutionException
 
-class LicensePlugin extends AbstractPlugin implements Plugin<Project> {
+class LicenseAddingPlugin extends AbstractPlugin {
 
-	final static String TASK_NAME_ADD_JAVA_LICENSE_HEADER = "addJavaLicenseHeader"
+	final static String TASK_NAME_ADD_JAVA_LICENSE_HEADER = "addLicenseHeader"
 
 	@Override
 	void apply(Project project) {
@@ -37,7 +36,10 @@ class LicensePlugin extends AbstractPlugin implements Plugin<Project> {
 				task.description = 'Adds license header for the Java source files'
 
 				var config = getExtensionsBean(project, TASK_NAME_ADD_JAVA_LICENSE_HEADER) as AddJavaLicenseHeaderExt
-				var header = config.headerText
+				var header = config.javaHeader
+				if (!header.endsWith('\n')) {
+					header += '\n'
+				}
 
 				if (header.isBlank()) {
 					throw new StopExecutionException('java license header text is blank')
@@ -58,8 +60,8 @@ class LicensePlugin extends AbstractPlugin implements Plugin<Project> {
 			}
 	}
 
-	static class AddJavaLicenseHeaderExt implements Serializable {
-		String headerText = ''
+	static class AddJavaLicenseHeaderExt {
+		String javaHeader = ''
 	}
 
 }

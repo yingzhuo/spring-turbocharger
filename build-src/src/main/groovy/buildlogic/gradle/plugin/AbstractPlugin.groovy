@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2022-2025 the original author or authors.
+ * Copyright 2022-present the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,10 @@ package buildlogic.gradle.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
+/**
+ * 抽象插件类 <br>
+ * 提供若干首相方法
+ */
 abstract class AbstractPlugin implements Plugin<Project> {
 
 	protected void setExtensionsBean(Project project, String extensionsName, Object extensionsObject) {

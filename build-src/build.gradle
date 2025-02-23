@@ -3,13 +3,14 @@ plugins {
 }
 
 dependencies {
+	implementation 'org.apache.commons:commons-lang3:3.17.0'
 }
 
 gradlePlugin {
 	plugins {
-		LicensePlugin {
+		'LicenseAddingPlugin' {
 			id = 'buildlogic.binary-plugin.license'
-			implementationClass = 'buildlogic.gradle.plugin.LicensePlugin'
+			implementationClass = 'buildlogic.gradle.plugin.LicenseAddingPlugin'
 		}
 	}
 }

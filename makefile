@@ -8,7 +8,7 @@ usage:
 	@echo 'install:                       安装到本地maven仓库'
 	@echo 'publish:                       推送到 oss.sonatype.org'
 	@echo 'setup-gradle-wrapper:          初始化 setup-gradle-wrapper'
-	@echo 'add-java-license-header:       为源文件添加许可证头'
+	@echo 'add-license-header:            为源文件添加许可证头'
 	@echo 'github:                        提交文件'
 	@echo '==============================================================================================================='
 
@@ -33,8 +33,8 @@ publish:
 setup-gradle-wrapper:
 	@gradle wrapper
 
-add-java-license-header:
-	@$(CURDIR)/gradlew addJavaLicenseHeader
+add-license-header:
+	@$(CURDIR)/gradlew :addLicenseHeader
 
 github:
 	@git status
@@ -45,5 +45,5 @@ github:
 .PHONY: usage \
 	clean compile build publish install \
 	setup-gradle-wrapper \
-	add-java-license-header \
+	add-license-header \
 	github
