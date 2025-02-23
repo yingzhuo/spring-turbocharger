@@ -63,9 +63,10 @@ class LicenseAddingPlugin implements Plugin<Project> {
 			}.each { file ->
 				def content = file.text
 				if (!content.startsWith(header)) {
-					file.setText(
-						header + content
-					)
+					file.setText(header + content)
+				}
+				if (!content.endsWith('\n')) {
+					file.setText(content + '\n')
 				}
 			}
 		}
