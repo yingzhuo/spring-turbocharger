@@ -25,18 +25,18 @@ import org.gradle.api.tasks.TaskAction
 
 import javax.inject.Inject
 
-class LicenseAddingPlugin implements Plugin<Project> {
-
-	final static String TASK_NAME_ADD_LICENSE_HEADER = "addLicenseHeader"
+class LicensePlugin implements Plugin<Project> {
 
 	@Override
 	void apply(Project project) {
-		project.extensions.add(TASK_NAME_ADD_LICENSE_HEADER, new Config())
+		project.extensions.add(AddLicenseHeaderTask.TASK_NAME, new Config())
 		project.getTasks()
-			.register(TASK_NAME_ADD_LICENSE_HEADER, AddLicenseHeaderTask, project)
+			.register(AddLicenseHeaderTask.TASK_NAME, AddLicenseHeaderTask, project)
 	}
 
 	static class AddLicenseHeaderTask extends DefaultTask {
+		public static final String TASK_NAME = 'addLicenseHeader'
+
 		final Project project;
 
 		@Inject
@@ -48,7 +48,7 @@ class LicenseAddingPlugin implements Plugin<Project> {
 
 		@TaskAction
 		void execute() {
-			var config = project.extensions.getByName(TASK_NAME_ADD_LICENSE_HEADER) as Config
+			var config = project.extensions.getByName(TASK_NAME) as Config
 			var header = config.javaHeader
 			if (!header.endsWith('\n')) {
 				header += '\n'
@@ -72,7 +72,7 @@ class LicenseAddingPlugin implements Plugin<Project> {
 		}
 	}
 
-	static class Config {
+	static class Config implements Serializable {
 		String javaHeader = ''
 	}
 
