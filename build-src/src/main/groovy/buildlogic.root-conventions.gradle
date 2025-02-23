@@ -42,7 +42,7 @@ tasks.named('wrapper') { task ->
 
 addLicenseHeader {
 	javaHeader =
-		"""
+		'''
 		|/*
 		| *
 		| * Copyright 2022-present the original author or authors.
@@ -60,7 +60,7 @@ addLicenseHeader {
 		| * limitations under the License.
 		| *
 		| */
-		"""
+		'''
 		.stripMargin('|')
 		.trim()
 }
