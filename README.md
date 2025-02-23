@@ -88,12 +88,12 @@ dependencies {
 
 ###### 开发环境
 
-| 软件     | 版本         |
-|--------|------------|
-| OS     | macOS 15.3 |
-| JDK    | 17         |
-| Gradle | 8.12.1     |
-| GnuPG  | 2.4.7      |
+| 软件     | 版本           |
+|--------|--------------|
+| OS     | macOS 15.3.1 |
+| JDK    | 17           |
+| Gradle | 8.12.1       |
+| GnuPG  | 2.4.7        |
 
 ###### 脚本
 
@@ -105,13 +105,13 @@ gradle publishToMavenLocal -x test
 
 #### 示例程序
 
-* [生成QRCode](./examples/qrcode-gen)
-* [生成有状态验证码](./examples/stateful-captcha)
-* [生成无状态验证码](./examples/stateless-captcha)
-* [使用HOCON格式的配置文件](./examples/use-hocon-as-config-file)
-* [使用JWT技术集成SpringSecurity](./examples/spring-security-jwt)
-* [多数据源代理](./examples/routing-data-source)
-* [HttpClient](./examples/web-client)
+* [生成QRCode](./projects-examples/qrcode-gen)
+* [生成有状态验证码](./projects-examples/stateful-captcha)
+* [生成无状态验证码](./projects-examples/stateless-captcha)
+* [使用HOCON格式的配置文件](./projects-examples/use-hocon-as-config-file)
+* [使用JWT技术集成SpringSecurity](./projects-examples/spring-security-jwt)
+* [多数据源代理](./projects-examples/routing-data-source)
+* [HttpClient](./projects-examples/web-client)
 
 #### 更新记录
 
