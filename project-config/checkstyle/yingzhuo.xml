@@ -4,8 +4,9 @@
 	"https://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <!--
-参考: https://google.github.io/styleguide/javaguide.html
 作者: 应卓
+参考1: https://checkstyle.sourceforge.io/
+参考2: https://google.github.io/styleguide/javaguide.html
 -->
 
 <module name="Checker">
@@ -28,10 +29,15 @@
 
 	<module name="TreeWalker">
 
-		<!-- 用法名 -->
+		<!-- 方法名 -->
 		<module name="MethodName">
 			<property name="format" value="^[a-z](_?[a-zA-Z0-9]+)*$"/>
 			<property name="allowClassName" value="false"/>
+		</module>
+
+		<!-- 方法长度 (行数) -->
+		<module name="MethodLength">
+			<property name="max" value="150"/>
 		</module>
 	</module>
 
