@@ -226,8 +226,9 @@ public final class AnnotationHelper {
 	 * @param <A>                    元注释类型泛型
 	 * @return {@link AnnotationAttributes} 实例
 	 */
-	public static <A extends Annotation> AnnotationAttributes findAnnotationAttributes(Field field,
-																					   Class<A> annotationType, boolean classValueAsString, boolean nestedAnnotationsAsMap) {
+	public static <A extends Annotation> AnnotationAttributes findAnnotationAttributes(
+		Field field,
+		Class<A> annotationType, boolean classValueAsString, boolean nestedAnnotationsAsMap) {
 		var annotation = findAnnotation(field, annotationType);
 		if (annotation == null) {
 			return new AnnotationAttributes();

@@ -128,8 +128,10 @@ public final class ClassDefinition implements BeanDefinition, Comparable<ClassDe
 		return getAnnotationAttributes(annotationType, classValuesAsString, false);
 	}
 
-	public <A extends Annotation> AnnotationAttributes getAnnotationAttributes(Class<A> annotationType,
-																			   boolean classValuesAsString, boolean nestedAnnotationsAsMap) {
+	public <A extends Annotation> AnnotationAttributes getAnnotationAttributes(
+		Class<A> annotationType,
+		boolean classValuesAsString, boolean nestedAnnotationsAsMap) {
+
 		try {
 			var annotation = AnnotationUtils.findAnnotation(this.clazz, annotationType);
 			if (annotation == null) {

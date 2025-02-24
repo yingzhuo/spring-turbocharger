@@ -8,20 +8,22 @@
 作者: 应卓
 -->
 
-<!--
-TODO: 需要逐渐完善形成自己的最佳实践
--->
-
 <module name="Checker">
 	<property name="charset" value="UTF-8"/>
 	<property name="severity" value="warning"/>
 	<property name="fileExtensions" value="java, properties, xml"/>
 
+	<!-- 忽略生成代码 -->
+	<module name="BeforeExecutionExclusionFileFilter"/>
+
 	<!-- 行长度 -->
 	<module name="LineLength">
 		<property name="fileExtensions" value="java"/>
-		<property name="max" value="150"/>
+		<property name="max" value="200"/>
 		<property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
 	</module>
+
+	<!-- 必须以空白行结束 -->
+	<module name="NewlineAtEndOfFile"/>
 
 </module>
