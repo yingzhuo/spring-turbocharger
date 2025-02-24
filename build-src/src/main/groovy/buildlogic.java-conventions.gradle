@@ -21,7 +21,6 @@ plugins {
 	id 'java'
 	id 'java-library'
 	id 'idea'
-	id 'checkstyle'
 	id 'io.spring.dependency-management'
 }
 
@@ -74,17 +73,6 @@ javadoc {
 }
 
 processResources {
-}
-
-checkstyle {
-	configFile = file("${rootDir}/project-config/checkstyle/google.xml")
-}
-
-checkstyleMain {
-	source ='src/main/java'
-}
-checkstyleTest {
-	source ='src/test/java'
 }
 
 idea {

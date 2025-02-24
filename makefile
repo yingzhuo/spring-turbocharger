@@ -9,6 +9,7 @@ usage:
 	@echo 'publish:                       推送到 oss.sonatype.org'
 	@echo 'setup-gradle-wrapper:          初始化 setup-gradle-wrapper'
 	@echo 'add-license-header:            为源文件添加许可证头'
+	@echo 'check:                         检查代码风格'
 	@echo 'github:                        提交文件'
 	@echo '==============================================================================================================='
 
@@ -36,6 +37,9 @@ setup-gradle-wrapper:
 add-license-header:
 	@$(CURDIR)/gradlew addLicenseHeader
 
+check:
+	@$(CURDIR)/gradlew check
+
 github:
 	@git status
 	@git add .
@@ -45,5 +49,5 @@ github:
 .PHONY: usage \
 	clean compile build publish install \
 	setup-gradle-wrapper \
-	add-license-header \
+	add-license-header check \
 	github
