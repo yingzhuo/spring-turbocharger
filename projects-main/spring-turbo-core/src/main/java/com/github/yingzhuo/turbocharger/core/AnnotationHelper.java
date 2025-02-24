@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.core;
 
 import org.springframework.core.annotation.AnnotationAttributes;

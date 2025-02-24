@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.core;
 
 import org.springframework.boot.io.ApplicationResourceLoader;
@@ -58,6 +57,7 @@ public final class ResourceUtils {
 	 * 私有构造方法
 	 */
 	private ResourceUtils() {
+		super();
 	}
 
 	/**

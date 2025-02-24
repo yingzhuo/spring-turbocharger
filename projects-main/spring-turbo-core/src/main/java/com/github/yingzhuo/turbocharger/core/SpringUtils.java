@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.core;
 
 import com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders;
@@ -56,6 +55,7 @@ public final class SpringUtils {
 	 * 私有构造方法
 	 */
 	private SpringUtils() {
+		super();
 	}
 
 	/**

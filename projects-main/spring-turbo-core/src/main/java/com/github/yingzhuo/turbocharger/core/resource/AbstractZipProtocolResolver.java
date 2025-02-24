@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.core.resource;
 
 import org.springframework.core.io.ByteArrayResource;
