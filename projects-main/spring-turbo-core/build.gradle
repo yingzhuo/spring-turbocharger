@@ -4,6 +4,11 @@ plugins {
 }
 
 dependencies {
+
+	// test
+	testImplementation 'org.junit.jupiter:junit-jupiter'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 	// spring-boot & spring
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compileOnly 'org.springframework.boot:spring-boot-autoconfigure'
