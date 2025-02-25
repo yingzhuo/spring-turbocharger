@@ -36,6 +36,7 @@ public final class ConversionUtils {
 	 * 私有构造方法
 	 */
 	private ConversionUtils() {
+		super();
 	}
 
 	/**

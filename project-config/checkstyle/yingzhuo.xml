@@ -28,7 +28,6 @@
 	<module name="NewlineAtEndOfFile"/>
 
 	<module name="TreeWalker">
-
 		<!-- 方法名 -->
 		<module name="MethodName">
 			<property name="format" value="^[a-z](_?[a-zA-Z0-9]+)*$"/>
@@ -38,7 +37,41 @@
 		<!-- 方法长度 (行数) -->
 		<module name="MethodLength">
 			<property name="max" value="150"/>
+			<property name="countEmpty" value="false"/>
 		</module>
+
+		<!-- 空程序块 -->
+		<module name="EmptyBlock">
+			<property name="option" value="TEXT"/>
+			<property name="tokens" value="LITERAL_TRY, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_SWITCH"/>
+		</module>
+
+		<!-- 空行使用规则 -->
+		<module name="EmptyLineSeparator">
+			<property name="tokens"
+								value="IMPORT, STATIC_IMPORT, CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
+                    STATIC_INIT, INSTANCE_INIT, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, RECORD_DEF,
+                    COMPACT_CTOR_DEF"/>
+			<property name="allowNoEmptyLineBetweenFields" value="true"/>
+		</module>
+
+		<!-- 空语句 -->
+		<module name="EmptyStatement"/>
+
+		<!-- 定义顺序 -->
+		<module name="DeclarationOrder">
+			<property name="ignoreConstructors" value="true"/>
+			<property name="ignoreModifiers" value="true"/>
+		</module>
+
+		<!-- 无用的import -->
+		<module name="UnusedImports"/>
+
+		<!-- 冗余的import -->
+		<module name="RedundantImport"/>
+
+		<!-- 不允许覆盖 Object.finalize() -->
+		<module name="NoFinalizer"/>
 	</module>
 
 </module>

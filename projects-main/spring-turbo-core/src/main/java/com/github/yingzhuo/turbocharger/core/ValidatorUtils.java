@@ -35,6 +35,7 @@ public final class ValidatorUtils {
 	 * 私有构造方法
 	 */
 	private ValidatorUtils() {
+		super();
 	}
 
 	/**

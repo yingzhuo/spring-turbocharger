@@ -35,6 +35,7 @@ public final class EnvironmentUtils {
 	 * 私有构造方法
 	 */
 	private EnvironmentUtils() {
+		super();
 	}
 
 	/**

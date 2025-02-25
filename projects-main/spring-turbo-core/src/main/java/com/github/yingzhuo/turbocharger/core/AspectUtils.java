@@ -40,6 +40,7 @@ public final class AspectUtils {
 	 * 私有构造方法
 	 */
 	private AspectUtils() {
+		super();
 	}
 
 	/**

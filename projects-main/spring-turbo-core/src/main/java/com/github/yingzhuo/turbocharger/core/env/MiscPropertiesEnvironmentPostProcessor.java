@@ -47,7 +47,7 @@ public class MiscPropertiesEnvironmentPostProcessor implements EnvironmentPostPr
 	public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
 		final var variables = new HashMap<String, Object>();
 		variables.put("spring.process.pid", CurrentProcess.pid());
-		variables.put("spring.process.parent-pid", CurrentProcess.parentPid());
+		variables.put("spring.process.parent-pid", CurrentProcess.parentPid()); // -1 则表示 null
 		variables.put("spring.process.user", CurrentProcess.user());
 
 		Optional.ofNullable(SpringApplicationHolders.getApplicationHome()).ifPresent(

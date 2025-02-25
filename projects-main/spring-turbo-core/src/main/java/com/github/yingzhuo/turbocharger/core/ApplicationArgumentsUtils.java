@@ -36,6 +36,7 @@ public final class ApplicationArgumentsUtils {
 	 * 私有构造方法
 	 */
 	private ApplicationArgumentsUtils() {
+		super();
 	}
 
 	public static Set<String> getOptionNames() {

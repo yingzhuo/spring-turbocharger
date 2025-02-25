@@ -36,6 +36,7 @@ public final class DataBinderUtils {
 	 * 私有构造方法
 	 */
 	private DataBinderUtils() {
+		super();
 	}
 
 	/**

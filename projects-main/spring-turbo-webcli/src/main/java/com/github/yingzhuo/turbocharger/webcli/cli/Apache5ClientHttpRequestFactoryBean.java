@@ -42,13 +42,13 @@ import java.util.Optional;
  * @see org.springframework.web.client.RestTemplate
  * @since 3.3.1
  */
-@SuppressWarnings("deprecation")
 public class Apache5ClientHttpRequestFactoryBean extends AbstractClientHttpRequestFactoryBean {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	public ClientHttpRequestFactory getObject() {
 		var sslContext = super.getSslContext();
 

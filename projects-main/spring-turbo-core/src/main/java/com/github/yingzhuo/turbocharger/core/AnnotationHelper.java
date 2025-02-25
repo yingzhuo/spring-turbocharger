@@ -41,6 +41,7 @@ public final class AnnotationHelper {
 	 * 私有构造方法
 	 */
 	private AnnotationHelper() {
+		super();
 	}
 
 	/**

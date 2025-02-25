@@ -38,6 +38,7 @@ public final class ProfilesUtils {
 	 * 私有构造方法
 	 */
 	private ProfilesUtils() {
+		super();
 	}
 
 	/**

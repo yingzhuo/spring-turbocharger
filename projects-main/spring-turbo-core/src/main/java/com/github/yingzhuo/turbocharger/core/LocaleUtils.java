@@ -33,6 +33,7 @@ public final class LocaleUtils {
 	 * 私有构造方法
 	 */
 	private LocaleUtils() {
+		super();
 	}
 
 	/**

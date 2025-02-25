@@ -40,6 +40,7 @@ public final class SpEL {
 	 * 私有构造方法
 	 */
 	private SpEL() {
+		super();
 	}
 
 	/**

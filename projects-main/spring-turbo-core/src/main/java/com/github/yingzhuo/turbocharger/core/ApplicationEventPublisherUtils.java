@@ -36,6 +36,7 @@ public final class ApplicationEventPublisherUtils {
 	 * 私有构造方法
 	 */
 	private ApplicationEventPublisherUtils() {
+		super();
 	}
 
 	/**

@@ -17,6 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.core;
 
+import lombok.Getter;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.lang.Nullable;
@@ -26,6 +27,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Aspect环绕式切面相关小工具
@@ -45,6 +47,7 @@ public final class AspectSpELTemplate<T> implements Serializable {
 	/**
 	 * SpringExpression 变量
 	 */
+	@Getter
 	private final Map<String, Object> expressionVariables;
 
 	@Nullable
@@ -81,11 +84,7 @@ public final class AspectSpELTemplate<T> implements Serializable {
 	}
 
 	public T getValue() {
-		return SpEL.getValue(expression, rootObject, expressionVariables);
-	}
-
-	public Map<String, Object> getExpressionVariables() {
-		return expressionVariables;
+		return Objects.requireNonNull(SpEL.getValue(expression, rootObject, expressionVariables));
 	}
 
 }
