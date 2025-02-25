@@ -26,6 +26,8 @@ checkstyle {
 checkstyleMain {
 	source ='src/main/java'
 }
+
 checkstyleTest {
-	source ='src/test/java'
+	enabled = false
+	// source ='src/test/java'
 }

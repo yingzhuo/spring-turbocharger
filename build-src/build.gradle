@@ -7,7 +7,7 @@ dependencies {
 
 gradlePlugin {
 	plugins {
-		'LicenseAddingPlugin' {
+		create('LicenseAddingPlugin') {
 			id = 'buildlogic.binary-plugin.license'
 			implementationClass = 'buildlogic.gradle.plugin.LicensePlugin'
 		}
