@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.jwt.JwtService;
@@ -39,7 +38,7 @@ import org.springframework.context.annotation.Bean;
 @ConditionalOnMissingBean(JwtService.class)
 public class JwtAutoConfiguration {
 
-	@Bean(name = "jsonWebTokenService")
+	@Bean
 	public JwtService jsonWebTokenService(JwtSigner jwtSigner) {
 		return new JwtServiceImpl(jwtSigner);
 	}

@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.security.filter.factory;
 
 import com.github.yingzhuo.turbocharger.security.FilterConfiguration;

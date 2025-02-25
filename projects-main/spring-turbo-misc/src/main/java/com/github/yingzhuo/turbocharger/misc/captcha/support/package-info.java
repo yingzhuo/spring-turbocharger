@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 @NonNullApi
 @NonNullFields
 package com.github.yingzhuo.turbocharger.misc.captcha.support;

@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.security.event;
 
 import com.github.yingzhuo.turbocharger.security.token.Token;

@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.security.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.security.authentication.UserDetailsFinder;

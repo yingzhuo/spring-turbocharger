@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.security.token.blacklist;
 
 import com.github.yingzhuo.turbocharger.security.exception.BlacklistTokenException;

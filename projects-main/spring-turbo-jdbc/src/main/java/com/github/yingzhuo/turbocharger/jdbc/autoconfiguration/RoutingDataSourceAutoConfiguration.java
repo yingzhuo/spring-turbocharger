@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.jdbc.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.jdbc.datasource.DataSourceFactories;

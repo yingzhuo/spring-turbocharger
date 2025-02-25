@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.security.filter;
 
 import com.github.yingzhuo.turbocharger.security.authentication.Authentication;

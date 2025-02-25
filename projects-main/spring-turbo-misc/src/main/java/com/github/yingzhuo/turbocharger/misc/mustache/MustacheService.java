@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.misc.mustache;
 
 import org.springframework.core.io.Resource;

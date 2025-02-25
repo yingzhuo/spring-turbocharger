@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.security.encoder.hutool;
 
 import cn.hutool.crypto.digest.DigestAlgorithm;

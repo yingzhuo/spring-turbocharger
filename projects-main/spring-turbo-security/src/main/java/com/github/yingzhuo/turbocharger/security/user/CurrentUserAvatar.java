@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.security.user;
 
 import org.springframework.core.annotation.AliasFor;

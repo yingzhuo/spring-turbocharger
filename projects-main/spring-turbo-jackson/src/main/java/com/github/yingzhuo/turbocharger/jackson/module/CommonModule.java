@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.jackson.module;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;

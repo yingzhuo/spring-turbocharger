@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.misc.captcha.google.renderer;
 
 import com.github.yingzhuo.turbocharger.misc.captcha.google.color.ColorFactory;

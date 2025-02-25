@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.security.user;
 
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;

@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.exception;
 
 import com.github.yingzhuo.turbocharger.databinding.MultiMessageSourceResolvable;

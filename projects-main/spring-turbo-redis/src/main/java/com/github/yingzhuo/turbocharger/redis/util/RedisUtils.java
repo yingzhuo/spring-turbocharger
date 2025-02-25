@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.redis.util;
 
 import org.springframework.data.redis.connection.DataType;

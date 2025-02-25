@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.util.io;
 
 import com.github.yingzhuo.turbocharger.util.StringFormatter;

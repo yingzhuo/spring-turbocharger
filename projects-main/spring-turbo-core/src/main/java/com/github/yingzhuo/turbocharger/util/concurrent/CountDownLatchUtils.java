@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.util.concurrent;
 
 import org.springframework.util.Assert;

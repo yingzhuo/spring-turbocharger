@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.misc.tokenizer;
 
 import cn.hutool.extra.tokenizer.Result;

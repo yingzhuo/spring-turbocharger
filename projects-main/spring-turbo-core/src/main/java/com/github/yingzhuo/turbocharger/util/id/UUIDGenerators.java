@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.util.id;
 
 import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;

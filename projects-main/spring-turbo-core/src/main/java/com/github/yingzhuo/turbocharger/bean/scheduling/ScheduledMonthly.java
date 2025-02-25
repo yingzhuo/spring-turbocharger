@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.bean.scheduling;
 
 import org.springframework.scheduling.annotation.Scheduled;

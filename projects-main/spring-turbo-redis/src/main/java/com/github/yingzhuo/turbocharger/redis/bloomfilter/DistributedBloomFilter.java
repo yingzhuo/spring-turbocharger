@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.redis.bloomfilter;
 
 import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;

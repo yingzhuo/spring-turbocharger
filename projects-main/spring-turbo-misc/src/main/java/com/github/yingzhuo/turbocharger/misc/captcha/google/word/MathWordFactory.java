@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.misc.captcha.google.word;
 
 import com.github.yingzhuo.turbocharger.util.RandomUtils;

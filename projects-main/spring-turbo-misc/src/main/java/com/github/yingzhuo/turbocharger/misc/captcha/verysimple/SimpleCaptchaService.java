@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.misc.captcha.verysimple;
 
 import com.github.yingzhuo.turbocharger.misc.captcha.Captcha;

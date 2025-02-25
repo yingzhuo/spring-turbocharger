@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.jackson.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;

@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.jwt.alg;
 
 import com.github.yingzhuo.turbocharger.util.crypto.bundle.KeyStoreAsymmetricKeyBundleFactoryBean;

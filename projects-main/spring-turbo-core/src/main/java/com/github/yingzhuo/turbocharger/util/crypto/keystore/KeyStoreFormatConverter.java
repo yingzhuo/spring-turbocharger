@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.util.crypto.keystore;
 
 import org.springframework.core.convert.converter.Converter;

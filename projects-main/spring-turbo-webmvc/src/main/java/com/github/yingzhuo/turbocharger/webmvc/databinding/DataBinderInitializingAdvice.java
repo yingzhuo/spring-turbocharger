@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.webmvc.databinding;
 
 import com.github.yingzhuo.turbocharger.databinding.DirectMessageCodesResolver;

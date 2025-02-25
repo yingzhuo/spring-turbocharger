@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.jdbc.datasource;
 
 import org.springframework.beans.factory.InitializingBean;

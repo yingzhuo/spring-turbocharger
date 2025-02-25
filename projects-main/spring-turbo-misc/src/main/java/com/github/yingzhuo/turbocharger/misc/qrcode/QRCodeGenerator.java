@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.misc.qrcode;
 
 import com.github.yingzhuo.turbocharger.util.io.ImageUtils;

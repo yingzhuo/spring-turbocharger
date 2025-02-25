@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.misc.captcha.google.filter.predefined;
 
 import com.github.yingzhuo.turbocharger.misc.captcha.google.filter.AbstractFilterFactory;

@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.jwt;
 
 import java.util.HashMap;
@@ -38,6 +37,7 @@ public final class JwtAssertions extends HashMap<String, Object> implements Map<
 	 * 私有构造方法
 	 */
 	private JwtAssertions() {
+		super();
 	}
 
 	/**

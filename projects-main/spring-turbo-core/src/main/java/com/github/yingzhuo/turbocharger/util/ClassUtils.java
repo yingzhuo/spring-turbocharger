@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.util;
 
 import com.github.yingzhuo.turbocharger.util.reflection.InstanceUtils;

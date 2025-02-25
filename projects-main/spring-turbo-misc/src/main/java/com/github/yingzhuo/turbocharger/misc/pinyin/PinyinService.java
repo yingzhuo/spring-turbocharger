@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.misc.pinyin;
 
 import org.springframework.lang.Nullable;

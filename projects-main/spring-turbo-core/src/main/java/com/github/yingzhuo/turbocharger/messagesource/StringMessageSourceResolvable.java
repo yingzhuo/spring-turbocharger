@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.messagesource;
 
 import org.springframework.context.MessageSourceResolvable;

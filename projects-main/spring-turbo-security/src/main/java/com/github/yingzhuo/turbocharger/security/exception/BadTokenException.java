@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 package com.github.yingzhuo.turbocharger.security.exception;
 
 import org.springframework.security.authentication.AccountStatusException;
