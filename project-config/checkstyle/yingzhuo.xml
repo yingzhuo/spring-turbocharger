@@ -58,11 +58,20 @@
 		<!-- 空语句 -->
 		<module name="EmptyStatement"/>
 
+		<!-- 需要花括号块 -->
+		<module name="NeedBraces">
+			<property name="tokens"
+								value="LITERAL_DO, LITERAL_ELSE, LITERAL_FOR, LITERAL_IF, LITERAL_WHILE"/>
+		</module>
+
 		<!-- 定义顺序 -->
 		<module name="DeclarationOrder">
 			<property name="ignoreConstructors" value="true"/>
 			<property name="ignoreModifiers" value="true"/>
 		</module>
+
+		<!-- 修饰符顺序 -->
+		<module name="ModifierOrder"/>
 
 		<!-- 无用的import -->
 		<module name="UnusedImports"/>
