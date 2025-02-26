@@ -63,12 +63,12 @@ publishing {
 		maven {
 			name = 'OSSRH'
 			url = rootProject.version.endsWith('SNAPSHOT') ?
-				providers.gradleProperty('project.publishing.ossrhSnapshotUrl').getOrNull():
-				providers.gradleProperty('project.publishing.ossrhReleaseUrl').getOrNull()
+				getProperty('project.publishing.ossrhSnapshotUrl') as String:
+				getProperty('project.publishing.ossrhReleaseUrl') as String
 
 			credentials {
-				username = providers.gradleProperty('ossrh.token.username').getOrNull()
-				password = providers.gradleProperty('ossrh.token.password').getOrNull()
+				username = getProperty('ossrh.token.username') as String
+				password = getProperty('ossrh.token.password') as String
 			}
 		}
 	}
