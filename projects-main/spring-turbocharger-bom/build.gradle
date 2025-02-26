@@ -7,8 +7,7 @@ plugins {
 dependencies {
 	constraints {
 		rootProject.subprojects.forEach { subproject ->
-			var projectName = subproject.name
-			if (projectName.startsWith('spring-turbo-')) {
+			if (subproject.name.startsWith('spring-turbo-')) {
 				api(subproject)
 			}
 		}
@@ -27,7 +26,7 @@ publishing {
 
 			pom {
 				name = "${project.name}"
-				description = "Bill of Materials SpringTurbocharger"
+				description = 'Bill of Materials SpringTurbocharger'
 				url = 'https://github.com/yingzhuo/spring-turbocharger'
 				inceptionYear = '2025'
 
@@ -67,8 +66,8 @@ publishing {
 		maven {
 			name = 'OSSRH'
 			url = rootProject.version.endsWith('SNAPSHOT') ?
-				'https://oss.sonatype.org/content/repositories/snapshots/' :
-				'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+				providers.gradleProperty('project.publishing.ossrhSnapshotUrl').getOrNull():
+				providers.gradleProperty('project.publishing.ossrhReleaseUrl').getOrNull()
 
 			credentials {
 				username = providers.gradleProperty('ossrh.token.username').getOrNull()

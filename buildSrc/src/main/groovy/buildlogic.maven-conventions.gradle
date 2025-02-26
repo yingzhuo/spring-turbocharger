@@ -63,8 +63,8 @@ publishing {
 		maven {
 			name = 'OSSRH'
 			url = rootProject.version.endsWith('SNAPSHOT') ?
-				'https://oss.sonatype.org/content/repositories/snapshots/' :
-				'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+				providers.gradleProperty('project.publishing.ossrhSnapshotUrl').getOrNull():
+				providers.gradleProperty('project.publishing.ossrhReleaseUrl').getOrNull()
 
 			credentials {
 				username = providers.gradleProperty('ossrh.token.username').getOrNull()
