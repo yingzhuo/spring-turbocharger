@@ -1,0 +1,88 @@
+plugins {
+	id 'java-platform'
+	id 'signing'
+	id 'maven-publish'
+}
+
+dependencies {
+	constraints {
+		rootProject.subprojects.forEach { subproject ->
+			var projectName = subproject.name
+			if (projectName.startsWith('spring-turbo-')) {
+				api(subproject)
+			}
+		}
+	}
+}
+
+publishing {
+
+	publications {
+		mavenJava(MavenPublication) {
+			from components.javaPlatform
+
+			groupId = 'com.github.yingzhuo'
+			artifactId = "${project.name}"
+			version = "${rootProject.version}"
+
+			pom {
+				name = "${project.name}"
+				description = "Bill of Materials SpringTurbocharger"
+				url = 'https://github.com/yingzhuo/spring-turbocharger'
+				inceptionYear = '2025'
+
+				licenses {
+					license {
+						name = 'Apache License, Version 2.0'
+						url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+					}
+				}
+
+				developers {
+					developer {
+						id = 'yingzhuo'
+						name = '应卓'
+						email = 'yingzhor@gmail.com'
+						roles = ['author']
+						timezone = 'GMT+0800'
+						url = 'https://github.com/yingzhuo'
+					}
+				}
+
+				scm {
+					url = 'git@github.com:yingzhuo/spring-turbocharger.git'
+					connection = 'scm:git:git@github.com:yingzhuo/spring-turbocharger.git'
+					developerConnection = 'scm:git:git@github.com:yingzhuo/spring-turbocharger.git'
+				}
+
+				issueManagement {
+					system = 'GitHub Issues'
+					url = 'https://github.com/yingzhuo/spring-turbocharger/issues'
+				}
+			}
+		}
+	}
+
+	repositories {
+		maven {
+			name = 'OSSRH'
+			url = rootProject.version.endsWith('SNAPSHOT') ?
+				'https://oss.sonatype.org/content/repositories/snapshots/' :
+				'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+
+			credentials {
+				username = providers.gradleProperty('ossrh.token.username').getOrNull()
+				password = providers.gradleProperty('ossrh.token.password').getOrNull()
+			}
+		}
+	}
+}
+
+signing {
+	useGpgCmd()
+	sign publishing.publications.mavenJava
+}
+
+tasks.withType(GenerateModuleMetadata).configureEach {
+	enabled = false
+}

@@ -35,6 +35,9 @@ include 'projects-main:spring-turbo-webmvc'
 include 'projects-main:spring-turbo-security'
 include 'projects-main:spring-turbo-misc'
 
+// 核心项目 (BOM)
+include 'projects-main:spring-turbocharger-bom'
+
 // 演示项目
 include 'projects-examples:use-hocon-as-config-file'
 include 'projects-examples:qrcode-gen'

@@ -18,70 +18,75 @@
 // build.gradle
 
 dependencies {
-    implementation "com.github.yingzhuo:spring-turbo-core:${springTurbochargerVersion}"
-    implementation "com.github.yingzhuo:spring-turbo-webmvc:${springTurbochargerVersion}"
-    implementation "com.github.yingzhuo:spring-turbo-jackson:${springTurbochargerVersion}"
-    implementation "com.github.yingzhuo:spring-turbo-webmvc:${springTurbochargerVersion}"
-    implementation "com.github.yingzhuo:spring-turbo-webcli:${springTurbochargerVersion}"
-    implementation "com.github.yingzhuo:spring-turbo-security:${springTurbochargerVersion}"
-    implementation "com.github.yingzhuo:spring-turbo-jwt:${springTurbochargerVersion}"
-    implementation "com.github.yingzhuo:spring-turbo-redis:${springTurbochargerVersion}"
-    implementation "com.github.yingzhuo:spring-turbo-jdbc:${springTurbochargerVersion}"
-    implementation "com.github.yingzhuo:spring-turbo-misc:${springTurbochargerVersion}"
+    implementation(platform("com.github.yingzhuo:spring-turbocharger-bom:${springTurbochargerVersion}"))
+    implementation 'com.github.yingzhuo:spring-turbo-core'
+    implementation 'com.github.yingzhuo:spring-turbo-webmvc'
+    implementation 'com.github.yingzhuo:spring-turbo-jackson'
+    implementation 'com.github.yingzhuo:spring-turbo-webmvc'
+    implementation 'com.github.yingzhuo:spring-turbo-webcli'
+    implementation 'com.github.yingzhuo:spring-turbo-security'
+    implementation 'com.github.yingzhuo:spring-turbo-jwt'
+    implementation 'com.github.yingzhuo:spring-turbo-redis'
+    implementation 'com.github.yingzhuo:spring-turbo-jdbc'
+    implementation 'com.github.yingzhuo:spring-turbo-misc'
 }
 ```
 
 #### 依赖 (Maven)
 
 ```xml
+<project>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.github.yingzhuo</groupId>
+                <artifactId>spring-turbocharger-bom</artifactId>
+                <version>${springTurbochargerVersion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-<dependencies>
-    <dependency>
-        <groupId>com.github.yingzhuo</groupId>
-        <artifactId>spring-turbo-core</artifactId>
-        <version>${springTurbochargerVersion}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.github.yingzhuo</groupId>
-        <artifactId>spring-turbo-webmvc</artifactId>
-        <version>${springTurbochargerVersion}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.github.yingzhuo</groupId>
-        <artifactId>spring-turbo-jackson</artifactId>
-        <version>${springTurbochargerVersion}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.github.yingzhuo</groupId>
-        <artifactId>spring-turbo-webcli</artifactId>
-        <version>${springTurbochargerVersion}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.github.yingzhuo</groupId>
-        <artifactId>spring-turbo-security</artifactId>
-        <version>${springTurbochargerVersion}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.github.yingzhuo</groupId>
-        <artifactId>spring-turbo-jwt</artifactId>
-        <version>${springTurbochargerVersion}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.github.yingzhuo</groupId>
-        <artifactId>spring-turbo-redis</artifactId>
-        <version>${springTurbochargerVersion}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.github.yingzhuo</groupId>
-        <artifactId>spring-turbo-jdbc</artifactId>
-        <version>${springTurbochargerVersion}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.github.yingzhuo</groupId>
-        <artifactId>spring-turbo-misc</artifactId>
-        <version>${springTurbochargerVersion}</version>
-    </dependency>
-</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-jackson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-webcli</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-jwt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-misc</artifactId>
+        </dependency>
+    </dependencies>
+</project>
 ```
 
 #### 安装
