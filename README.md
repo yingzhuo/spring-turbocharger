@@ -97,7 +97,7 @@ dependencies {
 |--------|--------------|
 | OS     | macOS 15.3.1 |
 | JDK    | 17           |
-| Gradle | 8.12.1       |
+| Gradle | 8.13         |
 | GnuPG  | 2.4.7        |
 
 ###### 脚本
@@ -105,7 +105,7 @@ dependencies {
 ```bash
 # main分支为开发分支
 
-gradle publishToMavenLocal -x test
+gradlew -Dorg.gradle.parallel=false -x "test" -x "check" publishToMavenLocal
 ```
 
 #### 示例程序
