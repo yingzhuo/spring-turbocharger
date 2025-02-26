@@ -14,7 +14,7 @@ ext {
 }
 
 group = 'com.github.yingzhuo'
-version = '3.4.3-1-SNAPSHOT'
+version = '3.4.3-1'
 description = 'Another enhancement library of SpringBoot & SpringFramework.'
 
 addLicenseHeader {
