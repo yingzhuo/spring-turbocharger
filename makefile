@@ -19,7 +19,7 @@ clean:
 	@$(CURDIR)/gradlew --quiet clean
 
 clean-build-source:
-	@$(CURDIR)/gradlew --quiet -p $(CURDIR)/build-src/ clean
+	@$(CURDIR)/gradlew --quiet -p $(CURDIR)/buildSrc/ clean
 
 clean-all: clean clean-build-source
 

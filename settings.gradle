@@ -23,9 +23,6 @@ dependencyResolutionManagement {
 
 rootProject.name = 'spring-turbocharger'
 
-// 构建逻辑
-includeBuild 'build-src'
-
 // 核心项目
 include 'projects-main:spring-turbo-core'
 include 'projects-main:spring-turbo-configuration'
