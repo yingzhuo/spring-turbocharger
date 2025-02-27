@@ -99,6 +99,7 @@ public interface ClientCertificate extends Serializable {
 
 	/**
 	 * Key密码
+	 *
 	 * @return Key密码
 	 */
 	public String getKeyPassword();

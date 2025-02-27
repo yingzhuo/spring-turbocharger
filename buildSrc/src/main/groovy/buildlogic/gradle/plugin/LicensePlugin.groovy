@@ -1,9 +1,9 @@
 package buildlogic.gradle.plugin
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.tasks.StopExecutionException
 import org.gradle.api.tasks.TaskAction
 
 import javax.inject.Inject
@@ -26,20 +26,12 @@ class LicensePlugin implements Plugin<Project> {
 		AddLicenseHeaderTask(Project project) {
 			this.project = project
 			this.group = 'license'
-			this.description = 'Add license header to the source files'
+			this.description = 'Adds license header to the source files'
 		}
 
 		@TaskAction
 		void execute() {
-			var config = project.extensions.getByName(TASK_NAME) as Config
-			var header = config.javaHeader
-			if (!header.endsWith('\n')) {
-				header += '\n'
-			}
-
-			if (header.isBlank()) {
-				throw new StopExecutionException('java license header text is blank')
-			}
+			final var header = getJavaHeader()
 
 			project.fileTree(project.rootDir) {
 				include '**/*.java'
@@ -52,6 +44,22 @@ class LicensePlugin implements Plugin<Project> {
 					file.setText(content + '\n')
 				}
 			}
+		}
+
+		private String getJavaHeader() {
+			var config = project.extensions.getByName(TASK_NAME) as Config
+			var header = config.javaHeader
+
+			if (header.isBlank()) {
+				var msg = 'java license header text is blank'
+				logger.error(msg)
+				throw new GradleException(msg)
+			}
+
+			if (!header.endsWith('\n')) {
+				header += '\n'
+			}
+			return header
 		}
 	}
 

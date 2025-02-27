@@ -40,13 +40,11 @@ import java.time.Duration;
 public abstract class AbstractClientHttpRequestFactoryBean implements FactoryBean<ClientHttpRequestFactory> {
 
 	@Nullable
-	private ClientCertificate clientCertificate;
-
-	@Nullable
 	protected Duration connectTimeout;
-
 	@Nullable
 	protected Duration requestTimeout;
+	@Nullable
+	private ClientCertificate clientCertificate;
 
 	/**
 	 * 构造方法
