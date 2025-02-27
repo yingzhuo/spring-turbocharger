@@ -17,6 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.util;
 
+import lombok.Getter;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -35,6 +36,7 @@ public final class Logger implements Serializable {
 	@Nullable
 	private final org.slf4j.Logger log;
 
+	@Getter
 	private final boolean enabled;
 
 	private final LogLevel level;
@@ -67,10 +69,6 @@ public final class Logger implements Serializable {
 		}
 
 		this.enabled = this.checkEnabled();
-	}
-
-	public boolean isEnabled() {
-		return enabled;
 	}
 
 	private boolean checkEnabled() {

@@ -29,6 +29,9 @@ dependencies {
 	api project(':projects-main:spring-turbo-core')
 	api project(':projects-main:spring-turbo-jwt')
 
+	// bc
+	compileOnly 'org.bouncycastle:bcprov-jdk18on:1.80'
+
 	// hutool
 	compileOnly 'cn.hutool:hutool-all:5.8.36'
 

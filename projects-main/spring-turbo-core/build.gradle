@@ -24,6 +24,9 @@ dependencies {
 	compileOnly 'org.springframework.boot:spring-boot-autoconfigure-processor'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
+	// bc
+	compileOnly 'org.bouncycastle:bcprov-jdk18on:1.80'
+
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

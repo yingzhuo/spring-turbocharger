@@ -41,6 +41,7 @@ public final class ClassUtils {
 	 * 私有构造方法
 	 */
 	private ClassUtils() {
+		super();
 	}
 
 	/**
@@ -50,7 +51,8 @@ public final class ClassUtils {
 	 */
 	public static ClassLoader getDefaultClassLoader() {
 		// (only null if even the system ClassLoader isn't accessible)
-		return Optional.ofNullable(DEFAULT_CLASSLOADER).orElse(Thread.currentThread().getContextClassLoader());
+		return Optional.ofNullable(DEFAULT_CLASSLOADER)
+			.orElse(Thread.currentThread().getContextClassLoader());
 	}
 
 	/**
