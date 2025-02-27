@@ -6,6 +6,8 @@ plugins {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
+			from components.java
+
 			groupId = 'com.github.yingzhuo'
 			artifactId = "${project.name}"
 			version = "${rootProject.version}"
@@ -18,8 +20,6 @@ publishing {
 					fromResolutionResult()
 				}
 			}
-
-			from components.java
 
 			pom {
 				name = "${project.name}"

@@ -1,4 +1,5 @@
 import org.gradle.api.Project
+import org.gradle.api.tasks.StopExecutionException
 
 import java.time.LocalDateTime
 
@@ -26,7 +27,7 @@ abstract class SharedFunctions {
 	static String getGradleProperty(Project project, String propertyName, String defaultPropertyValue = null) {
 		var value = project.providers.gradleProperty(propertyName).getOrElse(defaultPropertyValue)
 		if (value == null) {
-			throw new IllegalArgumentException("Cannot get value of name: ${propertyName}")
+			throw new StopExecutionException("Cannot get value of name: ${propertyName}")
 		}
 		return value
 	}
