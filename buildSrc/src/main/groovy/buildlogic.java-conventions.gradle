@@ -1,5 +1,3 @@
-import java.time.LocalDateTime
-
 plugins {
 	id 'java'
 	id 'java-library'
@@ -42,10 +40,10 @@ compileJava {
 jar {
 	manifest {
 		attributes([
-			"Module-Name"           : "${project.name}",
-			"Implementation-Version": "${rootProject.version}",
-			"Built-By"              : "Gradle ${gradle.gradleVersion}",
-			"Build-Time"            : "${LocalDateTime.now().format("yyyy-MM-dd HH:mm:ss")}",
+			'Module-Name'           : "${project.name}",
+			'Implementation-Version': "${rootProject.version}",
+			'Built-By'              : "Gradle ${gradle.gradleVersion}",
+			'Build-Time': SharedFunctions.getTimestamp('yyyy-MM-dd HH:mm:ss.SSS'),
 		])
 	}
 }
@@ -61,7 +59,7 @@ processResources {
 idea {
 	module {
 		downloadSources = true
-		downloadJavadoc = false
+		downloadJavadoc = true
 	}
 }
 
