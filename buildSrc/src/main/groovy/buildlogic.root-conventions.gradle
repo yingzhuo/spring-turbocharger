@@ -3,21 +3,5 @@ plugins {
 }
 
 tasks.named('wrapper') { task ->
-	var propertyName = 'project.gradle-wrapper.distribution-url'
-
-	var url = providers.gradleProperty(propertyName).getOrNull()
-	if (url == null || url.isBlank()) {
-		var errorMessage = """
-		|配置问题:
-		|	${propertyName} 配置缺失
-		|请检查:
-		|	gradle.properties
-		"""
-			.stripMargin('|')
-			.trim()
-
-		throw new StopExecutionException(errorMessage)
-	} else {
-		distributionUrl = url
-	}
+	distributionUrl = "https://mirrors.cloud.tencent.com/gradle/gradle-${getProperty('project.gradle-wrapper.version')}-bin.zip"
 }
