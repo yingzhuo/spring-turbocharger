@@ -4,6 +4,7 @@ pluginManagement {
 		gradlePluginPortal()
 		maven { name = '腾讯云'; url = 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
 		maven { name = '阿里云'; url = 'https://maven.aliyun.com/repository/gradle-plugin' }
+		maven { name = '华为云'; url = 'https://repo.huaweicloud.com/repository/maven/' }
 		mavenCentral()
 		google()
 	}
@@ -20,9 +21,10 @@ dependencyResolutionManagement {
 		mavenLocal()
 		maven { name = '腾讯云'; url = 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
 		maven { name = '阿里云'; url = 'https://maven.aliyun.com/repository/public/' }
-		maven { name = 'Spring(GA)'; url = 'https://repo.spring.io/release' }
-		maven { name = 'Spring(Milestone)'; url = 'https://repo.spring.io/milestone' }
-		maven { name = 'Spring(Snapshot)'; url = 'https://repo.spring.io/snapshot' }
+		maven { name = '华为云'; url = 'https://repo.huaweicloud.com/repository/maven/' }
+		// maven { name = 'Spring(GA)'; url = 'https://repo.spring.io/release' }
+		// maven { name = 'Spring(Milestone)'; url = 'https://repo.spring.io/milestone' }
+		// maven { name = 'Spring(Snapshot)'; url = 'https://repo.spring.io/snapshot' }
 		mavenCentral()
 		google()
 	}
