@@ -13,5 +13,5 @@ ext {
 }
 
 group = 'com.github.yingzhuo'
-version = '3.4.3-2-SNAPSHOT'
+version = '3.4.3-2'
 description = 'Another enhancement library of SpringBoot & SpringFramework.'
