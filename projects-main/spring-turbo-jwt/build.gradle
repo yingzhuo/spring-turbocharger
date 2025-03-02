@@ -4,6 +4,10 @@ plugins {
 	id 'buildlogic.maven-conventions'
 }
 
+apply {
+	from("$rootDir/buildSrc/shared.gradle")
+}
+
 dependencies {
 
 	// test
