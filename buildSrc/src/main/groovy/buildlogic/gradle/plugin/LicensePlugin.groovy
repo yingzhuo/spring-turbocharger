@@ -57,15 +57,24 @@ class LicensePlugin implements Plugin<Project> {
 					'**/*.kt',
 					'**/*.scala',
 					'buildSrc/**/*.gradle',
-					'buildSrc/**/*.gradle.kts',
+					'buildSrc/**/*.gradle.kts'
 				)
 			}.each { file ->
-				def content = file.text
+				var content = file.text
+				var changed = false
+
 				if (!content.startsWith(header)) {
-					file.setText(header + content)
+					content = header + content
+					changed = true
 				}
+
 				if (!content.endsWith('\n')) {
-					file.setText(content + '\n')
+					content = content + '\n'
+					changed = true
+				}
+
+				if (changed) {
+					file.text = content
 				}
 			}
 		}
