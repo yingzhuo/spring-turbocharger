@@ -6,7 +6,7 @@ pluginManagement {
 		maven { name = '阿里云'; url = 'https://maven.aliyun.com/repository/gradle-plugin' }
 		maven { name = '华为云'; url = 'https://repo.huaweicloud.com/repository/maven/' }
 		mavenCentral()
-		google()
+		//google()
 	}
 }
 
@@ -20,13 +20,14 @@ dependencyResolutionManagement {
 		maven { name = 'Spring(Milestone)'; url = 'https://repo.spring.io/milestone' }
 		maven { name = 'Spring(Snapshot)'; url = 'https://repo.spring.io/snapshot' }
 		mavenCentral()
-		google()
+		//google()
 	}
 }
 
 rootProject.name = 'spring-turbocharger'
 
-// 核心项目 (库)
+// 核心项目
+include 'projects-main:spring-turbocharger-bom'
 include 'projects-main:spring-turbo-core'
 include 'projects-main:spring-turbo-configuration'
 include 'projects-main:spring-turbo-jackson'
@@ -37,9 +38,6 @@ include 'projects-main:spring-turbo-redis'
 include 'projects-main:spring-turbo-webmvc'
 include 'projects-main:spring-turbo-security'
 include 'projects-main:spring-turbo-misc'
-
-// 核心项目 (BOM)
-include 'projects-main:spring-turbocharger-bom'
 
 // 演示项目
 include 'projects-examples:use-hocon-as-config-file'
