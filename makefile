@@ -27,7 +27,7 @@ compile:
 	@$(CURDIR)/gradlew classes
 
 build:
-	@$(CURDIR)/gradlew -Dorg.gradle.parallel=true -x "test" -x "check" build
+	@$(CURDIR)/gradlew -Dorg.gradle.parallel=true assemble
 
 install:
 	@$(CURDIR)/gradlew -Dorg.gradle.parallel=false -x "test" -x "check" publishToMavenLocal
@@ -39,7 +39,7 @@ setup-gradle-wrapper:
 	@$(CURDIR)/gradlew wrapper
 
 add-license-header:
-	@$(CURDIR)/gradlew :addLicenseHeader
+	@$(CURDIR)/gradlew addLicenseHeader
 
 test:
 	@$(CURDIR)/gradlew \test
