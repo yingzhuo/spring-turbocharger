@@ -29,7 +29,7 @@ class LicensePlugin implements Plugin<Project> {
 
 	@Override
 	void apply(Project project) {
-		project.extensions.add(AddLicenseHeaderTask.TASK_NAME, new Config())
+		project.extensions.add(AddLicenseHeaderTask.TASK_NAME, new PluginConfiguration())
 		project.getTasks()
 			.register(AddLicenseHeaderTask.TASK_NAME, AddLicenseHeaderTask, project)
 	}
@@ -80,7 +80,7 @@ class LicensePlugin implements Plugin<Project> {
 		}
 
 		private String getJavaHeader() {
-			var config = project.extensions.getByName(TASK_NAME) as Config
+			var config = project.extensions.getByName(TASK_NAME) as PluginConfiguration
 			var header = config.javaHeader
 
 			if (header.isBlank()) {
@@ -96,7 +96,7 @@ class LicensePlugin implements Plugin<Project> {
 		}
 	}
 
-	static class Config implements Serializable {
+	static class PluginConfiguration {
 		String javaHeader = ''
 	}
 

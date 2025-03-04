@@ -36,6 +36,7 @@ public final class IOUtils {
 	 * 私有构造方法
 	 */
 	private IOUtils() {
+		super();
 	}
 
 	/**
@@ -153,6 +154,23 @@ public final class IOUtils {
 
 		try {
 			return StreamUtils.copyToString(in, charset);
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
+		}
+	}
+
+	/**
+	 * 拷贝一段
+	 *
+	 * @param in    输入
+	 * @param out   输出
+	 * @param start 拷贝起点
+	 * @param end   拷贝总店
+	 * @return 拷贝字节数
+	 */
+	public static long copyRange(InputStream in, OutputStream out, long start, long end) {
+		try {
+			return StreamUtils.copyRange(in, out, start, end);
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}

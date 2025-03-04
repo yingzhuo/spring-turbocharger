@@ -17,13 +17,15 @@
  */
 package com.github.yingzhuo.turbocharger.util.function;
 
+import java.util.function.Supplier;
+
 /**
  * @author 应卓
  * @since 3.3.1
  */
 @FunctionalInterface
 @SuppressWarnings("rawtypes")
-public interface GenericGenerator extends java.util.function.Supplier {
+public interface GenericGenerator extends Supplier {
 
 	@Override
 	public default Object get() {
