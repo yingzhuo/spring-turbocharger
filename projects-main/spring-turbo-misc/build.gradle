@@ -32,17 +32,16 @@ dependencies {
 	api project(':projects-main:spring-turbo-core')
 
 	// zxing (qrcode tool)
-	compileOnly 'com.google.zxing:core:3.5.3'
-	compileOnly 'com.google.zxing:javase:3.5.3'
+	compileOnly(libs.bundles.zxing)
 
 	// hutool
-	compileOnly 'cn.hutool:hutool-all:5.8.36'
+	compileOnly(libs.hutool.all)
 
-	// mustache (text template tool)
-	compileOnly 'com.github.spullara.mustache.java:compiler:0.9.14'
+	// mustache
+	compileOnly(libs.mustache.compiler)
 
 	// pinyin4j
-	compileOnly 'com.belerweb:pinyin4j:2.5.1'
+	compileOnly(libs.pinyin4j)
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

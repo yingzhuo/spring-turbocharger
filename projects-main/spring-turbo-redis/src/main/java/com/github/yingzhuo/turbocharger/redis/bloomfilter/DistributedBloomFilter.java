@@ -44,12 +44,7 @@ public class DistributedBloomFilter implements BloomFilter {
 	private final List<HashFunction> hashFunctions = new ArrayList<>(5);
 	private final RedisOperations<String, String> redisOperations;
 	private final String redisKey;
-	/**
-	 * -- GETTER --
-	 * 获取底层bitmap长度
-	 *
-	 * @return 底层bitmap长度
-	 */
+
 	@Getter
 	private final int bitmapSize;
 

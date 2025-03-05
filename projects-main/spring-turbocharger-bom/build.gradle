@@ -1,3 +1,5 @@
+//file:noinspection ForeignDelegate
+
 plugins {
 	id 'java-platform'
 	id 'signing'
@@ -11,6 +13,27 @@ dependencies {
 				api(subproject)
 			}
 		}
+
+		// hocon
+		api(libs.hocon)
+
+		// 充气城堡
+		api(libs.bundles.bouncycastle)
+
+		// jwt
+		api(libs.bundles.jjwt)
+
+		// zxing
+		api(libs.bundles.zxing)
+
+		// hutool
+		api(libs.hutool.all)
+
+		// mustache
+		api(libs.mustache.compiler)
+
+		// pinyin4j
+		api(libs.pinyin4j)
 	}
 }
 

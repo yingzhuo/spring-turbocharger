@@ -1,9 +1,28 @@
 # Version Catalogs
 #  https://docs.gradle.org/current/userguide/version_catalogs.html
 [versions]
+bouncycastle = "1.80"
+jjwt = "0.12.6"
+zxing = "3.5.3"
+hutool = "5.8.36"
+mustache = "0.9.14"
+pinyin4j = "2.5.1"
 
 [libraries]
+hocon = { module = "com.typesafe:config", version = "1.4.3" }
+bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncycastle" }
+jjwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jjwt" }
+jjwt-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "jjwt" }
+jjwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jjwt" }
+zxing-core = { module = "com.google.zxing:core", version.ref = "zxing" }
+zxing-javase = { module = "com.google.zxing:javase", version.ref = "zxing" }
+hutool-all = { module = "cn.hutool:hutool-all", version.ref = "hutool" }
+mustache-compiler = { module = "com.github.spullara.mustache.java:compiler", version.ref = "mustache" }
+pinyin4j = { module = "com.belerweb:pinyin4j", version.ref = "pinyin4j" }
 
 [bundles]
+bouncycastle = ["bcprov"]
+jjwt = ["jjwt-api", "jjwt-impl", "jjwt-jackson"]
+zxing = ["zxing-core", "zxing-javase"]
 
 [plugins]
