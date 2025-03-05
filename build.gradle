@@ -4,12 +4,14 @@ plugins {
 
 ext {
 	// 核心框架版本
-	set('springBootVersion', '3.4.3')
+	// set('springBootVersion', '3.4.3')
 
 	// SpringBoot BOM 微调
 	// https://docs.spring.io/spring-boot/appendix/dependency-versions/coordinates.html
 	// https://docs.spring.io/spring-boot/appendix/dependency-versions/properties.html
 }
+
+defaultTasks 'assemble'
 
 allprojects {
 	group = 'com.github.yingzhuo'

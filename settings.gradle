@@ -1,17 +1,17 @@
 pluginManagement {
 	repositories {
 		mavenLocal()
-		gradlePluginPortal()
 		maven { name = '腾讯云'; url = 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
 		maven { name = '阿里云'; url = 'https://maven.aliyun.com/repository/gradle-plugin' }
 		maven { name = '华为云'; url = 'https://repo.huaweicloud.com/repository/maven/' }
 		maven { name = '网易云'; url = 'https://mirrors.163.com/maven/repository/maven-public/' }
+		gradlePluginPortal()
 		mavenCentral()
 	}
 }
 
 plugins {
-	id 'io.spring.dependency-management' version '1.1.7' apply false
+	id 'io.spring.dependency-management' version "${dependencyManagementPluginVersion}" apply false
 }
 
 dependencyResolutionManagement {
@@ -31,11 +31,13 @@ dependencyResolutionManagement {
 rootProject.name = 'spring-turbocharger'
 
 // 核心子项目
-file("${rootDir}/projects-main").eachDirMatch(~/spring-turbo.*/) {
-	include("projects-main:${it.name}")
+var coreDir = 'projects-main'
+file("${rootDir}/${coreDir}").eachDirMatch(~/spring-turbo.*/) {
+	include("${coreDir}:${it.name}")
 }
 
 // 演示子项目
-file("${rootDir}/projects-example").eachDirMatch(~/.*/) {
-	include("projects-example:${it.name}")
+var exampleDir = 'projects-example'
+file("${rootDir}/${exampleDir}").eachDirMatch(~/.*/) {
+	include("${exampleDir}:${it.name}")
 }
