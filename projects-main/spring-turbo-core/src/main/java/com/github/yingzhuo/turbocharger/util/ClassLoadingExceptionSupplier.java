@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.util;
 
-import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 
 import java.util.function.Supplier;
@@ -34,7 +33,7 @@ public class ClassLoadingExceptionSupplier implements Supplier<ClassLoadingExcep
 
 	private final String className;
 
-	public ClassLoadingExceptionSupplier(@NonNull String className) {
+	public ClassLoadingExceptionSupplier(String className) {
 		Assert.hasText(className, "className is required");
 		this.className = className;
 	}
@@ -44,7 +43,7 @@ public class ClassLoadingExceptionSupplier implements Supplier<ClassLoadingExcep
 	 */
 	@Override
 	public ClassLoadingException get() {
-		final String msg = StringFormatter.format("not able to load class. class name: '{}'", className);
+		var msg = StringFormatter.format("not able to load class. class name: '{}'", className);
 		return new ClassLoadingException(msg);
 	}
 

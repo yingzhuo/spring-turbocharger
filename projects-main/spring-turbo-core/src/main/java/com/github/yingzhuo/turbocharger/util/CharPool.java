@@ -47,6 +47,7 @@ public final class CharPool {
 	 * 私有构造方法
 	 */
 	private CharPool() {
+		super();
 	}
 
 }
