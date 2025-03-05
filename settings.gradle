@@ -10,6 +10,10 @@ pluginManagement {
 	}
 }
 
+plugins {
+	id 'io.spring.dependency-management' version '1.1.7' apply false
+}
+
 dependencyResolutionManagement {
 	repositories {
 		mavenLocal()
@@ -26,24 +30,12 @@ dependencyResolutionManagement {
 
 rootProject.name = 'spring-turbocharger'
 
-// 核心项目
-include 'projects-main:spring-turbocharger-bom'
-include 'projects-main:spring-turbo-core'
-include 'projects-main:spring-turbo-configuration'
-include 'projects-main:spring-turbo-jackson'
-include 'projects-main:spring-turbo-jdbc'
-include 'projects-main:spring-turbo-jwt'
-include 'projects-main:spring-turbo-webcli'
-include 'projects-main:spring-turbo-redis'
-include 'projects-main:spring-turbo-webmvc'
-include 'projects-main:spring-turbo-security'
-include 'projects-main:spring-turbo-misc'
+// 核心子项目
+file("${rootDir}/projects-main").eachDirMatch(~/spring-turbo.*/) {
+	include("projects-main:${it.name}")
+}
 
-// 演示项目
-include 'projects-examples:use-hocon-as-config-file'
-include 'projects-examples:qrcode-gen'
-include 'projects-examples:stateless-captcha'
-include 'projects-examples:stateful-captcha'
-include 'projects-examples:spring-security-jwt'
-include 'projects-examples:routing-data-source'
-include 'projects-examples:web-client'
+// 演示子项目
+file("${rootDir}/projects-example").eachDirMatch(~/.*/) {
+	include("projects-example:${it.name}")
+}

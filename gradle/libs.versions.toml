@@ -11,6 +11,7 @@ pinyin4j = "2.5.1"
 [libraries]
 hocon = { module = "com.typesafe:config", version = "1.4.3" }
 bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncycastle" }
+bcutil = { module = "org.bouncycastle:bcutil-jdk18on", version.ref = "bouncycastle" }
 jjwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jjwt" }
 jjwt-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "jjwt" }
 jjwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jjwt" }
@@ -21,7 +22,7 @@ mustache-compiler = { module = "com.github.spullara.mustache.java:compiler", ver
 pinyin4j = { module = "com.belerweb:pinyin4j", version.ref = "pinyin4j" }
 
 [bundles]
-bouncycastle = ["bcprov"]
+bouncycastle = ["bcprov", "bcutil"]
 jjwt = ["jjwt-api", "jjwt-impl", "jjwt-jackson"]
 zxing = ["zxing-core", "zxing-javase"]
 
