@@ -49,7 +49,7 @@ publishing {
 
 			pom {
 				name = "${project.name}"
-				description = 'Bill of Materials SpringTurbocharger'
+				description = 'BOM of SpringTurbocharger'
 				url = 'https://github.com/yingzhuo/spring-turbocharger'
 				inceptionYear = '2025'
 

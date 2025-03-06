@@ -15,11 +15,12 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.misc.mustache;
+package com.github.yingzhuo.turbocharger.stringtemplate.mustache;
 
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.MustacheFactory;
 import com.github.mustachejava.resolver.ClasspathResolver;
+import com.github.yingzhuo.turbocharger.stringtemplate.StringTemplateRenderer;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
@@ -28,20 +29,14 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Objects;
 
-/**
- * {@link MustacheService} 默认实现类
- *
- * @author 应卓
- * @since 3.3.0
- */
-public class MustacheServiceImpl implements MustacheService {
+public class MustacheStringTemplateRenderer implements StringTemplateRenderer {
 
 	private final MustacheFactory mustacheFactory;
 
 	/**
 	 * 默认构造方法
 	 */
-	public MustacheServiceImpl() {
+	public MustacheStringTemplateRenderer() {
 		this.mustacheFactory = new DefaultMustacheFactory(new ClasspathResolver());
 	}
 

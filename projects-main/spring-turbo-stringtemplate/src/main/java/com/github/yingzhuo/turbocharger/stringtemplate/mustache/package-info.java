@@ -17,7 +17,7 @@
  */
 @NonNullApi
 @NonNullFields
-package com.github.yingzhuo.turbocharger.misc.mustache;
+package com.github.yingzhuo.turbocharger.stringtemplate.mustache;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

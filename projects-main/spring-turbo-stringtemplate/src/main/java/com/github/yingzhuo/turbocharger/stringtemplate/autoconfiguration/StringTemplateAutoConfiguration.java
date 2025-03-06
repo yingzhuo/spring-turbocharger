@@ -15,10 +15,10 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.misc.autoconfiguration;
+package com.github.yingzhuo.turbocharger.stringtemplate.autoconfiguration;
 
-import com.github.yingzhuo.turbocharger.misc.mustache.MustacheService;
-import com.github.yingzhuo.turbocharger.misc.mustache.MustacheServiceImpl;
+import com.github.yingzhuo.turbocharger.stringtemplate.StringTemplateRenderer;
+import com.github.yingzhuo.turbocharger.stringtemplate.mustache.MustacheStringTemplateRenderer;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -26,16 +26,16 @@ import org.springframework.context.annotation.Bean;
 
 /**
  * @author 应卓
- * @since 3.3.0
+ * @since 3.4.3
  */
 @AutoConfiguration
-@ConditionalOnMissingBean(MustacheService.class)
-@ConditionalOnClass(name = "com.github.mustachejava.MustacheFactory")
-public class MustacheServiceAutoConfiguration {
+@ConditionalOnMissingBean(StringTemplateRenderer.class)
+public class StringTemplateAutoConfiguration {
 
 	@Bean
-	public MustacheService mustacheService() {
-		return new MustacheServiceImpl();
+	@ConditionalOnClass(name = "com.github.mustachejava.MustacheFactory")
+	public StringTemplateRenderer stringTemplateRenderer() {
+		return new MustacheStringTemplateRenderer();
 	}
 
 }

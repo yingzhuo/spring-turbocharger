@@ -4,4 +4,3 @@ com.github.yingzhuo.turbocharger.misc.autoconfiguration.CaptchaSupportAutoConfig
 com.github.yingzhuo.turbocharger.misc.autoconfiguration.CaptchaSupportRedisAutoConfiguration
 com.github.yingzhuo.turbocharger.misc.autoconfiguration.PinyinServiceAutoConfiguration
 com.github.yingzhuo.turbocharger.misc.autoconfiguration.TokenizerServiceAutoConfiguration
-com.github.yingzhuo.turbocharger.misc.autoconfiguration.MustacheServiceAutoConfiguration

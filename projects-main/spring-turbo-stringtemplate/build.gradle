@@ -31,14 +31,8 @@ dependencies {
 	// spring-turbocharger
 	api project(':projects-main:spring-turbo-core')
 
-	// zxing (qrcode tool)
-	compileOnly(libs.bundles.zxing)
-
-	// hutool
-	compileOnly(libs.hutool.all)
-
-	// pinyin4j
-	compileOnly(libs.pinyin4j)
+	// mustache
+	implementation(libs.mustache.compiler)
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

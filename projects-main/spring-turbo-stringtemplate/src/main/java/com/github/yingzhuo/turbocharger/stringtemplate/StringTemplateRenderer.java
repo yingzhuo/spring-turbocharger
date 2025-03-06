@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.misc.mustache;
+package com.github.yingzhuo.turbocharger.stringtemplate;
 
 import org.springframework.core.io.Resource;
 import org.springframework.lang.Nullable;
@@ -26,13 +26,12 @@ import java.io.UncheckedIOException;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
- * 集成 mustache.java 进行简易的模版渲染。
+ * 文本模板渲染器
  *
  * @author 应卓
- * @see <a href="https://github.com/spullara/mustache.java">mustache.java官方文档</a>
- * @since 3.3.0
+ * @since 3.4.3
  */
-public interface MustacheService {
+public interface StringTemplateRenderer {
 
 	/**
 	 * 渲染文本
@@ -68,5 +67,4 @@ public interface MustacheService {
 	 * @return 渲染结果
 	 */
 	public String render(String templateString, String templateName, @Nullable Object data);
-
 }
