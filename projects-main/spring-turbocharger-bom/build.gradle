@@ -1,5 +1,4 @@
 //file:noinspection ForeignDelegate
-
 plugins {
 	id 'java-platform'
 	id 'signing'
