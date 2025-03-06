@@ -21,6 +21,7 @@ dependencies {
     implementation 'com.github.yingzhuo:spring-turbo-webmvc'
     implementation 'com.github.yingzhuo:spring-turbo-webcli'
     implementation 'com.github.yingzhuo:spring-turbo-security'
+    implementation 'com.github.yingzhuo:spring-turbo-stringtemplate'
     implementation 'com.github.yingzhuo:spring-turbo-jwt'
     implementation 'com.github.yingzhuo:spring-turbo-redis'
     implementation 'com.github.yingzhuo:spring-turbo-jdbc'
@@ -64,6 +65,10 @@ dependencies {
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-stringtemplate</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>

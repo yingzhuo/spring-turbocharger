@@ -29,23 +29,22 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+ * {@link StringTemplateRenderer}实现
+ *
+ * @author 应卓
+ * @since 3.4.3
+ */
 public class MustacheStringTemplateRenderer implements StringTemplateRenderer {
 
-	private final MustacheFactory mustacheFactory;
-
-	/**
-	 * 默认构造方法
-	 */
-	public MustacheStringTemplateRenderer() {
-		this.mustacheFactory = new DefaultMustacheFactory(new ClasspathResolver());
-	}
+	private final MustacheFactory mustacheFactory = new DefaultMustacheFactory(new ClasspathResolver());
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String render(String classpathTemplateLocation, @Nullable Object data) {
-		Assert.hasText(classpathTemplateLocation, "classpathTemplateLocation is requuired");
+		Assert.hasText(classpathTemplateLocation, "classpathTemplateLocation is required");
 
 		if (classpathTemplateLocation.startsWith("classpath:")) {
 			classpathTemplateLocation = classpathTemplateLocation.substring("classpath:".length());
