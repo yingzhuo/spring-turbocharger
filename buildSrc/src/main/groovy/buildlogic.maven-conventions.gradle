@@ -79,19 +79,19 @@ publishing {
 	repositories {
 		maven {
 			name = 'OSSRH'
-			url = rootProject.version.endsWith('SNAPSHOT') ?
-				getProperty('project.publishing.ossrhSnapshotUrl') as String :
-				getProperty('project.publishing.ossrhReleaseUrl') as String
+			url = rootProject.version.endsWith('SNAPSHOT') ? "${ossrhSnapshotUrl}" : "${ossrhReleaseUrl}"
 
 			credentials {
-				username = getProperty('ossrh.token.username') as String
-				password = getProperty('ossrh.token.password') as String
+				// 私密信息在 $GRADLE_USER_HOME/gradle.properties
+				username = "${ossrhTokenUsername}"
+				password = "${ossrhTokenPassword}"
 			}
 		}
 	}
 }
 
 signing {
+	// 私密信息在 $GRADLE_USER_HOME/gradle.properties
 	useGpgCmd()
 	sign publishing.publications.mavenJava
 }

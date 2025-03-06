@@ -4,7 +4,6 @@
 [![Version](https://img.shields.io/maven-central/v/com.github.yingzhuo/spring-turbocharger-bom.svg?label=Maven%20Central&style=flat-square)](https://search.maven.org/search?q=g:%22com.github.yingzhuo%22%20AND%20a:%22spring-turbocharger-bom%22)
 [![Author](https://img.shields.io/badge/yingzhor%40gmail.com-F0FF00?style=flat-square)](mailto:yingzhor@gmail.com)
 [![Github](https://img.shields.io/badge/https%3A%2F%2Fgithub.com%2Fyingzhuo%2Fspring--turbocharger-8A2BE2?style=flat-square&link=https%3A%2F%2Fgithub.com%2Fyingzhuo%2Fspring-turbocharger)](https://github.com/yingzhuo/spring-turbocharger)
-<br>
 
 Another enhancement library of SpringBoot & SpringFramework. Have fun! :)
 
@@ -84,25 +83,6 @@ dependencies {
         </dependency>
     </dependencies>
 </project>
-```
-
-#### 安装
-
-###### 开发环境
-
-| 软件     | 版本           |
-|--------|--------------|
-| OS     | macOS 15.3.1 |
-| JDK    | 17           |
-| Gradle | 8.13         |
-| GnuPG  | 2.4.7        |
-
-###### 脚本
-
-```bash
-# main分支为开发分支
-
-gradlew -Dorg.gradle.parallel=false -x "test" -x "check" publishToMavenLocal
 ```
 
 #### 示例程序
