@@ -19,6 +19,20 @@ plugins {
 	id 'groovy-gradle-plugin'
 }
 
+ext {
+	var reader = file("${rootDir}/../gradle.properties").newReader('utf-8')
+	var props = new Properties()
+	props.load(reader)
+	props.each { entry ->
+		var name = entry.key as String
+		var value = entry.value
+		if (name.endsWithIgnoreCase('Version')) {
+			set(name, value)
+		}
+	}
+	reader.close()
+}
+
 dependencies {
 }
 
