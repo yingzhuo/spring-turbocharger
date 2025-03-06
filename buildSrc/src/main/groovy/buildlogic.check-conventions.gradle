@@ -20,7 +20,7 @@ plugins {
 }
 
 checkstyle {
-	configFile = file("${rootDir}/project-config/checkstyle/yingzhuo.xml")
+	configFile = file("${rootDir}/buildSrc/config/checkstyle/yingzhuo.xml")
 }
 
 checkstyleMain {
