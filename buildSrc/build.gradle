@@ -20,17 +20,18 @@ plugins {
 }
 
 ext {
-	var reader = file("${rootDir}/../gradle.properties").newReader('utf-8')
-	var props = new Properties()
-	props.load(reader)
-	props.each { entry ->
-		var name = entry.key as String
-		var value = entry.value
-		if (name.endsWithIgnoreCase('Version')) {
-			set(name, value)
+	try (var reader = file("${rootDir}/../gradle.properties").newReader('ISO-8859-1')) {
+		final var props = new Properties()
+		props.load(reader)
+		props.each { entry ->
+			var name = entry.key as String
+			if (name.endsWithIgnoreCase('version')) {
+				set(name, entry.value)
+			}
 		}
+	} catch (IOException ex) {
+		logger.debug(ex.message)
 	}
-	reader.close()
 }
 
 dependencies {
