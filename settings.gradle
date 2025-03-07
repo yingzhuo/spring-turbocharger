@@ -31,13 +31,37 @@ dependencyResolutionManagement {
 rootProject.name = 'spring-turbocharger'
 
 // 核心子项目
-var coreDir = 'projects-main'
-file("${rootDir}/${coreDir}").eachDirMatch(~/spring-turbo.*/) {
-	include("${coreDir}:${it.name}")
-}
+includeSubprojects(file('projects-main'), new FileFilter() {
+	@Override
+	boolean accept(File f) {
+		f.name.startsWith('spring-turbo')
+	}
+})
 
 // 演示子项目
-var exampleDir = 'projects-example'
-file("${rootDir}/${exampleDir}").eachDirMatch(~/.*/) {
-	include("${exampleDir}:${it.name}")
+includeSubprojects(file('projects-example'))
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+private def includeSubprojects(File directory, FileFilter subDirFilter = new FileFilter() {
+	@Override
+	boolean accept(File f) {
+		return true
+	}
+}) {
+	if (directory == null || !directory.isDirectory()) {
+		return
+	}
+
+	directory.listFiles(new FileFilter() {
+		@Override
+		boolean accept(File f) {
+			return f.isDirectory()
+		}
+	})
+		.each { subDir ->
+			if (subDirFilter.accept(subDir)) {
+				include("${directory.name}:${subDir.name}")
+			}
+		}
 }
