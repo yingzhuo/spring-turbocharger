@@ -2,15 +2,13 @@ pluginManagement {
 	repositories {
 		mavenLocal()
 
-		try (var reader = file('buildSrc/config/maven/repositories.txt').newReader()) {
-			reader.lines()
-				.forEach { line ->
-					var mirror = line.trim()
-					if (!mirror.isBlank()) {
-						maven { url = uri(mirror); allowInsecureProtocol = true }
-					}
+		file('buildSrc/config/maven/repositories.txt')
+			.readLines()
+			.forEach { line ->
+				if (!line.isBlank()) {
+					maven { url = uri(line.trim()); allowInsecureProtocol = true }
 				}
-		}
+			}
 
 		gradlePluginPortal()
 		mavenCentral()
@@ -26,15 +24,13 @@ dependencyResolutionManagement {
 	repositories {
 		mavenLocal()
 
-		try (var reader = file('buildSrc/config/maven/repositories.txt').newReader()) {
-			reader.lines()
-				.forEach { line ->
-					var mirror = line.trim()
-					if (!mirror.isBlank()) {
-						maven { url = uri(mirror); allowInsecureProtocol = true }
-					}
+		file('buildSrc/config/maven/repositories.txt')
+			.readLines()
+			.forEach { line ->
+				if (!line.isBlank()) {
+					maven { url = uri(line.trim()); allowInsecureProtocol = true }
 				}
-		}
+			}
 
 		mavenCentral()
 		google()
@@ -59,7 +55,7 @@ includeSubprojects(file('projects-example'))
 private def includeSubprojects(File directory, FileFilter subDirFilter = new FileFilter() {
 	@Override
 	boolean accept(File f) {
-		return true
+		true
 	}
 }) {
 	if (directory == null || !directory.isDirectory()) {

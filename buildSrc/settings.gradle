@@ -20,15 +20,13 @@ pluginManagement {
 		mavenLocal()
 		gradlePluginPortal()
 
-		try (var reader = file('config/maven/repositories.txt').newReader()) {
-			reader.lines()
-				.forEach { line ->
-					var mirror = line.trim()
-					if (!mirror.isBlank()) {
-						maven { url = uri(mirror); allowInsecureProtocol = true }
-					}
+		file('config/maven/repositories.txt')
+			.readLines()
+			.forEach { line ->
+				if (!line.isBlank()) {
+					maven { url = uri(line.trim()); allowInsecureProtocol = true }
 				}
-		}
+			}
 
 		mavenCentral()
 		google()
@@ -43,15 +41,13 @@ dependencyResolutionManagement {
 	repositories {
 		mavenLocal()
 
-		try (var reader = file('config/maven/repositories.txt').newReader()) {
-			reader.lines()
-				.forEach { line ->
-					var mirror = line.trim()
-					if (!mirror.isBlank()) {
-						maven { url = uri(mirror); allowInsecureProtocol = true }
-					}
+		file('config/maven/repositories.txt')
+			.readLines()
+			.forEach { line ->
+				if (!line.isBlank()) {
+					maven { url = uri(line.trim()); allowInsecureProtocol = true }
 				}
-		}
+			}
 
 		mavenCentral()
 		google()
