@@ -17,11 +17,13 @@
  */
 package com.github.yingzhuo.turbocharger.stringtemplate.autoconfiguration;
 
+import com.github.yingzhuo.turbocharger.stringtemplate.FreemarkerStringTemplateRenderer;
 import com.github.yingzhuo.turbocharger.stringtemplate.StringTemplateRenderer;
-import com.github.yingzhuo.turbocharger.stringtemplate.mustache.MustacheStringTemplateRenderer;
+import com.github.yingzhuo.turbocharger.stringtemplate.properties.StringTemplateRendererProperties;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -29,13 +31,18 @@ import org.springframework.context.annotation.Bean;
  * @since 3.4.3
  */
 @AutoConfiguration
-@ConditionalOnMissingBean(StringTemplateRenderer.class)
+@EnableConfigurationProperties(StringTemplateRendererProperties.class)
+@ConditionalOnProperty(prefix = "springturbo.stringtemplate", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class StringTemplateAutoConfiguration {
 
 	@Bean
-	@ConditionalOnClass(name = "com.github.mustachejava.MustacheFactory")
-	public StringTemplateRenderer stringTemplateRenderer() {
-		return new MustacheStringTemplateRenderer();
+	@ConditionalOnMissingBean
+	public StringTemplateRenderer stringTemplateRenderer(StringTemplateRendererProperties properties) {
+		var bean = new FreemarkerStringTemplateRenderer();
+		bean.setDefaultEncoding(properties.getDefaultEncoding());
+		bean.setSuffix(properties.getSuffix());
+		bean.setTemplateLoaderPath(properties.getTemplateLoaderPath());
+		return bean;
 	}
 
 }

@@ -15,26 +15,23 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.stringtemplate;
+package com.github.yingzhuo.turbocharger.stringtemplate.properties;
 
-import org.springframework.lang.Nullable;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/**
- * 文本模板渲染器
- *
- * @author 应卓
- * @since 3.4.3
- */
-@FunctionalInterface
-public interface StringTemplateRenderer {
+import java.io.Serializable;
 
-	/**
-	 * 渲染文本
-	 *
-	 * @param templateName 模板名称
-	 * @param data         数据
-	 * @return 渲染结果
-	 */
-	public String render(String templateName, @Nullable Object data);
+@Getter
+@Setter
+@ToString
+@ConfigurationProperties(prefix = "springturbo.stringtemplate")
+public class StringTemplateRendererProperties implements Serializable {
 
+	private boolean enabled = true;
+	private String defaultEncoding = "UTF-8";
+	private String templateLoaderPath = "string-templates/";
+	private String suffix = ".ftl";
 }

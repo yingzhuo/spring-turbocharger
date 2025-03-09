@@ -28,8 +28,8 @@ dependencies {
 		// hutool
 		api(libs.hutool.all)
 
-		// mustache
-		api(libs.mustache.compiler)
+		// freemarker
+		api(libs.freemarker)
 
 		// pinyin4j
 		api(libs.pinyin4j)

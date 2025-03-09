@@ -5,7 +5,6 @@ usage:
 	@echo 'clean-build-source  :          清理构建逻辑'
 	@echo 'clean-all           :          清理项目构建产物和构建逻辑'
 	@echo 'compile             :          编译项目'
-	@echo 'build               :          构建项目'
 	@echo 'install             :          安装到本地maven仓库'
 	@echo 'publish             :          推送到 oss.sonatype.org'
 	@echo 'setup-gradle-wrapper:          初始化 setup-gradle-wrapper'
@@ -26,9 +25,6 @@ clean-all: clean clean-build-source
 compile:
 	@$(CURDIR)/gradlew classes
 
-build:
-	@$(CURDIR)/gradlew -Dorg.gradle.parallel=true assemble
-
 install:
 	@$(CURDIR)/gradlew -Dorg.gradle.parallel=false -x "test" -x "check" publishToMavenLocal
 
@@ -42,10 +38,10 @@ add-license-header:
 	@$(CURDIR)/gradlew addLicenseHeader
 
 test:
-	@$(CURDIR)/gradlew \test
+	@$(CURDIR)/gradlew "test"
 
 check:
-	@$(CURDIR)/gradlew \check
+	@$(CURDIR)/gradlew "check"
 
 github:
 	@git status
@@ -55,8 +51,8 @@ github:
 .PHONY: \
 	usage \
 	clean clean-build-source clean-all \
-	compile build publish install \
+	compile publish install \
 	check test \
 	setup-gradle-wrapper \
-	add-license-header check \
+	add-license-header \
 	github

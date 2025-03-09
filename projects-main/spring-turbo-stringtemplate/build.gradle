@@ -27,8 +27,11 @@ dependencies {
 	// spring-turbocharger
 	api project(':projects-main:spring-turbo-core')
 
+	// freemarker
+	implementation(libs.freemarker)
+
 	// mustache
-	implementation(libs.mustache.compiler)
+	// compileOnly(libs.mustache.compiler)
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

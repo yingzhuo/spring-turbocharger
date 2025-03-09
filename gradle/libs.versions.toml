@@ -18,8 +18,8 @@ jjwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jjwt" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxing" }
 zxing-javase = { module = "com.google.zxing:javase", version.ref = "zxing" }
 hutool-all = { module = "cn.hutool:hutool-all", version.ref = "hutool" }
-mustache-compiler = { module = "com.github.spullara.mustache.java:compiler", version.ref = "mustache" }
 pinyin4j = { module = "com.belerweb:pinyin4j", version.ref = "pinyin4j" }
+freemarker = { module = "org.freemarker:freemarker", version = "2.3.34" }
 
 [bundles]
 bouncycastle = ["bcprov", "bcutil"]
