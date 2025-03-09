@@ -60,9 +60,9 @@ jar {
 	manifest {
 		attributes([
 			'Module-Name'           : "${project.name}",
-			'Implementation-Version': "${rootProject.version}",
+			'Implementation-Version': "${project.version}",
 			'Built-By'              : "Gradle ${gradle.gradleVersion}",
-			'Build-Time'            : SharedFunctions.getTimestamp('yyyy-MM-dd HH:mm:ss.SSS'),
+			'Build-Time'            : SharedFunctions.getTimestamp('yyyy-MM-dd HH:mm:ss.SSS')
 		])
 	}
 }

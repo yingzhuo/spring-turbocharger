@@ -16,7 +16,7 @@ dependencies {
 		// hocon
 		api(libs.hocon)
 
-		// 充气城堡
+		// bouncy castle
 		api(libs.bundles.bouncycastle)
 
 		// jwt
@@ -44,7 +44,7 @@ publishing {
 
 			groupId = 'com.github.yingzhuo'
 			artifactId = "${project.name}"
-			version = "${rootProject.version}"
+			version = "${project.version}"
 
 			pom {
 				name = "${project.name}"
@@ -87,7 +87,7 @@ publishing {
 	repositories {
 		maven {
 			name = 'OSSRH'
-			url = rootProject.version.endsWith('SNAPSHOT') ? "${ossrhSnapshotUrl}" : "${ossrhReleaseUrl}"
+			url = project.version.endsWith('SNAPSHOT') ? "${ossrhSnapshotUrl}" : "${ossrhReleaseUrl}"
 
 			credentials {
 				// 私密信息在 $GRADLE_USER_HOME/gradle.properties
