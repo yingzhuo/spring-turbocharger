@@ -40,7 +40,7 @@ publishing {
 
 			pom {
 				name = "${project.name}"
-				description = "${project.description}"
+				description = 'Another enhancement library of SpringBoot & SpringFramework'
 				url = 'https://github.com/yingzhuo/spring-turbocharger'
 				inceptionYear = '2025'
 

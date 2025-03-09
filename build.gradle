@@ -13,5 +13,4 @@ defaultTasks 'classes'
 allprojects {
 	group = 'com.github.yingzhuo'
 	version = '3.4.3-4-SNAPSHOT'
-	description = 'Another enhancement library of SpringBoot & SpringFramework'
 }

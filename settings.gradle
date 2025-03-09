@@ -40,12 +40,7 @@ dependencyResolutionManagement {
 rootProject.name = 'spring-turbocharger'
 
 // 核心子项目
-includeSubprojects(file('projects-main'), new FileFilter() {
-	@Override
-	boolean accept(File f) {
-		f.name.startsWith('spring-turbo')
-	}
-})
+includeSubprojects(file('projects-main'))
 
 // 演示子项目
 includeSubprojects(file('projects-example'))

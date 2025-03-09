@@ -21,7 +21,7 @@ plugins {
 
 ext {
 	try (var reader = file("${rootDir}/../gradle.properties").newReader('ISO-8859-1')) {
-		final var props = new Properties()
+		var props = new Properties()
 		props.load(reader)
 		props.each { entry ->
 			var name = entry.key as String
@@ -29,8 +29,6 @@ ext {
 				set(name, entry.value)
 			}
 		}
-	} catch (IOException ex) {
-		logger.debug(ex.message)
 	}
 }
 
