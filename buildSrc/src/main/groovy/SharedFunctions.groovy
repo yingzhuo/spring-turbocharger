@@ -16,7 +16,6 @@
  *
  */
 import org.gradle.api.Project
-import org.gradle.api.tasks.StopExecutionException
 
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
@@ -41,27 +40,6 @@ abstract class SharedFunctions {
 					.replace("project '", "")
 					.replace("'", "")
 			}
-	}
-
-	static String getGradleProperty(Project project, String propertyName, String defaultPropertyValue = null) {
-		var value = project.providers.gradleProperty(propertyName).getOrElse(defaultPropertyValue)
-		if (value == null) {
-			throw new StopExecutionException("Cannot get value of name: ${propertyName}")
-		}
-		return value
-	}
-
-	static boolean getGradlePropertyAsBoolean(Project project, String propertyName, boolean defaultValue = false) {
-		var booleanString = getGradleProperty(project, propertyName, "${defaultValue}")
-		return Boolean.valueOf(booleanString)
-	}
-
-	static String getEnv(String name, String defaultValueIfMissing = '<no value>') {
-		return Optional.of(System.getenv(name)).orElse(defaultValueIfMissing)
-	}
-
-	static boolean getEnvAsBoolean(String name, boolean defaultValue = false) {
-		return getEnv(name, "${defaultValue}").toBoolean()
 	}
 
 	static void mkdir(File file) {
