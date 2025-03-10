@@ -73,21 +73,6 @@ javadoc {
 }
 
 processResources {
-
-	doLast {
-		var metaInfoDir = file(layout.buildDirectory.dir('resource/main/META-INF/'))
-		SharedFunctions.mkdir(metaInfoDir)
-
-		SharedFunctions.copyFile(
-			file("${rootDir}/LICENSE.txt"),
-			file(layout.buildDirectory.dir('resources/main/META-INF/LICENSE.txt'))
-		)
-
-		SharedFunctions.copyFile(
-			file("${rootDir}/NOTICE.txt"),
-			file(layout.buildDirectory.dir('resources/main/META-INF/NOTICE.txt'))
-		)
-	}
 }
 
 idea {
