@@ -18,6 +18,8 @@
 import org.gradle.api.Project
 import org.gradle.api.tasks.StopExecutionException
 
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 import java.time.LocalDateTime
 
 /**
@@ -62,4 +64,11 @@ abstract class SharedFunctions {
 		return getEnv(name, "${defaultValue}").toBoolean()
 	}
 
+	static void mkdir(File file) {
+		file.mkdir()
+	}
+
+	static void copyFile(File src, File dest) {
+		Files.copy(src.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING)
+	}
 }
