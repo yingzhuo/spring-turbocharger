@@ -5,8 +5,8 @@ bouncycastle = "1.80"
 jjwt = "0.12.6"
 zxing = "3.5.3"
 hutool = "5.8.36"
-mustache = "0.9.14"
 pinyin4j = "2.5.1"
+freemarker = "2.3.34"
 
 [libraries]
 hocon = { module = "com.typesafe:config", version = "1.4.3" }
@@ -19,7 +19,7 @@ zxing-core = { module = "com.google.zxing:core", version.ref = "zxing" }
 zxing-javase = { module = "com.google.zxing:javase", version.ref = "zxing" }
 hutool-all = { module = "cn.hutool:hutool-all", version.ref = "hutool" }
 pinyin4j = { module = "com.belerweb:pinyin4j", version.ref = "pinyin4j" }
-freemarker = { module = "org.freemarker:freemarker", version = "2.3.34" }
+freemarker = { module = "org.freemarker:freemarker", version.ref = "freemarker" }
 
 [bundles]
 bouncycastle = ["bcprov", "bcutil"]

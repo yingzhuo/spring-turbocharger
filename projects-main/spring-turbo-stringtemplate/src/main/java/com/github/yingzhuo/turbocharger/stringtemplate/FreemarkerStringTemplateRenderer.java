@@ -39,6 +39,8 @@ import java.util.List;
 import static com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils.toUnchecked;
 
 /**
+ * <a href="https://freemarker.apache.org/">Freemarker</a>实现
+ *
  * @author 应卓
  * @since 3.4.3
  */
@@ -55,6 +57,12 @@ public class FreemarkerStringTemplateRenderer implements StringTemplateRenderer,
 	@Setter
 	private String suffix = ".ftl";
 
+	/**
+	 * 默认构造方法
+	 */
+	public FreemarkerStringTemplateRenderer() {
+		super();
+	}
 
 	@Override
 	public String render(String templateName, @Nullable Object data) {

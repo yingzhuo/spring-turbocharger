@@ -39,9 +39,9 @@ public class StringTemplateAutoConfiguration {
 	@ConditionalOnMissingBean
 	public StringTemplateRenderer stringTemplateRenderer(StringTemplateRendererProperties properties) {
 		var bean = new FreemarkerStringTemplateRenderer();
-		bean.setTemplateLoaderPaths(properties.getTemplateLoaderPaths());
 		bean.setSuffix(properties.getSuffix());
 		bean.setDefaultEncoding(properties.getDefaultEncoding());
+		bean.setTemplateLoaderPaths(properties.getTemplateLoaderPaths());
 		return bean;
 	}
 

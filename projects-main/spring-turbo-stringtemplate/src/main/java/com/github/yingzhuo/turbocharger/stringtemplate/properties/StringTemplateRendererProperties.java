@@ -17,6 +17,8 @@
  */
 package com.github.yingzhuo.turbocharger.stringtemplate.properties;
 
+import com.github.yingzhuo.turbocharger.util.StringUtils;
+import com.github.yingzhuo.turbocharger.util.collection.ArrayUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -41,9 +43,15 @@ public class StringTemplateRendererProperties implements InitializingBean, Seria
 	private String suffix = ".ftl";
 
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		if (suffix == null) {
+	public void afterPropertiesSet() {
+		if (StringUtils.isBlank(suffix)) {
 			suffix = "";
+		}
+		if (StringUtils.isBlank(defaultEncoding)) {
+			defaultEncoding = "UTF-8";
+		}
+		if (ArrayUtils.isNullOrEmpty(templateLoaderPaths)) {
+			templateLoaderPaths = new String[]{"classpath:/templates/"};
 		}
 	}
 
