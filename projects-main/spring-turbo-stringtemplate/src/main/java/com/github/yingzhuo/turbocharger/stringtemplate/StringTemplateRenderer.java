@@ -32,6 +32,16 @@ public interface StringTemplateRenderer {
 	 * 渲染文本
 	 *
 	 * @param templateName 模板名称
+	 * @return 渲染结果
+	 */
+	public default String render(String templateName) {
+		return render(templateName, null);
+	}
+
+	/**
+	 * 渲染文本
+	 *
+	 * @param templateName 模板名称
 	 * @param data         数据
 	 * @return 渲染结果
 	 */

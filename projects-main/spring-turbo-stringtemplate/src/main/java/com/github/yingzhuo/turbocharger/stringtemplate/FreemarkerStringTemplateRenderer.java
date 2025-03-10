@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.stringtemplate;
 
-import com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
@@ -37,13 +36,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils.toUnchecked;
+
 /**
  * @author 应卓
  * @since 3.4.3
  */
 public class FreemarkerStringTemplateRenderer implements StringTemplateRenderer, InitializingBean {
 
-	private Configuration cfg;
+	private final Configuration cfg = new Configuration(Configuration.VERSION_2_3_34);
 
 	@Setter
 	private String defaultEncoding = "UTF-8";
@@ -54,14 +55,11 @@ public class FreemarkerStringTemplateRenderer implements StringTemplateRenderer,
 	@Setter
 	private String suffix = ".ftl";
 
-	public FreemarkerStringTemplateRenderer() {
-		cfg = new Configuration(Configuration.VERSION_2_3_34);
-		cfg.setClassForTemplateLoading(getClass(), "/templates");
-		cfg.setDefaultEncoding(defaultEncoding);
-	}
 
 	@Override
 	public String render(String templateName, @Nullable Object data) {
+		Assert.hasText(templateName, "template name is required");
+
 		if (data == null) {
 			data = new HashMap<String, Object>();
 		}
@@ -71,20 +69,19 @@ public class FreemarkerStringTemplateRenderer implements StringTemplateRenderer,
 			template.process(data, writer);
 			return writer.toString();
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw toUnchecked(e);
 		} catch (TemplateException e) {
-			throw IOExceptionUtils.toUnchecked(e.getMessage());
+			throw toUnchecked(e.getMessage());
 		}
 	}
 
 	@Override
 	public void afterPropertiesSet() {
 		try {
-			this.cfg = new Configuration(Configuration.VERSION_2_3_34);
 			this.cfg.setTemplateLoader(getTemplateLoader());
 			this.cfg.setDefaultEncoding(defaultEncoding);
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw toUnchecked(e);
 		}
 	}
 
@@ -110,9 +107,6 @@ public class FreemarkerStringTemplateRenderer implements StringTemplateRenderer,
 
 			if (path.startsWith("file:")) {
 				path = path.substring("file:".length());
-//				if (!path.startsWith("/")) {
-//					path = "/" + path;
-//				}
 				if (!path.endsWith("/")) {
 					path += "/";
 				}
@@ -123,4 +117,5 @@ public class FreemarkerStringTemplateRenderer implements StringTemplateRenderer,
 
 		return new MultiTemplateLoader(loaders.toArray(new TemplateLoader[0]));
 	}
+
 }
