@@ -29,7 +29,7 @@ dependencies {
 	api project(':projects-main:spring-turbo-core')
 	api project(':projects-main:spring-turbo-jwt')
 
-	// bc
+	// bouncy castle
 	compileOnly(libs.bundles.bouncycastle)
 
 	// hutool
