@@ -1,3 +1,8 @@
+### 3.4.3-4 (2025-03-10)
+
+- (UPDATE) 修复若干小bug
+- (UPDATE) 新增模块`spring-turbo-stringtemplate`
+
 ### 3.4.3-3 (2025-03-05)
 
 - (UPDATE) 修复若干小bug
