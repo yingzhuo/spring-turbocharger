@@ -41,7 +41,7 @@ public class StringTemplateAutoConfiguration {
 		var bean = new FreemarkerStringTemplateRenderer();
 		bean.setDefaultEncoding(properties.getDefaultEncoding());
 		bean.setSuffix(properties.getSuffix());
-		bean.setTemplateLoaderPath(properties.getTemplateLoaderPath());
+		bean.setTemplateLoaderPaths(properties.getTemplateLoaderPaths());
 		return bean;
 	}
 

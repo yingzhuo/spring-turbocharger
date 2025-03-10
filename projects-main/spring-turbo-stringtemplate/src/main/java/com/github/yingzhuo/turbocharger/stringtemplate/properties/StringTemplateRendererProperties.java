@@ -32,6 +32,7 @@ public class StringTemplateRendererProperties implements Serializable {
 
 	private boolean enabled = true;
 	private String defaultEncoding = "UTF-8";
-	private String templateLoaderPath = "string-templates/";
+	private String[] templateLoaderPaths = new String[]{"classpath:/templates/"};
 	private String suffix = ".ftl";
+
 }

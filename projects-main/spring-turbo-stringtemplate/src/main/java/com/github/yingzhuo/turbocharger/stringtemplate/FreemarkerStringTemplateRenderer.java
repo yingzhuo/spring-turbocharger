@@ -18,32 +18,45 @@
 package com.github.yingzhuo.turbocharger.stringtemplate;
 
 import com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils;
+import freemarker.cache.ClassTemplateLoader;
+import freemarker.cache.FileTemplateLoader;
+import freemarker.cache.MultiTemplateLoader;
+import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
 import jakarta.annotation.Nullable;
 import lombok.Setter;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.Assert;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class FreemarkerStringTemplateRenderer implements StringTemplateRenderer {
+/**
+ * @author 应卓
+ * @since 3.4.3
+ */
+public class FreemarkerStringTemplateRenderer implements StringTemplateRenderer, InitializingBean {
 
-	private final Configuration cfg;
+	private Configuration cfg;
 
 	@Setter
 	private String defaultEncoding = "UTF-8";
 
 	@Setter
-	private String templateLoaderPath = "templates/";
+	private String[] templateLoaderPaths = new String[]{"classpath:/templates/"};
 
 	@Setter
 	private String suffix = ".ftl";
 
 	public FreemarkerStringTemplateRenderer() {
 		cfg = new Configuration(Configuration.VERSION_2_3_34);
-		cfg.setClassForTemplateLoading(FreemarkerStringTemplateRenderer.class, this.templateLoaderPath);
+		cfg.setClassForTemplateLoading(getClass(), "/templates");
 		cfg.setDefaultEncoding(defaultEncoding);
 	}
 
@@ -64,4 +77,50 @@ public class FreemarkerStringTemplateRenderer implements StringTemplateRenderer 
 		}
 	}
 
+	@Override
+	public void afterPropertiesSet() {
+		try {
+			this.cfg = new Configuration(Configuration.VERSION_2_3_34);
+			this.cfg.setTemplateLoader(getTemplateLoader());
+			this.cfg.setDefaultEncoding(defaultEncoding);
+		} catch (IOException e) {
+			throw IOExceptionUtils.toUnchecked(e);
+		}
+	}
+
+	private MultiTemplateLoader getTemplateLoader() throws IOException {
+		Assert.notEmpty(this.templateLoaderPaths, "templateLoaderPaths must not be empty");
+		Assert.noNullElements(this.templateLoaderPaths, "templateLoaderPaths must not contain null elements");
+
+		List<TemplateLoader> loaders = new ArrayList<>();
+		for (String path : this.templateLoaderPaths) {
+
+			if (path.startsWith("classpath:")) {
+				path = path.substring("classpath:".length());
+
+				if (!path.startsWith("/")) {
+					path = "/" + path;
+				}
+				if (!path.endsWith("/")) {
+					path += "/";
+				}
+				var loader = new ClassTemplateLoader(this.getClass(), path);
+				loaders.add(loader);
+			}
+
+			if (path.startsWith("file:")) {
+				path = path.substring("file:".length());
+//				if (!path.startsWith("/")) {
+//					path = "/" + path;
+//				}
+				if (!path.endsWith("/")) {
+					path += "/";
+				}
+				var loader = new FileTemplateLoader(new File(path), true);
+				loaders.add(loader);
+			}
+		}
+
+		return new MultiTemplateLoader(loaders.toArray(new TemplateLoader[0]));
+	}
 }
