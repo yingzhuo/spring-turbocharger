@@ -26,8 +26,8 @@ publishing {
 			from components.java
 
 			groupId = 'com.github.yingzhuo'
-			artifactId = "${project.name}"
-			version = "${project.version}"
+			artifactId = project.name
+			version = project.version
 
 			versionMapping {
 				usage('java-api') {
@@ -57,7 +57,6 @@ publishing {
 						name = '应卓'
 						email = 'yingzhor@gmail.com'
 						roles = ['author']
-						timezone = 'GMT+0800'
 						url = 'https://github.com/yingzhuo'
 					}
 				}
@@ -85,8 +84,8 @@ publishing {
 
 			credentials {
 				// 私密信息在 $GRADLE_USER_HOME/gradle.properties
-				username = getProperty('ossrhTokenUsername')
-				password = getProperty('ossrhTokenPassword')
+				username = getPropertyOrEmpty('ossrhTokenUsername')
+				password = getPropertyOrEmpty('ossrhTokenPassword')
 			}
 		}
 	}
@@ -100,4 +99,15 @@ signing {
 
 tasks.withType(GenerateModuleMetadata).configureEach {
 	enabled = false
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+private String getPropertyOrEmpty(String propertyName) {
+	try {
+		var value = getProperty(propertyName).toString()
+		return value.trim()
+	} catch (MissingPropertyException ignored) {
+		return ''
+	}
 }
