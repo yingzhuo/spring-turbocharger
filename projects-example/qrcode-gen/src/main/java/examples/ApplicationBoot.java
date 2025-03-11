@@ -17,7 +17,7 @@
  */
 package examples;
 
-import com.github.yingzhuo.turbocharger.misc.qrcode.QRCodeGenerator;
+import com.github.yingzhuo.turbocharger.miscellaneous.qrcode.QRCodeGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;

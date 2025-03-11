@@ -1,6 +1,0 @@
-com.github.yingzhuo.turbocharger.misc.autoconfiguration.QRCodeGeneratorAutoConfiguration
-com.github.yingzhuo.turbocharger.misc.autoconfiguration.CaptchaServiceAutoConfiguration
-com.github.yingzhuo.turbocharger.misc.autoconfiguration.CaptchaSupportAutoConfiguration
-com.github.yingzhuo.turbocharger.misc.autoconfiguration.CaptchaSupportRedisAutoConfiguration
-com.github.yingzhuo.turbocharger.misc.autoconfiguration.PinyinServiceAutoConfiguration
-com.github.yingzhuo.turbocharger.misc.autoconfiguration.TokenizerServiceAutoConfiguration

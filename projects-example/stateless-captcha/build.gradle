@@ -9,7 +9,7 @@ dependencies {
 
 	// spring-turbocharger
 	implementation project(':projects-main:spring-turbo-core')
-	implementation project(':projects-main:spring-turbo-misc')
+	implementation project(':projects-main:spring-turbo-miscellaneous')
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

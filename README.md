@@ -19,7 +19,7 @@ dependencies {
     implementation 'com.github.yingzhuo:spring-turbo-jackson'
     implementation 'com.github.yingzhuo:spring-turbo-jdbc'
     implementation 'com.github.yingzhuo:spring-turbo-jwt'
-    implementation 'com.github.yingzhuo:spring-turbo-misc'
+    implementation 'com.github.yingzhuo:spring-turbo-miscellaneous'
     implementation 'com.github.yingzhuo:spring-turbo-redis'
     implementation 'com.github.yingzhuo:spring-turbo-security'
     implementation 'com.github.yingzhuo:spring-turbo-stringtemplate'
@@ -68,7 +68,7 @@ dependencies {
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
-            <artifactId>spring-turbo-misc</artifactId>
+            <artifactId>spring-turbo-miscellaneous</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
@@ -100,17 +100,17 @@ dependencies {
 
 #### 示例程序
 
-* [生成QRCode](./projects-examples/qrcode-gen)
-* [生成有状态验证码](./projects-examples/stateful-captcha)
-* [生成无状态验证码](./projects-examples/stateless-captcha)
-* [使用HOCON格式的配置文件](./projects-examples/use-hocon-as-config-file)
-* [使用JWT技术集成SpringSecurity](./projects-examples/spring-security-jwt)
-* [多数据源代理](./projects-examples/routing-data-source)
-* [HttpClient](./projects-examples/web-client)
+* [生成QRCode](./projects-example/qrcode-gen)
+* [生成有状态验证码](./projects-example/stateful-captcha)
+* [生成无状态验证码](./projects-example/stateless-captcha)
+* [使用HOCON格式的配置文件](./projects-example/use-hocon-as-config-file)
+* [使用JWT技术集成SpringSecurity](./projects-example/spring-security-jwt)
+* [多数据源代理](./projects-example/routing-data-source)
+* [HttpClient](./projects-example/web-client)
 
 #### 更新记录
 
-* [CHANGELOG](CHANGELOG.md)
+* [CHANGELOG](./CHANGELOG.md)
 
 #### 联系我
 
