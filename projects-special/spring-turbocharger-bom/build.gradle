@@ -20,6 +20,7 @@ dependencies {
 		api(libs.hutool.all)
 		api(libs.freemarker)
 		api(libs.pinyin4j)
+		api(libs.xxljob)
 	}
 }
 

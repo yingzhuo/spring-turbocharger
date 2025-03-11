@@ -7,6 +7,7 @@ zxing = "3.5.3"
 hutool = "5.8.36"
 pinyin4j = "2.5.1"
 freemarker = "2.3.34"
+xxljob = "3.0.0"
 
 [libraries]
 hocon = { module = "com.typesafe:config", version = "1.4.3" }
@@ -20,6 +21,7 @@ zxing-javase = { module = "com.google.zxing:javase", version.ref = "zxing" }
 hutool-all = { module = "cn.hutool:hutool-all", version.ref = "hutool" }
 pinyin4j = { module = "com.belerweb:pinyin4j", version.ref = "pinyin4j" }
 freemarker = { module = "org.freemarker:freemarker", version.ref = "freemarker" }
+xxljob = { module = "com.xuxueli:xxl-job-core", version.ref = "xxljob" }
 
 [bundles]
 bouncycastle = ["bcprov", "bcutil"]

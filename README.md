@@ -11,21 +11,21 @@ Another enhancement library of SpringBoot & SpringFramework. Have fun! :)
 
 ```gradle
 // build.gradle
-// (groovy-dsl)
 
 dependencies {
     implementation(platform("com.github.yingzhuo:spring-turbocharger-bom:${springTurbochargerVersion}"))
     implementation 'com.github.yingzhuo:spring-turbo-core'
-    implementation 'com.github.yingzhuo:spring-turbo-webmvc'
+    implementation 'com.github.yingzhuo:spring-turbo-hocon'
     implementation 'com.github.yingzhuo:spring-turbo-jackson'
-    implementation 'com.github.yingzhuo:spring-turbo-webmvc'
-    implementation 'com.github.yingzhuo:spring-turbo-webcli'
+    implementation 'com.github.yingzhuo:spring-turbo-jdbc'
+    implementation 'com.github.yingzhuo:spring-turbo-jwt'
+    implementation 'com.github.yingzhuo:spring-turbo-misc'
+    implementation 'com.github.yingzhuo:spring-turbo-redis'
     implementation 'com.github.yingzhuo:spring-turbo-security'
     implementation 'com.github.yingzhuo:spring-turbo-stringtemplate'
-    implementation 'com.github.yingzhuo:spring-turbo-jwt'
-    implementation 'com.github.yingzhuo:spring-turbo-redis'
-    implementation 'com.github.yingzhuo:spring-turbo-jdbc'
-    implementation 'com.github.yingzhuo:spring-turbo-misc'
+    implementation 'com.github.yingzhuo:spring-turbo-webcli'
+    implementation 'com.github.yingzhuo:spring-turbo-webmvc'
+    implementation 'com.github.yingzhuo:spring-turbo-xxljob'
 }
 ```
 
@@ -52,7 +52,7 @@ dependencies {
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
-            <artifactId>spring-turbo-webmvc</artifactId>
+            <artifactId>spring-turbo-hocon</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
@@ -60,7 +60,19 @@ dependencies {
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
-            <artifactId>spring-turbo-webcli</artifactId>
+            <artifactId>spring-turbo-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-jwt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-misc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
@@ -72,19 +84,15 @@ dependencies {
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
-            <artifactId>spring-turbo-jwt</artifactId>
+            <artifactId>spring-turbo-webcli</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
-            <artifactId>spring-turbo-redis</artifactId>
+            <artifactId>spring-turbo-webmvc</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
-            <artifactId>spring-turbo-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.yingzhuo</groupId>
-            <artifactId>spring-turbo-misc</artifactId>
+            <artifactId>spring-turbo-xxljob</artifactId>
         </dependency>
     </dependencies>
 </project>
