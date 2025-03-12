@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.stringtemplate;
+package com.github.yingzhuo.turbocharger.freemarker;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.FileTemplateLoader;
@@ -44,7 +44,7 @@ import static com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils.toUnchec
  * @author 应卓
  * @since 3.4.3
  */
-public class FreemarkerStringTemplateRenderer implements StringTemplateRenderer, InitializingBean {
+public class StringTemplateRendererImpl implements StringTemplateRenderer, InitializingBean {
 
 	private final Configuration cfg = new Configuration(Configuration.VERSION_2_3_34);
 
@@ -60,7 +60,7 @@ public class FreemarkerStringTemplateRenderer implements StringTemplateRenderer,
 	/**
 	 * 默认构造方法
 	 */
-	public FreemarkerStringTemplateRenderer() {
+	public StringTemplateRendererImpl() {
 		super();
 	}
 

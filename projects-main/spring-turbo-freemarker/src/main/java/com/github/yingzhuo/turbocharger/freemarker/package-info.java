@@ -17,7 +17,7 @@
  */
 @NonNullApi
 @NonNullFields
-package com.github.yingzhuo.turbocharger.stringtemplate;
+package com.github.yingzhuo.turbocharger.freemarker;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

@@ -15,6 +15,7 @@ Another enhancement library of SpringBoot & SpringFramework. Have fun! :)
 dependencies {
     implementation(platform("com.github.yingzhuo:spring-turbocharger-bom:${springTurbochargerVersion}"))
     implementation 'com.github.yingzhuo:spring-turbo-core'
+    implementation 'com.github.yingzhuo:spring-turbo-freemarker'
     implementation 'com.github.yingzhuo:spring-turbo-hocon'
     implementation 'com.github.yingzhuo:spring-turbo-jackson'
     implementation 'com.github.yingzhuo:spring-turbo-jdbc'
@@ -22,7 +23,6 @@ dependencies {
     implementation 'com.github.yingzhuo:spring-turbo-miscellaneous'
     implementation 'com.github.yingzhuo:spring-turbo-redis'
     implementation 'com.github.yingzhuo:spring-turbo-security'
-    implementation 'com.github.yingzhuo:spring-turbo-stringtemplate'
     implementation 'com.github.yingzhuo:spring-turbo-webcli'
     implementation 'com.github.yingzhuo:spring-turbo-webmvc'
     implementation 'com.github.yingzhuo:spring-turbo-xxljob'
@@ -52,6 +52,10 @@ dependencies {
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-freemarker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-hocon</artifactId>
         </dependency>
         <dependency>
@@ -77,10 +81,6 @@ dependencies {
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.yingzhuo</groupId>
-            <artifactId>spring-turbo-stringtemplate</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>

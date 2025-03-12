@@ -15,11 +15,11 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.stringtemplate.autoconfiguration;
+package com.github.yingzhuo.turbocharger.freemarker.autoconfiguration;
 
-import com.github.yingzhuo.turbocharger.stringtemplate.FreemarkerStringTemplateRenderer;
-import com.github.yingzhuo.turbocharger.stringtemplate.StringTemplateRenderer;
-import com.github.yingzhuo.turbocharger.stringtemplate.properties.StringTemplateRendererProperties;
+import com.github.yingzhuo.turbocharger.freemarker.StringTemplateRendererImpl;
+import com.github.yingzhuo.turbocharger.freemarker.StringTemplateRenderer;
+import com.github.yingzhuo.turbocharger.freemarker.properties.StringTemplateRendererProperties;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -38,7 +38,7 @@ public class StringTemplateAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public StringTemplateRenderer stringTemplateRenderer(StringTemplateRendererProperties properties) {
-		var bean = new FreemarkerStringTemplateRenderer();
+		var bean = new StringTemplateRendererImpl();
 		bean.setSuffix(properties.getSuffix());
 		bean.setDefaultEncoding(properties.getDefaultEncoding());
 		bean.setTemplateLoaderPaths(properties.getTemplateLoaderPaths());

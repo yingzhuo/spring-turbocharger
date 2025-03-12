@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.stringtemplate.properties;
+package com.github.yingzhuo.turbocharger.freemarker.properties;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import com.github.yingzhuo.turbocharger.util.collection.ArrayUtils;
