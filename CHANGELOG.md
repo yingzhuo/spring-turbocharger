@@ -1,3 +1,8 @@
+### 3.4.3-5 (2025-03-13)
+
+- (UPDATE) 修复若干小bug
+- (UPDATE) 模块`spring-turbo-stringtemplate` 重命名为 `spring-turbo-freemarker`
+
 ### 3.4.3-4 (2025-03-10)
 
 - (UPDATE) 修复若干小bug
