@@ -39,14 +39,8 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = 'spring-turbocharger'
-
-// 核心子项目
 includeSubprojects(file('projects-main'))
-
-// 演示子项目
 includeSubprojects(file('projects-example'))
-
-// ---------------------------------------------------------------------------------------------------------------------
 
 private def includeSubprojects(File directory, FileFilter subDirFilter = new FileFilter() {
 	@Override

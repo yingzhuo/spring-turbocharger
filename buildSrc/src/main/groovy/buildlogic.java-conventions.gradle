@@ -34,11 +34,11 @@ java {
 	withSourcesJar()
 	withJavadocJar()
 
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.toVersion("$javaVersion")
+	targetCompatibility = JavaVersion.toVersion("$javaVersion")
 
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+		languageVersion = JavaLanguageVersion.of("$javaVersion")
 	}
 }
 
