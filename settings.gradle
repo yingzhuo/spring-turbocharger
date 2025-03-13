@@ -43,9 +43,6 @@ rootProject.name = 'spring-turbocharger'
 // 核心子项目
 includeSubprojects(file('projects-main'))
 
-// 特殊子项目
-includeSubprojects(file('projects-special'))
-
 // 演示子项目
 includeSubprojects(file('projects-example'))
 

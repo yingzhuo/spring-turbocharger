@@ -84,8 +84,8 @@ publishing {
 
 			credentials {
 				// 私密信息在 $GRADLE_USER_HOME/gradle.properties
-				username = getPropertyOrEmpty('ossrhTokenUsername')
-				password = getPropertyOrEmpty('ossrhTokenPassword')
+				username = SharedFunctions.getPropertyOrEmpty(project, 'ossrhTokenUsername')
+				password = SharedFunctions.getPropertyOrEmpty(project, 'ossrhTokenPassword')
 			}
 		}
 	}
@@ -99,15 +99,4 @@ signing {
 
 tasks.withType(GenerateModuleMetadata).configureEach {
 	enabled = false
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-
-private String getPropertyOrEmpty(String propertyName) {
-	try {
-		var value = getProperty(propertyName).toString()
-		return value.trim()
-	} catch (MissingPropertyException ignored) {
-		return ''
-	}
 }

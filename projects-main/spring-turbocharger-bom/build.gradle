@@ -1,0 +1,23 @@
+plugins {
+	id 'buildlogic.bom-conventions'
+}
+
+dependencies {
+	constraints {
+		rootProject.findProject('projects-main').subprojects { subproject ->
+			var subprojectName = subproject.name
+			if (subprojectName.startsWith('spring-turbo-')) {
+				api(subproject)
+			}
+		}
+
+		api(libs.hocon)
+		api(libs.bundles.bouncycastle)
+		api(libs.bundles.jjwt)
+		api(libs.bundles.zxing)
+		api(libs.hutool.all)
+		api(libs.freemarker)
+		api(libs.pinyin4j)
+		api(libs.xxljob)
+	}
+}
