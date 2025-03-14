@@ -21,12 +21,12 @@ dependencies {
     implementation 'com.github.yingzhuo:spring-turbo-jdbc'
     implementation 'com.github.yingzhuo:spring-turbo-jwt'
     implementation 'com.github.yingzhuo:spring-turbo-miscellaneous'
-    implementation 'com.github.yingzhuo:spring-turbo-qrcode'
     implementation 'com.github.yingzhuo:spring-turbo-redis'
     implementation 'com.github.yingzhuo:spring-turbo-security'
     implementation 'com.github.yingzhuo:spring-turbo-webcli'
     implementation 'com.github.yingzhuo:spring-turbo-webmvc'
     implementation 'com.github.yingzhuo:spring-turbo-xxljob'
+    implementation 'com.github.yingzhuo:spring-turbo-zxing'
 }
 ```
 
@@ -77,10 +77,6 @@ dependencies {
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
-            <artifactId>spring-turbo-qrcode</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-redis</artifactId>
         </dependency>
         <dependency>
@@ -98,6 +94,10 @@ dependencies {
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-xxljob</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-zxing</artifactId>
         </dependency>
     </dependencies>
 </project>
