@@ -10,11 +10,7 @@ dependencies {
 	// spring-turbocharger
 
 	implementation project(':projects-main:spring-turbo-core')
-	implementation project(':projects-main:spring-turbo-miscellaneous')
-
-	// zxing (qrcode tool)
-	compileOnly 'com.google.zxing:core:3.5.3'
-	compileOnly 'com.google.zxing:javase:3.5.3'
+	implementation project(':projects-main:spring-turbo-qrcode')
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

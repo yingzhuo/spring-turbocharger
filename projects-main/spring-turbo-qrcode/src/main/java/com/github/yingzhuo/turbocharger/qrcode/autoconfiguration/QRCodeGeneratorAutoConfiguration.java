@@ -15,10 +15,10 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.miscellaneous.autoconfiguration;
+package com.github.yingzhuo.turbocharger.qrcode.autoconfiguration;
 
-import com.github.yingzhuo.turbocharger.miscellaneous.qrcode.QRCodeGenerator;
-import com.github.yingzhuo.turbocharger.miscellaneous.qrcode.QRCodeGeneratorImpl;
+import com.github.yingzhuo.turbocharger.qrcode.QRCodeGenerator;
+import com.github.yingzhuo.turbocharger.qrcode.QRCodeGeneratorImpl;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

@@ -17,7 +17,7 @@
  */
 package examples;
 
-import com.github.yingzhuo.turbocharger.miscellaneous.qrcode.QRCodeGenerator;
+import com.github.yingzhuo.turbocharger.qrcode.QRCodeGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
@@ -31,7 +31,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ApplicationBoot implements ApplicationRunner {
 
 	private final QRCodeGenerator gen;
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApplicationBoot.class, args);

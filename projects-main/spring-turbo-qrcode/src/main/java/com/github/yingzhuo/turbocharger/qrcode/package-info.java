@@ -17,7 +17,7 @@
  */
 @NonNullApi
 @NonNullFields
-package com.github.yingzhuo.turbocharger.miscellaneous.qrcode;
+package com.github.yingzhuo.turbocharger.qrcode;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

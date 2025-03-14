@@ -1,4 +1,3 @@
-com.github.yingzhuo.turbocharger.miscellaneous.autoconfiguration.QRCodeGeneratorAutoConfiguration
 com.github.yingzhuo.turbocharger.miscellaneous.autoconfiguration.CaptchaServiceAutoConfiguration
 com.github.yingzhuo.turbocharger.miscellaneous.autoconfiguration.CaptchaSupportAutoConfiguration
 com.github.yingzhuo.turbocharger.miscellaneous.autoconfiguration.CaptchaSupportRedisAutoConfiguration
