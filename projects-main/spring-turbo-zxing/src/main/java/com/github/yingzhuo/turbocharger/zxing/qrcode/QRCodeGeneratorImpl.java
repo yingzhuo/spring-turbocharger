@@ -29,8 +29,7 @@ import org.springframework.lang.Nullable;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
 
 /**
  * QRCode生成器默认实现
@@ -41,16 +40,14 @@ import java.util.Map;
  */
 public class QRCodeGeneratorImpl implements QRCodeGenerator {
 
-	private static final String CHARSET = "UTF-8";
-
 	@Override
 	public BufferedImage generate(String content,
 								  @Nullable Logo logo,
 								  @Nullable ErrorCorrectionLevel errorCorrectionLevel,
 								  int size) {
 		try {
-			final Map<EncodeHintType, Object> hints = new HashMap<>();
-			hints.put(EncodeHintType.CHARACTER_SET, CHARSET);
+			var hints = new EnumMap<>(EncodeHintType.class);
+			hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 			hints.put(EncodeHintType.ERROR_CORRECTION,
 				errorCorrectionLevel != null ? errorCorrectionLevel : ErrorCorrectionLevel.H);
 			hints.put(EncodeHintType.MARGIN, 1);
