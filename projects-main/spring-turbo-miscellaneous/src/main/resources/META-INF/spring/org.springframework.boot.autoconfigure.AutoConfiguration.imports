@@ -1,5 +1,0 @@
-com.github.yingzhuo.turbocharger.miscellaneous.autoconfiguration.CaptchaServiceAutoConfiguration
-com.github.yingzhuo.turbocharger.miscellaneous.autoconfiguration.CaptchaSupportAutoConfiguration
-com.github.yingzhuo.turbocharger.miscellaneous.autoconfiguration.CaptchaSupportRedisAutoConfiguration
-com.github.yingzhuo.turbocharger.miscellaneous.autoconfiguration.PinyinServiceAutoConfiguration
-com.github.yingzhuo.turbocharger.miscellaneous.autoconfiguration.TokenizerServiceAutoConfiguration

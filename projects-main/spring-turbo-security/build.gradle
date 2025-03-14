@@ -33,7 +33,7 @@ dependencies {
 	compileOnly(libs.bundles.bouncycastle)
 
 	// hutool
-	compileOnly(libs.hutool.all)
+	compileOnly(libs.hutool.crypto)
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

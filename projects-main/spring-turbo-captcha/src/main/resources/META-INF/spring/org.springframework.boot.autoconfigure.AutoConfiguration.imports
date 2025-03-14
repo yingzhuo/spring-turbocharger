@@ -1,0 +1,3 @@
+com.github.yingzhuo.turbocharger.captcha.autoconfiguration.CaptchaServiceAutoConfiguration
+com.github.yingzhuo.turbocharger.captcha.autoconfiguration.CaptchaSupportAutoConfiguration
+com.github.yingzhuo.turbocharger.captcha.autoconfiguration.CaptchaSupportRedisAutoConfiguration
