@@ -17,7 +17,7 @@
  */
 @NonNullApi
 @NonNullFields
-package com.github.yingzhuo.turbocharger.qrcode.autoconfiguration;
+package com.github.yingzhuo.turbocharger.zxing.exception;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

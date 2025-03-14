@@ -9,10 +9,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	// spring-turbocharger
-	implementation project(':projects-main:spring-turbo-core')
-	implementation project(':projects-main:spring-turbo-security')
-	implementation project(':projects-main:spring-turbo-jwt')
-	implementation project(':projects-main:spring-turbo-jackson')
+	api project(':projects-main:spring-turbo-core')
+	api project(':projects-main:spring-turbo-security')
+	api project(':projects-main:spring-turbo-jwt')
+	api project(':projects-main:spring-turbo-jackson')
 
 	// json-path
 	implementation 'com.jayway.jsonpath:json-path:2.9.0'

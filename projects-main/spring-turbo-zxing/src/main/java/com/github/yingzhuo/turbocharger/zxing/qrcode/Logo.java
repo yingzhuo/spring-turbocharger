@@ -15,11 +15,12 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.qrcode;
+package com.github.yingzhuo.turbocharger.zxing.qrcode;
 
 import com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils;
-import jakarta.annotation.Nullable;
+import lombok.Getter;
 import org.springframework.core.io.Resource;
+import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import javax.imageio.ImageIO;
@@ -44,12 +45,14 @@ public final class Logo implements Serializable {
 	@Nullable
 	private Image image;
 
+	@Getter
 	private boolean compress = true;
 
 	/**
 	 * 私有构造方法
 	 */
 	private Logo() {
+		super();
 	}
 
 	public static Builder builder() {
@@ -58,10 +61,6 @@ public final class Logo implements Serializable {
 
 	public Image getImage() {
 		return Objects.requireNonNull(image);
-	}
-
-	public boolean isCompress() {
-		return compress;
 	}
 
 	/**

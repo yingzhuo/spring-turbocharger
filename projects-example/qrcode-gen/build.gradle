@@ -8,9 +8,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 	// spring-turbocharger
+	api project(':projects-main:spring-turbo-core')
+	api project(':projects-main:spring-turbo-zxing')
 
-	implementation project(':projects-main:spring-turbo-core')
-	implementation project(':projects-main:spring-turbo-qrcode')
+	// zxing (qrcode tool)
+	implementation(libs.bundles.zxing)
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

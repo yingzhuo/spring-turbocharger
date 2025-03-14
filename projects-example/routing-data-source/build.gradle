@@ -7,8 +7,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
 	// spring-turbocharger
-	implementation project(':projects-main:spring-turbo-core')
-	implementation project(':projects-main:spring-turbo-jdbc')
+	api project(':projects-main:spring-turbo-core')
+	api project(':projects-main:spring-turbo-jdbc')
 
 	// MySQL驱动
 	implementation('com.mysql:mysql-connector-j:9.2.0') {

@@ -17,7 +17,8 @@
  */
 package examples;
 
-import com.github.yingzhuo.turbocharger.qrcode.QRCodeGenerator;
+import com.github.yingzhuo.turbocharger.zxing.qrcode.QRCodeGenerator;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
@@ -38,7 +39,7 @@ public class ApplicationBoot implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) {
-		var s = gen.generate("Hello SpringTurbocharger");
+		var s = gen.generate("hello", null, ErrorCorrectionLevel.H, 400);
 		log.debug("Generated QR Code: {}", s);
 	}
 

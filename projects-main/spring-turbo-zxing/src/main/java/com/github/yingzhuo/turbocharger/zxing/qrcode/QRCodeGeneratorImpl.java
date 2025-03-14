@@ -15,8 +15,9 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.qrcode;
+package com.github.yingzhuo.turbocharger.zxing.qrcode;
 
+import com.github.yingzhuo.turbocharger.zxing.exception.WritingException;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -28,8 +29,6 @@ import org.springframework.lang.Nullable;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,39 +43,20 @@ public class QRCodeGeneratorImpl implements QRCodeGenerator {
 
 	private static final String CHARSET = "UTF-8";
 
-	private ErrorCorrectionLevel defaultErrorCorrectionLevel = ErrorCorrectionLevel.H;
-	private int defaultSize = 200;
-	private int defaultMargin = 1;
-
 	@Override
-	public BufferedImage generate(String content) {
-		return generate(content, null);
-	}
-
-	@Override
-	public BufferedImage generate(String content, @Nullable Logo logo) {
-		return generate(content, logo, defaultErrorCorrectionLevel);
-	}
-
-	@Override
-	public BufferedImage generate(String content, @Nullable Logo logo,
-								  @Nullable ErrorCorrectionLevel errorCorrectionLevel) {
-		return generate(content, logo, errorCorrectionLevel, defaultSize);
-	}
-
-	@Override
-	public BufferedImage generate(String content, @Nullable Logo logo,
-								  @Nullable ErrorCorrectionLevel errorCorrectionLevel, int size) {
+	public BufferedImage generate(String content,
+								  @Nullable Logo logo,
+								  @Nullable ErrorCorrectionLevel errorCorrectionLevel,
+								  int size) {
 		try {
 			final Map<EncodeHintType, Object> hints = new HashMap<>();
 			hints.put(EncodeHintType.CHARACTER_SET, CHARSET);
 			hints.put(EncodeHintType.ERROR_CORRECTION,
-				errorCorrectionLevel != null ? errorCorrectionLevel : defaultErrorCorrectionLevel);
-			hints.put(EncodeHintType.MARGIN, defaultMargin);
+				errorCorrectionLevel != null ? errorCorrectionLevel : ErrorCorrectionLevel.H);
+			hints.put(EncodeHintType.MARGIN, 1);
 
-			int qrCodeSize = size >= 0 ? size : defaultSize; // 最终的size
 
-			BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, qrCodeSize, qrCodeSize,
+			BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, size, size,
 				hints);
 			int width = bitMatrix.getWidth();
 			int height = bitMatrix.getHeight();
@@ -88,12 +68,12 @@ public class QRCodeGeneratorImpl implements QRCodeGenerator {
 			}
 
 			if (logo != null) {
-				insertLogo(image, logo, qrCodeSize);
+				insertLogo(image, logo, size);
 			}
 
 			return image;
 		} catch (WriterException e) {
-			throw new UncheckedIOException(e.getMessage(), new IOException(e));
+			throw new WritingException(e);
 		}
 	}
 
@@ -128,19 +108,4 @@ public class QRCodeGeneratorImpl implements QRCodeGenerator {
 		graph.draw(shape);
 		graph.dispose();
 	}
-
-	// ----------------------------------------------------------------------------------------------------------------
-
-	public void setDefaultErrorCorrectionLevel(ErrorCorrectionLevel defaultErrorCorrectionLevel) {
-		this.defaultErrorCorrectionLevel = defaultErrorCorrectionLevel;
-	}
-
-	public void setDefaultSize(int defaultSize) {
-		this.defaultSize = defaultSize;
-	}
-
-	public void setDefaultMargin(int defaultMargin) {
-		this.defaultMargin = defaultMargin;
-	}
-
 }

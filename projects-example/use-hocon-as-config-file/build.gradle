@@ -8,8 +8,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 	// spring-turbocharger
-	implementation project(':projects-main:spring-turbo-core')
-	implementation project(':projects-main:spring-turbo-hocon')
+	api project(':projects-main:spring-turbo-core')
+	api project(':projects-main:spring-turbo-hocon')
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

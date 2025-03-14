@@ -8,9 +8,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 	// spring-turbocharger
-	implementation project(':projects-main:spring-turbo-core')
-	implementation project(':projects-main:spring-turbo-jackson')
-	implementation project(':projects-main:spring-turbo-webcli')
+	api project(':projects-main:spring-turbo-core')
+	api project(':projects-main:spring-turbo-jackson')
+	api project(':projects-main:spring-turbo-webcli')
 
 	// json-path
 	implementation 'com.jayway.jsonpath:json-path:2.9.0'
