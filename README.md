@@ -15,12 +15,12 @@ Another enhancement library of SpringBoot & SpringFramework. Have fun! :)
 dependencies {
     implementation(platform("com.github.yingzhuo:spring-turbocharger-bom:${springTurbochargerVersion}"))
     implementation 'com.github.yingzhuo:spring-turbo-core'
+    implementation 'com.github.yingzhuo:spring-turbo-captcha'
     implementation 'com.github.yingzhuo:spring-turbo-freemarker'
     implementation 'com.github.yingzhuo:spring-turbo-hocon'
     implementation 'com.github.yingzhuo:spring-turbo-jackson'
     implementation 'com.github.yingzhuo:spring-turbo-jdbc'
     implementation 'com.github.yingzhuo:spring-turbo-jwt'
-    implementation 'com.github.yingzhuo:spring-turbo-miscellaneous'
     implementation 'com.github.yingzhuo:spring-turbo-redis'
     implementation 'com.github.yingzhuo:spring-turbo-security'
     implementation 'com.github.yingzhuo:spring-turbo-webcli'
@@ -53,6 +53,10 @@ dependencies {
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-captcha</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-freemarker</artifactId>
         </dependency>
         <dependency>
@@ -70,10 +74,6 @@ dependencies {
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-jwt</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.yingzhuo</groupId>
-            <artifactId>spring-turbo-miscellaneous</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>

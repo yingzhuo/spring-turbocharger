@@ -13,7 +13,7 @@ dependencies {
 	api project(':projects-main:spring-turbo-webcli')
 
 	// json-path
-	implementation 'com.jayway.jsonpath:json-path:2.9.0'
+	implementation 'com.jayway.jsonpath:json-path'
 
 	// apache httpclient
 	implementation 'org.apache.httpcomponents.client5:httpclient5'

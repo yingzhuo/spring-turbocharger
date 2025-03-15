@@ -15,7 +15,7 @@ dependencies {
 	api project(':projects-main:spring-turbo-jackson')
 
 	// json-path
-	implementation 'com.jayway.jsonpath:json-path:2.9.0'
+	implementation 'com.jayway.jsonpath:json-path'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
