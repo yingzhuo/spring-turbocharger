@@ -22,4 +22,5 @@ dependencies {
 		api(libs.pinyin4j)
 		api(libs.xxljob)
 	}
+
 }

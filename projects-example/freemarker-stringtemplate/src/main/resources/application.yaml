@@ -1,0 +1,6 @@
+springturbo:
+  stringtemplate:
+    enabled: true
+    suffix: ".ftl"
+    template-loader-paths:
+      - "classpath:/templates/"
