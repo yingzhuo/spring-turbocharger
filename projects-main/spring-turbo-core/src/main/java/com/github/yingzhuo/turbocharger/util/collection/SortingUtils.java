@@ -39,10 +39,21 @@ public final class SortingUtils {
 		super();
 	}
 
+	/**
+	 * 为数组排序
+	 *
+	 * @param array 数组
+	 */
 	public static <T> void sort(T[] array) {
 		sort(array, null);
 	}
 
+	/**
+	 * 为数组排序
+	 *
+	 * @param array      数组
+	 * @param comparator 比较器
+	 */
 	public static <T> void sort(T[] array, @Nullable Comparator<? super T> comparator) {
 		if (comparator != null) {
 			Arrays.sort(array, comparator);
@@ -51,10 +62,21 @@ public final class SortingUtils {
 		}
 	}
 
+	/**
+	 * 为列表排序
+	 *
+	 * @param list  数组
+	 */
 	public static <T> void sort(List<T> list) {
 		sort(list, null);
 	}
 
+	/**
+	 * 为列表排序
+	 *
+	 * @param list      数组
+	 * @param comparator 比较器
+	 */
 	public static <T> void sort(List<T> list, @Nullable Comparator<? super T> comparator) {
 		if (comparator != null) {
 			list.sort(comparator);
