@@ -18,7 +18,6 @@
 plugins {
 	id 'java'
 	id 'java-library'
-	id 'idea'
 	id 'io.spring.dependency-management'
 }
 
@@ -73,13 +72,6 @@ javadoc {
 }
 
 processResources {
-}
-
-idea {
-	module {
-		downloadSources = true
-		downloadJavadoc = true
-	}
 }
 
 test {
