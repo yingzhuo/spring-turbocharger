@@ -42,6 +42,8 @@ rootProject.name = 'spring-turbocharger'
 includeSubprojects(file('projects-main'))
 includeSubprojects(file('projects-example'))
 
+// ---------------------------------------------------------------------------------------------------------------------
+
 private def includeSubprojects(File directory, FileFilter subDirFilter = new FileFilter() {
 	@Override
 	boolean accept(File f) {

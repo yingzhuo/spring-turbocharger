@@ -17,13 +17,13 @@
  */
 package com.github.yingzhuo.turbocharger.util.collection;
 
+import com.github.yingzhuo.turbocharger.core.ResourceUtils;
+import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.Properties;
-
-import static com.github.yingzhuo.turbocharger.core.ResourceUtils.loadResourceAsInputStream;
 
 /**
  * @author 应卓
@@ -40,10 +40,15 @@ public final class PropertiesUtils {
 
 	public static Properties load(String resourceLocation) {
 		Assert.hasText(resourceLocation, "resourceLocation is required");
+		return load(ResourceUtils.loadResource(resourceLocation));
+	}
+
+	public static Properties load(Resource resource) {
+		Assert.notNull(resource, "resource is required");
 
 		try {
 			var properties = new Properties();
-			properties.load(loadResourceAsInputStream(resourceLocation));
+			properties.load(resource.getInputStream());
 			return properties;
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
@@ -52,10 +57,14 @@ public final class PropertiesUtils {
 
 	public static Properties loadFromXML(String resourceLocation) {
 		Assert.hasText(resourceLocation, "resourceLocation is required");
+		return loadFromXML(ResourceUtils.loadResource(resourceLocation));
+	}
 
+	public static Properties loadFromXML(Resource resource) {
+		Assert.notNull(resource, "resource is required");
 		try {
 			var properties = new Properties();
-			properties.loadFromXML(loadResourceAsInputStream(resourceLocation));
+			properties.loadFromXML(resource.getInputStream());
 			return properties;
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
