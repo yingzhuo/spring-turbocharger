@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormatConverter;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 
@@ -28,7 +27,6 @@ import org.springframework.context.annotation.Bean;
  * @author 应卓
  * @since 3.3.2
  */
-@AutoConfiguration
 public class MiscAutoConfiguration {
 
 	/**

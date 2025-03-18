@@ -20,7 +20,6 @@ package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 import com.github.yingzhuo.turbocharger.jwt.JwtService;
 import com.github.yingzhuo.turbocharger.jwt.JwtServiceImpl;
 import com.github.yingzhuo.turbocharger.jwt.alg.JwtSigner;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +32,6 @@ import org.springframework.context.annotation.Bean;
  * @see com.github.yingzhuo.turbocharger.jwt.alg.KeyPairStoreJwtSignerFactoryBean
  * @since 3.3.2
  */
-@AutoConfiguration
 @ConditionalOnBean(JwtSigner.class)
 @ConditionalOnMissingBean(JwtService.class)
 public class JwtAutoConfiguration {
