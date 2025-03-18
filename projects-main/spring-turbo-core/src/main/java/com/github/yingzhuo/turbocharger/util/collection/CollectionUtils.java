@@ -160,7 +160,7 @@ public final class CollectionUtils {
 	 * @param map      要加入的映射
 	 * @param elements 待添加的元素
 	 * @param <K>      集合的泛型类型 key
-	 * @param <V>      集合的泛型类型 vakue
+	 * @param <V>      集合的泛型类型 value
 	 */
 	public static <K, V> void nullSafeAddAll(Map<K, V> map, @Nullable Map<K, V> elements) {
 		Assert.notNull(map, "map is required");

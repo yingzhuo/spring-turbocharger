@@ -22,7 +22,6 @@ import com.github.yingzhuo.turbocharger.security.authentication.UserDetailsServi
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandlerImpl;
 import com.github.yingzhuo.turbocharger.security.misc.GrantedAuthorityConverter;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -36,15 +35,8 @@ import org.springframework.security.web.firewall.StrictHttpFirewall;
  * @author 应卓
  * @since 3.3.1
  */
-@AutoConfiguration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class SpringSecurityAutoConfiguration {
-
-	/**
-	 * 默认构造方法
-	 */
-	public SpringSecurityAutoConfiguration() {
-	}
 
 	@Bean
 	@ConditionalOnMissingBean

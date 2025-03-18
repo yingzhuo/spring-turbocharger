@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.util.collection;
 
 import com.github.yingzhuo.turbocharger.util.StringFormatter;
-import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
@@ -45,6 +44,7 @@ public class Attributes extends LinkedMultiValueMap<String, Object> implements M
 	 * 构造方法
 	 */
 	public Attributes() {
+		super();
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class Attributes extends LinkedMultiValueMap<String, Object> implements M
 	 * @since 1.0.1
 	 */
 	@Nullable
-	public <T> T findFirst(@NonNull String key) {
+	public <T> T findFirst(String key) {
 		Assert.notNull(key, "key is required");
 		return (T) super.getFirst(key);
 	}
@@ -156,7 +156,7 @@ public class Attributes extends LinkedMultiValueMap<String, Object> implements M
 	 * @since 1.0.1
 	 */
 	@Nullable
-	public <T> T findFirstOrDefault(@NonNull String key, @Nullable T defaultIfNull) {
+	public <T> T findFirstOrDefault(String key, @Nullable T defaultIfNull) {
 		Assert.notNull(key, "key is required");
 		return Optional.<T>ofNullable(findFirst(key)).orElse(defaultIfNull);
 	}
@@ -174,7 +174,7 @@ public class Attributes extends LinkedMultiValueMap<String, Object> implements M
 	 * @since 1.1.2
 	 */
 	@Nullable
-	public <T> T findFirstOrDefault(@NonNull String key, @NonNull Supplier<T> defaultIfNull) {
+	public <T> T findFirstOrDefault(String key, Supplier<T> defaultIfNull) {
 		Assert.notNull(key, "key is required");
 		return Optional.<T>ofNullable(findFirst(key)).orElseGet(defaultIfNull);
 	}
@@ -189,8 +189,7 @@ public class Attributes extends LinkedMultiValueMap<String, Object> implements M
 	 * @see #findRequiredFirst(String)
 	 * @since 1.0.5
 	 */
-	@NonNull
-	public <T> T findRequiredFirst(@NonNull String key) {
+	public <T> T findRequiredFirst(String key) {
 		return findRequiredFirst(key,
 			() -> new NoSuchElementException(StringFormatter.format("element not found. key: {}", key)));
 	}
@@ -205,9 +204,8 @@ public class Attributes extends LinkedMultiValueMap<String, Object> implements M
 	 * @see #findRequiredFirst(String)
 	 * @since 1.0.5
 	 */
-	@NonNull
-	public <T> T findRequiredFirst(@NonNull String key,
-								   @NonNull Supplier<? extends RuntimeException> exceptionIfKeyNotFound) {
+	public <T> T findRequiredFirst(String key,
+								   Supplier<? extends RuntimeException> exceptionIfKeyNotFound) {
 		Assert.notNull(key, "key is required");
 		Assert.notNull(exceptionIfKeyNotFound, "exceptionIfKeyNotFound is required");
 
