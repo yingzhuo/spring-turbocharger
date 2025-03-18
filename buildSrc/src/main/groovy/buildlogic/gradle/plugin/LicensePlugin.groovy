@@ -48,16 +48,14 @@ class LicensePlugin implements Plugin<Project> {
 
 		@TaskAction
 		void execute() {
-			final var header = getJavaHeader()
+			var header = getJavaHeader()
 
 			project.fileTree(project.rootDir) {
 				include(
 					'**/*.java',
 					'**/*.groovy',
 					'**/*.kt',
-					'**/*.scala',
-					'buildSrc/**/*.gradle',
-					'buildSrc/**/*.gradle.kts'
+					'**/*.scala'
 				)
 			}.each { file ->
 				var content = file.text
