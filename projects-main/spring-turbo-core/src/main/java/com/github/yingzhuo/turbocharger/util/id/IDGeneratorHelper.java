@@ -30,6 +30,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @see UUIDGenerators#timeBased(boolean)
  * @since 3.4.1
  */
+@Deprecated
 public final class IDGeneratorHelper {
 
 	private static final int IP;
