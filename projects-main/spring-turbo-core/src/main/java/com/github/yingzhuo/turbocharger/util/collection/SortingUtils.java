@@ -65,7 +65,7 @@ public final class SortingUtils {
 	/**
 	 * 为列表排序
 	 *
-	 * @param list  数组
+	 * @param list 数组
 	 */
 	public static <T> void sort(List<T> list) {
 		sort(list, null);
@@ -74,7 +74,7 @@ public final class SortingUtils {
 	/**
 	 * 为列表排序
 	 *
-	 * @param list      数组
+	 * @param list       数组
 	 * @param comparator 比较器
 	 */
 	public static <T> void sort(List<T> list, @Nullable Comparator<? super T> comparator) {

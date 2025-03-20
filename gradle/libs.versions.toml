@@ -5,7 +5,6 @@ bouncycastle = "1.80"
 jjwt = "0.12.6"
 zxing = "3.5.3"
 hutool = "5.8.36"
-pinyin4j = "2.5.1"
 freemarker = "2.3.34"
 xxljob = "3.0.0"
 
@@ -18,7 +17,6 @@ jjwt-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "jjwt" }
 jjwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jjwt" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxing" }
 zxing-javase = { module = "com.google.zxing:javase", version.ref = "zxing" }
-pinyin4j = { module = "com.belerweb:pinyin4j", version.ref = "pinyin4j" }
 freemarker = { module = "org.freemarker:freemarker", version.ref = "freemarker" }
 xxljob = { module = "com.xuxueli:xxl-job-core", version.ref = "xxljob" }
 hutool-core = { module = "cn.hutool:hutool-core", version.ref = "hutool" }
