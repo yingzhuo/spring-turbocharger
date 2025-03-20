@@ -19,7 +19,6 @@ dependencies {
 		api(libs.hutool.captcha)
 		api(libs.hutool.crypto)
 		api(libs.freemarker)
-		api(libs.pinyin4j)
 		api(libs.xxljob)
 	}
 
