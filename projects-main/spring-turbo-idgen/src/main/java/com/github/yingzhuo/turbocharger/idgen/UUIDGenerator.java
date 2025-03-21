@@ -57,4 +57,7 @@ public interface UUIDGenerator {
 		return UuidCreator.getTimeOrderedEpoch();
 	}
 
+	public static class Default implements UUIDGenerator {
+	}
+
 }

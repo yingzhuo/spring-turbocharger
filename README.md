@@ -18,6 +18,7 @@ dependencies {
     implementation 'com.github.yingzhuo:spring-turbo-captcha'
     implementation 'com.github.yingzhuo:spring-turbo-freemarker'
     implementation 'com.github.yingzhuo:spring-turbo-hocon'
+    implementation 'com.github.yingzhuo:spring-turbo-idgen'
     implementation 'com.github.yingzhuo:spring-turbo-jackson'
     implementation 'com.github.yingzhuo:spring-turbo-jdbc'
     implementation 'com.github.yingzhuo:spring-turbo-jwt'
@@ -62,6 +63,10 @@ dependencies {
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-hocon</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-idgen</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
