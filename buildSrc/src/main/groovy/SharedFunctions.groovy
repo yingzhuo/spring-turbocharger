@@ -42,14 +42,6 @@ abstract class SharedFunctions {
 			}
 	}
 
-	static void mkdir(File file) {
-		file.mkdir()
-	}
-
-	static void copyFile(File src, File dest) {
-		Files.copy(src.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING)
-	}
-
 	static String getPropertyOrEmpty(Project project, String propertyName) {
 		try {
 			var value = project.getProperty(propertyName).toString()

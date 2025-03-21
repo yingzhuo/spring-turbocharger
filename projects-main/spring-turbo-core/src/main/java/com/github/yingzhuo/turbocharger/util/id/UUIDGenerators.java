@@ -28,6 +28,7 @@ import static java.util.UUID.randomUUID;
  * @author 应卓
  * @since 3.4.1
  */
+@Deprecated
 public final class UUIDGenerators {
 
 	/**

@@ -20,6 +20,8 @@ dependencies {
 		api(libs.hutool.crypto)
 		api(libs.freemarker)
 		api(libs.xxljob)
+		api(libs.uuid.creator)
+		api(libs.tsid.creator)
 	}
 
 }

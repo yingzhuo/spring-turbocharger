@@ -22,7 +22,7 @@ clean-buildsrc:
 compile:
 	@$(CURDIR)/gradlew --refresh-dependencies "classes"
 
-install:
+install: add-license-header
 	@$(CURDIR)/gradlew -Dorg.gradle.parallel=false -x "test" -x "check" "publishToMavenLocal"
 
 publish: install
