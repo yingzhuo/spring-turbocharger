@@ -20,25 +20,25 @@ clean-buildsrc:
 	@$(CURDIR)/gradlew --project-dir $(CURDIR)/buildSrc/ --quiet "clean"
 
 compile:
-	@$(CURDIR)/gradlew --refresh-dependencies "classes"
+	@$(CURDIR)/gradlew --project-dir $(CURDIR) "classes"
 
 install: add-license-header
-	@$(CURDIR)/gradlew -Dorg.gradle.parallel=false -x "test" -x "check" "publishToMavenLocal"
+	@$(CURDIR)/gradlew --project-dir $(CURDIR) -Dorg.gradle.parallel=false -x "test" -x "check" "publishToMavenLocal"
 
 publish: install
-	@$(CURDIR)/gradlew -Dorg.gradle.parallel=false -x "test" -x "check" "publish"
+	@$(CURDIR)/gradlew --project-dir $(CURDIR) -Dorg.gradle.parallel=false -x "test" -x "check" "publish"
 
 setup-gradle-wrapper:
-	@$(CURDIR)/gradlew "wrapper"
+	@$(CURDIR)/gradlew --project-dir $(CURDIR) "wrapper"
 
 add-license-header:
-	@$(CURDIR)/gradlew "addLicenseHeader"
+	@$(CURDIR)/gradlew --project-dir $(CURDIR) "addLicenseHeader"
 
 test:
-	@$(CURDIR)/gradlew "test"
+	@$(CURDIR)/gradlew --project-dir $(CURDIR) "test"
 
 check:
-	@$(CURDIR)/gradlew "check"
+	@$(CURDIR)/gradlew --project-dir $(CURDIR) "check"
 
 github: add-license-header
 	@git status
