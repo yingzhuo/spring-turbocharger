@@ -41,9 +41,7 @@ check:
 	@$(CURDIR)/gradlew --project-dir $(CURDIR) "check"
 
 github: add-license-header
-	@git status
-	@git add .
-	@git commit -m "$(shell /bin/date "+%F %T")"
+	@$(CURDIR)/gradlew --project-dir $(CURDIR) "github"
 
 .PHONY: \
 	usage \
