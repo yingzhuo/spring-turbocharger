@@ -10,6 +10,11 @@ tasks.named('wrapper') { task ->
 	distributionUrl = "https://mirrors.cloud.tencent.com/gradle/gradle-${gradleVersion}-bin.zip"
 }
 
+tasks.register('github', Exec) { task ->
+	workingDir("$rootDir")
+	commandLine('bash', "$rootDir/buildSrc/config/github/push.sh")
+}
+
 addLicenseHeader {
 	javaHeader =
 		'''
