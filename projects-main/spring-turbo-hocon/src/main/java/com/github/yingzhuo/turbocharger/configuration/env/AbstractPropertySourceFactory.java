@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.configuration.env;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
-import com.github.yingzhuo.turbocharger.util.id.UUIDGenerators;
 import org.springframework.boot.env.PropertySourceLoader;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.support.EncodedResource;
@@ -26,6 +25,7 @@ import org.springframework.core.io.support.PropertySourceFactory;
 import org.springframework.lang.Nullable;
 
 import java.io.IOException;
+import java.util.UUID;
 
 /**
  * (内部使用)
@@ -62,7 +62,7 @@ public abstract class AbstractPropertySourceFactory implements PropertySourceFac
 		}
 
 		if (StringUtils.isBlank(name)) {
-			return UUIDGenerators.classic36();
+			return UUID.randomUUID().toString();
 		}
 		return name;
 	}

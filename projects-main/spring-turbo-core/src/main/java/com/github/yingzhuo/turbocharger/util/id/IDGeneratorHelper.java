@@ -25,12 +25,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * ID生成辅助工具
  *
  * @author 应卓
- * @see UUIDGenerators#timeBased32()
- * @see UUIDGenerators#timeBased36()
- * @see UUIDGenerators#timeBased(boolean)
  * @since 3.4.1
  */
-@Deprecated
 public final class IDGeneratorHelper {
 
 	private static final int IP;

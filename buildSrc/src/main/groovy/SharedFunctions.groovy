@@ -15,10 +15,9 @@
  * limitations under the License.
  *
  */
+
 import org.gradle.api.Project
 
-import java.nio.file.Files
-import java.nio.file.StandardCopyOption
 import java.time.LocalDateTime
 
 /**
