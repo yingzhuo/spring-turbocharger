@@ -22,12 +22,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 
 /**
- * 自动配置类
+ * 自动配置类 (杂项)
  *
  * @author 应卓
  * @since 3.3.2
  */
-public class MiscAutoConfiguration {
+public class MiscellaneousAutoConfiguration {
 
 	/**
 	 * 配置 {@link KeyStoreFormatConverter} 实例

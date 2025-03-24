@@ -94,6 +94,7 @@ public final class SpringApplicationHolders {
 		 */
 		private Hook() {
 			// SpringBoot 可以使用私有构造方法
+			super();
 		}
 
 		/**

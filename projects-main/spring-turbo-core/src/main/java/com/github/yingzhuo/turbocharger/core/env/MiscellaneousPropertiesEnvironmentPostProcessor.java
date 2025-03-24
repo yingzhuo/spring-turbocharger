@@ -41,7 +41,7 @@ import java.util.Optional;
  * @see ApplicationProcessUser
  * @since 3.3.1
  */
-public class MiscPropertiesEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
+public class MiscellaneousPropertiesEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
 
 	@Override
 	public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
@@ -55,7 +55,7 @@ public class MiscPropertiesEnvironmentPostProcessor implements EnvironmentPostPr
 		);
 
 		var propertySource = new MapPropertySource(
-			"spring-turbo-misc",
+			"spring-turbo-miscellaneous",
 			variables
 		);
 
