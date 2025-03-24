@@ -46,7 +46,7 @@ public final class ValidatorUtils {
 	 */
 	public static boolean support(Class<?> targetType) {
 		Assert.notNull(targetType, "targetType is required");
-		final Validator validator = SpringUtils.getValidator();
+		var validator = SpringUtils.getValidator();
 		return validator.supports(targetType);
 	}
 
@@ -58,9 +58,9 @@ public final class ValidatorUtils {
 	 */
 	public static BindingResult validate(Object obj) {
 		Assert.notNull(obj, "obj is required");
-		final String objectName = StringFormatter.format("bean[{}]", System.identityHashCode(obj));
-		final BeanPropertyBindingResult errors = new BeanPropertyBindingResult(obj, objectName);
-		final Validator validator = SpringUtils.getValidator();
+		var objectName = StringFormatter.format("bean[{}]", System.identityHashCode(obj));
+		var errors = new BeanPropertyBindingResult(obj, objectName);
+		var validator = SpringUtils.getValidator();
 		validator.validate(obj, errors);
 		return errors;
 	}
