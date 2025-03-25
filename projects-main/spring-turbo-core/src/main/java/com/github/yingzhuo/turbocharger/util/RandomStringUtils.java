@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.util;
 
-import com.github.yingzhuo.turbocharger.util.id.UUIDGenerators;
 import org.springframework.lang.Nullable;
 
 import java.util.Random;
@@ -30,7 +29,6 @@ import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
  *
  * @author 应卓
  * @see RandomUtils
- * @see UUIDGenerators
  * @see StringUtils
  * @see StringDefaults
  * @since 1.0.0

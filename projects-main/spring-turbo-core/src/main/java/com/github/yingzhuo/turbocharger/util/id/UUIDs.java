@@ -15,34 +15,36 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.idgen.util;
+package com.github.yingzhuo.turbocharger.util.id;
 
-import com.github.yingzhuo.turbocharger.core.SpringUtils;
-import com.github.yingzhuo.turbocharger.idgen.TSIDGenerator;
+import com.github.yingzhuo.turbocharger.util.StringPool;
+
+import java.util.UUID;
 
 /**
- * TSID生成工具
- *
  * @author 应卓
- * @since 3.4.3
+ * @since 3.4.4
  */
-public final class TSIDUtils {
+public final class UUIDs {
 
 	/**
 	 * 私有构造方法
 	 */
-	private TSIDUtils() {
+	private UUIDs() {
 		super();
 	}
 
-	public static long generateLong() {
-		return SpringUtils.getRequiredBean(TSIDGenerator.class)
-			.generateLong();
+	public static String v4(boolean removeHyphen) {
+		var uuid = UUID.randomUUID().toString();
+		return removeHyphen ? uuid.replaceAll(StringPool.HYPHEN, StringPool.EMPTY) : uuid;
 	}
 
-	public static String generateString() {
-		return SpringUtils.getRequiredBean(TSIDGenerator.class)
-			.generateString();
+	public static String classic32() {
+		return v4(true);
+	}
+
+	public static String classic36() {
+		return v4(false);
 	}
 
 }

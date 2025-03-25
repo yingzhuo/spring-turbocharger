@@ -33,6 +33,9 @@ public interface TSIDGenerator {
 		return TsidCreator.getTsid().toString();
 	}
 
+	/**
+	 * 默认实现
+	 */
 	public static class Default implements TSIDGenerator {
 	}
 }

@@ -23,5 +23,4 @@ dependencies {
 		api(libs.uuid.creator)
 		api(libs.tsid.creator)
 	}
-
 }

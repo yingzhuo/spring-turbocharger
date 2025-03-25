@@ -57,6 +57,9 @@ public interface UUIDGenerator {
 		return UuidCreator.getTimeOrderedEpoch();
 	}
 
+	/**
+	 * 默认实现
+	 */
 	public static class Default implements UUIDGenerator {
 	}
 
