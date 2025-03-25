@@ -118,6 +118,7 @@ dependencies {
 * [使用JWT技术集成SpringSecurity](./projects-example/spring-security-jwt)
 * [多数据源代理](./projects-example/routing-data-source)
 * [HttpClient](./projects-example/web-client)
+* [ID生成器](./projects-example/id-generator)
 
 #### 更新记录
 

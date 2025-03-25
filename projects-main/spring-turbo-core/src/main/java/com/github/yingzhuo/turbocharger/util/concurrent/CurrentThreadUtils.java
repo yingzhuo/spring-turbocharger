@@ -17,7 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.util.concurrent;
 
-import java.util.UUID;
+import com.github.yingzhuo.turbocharger.util.id.UUIDs;
 
 /**
  * 当前线程相关小工具
@@ -159,7 +159,7 @@ public final class CurrentThreadUtils {
 		/**
 		 * 伪Java虚拟机ID
 		 */
-		private static final String PSEUDO_VM_ID = UUID.randomUUID().toString();
+		private static final String PSEUDO_VM_ID = UUIDs.classic32();
 	}
 
 }

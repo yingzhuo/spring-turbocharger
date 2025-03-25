@@ -18,10 +18,9 @@
 package com.github.yingzhuo.turbocharger.captcha.support;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
+import com.github.yingzhuo.turbocharger.util.id.UUIDs;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
-
-import java.util.UUID;
 
 import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
 
@@ -39,7 +38,7 @@ public class SimpleAccessKeyGenerator implements AccessKeyGenerator, Initializin
 
 	@Override
 	public String generate() {
-		return applicationName + "-captcha-access-key-" + UUID.randomUUID();
+		return applicationName + "-captcha-access-key-" + UUIDs.classic32();
 	}
 
 	@Override
