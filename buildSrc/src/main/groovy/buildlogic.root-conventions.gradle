@@ -12,7 +12,7 @@ tasks.named('wrapper') { task ->
 
 tasks.register('github', Exec) { task ->
 	workingDir("$rootDir")
-	commandLine('bash', "$rootDir/buildSrc/config/github/push.sh")
+	commandLine('bash', "$rootDir/buildSrc/config/github/commit-all.sh")
 }
 
 addLicenseHeader {

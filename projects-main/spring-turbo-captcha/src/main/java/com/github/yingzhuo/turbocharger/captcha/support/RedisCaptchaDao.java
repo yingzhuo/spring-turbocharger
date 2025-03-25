@@ -45,6 +45,7 @@ public class RedisCaptchaDao implements CaptchaDao {
 		}
 	}
 
+	@Nullable
 	@Override
 	public String find(String accessKey) {
 		return redisTemplate.opsForValue().get(accessKey);
