@@ -20,7 +20,7 @@ tasks.register('postClean', Exec) { task ->
 }
 
 tasks.register('github', Exec) { task ->
-	workingDir("$rootDir")
+	workingDir(rootDir)
 	commandLine('bash', "$rootDir/buildSrc/config/shell/github-commit-all.sh")
 }
 
