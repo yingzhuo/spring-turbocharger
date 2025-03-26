@@ -12,12 +12,10 @@ pluginManagement {
 
 		gradlePluginPortal()
 		mavenCentral()
-		google()
 	}
 }
 
 plugins {
-	id 'org.gradle.toolchains.foojay-resolver-convention' version "${toolchainsPluginVersion}" apply true
 	id 'io.spring.dependency-management' version "${dependencyManagementPluginVersion}" apply false
 }
 
@@ -34,15 +32,12 @@ dependencyResolutionManagement {
 			}
 
 		mavenCentral()
-		google()
 	}
 }
 
 rootProject.name = 'spring-turbocharger'
 includeSubprojects(file('projects-main'))
 includeSubprojects(file('projects-example'))
-
-// ---------------------------------------------------------------------------------------------------------------------
 
 private def includeSubprojects(File directory, FileFilter subDirFilter = new FileFilter() {
 	@Override

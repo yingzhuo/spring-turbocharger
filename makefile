@@ -2,7 +2,6 @@ usage:
 	@echo '==============================================================================================================='
 	@echo 'usage                :          显示本菜单'
 	@echo 'clean                :          清理项目构建产物'
-	@echo 'clean-buildsrc       :          清理构建逻辑'
 	@echo 'compile              :          编译项目'
 	@echo 'install              :          安装到本地maven仓库'
 	@echo 'publish              :          推送到 oss.sonatype.org'
@@ -15,8 +14,6 @@ usage:
 
 clean:
 	@$(CURDIR)/gradlew --project-dir $(CURDIR) --quiet "clean"
-
-clean-buildsrc:
 	@$(CURDIR)/gradlew --project-dir $(CURDIR)/buildSrc/ --quiet "clean"
 
 compile:
@@ -45,7 +42,7 @@ github: add-license-header
 
 .PHONY: \
 	usage \
-	clean clean-buildsrc \
+	clean \
 	compile publish install \
 	check test \
 	setup-gradle-wrapper \
