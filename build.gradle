@@ -2,7 +2,7 @@ plugins {
 	id 'buildlogic.root-conventions'
 }
 
-defaultTasks 'classes'
+defaultTasks('classes')
 
 ext {
 	// SpringBoot BOM 微调
@@ -12,5 +12,5 @@ ext {
 
 allprojects {
 	group = 'com.github.yingzhuo'
-	version = '3.4.4-1'
+	version = '3.4.4-2-SNAPSHOT'
 }

@@ -10,9 +10,18 @@ tasks.named('wrapper') { task ->
 	distributionUrl = "https://mirrors.cloud.tencent.com/gradle/gradle-${gradleVersion}-bin.zip"
 }
 
+tasks.named('clean') {
+	finalizedBy('postClean')
+}
+
+tasks.register('postClean', Exec) { task ->
+	workingDir(rootDir)
+	commandLine('bash', "$rootDir/buildSrc/config/shell/cleanup.sh")
+}
+
 tasks.register('github', Exec) { task ->
 	workingDir("$rootDir")
-	commandLine('bash', "$rootDir/buildSrc/config/github/commit-all.sh")
+	commandLine('bash', "$rootDir/buildSrc/config/shell/github-commit-all.sh")
 }
 
 addLicenseHeader {
