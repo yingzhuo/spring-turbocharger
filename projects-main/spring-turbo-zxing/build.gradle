@@ -27,7 +27,7 @@ dependencies {
 	// spring-turbocharger
 	api project(':projects-main:spring-turbo-core')
 
-	// zxing (qrcode tool)
+	// zxing
 	implementation(libs.bundles.zxing)
 
 	// lombok
@@ -36,5 +36,4 @@ dependencies {
 
 	// slf4j
 	implementation 'org.slf4j:slf4j-api'
-
 }

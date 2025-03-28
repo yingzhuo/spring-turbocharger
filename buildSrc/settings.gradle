@@ -23,7 +23,8 @@ pluginManagement {
 		file('config/maven/repositories.txt')
 			.readLines()
 			.forEach { line ->
-				if (!line.isBlank()) {
+				line = line.trim()
+				if (!line.isBlank() && !line.startsWith('#')) {
 					maven { url = uri(line.trim()); allowInsecureProtocol = true }
 				}
 			}

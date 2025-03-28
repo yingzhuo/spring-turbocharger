@@ -1,3 +1,4 @@
+# 中国大陆地区方便的Maven仓库镜像
 https://maven.aliyun.com/repository/public/
 https://mirrors.cloud.tencent.com/nexus/repository/maven-public/
 https://repo.huaweicloud.com/repository/maven/
