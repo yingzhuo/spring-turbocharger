@@ -5,19 +5,18 @@ pluginManagement {
 		file('buildSrc/config/maven/repositories.txt')
 			.readLines()
 			.forEach { line ->
-				if (!line.isBlank()) {
+				line = line.trim()
+				if (!line.isBlank() && !line.startsWith('#')) {
 					maven { url = uri(line.trim()); allowInsecureProtocol = true }
 				}
 			}
 
 		gradlePluginPortal()
 		mavenCentral()
-		google()
 	}
 }
 
 plugins {
-	id 'org.gradle.toolchains.foojay-resolver-convention' version "${toolchainsPluginVersion}" apply true
 	id 'io.spring.dependency-management' version "${dependencyManagementPluginVersion}" apply false
 }
 
@@ -28,21 +27,19 @@ dependencyResolutionManagement {
 		file('buildSrc/config/maven/repositories.txt')
 			.readLines()
 			.forEach { line ->
-				if (!line.isBlank()) {
+				line = line.trim()
+				if (!line.isBlank() && !line.startsWith('#')) {
 					maven { url = uri(line.trim()); allowInsecureProtocol = true }
 				}
 			}
 
 		mavenCentral()
-		google()
 	}
 }
 
 rootProject.name = 'spring-turbocharger'
 includeSubprojects(file('projects-main'))
 includeSubprojects(file('projects-example'))
-
-// ---------------------------------------------------------------------------------------------------------------------
 
 private def includeSubprojects(File directory, FileFilter subDirFilter = new FileFilter() {
 	@Override
