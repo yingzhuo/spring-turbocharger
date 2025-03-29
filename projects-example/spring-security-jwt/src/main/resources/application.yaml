@@ -1,0 +1,9 @@
+logging:
+  level:
+    "root": info
+    "examples": trace
+
+spring:
+  autoconfigure:
+    exclude:
+      - "org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration"

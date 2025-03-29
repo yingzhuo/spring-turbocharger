@@ -1,0 +1,65 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+
+		file('buildSrc/config/maven/repositories.txt')
+			.readLines()
+			.forEach { line ->
+				line = line.trim()
+				if (!line.isBlank() && !line.startsWith('#')) {
+					maven { url = uri(line.trim()); allowInsecureProtocol = true }
+				}
+			}
+
+		gradlePluginPortal()
+		mavenCentral()
+	}
+}
+
+plugins {
+	id 'io.spring.dependency-management' version "${dependencyManagementPluginVersion}" apply false
+}
+
+dependencyResolutionManagement {
+	repositories {
+		mavenLocal()
+
+		file('buildSrc/config/maven/repositories.txt')
+			.readLines()
+			.forEach { line ->
+				line = line.trim()
+				if (!line.isBlank() && !line.startsWith('#')) {
+					maven { url = uri(line.trim()); allowInsecureProtocol = true }
+				}
+			}
+
+		mavenCentral()
+	}
+}
+
+rootProject.name = 'spring-turbocharger'
+includeSubprojects(file('projects-main'))
+includeSubprojects(file('projects-example'))
+
+private def includeSubprojects(File directory, FileFilter subDirFilter = new FileFilter() {
+	@Override
+	boolean accept(File f) {
+		true
+	}
+}) {
+	if (directory == null || !directory.isDirectory()) {
+		return
+	}
+
+	directory.listFiles(new FileFilter() {
+		@Override
+		boolean accept(File f) {
+			return f.isDirectory()
+		}
+	})
+		.each { subDir ->
+			if (subDirFilter.accept(subDir)) {
+				include("${directory.name}:${subDir.name}")
+			}
+		}
+}
