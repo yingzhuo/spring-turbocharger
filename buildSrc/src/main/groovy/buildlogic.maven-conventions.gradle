@@ -75,7 +75,6 @@ publishing {
 }
 
 signing {
-	// 私密信息在 $GRADLE_USER_HOME/gradle.properties
 	useGpgCmd()
 	sign publishing.publications.mavenJava
 }

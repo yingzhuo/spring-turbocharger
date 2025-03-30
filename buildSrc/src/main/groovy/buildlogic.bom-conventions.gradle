@@ -59,7 +59,6 @@ publishing {
 				'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
 
 			credentials {
-				// 私密信息在 $GRADLE_USER_HOME/gradle.properties
 				username = SharedFunctions.getPropertyOrEmpty(project, 'ossrhTokenUsername')
 				password = SharedFunctions.getPropertyOrEmpty(project, 'ossrhTokenPassword')
 			}
