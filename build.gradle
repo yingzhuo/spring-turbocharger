@@ -12,5 +12,5 @@ ext {
 
 allprojects {
 	group = 'com.github.yingzhuo'
-	version = '3.4.4-3-SNAPSHOT'
+	version = "${springTurbochargerVersion}"
 }
