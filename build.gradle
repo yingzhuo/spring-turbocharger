@@ -12,5 +12,5 @@ ext {
 
 allprojects {
 	group = 'com.github.yingzhuo'
-	version = ext.get('springTurbochargerVersion')
+	version = "$springTurbochargerVersion"
 }
