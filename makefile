@@ -26,7 +26,7 @@ publish: install
 	@$(CURDIR)/gradlew --project-dir $(CURDIR) -Dorg.gradle.parallel=false -x "test" -x "check" "publish"
 
 setup-gradle-wrapper:
-	@$(CURDIR)/gradlew --project-dir $(CURDIR) "wrapper"
+	@gradle --project-dir $(CURDIR) "wrapper"
 
 add-license-header:
 	@$(CURDIR)/gradlew --project-dir $(CURDIR) "addLicenseHeader"

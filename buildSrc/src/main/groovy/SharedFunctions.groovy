@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 import org.gradle.api.Project
 
 import java.time.LocalDateTime

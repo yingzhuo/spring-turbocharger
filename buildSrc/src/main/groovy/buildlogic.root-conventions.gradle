@@ -5,12 +5,25 @@ plugins {
 
 tasks.named('wrapper') { task ->
 	// 国内镜像两个比较好的选择
-	// (1) 腾讯云: https://mirrors.cloud.tencent.com/gradle/gradle-${gradleVersion}-bin.zip
-	// (2) 华为云: https://mirrors.huaweicloud.com/gradle/gradle-${gradleVersion}-bin.zip
-	distributionUrl = "https://mirrors.cloud.tencent.com/gradle/gradle-${gradleVersion}-bin.zip"
+	// (1) 腾讯云: https://mirrors.cloud.tencent.com/gradle/gradle-${gradleWrapperVersion}-bin.zip
+	// (2) 华为云: https://mirrors.huaweicloud.com/gradle/gradle-${gradleWrapperVersion}-bin.zip
+	distributionUrl = "https://mirrors.cloud.tencent.com/gradle/gradle-$gradleWrapperVersion-bin.zip"
+}
+
+tasks.register('removeWrapper', Delete) { task ->
+	group = 'build setup'
+	description = 'Remove Gradle wrapper files.'
+
+	followSymlinks = true
+	delete "$rootDir/gradlew"
+	delete "$rootDir/gradlew.bat"
+	delete "$rootDir/gradle/wrapper"
 }
 
 tasks.register('github', Exec) { task ->
+	group = 'github'
+	description = 'Commit and push codes to github.'
+
 	workingDir(rootDir)
 	commandLine('bash', "$rootDir/buildSrc/config/shell/github-commit-all.sh")
 }
