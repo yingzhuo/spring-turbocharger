@@ -13,11 +13,12 @@ pluginManagement {
 
 		gradlePluginPortal()
 		mavenCentral()
+		google()
 	}
 }
 
 plugins {
-	id 'io.spring.dependency-management' version "${dependencyManagementPluginVersion}" apply false
+	id 'io.spring.dependency-management' version "$dependencyManagementPluginVersion" apply false
 }
 
 dependencyResolutionManagement {
@@ -34,19 +35,19 @@ dependencyResolutionManagement {
 			}
 
 		mavenCentral()
+		google()
 	}
 }
 
+// root project
 rootProject.name = 'spring-turbocharger'
+
+// sub-projects
 includeSubprojects(file('projects-main'))
 includeSubprojects(file('projects-example'))
 
-private def includeSubprojects(File directory, FileFilter subDirFilter = new FileFilter() {
-	@Override
-	boolean accept(File f) {
-		true
-	}
-}) {
+// tools
+private def includeSubprojects(File directory) {
 	if (directory == null || !directory.isDirectory()) {
 		return
 	}
@@ -58,8 +59,11 @@ private def includeSubprojects(File directory, FileFilter subDirFilter = new Fil
 		}
 	})
 		.each { subDir ->
-			if (subDirFilter.accept(subDir)) {
-				include("${directory.name}:${subDir.name}")
+			for (var subSubFile : subDir.listFiles()) {
+				if (subSubFile.isFile() || subSubFile.name == 'build.gradle') {
+					include("${directory.name}:${subDir.name}")
+					break
+				}
 			}
 		}
 }
