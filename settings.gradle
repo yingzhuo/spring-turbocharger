@@ -43,8 +43,9 @@ dependencyResolutionManagement {
 rootProject.name = 'spring-turbocharger'
 
 // sub-projects
-includeSubprojects(file('projects-main'))
-includeSubprojects(file('projects-example'))
+['projects-main', 'projects-example'].forEach { dirName ->
+	includeSubprojects(file(dirName))
+}
 
 // tools
 private def includeSubprojects(File directory) {
