@@ -55,7 +55,7 @@ class LicensePlugin implements Plugin<Project> {
 					'**/*.java',
 					'**/*.groovy',
 					'**/*.kt',
-					'**/*.scala'
+					'**/*.scala',
 				)
 			}.each { file ->
 				var content = file.text

@@ -10,12 +10,12 @@ publishing {
 		mavenJava(MavenPublication) {
 			from components.javaPlatform
 
-			groupId = "$project.group"
+			groupId = project.group
 			artifactId = project.name
 			version = project.version
 
 			pom {
-				name = "${project.name}"
+				name = project.name
 				description = 'BOM of SpringTurbocharger'
 				url = 'https://github.com/yingzhuo/spring-turbocharger'
 				inceptionYear = '2025'
