@@ -1,7 +1,7 @@
 plugins {
 	id 'buildlogic.java-conventions'
 	id 'buildlogic.check-conventions'
-	id 'buildlogic.maven-conventions'
+	id 'buildlogic.github-pkgs-conventions'
 }
 
 dependencies {
