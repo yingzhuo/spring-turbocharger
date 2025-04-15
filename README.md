@@ -33,39 +33,6 @@ dependencies {
 #### 依赖 (Maven)
 
 ```xml
-<!-- ~/.m2/settings.xml -->
-<settings>
-    <activeProfiles>
-        <activeProfile>github</activeProfile>
-    </activeProfiles>
-
-    <profiles>
-        <profile>
-            <id>github</id>
-            <repositories>
-                <repository>
-                    <id>github-yingzhuo</id>
-                    <url>https://maven.pkg.github.com/yingzhuo/*</url>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-        </profile>
-    </profiles>
-
-    <servers>
-        <server>
-            <id>github-yingzhuo</id>
-            <username>yingzhuo</username>
-            <password>xxx</password> <!-- packages:readOnly -->
-        </server>
-    </servers>
-
-</settings>
-```
-
-```xml
 <!-- pom.xml -->
 <project>
     <dependencyManagement>

@@ -11,6 +11,6 @@ ext {
 }
 
 allprojects {
-	group = 'com.github.yingzhuo'
+	group = 'io.github.yingzhuo'
 	version = springTurbochargerVersion
 }
