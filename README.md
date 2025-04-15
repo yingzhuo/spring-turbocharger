@@ -12,21 +12,20 @@ Another enhancement library of SpringBoot & SpringFramework. Have fun! :)
 // build.gradle
 
 dependencies {
-    implementation(platform("com.github.yingzhuo:spring-turbocharger-bom:${springTurbochargerVersion}"))
-    implementation 'com.github.yingzhuo:spring-turbo-core'
-    implementation 'com.github.yingzhuo:spring-turbo-captcha'
-    implementation 'com.github.yingzhuo:spring-turbo-freemarker'
-    implementation 'com.github.yingzhuo:spring-turbo-hocon'
-    implementation 'com.github.yingzhuo:spring-turbo-idgen'
-    implementation 'com.github.yingzhuo:spring-turbo-jackson'
-    implementation 'com.github.yingzhuo:spring-turbo-jdbc'
-    implementation 'com.github.yingzhuo:spring-turbo-jwt'
-    implementation 'com.github.yingzhuo:spring-turbo-redis'
-    implementation 'com.github.yingzhuo:spring-turbo-security'
-    implementation 'com.github.yingzhuo:spring-turbo-webcli'
-    implementation 'com.github.yingzhuo:spring-turbo-webmvc'
-    implementation 'com.github.yingzhuo:spring-turbo-xxljob'
-    implementation 'com.github.yingzhuo:spring-turbo-zxing'
+    implementation 'com.github.yingzhuo:spring-turbo-core:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-captcha:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-freemarker:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-hocon:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-idgen:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-jackson:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-jdbc:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-jwt:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-redis:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-security:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-webcli:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-webmvc:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-xxljob:$springTurbochargerVersion'
+    implementation 'com.github.yingzhuo:spring-turbo-zxing:$springTurbochargerVersion'
 }
 ```
 
@@ -35,74 +34,76 @@ dependencies {
 ```xml
 <!-- pom.xml -->
 <project>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.github.yingzhuo</groupId>
-                <artifactId>spring-turbocharger-bom</artifactId>
-                <version>${springTurbochargerVersion}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-core</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-captcha</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-freemarker</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-hocon</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-idgen</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-jackson</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-jdbc</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-jwt</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-redis</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-security</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-webcli</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-webmvc</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-xxljob</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-zxing</artifactId>
+            <version>${springTurbochargerVersion}</version>
         </dependency>
     </dependencies>
 </project>
