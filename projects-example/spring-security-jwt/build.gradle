@@ -1,0 +1,26 @@
+plugins {
+	id 'buildlogic.java-conventions'
+}
+
+dependencies {
+	// spring-boot
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// spring-turbocharger
+	api project(':projects-main:spring-turbo-core')
+	api project(':projects-main:spring-turbo-security')
+	api project(':projects-main:spring-turbo-jwt')
+	api project(':projects-main:spring-turbo-jackson')
+
+	// json-path
+	implementation 'com.jayway.jsonpath:json-path'
+
+	// lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// slf4j
+	implementation 'org.slf4j:slf4j-api'
+}
