@@ -1,8 +1,8 @@
-plugins {
-	id 'java-platform'
+//plugins {
+//	id 'java-platform'
 //	id 'maven-publish'
-}
-
+//}
+//
 //publishing {
 //	repositories {
 //		maven {
