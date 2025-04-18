@@ -1,5 +1,5 @@
 plugins {
-	id 'buildlogic.root-conventions'
+	id 'buildlogic.root-project-conventions'
 }
 
 defaultTasks 'classes'
