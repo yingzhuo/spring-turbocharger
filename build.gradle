@@ -2,7 +2,7 @@ plugins {
 	id 'buildlogic.root-conventions'
 }
 
-defaultTasks('classes')
+defaultTasks 'classes'
 
 ext {
 	// SpringBoot BOM 微调
