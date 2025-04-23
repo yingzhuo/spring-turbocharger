@@ -22,12 +22,12 @@ tasks.register('removeWrapper', Delete) { task ->
 	}
 }
 
-tasks.register('github', Exec) { task ->
-	group = 'github'
-	description = 'Commit and push codes to github.'
+tasks.register('pushAllCodes', Exec) { task ->
+	group = 'git'
+	description = 'Commit and push codes to github/gitee'
 
 	workingDir(rootDir)
-	commandLine('bash', "$rootDir/buildSrc/config/shell/github-commit-all.sh")
+	commandLine('bash', "$rootDir/buildSrc/config/shell/push.sh")
 }
 
 tasks.named('clean') { task ->

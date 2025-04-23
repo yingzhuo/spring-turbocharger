@@ -10,7 +10,7 @@ usage:
 	@echo 'add-license-header   :          为源文件添加许可证头'
 	@echo 'test                 :          执行单元测试'
 	@echo 'check                :          检查代码风格'
-	@echo 'github               :          提交文件'
+	@echo 'push                 :          提交文件'
 	@echo '==============================================================================================================='
 
 clean:
@@ -41,8 +41,8 @@ test:
 check:
 	@$(CURDIR)/gradlew --project-dir $(CURDIR) "check"
 
-github: add-license-header
-	@$(CURDIR)/gradlew --project-dir $(CURDIR) "github"
+push: add-license-header
+	@$(CURDIR)/gradlew --project-dir $(CURDIR) "pushAllCodes"
 
 .PHONY: \
 	usage \
@@ -50,4 +50,4 @@ github: add-license-header
 	check test \
 	setup-gradle-wrapper remove-wrapper \
 	add-license-header \
-	github
+	push

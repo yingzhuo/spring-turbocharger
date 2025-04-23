@@ -2,4 +2,5 @@
 
 git add .
 git commit -m "$(/bin/date "+%F %T")"
-git push
+git push github
+git push gitee
