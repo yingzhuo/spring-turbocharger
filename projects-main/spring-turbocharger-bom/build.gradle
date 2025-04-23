@@ -1,0 +1,24 @@
+plugins {
+	id 'buildlogic.maven-central-bom-conventions'
+}
+
+dependencies {
+	constraints {
+		rootProject.findProject('projects-main').subprojects { subproject ->
+			if (subproject.name != 'spring-turbocharger-bom') {
+				api(subproject)
+			}
+		}
+
+		api(libs.bundles.bouncycastle)
+		api(libs.hutool.captcha)
+		api(libs.hutool.crypto)
+		api(libs.freemarker)
+		api(libs.hocon)
+		api(libs.uuid.creator)
+		api(libs.tsid.creator)
+		api(libs.bundles.jjwt)
+		api(libs.xxljob)
+		api(libs.bundles.zxing)
+	}
+}

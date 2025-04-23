@@ -1,0 +1,16 @@
+plugins {
+	id 'buildlogic.root-project-conventions'
+}
+
+defaultTasks 'classes'
+
+ext {
+	// SpringBoot BOM 微调
+	// https://docs.spring.io/spring-boot/appendix/dependency-versions/coordinates.html
+	// https://docs.spring.io/spring-boot/appendix/dependency-versions/properties.html
+}
+
+allprojects {
+	group = 'com.github.yingzhuo'
+	version = springTurbochargerVersion
+}

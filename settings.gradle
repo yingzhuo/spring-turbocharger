@@ -1,0 +1,64 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+
+		file('buildSrc/config/maven/repositories.txt')
+			.readLines()
+			.forEach { line ->
+				line = line.trim()
+				if (!line.isBlank() && !line.startsWith('#')) {
+					maven { url = uri(line.trim()); allowInsecureProtocol = true }
+				}
+			}
+
+		gradlePluginPortal()
+		mavenCentral()
+		google()
+	}
+}
+
+plugins {
+	id 'io.spring.dependency-management' version "$dependencyManagementPluginVersion" apply false
+	id 'io.gitee.pkmer.pkmerboot-central-publisher' version "$mavenCentralPublisherPluginVersion" apply false
+}
+
+dependencyResolutionManagement {
+	repositories {
+		mavenLocal()
+
+		file('buildSrc/config/maven/repositories.txt')
+			.readLines()
+			.forEach { line ->
+				line = line.trim()
+				if (!line.isBlank() && !line.startsWith('#')) {
+					maven { url = uri(line.trim()); allowInsecureProtocol = true }
+				}
+			}
+
+		mavenCentral()
+		google()
+	}
+}
+
+// root project
+rootProject.name = 'spring-turbocharger'
+
+// sub-projects
+['projects-main', 'projects-example'].forEach {
+	var firstLevelDir = file(it)
+
+	// 目录有误
+	if (!firstLevelDir.exists() || !firstLevelDir.isDirectory()) {
+		throw new GradleException("'${firstLevelDir.name}' is NOT exists or NOT a directory")
+	}
+
+	firstLevelDir.listFiles().each { secondLevelDir ->
+		if (secondLevelDir.isDirectory()) {
+			for (var subSubFile : secondLevelDir.listFiles()) {
+				if (subSubFile.isFile() || subSubFile.name == 'build.gradle') {
+					include("${firstLevelDir.name}:${secondLevelDir.name}")
+				}
+			}
+		}
+	}
+}

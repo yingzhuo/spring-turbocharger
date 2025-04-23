@@ -1,0 +1,93 @@
+/*
+ *
+ * Copyright 2022-present the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+package com.github.yingzhuo.turbocharger.util.collection.iterator;
+
+import org.springframework.lang.Nullable;
+
+import java.util.Comparator;
+import java.util.Objects;
+
+/**
+ * 对 {@code null} 值友好的比较器
+ *
+ * @param <T> 泛型
+ * @author 应卓
+ * @deprecated 使用 {@link Comparator#nullsFirst(Comparator)} 或 {@link Comparator#nullsLast(Comparator)} 替代
+ */
+@Deprecated
+@SuppressWarnings({"rawtypes", "unchecked"})
+public class NulSafeComparator<T> implements Comparator<T> {
+
+	private final boolean nullGreater;
+
+	@Nullable
+	private final Comparator<T> comparator;
+
+	public NulSafeComparator(boolean nullGreater) {
+		this(nullGreater, null);
+	}
+
+	public NulSafeComparator(boolean nullGreater, @Nullable Comparator<? super T> comparator) {
+		this.nullGreater = nullGreater;
+		this.comparator = (Comparator<T>) comparator;
+	}
+
+	@Override
+	public int compare(@Nullable T a, @Nullable T b) {
+		if (a == b) {
+			return 0;
+		}
+		if (a == null) {
+			return nullGreater ? 1 : -1;
+		} else if (b == null) {
+			return nullGreater ? -1 : 1;
+		} else {
+			return doCompare(a, b);
+		}
+	}
+
+	@Override
+	public Comparator<T> thenComparing(Comparator<? super T> other) {
+		Objects.requireNonNull(other);
+		return new NulSafeComparator<>(nullGreater, comparator == null ? other : comparator.thenComparing(other));
+	}
+
+	@Override
+	public Comparator<T> reversed() {
+		return new NulSafeComparator<>((!nullGreater), comparator == null ? null : comparator.reversed());
+	}
+
+	/**
+	 * 不检查{@code null}的比较方法<br>
+	 * 用户可自行重写此方法自定义比较方式
+	 *
+	 * @param a A值
+	 * @param b B值
+	 * @return 比较结果，-1:a小于b，0:相等，1:a大于b
+	 */
+	private int doCompare(T a, T b) {
+		if (null == comparator) {
+			if (a instanceof Comparable && b instanceof Comparable) {
+				return ((Comparable) a).compareTo(b);
+			}
+			return 0;
+		}
+
+		return comparator.compare(a, b);
+	}
+}

@@ -1,0 +1,11 @@
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook,\
+com.github.yingzhuo.turbocharger.core.env.MiscellaneousPropertiesEnvironmentPostProcessor,\
+com.github.yingzhuo.turbocharger.core.env.BouncyCastleInstallingEnvironmentPostProcessor
+org.springframework.context.ApplicationListener=\
+com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook
+org.springframework.core.io.ProtocolResolver=\
+com.github.yingzhuo.turbocharger.core.resource.HexProtocolResolver,\
+com.github.yingzhuo.turbocharger.core.resource.StringProtocolResolver,\
+com.github.yingzhuo.turbocharger.core.resource.ZipProtocolResolver,\
+com.github.yingzhuo.turbocharger.core.resource.JarProtocolResolver

@@ -1,0 +1,78 @@
+plugins {
+	id 'java'
+	id 'java-library'
+	id 'io.spring.dependency-management'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+	}
+}
+
+java {
+	withSourcesJar()
+	withJavadocJar()
+
+	sourceCompatibility = JavaVersion.toVersion("$javaVersion")
+	targetCompatibility = JavaVersion.toVersion("$javaVersion")
+
+	toolchain {
+		languageVersion = JavaLanguageVersion.of("$javaVersion")
+	}
+}
+
+compileJava {
+	options.compilerArgs += [
+		'-parameters',
+		'-Xlint:unchecked',
+		'-Xlint:cast',
+		'-Xlint:rawtypes',
+		'-Xlint:overloads',
+		'-Xlint:divzero',
+		'-Xlint:finally',
+		'-Xlint:static',
+		// '-Werror',
+	]
+}
+
+jar {
+	manifest {
+		final var attr = [
+			'Module-Name'           : project.name,
+			'Implementation-Version': project.version,
+			'Build-Jdk-Spec'        : javaVersion,
+			'Created-By'            : "Gradle ${gradle.gradleVersion}",
+		]
+		attributes(attr)
+	}
+}
+
+sourcesJar {
+}
+
+javadoc {
+	failOnError = false
+	options.addBooleanOption("html5", true)
+	options.addBooleanOption("Xdoclint:none", true)
+}
+
+processResources {
+	from(rootDir) {
+		include('LICENSE.txt', 'NOTICE.txt')
+		into 'META-INF'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
+tasks.register('checkVersion') { task ->
+	group = 'pkmer boot'
+	description = 'check version of this shit.'
+
+	if ("${project.version}".endsWith('-SNAPSHOT')) {
+		throw new GradleException('Not able to publish SNAPSHOT items')
+	}
+}

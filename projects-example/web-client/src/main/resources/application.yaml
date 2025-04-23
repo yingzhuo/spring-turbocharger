@@ -1,0 +1,7 @@
+logging:
+  level:
+    "root": info
+    "examples": trace
+
+github:
+  endpoint: "https://api.github.com"
