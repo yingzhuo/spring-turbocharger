@@ -2,9 +2,13 @@
 
 [![License](https://img.shields.io/badge/License-Apache%20v2.0-red?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Author](https://img.shields.io/badge/yingzhor%40gmail.com-F0FF00?style=flat-square)](mailto:yingzhor@gmail.com)
-[![Github](https://img.shields.io/badge/https%3A%2F%2Fgithub.com%2Fyingzhuo%2Fspring--turbocharger-8A2BE2?style=flat-square&link=https%3A%2F%2Fgithub.com%2Fyingzhuo%2Fspring-turbocharger)](https://github.com/yingzhuo/spring-turbocharger)
 
 Another enhancement library of SpringBoot & SpringFramework. Have fun! :)
+
+#### 代码镜像
+
+[![Github](https://img.shields.io/badge/https%3A%2F%2Fgithub.com%2Fyingzhuo%2Fspring--turbocharger-blue?style=flat-square&link=https%3A%2F%2Fgithub.com%2Fyingzhuo%2Fspring-turbocharger)](https://github.com/yingzhuo/spring-turbocharger)
+[![Gitee](https://img.shields.io/badge/https%3A%2F%2Fgitee.com%2Fyingzhuo%2Fspring--turbocharger-red?style=flat-square&link=https%3A%2F%2Fgitee.com%2Fyingzhuo%2Fspring-turbocharger)](https://gitee.com/yingzhuo/spring-turbocharger)
 
 #### 依赖 (Gradle)
 
