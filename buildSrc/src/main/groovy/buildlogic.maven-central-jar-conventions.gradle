@@ -85,5 +85,9 @@ pkmerBoot {
 }
 
 tasks.named('publishToMavenCentralPortal') { task ->
-	dependsOn 'checkVersion'
+	doFirst {
+		if ("$springTurbochargerVersion".endsWith('-SNAPSHOT')) {
+			throw new GradleException('Not able to publish SNAPSHOT items')
+		}
+	}
 }

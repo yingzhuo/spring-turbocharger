@@ -67,12 +67,3 @@ processResources {
 test {
 	useJUnitPlatform()
 }
-
-tasks.register('checkVersion') { task ->
-	group = 'pkmer boot'
-	description = 'check version of this shit.'
-
-	if ("${project.version}".endsWith('-SNAPSHOT')) {
-		throw new GradleException('Not able to publish SNAPSHOT items')
-	}
-}
