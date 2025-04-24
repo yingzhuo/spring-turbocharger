@@ -19,9 +19,6 @@ import org.gradle.api.Project
 
 import java.time.LocalDateTime
 
-/**
- * 构建逻辑的共享函数
- */
 abstract class SharedFunctions {
 
 	static String getTimestamp(String formatPattern = 'yyyyMMddHHmmss') {
@@ -39,14 +36,4 @@ abstract class SharedFunctions {
 					.replace("'", "")
 			}
 	}
-
-	static String getPropertyOrEmpty(Project project, String propertyName) {
-		try {
-			var value = project.getProperty(propertyName).toString()
-			return value.trim()
-		} catch (MissingPropertyException ignored) {
-			return ''
-		}
-	}
-
 }

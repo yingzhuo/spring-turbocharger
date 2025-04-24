@@ -13,4 +13,8 @@ ext {
 allprojects {
 	group = 'com.github.yingzhuo'
 	version = springTurbochargerVersion
+
+	configurations.configureEach {
+		resolutionStrategy.cacheChangingModulesFor 0, "minutes"
+	}
 }

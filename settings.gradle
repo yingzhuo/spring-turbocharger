@@ -43,22 +43,10 @@ dependencyResolutionManagement {
 // root project
 rootProject.name = 'spring-turbocharger'
 
-// sub-projects
-['projects-main', 'projects-example'].forEach {
-	var firstLevelDir = file(it)
+file("$rootDir/projects-main/").eachDirMatch(~/spring-turbo.*/) {
+	include "projects-main:${it.name}"
+}
 
-	// 目录有误
-	if (!firstLevelDir.exists() || !firstLevelDir.isDirectory()) {
-		throw new GradleException("'${firstLevelDir.name}' is NOT exists or NOT a directory")
-	}
-
-	firstLevelDir.listFiles().each { secondLevelDir ->
-		if (secondLevelDir.isDirectory()) {
-			for (var subSubFile : secondLevelDir.listFiles()) {
-				if (subSubFile.isFile() || subSubFile.name == 'build.gradle') {
-					include("${firstLevelDir.name}:${secondLevelDir.name}")
-				}
-			}
-		}
-	}
+file("$rootDir/projects-example/").eachDirMatch(~/.*/) {
+	include "projects-example:${it.name}"
 }
