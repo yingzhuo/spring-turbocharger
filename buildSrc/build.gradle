@@ -8,6 +8,12 @@ try (var inputStream = file("${rootDir}/../gradle.properties").newInputStream())
 	properties.forEach(ext::set)
 }
 
+try (var inputStream = file('gradle.properties').newInputStream()) {
+	var properties = new Properties()
+	properties.load(inputStream)
+	properties.forEach(ext::set)
+}
+
 dependencies {
 }
 
