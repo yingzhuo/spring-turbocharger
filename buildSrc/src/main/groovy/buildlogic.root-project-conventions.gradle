@@ -24,7 +24,7 @@ tasks.register('removeWrapper', Delete) { task ->
 
 tasks.register('pushAllCodes', Exec) { task ->
 	group = 'git'
-	description = 'Commit and push codes to github/gitee'
+	description = 'Commit and push codes to gitee/github'
 
 	workingDir(rootDir)
 	commandLine('bash', "$rootDir/buildSrc/config/shell/push.sh")
@@ -45,8 +45,12 @@ tasks.register('showSonatypeInfo', DefaultTask) { task ->
 	group = 'sonatype'
 	description = 'Show username/password of "central.sonatype.com".'
 
-	println("username: ${findProperty('sonatypeUsername') as String}")
-	println("password: ${findProperty('sonatypePassword') as String}")
+	doLast {
+		println('-' * 80)
+		println("username: '${findProperty('sonatypeUsername')}'")
+		println("password: '${findProperty('sonatypePassword')}'")
+		println('-' * 80)
+	}
 }
 
 addLicenseHeader {

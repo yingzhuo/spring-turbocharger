@@ -11,38 +11,42 @@ usage:
 	@echo 'test                 : 执行单元测试'
 	@echo 'check                : 检查代码风格'
 	@echo 'push-all-codes       : 提交文件'
+	@echo 'show-sonatype-info   : 显示sonatype用户名和口令'
 	@echo '==============================================================================================================='
 
 clean:
-	@$(CURDIR)/gradlew --project-dir $(CURDIR) --quiet "clean"
-	@$(CURDIR)/gradlew --project-dir $(CURDIR)/buildSrc/ --quiet "clean"
+	@$(CURDIR)/gradlew -q "clean"
+	@$(CURDIR)/gradlew --project-dir $(CURDIR)/buildSrc/ -q "clean"
 
 compile:
-	@$(CURDIR)/gradlew --project-dir $(CURDIR) "classes"
+	@$(CURDIR)/gradlew "classes"
 
 install: add-license-header
-	@$(CURDIR)/gradlew --project-dir $(CURDIR) -Dorg.gradle.parallel=false -x "test" -x "check" "publishToMavenLocal"
+	@$(CURDIR)/gradlew -Dorg.gradle.parallel=false -x "test" -x "check" "publishToMavenLocal"
 
 publish: install
-	@$(CURDIR)/gradlew --project-dir $(CURDIR) -Dorg.gradle.parallel=false -x "test" -x "check" "publishToMavenCentralPortal"
+	@$(CURDIR)/gradlew -Dorg.gradle.parallel=false -x "test" -x "check" "publishToMavenCentralPortal"
 
 setup-gradle-wrapper:
-	@gradle --project-dir $(CURDIR) "wrapper"
+	@gradle "wrapper"
 
 remove-wrapper:
-	@gradle --project-dir $(CURDIR) "removeWrapper"
+	@gradle "removeWrapper"
 
 add-license-header:
-	@$(CURDIR)/gradlew --project-dir $(CURDIR) "addLicenseHeader"
+	@$(CURDIR)/gradlew "addLicenseHeader"
 
 test:
-	@$(CURDIR)/gradlew --project-dir $(CURDIR) "test"
+	@$(CURDIR)/gradlew "test"
 
 check:
-	@$(CURDIR)/gradlew --project-dir $(CURDIR) "check"
+	@$(CURDIR)/gradlew "check"
 
 push-all-codes: add-license-header
-	@$(CURDIR)/gradlew --project-dir $(CURDIR) "pushAllCodes"
+	@$(CURDIR)/gradlew "pushAllCodes"
+
+show-sonatype-info:
+	@$(CURDIR)/gradlew -q ":showSonatypeInfo"
 
 .PHONY: \
 	usage \
@@ -50,4 +54,4 @@ push-all-codes: add-license-header
 	check test \
 	setup-gradle-wrapper remove-wrapper \
 	add-license-header \
-	push-all-codes
+	push-all-codes show-sonatype-info

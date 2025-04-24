@@ -5,7 +5,7 @@
 
 Another enhancement library of SpringBoot & SpringFramework. Have fun! :)
 
-#### 代码镜像
+#### 代码仓库
 
 [![Github](https://img.shields.io/badge/https%3A%2F%2Fgithub.com%2Fyingzhuo%2Fspring--turbocharger-blue?style=flat-square&link=https%3A%2F%2Fgithub.com%2Fyingzhuo%2Fspring-turbocharger)](https://github.com/yingzhuo/spring-turbocharger)
 [![Gitee](https://img.shields.io/badge/https%3A%2F%2Fgitee.com%2Fyingzhuo%2Fspring--turbocharger-red?style=flat-square&link=https%3A%2F%2Fgitee.com%2Fyingzhuo%2Fspring-turbocharger)](https://gitee.com/yingzhuo/spring-turbocharger)
