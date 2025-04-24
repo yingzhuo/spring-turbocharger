@@ -15,38 +15,38 @@ usage:
 	@echo '==============================================================================================================='
 
 clean:
-	@$(CURDIR)/gradlew -q "clean"
-	@$(CURDIR)/gradlew --project-dir $(CURDIR)/buildSrc/ -q "clean"
+	gradlew -q "clean"
+	gradlew -q -p $(CURDIR)/buildSrc/ "clean"
 
 compile:
-	@$(CURDIR)/gradlew "classes"
+	gradlew "classes"
 
 install: add-license-header
-	@$(CURDIR)/gradlew -Dorg.gradle.parallel=false -x "test" -x "check" "publishToMavenLocal"
+	gradlew --no-parallel -x "test" -x "check" "publishToMavenLocal"
 
-publish: install
-	@$(CURDIR)/gradlew -Dorg.gradle.parallel=false -x "test" -x "check" "publishToMavenCentralPortal"
+publish: add-license-header
+	gradlew --no-parallel -x "test" -x "check" "publishToMavenCentralPortal"
 
 setup-gradle-wrapper:
-	@gradle "wrapper"
+	gradle "wrapper"
 
 remove-wrapper:
-	@gradle "removeWrapper"
+	gradle "removeWrapper"
 
 add-license-header:
-	@$(CURDIR)/gradlew "addLicenseHeader"
+	gradlew -q "addLicenseHeader"
 
 test:
-	@$(CURDIR)/gradlew "test"
+	gradlew "test"
 
 check:
-	@$(CURDIR)/gradlew "check"
+	gradlew "check"
 
 push-all-codes: add-license-header
-	@$(CURDIR)/gradlew "pushAllCodes"
+	gradlew -q "pushAllCodes"
 
 show-sonatype-info:
-	@$(CURDIR)/gradlew -q ":showSonatypeInfo"
+	gradlew -q "showSonatypeInfo"
 
 .PHONY: \
 	usage \
