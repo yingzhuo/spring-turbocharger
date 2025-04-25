@@ -77,8 +77,18 @@ tasks.withType(GenerateModuleMetadata).configureEach {
 pkmerBoot {
 	sonatypeMavenCentral {
 		stagingRepository = layout.buildDirectory.dir("repos/bundles")
-		username = getProperty('sonatypeUsername')
-		password = getProperty('sonatypePassword')
+
+		try {
+			username = getProperty('sonatypeUsername')
+		} catch (MissingPropertyException ignored) {
+			username = ''
+		}
+
+		try {
+			password = getProperty('sonatypePassword')
+		} catch (MissingPropertyException ignored) {
+			password = ''
+		}
 	}
 }
 
