@@ -10,6 +10,10 @@ Another enhancement library of SpringBoot & SpringFramework. Have fun! :)
 [![Github](https://img.shields.io/badge/https%3A%2F%2Fgithub.com%2Fyingzhuo%2Fspring--turbocharger-blue?style=flat-square&link=https%3A%2F%2Fgithub.com%2Fyingzhuo%2Fspring-turbocharger)](https://github.com/yingzhuo/spring-turbocharger)
 [![Gitee](https://img.shields.io/badge/https%3A%2F%2Fgitee.com%2Fyingzhuo%2Fspring--turbocharger-red?style=flat-square&link=https%3A%2F%2Fgitee.com%2Fyingzhuo%2Fspring-turbocharger)](https://gitee.com/yingzhuo/spring-turbocharger)
 
+#### 最新版本
+
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.yingzhuo/spring-turbocharger-bom.svg?label=Maven%20Central&style=flat-square)](https://search.maven.org/search?q=g:%22com.github.yingzhuo%22%20AND%20a:%22spring-turbocharger-bom%22)
+
 #### 依赖 (Gradle)
 
 ```gradle
