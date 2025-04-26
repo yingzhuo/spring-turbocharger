@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 plugins {
 	id 'java'
 	id 'java-library'
@@ -14,11 +16,11 @@ java {
 	withSourcesJar()
 	withJavadocJar()
 
-	sourceCompatibility = JavaVersion.toVersion("$javaVersion")
-	targetCompatibility = JavaVersion.toVersion("$javaVersion")
+	sourceCompatibility = JavaVersion.toVersion(javaVersion)
+	targetCompatibility = JavaVersion.toVersion(javaVersion)
 
 	toolchain {
-		languageVersion = JavaLanguageVersion.of("$javaVersion")
+		languageVersion = JavaLanguageVersion.of(javaVersion)
 	}
 }
 
@@ -62,6 +64,13 @@ processResources {
 		include('LICENSE.txt', 'NOTICE.txt')
 		into 'META-INF'
 	}
+
+	filter(ReplaceTokens, 'tokens': [
+		'PROJECT_GROUP'  : project.group,
+		'PROJECT_NAME'   : project.name,
+		'PROJECT_VERSION': project.version,
+	])
+	filteringCharset = 'UTF-8'
 }
 
 test {

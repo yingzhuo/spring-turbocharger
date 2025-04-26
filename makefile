@@ -21,7 +21,7 @@ compile:
 	gradlew "classes"
 
 install: add-license-header
-	gradlew --no-parallel -x "test" -x "check" "publishToMavenLocal"
+	gradlew --no-parallel -x "test" -x "check" -x "signMavenJavaPublication" "publishToMavenLocal"
 
 publish: add-license-header
 	gradlew --no-parallel -x "test" -x "check" "publishToMavenCentralPortal"
