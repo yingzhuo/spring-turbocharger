@@ -21,15 +21,15 @@ tasks.named('publishToMavenCentralPortal') { task ->
 private String findSonatypeUsername() {
 	try {
 		return getProperty('sonatypeUsername')
-	} catch (MissingPropertyException e) {
-		return ''
+	} catch (MissingPropertyException ignored) {
+		return System.getenv('SONATYPE_USERNAME')
 	}
 }
 
 private String findSonatypePassword() {
 	try {
 		return getProperty('sonatypePassword')
-	} catch (MissingPropertyException e) {
-		return ''
+	} catch (MissingPropertyException ignored) {
+		return System.getenv('SONATYPE_PASSWORD')
 	}
 }
