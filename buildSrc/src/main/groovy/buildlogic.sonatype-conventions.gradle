@@ -1,0 +1,37 @@
+plugins {
+	id 'io.gitee.pkmer.pkmerboot-central-publisher'
+}
+
+pkmerBoot {
+	sonatypeMavenCentral {
+		stagingRepository = layout.buildDirectory.dir("repos/bundles")
+		username = findSonatypeUsername()
+		password = findSonatypePassword()
+	}
+}
+
+tasks.named('publishToMavenCentralPortal') { task ->
+	doFirst {
+		if ("$springTurbochargerVersion".endsWith('-SNAPSHOT')) {
+			throw new GradleException('Not able to publish SNAPSHOT items')
+		}
+	}
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+String findSonatypeUsername() {
+	try {
+		return getProperty('sonatypeUsername')
+	} catch (MissingPropertyException ignored) {
+		return ''
+	}
+}
+
+String findSonatypePassword() {
+	try {
+		return getProperty('sonatypePassword')
+	} catch (MissingPropertyException ignored) {
+		return ''
+	}
+}

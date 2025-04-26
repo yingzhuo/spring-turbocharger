@@ -1,7 +1,6 @@
 plugins {
 	id 'maven-publish'
 	id 'signing'
-	id 'io.gitee.pkmer.pkmerboot-central-publisher'
 }
 
 publishing {
@@ -74,29 +73,4 @@ signing {
 
 tasks.withType(GenerateModuleMetadata).configureEach {
 	enabled = false
-}
-
-pkmerBoot {
-	sonatypeMavenCentral {
-		stagingRepository = layout.buildDirectory.dir("repos/bundles")
-		try {
-			username = getProperty('sonatypeUsername')
-		} catch (MissingPropertyException ignored) {
-			username = ''
-		}
-
-		try {
-			password = getProperty('sonatypePassword')
-		} catch (MissingPropertyException ignored) {
-			password = ''
-		}
-	}
-}
-
-tasks.named('publishToMavenCentralPortal') { task ->
-	doFirst {
-		if ("$springTurbochargerVersion".endsWith('-SNAPSHOT')) {
-			throw new GradleException('Not able to publish SNAPSHOT items')
-		}
-	}
 }

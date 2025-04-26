@@ -41,18 +41,6 @@ tasks.named('clean') { task ->
 	}
 }
 
-tasks.register('showSonatypeInfo', DefaultTask) { task ->
-	group = 'sonatype'
-	description = 'Show username/password of "central.sonatype.com".'
-
-	doLast {
-		println('-' * 80)
-		println("username: '${findProperty('sonatypeUsername')}'")
-		println("password: '${findProperty('sonatypePassword')}'")
-		println('-' * 80)
-	}
-}
-
 addLicenseHeader {
 	javaHeader =
 		'''

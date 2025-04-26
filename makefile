@@ -11,7 +11,6 @@ usage:
 	@echo 'test                 : 执行单元测试'
 	@echo 'check                : 检查代码风格'
 	@echo 'push-all-codes       : 提交文件'
-	@echo 'show-sonatype-info   : 显示sonatype用户名和口令'
 	@echo '==============================================================================================================='
 
 clean:
@@ -45,13 +44,10 @@ check:
 push-all-codes: add-license-header
 	gradlew -q "pushAllCodes"
 
-show-sonatype-info:
-	gradlew -q "showSonatypeInfo"
-
 .PHONY: \
 	usage \
 	clean compile publish install \
 	check test \
 	setup-gradle-wrapper remove-wrapper \
 	add-license-header \
-	push-all-codes show-sonatype-info
+	push-all-codes
