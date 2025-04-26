@@ -43,10 +43,12 @@ dependencyResolutionManagement {
 // root project
 rootProject.name = 'spring-turbocharger'
 
+// main
 file("$rootDir/projects-main/").eachDirMatch(~/spring-turbo.*/) {
 	include "projects-main:${it.name}"
 }
 
+// examples
 file("$rootDir/projects-example/").eachDirMatch(~/.*/) {
 	include "projects-example:${it.name}"
 }

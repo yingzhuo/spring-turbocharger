@@ -2,16 +2,14 @@ pluginManagement {
 	repositories {
 		mavenLocal()
 		gradlePluginPortal()
-
 		file('config/maven/repositories.txt')
 			.readLines()
 			.forEach { line ->
 				line = line.trim()
 				if (!line.isBlank() && !line.startsWith('#')) {
-					maven { url = uri(line.trim()); allowInsecureProtocol = true }
+					maven { url = uri(line); allowInsecureProtocol = true }
 				}
 			}
-
 		mavenCentral()
 		google()
 	}
@@ -25,15 +23,14 @@ dependencyResolutionManagement {
 	repositories {
 		mavenLocal()
 		gradlePluginPortal()
-
 		file('config/maven/repositories.txt')
 			.readLines()
 			.forEach { line ->
-				if (!line.isBlank()) {
-					maven { url = uri(line.trim()); allowInsecureProtocol = true }
+				line = line.trim()
+				if (!line.isBlank() && !line.startsWith('#')) {
+					maven { url = uri(line); allowInsecureProtocol = true }
 				}
 			}
-
 		mavenCentral()
 		google()
 	}
