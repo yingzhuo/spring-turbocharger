@@ -12,26 +12,24 @@ pkmerBoot {
 
 tasks.named('publishToMavenCentralPortal') { task ->
 	doFirst {
-		if ("$springTurbochargerVersion".endsWith('-SNAPSHOT')) {
+		if ("$springTurbochargerVersion".endsWith('SNAPSHOT')) {
 			throw new GradleException('Not able to publish SNAPSHOT items')
 		}
 	}
 }
 
-// ---------------------------------------------------------------------------------------------------------------------
-
-String findSonatypeUsername() {
+private String findSonatypeUsername() {
 	try {
 		return getProperty('sonatypeUsername')
-	} catch (MissingPropertyException ignored) {
+	} catch (MissingPropertyException e) {
 		return ''
 	}
 }
 
-String findSonatypePassword() {
+private String findSonatypePassword() {
 	try {
 		return getProperty('sonatypePassword')
-	} catch (MissingPropertyException ignored) {
+	} catch (MissingPropertyException e) {
 		return ''
 	}
 }
