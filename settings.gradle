@@ -7,7 +7,14 @@ pluginManagement {
 			.forEach { line ->
 				line = line.trim()
 				if (!line.isBlank() && !line.startsWith('#')) {
-					maven { url = uri(line.trim()); allowInsecureProtocol = true }
+					maven {
+						url = uri(line)
+						allowInsecureProtocol = true
+						content {
+							excludeGroup 'com.github.yingzhuo'
+							excludeGroup 'io.github.yingzhuo'
+						}
+					}
 				}
 			}
 
@@ -31,7 +38,14 @@ dependencyResolutionManagement {
 			.forEach { line ->
 				line = line.trim()
 				if (!line.isBlank() && !line.startsWith('#')) {
-					maven { url = uri(line.trim()); allowInsecureProtocol = true }
+					maven {
+						url = uri(line)
+						allowInsecureProtocol = true
+						content {
+							excludeGroup 'com.github.yingzhuo'
+							excludeGroup 'io.github.yingzhuo'
+						}
+					}
 				}
 			}
 
