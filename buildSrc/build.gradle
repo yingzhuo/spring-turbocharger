@@ -15,6 +15,7 @@ try (var inputStream = file('gradle.properties').newInputStream()) {
 }
 
 dependencies {
+	implementation "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:$dependencyManagementPluginVersion"
 	implementation "io.gitee.pkmer.pkmerboot-central-publisher:io.gitee.pkmer.pkmerboot-central-publisher.gradle.plugin:$mavenCentralPublisherPluginVersion"
 }
 
