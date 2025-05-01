@@ -1,5 +1,4 @@
 import org.apache.tools.ant.filters.ReplaceTokens
-import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
 	id 'java'
@@ -9,7 +8,7 @@ plugins {
 
 dependencyManagement {
 	imports {
-		mavenBom SpringBootPlugin.BOM_COORDINATES
+		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
 	}
 }
 
@@ -45,7 +44,7 @@ jar {
 			'Module-Name'           : project.name,
 			'Implementation-Version': project.version,
 			'Build-Jdk-Spec'        : javaVersion,
-			'Created-By'            : "Gradle ${gradle.gradleVersion}",
+			'Created-By'            : "Gradle ${gradle.gradleVersion}"
 		]
 		attributes(attr)
 	}
@@ -69,7 +68,7 @@ processResources {
 	filter(ReplaceTokens, 'tokens': [
 		'PROJECT_GROUP'  : project.group,
 		'PROJECT_NAME'   : project.name,
-		'PROJECT_VERSION': project.version,
+		'PROJECT_VERSION': project.version
 	])
 	filteringCharset = 'UTF-8'
 }
