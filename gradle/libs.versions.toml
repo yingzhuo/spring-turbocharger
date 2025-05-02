@@ -6,7 +6,7 @@ jjwt = "0.12.6"
 zxing = "3.5.3"
 hutool = "5.8.37"
 freemarker = "2.3.34"
-xxljob = "3.0.0"
+xxljob = "3.1.0"
 
 [libraries]
 hocon = { module = "com.typesafe:config", version = "1.4.3" }
