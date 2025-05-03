@@ -12,15 +12,10 @@ dependencyResolutionManagement {
 	evaluate(file("buildSrc/config/maven/RepositoriesSupport.groovy")).applyDependencyResolutionManagement(this)
 }
 
-// root project
 rootProject.name = 'spring-turbocharger'
 
-// main
-file("$rootDir/projects-main/").eachDirMatch(~/spring-turbo.*/) {
-	include "projects-main:${it.name}"
-}
-
-// examples
-file("$rootDir/projects-example/").eachDirMatch(~/.*/) {
-	include "projects-example:${it.name}"
+['projects-main', 'projects-example'].each { String projectParentDirName ->
+	file(projectParentDirName).eachDirMatch(~/.*/) { File projectDir ->
+		include "$projectParentDirName:${projectDir.name}"
+	}
 }
