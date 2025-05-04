@@ -1,5 +1,5 @@
 pluginManagement {
-	evaluate(file("config/maven/RepositoriesSupport.groovy")).applyPluginManagement(this)
+	evaluate(file('config/maven/RepositoriesSupport.groovy')).applyPluginManagement(this)
 }
 
 dependencyResolutionManagement {
@@ -7,7 +7,7 @@ dependencyResolutionManagement {
 		create('libs', { from(files('../gradle/libs.versions.toml')) })
 	}
 
-	evaluate(file("config/maven/RepositoriesSupport.groovy")).applyDependencyResolutionManagement(this)
+	evaluate(file('config/maven/RepositoriesSupport.groovy')).applyDependencyResolutionManagement(this)
 
 	repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
 }

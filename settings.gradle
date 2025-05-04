@@ -1,5 +1,5 @@
 pluginManagement {
-	evaluate(file("buildSrc/config/maven/RepositoriesSupport.groovy")).applyPluginManagement(this)
+	evaluate(file('buildSrc/config/maven/RepositoriesSupport.groovy')).applyPluginManagement(this)
 }
 
 plugins {
@@ -9,7 +9,7 @@ plugins {
 }
 
 dependencyResolutionManagement {
-	evaluate(file("buildSrc/config/maven/RepositoriesSupport.groovy")).applyDependencyResolutionManagement(this)
+	evaluate(file('buildSrc/config/maven/RepositoriesSupport.groovy')).applyDependencyResolutionManagement(this)
 }
 
 rootProject.name = 'spring-turbocharger'
