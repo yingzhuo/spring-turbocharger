@@ -14,8 +14,8 @@ dependencyResolutionManagement {
 
 rootProject.name = 'spring-turbocharger'
 
-['projects-main', 'projects-example'].each { String projectParentDirName ->
-	file(projectParentDirName).eachDirMatch(~/.*/) { File projectDir ->
-		include "$projectParentDirName:${projectDir.name}"
+['projects-main', 'projects-example'].each {
+	file(it).eachDirMatch(~/.*/) { projectDir ->
+		include "$it:${projectDir.name}"
 	}
 }
