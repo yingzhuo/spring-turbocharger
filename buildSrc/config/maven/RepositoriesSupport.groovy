@@ -16,37 +16,11 @@
  *
  */
 def applyPluginManagement(settings) {
-
 	settings.pluginManagement.repositories {
 		mavenLocal()
 		maven {
-			name = '阿里云'
 			url = 'https://maven.aliyun.com/repository/public/'
-			content {
-				excludeGroup 'com.github.yingzhuo'
-			}
 		}
-//		maven {
-//			name = '腾讯云'
-//			url = 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/'
-//			content {
-//				excludeGroup 'com.github.yingzhuo'
-//			}
-//		}
-//		maven {
-//			name = '华为云'
-//			url = 'https://repo.huaweicloud.com/repository/maven/'
-//			content {
-//				excludeGroup 'com.github.yingzhuo'
-//			}
-//		}
-//		maven {
-//			name = '网易云'
-//			url = 'https://mirrors.163.com/maven/repository/maven-public/'
-//			content {
-//				excludeGroup 'com.github.yingzhuo'
-//			}
-//		}
 		mavenCentral()
 		gradlePluginPortal()
 		maven {
@@ -66,33 +40,8 @@ def applyDependencyResolutionManagement(settings) {
 	settings.dependencyResolutionManagement.repositories {
 		mavenLocal()
 		maven {
-			name = '阿里云'
 			url = 'https://maven.aliyun.com/repository/public/'
-			content {
-				excludeGroup 'com.github.yingzhuo'
-			}
 		}
-//		maven {
-//			name = '腾讯云'
-//			url = 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/'
-//			content {
-//				excludeGroup 'com.github.yingzhuo'
-//			}
-//		}
-//		maven {
-//			name = '华为云'
-//			url = 'https://repo.huaweicloud.com/repository/maven/'
-//			content {
-//				excludeGroup 'com.github.yingzhuo'
-//			}
-//		}
-//		maven {
-//			name = '网易云'
-//			url = 'https://mirrors.163.com/maven/repository/maven-public/'
-//			content {
-//				excludeGroup 'com.github.yingzhuo'
-//			}
-//		}
 		mavenCentral()
 		gradlePluginPortal()
 		maven {
