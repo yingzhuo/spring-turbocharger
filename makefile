@@ -17,22 +17,22 @@ usage:
 	@echo '==============================================================================================================='
 
 clean:
-	gradlew -q "clean"
+	gradle -q "clean"
 
 clean-buildsrc:
-	gradlew -q -p $(CURDIR)/buildSrc/ "clean"
+	gradle -q -p $(CURDIR)/buildSrc/ "clean"
 
 refresh-dependencies:
-	gradlew -U
+	gradle -U
 
 compile:
-	gradlew "classes"
+	gradle "classes"
 
 install: add-license-header
-	gradlew --no-parallel -x "test" -x "check" "publishToMavenLocal"
+	gradle --no-parallel -x "test" -x "check" "publishToMavenLocal"
 
 publish: install
-	gradlew --no-parallel -x "test" -x "check" "publishToMavenCentralPortal"
+	gradle --no-parallel -x "test" -x "check" "publishToMavenCentralPortal"
 
 setup-gradle-wrapper:
 	gradle "wrapper"
@@ -41,19 +41,19 @@ remove-wrapper:
 	gradle "removeWrapper"
 
 add-license-header:
-	gradlew -q "addLicenseHeader"
+	gradle -q "addLicenseHeader"
 
 test:
-	gradlew "test"
+	gradle "test"
 
 check:
-	gradlew "check"
+	gradle "check"
 
 stop-gradle-daemon:
 	gradle -q --stop
 
 push-all-codes: add-license-header
-	gradlew -q "pushAllCodes"
+	gradle -q "pushAllCodes"
 
 .PHONY: \
 	usage \

@@ -15,16 +15,9 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.idgen;
+@NonNullApi
+@NonNullFields
+package com.github.yingzhuo.turbocharger.idgen.impl;
 
-/**
- * @author 应卓
- * @since 3.4.3
- */
-public interface TSIDGenerator {
-
-	public long generateLong();
-
-	public String generateString();
-
-}
+import org.springframework.lang.NonNullApi;
+import org.springframework.lang.NonNullFields;

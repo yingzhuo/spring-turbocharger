@@ -15,31 +15,27 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.idgen.autoconfiguration;
+package com.github.yingzhuo.turbocharger.idgen.impl;
 
+import com.github.f4b6a3.tsid.TsidCreator;
 import com.github.yingzhuo.turbocharger.idgen.TSIDGenerator;
-import com.github.yingzhuo.turbocharger.idgen.UUIDGenerator;
-import com.github.yingzhuo.turbocharger.idgen.impl.TSIDGeneratorImpl;
-import com.github.yingzhuo.turbocharger.idgen.impl.UUIDGeneratorImpl;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
 
 /**
+ * {@link TSIDGenerator} 默认实现
+ *
  * @author 应卓
- * @since 3.4.3
+ * @since 3.4.5
  */
-public class IdGenAutoConfiguration {
+public class TSIDGeneratorImpl implements TSIDGenerator {
 
-	@Bean
-	@ConditionalOnMissingBean
-	public UUIDGenerator uuidGenerator() {
-		return new UUIDGeneratorImpl();
+	@Override
+	public long generateLong() {
+		return TsidCreator.getTsid().toLong();
 	}
 
-	@Bean
-	@ConditionalOnMissingBean
-	public TSIDGenerator tsidGenerator() {
-		return new TSIDGeneratorImpl();
+	@Override
+	public String generateString() {
+		return TsidCreator.getTsid().toString();
 	}
 
 }
