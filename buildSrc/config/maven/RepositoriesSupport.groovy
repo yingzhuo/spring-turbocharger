@@ -18,20 +18,12 @@
 def applyPluginManagement(settings) {
 	settings.pluginManagement.repositories {
 		mavenLocal()
-		maven {
-			url = 'https://maven.aliyun.com/repository/public/'
-		}
+		maven { url = 'https://maven.aliyun.com/repository/public/' }
 		mavenCentral()
 		gradlePluginPortal()
-		maven {
-			url = 'https://repo.spring.io/release'
-		}
-		maven {
-			url = 'https://repo.spring.io/milestone'
-		}
-		maven {
-			url = 'https://repo.spring.io/snapshot'
-		}
+		maven { url = 'https://repo.spring.io/release' }
+		maven { url = 'https://repo.spring.io/milestone' }
+		maven { url = 'https://repo.spring.io/snapshot' }
 		google()
 	}
 }
@@ -39,20 +31,12 @@ def applyPluginManagement(settings) {
 def applyDependencyResolutionManagement(settings) {
 	settings.dependencyResolutionManagement.repositories {
 		mavenLocal()
-		maven {
-			url = 'https://maven.aliyun.com/repository/public/'
-		}
+		maven { url = 'https://maven.aliyun.com/repository/public/' }
 		mavenCentral()
 		gradlePluginPortal()
-		maven {
-			url = 'https://repo.spring.io/release'
-		}
-		maven {
-			url = 'https://repo.spring.io/milestone'
-		}
-		maven {
-			url = 'https://repo.spring.io/snapshot'
-		}
+		maven { url = 'https://repo.spring.io/release' }
+		maven { url = 'https://repo.spring.io/milestone' }
+		maven { url = 'https://repo.spring.io/snapshot' }
 		google()
 	}
 }
