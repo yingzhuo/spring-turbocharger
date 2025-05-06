@@ -45,6 +45,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * {@link Resource}等相关工具
  *
  * @author 应卓
+ * @see ResourceLocationUtils
  * @since 3.3.2
  */
 public final class ResourceUtils {
@@ -91,21 +92,6 @@ public final class ResourceUtils {
 	public static Resource loadResource(String location) {
 		Assert.hasText(location, "location is required");
 		return RESOURCE_LOADER.getResource(location);
-	}
-
-	/**
-	 * 加载资源
-	 *
-	 * @param resourceLocationClass 资源所在位置
-	 * @param filename              文件名
-	 * @return 资源
-	 */
-	public static Resource loadResource(Class<?> resourceLocationClass, String filename) {
-		Assert.notNull(resourceLocationClass, "resourceLocationClass is required");
-		Assert.hasText(filename, "filename is required");
-
-		final var location = "classpath:" + resourceLocationClass.getPackage().getName().replaceAll("\\.", separator) + separator + filename;
-		return loadResource(location);
 	}
 
 	/**
