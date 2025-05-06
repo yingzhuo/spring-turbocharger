@@ -11,15 +11,18 @@ dependencyManagement {
 }
 
 java {
-	withSourcesJar()
-	withJavadocJar()
-
-	sourceCompatibility = JavaVersion.toVersion(javaVersion)
-	targetCompatibility = JavaVersion.toVersion(javaVersion)
+	final var javaVersionInt = javaVersion as Integer
+	sourceCompatibility = JavaVersion.toVersion(javaVersionInt)
+	targetCompatibility = JavaVersion.toVersion(javaVersionInt)
 
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(javaVersion)
+		languageVersion = JavaLanguageVersion.of(javaVersionInt)
+		vendor = JvmVendorSpec.ORACLE
+		implementation = JvmImplementation.VENDOR_SPECIFIC
 	}
+
+	withSourcesJar()
+	withJavadocJar()
 }
 
 compileJava {
