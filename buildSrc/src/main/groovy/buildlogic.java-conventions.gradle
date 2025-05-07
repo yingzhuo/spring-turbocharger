@@ -4,12 +4,6 @@ plugins {
 	id 'io.spring.dependency-management'
 }
 
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
-	}
-}
-
 java {
 	final var javaVersionInt = javaVersion as Integer
 	sourceCompatibility = JavaVersion.toVersion(javaVersionInt)

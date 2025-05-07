@@ -5,6 +5,12 @@ plugins {
 	id 'buildlogic.sonatype-conventions'
 }
 
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
+	}
+}
+
 dependencies {
 
 	// test
