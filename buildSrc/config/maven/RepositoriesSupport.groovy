@@ -31,8 +31,8 @@ def applyDependencyResolutionManagement(settings) {
 def applyPluginManagement(settings) {
 	settings.pluginManagement.repositories {
 		mavenLocal()
-		mavenCentral()
 		gradlePluginPortal()
+		mavenCentral()
 	}
 }
 
