@@ -24,6 +24,7 @@ dependencies {
     implementation 'com.github.yingzhuo:spring-turbo-captcha'
     implementation 'com.github.yingzhuo:spring-turbo-freemarker'
     implementation 'com.github.yingzhuo:spring-turbo-hocon'
+    implementation 'com.github.yingzhuo:spring-turbo-toml'
     implementation 'com.github.yingzhuo:spring-turbo-idgen'
     implementation 'com.github.yingzhuo:spring-turbo-jackson'
     implementation 'com.github.yingzhuo:spring-turbo-jdbc'
@@ -65,6 +66,10 @@ dependencies {
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-hocon</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-toml</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
@@ -117,6 +122,7 @@ dependencies {
 * [生成有状态验证码](./projects-example/stateful-captcha)
 * [生成无状态验证码](./projects-example/stateless-captcha)
 * [使用HOCON格式的配置文件](./projects-example/hocon-config-file)
+* [使用TOML格式的配置文件](./projects-example/toml-config-file)
 * [使用JWT技术集成SpringSecurity](./projects-example/spring-security-jwt)
 * [多数据源代理](./projects-example/routing-data-source)
 * [HttpClient](./projects-example/web-client)
