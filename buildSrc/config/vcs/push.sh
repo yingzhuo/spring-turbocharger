@@ -9,11 +9,11 @@ fi
 
 # 暂存所有更改并提交
 git add .
-TIMESTAMP=$(/bin/date "+%F %T")
+TIMESTAMP=$(date "+%F %T")
 git commit -m "$TIMESTAMP"
 
 REMOTES=$(git remote)
 for remote in $REMOTES; do
     echo "[INFO] 正在推送至远程仓库：$remote"
-    git push "$remote" HEAD  # HEAD 表示当前分支[10,11](@ref)
+    git push "$remote" HEAD
 done
