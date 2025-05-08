@@ -3,14 +3,14 @@ plugins {
 	id 'buildlogic.binary-plugin.license'
 }
 
-tasks.named('wrapper') { task ->
+tasks.named('wrapper') {
 	// 国内镜像两个比较好的选择
 	// (1) 腾讯云: https://mirrors.cloud.tencent.com/gradle/gradle-$gradleWrapperVersion-bin.zip
 	// (2) 华为云: https://mirrors.huaweicloud.com/gradle/gradle-$gradleWrapperVersion-bin.zip
 	distributionUrl = "https://mirrors.cloud.tencent.com/gradle/gradle-$gradleWrapperVersion-bin.zip"
 }
 
-tasks.register('removeWrapper', Delete) { task ->
+tasks.register('removeWrapper', Delete) {
 	group = 'build setup'
 	description = 'Remove Gradle wrapper files.'
 
@@ -22,15 +22,15 @@ tasks.register('removeWrapper', Delete) { task ->
 	}
 }
 
-tasks.register('pushToVcs', Exec) { task ->
-	group = 'code'
+tasks.register('pushToVcs', Exec) {
+	group = 'vcs'
 	description = 'Commit and push codes to gitee/github.'
 
 	workingDir(rootDir)
-	commandLine('bash', "$rootDir/buildSrc/config/shell/push.sh")
+	commandLine('bash', "$rootDir/buildSrc/config/vcs/push.sh")
 }
 
-tasks.named('clean') { task ->
+tasks.named('clean') {
 	mustRunAfter(SharedFunctions.getLeafProjectNames(rootProject).collect { "${it}:clean" })
 
 	delete fileTree(rootDir) {

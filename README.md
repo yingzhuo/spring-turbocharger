@@ -117,7 +117,7 @@ dependencies {
 #### 从源代码安装
 
 ```bash
-./gradlew --no-parallel -x test -x check publishToMavenLocal
+./gradlew --no-parallel -x 'test' -x 'check' 'publishToMavenLocal'
 ```
 
 #### 示例程序
