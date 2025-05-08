@@ -15,22 +15,36 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.configuration.env;
+package com.github.yingzhuo.turbocharger.core.configuration;
 
-import org.springframework.boot.env.YamlPropertySourceLoader;
+import org.springframework.core.env.PropertySource;
+import org.springframework.lang.Nullable;
+
+import java.util.Objects;
 
 /**
  * @author 应卓
- * @see HoconPropertySourceFactory
  * @since 2.1.3
  */
-public class YamlPropertySourceFactory extends AbstractPropertySourceFactory {
+public final class EmptyPropertySource extends PropertySource<Object> {
 
 	/**
-	 * 默认构造方法
+	 * 私有构造方法
+	 *
+	 * @param name 名称
 	 */
-	public YamlPropertySourceFactory() {
-		super(new YamlPropertySourceLoader());
+	private EmptyPropertySource(String name) {
+		super(name);
+	}
+
+	public static EmptyPropertySource of(@Nullable String name) {
+		return new EmptyPropertySource(Objects.requireNonNullElse(name, "empty"));
+	}
+
+	@Nullable
+	@Override
+	public Object getProperty(String name) {
+		return null;
 	}
 
 }

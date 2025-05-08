@@ -10,6 +10,7 @@ xxljob = "3.1.0"
 
 [libraries]
 hocon = { module = "com.typesafe:config", version = "1.4.3" }
+toml4j = { module = "com.moandjiezana.toml:toml4j", version = "0.7.2" }
 bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncycastle" }
 bcutil = { module = "org.bouncycastle:bcutil-jdk18on", version.ref = "bouncycastle" }
 jjwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jjwt" }

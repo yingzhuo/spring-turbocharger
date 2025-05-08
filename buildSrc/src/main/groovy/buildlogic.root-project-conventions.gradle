@@ -22,7 +22,7 @@ tasks.register('removeWrapper', Delete) { task ->
 	}
 }
 
-tasks.register('pushAllCodes', Exec) { task ->
+tasks.register('pushToVcs', Exec) { task ->
 	group = 'code'
 	description = 'Commit and push codes to gitee/github.'
 

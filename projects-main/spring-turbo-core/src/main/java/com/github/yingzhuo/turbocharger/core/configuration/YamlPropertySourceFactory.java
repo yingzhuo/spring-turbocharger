@@ -15,23 +15,21 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.configuration.env;
+package com.github.yingzhuo.turbocharger.core.configuration;
 
-import com.github.yingzhuo.turbocharger.core.configuration.AbstractPropertySourceFactory;
-import com.github.yingzhuo.turbocharger.core.configuration.YamlPropertySourceFactory;
+import org.springframework.boot.env.YamlPropertySourceLoader;
 
 /**
  * @author 应卓
- * @see YamlPropertySourceFactory
  * @since 2.1.3
  */
-public class HoconPropertySourceFactory extends AbstractPropertySourceFactory {
+public class YamlPropertySourceFactory extends AbstractPropertySourceFactory {
 
 	/**
 	 * 默认构造方法
 	 */
-	public HoconPropertySourceFactory() {
-		super(new HoconPropertySourceLoader());
+	public YamlPropertySourceFactory() {
+		super(new YamlPropertySourceLoader());
 	}
 
 }

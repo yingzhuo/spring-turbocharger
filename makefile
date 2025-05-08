@@ -13,7 +13,7 @@ usage:
 	@echo 'test                  : 执行单元测试'
 	@echo 'check                 : 检查代码风格'
 	@echo 'stop-gradle-daemon    : 停止gradle-daemon'
-	@echo 'push-all-codes        : 提交文件'
+	@echo 'push-to-vcs           : 提交文件'
 	@echo '==============================================================================================================='
 
 clean:
@@ -52,8 +52,8 @@ check:
 stop-gradle-daemon:
 	gradle -q --stop
 
-push-all-codes: add-license-header
-	gradle -q "pushAllCodes"
+push-to-vcs: add-license-header
+	gradle -q "pushToVcs"
 
 .PHONY: \
 	usage \
@@ -64,4 +64,4 @@ push-all-codes: add-license-header
 	setup-gradle-wrapper remove-gradle-wrapper \
 	add-license-header \
 	stop-gradle-daemon \
-	push-all-codes
+	push-to-vcs

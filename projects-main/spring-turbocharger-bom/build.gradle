@@ -16,6 +16,7 @@ dependencies {
 		api(libs.hutool.crypto)
 		api(libs.freemarker)
 		api(libs.hocon)
+		api(libs.toml4j)
 		api(libs.uuid.creator)
 		api(libs.tsid.creator)
 		api(libs.bundles.jjwt)

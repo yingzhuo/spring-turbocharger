@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.configuration.env;
+package com.github.yingzhuo.turbocharger.core.configuration;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import com.github.yingzhuo.turbocharger.util.id.UUIDs;

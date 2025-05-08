@@ -18,20 +18,19 @@
 package com.github.yingzhuo.turbocharger.configuration.env;
 
 import com.github.yingzhuo.turbocharger.core.configuration.AbstractPropertySourceFactory;
-import com.github.yingzhuo.turbocharger.core.configuration.YamlPropertySourceFactory;
+import org.springframework.core.io.support.PropertySourceFactory;
 
 /**
  * @author 应卓
- * @see YamlPropertySourceFactory
- * @since 2.1.3
+ * @since 3.4.5
  */
-public class HoconPropertySourceFactory extends AbstractPropertySourceFactory {
+public class TomlPropertySourceFactory extends AbstractPropertySourceFactory implements PropertySourceFactory {
 
 	/**
 	 * 默认构造方法
 	 */
-	public HoconPropertySourceFactory() {
-		super(new HoconPropertySourceLoader());
+	public TomlPropertySourceFactory() {
+		super(new TomlPropertySourceLoader());
 	}
 
 }
