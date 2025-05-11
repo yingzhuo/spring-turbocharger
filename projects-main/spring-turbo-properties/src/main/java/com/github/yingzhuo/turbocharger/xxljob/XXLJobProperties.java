@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.xxljob.properties;
+package com.github.yingzhuo.turbocharger.xxljob;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

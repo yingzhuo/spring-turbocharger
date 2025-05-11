@@ -17,6 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.webmvc.autoconfiguration;
 
+import com.github.yingzhuo.turbocharger.webmvc.SpringTurboWebMvcProperties;
 import com.github.yingzhuo.turbocharger.webmvc.databinding.DataBinderInitializingAdvice;
 import com.github.yingzhuo.turbocharger.webmvc.support.argument.RemoteAddressHandlerMethodArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -17,6 +17,7 @@ dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+
 	// spring-boot & spring
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compileOnly 'org.springframework.boot:spring-boot-autoconfigure'
@@ -33,7 +34,6 @@ dependencies {
 
 	// spring-turbocharger
 	api project(':projects-main:spring-turbo-core')
-	api project(':projects-main:spring-turbo-properties')
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

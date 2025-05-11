@@ -19,7 +19,7 @@ package com.github.yingzhuo.turbocharger.freemarker.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.freemarker.StringTemplateRenderer;
 import com.github.yingzhuo.turbocharger.freemarker.StringTemplateRendererImpl;
-import com.github.yingzhuo.turbocharger.freemarker.properties.StringTemplateRendererProperties;
+import com.github.yingzhuo.turbocharger.freemarker.StringTemplateRendererProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

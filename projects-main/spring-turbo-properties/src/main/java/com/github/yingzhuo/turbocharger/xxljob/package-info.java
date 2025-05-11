@@ -17,7 +17,7 @@
  */
 @NonNullApi
 @NonNullFields
-package com.github.yingzhuo.turbocharger.freemarker.properties;
+package com.github.yingzhuo.turbocharger.xxljob;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

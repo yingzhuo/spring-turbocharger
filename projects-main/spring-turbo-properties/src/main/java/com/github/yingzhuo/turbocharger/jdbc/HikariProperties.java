@@ -15,17 +15,14 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.jdbc.datasource;
+package com.github.yingzhuo.turbocharger.jdbc;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.util.Assert;
+import org.springframework.boot.autoconfigure.jdbc.JdbcConnectionDetails;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
  * @author 应卓
@@ -34,17 +31,22 @@ import java.util.Map;
 @Getter
 @Setter
 @ToString
-@ConfigurationProperties(prefix = "springturbo.routing-data-source")
-public class RoutingDataSourceProperties implements Serializable, InitializingBean {
+public class HikariProperties implements JdbcConnectionDetails, Serializable {
 
-	private boolean enabled = true;
-	private String defaultDataSourceName;
-	private Map<String, HikariProperties> hikariDataSources;
-
-	@Override
-	public void afterPropertiesSet() {
-		Assert.hasText(defaultDataSourceName, "defaultDataSourceName is required");
-		Assert.notEmpty(hikariDataSources, "hikariDataSources is empty");
-	}
+	private String driverClassName;
+	private String jdbcUrl;
+	private String username;
+	private String password;
+	private String poolName = "Hikari";
+	private int minimumIdle = 10;
+	private int maximumPoolSize = 30;
+	private boolean autoCommit = true;
+	private long idleTimeout = 30000L;
+	private long maxLifetime = 900000L;
+	private long connectionTimeout = 10000;
+	private String connectionTestQuery = null;
+	private long validationTimeout = 1000L;
+	private String connectionInitSql = null;
+	private long initializationFailTimeout = 1000L;
 
 }

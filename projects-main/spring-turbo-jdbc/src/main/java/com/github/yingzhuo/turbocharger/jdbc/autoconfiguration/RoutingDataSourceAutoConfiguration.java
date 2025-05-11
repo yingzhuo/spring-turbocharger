@@ -17,10 +17,10 @@
  */
 package com.github.yingzhuo.turbocharger.jdbc.autoconfiguration;
 
+import com.github.yingzhuo.turbocharger.jdbc.RoutingDataSourceProperties;
 import com.github.yingzhuo.turbocharger.jdbc.datasource.DataSourceFactories;
 import com.github.yingzhuo.turbocharger.jdbc.datasource.DataSourceSwitchAdvice;
 import com.github.yingzhuo.turbocharger.jdbc.datasource.RoutingDataSource;
-import com.github.yingzhuo.turbocharger.jdbc.datasource.RoutingDataSourceProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

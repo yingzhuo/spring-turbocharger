@@ -17,7 +17,7 @@
  */
 @NonNullApi
 @NonNullFields
-package com.github.yingzhuo.turbocharger.xxljob.properties;
+package com.github.yingzhuo.turbocharger.jdbc;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

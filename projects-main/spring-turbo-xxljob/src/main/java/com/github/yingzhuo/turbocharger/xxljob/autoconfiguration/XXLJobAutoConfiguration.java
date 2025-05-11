@@ -17,7 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.xxljob.autoconfiguration;
 
-import com.github.yingzhuo.turbocharger.xxljob.properties.XXLJobProperties;
+import com.github.yingzhuo.turbocharger.xxljob.XXLJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
