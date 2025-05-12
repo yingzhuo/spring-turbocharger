@@ -55,6 +55,11 @@ javadoc {
 }
 
 processResources {
+	exclude(
+		'**/.DS_Store',
+		'**/.gitkeep'
+	)
+
 	from(rootDir) {
 		include('LICENSE.txt', 'NOTICE.txt')
 		into 'META-INF'
