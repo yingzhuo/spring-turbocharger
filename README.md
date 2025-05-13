@@ -30,6 +30,7 @@ dependencies {
     implementation 'com.github.yingzhuo:spring-turbo-webmvc'
     implementation 'com.github.yingzhuo:spring-turbo-xxljob'
     implementation 'com.github.yingzhuo:spring-turbo-zxing'
+    implementation 'com.github.yingzhuo:spring-turbo-properties'
 }
 ```
 
@@ -106,9 +107,14 @@ dependencies {
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-zxing</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-properties</artifactId>
+        </dependency>
     </dependencies>
 </project>
 ```
+
 #### 代码仓库
 
 * [github.com](https://github.com/yingzhuo/spring-turbocharger)

@@ -10,6 +10,9 @@ ext {
 	// https://docs.spring.io/spring-boot/appendix/dependency-versions/properties.html
 }
 
+subprojects {
+}
+
 allprojects {
 	group = 'com.github.yingzhuo'
 	version = springTurbochargerVersion
