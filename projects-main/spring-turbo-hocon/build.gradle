@@ -35,7 +35,7 @@ dependencies {
 	api project(':projects-main:spring-turbo-core')
 
 	// hocon
-	implementation(libs.hocon)
+	implementation libs.hocon
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

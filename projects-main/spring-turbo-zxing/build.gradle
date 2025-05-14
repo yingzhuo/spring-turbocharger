@@ -35,7 +35,7 @@ dependencies {
 	api project(':projects-main:spring-turbo-core')
 
 	// zxing
-	implementation(libs.bundles.zxing)
+	implementation libs.bundles.zxing
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

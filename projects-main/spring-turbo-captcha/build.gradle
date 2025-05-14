@@ -35,7 +35,7 @@ dependencies {
 	api project(':projects-main:spring-turbo-core')
 
 	// hutool
-	implementation(libs.hutool.captcha)
+	implementation libs.hutool.captcha
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

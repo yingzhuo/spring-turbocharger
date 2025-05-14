@@ -11,16 +11,16 @@ dependencies {
 			}
 		}
 
-		api(libs.bundles.bouncycastle)
-		api(libs.hutool.captcha)
-		api(libs.hutool.crypto)
-		api(libs.freemarker)
-		api(libs.hocon)
-		api(libs.toml4j)
-		api(libs.uuid.creator)
-		api(libs.tsid.creator)
-		api(libs.bundles.jjwt)
-		api(libs.xxljob)
-		api(libs.bundles.zxing)
+		api libs.bundles.bouncycastle
+		api libs.hutool.captcha
+		api libs.hutool.crypto
+		api libs.freemarker
+		api libs.hocon
+		api libs.toml4j
+		api libs.uuid.creator
+		api libs.tsid.creator
+		api libs.bundles.jjwt
+		api libs.xxljob
+		api libs.bundles.zxing
 	}
 }

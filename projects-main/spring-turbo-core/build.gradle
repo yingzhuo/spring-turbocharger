@@ -32,7 +32,7 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
 	// bouncy castle
-	compileOnly(libs.bundles.bouncycastle)
+	compileOnly libs.bundles.bouncycastle
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

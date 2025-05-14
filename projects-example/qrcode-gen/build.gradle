@@ -18,7 +18,7 @@ dependencies {
 	api project(':projects-main:spring-turbo-zxing')
 
 	// zxing (qrcode tool)
-	implementation(libs.bundles.zxing)
+	implementation libs.bundles.zxing
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

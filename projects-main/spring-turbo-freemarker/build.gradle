@@ -36,7 +36,7 @@ dependencies {
 	api project(':projects-main:spring-turbo-properties')
 
 	// freemarker
-	implementation(libs.freemarker)
+	implementation libs.freemarker
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

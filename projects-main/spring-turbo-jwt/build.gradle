@@ -35,7 +35,7 @@ dependencies {
 	api project(':projects-main:spring-turbo-core')
 
 	// jwt
-	implementation(libs.bundles.jjwt)
+	implementation libs.bundles.jjwt
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

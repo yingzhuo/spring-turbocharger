@@ -35,7 +35,7 @@ dependencies {
 	api project(':projects-main:spring-turbo-core')
 
 	// toml4j
-	implementation(libs.toml4j)
+	implementation libs.toml4j
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

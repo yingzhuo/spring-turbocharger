@@ -1,3 +1,6 @@
+MAKEFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+GRADLE        := $(MAKEFILE_PATH)/gradlew
+
 usage:
 	@echo '==============================================================================================================='
 	@echo 'usage                 : 显示本菜单'
@@ -17,43 +20,43 @@ usage:
 	@echo '==============================================================================================================='
 
 clean:
-	./gradlew -q "clean"
+	$(GRADLE) "clean"
 
 clean-buildsrc:
-	./gradlew -q -p $(CURDIR)/buildSrc/ "clean"
+	$(GRADLE) -p $(MAKEFILE_PATH)/buildSrc/ "clean"
 
 refresh-dependencies:
-	./gradlew -U
+	$(GRADLE) -U
 
 compile:
-	./gradlew "classes"
+	$(GRADLE) "classes"
 
 install: add-license-header
-	./gradlew --no-parallel -x "test" -x "check" "publishToMavenLocal"
+	$(GRADLE) --no-parallel -x "test" -x "check" "publishToMavenLocal"
 
 publish: install
-	./gradlew --no-parallel -x "test" -x "check" "publishToMavenCentralPortal"
+	$(GRADLE) --no-parallel -x "test" -x "check" "publishToMavenCentralPortal"
 
 setup-gradle-wrapper:
-	./gradlew "wrapper"
+	$(GRADLE) "wrapper"
 
 remove-gradle-wrapper:
-	./gradlew "removeWrapper"
+	$(GRADLE) "removeWrapper"
 
 add-license-header:
-	./gradlew -q "addLicenseHeader"
+	$(GRADLE) "addLicenseHeader"
 
 test:
-	./gradlew "test"
+	$(GRADLE) "test"
 
 check:
-	./gradlew "check"
+	$(GRADLE) "check"
 
 stop-gradle-daemon:
-	./gradlew -q --stop
+	$(GRADLE) --stop
 
 push-to-vcs: add-license-header
-	./gradlew -q "pushToVcs"
+	$(GRADLE) "pushToVcs"
 
 .PHONY: \
 	usage \
