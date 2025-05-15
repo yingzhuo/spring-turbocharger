@@ -1,11 +1,12 @@
-MAKEFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-GRADLE        := $(MAKEFILE_PATH)/gradlew
+MAKEFILE_PATH			:= $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+GRADLE        		:= $(MAKEFILE_PATH)/gradlew
 
 usage:
 	@echo '==============================================================================================================='
-	@echo 'usage                 : 显示本菜单'
+	@echo 'usage (default)       : 显示本菜单'
 	@echo 'clean                 : 清理项目构建产物'
 	@echo 'clean-buildsrc        : 清理项目构建逻辑'
+	@echo 'clean-all             : 清理构建产物和构建逻辑'
 	@echo 'refresh-dependencies  : 更新依赖'
 	@echo 'compile               : 编译项目'
 	@echo 'install               : 安装到本地maven仓库'
@@ -24,6 +25,8 @@ clean:
 
 clean-buildsrc:
 	$(GRADLE) -p $(MAKEFILE_PATH)/buildSrc/ "clean"
+
+clean-all: clean clean-buildsrc
 
 refresh-dependencies:
 	$(GRADLE) -U
@@ -60,7 +63,7 @@ push-to-vcs: add-license-header
 
 .PHONY: \
 	usage \
-	clean clean-buildsrc \
+	clean clean-buildsrc clean-all \
 	refresh-dependencies \
 	compile publish install \
 	check test \
