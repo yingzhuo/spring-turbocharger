@@ -33,6 +33,11 @@ public class ClassLoadingExceptionSupplier implements Supplier<ClassLoadingExcep
 
 	private final String className;
 
+	/**
+	 * 构造方法
+	 *
+	 * @param className 加载类型名称
+	 */
 	public ClassLoadingExceptionSupplier(String className) {
 		Assert.hasText(className, "className is required");
 		this.className = className;

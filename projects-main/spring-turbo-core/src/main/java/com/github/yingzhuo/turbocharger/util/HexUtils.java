@@ -32,6 +32,7 @@ public final class HexUtils {
 	 * 私有构造方法
 	 */
 	private HexUtils() {
+		super();
 	}
 
 	/**
