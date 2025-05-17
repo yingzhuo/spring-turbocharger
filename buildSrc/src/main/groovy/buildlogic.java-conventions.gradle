@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 plugins {
 	id 'java'
 	id 'java-library'
@@ -54,6 +56,12 @@ javadoc {
 	options.addBooleanOption("Xdoclint:none", true)
 }
 
+final var replaceTokenMap = [
+	'APP_GROUP'  : project.group,
+	'APP_NAME'   : project.name,
+	'APP_VERSION': project.version
+]
+
 processResources {
 	exclude('**/.DS_Store', '**/.gitkeep')
 
@@ -61,10 +69,16 @@ processResources {
 		include('LICENSE.txt', 'NOTICE.txt')
 		into 'META-INF'
 	}
+
+	filter(ReplaceTokens, 'tokens': replaceTokenMap)
+	filteringCharset = 'UTF-8'
 }
 
 processTestResources {
 	exclude('**/.DS_Store', '**/.gitkeep')
+
+	filter(ReplaceTokens, 'tokens': replaceTokenMap)
+	filteringCharset = 'UTF-8'
 }
 
 test {
