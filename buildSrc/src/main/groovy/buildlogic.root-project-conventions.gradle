@@ -3,6 +3,8 @@ plugins {
 	id 'buildlogic.binary-plugin.license'
 }
 
+defaultTasks 'classes'
+
 tasks.named('wrapper') {
 	// 国内镜像两个比较好的选择
 	// (1) 腾讯云: https://mirrors.cloud.tencent.com/gradle/gradle-$gradleWrapperVersion-bin.zip
