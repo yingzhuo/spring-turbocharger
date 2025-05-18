@@ -6,7 +6,6 @@ ext {
 	// SpringBoot BOM 微调
 	// https://docs.spring.io/spring-boot/appendix/dependency-versions/coordinates.html
 	// https://docs.spring.io/spring-boot/appendix/dependency-versions/properties.html
-	set('spring-framework.version', '6.2.7')
 }
 
 subprojects {
@@ -17,7 +16,9 @@ allprojects {
 	version = springTurbochargerVersion
 
 	configurations.configureEach {
-		resolutionStrategy.cacheChangingModulesFor(0, 'minutes')
-		resolutionStrategy.cacheDynamicVersionsFor(0, 'minutes')
+		resolutionStrategy {
+			cacheChangingModulesFor(0, 'minutes')
+			cacheDynamicVersionsFor(0, 'minutes')
+		}
 	}
 }
