@@ -52,8 +52,13 @@ sourcesJar {
 
 javadoc {
 	failOnError = false
-	options.addBooleanOption("html5", true)
-	options.addBooleanOption("Xdoclint:none", true)
+
+	options {
+		locale = 'en_US'
+		encoding = 'UTF-8'
+		addBooleanOption("html5", true)
+		addBooleanOption("Xdoclint:none", true)
+	}
 }
 
 final var replaceTokenMap = [
