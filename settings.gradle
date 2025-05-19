@@ -1,5 +1,9 @@
 pluginManagement {
-	evaluate(file('buildSrc/config/maven/RepositoriesSupport.groovy')).applyPluginManagement(this)
+	repositories {
+		mavenLocal()
+		gradlePluginPortal()
+		mavenCentral()
+	}
 }
 
 plugins {
@@ -9,7 +13,8 @@ plugins {
 }
 
 dependencyResolutionManagement {
-	evaluate(file('buildSrc/config/maven/RepositoriesSupport.groovy')).applyDependencyResolutionManagement(this)
+	evaluate(file('buildSrc/config/maven/RepositoriesSupport.groovy')).apply(this)
+	repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
 }
 
 rootProject.name = 'spring-turbocharger'
