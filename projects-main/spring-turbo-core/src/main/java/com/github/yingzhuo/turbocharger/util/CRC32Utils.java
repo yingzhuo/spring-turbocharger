@@ -31,6 +31,7 @@ public final class CRC32Utils {
 	 * 私有构造方法
 	 */
 	private CRC32Utils() {
+		super();
 	}
 
 	/**
@@ -39,7 +40,7 @@ public final class CRC32Utils {
 	 * @param data 数据
 	 * @return 累加和
 	 */
-	public static Long crc32Value(byte[] data) {
+	public static long crc32Value(byte[] data) {
 		var crc32 = new CRC32();
 		crc32.update(data);
 		return crc32.getValue();
