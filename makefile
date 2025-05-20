@@ -61,8 +61,7 @@ stop-gradle-daemon:
 push-to-vcs: add-license-header
 	$(GRADLE) "pushToVcs"
 
-.PHONY: \
-	usage \
+.PHONY: usage \
 	clean clean-buildsrc clean-all \
 	refresh-dependencies \
 	compile publish install \

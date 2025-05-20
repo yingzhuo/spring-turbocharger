@@ -17,8 +17,8 @@ allprojects {
 
 	configurations.configureEach {
 		resolutionStrategy {
-			cacheChangingModulesFor(0, 'minutes')
-			cacheDynamicVersionsFor(0, 'minutes')
+			cacheChangingModulesFor(480, 'minutes')
+			cacheDynamicVersionsFor(480, 'minutes')
 		}
 	}
 }

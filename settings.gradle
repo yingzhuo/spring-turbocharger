@@ -10,8 +10,8 @@ pluginManagement {
 
 plugins {
 	id 'io.spring.dependency-management' version "$dependencyManagementPluginVersion" apply false
-	id 'org.springframework.boot' version "$springBootVersion" apply false
 	id 'io.gitee.pkmer.pkmerboot-central-publisher' version "$mavenCentralPublisherPluginVersion" apply false
+	//id 'org.springframework.boot' version "$springBootVersion" apply false
 }
 
 dependencyResolutionManagement {
