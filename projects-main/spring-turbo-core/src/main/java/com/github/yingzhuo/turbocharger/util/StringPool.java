@@ -50,14 +50,7 @@ public final class StringPool {
 	 * 私有构造方法
 	 */
 	private StringPool() {
-	}
-
-	public static boolean isOK(String value) {
-		return OK.equalsIgnoreCase(value);
-	}
-
-	public static boolean isNG(String value) {
-		return NG.equalsIgnoreCase(value);
+		super();
 	}
 
 }

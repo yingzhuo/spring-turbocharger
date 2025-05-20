@@ -31,12 +31,13 @@ import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
  * @author 应卓
  * @since 1.0.8
  */
-public final class NumberParseUtils {
+public final class NumberParsingUtils {
 
 	/**
 	 * 私有构造方法
 	 */
-	private NumberParseUtils() {
+	private NumberParsingUtils() {
+		super();
 	}
 
 	/**
@@ -48,14 +49,14 @@ public final class NumberParseUtils {
 	 * 请正确使用类型，否则会有精度损失
 	 *
 	 * @param text 字符串
-	 * @param type 具体类型
+	 * @param typeOfNumber 具体类型
 	 * @param <T>  数字的具体类型泛型
 	 * @return 结果
 	 * @throws IllegalArgumentException 解析失败
 	 */
-	public static <T extends Number> T parse(String text, Class<T> type) {
+	public static <T extends Number> T parse(String text, Class<T> typeOfNumber) {
 		Assert.notNull(text, "text is required");
-		Assert.notNull(type, "type is required");
+		Assert.notNull(typeOfNumber, "type is required");
 
 		// 移除白字符和逗号
 		text = text.replaceAll("[\\s,]", EMPTY);
@@ -64,19 +65,19 @@ public final class NumberParseUtils {
 		if (text.startsWith("#") || text.startsWith("-#") || text.startsWith("0x") || text.startsWith("0X")
 			|| text.startsWith("-0x") || text.startsWith("-0X")) {
 			final BigInteger bigInteger = NumberUtils.parseNumber(text, BigInteger.class);
-			return BigDecimalUtils.getValue(new BigDecimal(bigInteger), type);
+			return BigDecimalUtils.getValue(new BigDecimal(bigInteger), typeOfNumber);
 		}
 
 		// 科学计数法特殊处理
 		if (text.contains("E") || text.contains("e")) {
 			final BigDecimal bigDecimal = NumberUtils.parseNumber(text, BigDecimal.class);
-			return BigDecimalUtils.getValue(bigDecimal, type);
+			return BigDecimalUtils.getValue(bigDecimal, typeOfNumber);
 		}
 
 		try {
-			return NumberUtils.parseNumber(text, type);
+			return NumberUtils.parseNumber(text, typeOfNumber);
 		} catch (IllegalArgumentException e) {
-			return fallback(text, type);
+			return fallback(text, typeOfNumber);
 		}
 	}
 

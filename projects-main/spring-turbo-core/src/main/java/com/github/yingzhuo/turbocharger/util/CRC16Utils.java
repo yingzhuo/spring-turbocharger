@@ -18,7 +18,10 @@
 package com.github.yingzhuo.turbocharger.util;
 
 /**
+ * CRC16相关工具
+ *
  * @author 应卓
+ * @see CRC32Utils
  * @since 3.4.5
  */
 public final class CRC16Utils {
