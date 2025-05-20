@@ -48,9 +48,9 @@ public final class NumberParsingUtils {
 	 * </ul>
 	 * 请正确使用类型，否则会有精度损失
 	 *
-	 * @param text 字符串
+	 * @param text         字符串
 	 * @param typeOfNumber 具体类型
-	 * @param <T>  数字的具体类型泛型
+	 * @param <T>          数字的具体类型泛型
 	 * @return 结果
 	 * @throws IllegalArgumentException 解析失败
 	 */

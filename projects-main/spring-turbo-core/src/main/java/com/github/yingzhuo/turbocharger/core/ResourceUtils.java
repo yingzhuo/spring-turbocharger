@@ -28,7 +28,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
@@ -38,7 +37,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.github.yingzhuo.turbocharger.util.io.CloseUtils.closeQuietly;
-import static java.io.File.separator;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
