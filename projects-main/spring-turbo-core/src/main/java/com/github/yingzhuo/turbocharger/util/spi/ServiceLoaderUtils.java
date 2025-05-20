@@ -43,6 +43,7 @@ public final class ServiceLoaderUtils {
 	 * 私有构造方法
 	 */
 	private ServiceLoaderUtils() {
+		super();
 	}
 
 	/**

@@ -37,6 +37,7 @@ public final class KeyStoreFormatConverter implements Converter<String, KeyStore
 	 * 私有构造方法
 	 */
 	private KeyStoreFormatConverter() {
+		super();
 	}
 
 	public static KeyStoreFormatConverter getInstance() {

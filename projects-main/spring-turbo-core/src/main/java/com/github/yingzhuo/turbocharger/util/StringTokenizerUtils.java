@@ -37,6 +37,7 @@ public final class StringTokenizerUtils {
 	 * 私有构造方法
 	 */
 	private StringTokenizerUtils() {
+		super();
 	}
 
 	/**

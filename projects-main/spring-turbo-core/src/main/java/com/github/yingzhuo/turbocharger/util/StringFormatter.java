@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 字符串拼凑工具
+ *
  * @author 应卓
  * @since 1.0.0
  */
@@ -31,6 +33,7 @@ public final class StringFormatter {
 	private static final char ESCAPE_CHAR = '\\';
 
 	private StringFormatter() {
+		super();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------

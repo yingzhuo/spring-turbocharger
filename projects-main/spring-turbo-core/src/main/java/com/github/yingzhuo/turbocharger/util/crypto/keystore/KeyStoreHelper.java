@@ -33,7 +33,6 @@ import java.util.Objects;
  *
  * @author 应卓
  * @see KeyStoreFormat
- * @see <a href="https://github.com/yingzhuo/spring-turbo/wiki/2024%E2%80%9007%E2%80%9002%E2%80%90keytool%E2%80%90cheatsheet">2024‐07‐02‐keytool‐cheatsheet</a>
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")
@@ -43,6 +42,7 @@ public final class KeyStoreHelper {
 	 * 私有构造方法
 	 */
 	private KeyStoreHelper() {
+		super();
 	}
 
 	/**
@@ -72,7 +72,7 @@ public final class KeyStoreHelper {
 		Assert.notNull(inputStream, "inputStream is required");
 		Assert.notNull(storepass, "storepass is required");
 
-		keyStoreFormat = Objects.requireNonNullElseGet(keyStoreFormat, KeyStoreFormat::getDefault);
+		keyStoreFormat = Objects.requireNonNullElse(keyStoreFormat, KeyStoreFormat.PKCS12);
 
 		try {
 			var keyStore = KeyStore.getInstance(keyStoreFormat.getValue());

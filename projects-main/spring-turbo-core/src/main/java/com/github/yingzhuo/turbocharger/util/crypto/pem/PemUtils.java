@@ -55,6 +55,7 @@ public final class PemUtils {
 	 * 私有构造方法
 	 */
 	private PemUtils() {
+		super();
 	}
 
 	/**
@@ -126,7 +127,6 @@ public final class PemUtils {
 	public static X509Certificate readX509Certificate(String text) {
 		hasText(text, "text is null or blank");
 
-		text = trimPemContent(text);
 		var pemContent = PemContent.of(text);
 		var certs = pemContent.getCertificates();
 		if (certs.size() == 1) {
@@ -162,7 +162,6 @@ public final class PemUtils {
 	public static List<X509Certificate> readX509Certificates(String text) {
 		hasText(text, "text is null or blank");
 
-		text = trimPemContent(text);
 		var pemContent = PemContent.of(text);
 		return new ArrayList<>(pemContent.getCertificates());
 	}
@@ -287,7 +286,6 @@ public final class PemUtils {
 	public static <T extends Key> T readPkcs8Key(String text, @Nullable String password) {
 		hasText(text, "text is null or blank");
 
-		text = trimPemContent(text);
 		var pem = PemContent.of(text);
 		return (T) pem.getPrivateKey(password);
 	}

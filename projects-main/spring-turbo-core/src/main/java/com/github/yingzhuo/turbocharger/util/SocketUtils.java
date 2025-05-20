@@ -47,7 +47,7 @@ public final class SocketUtils {
 		try (Socket socket = new Socket()) {
 			socket.connect(new InetSocketAddress(address, port), timeoutInMillis);
 			return true;
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			return false;
 		}
 	}
