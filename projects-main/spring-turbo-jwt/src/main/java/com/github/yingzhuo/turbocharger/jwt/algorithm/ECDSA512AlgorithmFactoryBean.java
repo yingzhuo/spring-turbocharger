@@ -19,8 +19,12 @@ package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
 
+import java.security.interfaces.ECPrivateKey;
+import java.security.interfaces.ECPublicKey;
+
 /**
  * @author 应卓
+ * @see Algorithm#ECDSA512(ECPublicKey, ECPrivateKey)
  * @since 3.5.0
  */
 public class ECDSA512AlgorithmFactoryBean extends AbstractECAlgorithmFactoryBean {

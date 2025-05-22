@@ -23,15 +23,18 @@ import com.auth0.jwt.exceptions.*;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
+import java.util.Objects;
+
 /**
  * @author 应卓
  * @since 3.5.0
  */
 public class JwtServiceImpl implements JwtService {
 
-    private final Algorithm algorithm;
+	private static final VerificationCustomizer NOOP_CUSTOMIZER = verification -> {
+	};
 
-    @Nullable
+    private final Algorithm algorithm;
     private final VerificationCustomizer verificationCustomizer;
 
     /**
@@ -52,9 +55,12 @@ public class JwtServiceImpl implements JwtService {
     public JwtServiceImpl(Algorithm algorithm, @Nullable VerificationCustomizer verificationCustomizer) {
         Assert.notNull(algorithm, "algorithm must not be null");
         this.algorithm = algorithm;
-        this.verificationCustomizer = verificationCustomizer;
+		this.verificationCustomizer = Objects.requireNonNullElse(verificationCustomizer, NOOP_CUSTOMIZER);
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
     @Override
     public String createToken(JwtData data) {
         return JWT.create()
@@ -63,15 +69,15 @@ public class JwtServiceImpl implements JwtService {
                 .sign(algorithm);
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
     @Override
     public ValidatingResult validateToken(String token) {
         try {
             var verification = JWT.require(algorithm);
-            if (verificationCustomizer != null) {
-                verification = verificationCustomizer.apply(verification);
-            }
-
-            verification.build().verify(token);
+			verificationCustomizer.customize(verification);
+			verification.build().verify(token);
         } catch (IncorrectClaimException | MissingClaimException ex) {
             return ValidatingResult.INVALID_CLAIM;
         } catch (TokenExpiredException ex) {

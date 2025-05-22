@@ -19,8 +19,12 @@ package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
 
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+
 /**
  * @author 应卓
+ * @see Algorithm#RSA256(RSAPublicKey, RSAPrivateKey)
  * @since 3.5.0
  */
 public class RSA256AlgorithmFactoryBean extends AbstractRSAAlgorithmFactoryBean {

@@ -23,6 +23,7 @@ import org.springframework.beans.factory.FactoryBean;
 
 /**
  * @author 应卓
+ * @see Algorithm#HMAC256(String)
  * @since 3.5.0
  */
 @Setter

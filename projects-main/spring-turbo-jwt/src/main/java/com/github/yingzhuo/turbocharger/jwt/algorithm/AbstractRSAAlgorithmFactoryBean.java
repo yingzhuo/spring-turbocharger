@@ -18,9 +18,12 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
+import com.github.yingzhuo.turbocharger.util.StringUtils;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.ssl.pem.PemContent;
+import org.springframework.lang.Nullable;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -30,10 +33,12 @@ import java.security.interfaces.RSAPublicKey;
  * @since 3.5.0
  */
 @Setter
-abstract class AbstractRSAAlgorithmFactoryBean implements FactoryBean<Algorithm> {
+public abstract class AbstractRSAAlgorithmFactoryBean implements FactoryBean<Algorithm>, InitializingBean {
 
 	private String certificatePemContent;
 	private String privateKeyPemContent;
+
+	@Nullable
 	private String privateKeyPassword;
 
 	protected final RSAPublicKey getPublicKey() {
@@ -51,4 +56,10 @@ abstract class AbstractRSAAlgorithmFactoryBean implements FactoryBean<Algorithm>
 		return Algorithm.class;
 	}
 
+	@Override
+	public void afterPropertiesSet() {
+		if (StringUtils.isBlank(privateKeyPassword)) {
+			privateKeyPassword = null;
+		}
+	}
 }

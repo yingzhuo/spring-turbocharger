@@ -31,7 +31,7 @@ import org.springframework.lang.Nullable;
  * 自动配置类
  *
  * @author 应卓
- * @since 3.3.2
+ * @since 3.5.0
  */
 @ConditionalOnBean(Algorithm.class)
 @ConditionalOnMissingBean(JwtService.class)

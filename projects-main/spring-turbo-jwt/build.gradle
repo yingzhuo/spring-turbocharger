@@ -34,7 +34,7 @@ dependencies {
 	// spring-turbocharger
 	api project(':projects-main:spring-turbo-core')
 
-	// jwt
+	// jwt tool
 	implementation libs.java.jwt
 
 	// lombok

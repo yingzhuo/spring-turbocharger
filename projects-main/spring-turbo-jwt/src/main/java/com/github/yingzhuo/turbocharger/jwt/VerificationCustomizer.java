@@ -19,11 +19,19 @@ package com.github.yingzhuo.turbocharger.jwt;
 
 import com.auth0.jwt.interfaces.Verification;
 
-import java.util.function.Function;
-
 /**
+ * {@link Verification} 客制化工具
+ *
  * @author 应卓
  * @since 3.5.0
  */
-public interface VerificationCustomizer extends Function<Verification, Verification> {
+public interface VerificationCustomizer {
+
+	/**
+	 * 客制 verification 实例
+	 *
+	 * @param verification verification 实例
+	 */
+	public void customize(Verification verification);
+
 }

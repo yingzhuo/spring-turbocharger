@@ -1,5 +1,5 @@
-MAKEFILE_PATH			:= $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-GRADLE        		:= $(MAKEFILE_PATH)/gradlew
+MAKEFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+GRADLE        := $(MAKEFILE_PATH)/gradlew
 
 usage:
 	@echo '==============================================================================================================='
