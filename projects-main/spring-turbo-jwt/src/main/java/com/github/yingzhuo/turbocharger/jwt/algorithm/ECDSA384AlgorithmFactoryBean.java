@@ -27,11 +27,11 @@ import java.security.interfaces.ECPublicKey;
  * @see Algorithm#ECDSA384(ECPublicKey, ECPrivateKey)
  * @since 3.5.0
  */
-public class ECDSA384AlgorithmFactoryBean extends AbstractECAlgorithmFactoryBean {
+public class ECDSA384AlgorithmFactoryBean extends AbstractPemLoadingAlgorithmFactoryBean {
 
 	@Override
 	public Algorithm getObject() {
-		return Algorithm.ECDSA384(getPublicKey(), getPrivateKey());
+		return Algorithm.ECDSA384((ECPublicKey) getPublicKey(), (ECPrivateKey) getPrivateKey());
 	}
 
 }

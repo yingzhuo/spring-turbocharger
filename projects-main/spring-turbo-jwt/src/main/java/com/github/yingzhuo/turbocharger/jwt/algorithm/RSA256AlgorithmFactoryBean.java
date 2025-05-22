@@ -27,11 +27,11 @@ import java.security.interfaces.RSAPublicKey;
  * @see Algorithm#RSA256(RSAPublicKey, RSAPrivateKey)
  * @since 3.5.0
  */
-public class RSA256AlgorithmFactoryBean extends AbstractRSAAlgorithmFactoryBean {
+public class RSA256AlgorithmFactoryBean extends AbstractPemLoadingAlgorithmFactoryBean {
 
 	@Override
 	public Algorithm getObject() {
-		return Algorithm.RSA256(getPublicKey(), getPrivateKey());
+		return Algorithm.RSA256((RSAPublicKey) getPublicKey(), (RSAPrivateKey) getPrivateKey());
 	}
 
 }

@@ -79,7 +79,6 @@ public class JwtServiceTest {
 				"""
 		);
 		factoryBean.setPrivateKeyPassword(null);
-		factoryBean.afterPropertiesSet();
 
 		var alg = factoryBean.getObject();
 		System.out.println(alg);

@@ -27,11 +27,11 @@ import java.security.interfaces.RSAPublicKey;
  * @see Algorithm#RSA512(RSAPublicKey, RSAPrivateKey)
  * @since 3.5.0
  */
-public class RSA512AlgorithmFactoryBean extends AbstractRSAAlgorithmFactoryBean {
+public class RSA512AlgorithmFactoryBean extends AbstractPemLoadingAlgorithmFactoryBean {
 
 	@Override
 	public Algorithm getObject() {
-		return Algorithm.RSA512(getPublicKey(), getPrivateKey());
+		return Algorithm.RSA512((RSAPublicKey) getPublicKey(), (RSAPrivateKey) getPrivateKey());
 	}
 
 }
