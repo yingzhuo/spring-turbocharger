@@ -20,6 +20,8 @@ dependencies {
 	api project(':projects-main:spring-turbo-jwt')
 	api project(':projects-main:spring-turbo-jackson')
 
+	implementation libs.java.jwt
+
 	// json-path
 	implementation 'com.jayway.jsonpath:json-path'
 

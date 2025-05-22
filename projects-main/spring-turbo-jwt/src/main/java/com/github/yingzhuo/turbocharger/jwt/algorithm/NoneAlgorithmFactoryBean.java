@@ -20,6 +20,11 @@ package com.github.yingzhuo.turbocharger.jwt.algorithm;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.FactoryBean;
 
+/**
+ * @author 应卓
+ * @since 3.5.0
+ */
+@Deprecated
 public final class NoneAlgorithmFactoryBean implements FactoryBean<Algorithm> {
 
 	@Override
