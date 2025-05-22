@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
-import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 
@@ -26,14 +25,13 @@ import org.springframework.beans.factory.FactoryBean;
  * @author 应卓
  * @since 3.5.0
  */
-@Getter
 @Setter
 public class HMAC512AlgorithmFactoryBean implements FactoryBean<Algorithm> {
 
 	private String secret;
 
 	@Override
-	public Algorithm getObject() throws Exception {
+	public Algorithm getObject() {
 		return Algorithm.HMAC512(secret);
 	}
 

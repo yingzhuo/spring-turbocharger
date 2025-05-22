@@ -18,21 +18,17 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
-import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.boot.ssl.pem.PemContent;
 
 import java.security.interfaces.ECPrivateKey;
 import java.security.interfaces.ECPublicKey;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
 
 /**
  * @author 应卓
  * @since 3.5.0
  */
-@Getter
 @Setter
 abstract class AbstractECAlgorithmFactoryBean implements FactoryBean<Algorithm> {
 

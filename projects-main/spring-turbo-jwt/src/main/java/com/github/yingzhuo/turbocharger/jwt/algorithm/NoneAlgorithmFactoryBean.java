@@ -18,26 +18,17 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
-import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 
-/**
- * @author 应卓
- * @since 3.5.0
- */
-@Setter
-public class HMAC384AlgorithmFactoryBean implements FactoryBean<Algorithm> {
-
-	private String secret;
+public final class NoneAlgorithmFactoryBean implements FactoryBean<Algorithm> {
 
 	@Override
-	public Algorithm getObject() {
-		return Algorithm.HMAC384(secret);
+	public Algorithm getObject() throws Exception {
+		return Algorithm.none();
 	}
 
 	@Override
 	public Class<?> getObjectType() {
 		return Algorithm.class;
 	}
-
 }

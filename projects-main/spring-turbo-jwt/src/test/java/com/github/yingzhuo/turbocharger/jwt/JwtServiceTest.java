@@ -17,12 +17,29 @@
  */
 package com.github.yingzhuo.turbocharger.jwt;
 
+import com.auth0.jwt.algorithms.Algorithm;
 import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
 
 public class JwtServiceTest {
 
 	@Test
 	void test() {
+		Algorithm algorithm = Algorithm.HMAC256("secret");
+
+		var service = new JwtServiceImpl(algorithm);
+		var jwtData = JwtData.newInstance()
+			.addPayloadExpiresAtFuture(Duration.ofHours(24))
+			.addPayload("foo", "foo")
+			.addPayload("bar", "bar")
+			;
+
+		var token = service.createToken(jwtData);
+
+		System.out.println("---");
+		System.out.println(token);
+		System.out.println("---");
 	}
 
 }
