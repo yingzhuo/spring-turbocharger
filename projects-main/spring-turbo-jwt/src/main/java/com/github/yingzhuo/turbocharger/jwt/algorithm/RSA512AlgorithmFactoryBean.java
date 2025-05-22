@@ -15,14 +15,19 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.jwt;
+package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
-import org.junit.jupiter.api.Test;
+import com.auth0.jwt.algorithms.Algorithm;
 
-public class JwtServiceTest {
+/**
+ * @author 应卓
+ * @since 3.5.0
+ */
+public class RSA512AlgorithmFactoryBean extends AbstractRSAAlgorithmFactoryBean {
 
-	@Test
-	void test() {
+	@Override
+	public Algorithm getObject() {
+		return Algorithm.RSA512(getPublicKey(), getPrivateKey());
 	}
 
 }

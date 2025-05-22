@@ -15,14 +15,31 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.jwt;
+package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
-import org.junit.jupiter.api.Test;
+import com.auth0.jwt.algorithms.Algorithm;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.FactoryBean;
 
-public class JwtServiceTest {
+/**
+ * @author 应卓
+ * @since 3.5.0
+ */
+@Getter
+@Setter
+public class HMAC384AlgorithmFactoryBean implements FactoryBean<Algorithm> {
 
-	@Test
-	void test() {
+	private String secret;
+
+	@Override
+	public Algorithm getObject() throws Exception {
+		return Algorithm.HMAC384(secret);
+	}
+
+	@Override
+	public Class<?> getObjectType() {
+		return Algorithm.class;
 	}
 
 }

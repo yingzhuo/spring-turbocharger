@@ -19,7 +19,7 @@ dependencies {
 		api libs.toml4j
 		api libs.uuid.creator
 		api libs.tsid.creator
-		api libs.bundles.jjwt
+		api libs.java.jwt
 		api libs.xxljob
 		api libs.bundles.zxing
 	}

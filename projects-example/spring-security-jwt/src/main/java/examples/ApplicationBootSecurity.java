@@ -17,7 +17,6 @@
  */
 package examples;
 
-import com.github.yingzhuo.turbocharger.jwt.alg.KeyPairPemJwtSignerFactoryBean;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.encoder.EncodingIds;
 import com.github.yingzhuo.turbocharger.security.encoder.PasswordEncoderFactories;
@@ -45,13 +44,13 @@ import org.springframework.security.web.SecurityFilterChain;
 )
 public class ApplicationBootSecurity {
 
-	@Bean
-	public KeyPairPemJwtSignerFactoryBean keyPairPemJwtSignerFactoryBean() {
-		var bean = new KeyPairPemJwtSignerFactoryBean();
-		bean.setCertificateLocation("classpath:/jwt.pem");
-		bean.setPrivateKeyLocation("classpath:/jwt.pem");
-		return bean;
-	}
+//	@Bean
+//	public KeyPairPemJwtSignerFactoryBean keyPairPemJwtSignerFactoryBean() {
+//		var bean = new KeyPairPemJwtSignerFactoryBean();
+//		bean.setCertificateLocation("classpath:/jwt.pem");
+//		bean.setPrivateKeyLocation("classpath:/jwt.pem");
+//		return bean;
+//	}
 
 	@Bean
 	public JwtTokenAuthenticationFilterFactoryBean jwtTokenAuthenticationFilterFactoryBean(

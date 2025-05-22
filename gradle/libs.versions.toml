@@ -16,6 +16,7 @@ bcutil = { module = "org.bouncycastle:bcutil-jdk18on", version.ref = "bouncycast
 jjwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jjwt" }
 jjwt-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "jjwt" }
 jjwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jjwt" }
+java-jwt = { module = "com.auth0:java-jwt", version = "4.5.0" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxing" }
 zxing-javase = { module = "com.google.zxing:javase", version.ref = "zxing" }
 freemarker = { module = "org.freemarker:freemarker", version.ref = "freemarker" }

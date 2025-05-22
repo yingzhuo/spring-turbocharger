@@ -15,17 +15,19 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.jwt.alg;
+package com.github.yingzhuo.turbocharger.jwt.algorithm;
+
+import com.auth0.jwt.algorithms.Algorithm;
 
 /**
- * JWT签名算法 (抽象) <br>
- * 标记型接口
- *
  * @author 应卓
- * @see JwtSignerFactories
- * @see KeyPairJwtSigner
- * @see SecretKeyJwtSigner
- * @since 3.3.2
+ * @since 3.5.0
  */
-public interface JwtSigner {
+public class RSA384AlgorithmFactoryBean extends AbstractRSAAlgorithmFactoryBean {
+
+	@Override
+	public Algorithm getObject() {
+		return Algorithm.RSA384(getPublicKey(), getPrivateKey());
+	}
+
 }

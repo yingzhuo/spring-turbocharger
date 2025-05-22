@@ -56,8 +56,6 @@ public enum ValidatingResult implements Serializable {
 
 	/**
 	 * 被断言的Claim缺失或不正确
-	 *
-	 * @see JwtAssertions
 	 */
 	INVALID_CLAIM
 

@@ -17,12 +17,13 @@
  */
 package com.github.yingzhuo.turbocharger.jwt;
 
-import org.junit.jupiter.api.Test;
+import com.auth0.jwt.interfaces.Verification;
 
-public class JwtServiceTest {
+import java.util.function.Function;
 
-	@Test
-	void test() {
-	}
-
+/**
+ * @author 应卓
+ * @since 3.5.0
+ */
+public interface VerificationCustomizer extends Function<Verification, Verification> {
 }

@@ -17,123 +17,71 @@
  */
 package com.github.yingzhuo.turbocharger.jwt;
 
-import com.github.yingzhuo.turbocharger.jwt.alg.JwtSigner;
-import com.github.yingzhuo.turbocharger.jwt.alg.KeyPairJwtSigner;
-import com.github.yingzhuo.turbocharger.jwt.alg.SecretKeyJwtSigner;
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.SecurityException;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.*;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
-
-import javax.crypto.SecretKey;
-import java.security.Key;
-import java.security.PublicKey;
-import java.util.Optional;
 
 /**
  * @author 应卓
- * @since 3.3.2
+ * @since 3.5.0
  */
 public class JwtServiceImpl implements JwtService {
 
-	private final JwtSigner signer;
+    private final Algorithm algorithm;
 
-	/**
-	 * 构造方法
-	 *
-	 * @param signer 签名器
-	 */
-	public JwtServiceImpl(JwtSigner signer) {
-		Assert.notNull(signer, "signer must not be null");
-		this.signer = signer;
-	}
+    @Nullable
+    private final VerificationCustomizer verificationCustomizer;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String createToken(JwtData data) {
-		return Jwts.builder()
-			.header()
-			.add(data.getHeaderMap())
-			.and()
-			.claims(data.getPayloadMap())
-			.signWith(getSignerKey())
-			.compact();
-	}
+    /**
+     * 构造方法
+     *
+     * @param algorithm 签名算法
+     */
+    public JwtServiceImpl(Algorithm algorithm) {
+        this(algorithm, null);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ValidatingResult validateToken(String token, @Nullable JwtAssertions jwtAssertions) {
+    /**
+     * 构造方法
+     *
+     * @param algorithm              签名算法
+     * @param verificationCustomizer verification 客制化工具
+     */
+    public JwtServiceImpl(Algorithm algorithm, @Nullable VerificationCustomizer verificationCustomizer) {
+        Assert.notNull(algorithm, "algorithm must not be null");
+        this.algorithm = algorithm;
+        this.verificationCustomizer = verificationCustomizer;
+    }
 
-		if (!StringUtils.hasText(token)) {
-			return ValidatingResult.INVALID_JWT_FORMAT;
-		}
+    @Override
+    public String createToken(JwtData data) {
+        return JWT.create()
+                .withHeader(data.getHeaderMap())
+                .withPayload(data.getPayloadMap())
+                .sign(algorithm);
+    }
 
-		var builder = Jwts.parser();
+    @Override
+    public ValidatingResult validateToken(String token) {
+        try {
+            var verification = JWT.require(algorithm);
+            if (verificationCustomizer != null) {
+                verification = verificationCustomizer.apply(verification);
+            }
 
-		Optional.ofNullable(jwtAssertions)
-			.ifPresent(assertions -> {
-				if (!assertions.isEmpty()) {
-					for (var key : assertions.keySet()) {
-						var value = assertions.get(key);
-						builder.require(key, value);
-					}
-				}
-			});
-
-		Optional.ofNullable(getVerifyPublicKey())
-			.ifPresent(builder::verifyWith);
-
-		Optional.ofNullable(getVerifySecretKey())
-			.ifPresent(builder::verifyWith);
-
-		try {
-			builder.build()
-				.parse(token);
-		} catch (ExpiredJwtException | PrematureJwtException e) {
-			return ValidatingResult.INVALID_TIME;
-		} catch (SecurityException e) {
-			return ValidatingResult.INVALID_SIGNATURE;
-		} catch (MalformedJwtException | IllegalArgumentException e) {
-			return ValidatingResult.INVALID_JWT_FORMAT;
-		} catch (MissingClaimException | IncorrectClaimException e) {
-			return ValidatingResult.INVALID_CLAIM;
-		}
-
-		return ValidatingResult.OK;
-	}
-
-	private Key getSignerKey() {
-		if (signer instanceof KeyPairJwtSigner keyPairJwtSigner) {
-			return keyPairJwtSigner.keyPair().getPrivate();     // 签名用私钥，验证用公钥
-		}
-
-		if (signer instanceof SecretKeyJwtSigner secretKeyJwtSigner) {
-			return secretKeyJwtSigner.secretKey();
-		}
-
-		var msg = String.format("unsupported type: %s", signer.getClass().getName());
-		throw new IllegalStateException(msg);
-	}
-
-	@Nullable
-	private PublicKey getVerifyPublicKey() {
-		if (signer instanceof KeyPairJwtSigner keyPairJwtSigner) {
-			return keyPairJwtSigner.keyPair().getPublic();
-		}
-		return null;
-	}
-
-	@Nullable
-	private SecretKey getVerifySecretKey() {
-		if (signer instanceof SecretKeyJwtSigner secretKeyJwtSigner) {
-			return secretKeyJwtSigner.secretKey();
-		}
-		return null;
-	}
+            verification.build().verify(token);
+        } catch (IncorrectClaimException | MissingClaimException ex) {
+            return ValidatingResult.INVALID_CLAIM;
+        } catch (TokenExpiredException ex) {
+            return ValidatingResult.INVALID_TIME;
+        } catch (SignatureVerificationException ex) {
+            return ValidatingResult.INVALID_SIGNATURE;
+        } catch (JWTVerificationException exception) {
+            return ValidatingResult.INVALID_JWT_FORMAT;
+        }
+        return ValidatingResult.OK;
+    }
 
 }

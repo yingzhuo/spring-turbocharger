@@ -18,7 +18,6 @@
 package examples.security;
 
 import com.github.yingzhuo.turbocharger.jackson.util.JsonUtils;
-import com.github.yingzhuo.turbocharger.jwt.JwtAssertions;
 import com.github.yingzhuo.turbocharger.jwt.JwtService;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.jwt.AbstractJwtTokenToUserConverter;
@@ -42,12 +41,6 @@ public class JwtTokenToUserConverter extends AbstractJwtTokenToUserConverter imp
 
 	public JwtTokenToUserConverter(JwtService jwtService) {
 		super(jwtService);
-	}
-
-	@Nullable
-	@Override
-	protected JwtAssertions getJwtAssertions() {
-		return null;
 	}
 
 	@Nullable

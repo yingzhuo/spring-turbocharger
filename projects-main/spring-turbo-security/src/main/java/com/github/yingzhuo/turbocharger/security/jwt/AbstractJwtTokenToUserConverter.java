@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.security.jwt;
 
-import com.github.yingzhuo.turbocharger.jwt.JwtAssertions;
 import com.github.yingzhuo.turbocharger.jwt.JwtService;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.jwt.exception.BadJwtAlgorithmTokenException;
@@ -68,7 +67,7 @@ public abstract class AbstractJwtTokenToUserConverter implements TokenToUserConv
 			throw new BadJwtFormatTokenException(StringFormatter.format("invalid toke: {}", rawToken));
 		}
 
-		var result = jwtService.validateToken(token.asString(), this.getJwtAssertions());
+		var result = jwtService.validateToken(token.asString());
 
 		switch (result) {
 			case INVALID_JWT_FORMAT:
@@ -92,11 +91,6 @@ public abstract class AbstractJwtTokenToUserConverter implements TokenToUserConv
 			headerJson,
 			payloadJson
 		);
-	}
-
-	@Nullable
-	protected JwtAssertions getJwtAssertions() {
-		return JwtAssertions.newInstance();
 	}
 
 	@Nullable

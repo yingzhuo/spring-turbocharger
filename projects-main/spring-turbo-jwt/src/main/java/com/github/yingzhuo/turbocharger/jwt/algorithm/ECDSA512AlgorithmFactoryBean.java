@@ -15,28 +15,19 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.jwt.alg;
+package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
-import org.springframework.core.style.ToStringCreator;
-
-import javax.crypto.SecretKey;
+import com.auth0.jwt.algorithms.Algorithm;
 
 /**
- * 封装了{@link SecretKey}的签名器
- *
- * @param secretKey 秘钥
  * @author 应卓
- * @since 3.3.2
+ * @since 3.5.0
  */
-public record SecretKeyJwtSigner(SecretKey secretKey) implements JwtSigner {
+public class ECDSA512AlgorithmFactoryBean extends AbstractECAlgorithmFactoryBean {
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
-	public String toString() {
-		var creator = new ToStringCreator(this);
-		return creator.toString();
+	public Algorithm getObject() {
+		return Algorithm.ECDSA512(getPublicKey(), getPrivateKey());
 	}
 
 }

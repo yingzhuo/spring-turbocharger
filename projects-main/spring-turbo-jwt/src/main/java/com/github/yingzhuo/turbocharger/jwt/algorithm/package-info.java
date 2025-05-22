@@ -17,7 +17,7 @@
  */
 @NonNullApi
 @NonNullFields
-package com.github.yingzhuo.turbocharger.jwt.alg;
+package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

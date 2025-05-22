@@ -17,28 +17,29 @@
  */
 package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
-import com.github.yingzhuo.turbocharger.jwt.JwtService;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.github.yingzhuo.turbocharger.jwt.JwtServiceImpl;
-import com.github.yingzhuo.turbocharger.jwt.alg.JwtSigner;
+import com.github.yingzhuo.turbocharger.jwt.JwtService;
+import com.github.yingzhuo.turbocharger.jwt.VerificationCustomizer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.lang.Nullable;
 
 /**
  * 自动配置类
  *
  * @author 应卓
- * @see com.github.yingzhuo.turbocharger.jwt.alg.KeyPairPemJwtSignerFactoryBean
- * @see com.github.yingzhuo.turbocharger.jwt.alg.KeyPairStoreJwtSignerFactoryBean
  * @since 3.3.2
  */
-@ConditionalOnBean(JwtSigner.class)
+@ConditionalOnBean(Algorithm.class)
 @ConditionalOnMissingBean(JwtService.class)
 public class JwtAutoConfiguration {
 
 	@Bean
-	public JwtService jsonWebTokenService(JwtSigner jwtSigner) {
-		return new JwtServiceImpl(jwtSigner);
+	public JwtService jsonWebTokenService(Algorithm algorithm, @Autowired(required = false) @Nullable VerificationCustomizer verificationCustomizer) {
+		return new JwtServiceImpl(algorithm, verificationCustomizer);
 	}
 
 }

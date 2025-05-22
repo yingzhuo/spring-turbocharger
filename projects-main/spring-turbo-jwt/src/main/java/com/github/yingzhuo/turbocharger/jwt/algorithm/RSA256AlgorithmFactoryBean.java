@@ -15,30 +15,19 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.jwt.alg;
+package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
-import org.springframework.core.style.ToStringCreator;
-
-import java.security.KeyPair;
+import com.auth0.jwt.algorithms.Algorithm;
 
 /**
- * 封装了{@link KeyPair}的签名器
- *
- * @param keyPair 公私钥对
  * @author 应卓
- * @see KeyPairPemJwtSignerFactoryBean
- * @see KeyPairStoreJwtSignerFactoryBean
- * @since 3.3.2
+ * @since 3.5.0
  */
-public record KeyPairJwtSigner(KeyPair keyPair) implements JwtSigner {
+public class RSA256AlgorithmFactoryBean extends AbstractRSAAlgorithmFactoryBean {
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
-	public String toString() {
-		var creator = new ToStringCreator(this);
-		return creator.toString();
+	public Algorithm getObject() {
+		return Algorithm.RSA256(getPublicKey(), getPrivateKey());
 	}
 
 }
