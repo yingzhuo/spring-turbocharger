@@ -27,9 +27,9 @@ import java.security.interfaces.RSAPublicKey;
  * @author 应卓
  * @since 3.5.0
  */
-@Setter
 public class RsaPemAlgorithmFactoryBean extends AbstractPemAlgorithmFactoryBean {
 
+	@Setter
 	private AlgorithmType algorithmType = AlgorithmType.RSA_512;
 
 	/**
@@ -45,8 +45,8 @@ public class RsaPemAlgorithmFactoryBean extends AbstractPemAlgorithmFactoryBean 
 	@Override
 	@SuppressWarnings("DuplicatedCode")
 	public Algorithm getObject() {
-		var publicKey = (RSAPublicKey) getBundle().getPublicKey();
-		var privateKey = (RSAPrivateKey) getBundle().getPrivateKey();
+		final var publicKey = (RSAPublicKey) getBundle().getPublicKey();
+		final var privateKey = (RSAPrivateKey) getBundle().getPrivateKey();
 
 		return switch (algorithmType) {
 			case RSA_256 -> Algorithm.RSA256(publicKey, privateKey);

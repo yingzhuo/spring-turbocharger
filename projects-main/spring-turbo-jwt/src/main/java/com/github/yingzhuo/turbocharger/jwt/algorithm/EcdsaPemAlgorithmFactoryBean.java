@@ -27,9 +27,9 @@ import java.security.interfaces.ECPublicKey;
  * @author 应卓
  * @since 3.5.0
  */
-@Setter
 public class EcdsaPemAlgorithmFactoryBean extends AbstractPemAlgorithmFactoryBean {
 
+	@Setter
 	private AlgorithmType algorithmType = AlgorithmType.ECDSA_512;
 
 	/**
