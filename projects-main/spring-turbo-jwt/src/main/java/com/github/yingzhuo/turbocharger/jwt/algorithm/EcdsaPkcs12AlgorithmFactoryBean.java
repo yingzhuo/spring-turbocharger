@@ -32,8 +32,19 @@ public class EcdsaPkcs12AlgorithmFactoryBean extends AbstractPkcs12LoadingAlgori
 
 	private AlgorithmType algorithmType = AlgorithmType.ECDSA_512;
 
+	/**
+	 * 默认构造方法
+	 */
+	public EcdsaPkcs12AlgorithmFactoryBean() {
+		super();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public Algorithm getObject() throws Exception {
+	@SuppressWarnings("DuplicatedCode")
+	public Algorithm getObject() {
 		var publicKey = (ECPublicKey) getPublicKey();
 		var privateKey = (ECPrivateKey) getPrivateKey();
 

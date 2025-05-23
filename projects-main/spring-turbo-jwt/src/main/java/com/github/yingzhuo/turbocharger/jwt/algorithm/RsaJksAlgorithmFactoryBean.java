@@ -43,6 +43,7 @@ public class RsaJksAlgorithmFactoryBean extends AbstractJksLoadingAlgorithmFacto
 	 * {@inheritDoc}
 	 */
 	@Override
+	@SuppressWarnings("DuplicatedCode")
 	public Algorithm getObject() {
 		var publicKey = (RSAPublicKey) getPublicKey();
 		var privateKey = (RSAPrivateKey) getPrivateKey();

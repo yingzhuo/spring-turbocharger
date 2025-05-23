@@ -43,6 +43,7 @@ public class EcdsaPemAlgorithmFactoryBean extends AbstractPemLoadingAlgorithmFac
 	 * {@inheritDoc}
 	 */
 	@Override
+	@SuppressWarnings("DuplicatedCode")
 	public Algorithm getObject() {
 		var publicKey = (ECPublicKey) getPublicKey();
 		var privateKey = (ECPrivateKey) getPrivateKey();

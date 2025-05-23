@@ -43,6 +43,7 @@ public class RsaPkcs12AlgorithmFactoryBean extends AbstractPkcs12LoadingAlgorith
 	 * {@inheritDoc}
 	 */
 	@Override
+	@SuppressWarnings("DuplicatedCode")
 	public Algorithm getObject() {
 		var publicKey = (RSAPublicKey) getPublicKey();
 		var privateKey = (RSAPrivateKey) getPrivateKey();

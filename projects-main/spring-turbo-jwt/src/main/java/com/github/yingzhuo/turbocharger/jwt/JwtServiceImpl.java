@@ -20,10 +20,9 @@ package com.github.yingzhuo.turbocharger.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.*;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
-
-import java.util.Objects;
 
 /**
  * @author 应卓
@@ -31,10 +30,10 @@ import java.util.Objects;
  */
 public class JwtServiceImpl implements JwtService {
 
-	private static final VerificationCustomizer NOOP_CUSTOMIZER = verification -> {
-	};
-
+	@NonNull
 	private final Algorithm algorithm;
+
+	@Nullable
 	private final VerificationCustomizer verificationCustomizer;
 
 	/**
@@ -55,7 +54,7 @@ public class JwtServiceImpl implements JwtService {
 	public JwtServiceImpl(Algorithm algorithm, @Nullable VerificationCustomizer verificationCustomizer) {
 		Assert.notNull(algorithm, "algorithm must not be null");
 		this.algorithm = algorithm;
-		this.verificationCustomizer = Objects.requireNonNullElse(verificationCustomizer, NOOP_CUSTOMIZER);
+		this.verificationCustomizer = verificationCustomizer;
 	}
 
 	/**
@@ -76,7 +75,9 @@ public class JwtServiceImpl implements JwtService {
 	public ValidatingResult validateToken(String token) {
 		try {
 			var verification = JWT.require(algorithm);
-			verificationCustomizer.customize(verification);
+			if (verificationCustomizer != null) {
+				verificationCustomizer.customize(verification);
+			}
 			verification.build().verify(token);
 		} catch (IncorrectClaimException | MissingClaimException ex) {
 			return ValidatingResult.INVALID_CLAIM;
