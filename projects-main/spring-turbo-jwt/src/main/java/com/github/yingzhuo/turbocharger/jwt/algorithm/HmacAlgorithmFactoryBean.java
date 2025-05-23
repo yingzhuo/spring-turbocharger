@@ -20,14 +20,13 @@ package com.github.yingzhuo.turbocharger.jwt.algorithm;
 import com.auth0.jwt.algorithms.Algorithm;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.lang.Nullable;
 
 /**
  * @author 应卓
  * @since 3.5.0
  */
 @Setter
-public class HmacAlgFactoryBean implements FactoryBean<Algorithm> {
+public class HmacAlgorithmFactoryBean implements FactoryBean<Algorithm> {
 
 	private AlgorithmType algorithmType = AlgorithmType.HMAC_512;
 	private String secret;
@@ -35,10 +34,13 @@ public class HmacAlgFactoryBean implements FactoryBean<Algorithm> {
 	/**
 	 * 默认构造方法
 	 */
-	public HmacAlgFactoryBean() {
+	public HmacAlgorithmFactoryBean() {
 		super();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Algorithm getObject() {
 		return switch (algorithmType) {
@@ -49,7 +51,9 @@ public class HmacAlgFactoryBean implements FactoryBean<Algorithm> {
 		};
 	}
 
-	@Nullable
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Class<?> getObjectType() {
 		return Algorithm.class;

@@ -34,13 +34,13 @@ public class EcdsaPkcs12AlgorithmFactoryBean extends AbstractPkcs12LoadingAlgori
 
 	@Override
 	public Algorithm getObject() throws Exception {
+		var publicKey = (ECPublicKey) getPublicKey();
+		var privateKey = (ECPrivateKey) getPrivateKey();
+
 		return switch (algorithmType) {
-			case ECDSA_256 ->
-				Algorithm.ECDSA256((ECPublicKey) super.getPublicKey(), (ECPrivateKey) super.getPrivateKey());
-			case ECDSA_384 ->
-				Algorithm.ECDSA384((ECPublicKey) super.getPublicKey(), (ECPrivateKey) super.getPrivateKey());
-			case ECDSA_512 ->
-				Algorithm.ECDSA512((ECPublicKey) super.getPublicKey(), (ECPrivateKey) super.getPrivateKey());
+			case ECDSA_256 -> Algorithm.ECDSA256(publicKey, privateKey);
+			case ECDSA_384 -> Algorithm.ECDSA384(publicKey, privateKey);
+			case ECDSA_512 -> Algorithm.ECDSA512(publicKey, privateKey);
 			default -> throw new IllegalStateException("Unsupported algorithm type: " + algorithmType);
 		};
 	}

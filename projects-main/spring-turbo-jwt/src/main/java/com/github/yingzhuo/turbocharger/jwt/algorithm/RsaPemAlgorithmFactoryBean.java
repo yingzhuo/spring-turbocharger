@@ -44,13 +44,13 @@ public class RsaPemAlgorithmFactoryBean extends AbstractPemLoadingAlgorithmFacto
 	 */
 	@Override
 	public Algorithm getObject() {
+		var publicKey = (RSAPublicKey) getPublicKey();
+		var privateKey = (RSAPrivateKey) getPrivateKey();
+
 		return switch (algorithmType) {
-			case RSA_256 ->
-				Algorithm.RSA256((RSAPublicKey) super.getPublicKey(), (RSAPrivateKey) super.getPrivateKey());
-			case RSA_384 ->
-				Algorithm.RSA384((RSAPublicKey) super.getPublicKey(), (RSAPrivateKey) super.getPrivateKey());
-			case RSA_512 ->
-				Algorithm.RSA512((RSAPublicKey) super.getPublicKey(), (RSAPrivateKey) super.getPrivateKey());
+			case RSA_256 -> Algorithm.RSA256(publicKey, privateKey);
+			case RSA_384 -> Algorithm.RSA384(publicKey, privateKey);
+			case RSA_512 -> Algorithm.RSA512(publicKey, privateKey);
 			default -> throw new IllegalStateException("Unsupported algorithm type: " + algorithmType);
 		};
 	}
