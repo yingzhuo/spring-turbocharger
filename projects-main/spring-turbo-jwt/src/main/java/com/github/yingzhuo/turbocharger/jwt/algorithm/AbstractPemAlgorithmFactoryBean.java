@@ -18,8 +18,8 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
-import com.github.yingzhuo.turbocharger.util.crypto.bundle.AsymmetricKeyBundle;
-import com.github.yingzhuo.turbocharger.util.crypto.bundle.PemAsymmetricKeyBundleFactoryBean;
+import com.github.yingzhuo.turbocharger.util.crypto.bundle.KeyBundle;
+import com.github.yingzhuo.turbocharger.util.crypto.bundle.PemKeyBundleFactoryBean;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.lang.Nullable;
@@ -31,16 +31,16 @@ import org.springframework.util.Assert;
  */
 public abstract class AbstractPemAlgorithmFactoryBean implements FactoryBean<Algorithm>, InitializingBean {
 
-	private final PemAsymmetricKeyBundleFactoryBean delegatingFactoryBean;
+	private final PemKeyBundleFactoryBean delegatingFactoryBean;
 
 	@Nullable
-	private AsymmetricKeyBundle bundle;
+	private KeyBundle bundle;
 
 	/**
 	 * 构造方法
 	 */
 	protected AbstractPemAlgorithmFactoryBean() {
-		delegatingFactoryBean = new PemAsymmetricKeyBundleFactoryBean();
+		delegatingFactoryBean = new PemKeyBundleFactoryBean();
 	}
 
 	/**
@@ -80,7 +80,7 @@ public abstract class AbstractPemAlgorithmFactoryBean implements FactoryBean<Alg
 		this.bundle = delegatingFactoryBean.getObject();
 	}
 
-	protected final AsymmetricKeyBundle getBundle() {
+	protected final KeyBundle getBundle() {
 		Assert.notNull(bundle, "bundle not initialized");
 		return bundle;
 	}

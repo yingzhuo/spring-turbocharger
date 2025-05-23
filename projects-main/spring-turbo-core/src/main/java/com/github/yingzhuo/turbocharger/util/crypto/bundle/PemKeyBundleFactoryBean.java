@@ -32,15 +32,15 @@ import static com.github.yingzhuo.turbocharger.util.crypto.pem.PemUtils.readPkcs
 import static com.github.yingzhuo.turbocharger.util.crypto.pem.PemUtils.readX509Certificate;
 
 /**
- * {@link AsymmetricKeyBundle} 配置用 {@link FactoryBean} <br>
+ * {@link KeyBundle} 配置用 {@link FactoryBean} <br>
  * 用PEM格式文件配置
  *
- * @see AsymmetricKeyBundle
+ * @see KeyBundle
  * @see PemUtils
  * @since 应卓
  * @since 3.3.1
  */
-public class PemAsymmetricKeyBundleFactoryBean implements FactoryBean<AsymmetricKeyBundle>, InitializingBean {
+public class PemKeyBundleFactoryBean implements FactoryBean<KeyBundle>, InitializingBean {
 
 	@Setter
 	private String certificateLocation;
@@ -58,13 +58,13 @@ public class PemAsymmetricKeyBundleFactoryBean implements FactoryBean<Asymmetric
 	private String privateKeyPassword;
 
 	@Nullable
-	private AsymmetricKeyBundle bundle;
+	private KeyBundle bundle;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AsymmetricKeyBundle getObject() {
+	public KeyBundle getObject() {
 		Assert.notNull(bundle, "bundle is not initialized");
 		return this.bundle;
 	}
@@ -74,7 +74,7 @@ public class PemAsymmetricKeyBundleFactoryBean implements FactoryBean<Asymmetric
 	 */
 	@Override
 	public Class<?> getObjectType() {
-		return AsymmetricKeyBundle.class;
+		return KeyBundle.class;
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class PemAsymmetricKeyBundleFactoryBean implements FactoryBean<Asymmetric
 	public void afterPropertiesSet() throws Exception {
 		var cert = readX509Certificate(getCertContent());
 		var privateKey = readPkcs8PrivateKey(getPrivateKeyContent(), privateKeyPassword);
-		this.bundle = new AsymmetricKeyBundleImpl(new KeyPair(cert.getPublicKey(), privateKey), cert);
+		this.bundle = new KeyBundleImpl(new KeyPair(cert.getPublicKey(), privateKey), cert);
 	}
 
 	private String getCertContent() {

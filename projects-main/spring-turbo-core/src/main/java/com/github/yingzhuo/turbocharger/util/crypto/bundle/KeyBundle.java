@@ -32,12 +32,10 @@ import java.security.cert.X509Certificate;
  * @author 应卓
  * @see SignatureUtils
  * @see CipherUtils
- * @see PemAsymmetricKeyBundleFactoryBean
- * @see KeyStoreAsymmetricKeyBundleFactoryBean
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")
-public interface AsymmetricKeyBundle extends Serializable {
+public interface KeyBundle extends Serializable {
 
 	/**
 	 * 获取KeyPair

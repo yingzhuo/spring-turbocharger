@@ -18,10 +18,9 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
-import com.github.yingzhuo.turbocharger.util.crypto.bundle.AsymmetricKeyBundle;
-import com.github.yingzhuo.turbocharger.util.crypto.bundle.KeyStoreAsymmetricKeyBundleFactoryBean;
+import com.github.yingzhuo.turbocharger.util.crypto.bundle.KeyBundle;
+import com.github.yingzhuo.turbocharger.util.crypto.bundle.StoreKeyBundleFactoryBean;
 import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
-import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreHelper;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.lang.Nullable;
@@ -29,21 +28,20 @@ import org.springframework.util.Assert;
 
 /**
  * @author 应卓
- * @see KeyStoreHelper
  * @since 3.5.0
  */
-public abstract class AbstractKeyStoreAlgorithmFactoryBean implements FactoryBean<Algorithm>, InitializingBean {
+public abstract class AbstractStoreAlgorithmFactoryBean implements FactoryBean<Algorithm>, InitializingBean {
 
-	private final KeyStoreAsymmetricKeyBundleFactoryBean delegatingFactoryBean;
+	private final StoreKeyBundleFactoryBean delegatingFactoryBean;
 
 	@Nullable
-	private AsymmetricKeyBundle bundle;
+	private KeyBundle bundle;
 
 	/**
 	 * 构造方法
 	 */
-	protected AbstractKeyStoreAlgorithmFactoryBean() {
-		delegatingFactoryBean = new KeyStoreAsymmetricKeyBundleFactoryBean();
+	protected AbstractStoreAlgorithmFactoryBean() {
+		delegatingFactoryBean = new StoreKeyBundleFactoryBean();
 		delegatingFactoryBean.setFormat(KeyStoreFormat.PKCS12);
 	}
 
@@ -84,7 +82,7 @@ public abstract class AbstractKeyStoreAlgorithmFactoryBean implements FactoryBea
 		delegatingFactoryBean.setKeypass(keypass);
 	}
 
-	protected final AsymmetricKeyBundle getBundle() {
+	protected final KeyBundle getBundle() {
 		Assert.notNull(bundle, "bundle is not initialized");
 		return bundle;
 	}

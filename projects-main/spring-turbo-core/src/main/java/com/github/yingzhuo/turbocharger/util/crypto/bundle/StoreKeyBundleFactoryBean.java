@@ -33,7 +33,7 @@ import static com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreHelp
  * @author 应卓
  * @since 3.3.1
  */
-public class KeyStoreAsymmetricKeyBundleFactoryBean implements FactoryBean<AsymmetricKeyBundle>, InitializingBean {
+public class StoreKeyBundleFactoryBean implements FactoryBean<KeyBundle>, InitializingBean {
 
 	@Setter
 	private String location;
@@ -51,13 +51,13 @@ public class KeyStoreAsymmetricKeyBundleFactoryBean implements FactoryBean<Asymm
 	private String keypass;
 
 	@Nullable
-	private AsymmetricKeyBundle bundle;
+	private KeyBundle bundle;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AsymmetricKeyBundle getObject() {
+	public KeyBundle getObject() {
 		Assert.notNull(bundle, "bundle is not initialized");
 		return this.bundle;
 	}
@@ -67,7 +67,7 @@ public class KeyStoreAsymmetricKeyBundleFactoryBean implements FactoryBean<Asymm
 	 */
 	@Override
 	public Class<?> getObjectType() {
-		return AsymmetricKeyBundle.class;
+		return KeyBundle.class;
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class KeyStoreAsymmetricKeyBundleFactoryBean implements FactoryBean<Asymm
 			var store = loadKeyStore(inputStream, format, storepass);
 			var cert = getCertificate(store, alias);
 			var privateKey = getPrivateKey(store, alias, keypass);
-			this.bundle = new AsymmetricKeyBundleImpl(new KeyPair(cert.getPublicKey(), privateKey), cert);
+			this.bundle = new KeyBundleImpl(new KeyPair(cert.getPublicKey(), privateKey), cert);
 		}
 	}
 

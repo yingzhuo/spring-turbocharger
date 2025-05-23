@@ -18,7 +18,7 @@
 package examples;
 
 import com.github.yingzhuo.turbocharger.jwt.algorithm.AlgorithmType;
-import com.github.yingzhuo.turbocharger.jwt.algorithm.RsaKeyStoreAlgorithmFactoryBean;
+import com.github.yingzhuo.turbocharger.jwt.algorithm.RsaStoreAlgorithmFactoryBean;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.encoder.EncodingIds;
 import com.github.yingzhuo.turbocharger.security.encoder.PasswordEncoderFactories;
@@ -48,8 +48,8 @@ import org.springframework.security.web.SecurityFilterChain;
 public class ApplicationBootSecurity {
 
 	@Bean
-	public RsaKeyStoreAlgorithmFactoryBean jwtAlgorithmFactoryBean() {
-		var factoryBean = new RsaKeyStoreAlgorithmFactoryBean();
+	public RsaStoreAlgorithmFactoryBean jwtAlgorithmFactoryBean() {
+		var factoryBean = new RsaStoreAlgorithmFactoryBean();
 		factoryBean.setFormat(KeyStoreFormat.PKCS12);
 		factoryBean.setAlgorithmType(AlgorithmType.RSA_512);
 		factoryBean.setLocation("classpath:examples.pfx");

@@ -27,7 +27,7 @@ import java.security.interfaces.RSAPublicKey;
  * @author 应卓
  * @since 3.5.0
  */
-public class RsaKeyStoreAlgorithmFactoryBean extends AbstractKeyStoreAlgorithmFactoryBean {
+public class RsaStoreAlgorithmFactoryBean extends AbstractStoreAlgorithmFactoryBean {
 
 	@Setter
 	private AlgorithmType algorithmType = AlgorithmType.RSA_512;
@@ -35,7 +35,7 @@ public class RsaKeyStoreAlgorithmFactoryBean extends AbstractKeyStoreAlgorithmFa
 	/**
 	 * 默认构造方法
 	 */
-	public RsaKeyStoreAlgorithmFactoryBean() {
+	public RsaStoreAlgorithmFactoryBean() {
 		super();
 	}
 

@@ -24,16 +24,17 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 
 /**
+ * {@link KeyBundle} 默认实现
  * @author 应卓
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")
-public class AsymmetricKeyBundleImpl implements AsymmetricKeyBundle {
+class KeyBundleImpl implements KeyBundle {
 
 	private final KeyPair keyPair;
 	private final Certificate certificate;
 
-	public AsymmetricKeyBundleImpl(KeyPair keyPair, Certificate certificate) {
+	KeyBundleImpl(KeyPair keyPair, Certificate certificate) {
 		this.keyPair = keyPair;
 		this.certificate = certificate;
 	}

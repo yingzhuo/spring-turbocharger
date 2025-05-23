@@ -27,7 +27,7 @@ import java.security.interfaces.ECPublicKey;
  * @author 应卓
  * @since 3.5.0
  */
-public class EcdsaKeyStoreAlgorithmFactoryBean extends AbstractKeyStoreAlgorithmFactoryBean {
+public class EcdsaStoreAlgorithmFactoryBean extends AbstractStoreAlgorithmFactoryBean {
 
 	@Setter
 	private AlgorithmType algorithmType = AlgorithmType.ECDSA_512;
@@ -35,7 +35,7 @@ public class EcdsaKeyStoreAlgorithmFactoryBean extends AbstractKeyStoreAlgorithm
 	/**
 	 * 默认构造方法
 	 */
-	public EcdsaKeyStoreAlgorithmFactoryBean() {
+	public EcdsaStoreAlgorithmFactoryBean() {
 		super();
 	}
 
