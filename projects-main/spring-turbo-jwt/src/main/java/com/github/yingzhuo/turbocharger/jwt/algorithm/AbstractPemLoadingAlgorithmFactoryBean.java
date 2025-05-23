@@ -18,18 +18,17 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
-import com.github.yingzhuo.turbocharger.core.ResourceUtils;
-import com.github.yingzhuo.turbocharger.util.StringUtils;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.ssl.pem.PemContent;
 import org.springframework.lang.Nullable;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
+
+import static com.github.yingzhuo.turbocharger.core.ResourceUtils.readResourceAsString;
+import static com.github.yingzhuo.turbocharger.util.StringUtils.isBlank;
 
 /**
  * @author 应卓
@@ -37,7 +36,7 @@ import java.security.PublicKey;
  */
 @Getter
 @Setter
-public abstract class AbstractPemLoadingAlgorithmFactoryBean implements FactoryBean<Algorithm>, InitializingBean, DisposableBean {
+public abstract class AbstractPemLoadingAlgorithmFactoryBean implements FactoryBean<Algorithm> {
 
 	private String certificatePemContent;
 	private String privateKeyPemContent;
@@ -66,23 +65,14 @@ public abstract class AbstractPemLoadingAlgorithmFactoryBean implements FactoryB
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * 获取公钥
+	 *
+	 * @return 公钥
 	 */
-	@Override
-	public void afterPropertiesSet() {
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void destroy() {
-	}
-
 	protected final PublicKey getPublicKey() {
 		var certificatePemContentToUse = getCertificatePemContent();
-		if (StringUtils.isBlank(certificatePemContentToUse)) {
-			certificatePemContentToUse = ResourceUtils.readResourceAsString(certificatePemLocation);
+		if (isBlank(certificatePemContentToUse)) {
+			certificatePemContentToUse = readResourceAsString(certificatePemLocation);
 		}
 
 		var pemContent = PemContent.of(certificatePemContentToUse);
@@ -93,10 +83,15 @@ public abstract class AbstractPemLoadingAlgorithmFactoryBean implements FactoryB
 		return certificates.get(0).getPublicKey();
 	}
 
+	/**
+	 * 获取私钥
+	 *
+	 * @return 私钥
+	 */
 	protected final PrivateKey getPrivateKey() {
 		var privateKeyPemContentToUse = getPrivateKeyPemContent();
-		if (StringUtils.isBlank(privateKeyPemContentToUse)) {
-			privateKeyPemContentToUse = ResourceUtils.readResourceAsString(privateKeyPemLocation);
+		if (isBlank(privateKeyPemContentToUse)) {
+			privateKeyPemContentToUse = readResourceAsString(privateKeyPemLocation);
 		}
 
 		var pemContent = PemContent.of(privateKeyPemContentToUse);

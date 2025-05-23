@@ -17,7 +17,8 @@
  */
 package examples;
 
-import com.auth0.jwt.algorithms.Algorithm;
+import com.github.yingzhuo.turbocharger.jwt.algorithm.AlgorithmType;
+import com.github.yingzhuo.turbocharger.jwt.algorithm.RsaPkcs12AlgorithmFactoryBean;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.encoder.EncodingIds;
 import com.github.yingzhuo.turbocharger.security.encoder.PasswordEncoderFactories;
@@ -46,8 +47,14 @@ import org.springframework.security.web.SecurityFilterChain;
 public class ApplicationBootSecurity {
 
 	@Bean
-	public Algorithm jwtAlgorithm() {
-		return Algorithm.HMAC256(ApplicationBootSecurity.class.getName().repeat(2));
+	public RsaPkcs12AlgorithmFactoryBean jwtAlgorithmFactoryBean() {
+		var factoryBean = new RsaPkcs12AlgorithmFactoryBean();
+		factoryBean.setAlgorithmType(AlgorithmType.RSA_512);
+		factoryBean.setLocation("classpath:examples.pfx");
+		factoryBean.setStorepass("changeit");
+		factoryBean.setAlias("jwt");
+		factoryBean.setKeypass("changeit");
+		return factoryBean;
 	}
 
 	@Bean

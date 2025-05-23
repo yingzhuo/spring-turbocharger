@@ -18,11 +18,9 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
-import com.github.yingzhuo.turbocharger.core.ResourceUtils;
 import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
 import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreHelper;
 import lombok.Setter;
-import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.lang.Nullable;
@@ -32,12 +30,15 @@ import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+import static com.github.yingzhuo.turbocharger.core.ResourceUtils.loadResourceAsInputStream;
+import static com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreHelper.loadKeyStore;
+
 /**
  * @author 应卓
  * @see KeyStoreHelper
  * @since 3.5.0
  */
-public abstract class AbstractKeyStoreLoadingAlgorithmFactoryBean implements FactoryBean<Algorithm>, InitializingBean, DisposableBean {
+public abstract class AbstractKeyStoreLoadingAlgorithmFactoryBean implements FactoryBean<Algorithm>, InitializingBean {
 
 	private final KeyStoreFormat keyStoreFormat;
 
@@ -78,19 +79,7 @@ public abstract class AbstractKeyStoreLoadingAlgorithmFactoryBean implements Fac
 	 */
 	@Override
 	public void afterPropertiesSet() {
-		try {
-			keyStore = KeyStoreHelper.loadKeyStore(ResourceUtils.loadResourceAsInputStream(location), keyStoreFormat, storepass);
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-			throw e;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void destroy() {
+		keyStore = loadKeyStore(loadResourceAsInputStream(location), keyStoreFormat, storepass);
 	}
 
 	/**
@@ -99,7 +88,7 @@ public abstract class AbstractKeyStoreLoadingAlgorithmFactoryBean implements Fac
 	 * @return 公钥
 	 */
 	public final PublicKey getPublicKey() {
-		Assert.notNull(keyStore, "The keystore is required");
+		Assert.notNull(keyStore, "The keystore is not loaded");
 		return KeyStoreHelper.getPublicKey(keyStore, alias);
 	}
 
@@ -109,6 +98,8 @@ public abstract class AbstractKeyStoreLoadingAlgorithmFactoryBean implements Fac
 	 * @return 私钥
 	 */
 	public final PrivateKey getPrivateKey() {
+		Assert.notNull(keyStore, "The keystore is not loaded");
 		return KeyStoreHelper.getPrivateKey(keyStore, alias, keypass);
 	}
+
 }
