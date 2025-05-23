@@ -76,24 +76,24 @@ processResources {
 	}
 
 	from('src/main/resources') {
-		include('**/*.yaml', '**/*.yml', '**/*.txt')
+		include('**/*.yaml', '**/*.txt')
 		filter(ReplaceTokens, 'tokens': replaceTokenMap)
 		filteringCharset = 'UTF-8'
 	}
 
-	duplicatesStrategy = DuplicatesStrategy.INHERIT
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 processTestResources {
 	exclude('**/.DS_Store', '**/.gitkeep')
 
 	from('src/test/resources') {
-		include('**/*.yaml', '**/*.yml', '**/*.txt')
+		include('**/*.yaml', '**/*.txt')
 		filter(ReplaceTokens, 'tokens': replaceTokenMap)
 		filteringCharset = 'UTF-8'
 	}
 
-	duplicatesStrategy = DuplicatesStrategy.INHERIT
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 test {
