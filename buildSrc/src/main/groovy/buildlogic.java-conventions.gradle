@@ -1,5 +1,3 @@
-import org.apache.tools.ant.filters.ReplaceTokens
-
 plugins {
 	id 'java'
 	id 'java-library'
@@ -61,12 +59,6 @@ javadoc {
 	}
 }
 
-final var replaceTokenMap = [
-	'APP_GROUP'  : project.group,
-	'APP_NAME'   : project.name,
-	'APP_VERSION': project.version
-]
-
 processResources {
 	exclude('**/.DS_Store', '**/.gitkeep')
 
@@ -74,26 +66,10 @@ processResources {
 		include('LICENSE.txt', 'NOTICE.txt')
 		into 'META-INF'
 	}
-
-	from('src/main/resources') {
-		include('**/*.yaml', '**/*.txt')
-		filter(ReplaceTokens, 'tokens': replaceTokenMap)
-		filteringCharset = 'UTF-8'
-	}
-
-	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 processTestResources {
 	exclude('**/.DS_Store', '**/.gitkeep')
-
-	from('src/test/resources') {
-		include('**/*.yaml', '**/*.txt')
-		filter(ReplaceTokens, 'tokens': replaceTokenMap)
-		filteringCharset = 'UTF-8'
-	}
-
-	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 test {
