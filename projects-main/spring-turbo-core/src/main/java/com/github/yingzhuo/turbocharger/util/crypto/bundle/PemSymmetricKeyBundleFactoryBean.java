@@ -22,9 +22,11 @@ import com.github.yingzhuo.turbocharger.util.crypto.pem.PemUtils;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
+
+import static com.github.yingzhuo.turbocharger.util.crypto.pem.PemUtils.readPkcs8Key;
 
 /**
  * {@link SymmetricKeyBundle} 配置用 {@link FactoryBean} <br>
@@ -39,19 +41,23 @@ public class PemSymmetricKeyBundleFactoryBean implements FactoryBean<SymmetricKe
 
 	@Setter
 	private String keyLocation;
+
 	@Setter
 	private String keyContent;
+
 	@Setter
 	private String keyPassword;
+
+	@Nullable
 	private SymmetricKeyBundle bundle;
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@NonNull
 	@Override
 	public SymmetricKeyBundle getObject() {
-		return this.bundle;
+		Assert.notNull(bundle, "bundle is not initialized");
+		return bundle;
 	}
 
 	/**
@@ -67,7 +73,7 @@ public class PemSymmetricKeyBundleFactoryBean implements FactoryBean<SymmetricKe
 	 */
 	@Override
 	public void afterPropertiesSet() {
-		var key = PemUtils.readPkcs8Key(getKeyContent(), this.keyPassword);
+		var key = readPkcs8Key(getKeyContent(), this.keyPassword);
 		this.bundle = new SymmetricKeyBundleImpl(key);
 	}
 

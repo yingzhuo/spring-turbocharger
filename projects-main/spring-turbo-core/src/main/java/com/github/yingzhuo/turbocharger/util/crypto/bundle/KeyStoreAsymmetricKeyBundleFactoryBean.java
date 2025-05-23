@@ -22,7 +22,7 @@ import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.security.KeyPair;
@@ -50,14 +50,15 @@ public class KeyStoreAsymmetricKeyBundleFactoryBean implements FactoryBean<Asymm
 	@Setter
 	private String keypass;
 
+	@Nullable
 	private AsymmetricKeyBundle bundle;
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@NonNull
 	@Override
 	public AsymmetricKeyBundle getObject() {
+		Assert.notNull(bundle, "bundle is not initialized");
 		return this.bundle;
 	}
 

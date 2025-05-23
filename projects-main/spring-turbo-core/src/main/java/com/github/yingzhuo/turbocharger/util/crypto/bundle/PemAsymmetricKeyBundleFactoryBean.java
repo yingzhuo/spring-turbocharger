@@ -17,17 +17,17 @@
  */
 package com.github.yingzhuo.turbocharger.util.crypto.bundle;
 
-import com.github.yingzhuo.turbocharger.core.ResourceUtils;
 import com.github.yingzhuo.turbocharger.util.crypto.pem.PemUtils;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.security.KeyPair;
 
+import static com.github.yingzhuo.turbocharger.core.ResourceUtils.readResourceAsString;
 import static com.github.yingzhuo.turbocharger.util.crypto.pem.PemUtils.readPkcs8PrivateKey;
 import static com.github.yingzhuo.turbocharger.util.crypto.pem.PemUtils.readX509Certificate;
 
@@ -57,14 +57,15 @@ public class PemAsymmetricKeyBundleFactoryBean implements FactoryBean<Asymmetric
 	@Setter
 	private String privateKeyPassword;
 
+	@Nullable
 	private AsymmetricKeyBundle bundle;
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@NonNull
 	@Override
 	public AsymmetricKeyBundle getObject() {
+		Assert.notNull(bundle, "bundle is not initialized");
 		return this.bundle;
 	}
 
@@ -92,7 +93,7 @@ public class PemAsymmetricKeyBundleFactoryBean implements FactoryBean<Asymmetric
 		}
 
 		Assert.notNull(this.certificateLocation, "certificateLocation is required");
-		return ResourceUtils.readResourceAsString(certificateLocation);
+		return readResourceAsString(certificateLocation);
 	}
 
 	private String getPrivateKeyContent() {
@@ -101,7 +102,7 @@ public class PemAsymmetricKeyBundleFactoryBean implements FactoryBean<Asymmetric
 		}
 
 		Assert.notNull(this.privateKeyLocation, "keyLocation is required");
-		return ResourceUtils.readResourceAsString(privateKeyLocation);
+		return readResourceAsString(privateKeyLocation);
 	}
 
 }

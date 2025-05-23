@@ -23,7 +23,7 @@ import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreHelper;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
@@ -47,14 +47,15 @@ public class KeyStoreSymmetricKeyBundleFactoryBean implements FactoryBean<Symmet
 	@Setter
 	private String keypass;
 
+	@Nullable
 	private SymmetricKeyBundle bundle;
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@NonNull
 	@Override
 	public SymmetricKeyBundle getObject() {
+		Assert.notNull(bundle, "bundle is not initialized");
 		return this.bundle;
 	}
 
