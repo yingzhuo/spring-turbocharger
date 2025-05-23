@@ -23,13 +23,12 @@ import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
  * @author 应卓
  * @since 3.5.0
  */
-public abstract class AbstractPkcs12LoadingAlgorithmFactoryBean extends AbstractKeyStoreLoadingAlgorithmFactoryBean {
+public abstract class AbstractJksLoadingAlgorithmFactoryBean extends AbstractKeyStoreLoadingAlgorithmFactoryBean {
 
 	/**
 	 * 构造方法
 	 */
-	protected AbstractPkcs12LoadingAlgorithmFactoryBean() {
-		super(KeyStoreFormat.PKCS12);
+	protected AbstractJksLoadingAlgorithmFactoryBean() {
+		super(KeyStoreFormat.JKS);
 	}
-
 }

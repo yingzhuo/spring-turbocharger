@@ -75,15 +75,25 @@ processResources {
 		into 'META-INF'
 	}
 
-	filter(ReplaceTokens, 'tokens': replaceTokenMap)
-	filteringCharset = 'UTF-8'
+	from('src/main/resources') {
+		include('**/*.yaml', '**/*.yml', '**/*.txt')
+		filter(ReplaceTokens, 'tokens': replaceTokenMap)
+		filteringCharset = 'UTF-8'
+	}
+
+	duplicatesStrategy = DuplicatesStrategy.INHERIT
 }
 
 processTestResources {
 	exclude('**/.DS_Store', '**/.gitkeep')
 
-	filter(ReplaceTokens, 'tokens': replaceTokenMap)
-	filteringCharset = 'UTF-8'
+	from('src/test/resources') {
+		include('**/*.yaml', '**/*.yml', '**/*.txt')
+		filter(ReplaceTokens, 'tokens': replaceTokenMap)
+		filteringCharset = 'UTF-8'
+	}
+
+	duplicatesStrategy = DuplicatesStrategy.INHERIT
 }
 
 test {
