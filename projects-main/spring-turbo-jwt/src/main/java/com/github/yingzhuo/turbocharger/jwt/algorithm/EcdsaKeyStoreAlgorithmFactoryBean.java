@@ -27,15 +27,15 @@ import java.security.interfaces.ECPublicKey;
  * @author 应卓
  * @since 3.5.0
  */
-@Setter
-public class EcdsaJksAlgorithmFactoryBean extends AbstractJksLoadingAlgorithmFactoryBean {
+public class EcdsaKeyStoreAlgorithmFactoryBean extends AbstractKeyStoreAlgorithmFactoryBean {
 
+	@Setter
 	private AlgorithmType algorithmType = AlgorithmType.ECDSA_512;
 
 	/**
 	 * 默认构造方法
 	 */
-	public EcdsaJksAlgorithmFactoryBean() {
+	public EcdsaKeyStoreAlgorithmFactoryBean() {
 		super();
 	}
 
@@ -45,8 +45,8 @@ public class EcdsaJksAlgorithmFactoryBean extends AbstractJksLoadingAlgorithmFac
 	@Override
 	@SuppressWarnings("DuplicatedCode")
 	public Algorithm getObject() {
-		var publicKey = (ECPublicKey) getPublicKey();
-		var privateKey = (ECPrivateKey) getPrivateKey();
+		var publicKey = (ECPublicKey) getBundle().getPublicKey();
+		var privateKey = (ECPrivateKey) getBundle().getPrivateKey();
 
 		return switch (algorithmType) {
 			case ECDSA_256 -> Algorithm.ECDSA256(publicKey, privateKey);

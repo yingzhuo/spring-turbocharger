@@ -80,7 +80,7 @@ public class PemAsymmetricKeyBundleFactoryBean implements FactoryBean<Asymmetric
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void afterPropertiesSet() {
+	public void afterPropertiesSet() throws Exception {
 		var cert = readX509Certificate(getCertContent());
 		var privateKey = readPkcs8PrivateKey(getPrivateKeyContent(), privateKeyPassword);
 		this.bundle = new AsymmetricKeyBundleImpl(new KeyPair(cert.getPublicKey(), privateKey), cert);

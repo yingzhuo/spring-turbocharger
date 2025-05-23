@@ -33,8 +33,7 @@ import static com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreHelp
  * @author 应卓
  * @since 3.3.1
  */
-public class KeyStoreAsymmetricKeyBundleFactoryBean
-	implements FactoryBean<AsymmetricKeyBundle>, InitializingBean {
+public class KeyStoreAsymmetricKeyBundleFactoryBean implements FactoryBean<AsymmetricKeyBundle>, InitializingBean {
 
 	@Setter
 	private String location;

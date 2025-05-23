@@ -27,15 +27,15 @@ import java.security.interfaces.RSAPublicKey;
  * @author 应卓
  * @since 3.5.0
  */
-@Setter
-public class RsaPkcs12AlgorithmFactoryBean extends AbstractPkcs12LoadingAlgorithmFactoryBean {
+public class RsaKeyStoreAlgorithmFactoryBean extends AbstractKeyStoreAlgorithmFactoryBean {
 
+	@Setter
 	private AlgorithmType algorithmType = AlgorithmType.RSA_512;
 
 	/**
 	 * 默认构造方法
 	 */
-	public RsaPkcs12AlgorithmFactoryBean() {
+	public RsaKeyStoreAlgorithmFactoryBean() {
 		super();
 	}
 
@@ -45,8 +45,8 @@ public class RsaPkcs12AlgorithmFactoryBean extends AbstractPkcs12LoadingAlgorith
 	@Override
 	@SuppressWarnings("DuplicatedCode")
 	public Algorithm getObject() {
-		var publicKey = (RSAPublicKey) getPublicKey();
-		var privateKey = (RSAPrivateKey) getPrivateKey();
+		var publicKey = (RSAPublicKey) getBundle().getPublicKey();
+		var privateKey = (RSAPrivateKey) getBundle().getPrivateKey();
 
 		return switch (algorithmType) {
 			case RSA_256 -> Algorithm.RSA256(publicKey, privateKey);

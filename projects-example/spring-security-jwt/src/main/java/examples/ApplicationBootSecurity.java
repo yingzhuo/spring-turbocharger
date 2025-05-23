@@ -18,12 +18,13 @@
 package examples;
 
 import com.github.yingzhuo.turbocharger.jwt.algorithm.AlgorithmType;
-import com.github.yingzhuo.turbocharger.jwt.algorithm.RsaPkcs12AlgorithmFactoryBean;
+import com.github.yingzhuo.turbocharger.jwt.algorithm.RsaKeyStoreAlgorithmFactoryBean;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.encoder.EncodingIds;
 import com.github.yingzhuo.turbocharger.security.encoder.PasswordEncoderFactories;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
 import com.github.yingzhuo.turbocharger.security.filter.factory.JwtTokenAuthenticationFilterFactoryBean;
+import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,8 +48,9 @@ import org.springframework.security.web.SecurityFilterChain;
 public class ApplicationBootSecurity {
 
 	@Bean
-	public RsaPkcs12AlgorithmFactoryBean jwtAlgorithmFactoryBean() {
-		var factoryBean = new RsaPkcs12AlgorithmFactoryBean();
+	public RsaKeyStoreAlgorithmFactoryBean jwtAlgorithmFactoryBean() {
+		var factoryBean = new RsaKeyStoreAlgorithmFactoryBean();
+		factoryBean.setFormat(KeyStoreFormat.PKCS12);
 		factoryBean.setAlgorithmType(AlgorithmType.RSA_512);
 		factoryBean.setLocation("classpath:examples.pfx");
 		factoryBean.setStorepass("changeit");
