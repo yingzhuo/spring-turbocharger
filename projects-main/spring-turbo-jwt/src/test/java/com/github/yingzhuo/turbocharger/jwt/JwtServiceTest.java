@@ -17,34 +17,36 @@
  */
 package com.github.yingzhuo.turbocharger.jwt;
 
-import com.github.yingzhuo.turbocharger.jwt.algorithm.RSA512AlgorithmFactoryBean;
+import com.github.yingzhuo.turbocharger.jwt.algorithm.AlgorithmType;
+import com.github.yingzhuo.turbocharger.jwt.algorithm.RsaPemAlgorithmFactoryBean;
 import org.junit.jupiter.api.Test;
 
 public class JwtServiceTest {
 
 	@Test
 	void test() {
-		var factoryBean = new RSA512AlgorithmFactoryBean();
+		var factoryBean = new RsaPemAlgorithmFactoryBean();
+		factoryBean.setAlgorithmType(AlgorithmType.RSA_512);
 		factoryBean.setCertificatePemContent(
 			"""
-				-----BEGIN CERTIFICATE-----
-				MIICsjCCAZqgAwIBAgIUTdMkQsog9u9UHGvFaNgBlvnph4EwDQYJKoZIhvcNAQEL
-				BQAwEzERMA8GA1UEAwwIeWluZ3podW8wHhcNMjUwNTIyMjEzMjMzWhcNMjYxMjMx
-				MTU1OTU5WjATMREwDwYDVQQDDAh5aW5nemh1bzCCASIwDQYJKoZIhvcNAQEBBQAD
-				ggEPADCCAQoCggEBANYQyLr37pannQjpjH/N36+5vn48lVTfRPtgFpYYi02bicwI
-				62KezrcZSkXFASFKtKt3s6iQsTn7x8GzmSWjHO9u71YcxJTifReYZOySgARl70KT
-				KE+6C5yDik45F+dbzIHPc4M/wL/CMMao7GF5LlshQ/e9jHzbpPrBTwalDyZhe26c
-				5JMaoo1bils6naipMJAcSV/EtkfINLhg4P1IW96bydIpf2JuQECX22oe2r5KKk6y
-				J2Ztp356NiQB/JOii4N/imTlSdZn3fq9YxNQdig9V3x09WEM0jNDTlmDgBnNXrgt
-				0Pg8xdsIsStuQFJd1/R2yl9E13lh6HLm3YmSZv0CAwEAATANBgkqhkiG9w0BAQsF
-				AAOCAQEAuM6eQgzm/ZJ5rutSo3VpH4D0fHEfT+j7dh430KnNYAEIbTwlunL+hM0w
-				er8pD66bFW01OmJSfzEeeL+ms0gANgTCKQfNmjmb/y0sFFFuyqFkKm9INOr7O5SF
-				ECHSe4TU+UljKSC1JV7vlDu4GgAVXB0A7Cl6Ip2yLJuHs0Ee3zQk6komoOXuJP24
-				t6jchKRnzTFbxOa3rT8UfbBbU1Y7IzDfQ3spkDMoaHQH3YziZ0aoQlbqvLd2FfKB
-				YymQkWnk+/RYWriludTHTjsvORw4EPts2HjoITrSF7UihWyVDUXYokCm6G7tr3PM
-				Xx6YU7RxA84R1sgdD0YtdhKuuGcoWw==
-				-----END CERTIFICATE-----
-				"""
+			-----BEGIN CERTIFICATE-----
+			MIICsjCCAZqgAwIBAgIUTdMkQsog9u9UHGvFaNgBlvnph4EwDQYJKoZIhvcNAQEL
+			BQAwEzERMA8GA1UEAwwIeWluZ3podW8wHhcNMjUwNTIyMjEzMjMzWhcNMjYxMjMx
+			MTU1OTU5WjATMREwDwYDVQQDDAh5aW5nemh1bzCCASIwDQYJKoZIhvcNAQEBBQAD
+			ggEPADCCAQoCggEBANYQyLr37pannQjpjH/N36+5vn48lVTfRPtgFpYYi02bicwI
+			62KezrcZSkXFASFKtKt3s6iQsTn7x8GzmSWjHO9u71YcxJTifReYZOySgARl70KT
+			KE+6C5yDik45F+dbzIHPc4M/wL/CMMao7GF5LlshQ/e9jHzbpPrBTwalDyZhe26c
+			5JMaoo1bils6naipMJAcSV/EtkfINLhg4P1IW96bydIpf2JuQECX22oe2r5KKk6y
+			J2Ztp356NiQB/JOii4N/imTlSdZn3fq9YxNQdig9V3x09WEM0jNDTlmDgBnNXrgt
+			0Pg8xdsIsStuQFJd1/R2yl9E13lh6HLm3YmSZv0CAwEAATANBgkqhkiG9w0BAQsF
+			AAOCAQEAuM6eQgzm/ZJ5rutSo3VpH4D0fHEfT+j7dh430KnNYAEIbTwlunL+hM0w
+			er8pD66bFW01OmJSfzEeeL+ms0gANgTCKQfNmjmb/y0sFFFuyqFkKm9INOr7O5SF
+			ECHSe4TU+UljKSC1JV7vlDu4GgAVXB0A7Cl6Ip2yLJuHs0Ee3zQk6komoOXuJP24
+			t6jchKRnzTFbxOa3rT8UfbBbU1Y7IzDfQ3spkDMoaHQH3YziZ0aoQlbqvLd2FfKB
+			YymQkWnk+/RYWriludTHTjsvORw4EPts2HjoITrSF7UihWyVDUXYokCm6G7tr3PM
+			Xx6YU7RxA84R1sgdD0YtdhKuuGcoWw==
+			-----END CERTIFICATE-----
+			"""
 		);
 		factoryBean.setPrivateKeyPemContent(
 			"""

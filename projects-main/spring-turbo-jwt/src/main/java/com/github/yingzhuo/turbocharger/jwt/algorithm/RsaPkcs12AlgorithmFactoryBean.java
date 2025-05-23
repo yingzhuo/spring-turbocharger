@@ -18,20 +18,41 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
+import lombok.Setter;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
 /**
  * @author 应卓
- * @see Algorithm#RSA512(RSAPublicKey, RSAPrivateKey)
  * @since 3.5.0
  */
-public class RSA512AlgorithmFactoryBean extends AbstractPemLoadingAlgorithmFactoryBean {
+@Setter
+public class RsaPkcs12AlgorithmFactoryBean extends AbstractPkcs12LoadingAlgorithmFactoryBean {
 
+	private AlgorithmType algorithmType = AlgorithmType.RSA_512;
+
+	/**
+	 * 默认构造方法
+	 */
+	public RsaPkcs12AlgorithmFactoryBean() {
+		super();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Algorithm getObject() {
-		return Algorithm.RSA512((RSAPublicKey) getPublicKey(), (RSAPrivateKey) getPrivateKey());
+		return switch (algorithmType) {
+			case RSA_256 ->
+				Algorithm.RSA256((RSAPublicKey) super.getPublicKey(), (RSAPrivateKey) super.getPrivateKey());
+			case RSA_384 ->
+				Algorithm.RSA384((RSAPublicKey) super.getPublicKey(), (RSAPrivateKey) super.getPrivateKey());
+			case RSA_512 ->
+				Algorithm.RSA512((RSAPublicKey) super.getPublicKey(), (RSAPrivateKey) super.getPrivateKey());
+			default -> throw new IllegalStateException("Unsupported algorithm type: " + algorithmType);
+		};
 	}
 
 }

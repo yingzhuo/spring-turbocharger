@@ -26,6 +26,8 @@ import java.io.UncheckedIOException;
 import java.security.*;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -206,6 +208,20 @@ public final class KeyStoreHelper {
 			return x509Cert.getSigAlgOID();
 		}
 		throw new IllegalArgumentException("cannot get SigAlgOID");
+	}
+
+	/**
+	 * 获取所有条目名称
+	 *
+	 * @param keyStore 已加载的密钥库
+	 * @return 所有条目名称
+	 */
+	public static List<String> getAliases(KeyStore keyStore) {
+		try {
+			return Collections.list(keyStore.aliases());
+		} catch (KeyStoreException e) {
+			throw new IllegalArgumentException(e.getMessage(), e);
+		}
 	}
 
 	/**

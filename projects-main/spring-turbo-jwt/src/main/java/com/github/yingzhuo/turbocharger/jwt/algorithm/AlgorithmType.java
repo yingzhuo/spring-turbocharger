@@ -17,28 +17,19 @@
  */
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
-import com.auth0.jwt.algorithms.Algorithm;
-import lombok.Setter;
-import org.springframework.beans.factory.FactoryBean;
-
 /**
  * @author 应卓
- * @see Algorithm#HMAC512(String)
  * @since 3.5.0
  */
-@Setter
-public class HMAC512AlgorithmFactoryBean implements FactoryBean<Algorithm> {
+public enum AlgorithmType {
 
-	private String secret;
-
-	@Override
-	public Algorithm getObject() {
-		return Algorithm.HMAC512(secret);
-	}
-
-	@Override
-	public Class<?> getObjectType() {
-		return Algorithm.class;
-	}
-
+	ECDSA_256,
+	ECDSA_384,
+	ECDSA_512,
+	RSA_256,
+	RSA_384,
+	RSA_512,
+	HMAC_256,
+	HMAC_384,
+	HMAC_512
 }

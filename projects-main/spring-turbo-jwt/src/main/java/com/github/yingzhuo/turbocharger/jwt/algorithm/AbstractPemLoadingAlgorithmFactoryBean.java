@@ -22,8 +22,11 @@ import com.github.yingzhuo.turbocharger.core.ResourceUtils;
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.ssl.pem.PemContent;
+import org.springframework.lang.Nullable;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -34,13 +37,13 @@ import java.security.PublicKey;
  */
 @Getter
 @Setter
-public abstract class AbstractPemLoadingAlgorithmFactoryBean implements FactoryBean<Algorithm> {
+public abstract class AbstractPemLoadingAlgorithmFactoryBean implements FactoryBean<Algorithm>, InitializingBean, DisposableBean {
 
 	private String certificatePemContent;
 	private String privateKeyPemContent;
 	private String certificatePemLocation;
 	private String privateKeyPemLocation;
-	private String privateKeyPassword;
+	private @Nullable String privateKeyPassword;
 
 	/**
 	 * 构造方法
@@ -60,6 +63,20 @@ public abstract class AbstractPemLoadingAlgorithmFactoryBean implements FactoryB
 	@Override
 	public final Class<?> getObjectType() {
 		return Algorithm.class;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void afterPropertiesSet() {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void destroy() {
 	}
 
 	protected final PublicKey getPublicKey() {

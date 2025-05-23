@@ -18,20 +18,41 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
+import lombok.Setter;
 
 import java.security.interfaces.ECPrivateKey;
 import java.security.interfaces.ECPublicKey;
 
 /**
  * @author 应卓
- * @see Algorithm#ECDSA256(ECPublicKey, ECPrivateKey)
  * @since 3.5.0
  */
-public class ECDSA256AlgorithmFactoryBean extends AbstractPemLoadingAlgorithmFactoryBean {
+@Setter
+public class EcdsaPemAlgorithmFactoryBean extends AbstractPemLoadingAlgorithmFactoryBean {
 
+	private AlgorithmType algorithmType = AlgorithmType.ECDSA_512;
+
+	/**
+	 * 默认构造方法
+	 */
+	public EcdsaPemAlgorithmFactoryBean() {
+		super();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Algorithm getObject() {
-		return Algorithm.ECDSA256((ECPublicKey) getPublicKey(), (ECPrivateKey) getPrivateKey());
+		return switch (algorithmType) {
+			case ECDSA_256 ->
+				Algorithm.ECDSA256((ECPublicKey) super.getPublicKey(), (ECPrivateKey) super.getPrivateKey());
+			case ECDSA_384 ->
+				Algorithm.ECDSA384((ECPublicKey) super.getPublicKey(), (ECPrivateKey) super.getPrivateKey());
+			case ECDSA_512 ->
+				Algorithm.ECDSA512((ECPublicKey) super.getPublicKey(), (ECPrivateKey) super.getPrivateKey());
+			default -> throw new IllegalStateException("Unsupported algorithm type: " + algorithmType);
+		};
 	}
 
 }

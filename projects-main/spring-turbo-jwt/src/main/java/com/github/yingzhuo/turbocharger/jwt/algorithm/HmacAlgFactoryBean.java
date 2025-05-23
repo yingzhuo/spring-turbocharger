@@ -18,20 +18,41 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
-
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
+import lombok.Setter;
+import org.springframework.beans.factory.FactoryBean;
+import org.springframework.lang.Nullable;
 
 /**
  * @author 应卓
- * @see Algorithm#RSA256(RSAPublicKey, RSAPrivateKey)
  * @since 3.5.0
  */
-public class RSA256AlgorithmFactoryBean extends AbstractPemLoadingAlgorithmFactoryBean {
+@Setter
+public class HmacAlgFactoryBean implements FactoryBean<Algorithm> {
+
+	private AlgorithmType algorithmType = AlgorithmType.HMAC_512;
+	private String secret;
+
+	/**
+	 * 默认构造方法
+	 */
+	public HmacAlgFactoryBean() {
+		super();
+	}
 
 	@Override
 	public Algorithm getObject() {
-		return Algorithm.RSA256((RSAPublicKey) getPublicKey(), (RSAPrivateKey) getPrivateKey());
+		return switch (algorithmType) {
+			case HMAC_256 -> Algorithm.HMAC256(secret);
+			case HMAC_384 -> Algorithm.HMAC384(secret);
+			case HMAC_512 -> Algorithm.HMAC512(secret);
+			default -> throw new IllegalStateException("Unsupported algorithm type: " + algorithmType);
+		};
+	}
+
+	@Nullable
+	@Override
+	public Class<?> getObjectType() {
+		return Algorithm.class;
 	}
 
 }
