@@ -81,4 +81,8 @@ public final class ListFactories {
 		return list;
 	}
 
+	public static <T> ArrayList<T> newArrayList(Enumeration<T> enumeration) {
+		return Collections.list(enumeration);
+	}
+
 }

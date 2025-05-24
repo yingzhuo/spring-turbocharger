@@ -17,6 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.keystore;
 
+import com.github.yingzhuo.turbocharger.keystore.util.PemUtils;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -27,8 +28,8 @@ import org.springframework.util.StringUtils;
 import java.security.KeyPair;
 
 import static com.github.yingzhuo.turbocharger.core.ResourceUtils.readResourceAsString;
-import static com.github.yingzhuo.turbocharger.keystore.PemUtils.readPkcs8PrivateKey;
-import static com.github.yingzhuo.turbocharger.keystore.PemUtils.readX509Certificate;
+import static com.github.yingzhuo.turbocharger.keystore.util.PemUtils.readPkcs8PrivateKey;
+import static com.github.yingzhuo.turbocharger.keystore.util.PemUtils.readX509Certificate;
 
 /**
  * {@link KeyBundle} 配置用 {@link FactoryBean} <br>

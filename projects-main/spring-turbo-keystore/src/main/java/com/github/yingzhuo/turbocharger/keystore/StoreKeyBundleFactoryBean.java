@@ -26,7 +26,7 @@ import org.springframework.util.Assert;
 
 import java.security.KeyPair;
 
-import static com.github.yingzhuo.turbocharger.keystore.KeyStoreHelper.*;
+import static com.github.yingzhuo.turbocharger.keystore.util.KeyStoreUtils.*;
 
 /**
  * @author 应卓

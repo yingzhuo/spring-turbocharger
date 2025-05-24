@@ -15,22 +15,9 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.keystore.autoconfiguration;
+@NonNullApi
+@NonNullFields
+package com.github.yingzhuo.turbocharger.keystore.util;
 
-import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormatConverter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
-
-/**
- * @author 应卓
- * @since 3.5.0
- */
-public class KeyStoreAutoConfiguration {
-
-	@Bean
-	@ConditionalOnMissingBean
-	public KeyStoreFormatConverter keyStoreFormatConverter() {
-		return new KeyStoreFormatConverter();
-	}
-
-}
+import org.springframework.lang.NonNullApi;
+import org.springframework.lang.NonNullFields;

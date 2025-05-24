@@ -15,8 +15,9 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.keystore;
+package com.github.yingzhuo.turbocharger.keystore.util;
 
+import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
@@ -38,12 +39,12 @@ import java.util.Objects;
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")
-public final class KeyStoreHelper {
+public final class KeyStoreUtils {
 
 	/**
 	 * 私有构造方法
 	 */
-	private KeyStoreHelper() {
+	private KeyStoreUtils() {
 		super();
 	}
 
@@ -104,7 +105,7 @@ public final class KeyStoreHelper {
 		try {
 			return (T) keyStore.getKey(alias, keypass.toCharArray());
 		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage(), e);
+			throw new IllegalArgumentException(e.getMessage(), e);
 		}
 	}
 
@@ -154,7 +155,7 @@ public final class KeyStoreHelper {
 
 		try {
 			return (T) keyStore.getCertificate(alias);
-		} catch (KeyStoreException e) {
+		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
 	}
@@ -218,8 +219,8 @@ public final class KeyStoreHelper {
 	 */
 	public static List<String> getAliases(KeyStore keyStore) {
 		try {
-			return Collections.list(keyStore.aliases());
-		} catch (KeyStoreException e) {
+			return Collections.unmodifiableList(Collections.list(keyStore.aliases()));
+		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
 	}
@@ -236,7 +237,7 @@ public final class KeyStoreHelper {
 	public static boolean containsAlias(KeyStore keyStore, String alias) {
 		try {
 			return keyStore.containsAlias(alias);
-		} catch (KeyStoreException e) {
+		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
 	}

@@ -17,7 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.webcli.cli.support;
 
-import com.github.yingzhuo.turbocharger.keystore.KeyStoreHelper;
+import com.github.yingzhuo.turbocharger.keystore.util.KeyStoreUtils;
 import com.github.yingzhuo.turbocharger.webcli.cli.ClientCertificate;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -69,7 +69,7 @@ public abstract class AbstractClientHttpRequestFactoryBean implements FactoryBea
 			.loadTrustMaterial(TrustAllStrategy.INSTANCE);
 
 		if (clientCertificate != null) {
-			var keyStore = KeyStoreHelper.loadKeyStore(
+			var keyStore = KeyStoreUtils.loadKeyStore(
 				clientCertificate.getResource().getInputStream(),
 				clientCertificate.getKeyStoreFormat(),
 				clientCertificate.getStorePassword()

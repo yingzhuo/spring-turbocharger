@@ -15,12 +15,11 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.keystore;
+package com.github.yingzhuo.turbocharger.keystore.util;
 
 import org.springframework.boot.ssl.pem.PemContent;
 import org.springframework.core.io.Resource;
 import org.springframework.lang.Nullable;
-import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,9 +29,7 @@ import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static com.github.yingzhuo.turbocharger.util.StringPool.LF;
 import static com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils.toUnchecked;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.springframework.util.Assert.hasText;
@@ -56,19 +53,6 @@ public final class PemUtils {
 	 */
 	private PemUtils() {
 		super();
-	}
-
-	/**
-	 * 文本转换为 {@link PemContent} 实例
-	 *
-	 * @param text 文本
-	 * @return PemContent 实例
-	 */
-	public static PemContent load(CharSequence text) {
-		notNull(text, "text is null");
-		var trimmed = PemUtils.trimPemContent(text.toString());
-		hasText(trimmed, "text is blank");
-		return PemContent.of(trimmed);
 	}
 
 	/**
@@ -307,23 +291,6 @@ public final class PemUtils {
 		} catch (IOException e) {
 			throw toUnchecked(e);
 		}
-	}
-
-	/**
-	 * 整理PEM文本内容，去除不必要的白字符 <br>
-	 * header和footer也去除白字符
-	 *
-	 * @param text PEM文件内容
-	 * @return 整理后的内容
-	 */
-	public static String trimPemContent(String text) {
-		hasText(text, "text is null or blank");
-
-		return text.lines()
-			.map(String::trim)
-			.filter(StringUtils::hasText)
-			.collect(Collectors.joining(LF))
-			.trim();
 	}
 
 }
