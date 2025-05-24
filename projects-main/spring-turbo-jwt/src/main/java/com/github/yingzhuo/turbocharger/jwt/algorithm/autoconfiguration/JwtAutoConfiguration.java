@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
+package com.github.yingzhuo.turbocharger.jwt.algorithm.autoconfiguration;
 
 import com.auth0.jwt.algorithms.Algorithm;
 import com.github.yingzhuo.turbocharger.jwt.JwtService;
@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.lang.Nullable;
 
 /**
  * 自动配置类
@@ -40,7 +39,7 @@ public class JwtAutoConfiguration {
 	@Bean
 	public JwtService jsonWebTokenService(
 		Algorithm algorithm,
-		@Autowired(required = false) @Nullable VerificationCustomizer verificationCustomizer) {
+		@Autowired(required = false) VerificationCustomizer verificationCustomizer) {
 		return new JwtServiceImpl(algorithm, verificationCustomizer);
 	}
 

@@ -28,7 +28,7 @@ import org.springframework.beans.factory.FactoryBean;
 public class HmacAlgorithmFactoryBean implements FactoryBean<Algorithm> {
 
 	@Setter
-	private AlgorithmType algorithmType = AlgorithmType.HMAC_512;
+	private AlgorithmType algorithmType = AlgorithmType.HMAC512;
 
 	@Setter
 	private String secret;
@@ -39,10 +39,10 @@ public class HmacAlgorithmFactoryBean implements FactoryBean<Algorithm> {
 	@Override
 	public Algorithm getObject() {
 		return switch (algorithmType) {
-			case HMAC_256 -> Algorithm.HMAC256(secret);
-			case HMAC_384 -> Algorithm.HMAC384(secret);
-			case HMAC_512 -> Algorithm.HMAC512(secret);
-			default -> throw new IllegalStateException("Unsupported algorithm type: " + algorithmType);
+			case HMAC256 -> Algorithm.HMAC256(secret);
+			case HMAC384 -> Algorithm.HMAC384(secret);
+			case HMAC512 -> Algorithm.HMAC512(secret);
+			default -> throw new UnsupportedAlgorithmTypeException("Unsupported algorithm type: " + algorithmType);
 		};
 	}
 

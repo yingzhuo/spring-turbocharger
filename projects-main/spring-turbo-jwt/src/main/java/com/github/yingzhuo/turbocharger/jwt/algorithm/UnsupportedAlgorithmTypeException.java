@@ -21,16 +21,15 @@ package com.github.yingzhuo.turbocharger.jwt.algorithm;
  * @author 应卓
  * @since 3.5.0
  */
-public enum AlgorithmType {
+public class UnsupportedAlgorithmTypeException extends IllegalArgumentException {
 
-	ECDSA256,
-	ECDSA384,
-	ECDSA512,
-	RSA256,
-	RSA384,
-	RSA512,
-	HMAC256,
-	HMAC384,
-	HMAC512;
+	/**
+	 * 构造方法
+	 *
+	 * @param message 错误消息
+	 */
+	public UnsupportedAlgorithmTypeException(String message) {
+		super(message);
+	}
 
 }

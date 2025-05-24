@@ -30,7 +30,7 @@ import java.security.interfaces.ECPublicKey;
 public class EcdsaStoreAlgorithmFactoryBean extends AbstractStoreAlgorithmFactoryBean {
 
 	@Setter
-	private AlgorithmType algorithmType = AlgorithmType.ECDSA_512;
+	private AlgorithmType algorithmType = AlgorithmType.ECDSA512;
 
 	/**
 	 * {@inheritDoc}
@@ -42,10 +42,10 @@ public class EcdsaStoreAlgorithmFactoryBean extends AbstractStoreAlgorithmFactor
 		var privateKey = (ECPrivateKey) getBundle().getPrivateKey();
 
 		return switch (algorithmType) {
-			case ECDSA_256 -> Algorithm.ECDSA256(publicKey, privateKey);
-			case ECDSA_384 -> Algorithm.ECDSA384(publicKey, privateKey);
-			case ECDSA_512 -> Algorithm.ECDSA512(publicKey, privateKey);
-			default -> throw new IllegalStateException("Unsupported algorithm type: " + algorithmType);
+			case ECDSA256 -> Algorithm.ECDSA256(publicKey, privateKey);
+			case ECDSA384 -> Algorithm.ECDSA384(publicKey, privateKey);
+			case ECDSA512 -> Algorithm.ECDSA512(publicKey, privateKey);
+			default -> throw new IllegalArgumentException("Unsupported algorithm type: " + algorithmType);
 		};
 	}
 

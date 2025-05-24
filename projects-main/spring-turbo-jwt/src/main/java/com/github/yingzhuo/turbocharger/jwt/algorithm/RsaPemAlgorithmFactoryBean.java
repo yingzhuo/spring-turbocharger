@@ -30,7 +30,7 @@ import java.security.interfaces.RSAPublicKey;
 public class RsaPemAlgorithmFactoryBean extends AbstractPemAlgorithmFactoryBean {
 
 	@Setter
-	private AlgorithmType algorithmType = AlgorithmType.RSA_512;
+	private AlgorithmType algorithmType = AlgorithmType.RSA512;
 
 	/**
 	 * {@inheritDoc}
@@ -42,10 +42,10 @@ public class RsaPemAlgorithmFactoryBean extends AbstractPemAlgorithmFactoryBean 
 		final var privateKey = (RSAPrivateKey) getBundle().getPrivateKey();
 
 		return switch (algorithmType) {
-			case RSA_256 -> Algorithm.RSA256(publicKey, privateKey);
-			case RSA_384 -> Algorithm.RSA384(publicKey, privateKey);
-			case RSA_512 -> Algorithm.RSA512(publicKey, privateKey);
-			default -> throw new IllegalStateException("Unsupported algorithm type: " + algorithmType);
+			case RSA256 -> Algorithm.RSA256(publicKey, privateKey);
+			case RSA384 -> Algorithm.RSA384(publicKey, privateKey);
+			case RSA512 -> Algorithm.RSA512(publicKey, privateKey);
+			default -> throw new UnsupportedAlgorithmTypeException("Unsupported algorithm type: " + algorithmType);
 		};
 	}
 

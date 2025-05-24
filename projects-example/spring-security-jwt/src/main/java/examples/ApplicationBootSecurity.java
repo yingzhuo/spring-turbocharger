@@ -19,12 +19,12 @@ package examples;
 
 import com.github.yingzhuo.turbocharger.jwt.algorithm.AlgorithmType;
 import com.github.yingzhuo.turbocharger.jwt.algorithm.RsaStoreAlgorithmFactoryBean;
+import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.encoder.EncodingIds;
 import com.github.yingzhuo.turbocharger.security.encoder.PasswordEncoderFactories;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
 import com.github.yingzhuo.turbocharger.security.filter.factory.JwtTokenAuthenticationFilterFactoryBean;
-import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +38,7 @@ import org.springframework.security.config.annotation.web.configurers.RequestCac
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AnyRequestMatcher;
 
 @Configuration
 @EnableMethodSecurity(
@@ -51,7 +52,7 @@ public class ApplicationBootSecurity {
 	public RsaStoreAlgorithmFactoryBean jwtAlgorithmFactoryBean() {
 		var factoryBean = new RsaStoreAlgorithmFactoryBean();
 		factoryBean.setFormat(KeyStoreFormat.PKCS12);
-		factoryBean.setAlgorithmType(AlgorithmType.RSA_512);
+		factoryBean.setAlgorithmType(AlgorithmType.RSA512);
 		factoryBean.setLocation("classpath:examples.pfx");
 		factoryBean.setStorepass("changeit");
 		factoryBean.setAlias("jwt");
@@ -83,8 +84,11 @@ public class ApplicationBootSecurity {
 		http.securityMatcher("/**");
 
 		// enabled
-		http.requiresChannel(c ->
-			c.anyRequest().requiresSecure()
+//		http.requiresChannel(c ->
+//			c.anyRequest().requiresSecure()
+//		);
+		http.redirectToHttps(c ->
+			c.requestMatchers(AnyRequestMatcher.INSTANCE)
 		);
 
 		// enabled

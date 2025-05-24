@@ -22,10 +22,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 
 /**
- * 自动配置类 (杂项)
- *
  * @author 应卓
- * @since 3.3.2
+ * @since 3.5.0
  */
 public class KeyStoreAutoConfiguration {
 
