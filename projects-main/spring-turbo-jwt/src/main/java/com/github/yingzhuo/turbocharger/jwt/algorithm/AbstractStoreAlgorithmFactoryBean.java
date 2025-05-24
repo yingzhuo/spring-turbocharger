@@ -18,9 +18,9 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
-import com.github.yingzhuo.turbocharger.util.crypto.bundle.KeyBundle;
-import com.github.yingzhuo.turbocharger.util.crypto.bundle.StoreKeyBundleFactoryBean;
-import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
+import com.github.yingzhuo.turbocharger.keystore.KeyBundle;
+import com.github.yingzhuo.turbocharger.keystore.StoreKeyBundleFactoryBean;
+import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.lang.Nullable;

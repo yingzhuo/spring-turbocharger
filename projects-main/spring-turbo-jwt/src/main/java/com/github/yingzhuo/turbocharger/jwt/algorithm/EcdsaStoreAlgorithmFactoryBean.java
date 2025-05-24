@@ -33,13 +33,6 @@ public class EcdsaStoreAlgorithmFactoryBean extends AbstractStoreAlgorithmFactor
 	private AlgorithmType algorithmType = AlgorithmType.ECDSA_512;
 
 	/**
-	 * 默认构造方法
-	 */
-	public EcdsaStoreAlgorithmFactoryBean() {
-		super();
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override

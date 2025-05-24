@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.util.crypto.pem;
+package com.github.yingzhuo.turbocharger.keystore;
 
 import org.springframework.boot.ssl.pem.PemContent;
 import org.springframework.core.io.Resource;

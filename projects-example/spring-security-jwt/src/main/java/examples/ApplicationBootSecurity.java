@@ -24,7 +24,7 @@ import com.github.yingzhuo.turbocharger.security.encoder.EncodingIds;
 import com.github.yingzhuo.turbocharger.security.encoder.PasswordEncoderFactories;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
 import com.github.yingzhuo.turbocharger.security.filter.factory.JwtTokenAuthenticationFilterFactoryBean;
-import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
+import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

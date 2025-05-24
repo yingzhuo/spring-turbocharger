@@ -15,9 +15,8 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.util.crypto.bundle;
+package com.github.yingzhuo.turbocharger.keystore;
 
-import com.github.yingzhuo.turbocharger.util.crypto.pem.PemUtils;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -28,8 +27,8 @@ import org.springframework.util.StringUtils;
 import java.security.KeyPair;
 
 import static com.github.yingzhuo.turbocharger.core.ResourceUtils.readResourceAsString;
-import static com.github.yingzhuo.turbocharger.util.crypto.pem.PemUtils.readPkcs8PrivateKey;
-import static com.github.yingzhuo.turbocharger.util.crypto.pem.PemUtils.readX509Certificate;
+import static com.github.yingzhuo.turbocharger.keystore.PemUtils.readPkcs8PrivateKey;
+import static com.github.yingzhuo.turbocharger.keystore.PemUtils.readX509Certificate;
 
 /**
  * {@link KeyBundle} 配置用 {@link FactoryBean} <br>
@@ -37,6 +36,7 @@ import static com.github.yingzhuo.turbocharger.util.crypto.pem.PemUtils.readX509
  *
  * @see KeyBundle
  * @see PemUtils
+ * @see StoreKeyBundleFactoryBean
  * @since 应卓
  * @since 3.3.1
  */
@@ -66,7 +66,7 @@ public class PemKeyBundleFactoryBean implements FactoryBean<KeyBundle>, Initiali
 	@Override
 	public KeyBundle getObject() {
 		Assert.notNull(bundle, "bundle is not initialized");
-		return this.bundle;
+		return bundle;
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class PemKeyBundleFactoryBean implements FactoryBean<KeyBundle>, Initiali
 	public void afterPropertiesSet() throws Exception {
 		var cert = readX509Certificate(getCertContent());
 		var privateKey = readPkcs8PrivateKey(getPrivateKeyContent(), privateKeyPassword);
-		this.bundle = new KeyBundleImpl(new KeyPair(cert.getPublicKey(), privateKey), cert);
+		bundle = new KeyBundleImpl(new KeyPair(cert.getPublicKey(), privateKey), cert);
 	}
 
 	private String getCertContent() {

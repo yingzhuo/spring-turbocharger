@@ -17,7 +17,7 @@
  */
 @NonNullApi
 @NonNullFields
-package com.github.yingzhuo.turbocharger.util.crypto.pem;
+package com.github.yingzhuo.turbocharger.keystore;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

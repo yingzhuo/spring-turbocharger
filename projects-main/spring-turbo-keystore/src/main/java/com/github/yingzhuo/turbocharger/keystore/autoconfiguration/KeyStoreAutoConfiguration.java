@@ -15,9 +15,9 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.autoconfiguration;
+package com.github.yingzhuo.turbocharger.keystore.autoconfiguration;
 
-import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormatConverter;
+import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormatConverter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 
@@ -27,14 +27,8 @@ import org.springframework.context.annotation.Bean;
  * @author 应卓
  * @since 3.3.2
  */
-public class MiscellaneousAutoConfiguration {
+public class KeyStoreAutoConfiguration {
 
-	/**
-	 * 配置 {@link KeyStoreFormatConverter} 实例
-	 *
-	 * @return {@link KeyStoreFormatConverter} 实例
-	 * @see KeyStoreFormatConverter
-	 */
 	@Bean
 	@ConditionalOnMissingBean
 	public KeyStoreFormatConverter keyStoreFormatConverter() {

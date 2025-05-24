@@ -33,13 +33,6 @@ public class RsaPemAlgorithmFactoryBean extends AbstractPemAlgorithmFactoryBean 
 	private AlgorithmType algorithmType = AlgorithmType.RSA_512;
 
 	/**
-	 * 默认构造方法
-	 */
-	public RsaPemAlgorithmFactoryBean() {
-		super();
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override

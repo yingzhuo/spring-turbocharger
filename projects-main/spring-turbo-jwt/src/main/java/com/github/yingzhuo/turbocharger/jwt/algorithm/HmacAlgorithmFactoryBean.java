@@ -25,18 +25,13 @@ import org.springframework.beans.factory.FactoryBean;
  * @author 应卓
  * @since 3.5.0
  */
-@Setter
 public class HmacAlgorithmFactoryBean implements FactoryBean<Algorithm> {
 
+	@Setter
 	private AlgorithmType algorithmType = AlgorithmType.HMAC_512;
-	private String secret;
 
-	/**
-	 * 默认构造方法
-	 */
-	public HmacAlgorithmFactoryBean() {
-		super();
-	}
+	@Setter
+	private String secret;
 
 	/**
 	 * {@inheritDoc}

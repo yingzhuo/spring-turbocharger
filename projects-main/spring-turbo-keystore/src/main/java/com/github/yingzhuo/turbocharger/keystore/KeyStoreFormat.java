@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.util.crypto.keystore;
+package com.github.yingzhuo.turbocharger.keystore;
 
 import lombok.Getter;
 import org.springframework.lang.Nullable;

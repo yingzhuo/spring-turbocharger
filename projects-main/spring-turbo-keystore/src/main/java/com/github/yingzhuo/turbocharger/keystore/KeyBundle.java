@@ -15,10 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.util.crypto.bundle;
-
-import com.github.yingzhuo.turbocharger.util.crypto.CipherUtils;
-import com.github.yingzhuo.turbocharger.util.crypto.SignatureUtils;
+package com.github.yingzhuo.turbocharger.keystore;
 
 import java.io.Serializable;
 import java.security.KeyPair;
@@ -30,8 +27,10 @@ import java.security.cert.X509Certificate;
  * 对非对称加密算法秘钥和证书的封装
  *
  * @author 应卓
- * @see SignatureUtils
- * @see CipherUtils
+ * @see KeyPair
+ * @see X509Certificate
+ * @see PublicKey
+ * @see PrivateKey
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")

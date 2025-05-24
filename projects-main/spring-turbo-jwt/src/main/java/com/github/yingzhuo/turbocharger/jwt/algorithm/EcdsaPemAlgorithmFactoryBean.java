@@ -33,13 +33,6 @@ public class EcdsaPemAlgorithmFactoryBean extends AbstractPemAlgorithmFactoryBea
 	private AlgorithmType algorithmType = AlgorithmType.ECDSA_512;
 
 	/**
-	 * 默认构造方法
-	 */
-	public EcdsaPemAlgorithmFactoryBean() {
-		super();
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override

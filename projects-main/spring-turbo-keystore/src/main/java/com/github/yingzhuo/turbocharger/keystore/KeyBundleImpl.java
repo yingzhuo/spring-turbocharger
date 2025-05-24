@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.util.crypto.bundle;
+package com.github.yingzhuo.turbocharger.keystore;
 
 import org.springframework.core.style.ToStringCreator;
 
@@ -24,7 +24,6 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 
 /**
- * {@link KeyBundle} 默认实现
  * @author 应卓
  * @since 3.3.1
  */

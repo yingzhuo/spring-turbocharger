@@ -15,10 +15,9 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.util.crypto.bundle;
+package com.github.yingzhuo.turbocharger.keystore;
 
 import com.github.yingzhuo.turbocharger.core.ResourceUtils;
-import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreFormat;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -27,10 +26,11 @@ import org.springframework.util.Assert;
 
 import java.security.KeyPair;
 
-import static com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreHelper.*;
+import static com.github.yingzhuo.turbocharger.keystore.KeyStoreHelper.*;
 
 /**
  * @author 应卓
+ * @see PemKeyBundleFactoryBean
  * @since 3.3.1
  */
 public class StoreKeyBundleFactoryBean implements FactoryBean<KeyBundle>, InitializingBean {
@@ -59,7 +59,7 @@ public class StoreKeyBundleFactoryBean implements FactoryBean<KeyBundle>, Initia
 	@Override
 	public KeyBundle getObject() {
 		Assert.notNull(bundle, "bundle is not initialized");
-		return this.bundle;
+		return bundle;
 	}
 
 	/**

@@ -18,8 +18,8 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
-import com.github.yingzhuo.turbocharger.util.crypto.bundle.KeyBundle;
-import com.github.yingzhuo.turbocharger.util.crypto.bundle.PemKeyBundleFactoryBean;
+import com.github.yingzhuo.turbocharger.keystore.KeyBundle;
+import com.github.yingzhuo.turbocharger.keystore.PemKeyBundleFactoryBean;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.lang.Nullable;

@@ -17,7 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.webcli.cli.support;
 
-import com.github.yingzhuo.turbocharger.util.crypto.keystore.KeyStoreHelper;
+import com.github.yingzhuo.turbocharger.keystore.KeyStoreHelper;
 import com.github.yingzhuo.turbocharger.webcli.cli.ClientCertificate;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -41,8 +41,10 @@ public abstract class AbstractClientHttpRequestFactoryBean implements FactoryBea
 
 	@Nullable
 	protected Duration connectTimeout;
+
 	@Nullable
 	protected Duration requestTimeout;
+
 	@Nullable
 	private ClientCertificate clientCertificate;
 
