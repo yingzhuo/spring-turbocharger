@@ -24,6 +24,8 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 
 /**
+ * {@link KeyBundle} 默认实现
+ *
  * @author 应卓
  * @since 3.3.1
  */

@@ -31,17 +31,19 @@ import java.security.cert.X509Certificate;
  * @see X509Certificate
  * @see PublicKey
  * @see PrivateKey
+ * @see #fromKeyStore()
+ * @see #fromPemFiles()
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")
 public interface KeyBundle extends Serializable {
 
-	public static KeyBundleBuilders.PemBuilder fromPemFiles() {
-		return new KeyBundleBuilders.PemBuilder();
+	public static FromPemBuilder fromPemFiles() {
+		return new FromPemBuilder();
 	}
 
-	public static KeyBundleBuilders.KeyStoreBuilder fromKeyStore() {
-		return new KeyBundleBuilders.KeyStoreBuilder();
+	public static FromKeyStoreBuilder fromKeyStore() {
+		return new FromKeyStoreBuilder();
 	}
 
 	/**

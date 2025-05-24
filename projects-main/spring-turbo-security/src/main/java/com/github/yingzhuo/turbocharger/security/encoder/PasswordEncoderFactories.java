@@ -17,8 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.security.encoder;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -42,9 +41,8 @@ import static com.github.yingzhuo.turbocharger.util.reflection.InstanceUtils.new
  * @see EncodingIds
  * @since 1.0.0
  */
+@Slf4j
 public final class PasswordEncoderFactories {
-
-	private static final Logger log = LoggerFactory.getLogger(PasswordEncoderFactories.class);
 
 	/**
 	 * 私有构造方法
