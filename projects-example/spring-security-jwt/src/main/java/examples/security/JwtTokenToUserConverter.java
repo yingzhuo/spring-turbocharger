@@ -33,9 +33,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * @author 应卓
- */
 @Component
 public class JwtTokenToUserConverter extends AbstractJwtTokenToUserConverter implements TokenToUserConverter {
 
@@ -76,7 +73,6 @@ public class JwtTokenToUserConverter extends AbstractJwtTokenToUserConverter imp
 		public String getPassword() {
 			return NO_PASS;
 		}
-
 	}
 
 }

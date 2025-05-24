@@ -50,8 +50,7 @@ public class ApplicationBootSecurity {
 
 	@Bean
 	public RsaStoreAlgorithmFactoryBean jwtAlgorithmFactoryBean() {
-		var factoryBean = new RsaStoreAlgorithmFactoryBean();
-		factoryBean.setFormat(KeyStoreFormat.PKCS12);
+		var factoryBean = new RsaStoreAlgorithmFactoryBean(KeyStoreFormat.PKCS12);
 		factoryBean.setAlgorithmType(AlgorithmType.RSA512);
 		factoryBean.setLocation("classpath:examples.pfx");
 		factoryBean.setStorepass("changeit");
@@ -84,9 +83,6 @@ public class ApplicationBootSecurity {
 		http.securityMatcher("/**");
 
 		// enabled
-//		http.requiresChannel(c ->
-//			c.anyRequest().requiresSecure()
-//		);
 		http.redirectToHttps(c ->
 			c.requestMatchers(AnyRequestMatcher.INSTANCE)
 		);

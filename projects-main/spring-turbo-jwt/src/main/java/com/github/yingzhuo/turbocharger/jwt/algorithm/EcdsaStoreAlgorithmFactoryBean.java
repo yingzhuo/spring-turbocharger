@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
+import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import lombok.Setter;
 
 import java.security.interfaces.ECPrivateKey;
@@ -31,6 +32,22 @@ public class EcdsaStoreAlgorithmFactoryBean extends AbstractStoreAlgorithmFactor
 
 	@Setter
 	private AlgorithmType algorithmType = AlgorithmType.ECDSA512;
+
+	/**
+	 * 默认构造方法
+	 */
+	public EcdsaStoreAlgorithmFactoryBean() {
+		this(KeyStoreFormat.PKCS12);
+	}
+
+	/**
+	 * 构造方法
+	 *
+	 * @param keyStoreFormat KeyStore格式
+	 */
+	public EcdsaStoreAlgorithmFactoryBean(KeyStoreFormat keyStoreFormat) {
+		super.setFormat(keyStoreFormat);
+	}
 
 	/**
 	 * {@inheritDoc}

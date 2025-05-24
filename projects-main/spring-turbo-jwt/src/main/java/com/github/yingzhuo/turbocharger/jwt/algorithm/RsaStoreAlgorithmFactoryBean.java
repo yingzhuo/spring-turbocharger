@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
+import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import lombok.Setter;
 
 import java.security.interfaces.RSAPrivateKey;
@@ -31,6 +32,22 @@ public class RsaStoreAlgorithmFactoryBean extends AbstractStoreAlgorithmFactoryB
 
 	@Setter
 	private AlgorithmType algorithmType = AlgorithmType.RSA512;
+
+	/**
+	 * 默认构造方法
+	 */
+	public RsaStoreAlgorithmFactoryBean() {
+		this(KeyStoreFormat.PKCS12);
+	}
+
+	/**
+	 * 构造方法
+	 *
+	 * @param keyStoreFormat KeyStore格式
+	 */
+	public RsaStoreAlgorithmFactoryBean(KeyStoreFormat keyStoreFormat) {
+		super.setFormat(keyStoreFormat);
+	}
 
 	/**
 	 * {@inheritDoc}
