@@ -36,6 +36,14 @@ import java.security.cert.X509Certificate;
 @SuppressWarnings("unchecked")
 public interface KeyBundle extends Serializable {
 
+	public static KeyBundleBuilders.PemBuilder fromPemFiles() {
+		return new KeyBundleBuilders.PemBuilder();
+	}
+
+	public static KeyBundleBuilders.KeyStoreBuilder fromKeyStore() {
+		return new KeyBundleBuilders.KeyStoreBuilder();
+	}
+
 	/**
 	 * 获取KeyPair
 	 *
