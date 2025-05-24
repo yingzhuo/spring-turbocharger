@@ -4,8 +4,6 @@
 bouncycastle = "1.80"
 zxing = "3.5.3"
 hutool = "5.8.38"
-freemarker = "2.3.34"
-xxljob = "3.1.0"
 
 [libraries]
 hocon = { module = "com.typesafe:config", version = "1.4.3" }
@@ -15,8 +13,8 @@ bcutil = { module = "org.bouncycastle:bcutil-jdk18on", version.ref = "bouncycast
 java-jwt = { module = "com.auth0:java-jwt", version = "4.5.0" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxing" }
 zxing-javase = { module = "com.google.zxing:javase", version.ref = "zxing" }
-freemarker = { module = "org.freemarker:freemarker", version.ref = "freemarker" }
-xxljob = { module = "com.xuxueli:xxl-job-core", version.ref = "xxljob" }
+freemarker = { module = "org.freemarker:freemarker", version = "2.3.34" }
+xxljob = { module = "com.xuxueli:xxl-job-core", version = "3.1.0" }
 hutool-core = { module = "cn.hutool:hutool-core", version.ref = "hutool" }
 hutool-captcha = { module = "cn.hutool:hutool-captcha", version.ref = "hutool" }
 hutool-crypto = { module = "cn.hutool:hutool-crypto", version.ref = "hutool" }
