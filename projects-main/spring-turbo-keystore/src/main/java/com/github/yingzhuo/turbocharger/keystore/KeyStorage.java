@@ -17,13 +17,15 @@
  */
 package com.github.yingzhuo.turbocharger.keystore;
 
-import com.github.yingzhuo.turbocharger.core.ResourceUtils;
 import com.github.yingzhuo.turbocharger.keystore.util.KeyStoreUtils;
 
 import javax.crypto.SecretKey;
 import java.io.Serializable;
 import java.security.KeyStore;
 import java.util.List;
+
+import static com.github.yingzhuo.turbocharger.core.ResourceUtils.loadResourceAsInputStream;
+import static com.github.yingzhuo.turbocharger.keystore.util.KeyStoreUtils.loadKeyStore;
 
 /**
  * 对 {@link KeyStore} 的封装
@@ -43,8 +45,8 @@ public final class KeyStorage implements Serializable {
 	 * @return 实例
 	 */
 	public static KeyStorage loadFromPkcs12(String location, String storepass) {
-		var ks = KeyStoreUtils.loadKeyStore(
-			ResourceUtils.loadResourceAsInputStream(location),
+		var ks = loadKeyStore(
+			loadResourceAsInputStream(location),
 			KeyStoreFormat.PKCS12,
 			storepass
 		);
@@ -59,8 +61,8 @@ public final class KeyStorage implements Serializable {
 	 * @return 实例
 	 */
 	public static KeyStorage loadFromJks(String location, String storepass) {
-		var ks = KeyStoreUtils.loadKeyStore(
-			ResourceUtils.loadResourceAsInputStream(location),
+		var ks = loadKeyStore(
+			loadResourceAsInputStream(location),
 			KeyStoreFormat.JKS,
 			storepass
 		);

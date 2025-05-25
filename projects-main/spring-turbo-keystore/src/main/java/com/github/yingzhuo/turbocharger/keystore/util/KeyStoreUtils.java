@@ -91,11 +91,12 @@ public final class KeyStoreUtils {
 	public static <T extends Key> T getKey(KeyStore loadedKeyStore, String alias, String keypass) {
 		Assert.notNull(loadedKeyStore, "keyStore is required");
 		Assert.hasText(alias, "alias is required");
-		Assert.notNull(keypass, "privateKeyPass is required");
+		Assert.notNull(keypass, "keypass is required");
 
 		T key = null;
 		try {
 			key = (T) loadedKeyStore.getKey(alias, keypass.toCharArray());
+
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
@@ -110,9 +111,9 @@ public final class KeyStoreUtils {
 	 * 从秘钥库中获取私钥
 	 *
 	 * @param loadedKeyStore 已加载的密钥库
-	 * @param alias    条目名称
-	 * @param keypass  私钥的密码
-	 * @param <T>      私钥类型的泛型
+	 * @param alias          条目名称
+	 * @param keypass        私钥的密码
+	 * @param <T>            私钥类型的泛型
 	 * @return 私钥
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
@@ -170,8 +171,7 @@ public final class KeyStoreUtils {
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
 	public static KeyPair getKeyPair(KeyStore loadedKeyStore, String alias, String keypass) {
-		return new KeyPair(getPublicKey(loadedKeyStore, alias), getPrivateKey(loadedKeyStore, alias, keypass)
-		);
+		return new KeyPair(getPublicKey(loadedKeyStore, alias), getPrivateKey(loadedKeyStore, alias, keypass));
 	}
 
 	/**
@@ -210,8 +210,9 @@ public final class KeyStoreUtils {
 	 * 获取秘钥
 	 *
 	 * @param loadedKeyStore 已加载的密钥库
-	 * @param alias    条目名称
-	 * @param password 条目秘钥
+	 * @param alias          条目名称
+	 * @param password       条目秘钥
+	 * @param <T>            秘钥类型的泛型
 	 * @return 秘钥
 	 */
 	public static <T extends SecretKey> T getSecretKey(KeyStore loadedKeyStore, String alias, String password) {

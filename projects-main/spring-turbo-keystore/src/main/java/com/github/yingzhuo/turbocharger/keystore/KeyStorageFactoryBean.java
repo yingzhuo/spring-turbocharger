@@ -19,12 +19,14 @@ package com.github.yingzhuo.turbocharger.keystore;
 
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.Assert;
 
 /**
  * @author 应卓
  * @since 3.5.0
  */
-public class KeyStorageFactoryBean implements FactoryBean<KeyStorage> {
+public class KeyStorageFactoryBean implements FactoryBean<KeyStorage>, InitializingBean {
 
 	@Setter
 	private String location;
@@ -46,6 +48,12 @@ public class KeyStorageFactoryBean implements FactoryBean<KeyStorage> {
 	@Override
 	public final Class<?> getObjectType() {
 		return KeyStorage.class;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		Assert.notNull(location, "location must not be null");
+		Assert.hasText(storepass, "storepass must not be null or blank");
 	}
 
 }
