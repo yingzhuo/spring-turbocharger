@@ -77,23 +77,25 @@ public final class KeyStoreUtils {
 		}
 	}
 
+	// -----------------------------------------------------------------------------------------------------------------
+
 	/**
 	 * 获取秘钥
 	 *
-	 * @param keyStore 已加载的密钥库
+	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias    条目名称
 	 * @param keypass  秘钥的密码
 	 * @param <T>      秘钥类型泛型
 	 * @return 秘钥
 	 */
-	public static <T extends Key> T getKey(KeyStore keyStore, String alias, String keypass) {
-		Assert.notNull(keyStore, "keyStore is required");
+	public static <T extends Key> T getKey(KeyStore loadedKeyStore, String alias, String keypass) {
+		Assert.notNull(loadedKeyStore, "keyStore is required");
 		Assert.hasText(alias, "alias is required");
 		Assert.notNull(keypass, "privateKeyPass is required");
 
 		T key = null;
 		try {
-			key = (T) keyStore.getKey(alias, keypass.toCharArray());
+			key = (T) loadedKeyStore.getKey(alias, keypass.toCharArray());
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
@@ -107,47 +109,47 @@ public final class KeyStoreUtils {
 	/**
 	 * 从秘钥库中获取私钥
 	 *
-	 * @param keyStore 已加载的密钥库
+	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias    条目名称
 	 * @param keypass  私钥的密码
 	 * @param <T>      私钥类型的泛型
 	 * @return 私钥
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
-	public static <T extends PrivateKey> T getPrivateKey(KeyStore keyStore, String alias, String keypass) {
-		return getKey(keyStore, alias, keypass);
+	public static <T extends PrivateKey> T getPrivateKey(KeyStore loadedKeyStore, String alias, String keypass) {
+		return getKey(loadedKeyStore, alias, keypass);
 	}
 
 	/**
 	 * 从密钥库中获取公钥
 	 *
-	 * @param keyStore 已加载的密钥库
+	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias    条目名称
 	 * @param <T>      私钥类型的泛型
 	 * @return 公钥
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
-	public static <T extends PublicKey> T getPublicKey(KeyStore keyStore, String alias) {
-		var cert = getCertificate(keyStore, alias);
+	public static <T extends PublicKey> T getPublicKey(KeyStore loadedKeyStore, String alias) {
+		var cert = getCertificate(loadedKeyStore, alias);
 		return (T) cert.getPublicKey();
 	}
 
 	/**
 	 * 从密钥库中获取证书，公钥保存在证书之中
 	 *
-	 * @param keyStore 已加载的密钥库
+	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias    条目名称
 	 * @param <T>      证书类型的泛型
 	 * @return 证书
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
-	public static <T extends Certificate> T getCertificate(KeyStore keyStore, String alias) {
-		Assert.notNull(keyStore, "keyStore is required");
+	public static <T extends Certificate> T getCertificate(KeyStore loadedKeyStore, String alias) {
+		Assert.notNull(loadedKeyStore, "keyStore is required");
 		Assert.hasText(alias, "alias is required");
 
 		T certificate = null;
 		try {
-			certificate = (T) keyStore.getCertificate(alias);
+			certificate = (T) loadedKeyStore.getCertificate(alias);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
@@ -161,29 +163,27 @@ public final class KeyStoreUtils {
 	/**
 	 * 从密钥库中获取密钥对
 	 *
-	 * @param keyStore 已加载的密钥库
+	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias    条目名称
 	 * @param keypass  私钥类型的泛型
 	 * @return 密钥对
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
-	public static KeyPair getKeyPair(KeyStore keyStore, String alias, String keypass) {
-		return new KeyPair(
-			getPublicKey(keyStore, alias),
-			getPrivateKey(keyStore, alias, keypass)
+	public static KeyPair getKeyPair(KeyStore loadedKeyStore, String alias, String keypass) {
+		return new KeyPair(getPublicKey(loadedKeyStore, alias), getPrivateKey(loadedKeyStore, alias, keypass)
 		);
 	}
 
 	/**
 	 * 获取签名算法名称
 	 *
-	 * @param keyStore 已加载的密钥库
+	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias    条目名称
 	 * @return 签名算法名称
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
-	public static String getSigAlgName(KeyStore keyStore, String alias) {
-		var cert = getCertificate(keyStore, alias);
+	public static String getSigAlgName(KeyStore loadedKeyStore, String alias) {
+		var cert = getCertificate(loadedKeyStore, alias);
 		if (cert instanceof X509Certificate x509Cert) {
 			return x509Cert.getSigAlgName();
 		}
@@ -193,13 +193,13 @@ public final class KeyStoreUtils {
 	/**
 	 * 获取签名算法OID
 	 *
-	 * @param keyStore 已加载的密钥库
+	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias    条目名称
 	 * @return 签名算法OID
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
-	public static String getSigAlgOID(KeyStore keyStore, String alias) {
-		var cert = getCertificate(keyStore, alias);
+	public static String getSigAlgOID(KeyStore loadedKeyStore, String alias) {
+		var cert = getCertificate(loadedKeyStore, alias);
 		if (cert instanceof X509Certificate x509Cert) {
 			return x509Cert.getSigAlgOID();
 		}
@@ -209,26 +209,26 @@ public final class KeyStoreUtils {
 	/**
 	 * 获取秘钥
 	 *
-	 * @param keyStore 已加载的密钥库
+	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias    条目名称
 	 * @param password 条目秘钥
 	 * @return 秘钥
 	 */
-	public static <T extends SecretKey> T getSecretKey(KeyStore keyStore, String alias, String password) {
-		return getKey(keyStore, alias, password);
+	public static <T extends SecretKey> T getSecretKey(KeyStore loadedKeyStore, String alias, String password) {
+		return getKey(loadedKeyStore, alias, password);
 	}
 
 	/**
 	 * 获取所有条目名称
 	 *
-	 * @param keyStore 已加载的密钥库
+	 * @param loadedKeyStore 已加载的密钥库
 	 * @return 所有条目名称
 	 */
-	public static List<String> getAliases(KeyStore keyStore) {
-		Assert.notNull(keyStore, "keyStore is required");
+	public static List<String> getAliases(KeyStore loadedKeyStore) {
+		Assert.notNull(loadedKeyStore, "keyStore is required");
 
 		try {
-			return Collections.unmodifiableList(Collections.list(keyStore.aliases()));
+			return Collections.unmodifiableList(Collections.list(loadedKeyStore.aliases()));
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
@@ -237,17 +237,17 @@ public final class KeyStoreUtils {
 	/**
 	 * 测试秘钥库是否包含条目
 	 *
-	 * @param keyStore 已加载的密钥库
+	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias    条目名称
 	 * @return 结果
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
-	public static boolean containsAlias(KeyStore keyStore, String alias) {
-		Assert.notNull(keyStore, "keyStore is required");
+	public static boolean containsAlias(KeyStore loadedKeyStore, String alias) {
+		Assert.notNull(loadedKeyStore, "keyStore is required");
 		Assert.hasText(alias, "alias is required");
 
 		try {
-			return keyStore.containsAlias(alias);
+			return loadedKeyStore.containsAlias(alias);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
