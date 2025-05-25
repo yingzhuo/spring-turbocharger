@@ -31,6 +31,7 @@ public final class FromPemBuilder {
 	private String privateKeyPassword;
 
 	FromPemBuilder() {
+		super();
 	}
 
 	public FromPemBuilder certificateLocation(String certificateLocation) {

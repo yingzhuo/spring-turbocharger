@@ -31,6 +31,7 @@ public final class FromKeyStoreBuilder {
 	private String keypass;
 
 	FromKeyStoreBuilder() {
+		super();
 	}
 
 	public FromKeyStoreBuilder location(String location) {

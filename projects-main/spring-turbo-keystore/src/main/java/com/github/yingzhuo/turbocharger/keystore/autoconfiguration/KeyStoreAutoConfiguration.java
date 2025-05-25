@@ -25,10 +25,10 @@ import org.springframework.context.annotation.Bean;
  * @author 应卓
  * @since 3.5.0
  */
+@ConditionalOnMissingBean(KeyStoreFormatConverter.class)
 public class KeyStoreAutoConfiguration {
 
 	@Bean
-	@ConditionalOnMissingBean
 	public KeyStoreFormatConverter keyStoreFormatConverter() {
 		return new KeyStoreFormatConverter();
 	}

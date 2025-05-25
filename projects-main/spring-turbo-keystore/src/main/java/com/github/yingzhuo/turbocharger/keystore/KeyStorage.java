@@ -26,11 +26,22 @@ import java.security.KeyStore;
 import java.util.List;
 
 /**
+ * 对 {@link KeyStore} 的封装
+ *
  * @author 应卓
+ * @see KeyStore
+ * @see KeyStoreUtils
  * @since 3.5.0
  */
 public final class KeyStorage implements Serializable {
 
+	/**
+	 * 从PKCS#12格式文件中加载
+	 *
+	 * @param location  资源位置
+	 * @param storepass 库密码
+	 * @return 实例
+	 */
 	public static KeyStorage loadFromPkcs12(String location, String storepass) {
 		var ks = KeyStoreUtils.loadKeyStore(
 			ResourceUtils.loadResourceAsInputStream(location),
@@ -40,6 +51,13 @@ public final class KeyStorage implements Serializable {
 		return new KeyStorage(ks);
 	}
 
+	/**
+	 * 从JKS格式文件中加载
+	 *
+	 * @param location  资源位置
+	 * @param storepass 库密码
+	 * @return 实例
+	 */
 	public static KeyStorage loadFromJks(String location, String storepass) {
 		var ks = KeyStoreUtils.loadKeyStore(
 			ResourceUtils.loadResourceAsInputStream(location),
