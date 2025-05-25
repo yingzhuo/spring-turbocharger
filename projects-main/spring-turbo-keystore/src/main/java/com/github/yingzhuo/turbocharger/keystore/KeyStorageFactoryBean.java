@@ -24,6 +24,8 @@ import org.springframework.util.Assert;
 
 /**
  * @author 应卓
+ * @see KeyStorage
+ * @see KeyStorage
  * @since 3.5.0
  */
 public class KeyStorageFactoryBean implements FactoryBean<KeyStorage>, InitializingBean {
@@ -37,6 +39,9 @@ public class KeyStorageFactoryBean implements FactoryBean<KeyStorage>, Initializ
 	@Setter
 	private KeyStoreFormat keyStoreFormat = KeyStoreFormat.PKCS12;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public KeyStorage getObject() throws Exception {
 		return switch (keyStoreFormat) {
@@ -45,11 +50,17 @@ public class KeyStorageFactoryBean implements FactoryBean<KeyStorage>, Initializ
 		};
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public final Class<?> getObjectType() {
 		return KeyStorage.class;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		Assert.notNull(location, "location must not be null");

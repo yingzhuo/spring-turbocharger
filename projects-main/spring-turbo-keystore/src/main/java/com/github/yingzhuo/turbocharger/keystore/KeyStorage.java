@@ -33,6 +33,7 @@ import static com.github.yingzhuo.turbocharger.keystore.util.KeyStoreUtils.loadK
  * @author 应卓
  * @see KeyStore
  * @see KeyStoreUtils
+ * @see KeyStorageFactoryBean
  * @since 3.5.0
  */
 public final class KeyStorage implements Serializable {
@@ -80,6 +81,11 @@ public final class KeyStorage implements Serializable {
 		this.keyStore = keyStore;
 	}
 
+	/**
+	 * 获取所有条目名称
+	 *
+	 * @return 所有条目名称
+	 */
 	public List<String> getAliases() {
 		return KeyStoreUtils.getAliases(keyStore);
 	}
