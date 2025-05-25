@@ -24,8 +24,10 @@ import org.springframework.beans.factory.FactoryBean;
 /**
  * @author 应卓
  * @since 3.5.0
+ * @deprecated 使用 {@link HmacStoreAlgorithmFactoryBean} 替代
  */
-public class HmacAlgorithmFactoryBean implements FactoryBean<Algorithm> {
+@Deprecated(since = "3.5.0", forRemoval = true)
+public class HmacSimpleAlgorithmFactoryBean implements FactoryBean<Algorithm> {
 
 	@Setter
 	private AlgorithmType algorithmType = AlgorithmType.HMAC512;

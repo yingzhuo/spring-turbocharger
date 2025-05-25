@@ -21,6 +21,7 @@ import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
+import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
@@ -209,6 +210,22 @@ public final class KeyStoreUtils {
 			return x509Cert.getSigAlgOID();
 		}
 		throw new IllegalArgumentException("cannot get SigAlgOID");
+	}
+
+	/**
+	 * 获取秘钥
+	 *
+	 * @param keyStore 已加载的密钥库
+	 * @param alias    条目名称
+	 * @param password 条目秘钥
+	 * @return 秘钥
+	 */
+	public static <K extends SecretKey> K getSecretKey(KeyStore keyStore, String alias, String password) {
+		try {
+			return (K) keyStore.getKey(alias, password.toCharArray());
+		} catch (Exception e) {
+			throw new IllegalArgumentException(e.getMessage(), e);
+		}
 	}
 
 	/**

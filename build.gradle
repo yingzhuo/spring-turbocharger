@@ -2,14 +2,16 @@ plugins {
 	id 'buildlogic.root-project-conventions'
 }
 
-allprojects {
-	group = 'com.github.yingzhuo'
-	version = springTurbochargerVersion
-
+subprojects {
 	configurations.configureEach {
 		resolutionStrategy {
 			cacheChangingModulesFor(24, 'hours')
 			cacheDynamicVersionsFor(24, 'hours')
 		}
 	}
+}
+
+allprojects {
+	group = 'com.github.yingzhuo'
+	version = springTurbochargerVersion
 }
