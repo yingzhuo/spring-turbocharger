@@ -30,7 +30,9 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+
+import static com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat.PKCS12;
+import static java.util.Objects.requireNonNullElse;
 
 /**
  * {@link KeyStore} 相关工具类
@@ -46,20 +48,6 @@ public final class KeyStoreUtils {
 	 * 私有构造方法
 	 */
 	private KeyStoreUtils() {
-		super();
-	}
-
-	/**
-	 * 加载密钥库
-	 *
-	 * @param inputStream 输入流
-	 * @param storepass   秘钥库的口令
-	 * @return 密钥库
-	 * @throws UncheckedIOException     IO错误
-	 * @throws IllegalArgumentException 其他错误
-	 */
-	public static KeyStore loadKeyStore(InputStream inputStream, String storepass) {
-		return loadKeyStore(inputStream, KeyStoreFormat.PKCS12, storepass);
 	}
 
 	/**
@@ -76,7 +64,7 @@ public final class KeyStoreUtils {
 		Assert.notNull(inputStream, "inputStream is required");
 		Assert.notNull(storepass, "storepass is required");
 
-		keyStoreFormat = Objects.requireNonNullElse(keyStoreFormat, KeyStoreFormat.PKCS12);
+		keyStoreFormat = requireNonNullElse(keyStoreFormat, PKCS12);
 
 		try {
 			var keyStore = KeyStore.getInstance(keyStoreFormat.getValue());
@@ -103,11 +91,17 @@ public final class KeyStoreUtils {
 		Assert.hasText(alias, "alias is required");
 		Assert.notNull(keypass, "privateKeyPass is required");
 
+		T key = null;
 		try {
-			return (T) keyStore.getKey(alias, keypass.toCharArray());
+			key = (T) keyStore.getKey(alias, keypass.toCharArray());
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
+
+		if (key == null) {
+			throw new IllegalArgumentException("cannot find key with alias: " + alias);
+		}
+		return key;
 	}
 
 	/**
@@ -118,7 +112,6 @@ public final class KeyStoreUtils {
 	 * @param keypass  私钥的密码
 	 * @param <T>      私钥类型的泛型
 	 * @return 私钥
-	 * @see #loadKeyStore(InputStream, String) 加载密钥库
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
 	public static <T extends PrivateKey> T getPrivateKey(KeyStore keyStore, String alias, String keypass) {
@@ -132,7 +125,6 @@ public final class KeyStoreUtils {
 	 * @param alias    条目名称
 	 * @param <T>      私钥类型的泛型
 	 * @return 公钥
-	 * @see #loadKeyStore(InputStream, String) 加载密钥库
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
 	public static <T extends PublicKey> T getPublicKey(KeyStore keyStore, String alias) {
@@ -147,18 +139,23 @@ public final class KeyStoreUtils {
 	 * @param alias    条目名称
 	 * @param <T>      证书类型的泛型
 	 * @return 证书
-	 * @see #loadKeyStore(InputStream, String) 加载密钥库
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
 	public static <T extends Certificate> T getCertificate(KeyStore keyStore, String alias) {
 		Assert.notNull(keyStore, "keyStore is required");
 		Assert.hasText(alias, "alias is required");
 
+		T certificate = null;
 		try {
-			return (T) keyStore.getCertificate(alias);
+			certificate = (T) keyStore.getCertificate(alias);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
+
+		if (certificate == null) {
+			throw new IllegalArgumentException("cannot find certificate with alias: " + alias);
+		}
+		return certificate;
 	}
 
 	/**
@@ -168,7 +165,6 @@ public final class KeyStoreUtils {
 	 * @param alias    条目名称
 	 * @param keypass  私钥类型的泛型
 	 * @return 密钥对
-	 * @see #loadKeyStore(InputStream, String) 加载密钥库
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
 	public static KeyPair getKeyPair(KeyStore keyStore, String alias, String keypass) {
@@ -184,7 +180,6 @@ public final class KeyStoreUtils {
 	 * @param keyStore 已加载的密钥库
 	 * @param alias    条目名称
 	 * @return 签名算法名称
-	 * @see #loadKeyStore(InputStream, String) 加载密钥库
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
 	public static String getSigAlgName(KeyStore keyStore, String alias) {
@@ -201,7 +196,6 @@ public final class KeyStoreUtils {
 	 * @param keyStore 已加载的密钥库
 	 * @param alias    条目名称
 	 * @return 签名算法OID
-	 * @see #loadKeyStore(InputStream, String) 加载密钥库
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
 	public static String getSigAlgOID(KeyStore keyStore, String alias) {
@@ -220,12 +214,8 @@ public final class KeyStoreUtils {
 	 * @param password 条目秘钥
 	 * @return 秘钥
 	 */
-	public static <K extends SecretKey> K getSecretKey(KeyStore keyStore, String alias, String password) {
-		try {
-			return (K) keyStore.getKey(alias, password.toCharArray());
-		} catch (Exception e) {
-			throw new IllegalArgumentException(e.getMessage(), e);
-		}
+	public static <T extends SecretKey> T getSecretKey(KeyStore keyStore, String alias, String password) {
+		return getKey(keyStore, alias, password);
 	}
 
 	/**
@@ -235,6 +225,8 @@ public final class KeyStoreUtils {
 	 * @return 所有条目名称
 	 */
 	public static List<String> getAliases(KeyStore keyStore) {
+		Assert.notNull(keyStore, "keyStore is required");
+
 		try {
 			return Collections.unmodifiableList(Collections.list(keyStore.aliases()));
 		} catch (Exception e) {
@@ -248,10 +240,12 @@ public final class KeyStoreUtils {
 	 * @param keyStore 已加载的密钥库
 	 * @param alias    条目名称
 	 * @return 结果
-	 * @see #loadKeyStore(InputStream, String) 加载密钥库
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
 	public static boolean containsAlias(KeyStore keyStore, String alias) {
+		Assert.notNull(keyStore, "keyStore is required");
+		Assert.hasText(alias, "alias is required");
+
 		try {
 			return keyStore.containsAlias(alias);
 		} catch (Exception e) {

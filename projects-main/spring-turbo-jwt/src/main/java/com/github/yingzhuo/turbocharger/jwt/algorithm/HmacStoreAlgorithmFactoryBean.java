@@ -22,6 +22,7 @@ import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 
+import static com.auth0.jwt.algorithms.Algorithm.*;
 import static com.github.yingzhuo.turbocharger.core.ResourceUtils.loadResourceAsInputStream;
 import static com.github.yingzhuo.turbocharger.keystore.util.KeyStoreUtils.getSecretKey;
 import static com.github.yingzhuo.turbocharger.keystore.util.KeyStoreUtils.loadKeyStore;
@@ -57,15 +58,15 @@ public class HmacStoreAlgorithmFactoryBean implements FactoryBean<Algorithm> {
 
 		var algName = secretKey.getAlgorithm();
 		if (algName.equalsIgnoreCase("HmacSHA256")) {
-			return Algorithm.HMAC256(secretKey.getEncoded());
+			return HMAC256(secretKey.getEncoded());
 		}
 
 		if (algName.equalsIgnoreCase("HmacSHA384")) {
-			return Algorithm.HMAC384(secretKey.getEncoded());
+			return HMAC384(secretKey.getEncoded());
 		}
 
 		if (algName.equalsIgnoreCase("HmacSHA512")) {
-			return Algorithm.HMAC512(secretKey.getEncoded());
+			return HMAC512(secretKey.getEncoded());
 		}
 
 		throw new IllegalArgumentException("Unsupported algorithm: " + algName);
