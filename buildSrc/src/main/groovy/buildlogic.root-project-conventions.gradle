@@ -6,10 +6,7 @@ plugins {
 defaultTasks 'classes'
 
 tasks.named('wrapper') {
-	// 国内镜像两个比较好的选择
-	// (1) 腾讯云: https://mirrors.cloud.tencent.com/gradle/gradle-$gradleWrapperVersion-bin.zip
-	// (2) 华为云: https://mirrors.huaweicloud.com/gradle/gradle-$gradleWrapperVersion-bin.zip
-	distributionUrl = "https://mirrors.cloud.tencent.com/gradle/gradle-$gradleWrapperVersion-bin.zip"
+	distributionUrl = gradleWrapperDistributionUrl
 }
 
 tasks.register('removeWrapper', Delete) {
