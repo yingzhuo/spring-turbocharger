@@ -35,7 +35,7 @@ import java.security.cert.X509Certificate;
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")
-public interface KeyBundle extends java.io.Serializable {
+public sealed interface KeyBundle extends java.io.Serializable permits KeyBundleImpl {
 
 	/**
 	 * 生成创建器

@@ -30,7 +30,7 @@ import java.security.cert.X509Certificate;
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")
-class KeyBundleImpl implements KeyBundle {
+final class KeyBundleImpl implements KeyBundle {
 
 	private final KeyPair keyPair;
 	private final Certificate certificate;

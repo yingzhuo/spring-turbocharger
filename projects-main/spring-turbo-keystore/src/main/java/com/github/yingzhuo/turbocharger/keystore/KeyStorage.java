@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.keystore;
 
 import com.github.yingzhuo.turbocharger.keystore.util.KeyStoreUtils;
+import org.springframework.core.style.ToStringCreator;
 
 import javax.crypto.SecretKey;
 import java.io.Serializable;
@@ -51,7 +52,7 @@ public final class KeyStorage implements Serializable {
 			KeyStoreFormat.PKCS12,
 			storepass
 		);
-		return new KeyStorage(ks);
+		return new KeyStorage(ks, location);
 	}
 
 	/**
@@ -67,18 +68,20 @@ public final class KeyStorage implements Serializable {
 			KeyStoreFormat.JKS,
 			storepass
 		);
-		return new KeyStorage(ks);
+		return new KeyStorage(ks, location);
 	}
 
 	private final KeyStore keyStore;
+	private final String location;
 
 	/**
 	 * 私有构造方法
 	 *
 	 * @param keyStore 底层秘钥库
 	 */
-	private KeyStorage(KeyStore keyStore) {
+	private KeyStorage(KeyStore keyStore, String location) {
 		this.keyStore = keyStore;
+		this.location = location;
 	}
 
 	/**
@@ -101,4 +104,18 @@ public final class KeyStorage implements Serializable {
 		return KeyStoreUtils.getSecretKey(keyStore, alias, keypass);
 	}
 
+	public KeyStore toKeyStore() {
+		return keyStore;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		var creator = new ToStringCreator(this);
+		creator.append("keyStore", keyStore);
+		creator.append("location", location);
+		return creator.toString();
+	}
 }
