@@ -2,6 +2,7 @@ logging:
   level:
     "root": info
     "examples": trace
+    "org.springframework.security": trace
 
 spring:
   autoconfigure:

@@ -21,17 +21,15 @@ import com.github.yingzhuo.turbocharger.jackson.util.JsonUtils;
 import com.github.yingzhuo.turbocharger.jwt.JwtService;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.jwt.AbstractJwtTokenToUserConverter;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.stream.Stream;
 
 @Component
 public class JwtTokenToUserConverter extends AbstractJwtTokenToUserConverter implements TokenToUserConverter {
@@ -43,36 +41,34 @@ public class JwtTokenToUserConverter extends AbstractJwtTokenToUserConverter imp
 	@Nullable
 	@Override
 	protected UserDetails doAuthenticate(String rawToken, String headerJson, String payloadJson) throws AuthenticationException {
-		return JsonUtils.parseJson(payloadJson, UserAttributes.class);
+		var ua = JsonUtils.parseJson(payloadJson, UserAttributes.class);
+
+		var rolesToUse = Stream.of(ua.roles)
+			.map(role -> {
+				if (role.startsWith("ROLE_")) {
+					return role.substring("ROLE_".length());
+				} else {
+					return role;
+				}
+			})
+			.toList()
+			.toArray(new String[0]);
+
+		return User.builder()
+			.username(ua.getUsername())
+			.password("WhatEver")
+			.roles(rolesToUse)
+			.build();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	@Data
-	public static class UserAttributes implements UserDetails {
-
-		private static final String NO_PASS = UserAttributes.class.getName() + "#NO_PASS";
-
+	@Getter
+	@Setter
+	public static class UserAttributes {
 		private String userId;
 		private String username;
 		private String[] roles;
-
-		@Override
-		public Collection<? extends GrantedAuthority> getAuthorities() {
-			var roles = this.getRoles();
-			if (roles == null) {
-				return List.of();
-			}
-
-			return Arrays.stream(roles)
-				.map(SimpleGrantedAuthority::new)
-				.toList();
-		}
-
-		@Override
-		public String getPassword() {
-			return NO_PASS;
-		}
 	}
 
 }

@@ -101,7 +101,7 @@ public class ApplicationBootSecurity {
 		http.csrf(AbstractHttpConfigurer::disable);
 
 		// disabled
-		http.httpBasic(Customizer.withDefaults());
+		http.httpBasic(AbstractHttpConfigurer::disable);
 
 		// disabled
 		http.jee(AbstractHttpConfigurer::disable);
@@ -135,7 +135,8 @@ public class ApplicationBootSecurity {
 			c.requestMatchers(HttpMethod.POST, "/security/login").permitAll()
 				.requestMatchers(HttpMethod.GET, "/favicon.ico").permitAll()
 				.requestMatchers(HttpMethod.GET, "/actuator", "/actuator/**").permitAll()
-				.anyRequest().hasAuthority("ROLE_USER")
+				.requestMatchers("/error").permitAll()
+				.anyRequest().hasAnyRole("USER", "ADMIN")
 		);
 
 		return http.build();
@@ -143,7 +144,7 @@ public class ApplicationBootSecurity {
 
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
-		return web -> web.debug(false);
+		return web -> web.debug(true);
 	}
 
 }
