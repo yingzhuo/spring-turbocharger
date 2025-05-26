@@ -100,25 +100,25 @@ public final class PasswordEncoderFactories {
 		PasswordEncoder encoder;
 
 		// MD2
-		encoder = loadInstance("spring.turbo.module.security.encoder.hutool.MD2PasswordEncoder");
+		encoder = loadInstance("com.github.yingzhuo.turbocharger.security.encoder.hutool.MD2PasswordEncoder");
 		if (encoder != null) {
 			map.put(EncodingIds.MD2, encoder);
 		}
 
 		// SHA384
-		encoder = loadInstance("spring.turbo.module.security.encoder.hutool.SHA384PasswordEncoder");
+		encoder = loadInstance("com.github.yingzhuo.turbocharger.security.encoder.hutool.SHA384PasswordEncoder");
 		if (encoder != null) {
 			map.put(EncodingIds.SHA_384, encoder);
 		}
 
 		// SHA512
-		encoder = loadInstance("spring.turbo.module.security.encoder.hutool.SHA512PasswordEncoder");
+		encoder = loadInstance("com.github.yingzhuo.turbocharger.security.encoder.hutool.SHA512PasswordEncoder");
 		if (encoder != null) {
 			map.put(EncodingIds.SHA_512, encoder);
 		}
 
 		// SM3
-		encoder = loadInstance("spring.turbo.module.security.encoder.hutool.SM3PasswordEncoder");
+		encoder = loadInstance("com.github.yingzhuo.turbocharger.security.encoder.hutool.SM3PasswordEncoder");
 		if (encoder != null) {
 			map.put(EncodingIds.SM3, encoder);
 		}
