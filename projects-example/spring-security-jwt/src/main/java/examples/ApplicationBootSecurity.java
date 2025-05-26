@@ -17,8 +17,7 @@
  */
 package examples;
 
-import com.github.yingzhuo.turbocharger.jwt.algorithm.AlgorithmType;
-import com.github.yingzhuo.turbocharger.jwt.algorithm.RsaStoreAlgorithmFactoryBean;
+import com.github.yingzhuo.turbocharger.jwt.algorithm.HmacStoreAlgorithmFactoryBean;
 import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.encoder.EncodingIds;
@@ -38,7 +37,6 @@ import org.springframework.security.config.annotation.web.configurers.RequestCac
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AnyRequestMatcher;
 
 @Configuration
 @EnableMethodSecurity(
@@ -49,12 +47,12 @@ import org.springframework.security.web.util.matcher.AnyRequestMatcher;
 public class ApplicationBootSecurity {
 
 	@Bean
-	public RsaStoreAlgorithmFactoryBean jwtAlgorithmFactoryBean() {
-		var factoryBean = new RsaStoreAlgorithmFactoryBean(KeyStoreFormat.PKCS12);
-		factoryBean.setAlgorithmType(AlgorithmType.RSA512);
-		factoryBean.setLocation("classpath:examples.pfx");
+	public HmacStoreAlgorithmFactoryBean jwtAlgFactoryBean() {
+		var factoryBean = new HmacStoreAlgorithmFactoryBean();
+		factoryBean.setFormat(KeyStoreFormat.PKCS12);
+		factoryBean.setLocation("classpath:secret.pfx");
 		factoryBean.setStorepass("changeit");
-		factoryBean.setAlias("jwt");
+		factoryBean.setAlias("jwt-hmac512");
 		factoryBean.setKeypass("changeit");
 		return factoryBean;
 	}
@@ -83,9 +81,9 @@ public class ApplicationBootSecurity {
 		http.securityMatcher("/**");
 
 		// enabled
-		http.redirectToHttps(c ->
-			c.requestMatchers(AnyRequestMatcher.INSTANCE)
-		);
+//		http.redirectToHttps(c ->
+//			c.requestMatchers(AnyRequestMatcher.INSTANCE)
+//		);
 
 		// enabled
 		// default role: 'ROLE_ANONYMOUS'
