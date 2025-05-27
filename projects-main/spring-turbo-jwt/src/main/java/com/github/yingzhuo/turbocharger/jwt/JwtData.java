@@ -19,7 +19,6 @@ package com.github.yingzhuo.turbocharger.jwt;
 
 import org.springframework.util.Assert;
 
-import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -29,8 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import static com.github.yingzhuo.turbocharger.jwt.JwtConstants.*;
-
 /**
  * JWT签名所包含的信息
  *
@@ -39,7 +36,7 @@ import static com.github.yingzhuo.turbocharger.jwt.JwtConstants.*;
  * @see JwtConstants
  * @since 3.1.1
  */
-public final class JwtData implements Serializable {
+public final class JwtData implements JwtConstants {
 
 	private final Map<String, Object> headerMap = new HashMap<>();
 	private final Map<String, Object> payloadMap = new HashMap<>();

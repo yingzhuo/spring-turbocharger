@@ -17,13 +17,15 @@
  */
 package com.github.yingzhuo.turbocharger.jwt;
 
+import java.io.Serializable;
+
 /**
  * Jwt相关常量
  *
  * @author 应卓
  * @since 3.3.2
  */
-public final class JwtConstants {
+public interface JwtConstants extends Serializable {
 
 	// headers
 	// -----------------------------------------------------------------------------------------------------------------
@@ -41,12 +43,5 @@ public final class JwtConstants {
 	public static final String PAYLOAD_NOT_BEFORE = "nbf";
 	public static final String PAYLOAD_ISSUED_AT = "iat";
 	public static final String PAYLOAD_JWT_ID = "jti";
-
-	/**
-	 * 私有构造方法
-	 */
-	private JwtConstants() {
-		super();
-	}
 
 }

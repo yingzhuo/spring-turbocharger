@@ -23,14 +23,55 @@ package com.github.yingzhuo.turbocharger.jwt.algorithm;
  */
 public enum AlgorithmType {
 
+	/**
+	 * @see EcdsaPemAlgorithmFactoryBean
+	 * @see EcdsaStoreAlgorithmFactoryBean
+	 */
 	ECDSA256,
+
+	/**
+	 * @see EcdsaPemAlgorithmFactoryBean
+	 * @see EcdsaStoreAlgorithmFactoryBean
+	 */
 	ECDSA384,
+
+	/**
+	 * @see EcdsaPemAlgorithmFactoryBean
+	 * @see EcdsaStoreAlgorithmFactoryBean
+	 */
 	ECDSA512,
+
+	/**
+	 * @see RsaPemAlgorithmFactoryBean
+	 * @see RsaStoreAlgorithmFactoryBean
+	 */
 	RSA256,
+
+	/**
+	 * @see RsaPemAlgorithmFactoryBean
+	 * @see RsaStoreAlgorithmFactoryBean
+	 */
 	RSA384,
+
+	/**
+	 * @see RsaPemAlgorithmFactoryBean
+	 * @see RsaStoreAlgorithmFactoryBean
+	 */
 	RSA512,
+
+	/**
+	 * @see HmacStoreAlgorithmFactoryBean
+	 */
 	HMAC256,
+
+	/**
+	 * @see HmacStoreAlgorithmFactoryBean
+	 */
 	HMAC384,
-	HMAC512;
+
+	/**
+	 * @see HmacStoreAlgorithmFactoryBean
+	 */
+	HMAC512
 
 }
