@@ -43,6 +43,7 @@ import java.util.Properties;
  * @see Properties
  * @since 3.3.1
  */
+@Deprecated(forRemoval = true, since = "3.5.0")
 public class InMemoryUserDetailsService implements UserDetailsService {
 
 	private final Map<String, UserDetails> map = new HashMap<>();
