@@ -39,6 +39,7 @@ public final class NullTokenToUserConverter implements TokenToUserConverter {
 	 * 私有构造方法
 	 */
 	private NullTokenToUserConverter() {
+		super();
 	}
 
 	/**

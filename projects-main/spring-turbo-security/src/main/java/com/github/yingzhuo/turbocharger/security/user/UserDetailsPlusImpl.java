@@ -262,6 +262,14 @@ public class UserDetailsPlusImpl implements UserDetailsPlus {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public String getName() {
+		return getUsername();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String toString() {
 		var creator = new ToStringCreator(this);
 		creator.append("username", getUsername());

@@ -17,7 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.security.filter;
 
-import com.github.yingzhuo.turbocharger.security.authentication.Authentication;
+import com.github.yingzhuo.turbocharger.security.authentication.TokenAuthentication;
 import com.github.yingzhuo.turbocharger.security.authentication.NullUserDetailsFinder;
 import com.github.yingzhuo.turbocharger.security.authentication.UserDetailsFinder;
 import com.github.yingzhuo.turbocharger.security.event.AuthenticationFailureEvent;
@@ -99,7 +99,7 @@ public class BasicAuthenticationFilter extends AbstractAuthenticationFilter {
 				return;
 			}
 
-			var authentication = new Authentication(user, token);
+			var authentication = new TokenAuthentication(user, token);
 			authentication.setAuthenticated(true);
 			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 			SecurityContextHolder.getContext().setAuthentication(authentication);

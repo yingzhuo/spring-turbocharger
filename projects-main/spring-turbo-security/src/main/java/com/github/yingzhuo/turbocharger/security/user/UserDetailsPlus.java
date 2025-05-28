@@ -22,7 +22,7 @@ import com.github.yingzhuo.turbocharger.util.collection.Attributes;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -37,7 +37,7 @@ import java.util.Objects;
  * @see TokenToUserConverter
  * @since 1.0.0
  */
-public interface UserDetailsPlus extends UserDetails, Serializable {
+public interface UserDetailsPlus extends UserDetails, Principal {
 
 	/**
 	 * 获取创建器

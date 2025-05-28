@@ -22,10 +22,9 @@ import com.github.yingzhuo.turbocharger.security.util.AuthorityUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
-import java.security.Principal;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -36,8 +35,7 @@ import java.util.Optional;
  * @see org.springframework.security.core.Authentication
  * @since 1.0.0
  */
-public final class Authentication extends AbstractAuthenticationToken
-	implements org.springframework.security.core.Authentication, Principal, Serializable {
+public final class TokenAuthentication extends AbstractAuthenticationToken implements Authentication {
 
 	/**
 	 * 当前用户
@@ -56,7 +54,7 @@ public final class Authentication extends AbstractAuthenticationToken
 	/**
 	 * 默认构造方法
 	 */
-	public Authentication() {
+	public TokenAuthentication() {
 		this(null, null);
 	}
 
@@ -65,7 +63,7 @@ public final class Authentication extends AbstractAuthenticationToken
 	 *
 	 * @param userDetails 用户信息
 	 */
-	public Authentication(@Nullable UserDetails userDetails) {
+	public TokenAuthentication(@Nullable UserDetails userDetails) {
 		this(userDetails, null);
 	}
 
@@ -75,7 +73,7 @@ public final class Authentication extends AbstractAuthenticationToken
 	 * @param userDetails 用户信息
 	 * @param token       令牌
 	 */
-	public Authentication(@Nullable UserDetails userDetails, @Nullable Token token) {
+	public TokenAuthentication(@Nullable UserDetails userDetails, @Nullable Token token) {
 		super(AuthorityUtils.getAuthorities(userDetails));
 		this.userDetails = userDetails;
 		this.token = token;
@@ -104,7 +102,7 @@ public final class Authentication extends AbstractAuthenticationToken
 			return false;
 		if (!super.equals(o))
 			return false;
-		Authentication that = (Authentication) o;
+		TokenAuthentication that = (TokenAuthentication) o;
 		return Objects.equals(userDetails, that.userDetails) && Objects.equals(token, that.token);
 	}
 
