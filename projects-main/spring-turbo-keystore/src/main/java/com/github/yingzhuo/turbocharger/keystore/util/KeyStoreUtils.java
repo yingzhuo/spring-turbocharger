@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.keystore.util;
 
 import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
+import com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
@@ -72,7 +73,7 @@ public final class KeyStoreUtils {
 			keyStore.load(inputStream, storepass.toCharArray());
 			return keyStore;
 		} catch (IOException e) {
-			throw new UncheckedIOException(e);
+			throw IOExceptionUtils.toUnchecked(e);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
@@ -97,7 +98,6 @@ public final class KeyStoreUtils {
 		T key = null;
 		try {
 			key = (T) loadedKeyStore.getKey(alias, keypass.toCharArray());
-
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
