@@ -98,7 +98,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 			authentication.setAuthenticated(true);
 			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-			var securityContext = super.securityContextHolderStrategy.getContext();
+			var securityContext = securityContextHolderStrategy.getContext();
 			securityContext.setAuthentication(authentication);
 
 			if (this.rememberMeServices != null) {

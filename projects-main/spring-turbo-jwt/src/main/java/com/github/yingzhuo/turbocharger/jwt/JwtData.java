@@ -78,6 +78,7 @@ public final class JwtData implements JwtConstants {
 		return this;
 	}
 
+	@Deprecated
 	public JwtData addHeaderAlgorithm(String algorithm) {
 		Assert.hasText(algorithm, "algorithm is null or blank");
 		headerMap.put(HEADER_ALGORITHM, algorithm);

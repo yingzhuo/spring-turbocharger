@@ -22,7 +22,6 @@ import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 
-import static com.auth0.jwt.algorithms.Algorithm.*;
 import static com.github.yingzhuo.turbocharger.core.ResourceUtils.loadResourceAsInputStream;
 import static com.github.yingzhuo.turbocharger.keystore.util.KeyStoreUtils.getSecretKey;
 import static com.github.yingzhuo.turbocharger.keystore.util.KeyStoreUtils.loadKeyStore;
@@ -57,19 +56,12 @@ public class HmacStoreAlgorithmFactoryBean implements FactoryBean<Algorithm> {
 		var secretKey = getSecretKey(keyStore, alias, keypass);
 
 		var algName = secretKey.getAlgorithm();
-		if (algName.equalsIgnoreCase("HmacSHA256")) {
-			return HMAC256(secretKey.getEncoded());
-		}
-
-		if (algName.equalsIgnoreCase("HmacSHA384")) {
-			return HMAC384(secretKey.getEncoded());
-		}
-
-		if (algName.equalsIgnoreCase("HmacSHA512")) {
-			return HMAC512(secretKey.getEncoded());
-		}
-
-		throw new IllegalArgumentException("Unsupported algorithm: " + algName);
+		return switch (algName) {
+			case "HmacSHA256" -> Algorithm.HMAC256(secretKey.getEncoded());
+			case "HmacSHA384" -> Algorithm.HMAC384(secretKey.getEncoded());
+			case "HmacSHA512" -> Algorithm.HMAC512(secretKey.getEncoded());
+			default -> throw new IllegalArgumentException("Unsupported algorithm: " + algName);
+		};
 	}
 
 	/**

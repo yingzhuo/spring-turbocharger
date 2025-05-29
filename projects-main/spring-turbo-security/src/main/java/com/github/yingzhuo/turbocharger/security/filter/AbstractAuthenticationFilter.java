@@ -60,7 +60,7 @@ public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter 
 	protected ApplicationEventPublisher applicationEventPublisher;
 
 	protected final boolean authenticationIsRequired() {
-		final Authentication existingAuth = SecurityContextHolder.getContext().getAuthentication();
+		final Authentication existingAuth = securityContextHolderStrategy.getContext().getAuthentication();
 		if (existingAuth == null || !existingAuth.isAuthenticated()) {
 			return true;
 		}
