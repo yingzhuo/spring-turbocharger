@@ -27,6 +27,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -40,6 +41,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @since 1.2.3
  */
 public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter {
+
+	protected SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
 
 	@Nullable
 	protected TokenResolver tokenResolver;
@@ -90,8 +93,12 @@ public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter 
 		this.authenticationEntryPoint = authenticationEntryPoint;
 	}
 
-	public void setApplicationEventPublisher(@Nullable ApplicationEventPublisher applicationEventPublisher) {
+	public final void setApplicationEventPublisher(@Nullable ApplicationEventPublisher applicationEventPublisher) {
 		this.applicationEventPublisher = applicationEventPublisher;
+	}
+
+	public final void setSecurityContextHolderStrategy(SecurityContextHolderStrategy securityContextHolderStrategy) {
+		this.securityContextHolderStrategy = securityContextHolderStrategy;
 	}
 
 }

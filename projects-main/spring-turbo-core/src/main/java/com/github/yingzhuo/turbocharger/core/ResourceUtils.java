@@ -35,6 +35,7 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
 
 import static com.github.yingzhuo.turbocharger.util.io.CloseUtils.closeQuietly;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -173,6 +174,40 @@ public final class ResourceUtils {
 		try {
 			charset = Objects.requireNonNullElse(charset, UTF_8);
 			return loadResource(location).getContentAsString(charset);
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
+		}
+	}
+
+	/**
+	 * 加载Properties文件
+	 *
+	 * @param location 资源位置
+	 * @return 加载的实例
+	 * @throws UncheckedIOException I/O错误
+	 */
+	public static Properties loadResourceAsProperties(String location) {
+		return loadResourceAsProperties(location, false);
+	}
+
+	/**
+	 * 加载Properties文件
+	 *
+	 * @param location  资源位置
+	 * @param xmlFormat 是否为xml格式
+	 * @return 加载的实例
+	 * @throws UncheckedIOException I/O错误
+	 */
+	public static Properties loadResourceAsProperties(String location, boolean xmlFormat) {
+		Assert.notNull(location, "resource location must not be null");
+		try (var inputStream = loadResourceAsInputStream(location)) {
+			var properties = new Properties();
+			if (xmlFormat) {
+				properties.loadFromXML(inputStream);
+			} else {
+				properties.load(inputStream);
+			}
+			return properties;
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}

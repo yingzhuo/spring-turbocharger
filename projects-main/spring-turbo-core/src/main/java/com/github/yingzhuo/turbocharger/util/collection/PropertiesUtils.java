@@ -17,13 +17,8 @@
  */
 package com.github.yingzhuo.turbocharger.util.collection;
 
-import com.github.yingzhuo.turbocharger.core.ResourceUtils;
-import org.springframework.core.io.Resource;
 import org.springframework.lang.Nullable;
-import org.springframework.util.Assert;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.Properties;
 
 /**
@@ -37,63 +32,6 @@ public final class PropertiesUtils {
 	 */
 	private PropertiesUtils() {
 		super();
-	}
-
-	/**
-	 * 加载Properties
-	 *
-	 * @param resourceLocation 资源位置
-	 * @return Properties实例
-	 */
-	public static Properties load(String resourceLocation) {
-		Assert.hasText(resourceLocation, "resourceLocation is required");
-		return load(ResourceUtils.loadResource(resourceLocation));
-	}
-
-	/**
-	 * 加载Properties
-	 *
-	 * @param resource 资源
-	 * @return Properties实例
-	 */
-	public static Properties load(Resource resource) {
-		Assert.notNull(resource, "resource is required");
-
-		try {
-			var properties = new Properties();
-			properties.load(resource.getInputStream());
-			return properties;
-		} catch (IOException e) {
-			throw new UncheckedIOException(e);
-		}
-	}
-
-	/**
-	 * 加载Properties (XML格式)
-	 *
-	 * @param resourceLocation 资源位置
-	 * @return Properties实例
-	 */
-	public static Properties loadFromXML(String resourceLocation) {
-		Assert.hasText(resourceLocation, "resourceLocation is required");
-		return loadFromXML(ResourceUtils.loadResource(resourceLocation));
-	}
-
-	/**
-	 * 加载Properties (XML格式)
-	 *
-	 * @param resource 资源
-	 * @return Properties实例
-	 */
-	public static Properties loadFromXML(Resource resource) {
-		Assert.notNull(resource, "resource is required");
-		try {
-			var properties = new Properties();
-			properties.loadFromXML(resource.getInputStream());
-			return properties;
-		} catch (IOException e) {
-			throw new UncheckedIOException(e);
-		}
 	}
 
 	/**

@@ -48,26 +48,27 @@ public final class KeyStoreUtils {
 	 * 私有构造方法
 	 */
 	private KeyStoreUtils() {
+		super();
 	}
 
 	/**
 	 * 加载密钥库
 	 *
 	 * @param inputStream    输入流
-	 * @param keyStoreFormat 密钥库格式
+	 * @param format         密钥库格式
 	 * @param storepass      秘钥库的口令
 	 * @return 密钥库
 	 * @throws UncheckedIOException     IO错误
 	 * @throws IllegalArgumentException 其他错误
 	 */
-	public static KeyStore loadKeyStore(InputStream inputStream, @Nullable KeyStoreFormat keyStoreFormat, String storepass) {
+	public static KeyStore loadKeyStore(InputStream inputStream, @Nullable KeyStoreFormat format, String storepass) {
 		Assert.notNull(inputStream, "inputStream is required");
 		Assert.notNull(storepass, "storepass is required");
 
-		keyStoreFormat = requireNonNullElse(keyStoreFormat, PKCS12);
+		format = requireNonNullElse(format, PKCS12);
 
 		try {
-			var keyStore = KeyStore.getInstance(keyStoreFormat.getValue());
+			var keyStore = KeyStore.getInstance(format.getValue());
 			keyStore.load(inputStream, storepass.toCharArray());
 			return keyStore;
 		} catch (IOException e) {
