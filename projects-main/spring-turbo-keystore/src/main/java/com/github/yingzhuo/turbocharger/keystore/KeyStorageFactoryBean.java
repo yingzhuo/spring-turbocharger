@@ -45,8 +45,8 @@ public class KeyStorageFactoryBean implements FactoryBean<KeyStorage>, Initializ
 	@Override
 	public KeyStorage getObject() throws Exception {
 		return switch (keyStoreFormat) {
-			case PKCS12 -> KeyStorage.loadFromPkcs12(location, storepass);
-			case JKS -> KeyStorage.loadFromJks(location, storepass);
+			case PKCS12 -> KeyStorage.load(location, KeyStoreFormat.PKCS12, storepass);
+			case JKS -> KeyStorage.load(location, KeyStoreFormat.JKS, storepass);
 		};
 	}
 

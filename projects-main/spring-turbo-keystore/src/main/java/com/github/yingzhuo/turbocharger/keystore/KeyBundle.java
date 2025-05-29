@@ -17,6 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.keystore;
 
+import java.io.Serializable;
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -35,7 +36,7 @@ import java.security.cert.X509Certificate;
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")
-public sealed interface KeyBundle extends java.io.Serializable permits KeyBundleImpl {
+public sealed interface KeyBundle extends Serializable permits KeyBundleImpl {
 
 	/**
 	 * 生成创建器

@@ -42,30 +42,15 @@ public final class KeyStorage implements Serializable {
 	/**
 	 * 从PKCS#12格式文件中加载
 	 *
-	 * @param location  资源位置
+	 * @param location 资源位置
+	 * @param keyStoreFormat 库文件类型
 	 * @param storepass 库密码
 	 * @return 实例
 	 */
-	public static KeyStorage loadFromPkcs12(String location, String storepass) {
+	public static KeyStorage load(String location, KeyStoreFormat keyStoreFormat, String storepass) {
 		var ks = loadKeyStore(
 			loadResourceAsInputStream(location),
-			KeyStoreFormat.PKCS12,
-			storepass
-		);
-		return new KeyStorage(ks, location);
-	}
-
-	/**
-	 * 从JKS格式文件中加载
-	 *
-	 * @param location  资源位置
-	 * @param storepass 库密码
-	 * @return 实例
-	 */
-	public static KeyStorage loadFromJks(String location, String storepass) {
-		var ks = loadKeyStore(
-			loadResourceAsInputStream(location),
-			KeyStoreFormat.JKS,
+			keyStoreFormat,
 			storepass
 		);
 		return new KeyStorage(ks, location);
