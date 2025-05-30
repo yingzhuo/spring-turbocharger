@@ -28,6 +28,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.PriorityOrdered;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.Environment;
 import org.springframework.lang.Nullable;
 
 import java.nio.file.Path;
@@ -53,6 +54,9 @@ public final class SpringApplicationHolders {
 
 	@Nullable
 	private static WebApplicationType APPLICATION_WEB_APPLICATION_TYPE;
+
+	@Nullable
+	private static Environment ENVIRONMENT;
 
 	/**
 	 * 私有构造方法
@@ -81,6 +85,11 @@ public final class SpringApplicationHolders {
 		return APPLICATION_WEB_APPLICATION_TYPE;
 	}
 
+	@Nullable
+	public static Environment getEnvironment() {
+		return ENVIRONMENT;
+	}
+
 	/**
 	 * 被SpringBoot回调的挂钩
 	 *
@@ -105,6 +114,7 @@ public final class SpringApplicationHolders {
 			SpringApplicationHolders.APPLICATION_HOME = getAppHomeDir(application).toAbsolutePath();
 			SpringApplicationHolders.APPLICATION_SOURCES = application.getAllSources();
 			SpringApplicationHolders.APPLICATION_WEB_APPLICATION_TYPE = application.getWebApplicationType();
+			SpringApplicationHolders.ENVIRONMENT = environment;
 		}
 
 		/**

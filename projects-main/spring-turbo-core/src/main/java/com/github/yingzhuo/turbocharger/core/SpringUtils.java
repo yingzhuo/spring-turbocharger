@@ -136,10 +136,11 @@ public final class SpringUtils {
 	 * @throws UnsupportedOperationException 无法定位{@code ApplicationContext}实例
 	 * @see Environment
 	 * @see EnvironmentUtils
-	 * @see ProfilesUtils
+	 * @see ProfileUtils
 	 */
 	public static Environment getEnvironment() {
-		return getApplicationContext().getEnvironment();
+		return Optional.ofNullable(SpringApplicationHolders.getEnvironment())
+			.orElseThrow(NOT_SUPPORTED);
 	}
 
 	/**
@@ -149,7 +150,7 @@ public final class SpringUtils {
 	 * @throws UnsupportedOperationException 无法定位{@code ApplicationContext}实例
 	 * @see Environment
 	 * @see EnvironmentUtils
-	 * @see ProfilesUtils
+	 * @see ProfileUtils
 	 */
 	public static ApplicationArguments getApplicationArguments() {
 		return getApplicationContext().getBean(ApplicationArguments.class);

@@ -18,9 +18,6 @@
 package com.github.yingzhuo.turbocharger.core;
 
 import org.springframework.core.env.Profiles;
-import org.springframework.util.Assert;
-
-import static com.github.yingzhuo.turbocharger.core.SpringUtils.getEnvironment;
 
 /**
  * Profiles相关工具
@@ -32,34 +29,24 @@ import static com.github.yingzhuo.turbocharger.core.SpringUtils.getEnvironment;
  * @see Profiles#of(String...)
  * @since 1.0.13
  */
-public final class ProfilesUtils {
+public final class ProfileUtils {
 
 	/**
 	 * 私有构造方法
 	 */
-	private ProfilesUtils() {
+	private ProfileUtils() {
 		super();
 	}
 
 	/**
 	 * 判断profiles是否被激活
 	 *
-	 * @param profiles profiles实例
+	 * @param profileExpressions profile表达式
 	 * @return 结果
 	 */
-	public static boolean acceptsProfiles(Profiles profiles) {
-		Assert.notNull(profiles, "profiles is required");
-		return getEnvironment().acceptsProfiles(profiles);
-	}
-
-	/**
-	 * 判断profiles是否被激活
-	 *
-	 * @param profiles profiles
-	 * @return 结果
-	 */
-	public static boolean acceptsProfiles(String... profiles) {
-		return acceptsProfiles((Profiles.of(profiles)));
+	public static boolean matchesProfiles(String... profileExpressions) {
+		return SpringUtils.getEnvironment()
+			.matchesProfiles(profileExpressions);
 	}
 
 }
