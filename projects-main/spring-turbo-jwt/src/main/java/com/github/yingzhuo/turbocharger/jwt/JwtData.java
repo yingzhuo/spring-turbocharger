@@ -22,10 +22,7 @@ import org.springframework.util.Assert;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
 
 /**
@@ -45,7 +42,25 @@ public final class JwtData implements JwtConstants {
 	 * 构造方法
 	 */
 	public JwtData() {
-		this.headerMap.put(HEADER_TYPE, "JWT");
+		addHeaderType("JWT");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || getClass() != o.getClass()) return false;
+		JwtData jwtData = (JwtData) o;
+		return Objects.equals(headerMap, jwtData.headerMap) && Objects.equals(payloadMap, jwtData.payloadMap);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(headerMap, payloadMap);
 	}
 
 	/**
