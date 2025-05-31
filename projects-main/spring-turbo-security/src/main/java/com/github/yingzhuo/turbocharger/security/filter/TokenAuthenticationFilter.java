@@ -120,7 +120,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 				log.debug(e.getMessage(), e);
 			}
 
-			SecurityContextHolder.clearContext();
+			securityContextHolderStrategy.clearContext();
 
 			if (rememberMeServices != null) {
 				rememberMeServices.loginFail(request, response);
