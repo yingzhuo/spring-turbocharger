@@ -18,7 +18,7 @@
 package com.github.yingzhuo.turbocharger.security.token;
 
 import org.springframework.core.Ordered;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.Optional;
 
@@ -50,7 +50,7 @@ public interface TokenResolver extends Ordered {
 	 * @param request HTTP请求
 	 * @return 令牌Optional，不能成功解析时返回empty-optional
 	 */
-	public Optional<Token> resolve(WebRequest request);
+	public Optional<Token> resolve(NativeWebRequest request);
 
 	/**
 	 * 获取排序值

@@ -17,8 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.security.token;
 
-import org.springframework.lang.NonNull;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.Optional;
 
@@ -35,6 +34,7 @@ public final class NullTokenResolver implements TokenResolver {
 	 * 私有构造方法
 	 */
 	private NullTokenResolver() {
+		super();
 	}
 
 	/**
@@ -52,9 +52,8 @@ public final class NullTokenResolver implements TokenResolver {
 	 * @param request HTTP请求
 	 * @return empty-optional
 	 */
-	@NonNull
 	@Override
-	public Optional<Token> resolve(WebRequest request) {
+	public Optional<Token> resolve(NativeWebRequest request) {
 		return Optional.empty();
 	}
 

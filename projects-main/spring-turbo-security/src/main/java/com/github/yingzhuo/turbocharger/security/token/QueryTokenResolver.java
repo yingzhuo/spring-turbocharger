@@ -20,7 +20,7 @@ package com.github.yingzhuo.turbocharger.security.token;
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.Optional;
 
@@ -67,9 +67,8 @@ public class QueryTokenResolver implements TokenResolver {
 	 * @param request HTTP请求
 	 * @return 令牌Optional，不能成功解析时返回empty-optional
 	 */
-	@NonNull
 	@Override
-	public Optional<Token> resolve(WebRequest request) {
+	public Optional<Token> resolve(NativeWebRequest request) {
 		String paramValue = request.getParameter(paramName);
 
 		if (paramValue == null || !paramValue.startsWith(prefix)) {

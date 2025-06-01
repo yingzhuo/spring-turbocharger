@@ -20,7 +20,7 @@ package com.github.yingzhuo.turbocharger.security.token;
 import com.github.yingzhuo.turbocharger.util.Base64Utils;
 import com.github.yingzhuo.turbocharger.util.StringPool;
 import org.springframework.http.HttpHeaders;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.Optional;
 
@@ -47,7 +47,7 @@ public final class BasicTokenResolver extends HeaderTokenResolver {
 	}
 
 	@Override
-	public Optional<Token> resolve(WebRequest request) {
+	public Optional<Token> resolve(NativeWebRequest request) {
 		final Optional<Token> tokenOption = super.resolve(request);
 
 		if (tokenOption.isEmpty()) {

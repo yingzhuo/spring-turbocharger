@@ -21,7 +21,7 @@ import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;
 import org.springframework.core.OrderComparator;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,7 +58,7 @@ public final class CompositeTokenResolver implements TokenResolver {
 
 	@NonNull
 	@Override
-	public Optional<Token> resolve(WebRequest request) {
+	public Optional<Token> resolve(NativeWebRequest request) {
 		for (TokenResolver it : resolvers) {
 			Optional<Token> op = doResolve(it, request);
 			if (op.isPresent())
@@ -68,7 +68,7 @@ public final class CompositeTokenResolver implements TokenResolver {
 	}
 
 	// since 1.0.5
-	private Optional<Token> doResolve(@Nullable TokenResolver resolver, WebRequest request) {
+	private Optional<Token> doResolve(@Nullable TokenResolver resolver, NativeWebRequest request) {
 		try {
 			if (resolver != null) {
 				return resolver.resolve(request);

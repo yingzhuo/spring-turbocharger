@@ -38,6 +38,7 @@ public final class TokenResolverBuilder {
 	 * 构造方法
 	 */
 	TokenResolverBuilder() {
+		super();
 	}
 
 	/**
