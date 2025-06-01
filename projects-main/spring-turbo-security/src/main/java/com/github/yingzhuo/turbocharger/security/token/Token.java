@@ -37,7 +37,7 @@ public interface Token extends Serializable {
 
 	public String asString();
 
-	default int length() {
+	public default int length() {
 		return asString().length();
 	}
 

@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.security.token;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
-import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.web.context.request.NativeWebRequest;
 
@@ -43,7 +42,7 @@ public class QueryTokenResolver implements TokenResolver {
 	 *
 	 * @param paramName query name
 	 */
-	public QueryTokenResolver(@NonNull String paramName) {
+	public QueryTokenResolver(String paramName) {
 		this(paramName, EMPTY);
 	}
 
@@ -53,7 +52,7 @@ public class QueryTokenResolver implements TokenResolver {
 	 * @param paramName query name
 	 * @param prefix    前缀
 	 */
-	public QueryTokenResolver(@NonNull String paramName, @Nullable String prefix) {
+	public QueryTokenResolver(String paramName, @Nullable String prefix) {
 		if (prefix == null)
 			prefix = EMPTY;
 		this.paramName = paramName;
@@ -92,18 +91,6 @@ public class QueryTokenResolver implements TokenResolver {
 	@Override
 	public int getOrder() {
 		return -100;
-	}
-
-	public String getParamName() {
-		return paramName;
-	}
-
-	public String getPrefix() {
-		return prefix;
-	}
-
-	public int getPrefixLen() {
-		return prefixLen;
 	}
 
 }

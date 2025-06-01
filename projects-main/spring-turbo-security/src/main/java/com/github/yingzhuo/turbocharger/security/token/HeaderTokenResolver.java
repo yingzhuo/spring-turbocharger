@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.security.token;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
-import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.web.context.request.NativeWebRequest;
 
@@ -44,7 +43,7 @@ public class HeaderTokenResolver implements TokenResolver {
 	 *
 	 * @param headerName 请求头名
 	 */
-	public HeaderTokenResolver(@NonNull String headerName) {
+	public HeaderTokenResolver(String headerName) {
 		this(headerName, EMPTY);
 	}
 
@@ -54,7 +53,7 @@ public class HeaderTokenResolver implements TokenResolver {
 	 * @param headerName 请求头名
 	 * @param prefix     前缀
 	 */
-	public HeaderTokenResolver(@NonNull String headerName, @Nullable String prefix) {
+	public HeaderTokenResolver(String headerName, @Nullable String prefix) {
 		if (prefix == null) {
 			prefix = EMPTY;
 		}
@@ -94,18 +93,6 @@ public class HeaderTokenResolver implements TokenResolver {
 	@Override
 	public int getOrder() {
 		return -100;
-	}
-
-	public String getHeaderName() {
-		return headerName;
-	}
-
-	public String getPrefix() {
-		return prefix;
-	}
-
-	public int getPrefixLen() {
-		return prefixLen;
 	}
 
 }
