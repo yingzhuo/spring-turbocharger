@@ -19,7 +19,6 @@ package com.github.yingzhuo.turbocharger.keystore.util;
 
 import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import javax.crypto.SecretKey;
@@ -33,9 +32,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import static com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat.PKCS12;
-import static java.util.Objects.requireNonNullElse;
 
 /**
  * {@link KeyStore} 相关工具类
@@ -53,7 +49,6 @@ public final class KeyStoreUtils {
 	 * 私有构造方法
 	 */
 	private KeyStoreUtils() {
-		super();
 	}
 
 	/**
@@ -66,17 +61,16 @@ public final class KeyStoreUtils {
 	 * @throws UncheckedIOException     IO错误
 	 * @throws IllegalArgumentException 其他错误
 	 */
-	public static KeyStore loadKeyStore(InputStream inputStream, @Nullable KeyStoreFormat format, String storepass) {
+	public static KeyStore loadKeyStore(InputStream inputStream, KeyStoreFormat format, String storepass) {
 		Assert.notNull(inputStream, "inputStream is required");
+		Assert.notNull(format, "format is required");
 		Assert.notNull(storepass, "storepass is required");
-
-		format = requireNonNullElse(format, PKCS12);
 
 		LOCK.lock();
 
-		try {
+		try (var input = inputStream) {
 			var keyStore = KeyStore.getInstance(format.getValue());
-			keyStore.load(inputStream, storepass.toCharArray());
+			keyStore.load(input, storepass.toCharArray());
 			return keyStore;
 		} catch (IOException e) {
 			throw IOExceptionUtils.toUnchecked(e);
