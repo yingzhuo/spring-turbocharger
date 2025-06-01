@@ -39,12 +39,24 @@ import static com.github.yingzhuo.turbocharger.keystore.util.KeyStoreUtils.loadK
  */
 public final class KeyStorage implements Serializable {
 
+	private final KeyStore keyStore;
+	private final String location;
+	/**
+	 * 私有构造方法
+	 *
+	 * @param keyStore 底层秘钥库
+	 */
+	private KeyStorage(KeyStore keyStore, String location) {
+		this.keyStore = keyStore;
+		this.location = location;
+	}
+
 	/**
 	 * 从PKCS#12格式文件中加载
 	 *
-	 * @param location 资源位置
+	 * @param location       资源位置
 	 * @param keyStoreFormat 库文件类型
-	 * @param storepass 库密码
+	 * @param storepass      库密码
 	 * @return 实例
 	 */
 	public static KeyStorage load(String location, KeyStoreFormat keyStoreFormat, String storepass) {
@@ -54,19 +66,6 @@ public final class KeyStorage implements Serializable {
 			storepass
 		);
 		return new KeyStorage(ks, location);
-	}
-
-	private final KeyStore keyStore;
-	private final String location;
-
-	/**
-	 * 私有构造方法
-	 *
-	 * @param keyStore 底层秘钥库
-	 */
-	private KeyStorage(KeyStore keyStore, String location) {
-		this.keyStore = keyStore;
-		this.location = location;
 	}
 
 	/**

@@ -31,6 +31,8 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat.PKCS12;
 import static java.util.Objects.requireNonNullElse;
@@ -45,6 +47,8 @@ import static java.util.Objects.requireNonNullElse;
 @SuppressWarnings("unchecked")
 public final class KeyStoreUtils {
 
+	private static final Lock LOCK = new ReentrantLock();
+
 	/**
 	 * 私有构造方法
 	 */
@@ -55,9 +59,9 @@ public final class KeyStoreUtils {
 	/**
 	 * 加载密钥库
 	 *
-	 * @param inputStream    输入流
-	 * @param format         密钥库格式
-	 * @param storepass      秘钥库的口令
+	 * @param inputStream 输入流
+	 * @param format      密钥库格式
+	 * @param storepass   秘钥库的口令
 	 * @return 密钥库
 	 * @throws UncheckedIOException     IO错误
 	 * @throws IllegalArgumentException 其他错误
@@ -68,6 +72,8 @@ public final class KeyStoreUtils {
 
 		format = requireNonNullElse(format, PKCS12);
 
+		LOCK.lock();
+
 		try {
 			var keyStore = KeyStore.getInstance(format.getValue());
 			keyStore.load(inputStream, storepass.toCharArray());
@@ -76,6 +82,8 @@ public final class KeyStoreUtils {
 			throw IOExceptionUtils.toUnchecked(e);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
+		} finally {
+			LOCK.unlock();
 		}
 	}
 
@@ -85,9 +93,9 @@ public final class KeyStoreUtils {
 	 * 获取秘钥
 	 *
 	 * @param loadedKeyStore 已加载的密钥库
-	 * @param alias    条目名称
-	 * @param keypass  秘钥的密码
-	 * @param <T>      秘钥类型泛型
+	 * @param alias          条目名称
+	 * @param keypass        秘钥的密码
+	 * @param <T>            秘钥类型泛型
 	 * @return 秘钥
 	 */
 	public static <T extends Key> T getKey(KeyStore loadedKeyStore, String alias, String keypass) {
@@ -126,8 +134,8 @@ public final class KeyStoreUtils {
 	 * 从密钥库中获取公钥
 	 *
 	 * @param loadedKeyStore 已加载的密钥库
-	 * @param alias    条目名称
-	 * @param <T>      私钥类型的泛型
+	 * @param alias          条目名称
+	 * @param <T>            私钥类型的泛型
 	 * @return 公钥
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
@@ -140,8 +148,8 @@ public final class KeyStoreUtils {
 	 * 从密钥库中获取证书，公钥保存在证书之中
 	 *
 	 * @param loadedKeyStore 已加载的密钥库
-	 * @param alias    条目名称
-	 * @param <T>      证书类型的泛型
+	 * @param alias          条目名称
+	 * @param <T>            证书类型的泛型
 	 * @return 证书
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
@@ -166,8 +174,8 @@ public final class KeyStoreUtils {
 	 * 从密钥库中获取密钥对
 	 *
 	 * @param loadedKeyStore 已加载的密钥库
-	 * @param alias    条目名称
-	 * @param keypass  私钥类型的泛型
+	 * @param alias          条目名称
+	 * @param keypass        私钥类型的泛型
 	 * @return 密钥对
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
@@ -179,7 +187,7 @@ public final class KeyStoreUtils {
 	 * 获取签名算法名称
 	 *
 	 * @param loadedKeyStore 已加载的密钥库
-	 * @param alias    条目名称
+	 * @param alias          条目名称
 	 * @return 签名算法名称
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
@@ -195,7 +203,7 @@ public final class KeyStoreUtils {
 	 * 获取签名算法OID
 	 *
 	 * @param loadedKeyStore 已加载的密钥库
-	 * @param alias    条目名称
+	 * @param alias          条目名称
 	 * @return 签名算法OID
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */
@@ -240,7 +248,7 @@ public final class KeyStoreUtils {
 	 * 测试秘钥库是否包含条目
 	 *
 	 * @param loadedKeyStore 已加载的密钥库
-	 * @param alias    条目名称
+	 * @param alias          条目名称
 	 * @return 结果
 	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
 	 */

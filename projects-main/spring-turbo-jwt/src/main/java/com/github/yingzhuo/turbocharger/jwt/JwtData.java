@@ -46,6 +46,15 @@ public final class JwtData implements JwtConstants {
 	}
 
 	/**
+	 * 创建新实例
+	 *
+	 * @return 新实例
+	 */
+	public static JwtData newInstance() {
+		return new JwtData();
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -61,15 +70,6 @@ public final class JwtData implements JwtConstants {
 	@Override
 	public int hashCode() {
 		return Objects.hash(headerMap, payloadMap);
-	}
-
-	/**
-	 * 创建新实例
-	 *
-	 * @return 新实例
-	 */
-	public static JwtData newInstance() {
-		return new JwtData();
 	}
 
 	public JwtData addHeaderType(String type) {
