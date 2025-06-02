@@ -17,8 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.keystore;
 
-import org.springframework.core.style.ToStringCreator;
-
 import java.security.KeyPair;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
@@ -60,17 +58,6 @@ final class KeyBundleImpl implements KeyBundle {
 	@Override
 	public <T extends X509Certificate> T getCertificate() {
 		return (T) this.certificate;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
-		var creator = new ToStringCreator(this);
-		creator.append("algorithm", getAlgorithm());
-		creator.append("sigAlgName", getSigAlgName());
-		return creator.toString();
 	}
 
 }

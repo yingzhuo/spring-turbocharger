@@ -41,6 +41,7 @@ public final class KeyStorage implements Serializable {
 
 	private final KeyStore keyStore;
 	private final String location;
+
 	/**
 	 * 私有构造方法
 	 *
@@ -102,4 +103,5 @@ public final class KeyStorage implements Serializable {
 		creator.append("location", location);
 		return creator.toString();
 	}
+
 }

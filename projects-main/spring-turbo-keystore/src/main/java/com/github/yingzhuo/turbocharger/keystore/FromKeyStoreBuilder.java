@@ -17,6 +17,10 @@
  */
 package com.github.yingzhuo.turbocharger.keystore;
 
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
+
 /**
  * @author 应卓
  * @see FromPemBuilder
@@ -24,11 +28,20 @@ package com.github.yingzhuo.turbocharger.keystore;
  */
 public final class FromKeyStoreBuilder {
 
+	@Nullable
 	private String location;
+
+	@NonNull
 	private KeyStoreFormat format = KeyStoreFormat.PKCS12;
-	private String storepass;
+
+	@NonNull
+	private String storepass = "changeit";
+
+	@Nullable
 	private String alias;
-	private String keypass;
+
+	@NonNull
+	private String keypass = storepass;
 
 	FromKeyStoreBuilder() {
 		super();
@@ -42,6 +55,10 @@ public final class FromKeyStoreBuilder {
 	public FromKeyStoreBuilder format(KeyStoreFormat format) {
 		this.format = format;
 		return this;
+	}
+
+	public FromKeyStoreBuilder defaultStoreFormat() {
+		return format(KeyStoreFormat.PKCS12);
 	}
 
 	public FromKeyStoreBuilder storepass(String storepass) {
@@ -60,6 +77,10 @@ public final class FromKeyStoreBuilder {
 	}
 
 	public KeyBundle build() {
+		Assert.notNull(location, "location must not be null");
+		Assert.notNull(format, "format must not be null");
+		Assert.hasText(alias, "alias must not be empty");
+
 		try {
 			var factory = new StoreKeyBundleFactoryBean();
 			factory.setLocation(location);

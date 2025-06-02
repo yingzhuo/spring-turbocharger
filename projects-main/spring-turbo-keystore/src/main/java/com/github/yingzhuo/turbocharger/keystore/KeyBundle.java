@@ -94,17 +94,8 @@ public sealed interface KeyBundle extends Serializable permits KeyBundleImpl {
 	 *
 	 * @return 算法名称 如: RSA
 	 */
-	public default String getAlgorithm() {
+	public default String getAlgorithmName() {
 		return getCertificate().getPublicKey().getAlgorithm();
-	}
-
-	/**
-	 * 获取签名算法名称
-	 *
-	 * @return 签名算法名称 如: SHA256WithRSA
-	 */
-	public default String getSigAlgName() {
-		return getCertificate().getSigAlgName();
 	}
 
 }
