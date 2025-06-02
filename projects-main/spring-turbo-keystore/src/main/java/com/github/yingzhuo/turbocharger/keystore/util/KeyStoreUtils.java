@@ -30,8 +30,6 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * {@link KeyStore} 相关工具类
@@ -42,8 +40,6 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @SuppressWarnings("unchecked")
 public final class KeyStoreUtils {
-
-	private static final Lock LOCK = new ReentrantLock();
 
 	/**
 	 * 私有构造方法
@@ -66,8 +62,6 @@ public final class KeyStoreUtils {
 		Assert.notNull(format, "format is required");
 		Assert.notNull(storepass, "storepass is required");
 
-		LOCK.lock();
-
 		try (var input = inputStream) {
 			var keyStore = KeyStore.getInstance(format.getValue());
 			keyStore.load(input, storepass.toCharArray());
@@ -76,8 +70,6 @@ public final class KeyStoreUtils {
 			throw IOExceptionUtils.toUnchecked(e);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
-		} finally {
-			LOCK.unlock();
 		}
 	}
 

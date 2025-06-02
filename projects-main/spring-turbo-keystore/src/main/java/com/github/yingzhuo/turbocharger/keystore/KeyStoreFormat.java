@@ -45,7 +45,7 @@ public enum KeyStoreFormat implements Serializable {
 	/**
 	 * JKS，Java8及以前使用的格式。 文件扩展名为jks。
 	 */
-	JKS("JKS");
+	JKS("jks");
 
 	/**
 	 * 字符串类型值
@@ -57,7 +57,7 @@ public enum KeyStoreFormat implements Serializable {
 	 *
 	 * @param value 字符串类型值
 	 */
-	KeyStoreFormat(String value) {
+	private KeyStoreFormat(String value) {
 		this.value = value;
 	}
 
