@@ -83,14 +83,4 @@ public class QueryTokenResolver implements TokenResolver {
 		return Optional.of(StringToken.of(paramValue));
 	}
 
-	/**
-	 * 排序参数
-	 *
-	 * @return 排序值
-	 */
-	@Override
-	public int getOrder() {
-		return -100;
-	}
-
 }
