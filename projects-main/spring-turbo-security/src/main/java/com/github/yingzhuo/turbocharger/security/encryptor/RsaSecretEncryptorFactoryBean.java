@@ -52,17 +52,26 @@ public class RsaSecretEncryptorFactoryBean implements FactoryBean<RsaSecretEncry
 		delegatingFactoryBean.setFormat(KeyStoreFormat.PKCS12);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public RsaSecretEncryptor getObject() {
 		Assert.notNull(keyBundle, "RSA key bundle is required");
 		return new RsaSecretEncryptor(keyBundle.getKeyPair(), rsaAlgorithm, salt);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public final Class<?> getObjectType() {
 		return RsaSecretEncryptor.class;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		delegatingFactoryBean.afterPropertiesSet();

@@ -49,17 +49,26 @@ public class RsaRawEncryptorFactoryBean implements FactoryBean<RsaRawEncryptor>,
 		delegatingFactoryBean.setFormat(KeyStoreFormat.PKCS12);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public RsaRawEncryptor getObject() {
 		Assert.notNull(keyBundle, "RSA key bundle is required");
 		return new RsaRawEncryptor(keyBundle.getKeyPair(), rsaAlgorithm);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public final Class<?> getObjectType() {
 		return RsaRawEncryptor.class;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		delegatingFactoryBean.afterPropertiesSet();
