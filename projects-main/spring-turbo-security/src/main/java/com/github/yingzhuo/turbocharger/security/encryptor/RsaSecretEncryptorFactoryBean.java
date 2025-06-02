@@ -17,36 +17,76 @@
  */
 package com.github.yingzhuo.turbocharger.security.encryptor;
 
+import com.github.yingzhuo.turbocharger.keystore.KeyBundle;
+import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
+import com.github.yingzhuo.turbocharger.keystore.StoreKeyBundleFactoryBean;
 import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.encrypt.RsaAlgorithm;
 import org.springframework.security.crypto.encrypt.RsaSecretEncryptor;
-
-import java.security.KeyPair;
+import org.springframework.util.Assert;
 
 /**
  * @author 应卓
  * @since 3.5.0
  */
-public class RsaSecretEncryptorFactoryBean implements FactoryBean<RsaSecretEncryptor> {
+public class RsaSecretEncryptorFactoryBean implements FactoryBean<RsaSecretEncryptor>, InitializingBean {
+
+	private final StoreKeyBundleFactoryBean delegatingFactoryBean = new StoreKeyBundleFactoryBean();
 
 	@Setter
-	private RsaAlgorithm rsaAlgorithm;
-
-	@Setter
-	private KeyPair keyPair;
+	private RsaAlgorithm rsaAlgorithm = RsaAlgorithm.DEFAULT;
 
 	@Setter
 	private String salt = "deadbeef";
 
+	@Nullable
+	private KeyBundle keyBundle;
+
+	/**
+	 * 默认构造方法
+	 */
+	public RsaSecretEncryptorFactoryBean() {
+		delegatingFactoryBean.setFormat(KeyStoreFormat.PKCS12);
+	}
+
 	@Override
 	public RsaSecretEncryptor getObject() {
-		return new RsaSecretEncryptor(keyPair, rsaAlgorithm, salt);
+		Assert.notNull(keyBundle, "RSA key bundle is required");
+		return new RsaSecretEncryptor(keyBundle.getKeyPair(), rsaAlgorithm, salt);
 	}
 
 	@Override
 	public final Class<?> getObjectType() {
 		return RsaSecretEncryptor.class;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		delegatingFactoryBean.afterPropertiesSet();
+		keyBundle = delegatingFactoryBean.getObject();
+	}
+
+	public void setLocation(String location) {
+		delegatingFactoryBean.setLocation(location);
+	}
+
+	public void setFormat(KeyStoreFormat format) {
+		delegatingFactoryBean.setFormat(format);
+	}
+
+	public void setStorepass(String storepass) {
+		delegatingFactoryBean.setStorepass(storepass);
+	}
+
+	public void setAlias(String alias) {
+		delegatingFactoryBean.setAlias(alias);
+	}
+
+	public void setKeypass(String keypass) {
+		delegatingFactoryBean.setKeypass(keypass);
 	}
 
 }
