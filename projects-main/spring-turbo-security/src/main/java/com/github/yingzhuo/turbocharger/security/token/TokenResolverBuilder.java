@@ -17,11 +17,14 @@
  */
 package com.github.yingzhuo.turbocharger.security.token;
 
-import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;
+import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+
+import static com.github.yingzhuo.turbocharger.util.collection.CollectionUtils.nullSafeAddAll;
 
 /**
  * 令牌解析器的创建器
@@ -48,7 +51,7 @@ public final class TokenResolverBuilder {
 	 * @return 创建器本身
 	 */
 	public TokenResolverBuilder add(TokenResolver... resolvers) {
-		CollectionUtils.nullSafeAddAll(this.list, resolvers);
+		nullSafeAddAll(list, resolvers);
 		return this;
 	}
 
@@ -59,7 +62,7 @@ public final class TokenResolverBuilder {
 	 * @return 创建器本身
 	 */
 	public TokenResolverBuilder add(Collection<TokenResolver> resolvers) {
-		CollectionUtils.nullSafeAddAll(this.list, resolvers);
+		nullSafeAddAll(list, resolvers);
 		return this;
 	}
 
@@ -83,7 +86,7 @@ public final class TokenResolverBuilder {
 	 * @return 创建器本身
 	 * @see HeaderTokenResolver
 	 */
-	public TokenResolverBuilder fromHttpHeader(String headName, String prefix) {
+	public TokenResolverBuilder fromHttpHeader(String headName, @Nullable String prefix) {
 		list.add(new HeaderTokenResolver(headName, prefix));
 		return this;
 	}
@@ -106,7 +109,7 @@ public final class TokenResolverBuilder {
 	 * @param prefix    前缀
 	 * @return 创建器本身
 	 */
-	public TokenResolverBuilder fromHttpQuery(String paramName, String prefix) {
+	public TokenResolverBuilder fromHttpQuery(String paramName, @Nullable String prefix) {
 		list.add(new QueryTokenResolver(paramName, prefix));
 		return this;
 	}
@@ -138,7 +141,7 @@ public final class TokenResolverBuilder {
 	 */
 	public TokenResolver build() {
 		if (list.isEmpty()) {
-			return NullTokenResolver.getInstance();
+			return request -> Optional.empty();
 		}
 		if (list.size() == 1) {
 			return list.get(0);
