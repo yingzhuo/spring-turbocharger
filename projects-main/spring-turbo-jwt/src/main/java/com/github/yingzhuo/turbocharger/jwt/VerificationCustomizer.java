@@ -27,11 +27,6 @@ import com.auth0.jwt.interfaces.Verification;
  */
 public interface VerificationCustomizer {
 
-	public static VerificationCustomizer noop() {
-		return vc -> {
-		};
-	}
-
 	/**
 	 * 客制 verification 实例
 	 *

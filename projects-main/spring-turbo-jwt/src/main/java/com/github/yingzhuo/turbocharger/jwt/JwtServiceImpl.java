@@ -20,7 +20,6 @@ package com.github.yingzhuo.turbocharger.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.*;
-import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
@@ -30,7 +29,6 @@ import org.springframework.util.Assert;
  */
 public class JwtServiceImpl implements JwtService {
 
-	@NonNull
 	private final Algorithm algorithm;
 
 	@Nullable

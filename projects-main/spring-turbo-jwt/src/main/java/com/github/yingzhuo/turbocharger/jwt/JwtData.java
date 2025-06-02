@@ -39,7 +39,7 @@ public final class JwtData implements JwtConstants {
 	private final Map<String, Object> payloadMap = new HashMap<>();
 
 	/**
-	 * 构造方法
+	 * 默认构造方法
 	 */
 	public JwtData() {
 		addHeaderType("JWT");
