@@ -19,8 +19,10 @@ package com.github.yingzhuo.turbocharger.security.token;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
@@ -54,9 +56,9 @@ public class HeaderTokenResolver implements TokenResolver {
 	 * @param prefix     前缀
 	 */
 	public HeaderTokenResolver(String headerName, @Nullable String prefix) {
-		if (prefix == null) {
-			prefix = EMPTY;
-		}
+		Assert.hasText(headerName, "headerName is required");
+		prefix = Objects.requireNonNullElse(prefix, EMPTY);
+
 		this.headerName = headerName;
 		this.prefix = prefix;
 		this.prefixLen = prefix.length();
@@ -70,7 +72,7 @@ public class HeaderTokenResolver implements TokenResolver {
 	 */
 	@Override
 	public Optional<Token> resolve(NativeWebRequest request) {
-		String headerValue = request.getHeader(headerName);
+		var headerValue = request.getHeader(headerName);
 
 		if (headerValue == null || !headerValue.startsWith(prefix)) {
 			return Optional.empty();

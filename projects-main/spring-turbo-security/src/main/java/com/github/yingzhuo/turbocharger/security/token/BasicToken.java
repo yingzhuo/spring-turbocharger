@@ -24,7 +24,7 @@ import lombok.Getter;
  * @see BasicTokenResolver
  * @since 1.2.3
  */
-public final class BasicToken extends StringToken {
+public class BasicToken extends StringToken {
 
 	/**
 	 * 用户名
