@@ -41,16 +41,25 @@ public class StringToken implements Token, Serializable {
 		return new StringToken(token);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String asString() {
 		return string;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return string;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -61,6 +70,9 @@ public class StringToken implements Token, Serializable {
 		return string.equals(that.string);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(string);

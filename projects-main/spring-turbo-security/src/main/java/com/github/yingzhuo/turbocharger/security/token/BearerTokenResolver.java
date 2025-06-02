@@ -30,13 +30,11 @@ import org.springframework.http.HttpHeaders;
  */
 public final class BearerTokenResolver extends HeaderTokenResolver {
 
-	private static final String PREFIX = "Bearer ";
-
 	/**
 	 * 构造方法
 	 */
 	public BearerTokenResolver() {
-		super(HttpHeaders.AUTHORIZATION, PREFIX);
+		super(HttpHeaders.AUTHORIZATION, "Bearer ");
 	}
 
 }

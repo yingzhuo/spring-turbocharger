@@ -54,12 +54,16 @@ public final class CompositeTokenResolver implements TokenResolver {
 		return new CompositeTokenResolver(resolvers);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Optional<Token> resolve(NativeWebRequest request) {
 		for (TokenResolver it : resolvers) {
 			Optional<Token> op = doResolve(it, request);
-			if (op.isPresent())
+			if (op.isPresent()) {
 				return op;
+			}
 		}
 		return Optional.empty();
 	}

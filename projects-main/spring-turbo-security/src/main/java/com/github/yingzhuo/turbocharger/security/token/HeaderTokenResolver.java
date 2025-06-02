@@ -32,6 +32,7 @@ import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
  *
  * @author 应卓
  * @see org.springframework.http.HttpHeaders
+ * @see QueryTokenResolver
  * @since 1.0.0
  */
 public class HeaderTokenResolver implements TokenResolver {

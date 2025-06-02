@@ -19,8 +19,10 @@ package com.github.yingzhuo.turbocharger.security.token;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
@@ -29,6 +31,7 @@ import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
  * 从HTTP QUERY中解析令牌
  *
  * @author 应卓
+ * @see HeaderTokenResolver
  * @since 1.0.0
  */
 public class QueryTokenResolver implements TokenResolver {
@@ -53,8 +56,9 @@ public class QueryTokenResolver implements TokenResolver {
 	 * @param prefix    前缀
 	 */
 	public QueryTokenResolver(String paramName, @Nullable String prefix) {
-		if (prefix == null)
-			prefix = EMPTY;
+		Assert.notNull(paramName, "paramName must not be null");
+		prefix = Objects.requireNonNullElse(prefix, EMPTY);
+
 		this.paramName = paramName;
 		this.prefix = prefix;
 		this.prefixLen = prefix.length();

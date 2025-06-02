@@ -17,28 +17,38 @@
  */
 package com.github.yingzhuo.turbocharger.security.token;
 
-import com.github.yingzhuo.turbocharger.security.authentication.MutableAuthentication;
-
 import java.io.Serializable;
+import java.util.function.Supplier;
 
 /**
  * 令牌
  *
  * @author 应卓
  * @see #ofString(String)
- * @see MutableAuthentication
  * @since 1.0.0
  */
-public interface Token extends Serializable {
+@FunctionalInterface
+public interface Token extends Serializable, Supplier<String> {
 
 	public static Token ofString(String stringValue) {
 		return StringToken.of(stringValue);
 	}
 
+	/**
+	 * 获取令牌的值
+	 *
+	 * @return 令牌的值
+	 */
 	public String asString();
 
-	public default int length() {
-		return asString().length();
+	/**
+	 * 获取令牌的值
+	 *
+	 * @return 令牌的值
+	 */
+	@Override
+	public default String get() {
+		return asString();
 	}
 
 }

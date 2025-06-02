@@ -37,13 +37,11 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  */
 public final class BasicTokenResolver extends HeaderTokenResolver {
 
-	private static final String PREFIX = "Basic ";
-
 	/**
 	 * 构造方法
 	 */
 	public BasicTokenResolver() {
-		super(HttpHeaders.AUTHORIZATION, PREFIX);
+		super(HttpHeaders.AUTHORIZATION, "Basic ");
 	}
 
 	@Override
