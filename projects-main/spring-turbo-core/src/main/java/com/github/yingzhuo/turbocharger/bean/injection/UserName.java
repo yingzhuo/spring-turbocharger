@@ -15,28 +15,22 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.user;
+package com.github.yingzhuo.turbocharger.bean.injection;
 
-import org.springframework.core.annotation.AliasFor;
-import org.springframework.security.core.annotation.CurrentSecurityContext;
-import org.springframework.security.core.context.SecurityContext;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.lang.annotation.*;
 
 /**
- * 获取当前用户的{@link org.springframework.security.core.Authentication}对象
+ * {@code @Value("${user.name}")} 的快捷方式
  *
  * @author 应卓
- * @see SecurityContext#getAuthentication()
- * @since 1.0.0
+ * @see Value
+ * @since 3.5.0
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
-@CurrentSecurityContext(expression = "authentication")
-public @interface CurrentAuthentication {
-
-	@AliasFor(annotation = CurrentSecurityContext.class, attribute = "errorOnInvalidType")
-	public boolean errorOnInvalidType() default false;
-
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
+@Value("${user.name}")
+public @interface UserName {
 }

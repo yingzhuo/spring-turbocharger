@@ -33,7 +33,6 @@ import java.lang.annotation.*;
  * @see SecurityContext#getAuthentication()
  * @since 1.2.3
  */
-@Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)

@@ -34,7 +34,6 @@ import java.lang.annotation.*;
  * @see AuthenticationPrincipalArgumentResolver
  * @since 1.1.2
  */
-@Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
