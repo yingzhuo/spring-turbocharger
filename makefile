@@ -12,7 +12,6 @@ usage:
 	@echo 'install               : 安装到本地maven仓库'
 	@echo 'publish               : 发布代码到maven中央仓库'
 	@echo 'setup-gradle-wrapper  : 初始化 gradle wrapper'
-	@echo 'remove-gradle-wrapper : 删除 gradle wrapper'
 	@echo 'add-license-header    : 为源文件添加许可证头'
 	@echo 'test                  : 执行单元测试'
 	@echo 'check                 : 检查代码风格'
@@ -43,9 +42,6 @@ publish: install
 setup-gradle-wrapper:
 	$(GRADLE) "wrapper"
 
-remove-gradle-wrapper:
-	$(GRADLE) "removeWrapper"
-
 add-license-header:
 	$(GRADLE) "addLicenseHeader"
 
@@ -66,7 +62,7 @@ push-to-vcs: add-license-header
 	refresh-dependencies \
 	compile publish install \
 	check test \
-	setup-gradle-wrapper remove-gradle-wrapper \
+	setup-gradle-wrapper \
 	add-license-header \
 	stop-gradle-daemon \
 	push-to-vcs

@@ -9,18 +9,6 @@ tasks.named('wrapper') {
 	distributionUrl = gradleWrapperDistributionUrl
 }
 
-tasks.register('removeWrapper', Delete) {
-	group = 'build setup'
-	description = 'Remove Gradle wrapper files.'
-
-	followSymlinks = true
-	delete fileTree(rootDir) {
-		include 'gradlew'
-		include 'gradlew.bat'
-		include 'gradle/wrapper/'
-	}
-}
-
 tasks.register('pushToVcs', Exec) {
 	group = 'vcs'
 	description = 'Commit and push codes to gitee/github.'
