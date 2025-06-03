@@ -42,6 +42,9 @@ public class RsaSecretEncryptorFactoryBean implements FactoryBean<RsaSecretEncry
 	@Setter
 	private String salt = "deadbeef";
 
+	@Setter
+	private boolean gcm = false;
+
 	@Nullable
 	private KeyBundle keyBundle;
 
@@ -58,7 +61,7 @@ public class RsaSecretEncryptorFactoryBean implements FactoryBean<RsaSecretEncry
 	@Override
 	public RsaSecretEncryptor getObject() {
 		Assert.notNull(keyBundle, "RSA key bundle is required");
-		return new RsaSecretEncryptor(keyBundle.getKeyPair(), rsaAlgorithm, salt);
+		return new RsaSecretEncryptor(keyBundle.getKeyPair(), rsaAlgorithm, salt, gcm);
 	}
 
 	/**
