@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.keystore;
 
-import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
@@ -30,13 +29,8 @@ import org.springframework.util.Assert;
  */
 public class KeyStorageFactoryBean implements FactoryBean<KeyStorage>, InitializingBean {
 
-	@Setter
 	private String location;
-
-	@Setter
 	private String storepass;
-
-	@Setter
 	private KeyStoreFormat keyStoreFormat = KeyStoreFormat.PKCS12;
 
 	/**
@@ -67,4 +61,15 @@ public class KeyStorageFactoryBean implements FactoryBean<KeyStorage>, Initializ
 		Assert.hasText(storepass, "storepass must not be null or blank");
 	}
 
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public void setStorepass(String storepass) {
+		this.storepass = storepass;
+	}
+
+	public void setKeyStoreFormat(KeyStoreFormat keyStoreFormat) {
+		this.keyStoreFormat = keyStoreFormat;
+	}
 }
