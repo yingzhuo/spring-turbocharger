@@ -33,7 +33,6 @@ dependencies {
 
 	// spring-turbocharger
 	api project(':projects-main:spring-turbo-core')
-	api project(':projects-main:spring-turbo-keystore')
 
 	// jwt tool
 	implementation libs.java.jwt

@@ -15,10 +15,9 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.keystore;
+package com.github.yingzhuo.turbocharger.util.keystore;
 
 import lombok.Getter;
-import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
 
@@ -59,41 +58,6 @@ public enum KeyStoreFormat implements Serializable {
 	 */
 	private KeyStoreFormat(String value) {
 		this.value = value;
-	}
-
-	/**
-	 * 尝试转换字符串为本美剧类型
-	 *
-	 * @param value 字符串
-	 * @return 结果，有可能为空值
-	 */
-	@Nullable
-	public static KeyStoreFormat of(@Nullable String value) {
-		if (value == null) {
-			return null;
-		}
-
-		if ("pfx".equalsIgnoreCase(value) ||
-			"p12".equalsIgnoreCase(value) ||
-			"pkcs#12".equalsIgnoreCase(value) ||
-			"pkcs12".equalsIgnoreCase(value)) {
-			return PKCS12;
-		}
-
-		if ("jks".equalsIgnoreCase(value)) {
-			return JKS;
-		}
-
-		return null;
-	}
-
-	/**
-	 * 获取默认的格式
-	 *
-	 * @return 默认格式
-	 */
-	public static KeyStoreFormat getDefault() {
-		return PKCS12;
 	}
 
 }

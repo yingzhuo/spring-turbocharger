@@ -15,9 +15,8 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.keystore.util;
+package com.github.yingzhuo.turbocharger.util.keystore;
 
-import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
 import com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils;
 import org.springframework.util.Assert;
 

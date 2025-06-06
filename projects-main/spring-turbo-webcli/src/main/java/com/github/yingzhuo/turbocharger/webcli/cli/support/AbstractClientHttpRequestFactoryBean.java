@@ -17,7 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.webcli.cli.support;
 
-import com.github.yingzhuo.turbocharger.keystore.util.KeyStoreUtils;
+import com.github.yingzhuo.turbocharger.util.keystore.KeyStoreUtils;
 import com.github.yingzhuo.turbocharger.webcli.cli.ClientCertificate;
 import lombok.Setter;
 import lombok.SneakyThrows;

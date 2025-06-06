@@ -17,8 +17,7 @@
  */
 package examples;
 
-import com.github.yingzhuo.turbocharger.jwt.algorithm.HmacStoreAlgorithmFactoryBean;
-import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormat;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.encoder.EncodingIds;
 import com.github.yingzhuo.turbocharger.security.encoder.PasswordEncoderFactories;
@@ -46,15 +45,10 @@ import org.springframework.security.web.SecurityFilterChain;
 )
 public class ApplicationBootSecurity {
 
+
 	@Bean
-	public HmacStoreAlgorithmFactoryBean jwtAlgFactoryBean() {
-		var factoryBean = new HmacStoreAlgorithmFactoryBean();
-		factoryBean.setFormat(KeyStoreFormat.PKCS12);
-		factoryBean.setLocation("classpath:secret.pfx");
-		factoryBean.setStorepass("changeit");
-		factoryBean.setAlias("jwt-hmac512");
-		factoryBean.setKeypass("changeit");
-		return factoryBean;
+	public Algorithm jwtAlgorithm() {
+		return Algorithm.HMAC256("changeit");
 	}
 
 	@Bean

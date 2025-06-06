@@ -15,22 +15,31 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.keystore.autoconfiguration;
+package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
-import com.github.yingzhuo.turbocharger.keystore.KeyStoreFormatConverter;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.github.yingzhuo.turbocharger.jwt.JwtService;
+import com.github.yingzhuo.turbocharger.jwt.JwtServiceImpl;
+import com.github.yingzhuo.turbocharger.jwt.VerificationCustomizer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.lang.Nullable;
 
 /**
+ * 自动配置类
+ *
  * @author 应卓
  * @since 3.5.0
  */
-@ConditionalOnMissingBean(KeyStoreFormatConverter.class)
-public class KeyStoreAutoConfiguration {
+@ConditionalOnBean(Algorithm.class)
+@ConditionalOnMissingBean(JwtService.class)
+public class JwtAutoConfiguration {
 
 	@Bean
-	public KeyStoreFormatConverter keyStoreFormatConverter() {
-		return new KeyStoreFormatConverter();
+	public JwtService jsonWebTokenService(Algorithm algorithm, @Autowired(required = false) @Nullable VerificationCustomizer verificationCustomizer) {
+		return new JwtServiceImpl(algorithm, verificationCustomizer);
 	}
 
 }
