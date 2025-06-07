@@ -44,6 +44,7 @@ public final class KeyStoreUtils {
 	 * 私有构造方法
 	 */
 	private KeyStoreUtils() {
+		super();
 	}
 
 	/**

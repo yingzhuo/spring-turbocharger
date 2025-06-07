@@ -23,11 +23,11 @@ import java.io.Serializable;
 
 /**
  * {@link java.security.KeyStore}格式类型，本程序库只支持以下两种。<br>
- * 其中 <em>PKCS12</em> 为推荐格式
+ * 其中 <em>pkcs12</em> 为推荐格式
  *
  * <ul>
- *     <li>PKCS12</li>
- *     <li>JKS</li>
+ *     <li>pkcs12</li>
+ *     <li>jks</li>
  * </ul>
  *
  * @author 应卓
