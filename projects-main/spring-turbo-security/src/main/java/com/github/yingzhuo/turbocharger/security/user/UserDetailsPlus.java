@@ -89,6 +89,26 @@ public interface UserDetailsPlus extends UserDetails, Principal {
 	}
 
 	/**
+	 * 获取性别代词
+	 *
+	 * @param <T> 性别代词的类型
+	 * @return 性别代词
+	 */
+	@Nullable
+	public <T> T getPronouns();
+
+	/**
+	 * 获取性别代词
+	 *
+	 * @param <T> 性别代词的类型
+	 * @return 性别代词
+	 */
+	public default <T> T getRequiredPronouns() {
+		T pronouns = getPronouns();
+		return Objects.requireNonNull(pronouns);
+	}
+
+	/**
 	 * Email
 	 *
 	 * @return 电子邮件地址或{@code null}

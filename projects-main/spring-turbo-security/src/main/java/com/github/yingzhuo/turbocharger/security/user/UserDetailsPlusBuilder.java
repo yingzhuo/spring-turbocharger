@@ -54,6 +54,9 @@ public final class UserDetailsPlusBuilder {
 	private Object avatar;
 
 	@Nullable
+	private Object pronouns;
+
+	@Nullable
 	private Object nativeUser;
 
 	@Nullable
@@ -153,6 +156,11 @@ public final class UserDetailsPlusBuilder {
 		return this;
 	}
 
+	public UserDetailsPlusBuilder pronouns(Object pronouns) {
+		this.pronouns = pronouns;
+		return this;
+	}
+
 	public UserDetailsPlusBuilder nativeUser(Object u) {
 		this.nativeUser = u;
 		return this;
@@ -216,7 +224,7 @@ public final class UserDetailsPlusBuilder {
 			userBuilder.password(DEFAULT_PASSWORD);
 		}
 
-		return new UserDetailsPlusImpl(userBuilder.build(), this.id, this.avatar, this.nativeUser,
+		return new UserDetailsPlusImpl(userBuilder.build(), this.id, this.avatar, this.pronouns, this.nativeUser,
 			this.email, this.phoneNumber, this.dateOfBirth, this.biography, this.nationality, this.location,
 			this.url, this.attributes);
 	}

@@ -47,6 +47,9 @@ public class UserDetailsPlusImpl implements UserDetailsPlus {
 	private final Object avatar;
 
 	@Nullable
+	private final Object pronouns;
+
+	@Nullable
 	private final Object nativeUser;
 
 	@Nullable
@@ -77,6 +80,7 @@ public class UserDetailsPlusImpl implements UserDetailsPlus {
     UserDetailsPlusImpl(UserDetails delegating,
                         @Nullable Object id,
                         @Nullable Object avatar,
+						@Nullable Object pronouns,
                         @Nullable Object nativeUser,
                         @Nullable String email,
                         @Nullable String phoneNumber,
@@ -92,6 +96,7 @@ public class UserDetailsPlusImpl implements UserDetailsPlus {
         this.delegating = Objects.requireNonNull(delegating);
         this.id = id;
         this.avatar = avatar;
+		this.pronouns = pronouns;
         this.nativeUser = nativeUser;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -120,6 +125,15 @@ public class UserDetailsPlusImpl implements UserDetailsPlus {
 	@Nullable
 	public <T> T getAvatar() {
 		return (T) this.avatar;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Nullable
+	@Override
+	public <T> T getPronouns() {
+		return (T) pronouns;
 	}
 
 	/**
