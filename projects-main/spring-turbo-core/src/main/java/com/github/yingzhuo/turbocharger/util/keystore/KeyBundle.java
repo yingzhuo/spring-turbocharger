@@ -20,7 +20,6 @@ package com.github.yingzhuo.turbocharger.util.keystore;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
-import javax.crypto.SecretKey;
 import java.io.Serializable;
 import java.security.Key;
 import java.security.KeyPair;
@@ -48,10 +47,6 @@ public interface KeyBundle extends Serializable {
 	}
 
 	public <T extends Key> T getKey();
-
-	public default <T extends SecretKey> T getSecretKey() {
-		return (T) getKey();
-	}
 
 	public default <T extends PrivateKey> T getPrivateKey() {
 		return (T) getKey();
