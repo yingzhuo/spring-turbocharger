@@ -49,7 +49,7 @@ public final class KeyBundleFactories {
 	 */
 	public static KeyBundle ofPemContent(String pemContent, @Nullable String keypass) {
 		var pc = PemContent.of(pemContent);
-		return new KeyBundleImpl(pc.getCertificates(), pc.getPrivateKey(keypass));
+		return new KeyBundleImpl(pc.getCertificates(), pc.getPrivateKey(keypass), null);
 	}
 
 	/**

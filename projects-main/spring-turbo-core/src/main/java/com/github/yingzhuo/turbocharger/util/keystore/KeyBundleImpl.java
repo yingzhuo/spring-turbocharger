@@ -25,6 +25,8 @@ import java.security.cert.X509Certificate;
 import java.util.List;
 
 /**
+ * {@link KeyBundle} 实现
+ *
  * @author 应卓
  * @since 3.5.0
  */
@@ -40,11 +42,8 @@ class KeyBundleImpl implements KeyBundle {
 	@Nullable
 	private final String alias;
 
-	public KeyBundleImpl(List<X509Certificate> certificates, Key key) {
-		this(certificates, key, null);
-	}
 
-	public KeyBundleImpl(List<X509Certificate> certificates, Key key, @Nullable String alias) {
+	KeyBundleImpl(List<X509Certificate> certificates, Key key, @Nullable String alias) {
 		this.certificates = certificates;
 		this.key = key;
 		this.alias = alias;
