@@ -23,10 +23,9 @@ import org.springframework.lang.Nullable;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
 import java.security.cert.X509Certificate;
 import java.util.List;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author 应卓
@@ -41,15 +40,49 @@ public final class KeyBundleFactories {
 		super();
 	}
 
+	/**
+	 * 从PEM文件中加载KeyBundle
+	 *
+	 * @param pemContent PEM文件内容
+	 * @param keypass    私钥的秘钥
+	 * @return {@link KeyBundle} 实例
+	 */
 	public static KeyBundle ofPemContent(String pemContent, @Nullable String keypass) {
 		var pc = PemContent.of(pemContent);
 		return new KeyBundleImpl(pc.getCertificates(), pc.getPrivateKey(keypass));
 	}
 
-	public static KeyBundle loadPemResource(String resourceLocation, @Nullable String keypass) {
-		return ofPemContent(ResourceUtils.readResourceAsString(resourceLocation, UTF_8), keypass);
+	/**
+	 * 从PEM文件中加载KeyBundle
+	 *
+	 * @param resourceLocation 资源位置
+	 * @return {@link KeyBundle} 实例
+	 */
+	public static KeyBundle loadPemResource(String resourceLocation) {
+		return loadPemResource(resourceLocation, null);
 	}
 
+	/**
+	 * 从PEM文件中加载KeyBundle
+	 *
+	 * @param resourceLocation 资源位置
+	 * @param keypass          私钥的秘钥
+	 * @return {@link KeyBundle} 实例
+	 */
+	public static KeyBundle loadPemResource(String resourceLocation, @Nullable String keypass) {
+		return ofPemContent(ResourceUtils.readResourceAsString(resourceLocation, StandardCharsets.UTF_8), keypass);
+	}
+
+	/**
+	 * 从KeyStore文件中加载KeyBundle
+	 *
+	 * @param resourceLocation 资源位置
+	 * @param storeFormat      格式
+	 * @param storepass        库密码
+	 * @param alias            别名
+	 * @param keypass          私钥密码
+	 * @return {@link KeyBundle} 实例
+	 */
 	public static KeyBundle loadStoreResource(
 		String resourceLocation,
 		KeyStoreFormat storeFormat,

@@ -29,7 +29,14 @@ import java.security.cert.X509Certificate;
 import java.util.List;
 
 /**
+ * 对{@link KeyPair}简单封装
+ *
  * @author 应卓
+ * @see KeyPair
+ * @see PublicKey
+ * @see PrivateKey
+ * @see X509Certificate
+ * @see KeyBundleFactories
  * @since 3.5.0
  */
 @SuppressWarnings("unchecked")
@@ -38,24 +45,58 @@ public interface KeyBundle extends Serializable {
 	@Nullable
 	public String getAlias();
 
+	/**
+	 * 获取证书链
+	 *
+	 * @return 证书链
+	 */
 	public List<X509Certificate> getCertificateChain();
 
-	public default  <T extends X509Certificate> T getCertificate() {
+	/**
+	 * 获取证书
+	 *
+	 * @param <T> 证书或其子类型
+	 * @return 证书实例
+	 */
+	public default <T extends X509Certificate> T getCertificate() {
 		var lst = getCertificateChain();
 		Assert.isTrue(lst.size() == 1, "certificate chain size must be 1");
 		return (T) lst.get(0);
 	}
 
+	/**
+	 * 获取秘钥
+	 *
+	 * @param <T> 秘钥或其子类型
+	 * @return 秘钥实例
+	 */
 	public <T extends Key> T getKey();
 
+	/**
+	 * 获取私钥
+	 *
+	 * @param <T> 私钥或其子类型
+	 * @return 私钥
+	 */
 	public default <T extends PrivateKey> T getPrivateKey() {
 		return (T) getKey();
 	}
 
+	/**
+	 * 获取公钥
+	 *
+	 * @param <T> 公钥或其子类型
+	 * @return 公钥
+	 */
 	public default <T extends PublicKey> T getPublicKey() {
 		return (T) getCertificate().getPublicKey();
 	}
 
+	/**
+	 * 获取密钥对
+	 *
+	 * @return 密钥对实例
+	 */
 	public default KeyPair getKeyPair() {
 		return new KeyPair(getPublicKey(), getPrivateKey());
 	}
