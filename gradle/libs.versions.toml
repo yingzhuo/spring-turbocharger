@@ -1,7 +1,7 @@
 # Version Catalogs
 #  https://docs.gradle.org/current/userguide/version_catalogs.html
 [versions]
-bouncycastle = "1.80"
+bouncycastle = "1.81"
 zxing = "3.5.3"
 hutool = "5.8.38"
 
