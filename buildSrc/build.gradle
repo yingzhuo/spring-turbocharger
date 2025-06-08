@@ -11,6 +11,7 @@ plugins {
 }
 
 dependencies {
+	implementation "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
 	implementation "io.gitee.pkmer.pkmerboot-central-publisher:io.gitee.pkmer.pkmerboot-central-publisher.gradle.plugin:$mavenCentralPublisherPluginVersion"
 }
 
