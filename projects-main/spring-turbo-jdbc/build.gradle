@@ -27,11 +27,10 @@ dependencies {
 	compileOnly 'org.springframework.boot:spring-boot-starter-security'
 	compileOnly 'org.springframework.boot:spring-boot-starter-logging'
 	compileOnly 'org.springframework.boot:spring-boot-starter-validation'
-	compileOnly 'org.springframework.boot:spring-boot-starter-jdbc'
 	compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
-	compileOnly 'org.springframework.boot:spring-boot-starter-data-redis'
 	compileOnly 'org.springframework.boot:spring-boot-autoconfigure-processor'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	api 'org.springframework.boot:spring-boot-starter-jdbc'
 
 	// spring-turbocharger
 	api project(':projects-main:spring-turbo-core')
