@@ -36,12 +36,12 @@ dependencies {
 	api project(':projects-main:spring-turbo-properties')
 
 	// xxl-job-core
-	implementation libs.xxljob
+	api libs.xxljob
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
 	// slf4j
-	implementation 'org.slf4j:slf4j-api'
+	api 'org.slf4j:slf4j-api'
 }

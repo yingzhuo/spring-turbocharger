@@ -35,12 +35,12 @@ dependencies {
 	api project(':projects-main:spring-turbo-core')
 
 	// apache-client (v5)
-	implementation 'org.apache.httpcomponents.client5:httpclient5'
+	api 'org.apache.httpcomponents.client5:httpclient5'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
 	// slf4j
-	implementation 'org.slf4j:slf4j-api'
+	api 'org.slf4j:slf4j-api'
 }

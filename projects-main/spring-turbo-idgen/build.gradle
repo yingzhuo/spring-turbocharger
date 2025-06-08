@@ -35,14 +35,14 @@ dependencies {
 	api project(':projects-main:spring-turbo-core')
 
 	// xxid-creator
-	implementation libs.uuid.creator
-	implementation libs.tsid.creator
+	api libs.uuid.creator
+	api libs.tsid.creator
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
 	// slf4j
-	implementation 'org.slf4j:slf4j-api'
+	api 'org.slf4j:slf4j-api'
 
 }

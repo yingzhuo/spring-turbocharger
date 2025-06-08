@@ -35,17 +35,17 @@ dependencies {
 	api project(':projects-main:spring-turbo-core')
 
 	// jackson
-	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
+	api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+	api 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
 
 	// json-path
-	implementation 'com.jayway.jsonpath:json-path'
+	api 'com.jayway.jsonpath:json-path'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
 	// slf4j
-	implementation 'org.slf4j:slf4j-api'
+	api 'org.slf4j:slf4j-api'
 
 }
