@@ -15,40 +15,9 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.token;
+@NonNullApi
+@NonNullFields
+package com.github.yingzhuo.turbocharger.security.passwordencoder;
 
-import lombok.Getter;
-
-/**
- * @author 应卓
- * @see BasicTokenResolver
- * @since 1.2.3
- */
-public class BasicToken extends StringToken {
-
-	/**
-	 * 用户名
-	 */
-	@Getter
-	private final String username;
-
-	/**
-	 * 口令
-	 */
-	@Getter
-	private final String password;
-
-	/**
-	 * 构造方法
-	 *
-	 * @param stringValue 令牌原字符串
-	 * @param username    用户名
-	 * @param password    口令
-	 */
-	public BasicToken(String stringValue, String username, String password) {
-		super(stringValue);
-		this.username = username;
-		this.password = password;
-	}
-
-}
+import org.springframework.lang.NonNullApi;
+import org.springframework.lang.NonNullFields;

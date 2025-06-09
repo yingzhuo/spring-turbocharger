@@ -15,12 +15,12 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.encoder.hutool;
+package com.github.yingzhuo.turbocharger.security.passwordencoder.hutool;
 
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;
-import com.github.yingzhuo.turbocharger.security.encoder.EncodingIds;
-import com.github.yingzhuo.turbocharger.security.encoder.PasswordEncoderFactories;
+import com.github.yingzhuo.turbocharger.security.passwordencoder.EncodingIds;
+import com.github.yingzhuo.turbocharger.security.passwordencoder.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -38,6 +38,7 @@ public final class SHA512PasswordEncoder implements PasswordEncoder {
 	 * 构造方法
 	 */
 	public SHA512PasswordEncoder() {
+		super();
 	}
 
 	/**

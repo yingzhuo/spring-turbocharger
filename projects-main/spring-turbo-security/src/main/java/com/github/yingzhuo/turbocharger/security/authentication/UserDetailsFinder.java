@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.security.authentication;
 
-import com.github.yingzhuo.turbocharger.security.filter.BasicAuthenticationFilter;
 import com.github.yingzhuo.turbocharger.security.user.UserDetailsPlus;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -29,7 +28,6 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  * @author 应卓
  * @see TokenToUserConverter
- * @see BasicAuthenticationFilter
  * @see UserDetails
  * @see UserDetailsPlus
  * @since 1.2.3

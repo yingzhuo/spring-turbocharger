@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.encoder;
+package com.github.yingzhuo.turbocharger.security.passwordencoder;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.Nullable;
@@ -28,6 +28,7 @@ import org.springframework.util.Assert;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static com.github.yingzhuo.turbocharger.util.StringUtils.isNotBlank;
 import static com.github.yingzhuo.turbocharger.util.reflection.InstanceUtils.newInstance;
@@ -42,12 +43,14 @@ import static com.github.yingzhuo.turbocharger.util.reflection.InstanceUtils.new
  * @since 1.0.0
  */
 @Slf4j
+@SuppressWarnings("deprecation")
 public final class PasswordEncoderFactories {
 
 	/**
 	 * 私有构造方法
 	 */
 	private PasswordEncoderFactories() {
+		super();
 	}
 
 	public static BCryptPasswordEncoder createBCryptPasswordEncoder() {
@@ -83,7 +86,6 @@ public final class PasswordEncoderFactories {
 		return ret;
 	}
 
-	@SuppressWarnings("deprecation")
 	private static Map<String, PasswordEncoder> getEncoders() {
 		var map = new HashMap<String, PasswordEncoder>();
 		map.put(EncodingIds.bcrypt, new BCryptPasswordEncoder());
@@ -97,44 +99,35 @@ public final class PasswordEncoderFactories {
 		map.put(EncodingIds.scrypt, SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8());
 		map.put(EncodingIds.argon2, Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8());
 
-		PasswordEncoder encoder;
+		Optional<PasswordEncoder> encoderOp;
 
 		// MD2
-		encoder = loadInstance("com.github.yingzhuo.turbocharger.security.encoder.hutool.MD2PasswordEncoder");
-		if (encoder != null) {
-			map.put(EncodingIds.MD2, encoder);
-		}
+		encoderOp = loadInstance("com.github.yingzhuo.turbocharger.security.passwordencoder.hutool.MD2PasswordEncoder");
+		encoderOp.ifPresent(e -> map.put(EncodingIds.MD2, e));
 
 		// SHA384
-		encoder = loadInstance("com.github.yingzhuo.turbocharger.security.encoder.hutool.SHA384PasswordEncoder");
-		if (encoder != null) {
-			map.put(EncodingIds.SHA_384, encoder);
-		}
+		encoderOp = loadInstance("com.github.yingzhuo.turbocharger.security.passwordencoder.hutool.SHA384PasswordEncoder");
+		encoderOp.ifPresent(e -> map.put(EncodingIds.SHA_384, e));
 
 		// SHA512
-		encoder = loadInstance("com.github.yingzhuo.turbocharger.security.encoder.hutool.SHA512PasswordEncoder");
-		if (encoder != null) {
-			map.put(EncodingIds.SHA_512, encoder);
-		}
+		encoderOp = loadInstance("com.github.yingzhuo.turbocharger.security.passwordencoder.hutool.SHA512PasswordEncoder");
+		encoderOp.ifPresent(e -> map.put(EncodingIds.SHA_512, e));
 
 		// SM3
-		encoder = loadInstance("com.github.yingzhuo.turbocharger.security.encoder.hutool.SM3PasswordEncoder");
-		if (encoder != null) {
-			map.put(EncodingIds.SM3, encoder);
-		}
+		encoderOp = loadInstance("com.github.yingzhuo.turbocharger.security.passwordencoder.hutool.SM3PasswordEncoder");
+		encoderOp.ifPresent(e -> map.put(EncodingIds.SM3, e));
 
 		return Collections.unmodifiableMap(map);
 	}
 
-	@Nullable
-	private static PasswordEncoder loadInstance(String classname) {
+	private static Optional<PasswordEncoder> loadInstance(String classname) {
 		try {
-			return (PasswordEncoder) newInstance(classname).orElse(null);
+			return newInstance(classname);
 		} catch (Throwable ignored) {
 			// 加载失败的主要原因:
 			// 1. 没有默认构造方法
 			// 2. 缺少依赖
-			return null;
+			return Optional.empty();
 		}
 	}
 

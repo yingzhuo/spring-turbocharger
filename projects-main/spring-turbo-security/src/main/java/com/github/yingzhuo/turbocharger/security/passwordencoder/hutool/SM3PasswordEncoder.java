@@ -15,29 +15,32 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.encoder.hutool;
+package com.github.yingzhuo.turbocharger.security.passwordencoder.hutool;
 
-import cn.hutool.crypto.digest.DigestAlgorithm;
+import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.crypto.digest.Digester;
-import com.github.yingzhuo.turbocharger.security.encoder.EncodingIds;
-import com.github.yingzhuo.turbocharger.security.encoder.PasswordEncoderFactories;
+import com.github.yingzhuo.turbocharger.security.passwordencoder.EncodingIds;
+import com.github.yingzhuo.turbocharger.security.passwordencoder.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static com.github.yingzhuo.turbocharger.security.passwordencoder.EncodingIds.SM3;
+
 /**
- * SHA-384 算法实现 {@link PasswordEncoder}
+ * 国密算法 (SM3)
  *
  * @author 应卓
  * @see org.springframework.security.crypto.factory.PasswordEncoderFactories
  * @see PasswordEncoderFactories
- * @see EncodingIds#SHA_384
+ * @see EncodingIds#SM3
  * @since 1.0.1
  */
-public final class SHA384PasswordEncoder implements PasswordEncoder {
+public final class SM3PasswordEncoder implements PasswordEncoder {
 
 	/**
 	 * 构造方法
 	 */
-	public SHA384PasswordEncoder() {
+	public SM3PasswordEncoder() {
+		super();
 	}
 
 	/**
@@ -45,7 +48,7 @@ public final class SHA384PasswordEncoder implements PasswordEncoder {
 	 */
 	@Override
 	public String encode(CharSequence rawPassword) {
-		final Digester digester = new Digester(DigestAlgorithm.SHA384);
+		final Digester digester = DigestUtil.digester(SM3);
 		return digester.digestHex(rawPassword.toString());
 	}
 

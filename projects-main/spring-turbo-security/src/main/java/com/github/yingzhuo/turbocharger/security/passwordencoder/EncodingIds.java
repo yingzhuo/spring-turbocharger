@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.encoder;
+package com.github.yingzhuo.turbocharger.security.passwordencoder;
 
 /**
  * @author 应卓

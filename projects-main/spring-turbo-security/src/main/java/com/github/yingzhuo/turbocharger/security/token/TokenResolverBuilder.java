@@ -125,16 +125,6 @@ public final class TokenResolverBuilder {
 	}
 
 	/**
-	 * Basic 令牌解析器
-	 *
-	 * @return 创建器本身
-	 */
-	public TokenResolverBuilder basicToken() {
-		list.add(new BasicTokenResolver());
-		return this;
-	}
-
-	/**
 	 * 创建令牌解析器
 	 *
 	 * @return 解析器实例

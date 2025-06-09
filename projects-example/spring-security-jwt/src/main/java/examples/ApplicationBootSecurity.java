@@ -19,10 +19,10 @@ package examples;
 
 import com.auth0.jwt.algorithms.Algorithm;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
-import com.github.yingzhuo.turbocharger.security.encoder.EncodingIds;
-import com.github.yingzhuo.turbocharger.security.encoder.PasswordEncoderFactories;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
 import com.github.yingzhuo.turbocharger.security.filter.factory.JwtTokenAuthenticationFilterFactoryBean;
+import com.github.yingzhuo.turbocharger.security.passwordencoder.EncodingIds;
+import com.github.yingzhuo.turbocharger.security.passwordencoder.PasswordEncoderFactories;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

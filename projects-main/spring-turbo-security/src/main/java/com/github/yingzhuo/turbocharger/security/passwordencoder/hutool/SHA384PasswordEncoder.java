@@ -15,29 +15,29 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.encoder.hutool;
+package com.github.yingzhuo.turbocharger.security.passwordencoder.hutool;
 
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;
-import com.github.yingzhuo.turbocharger.security.encoder.EncodingIds;
-import com.github.yingzhuo.turbocharger.security.encoder.PasswordEncoderFactories;
+import com.github.yingzhuo.turbocharger.security.passwordencoder.EncodingIds;
+import com.github.yingzhuo.turbocharger.security.passwordencoder.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * MD2 算法实现 {@link PasswordEncoder}
+ * SHA-384 算法实现 {@link PasswordEncoder}
  *
  * @author 应卓
  * @see org.springframework.security.crypto.factory.PasswordEncoderFactories
  * @see PasswordEncoderFactories
- * @see EncodingIds#MD2
+ * @see EncodingIds#SHA_384
  * @since 1.0.1
  */
-public final class MD2PasswordEncoder implements PasswordEncoder {
+public final class SHA384PasswordEncoder implements PasswordEncoder {
 
 	/**
-	 * 默认构造方法
+	 * 构造方法
 	 */
-	public MD2PasswordEncoder() {
+	public SHA384PasswordEncoder() {
 	}
 
 	/**
@@ -45,7 +45,7 @@ public final class MD2PasswordEncoder implements PasswordEncoder {
 	 */
 	@Override
 	public String encode(CharSequence rawPassword) {
-		final Digester digester = new Digester(DigestAlgorithm.MD2);
+		final Digester digester = new Digester(DigestAlgorithm.SHA384);
 		return digester.digestHex(rawPassword.toString());
 	}
 

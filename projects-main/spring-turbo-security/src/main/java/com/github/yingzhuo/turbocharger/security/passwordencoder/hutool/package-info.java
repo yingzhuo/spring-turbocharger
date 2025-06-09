@@ -17,7 +17,7 @@
  */
 @NonNullApi
 @NonNullFields
-package com.github.yingzhuo.turbocharger.security.encoder.hutool;
+package com.github.yingzhuo.turbocharger.security.passwordencoder.hutool;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

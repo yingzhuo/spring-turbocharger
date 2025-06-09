@@ -79,5 +79,4 @@ public final class CompositeTokenResolver implements TokenResolver {
 			return Optional.empty();
 		}
 	}
-
 }
