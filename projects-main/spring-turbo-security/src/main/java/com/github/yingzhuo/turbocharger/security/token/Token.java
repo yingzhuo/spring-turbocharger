@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.security.token;
 
 import java.io.Serializable;
-import java.util.function.Supplier;
 
 /**
  * 令牌
@@ -28,8 +27,14 @@ import java.util.function.Supplier;
  * @since 1.0.0
  */
 @FunctionalInterface
-public interface Token extends Serializable, Supplier<String> {
+public interface Token extends Serializable {
 
+	/**
+	 * 创建 {@link StringToken}
+	 *
+	 * @param stringValue 令牌
+	 * @return 实例
+	 */
 	public static Token ofString(String stringValue) {
 		return StringToken.of(stringValue);
 	}
@@ -40,15 +45,5 @@ public interface Token extends Serializable, Supplier<String> {
 	 * @return 令牌的值
 	 */
 	public String asString();
-
-	/**
-	 * 获取令牌的值
-	 *
-	 * @return 令牌的值
-	 */
-	@Override
-	public default String get() {
-		return asString();
-	}
 
 }
