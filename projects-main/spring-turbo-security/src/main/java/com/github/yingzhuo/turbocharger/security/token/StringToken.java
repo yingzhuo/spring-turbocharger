@@ -19,7 +19,6 @@ package com.github.yingzhuo.turbocharger.security.token;
 
 import org.springframework.util.Assert;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -28,7 +27,7 @@ import java.util.Objects;
  * @author 应卓
  * @since 1.0.0
  */
-public class StringToken implements Token, Serializable {
+public class StringToken implements Token {
 
 	private final String string;
 

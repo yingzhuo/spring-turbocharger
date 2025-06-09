@@ -81,12 +81,18 @@ public final class TokenAuthentication extends AbstractAuthenticationToken imple
 		super.setDetails(null);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@NonNull
 	@Override
 	public Object getPrincipal() {
 		return Objects.requireNonNullElse(userDetails, Long.toString(System.identityHashCode(this)));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@NonNull
 	@Override
 	public Object getCredentials() {
@@ -94,6 +100,9 @@ public final class TokenAuthentication extends AbstractAuthenticationToken imple
 			.orElse(Long.toString(System.identityHashCode(this)));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -106,6 +115,9 @@ public final class TokenAuthentication extends AbstractAuthenticationToken imple
 		return Objects.equals(userDetails, that.userDetails) && Objects.equals(token, that.token);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(super.hashCode(), userDetails, token);
