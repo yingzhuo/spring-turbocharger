@@ -35,7 +35,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
  * @author 应卓
- * @see BasicAuthenticationFilter
  * @see TokenAuthenticationFilter
  * @see RequestMatcher
  * @since 1.2.3
