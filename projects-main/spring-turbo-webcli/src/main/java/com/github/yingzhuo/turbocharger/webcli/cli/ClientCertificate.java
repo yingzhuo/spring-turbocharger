@@ -47,7 +47,7 @@ public interface ClientCertificate extends Serializable {
 	 */
 	public static ClientCertificate of(String resourceLocation, @Nullable KeyStoreFormat format, String storePassword, String keyPassword) {
 		return of(
-			ResourceUtils.loadResource(resourceLocation),
+			(Resource) ResourceUtils.loadResource(resourceLocation),
 			format,
 			storePassword,
 			keyPassword

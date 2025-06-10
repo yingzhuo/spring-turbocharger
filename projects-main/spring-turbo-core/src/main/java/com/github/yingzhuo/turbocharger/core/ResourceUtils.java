@@ -47,6 +47,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * @see ResourceLocationUtils
  * @since 3.3.2
  */
+@SuppressWarnings("unchecked")
 public final class ResourceUtils {
 
 	private static final ResourceLoader RESOURCE_LOADER
@@ -88,9 +89,9 @@ public final class ResourceUtils {
 	 * @param location 资源位置
 	 * @return 资源
 	 */
-	public static Resource loadResource(String location) {
+	public static <T extends Resource> T loadResource(String location) {
 		Assert.hasText(location, "location is required");
-		return RESOURCE_LOADER.getResource(location);
+		return (T) RESOURCE_LOADER.getResource(location);
 	}
 
 	/**
