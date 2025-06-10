@@ -5,8 +5,4 @@ com.github.yingzhuo.turbocharger.core.env.BouncyCastleInstallingEnvironmentPostP
 org.springframework.context.ApplicationListener=\
 com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook
 org.springframework.core.io.ProtocolResolver=\
-com.github.yingzhuo.turbocharger.core.resource.HexProtocolResolver,\
-com.github.yingzhuo.turbocharger.core.resource.StringProtocolResolver,\
-com.github.yingzhuo.turbocharger.core.resource.ZipProtocolResolver,\
-com.github.yingzhuo.turbocharger.core.resource.JarProtocolResolver,\
 com.github.yingzhuo.turbocharger.util.keystore.KeyBundleProtocolResolver
