@@ -18,13 +18,11 @@
 package com.github.yingzhuo.turbocharger.jackson.util;
 
 import com.fasterxml.jackson.databind.Module;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.yingzhuo.turbocharger.util.spi.ServiceLoaderUtils;
 import org.springframework.lang.Nullable;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.ServiceLoader;
 import java.util.function.Predicate;
 
 /**
@@ -55,34 +53,12 @@ public final class JacksonModuleUtils {
 	/**
 	 * 加载classpath中被声明的所有的模块
 	 *
-	 * @param predicate 过滤用predicate
+	 * @param filter 过滤用predicate
 	 * @return 模块(多个)
 	 */
-	public static List<Module> loadModules(@Nullable Predicate<Module> predicate) {
-		return ServiceLoaderUtils.loadQuietly(Module.class)
-			.stream()
-			.filter(Objects.requireNonNullElse(predicate, Objects::nonNull))
+	public static List<Module> loadModules(@Nullable Predicate<ServiceLoader.Provider<Module>> filter) {
+		return ServiceLoaderUtils.load(Module.class, filter)
 			.toList();
-	}
-
-	/**
-	 * 加载classpath中被声明的所有的模块，并注册到 {@link ObjectMapper} 实例。
-	 *
-	 * @param objectMapper 要注册的{@link ObjectMapper} 实例
-	 */
-	public static void loadAndRegisterModules(@Nullable ObjectMapper objectMapper) {
-		loadAndRegisterModules(objectMapper, null);
-	}
-
-	/**
-	 * 加载classpath中被声明模块，并注册到 {@link ObjectMapper} 实例。
-	 *
-	 * @param objectMapper 要注册的{@link ObjectMapper} 实例
-	 * @param predicate    过滤用predicate
-	 */
-	public static void loadAndRegisterModules(@Nullable ObjectMapper objectMapper, @Nullable Predicate<Module> predicate) {
-		Optional.ofNullable(objectMapper)
-			.ifPresent(om -> om.registerModules(loadModules(predicate)));
 	}
 
 }

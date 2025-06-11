@@ -33,7 +33,6 @@ import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
-import java.util.Objects;
 
 import static com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils.toUnchecked;
 
@@ -53,6 +52,7 @@ public final class JsonUtils {
 	 * 私有构造方法
 	 */
 	private JsonUtils() {
+		super();
 	}
 
 	/**
@@ -374,7 +374,8 @@ public final class JsonUtils {
 				.build();
 
 			// 尝试注册能发现的所有模块
-			JacksonModuleUtils.loadAndRegisterModules(JSON_MAPPER, Objects::nonNull);
+			JacksonModuleUtils.loadModules(null)
+				.forEach(JSON_MAPPER::registerModule);
 
 			JSON_PATH_CONF = Configuration.builder()
 				.jsonProvider(new JacksonJsonProvider(JSON_MAPPER))
