@@ -61,20 +61,28 @@ public final class ServiceLoaderUtils {
 	 * 加载Service
 	 *
 	 * @param targetType Service类型
+	 * @param filter     类型过滤器
 	 * @param <T>        Service类型泛型
 	 * @return Service实例
 	 * @throws ServiceConfigurationError 加载失败时抛出此错误
 	 */
-	public static <T> Stream<T> load(Class<T> targetType, @Nullable Predicate<ServiceLoader.Provider<T>> filter) {
+	public static <T> Stream<T> load(Class<T> targetType, @Nullable Predicate<Class<?>> filter) {
 		Assert.notNull(targetType, "targetType is required");
 
-		filter = Objects.requireNonNullElse(filter, Objects::nonNull);
+		filter = Objects.requireNonNullElse(filter, c -> true);
 
 		return ServiceLoader.load(targetType)
 			.stream()
-			.filter(filter)
+			.filter(new ByTypePredicate<>(filter))
 			.map(ServiceLoader.Provider::get)
 			.sorted(OrderComparator.INSTANCE);
+	}
+
+	private record ByTypePredicate<T>(Predicate<Class<?>> filter) implements Predicate<ServiceLoader.Provider<T>> {
+		@Override
+		public boolean test(ServiceLoader.Provider<T> provider) {
+			return filter.test(provider.type());
+		}
 	}
 
 }

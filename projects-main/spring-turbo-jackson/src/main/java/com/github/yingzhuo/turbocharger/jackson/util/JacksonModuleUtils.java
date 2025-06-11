@@ -22,7 +22,6 @@ import com.github.yingzhuo.turbocharger.util.spi.ServiceLoaderUtils;
 import org.springframework.lang.Nullable;
 
 import java.util.List;
-import java.util.ServiceLoader;
 import java.util.function.Predicate;
 
 /**
@@ -56,7 +55,7 @@ public final class JacksonModuleUtils {
 	 * @param filter 过滤用predicate
 	 * @return 模块(多个)
 	 */
-	public static List<Module> loadModules(@Nullable Predicate<ServiceLoader.Provider<Module>> filter) {
+	public static List<Module> loadModules(@Nullable Predicate<Class<?>> filter) {
 		return ServiceLoaderUtils.load(Module.class, filter)
 			.toList();
 	}

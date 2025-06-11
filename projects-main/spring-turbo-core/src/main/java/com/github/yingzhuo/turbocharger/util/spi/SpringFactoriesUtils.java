@@ -49,6 +49,7 @@ public final class SpringFactoriesUtils {
 	 * 私有构造方法
 	 */
 	private SpringFactoriesUtils() {
+		super();
 	}
 
 	/**
