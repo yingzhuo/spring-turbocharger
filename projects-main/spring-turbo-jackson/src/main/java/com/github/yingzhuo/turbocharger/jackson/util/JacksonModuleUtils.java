@@ -18,11 +18,14 @@
 package com.github.yingzhuo.turbocharger.jackson.util;
 
 import com.fasterxml.jackson.databind.Module;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.yingzhuo.turbocharger.util.spi.ServiceLoaderUtils;
+import org.springframework.core.io.support.SpringFactoriesLoader;
 import org.springframework.lang.Nullable;
 
-import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Jackson模块加载工具
@@ -38,26 +41,26 @@ public final class JacksonModuleUtils {
 	 * 私有构造方法
 	 */
 	private JacksonModuleUtils() {
+		super();
 	}
 
-	/**
-	 * 加载classpath中被声明的所有的模块
-	 *
-	 * @return 模块(多个)
-	 */
-	public static List<Module> loadModules() {
-		return loadModules(null);
-	}
+	public static void loadModulesAndRegister(@Nullable ObjectMapper objectMapper, @Nullable Predicate<Class<?>> predicate) {
+		if (objectMapper == null) {
+			return;
+		}
 
-	/**
-	 * 加载classpath中被声明的所有的模块
-	 *
-	 * @param filter 过滤用predicate
-	 * @return 模块(多个)
-	 */
-	public static List<Module> loadModules(@Nullable Predicate<Class<?>> filter) {
-		return ServiceLoaderUtils.load(Module.class, filter)
-			.toList();
+		final Predicate<Class<?>> predicateInUse = Objects.requireNonNullElse(predicate, c -> true);
+
+		var factoryType = Module.class;
+
+		var s1 = SpringFactoriesLoader.loadFactories(factoryType, null)
+			.stream()
+			.filter(module -> predicateInUse.test(module.getClass()));
+
+		var s2 = ServiceLoaderUtils.load(factoryType, predicateInUse);
+
+		Stream.concat(s1, s2)
+			.forEach(objectMapper::registerModule);
 	}
 
 }

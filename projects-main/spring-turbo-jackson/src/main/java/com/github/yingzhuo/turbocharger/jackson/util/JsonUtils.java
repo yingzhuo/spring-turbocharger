@@ -374,8 +374,7 @@ public final class JsonUtils {
 				.build();
 
 			// 尝试注册能发现的所有模块
-			JacksonModuleUtils.loadModules(null)
-				.forEach(JSON_MAPPER::registerModule);
+			JacksonModuleUtils.loadModulesAndRegister(JSON_MAPPER, null);
 
 			JSON_PATH_CONF = Configuration.builder()
 				.jsonProvider(new JacksonJsonProvider(JSON_MAPPER))

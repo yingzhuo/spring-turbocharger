@@ -20,6 +20,7 @@ package com.github.yingzhuo.turbocharger.jackson.autoconfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.yingzhuo.turbocharger.jackson.util.JacksonModuleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 
 /**
  * 加载Jackson模块
@@ -29,10 +30,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class JacksonModuleAutoConfiguration {
 
-	@Autowired
-	private void initModules(ObjectMapper objectMapper) {
-		JacksonModuleUtils.loadModules()
-			.forEach(objectMapper::registerModule);
+	@Autowired(required = false)
+	private void initModules(@Nullable ObjectMapper objectMapper) {
+		JacksonModuleUtils.loadModulesAndRegister(objectMapper, null);
 	}
 
 }
