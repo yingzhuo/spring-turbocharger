@@ -13,19 +13,19 @@ dependencyManagement {
 
 dependencies {
 	// spring-boot
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	api 'org.springframework.boot:spring-boot-starter-jdbc'
 
 	// spring-turbocharger
 	api project(':projects-main:spring-turbo-core')
 	api project(':projects-main:spring-turbo-jdbc')
 
 	// MySQL驱动
-	implementation('com.mysql:mysql-connector-j')
+	api('com.mysql:mysql-connector-j')
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
 	// slf4j
-	implementation 'org.slf4j:slf4j-api'
+	api 'org.slf4j:slf4j-api'
 }

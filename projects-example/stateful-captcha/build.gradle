@@ -13,8 +13,7 @@ dependencyManagement {
 
 dependencies {
 	// spring-boot
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	api 'org.springframework.boot:spring-boot-starter-web'
 
 	// spring-turbocharger
 	api project(':projects-main:spring-turbo-core')
@@ -26,5 +25,5 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	// slf4j
-	implementation 'org.slf4j:slf4j-api'
+	api 'org.slf4j:slf4j-api'
 }
