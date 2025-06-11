@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  * @author 应卓
  * @since 3.3.1
  */
+@Deprecated(forRemoval = true, since = "3.5.0")
 public class CommonModule extends SimpleModule {
 
 	/**
