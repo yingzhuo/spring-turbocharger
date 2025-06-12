@@ -108,9 +108,15 @@ public interface SPILoader<T> {
 			this.classLoader = requireNonNullElse(classLoader, ClassUtils.getDefaultClassLoader());
 		}
 
-		public Builder<T> filter(@Nullable Predicate<Class<?>> filter) {
-			this.filter = requireNonNullElse(filter, c -> true);
+		public Builder<T> filter(Predicate<Class<?>> filter) {
+			Assert.notNull(filter, "filter must not be null");
+			this.filter = filter;
 			return this;
+		}
+
+		public Builder<T> filterClassName(String regex) {
+			Assert.notNull(regex, "regex must not be null");
+			return filter(c -> c.getName().matches(regex));
 		}
 
 		public Builder<T> withSpringFactories() {
