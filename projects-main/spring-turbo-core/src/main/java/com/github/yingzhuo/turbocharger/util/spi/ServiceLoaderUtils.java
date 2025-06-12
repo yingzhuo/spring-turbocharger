@@ -28,6 +28,8 @@ import java.util.stream.Stream;
 /**
  * @author 应卓
  * @see ServiceLoader
+ * @see SPILoader#builder(Class)
+ * @see SPILoader#builder(Class, ClassLoader)
  * @since 3.5.0
  */
 public final class ServiceLoaderUtils {
@@ -39,14 +41,38 @@ public final class ServiceLoaderUtils {
 		super();
 	}
 
+	/**
+	 * 加载SPI实例
+	 *
+	 * @param targetType 要加载的抽象类型
+	 * @param <T>        要加载的抽象类型
+	 * @return SPI实例
+	 */
 	public static <T> Stream<T> load(Class<T> targetType) {
 		return load(targetType, null, null);
 	}
 
+	/**
+	 * 加载SPI实例
+	 *
+	 * @param targetType  要加载的抽象类型
+	 * @param classLoader 类加载器
+	 * @param <T>         要加载的抽象类型
+	 * @return SPI实例
+	 */
 	public static <T> Stream<T> load(Class<T> targetType, @Nullable ClassLoader classLoader) {
 		return load(targetType, classLoader, null);
 	}
 
+	/**
+	 * 加载SPI实例
+	 *
+	 * @param targetType  要加载的抽象类型
+	 * @param classLoader 类加载器
+	 * @param filter      过滤器
+	 * @param <T>         要加载的抽象类型
+	 * @return SPI实例
+	 */
 	public static <T> Stream<T> load(Class<T> targetType, @Nullable ClassLoader classLoader, @Nullable Predicate<Class<?>> filter) {
 		Assert.notNull(targetType, "targetType must not be null");
 

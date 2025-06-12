@@ -27,6 +27,8 @@ import java.util.stream.Stream;
 
 /**
  * @author 应卓
+ * @see SPILoader#builder(Class)
+ * @see SPILoader#builder(Class, ClassLoader)
  * @since 3.5.0
  */
 public final class SpringFactoriesUtils {
@@ -38,18 +40,52 @@ public final class SpringFactoriesUtils {
 		super();
 	}
 
+	/**
+	 * 加载SPI
+	 *
+	 * @param targetType 要加载的抽象类型
+	 * @param <T>        要加载的抽象类型
+	 * @return SPI实例
+	 */
 	public static <T> Stream<T> load(Class<T> targetType) {
 		return load(targetType, null, null, null);
 	}
 
+	/**
+	 * 加载SPI
+	 *
+	 * @param targetType                      要加载的抽象类型
+	 * @param springFactoriesResourceLocation 配置文件位置
+	 * @param <T>                             要加载的抽象类型
+	 * @return SPI实例
+	 */
 	public static <T> Stream<T> load(Class<T> targetType, @Nullable String springFactoriesResourceLocation) {
 		return load(targetType, springFactoriesResourceLocation, null, null);
 	}
 
+	/**
+	 * 加载SPI
+	 *
+	 * @param targetType                      要加载的抽象类型
+	 * @param springFactoriesResourceLocation 配置文件位置
+	 * @param classLoader                     类加载器实例
+	 * @param <T>                             要加载的抽象类型
+	 * @return SPI实例
+	 */
 	public static <T> Stream<T> load(Class<T> targetType, @Nullable String springFactoriesResourceLocation, @Nullable ClassLoader classLoader) {
 		return load(targetType, springFactoriesResourceLocation, classLoader, null);
 	}
 
+	/**
+	 * 加载SPI
+	 *
+	 * @param targetType                      要加载的抽象类型
+	 * @param springFactoriesResourceLocation 配置文件位置
+	 * @param classLoader                     类加载器实例
+	 * @param filter                          过滤器
+	 * @param <T>                             要加载的抽象类型
+	 * @return SPI实例
+	 */
 	public static <T> Stream<T> load(Class<T> targetType, @Nullable String springFactoriesResourceLocation, @Nullable ClassLoader classLoader, @Nullable Predicate<Class<?>> filter) {
 		Assert.notNull(targetType, "targetType must not be null");
 
