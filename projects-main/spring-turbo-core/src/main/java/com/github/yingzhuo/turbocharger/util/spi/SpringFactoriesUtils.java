@@ -38,6 +38,18 @@ public final class SpringFactoriesUtils {
 		super();
 	}
 
+	public static <T> Stream<T> load(Class<T> targetType) {
+		return load(targetType, null, null, null);
+	}
+
+	public static <T> Stream<T> load(Class<T> targetType, @Nullable String springFactoriesResourceLocation) {
+		return load(targetType, springFactoriesResourceLocation, null, null);
+	}
+
+	public static <T> Stream<T> load(Class<T> targetType, @Nullable String springFactoriesResourceLocation, @Nullable ClassLoader classLoader) {
+		return load(targetType, springFactoriesResourceLocation, classLoader, null);
+	}
+
 	public static <T> Stream<T> load(Class<T> targetType, @Nullable String springFactoriesResourceLocation, @Nullable ClassLoader classLoader, @Nullable Predicate<Class<?>> filter) {
 		Assert.notNull(targetType, "targetType must not be null");
 

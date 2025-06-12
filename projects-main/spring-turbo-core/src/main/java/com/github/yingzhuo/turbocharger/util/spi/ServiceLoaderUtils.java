@@ -39,6 +39,14 @@ public final class ServiceLoaderUtils {
 		super();
 	}
 
+	public static <T> Stream<T> load(Class<T> targetType) {
+		return load(targetType, null, null);
+	}
+
+	public static <T> Stream<T> load(Class<T> targetType, @Nullable ClassLoader classLoader) {
+		return load(targetType, classLoader, null);
+	}
+
 	public static <T> Stream<T> load(Class<T> targetType, @Nullable ClassLoader classLoader, @Nullable Predicate<Class<?>> filter) {
 		Assert.notNull(targetType, "targetType must not be null");
 
