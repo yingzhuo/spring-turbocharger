@@ -17,11 +17,20 @@
  */
 package com.github.yingzhuo.turbocharger.util.spi;
 
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
+import org.springframework.util.ClassUtils;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.ServiceLoader;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
+
+import static java.util.Objects.requireNonNullElse;
+import static org.springframework.core.io.support.SpringFactoriesLoader.FACTORIES_RESOURCE_LOCATION;
+import static org.springframework.core.io.support.SpringFactoriesLoader.forResourceLocation;
 
 /**
  * SPI加载工具
@@ -30,13 +39,13 @@ import java.util.stream.Stream;
  * @author 应卓
  * @see java.util.ServiceLoader
  * @see org.springframework.core.io.support.SpringFactoriesLoader
- * @see SPILoaderBuilder
+ * @see Builder
  * @see #builder(Class)
  * @see #builder(Class, ClassLoader)
  * @since 3.5.0
  */
 @FunctionalInterface
-public interface SPILoader<T> extends Supplier<Stream<T>> {
+public interface SPILoader<T> {
 
 	/**
 	 * 生成创建器
@@ -45,7 +54,7 @@ public interface SPILoader<T> extends Supplier<Stream<T>> {
 	 * @param <T>        要加载的抽象类型
 	 * @return 创建器实例
 	 */
-	public static <T> SPILoaderBuilder<T> builder(Class<T> targetType) {
+	public static <T> Builder<T> builder(Class<T> targetType) {
 		return builder(targetType, null);
 	}
 
@@ -57,8 +66,8 @@ public interface SPILoader<T> extends Supplier<Stream<T>> {
 	 * @param <T>         要加载的抽象类型
 	 * @return 创建器实例
 	 */
-	public static <T> SPILoaderBuilder<T> builder(Class<T> targetType, @Nullable ClassLoader classLoader) {
-		return new SPILoaderBuilder<>(targetType, classLoader);
+	public static <T> Builder<T> builder(Class<T> targetType, @Nullable ClassLoader classLoader) {
+		return new Builder<>(targetType, classLoader);
 	}
 
 	/**
@@ -77,12 +86,109 @@ public interface SPILoader<T> extends Supplier<Stream<T>> {
 		return load().toList();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public default Stream<T> get() {
-		return load();
+	// -----------------------------------------------------------------------------------------------------------------
+
+	public final class Builder<T> {
+
+		private final Class<T> targetType;
+		private final ClassLoader classLoader;
+
+		@Nullable
+		private String springFactoriesResourceLocation;
+
+		private boolean jdkServiceLoaderEnabled = false;
+
+		@NonNull
+		private Predicate<Class<?>> filter = c -> true;
+
+		@Nullable
+		private Comparator<? super T> comparator;
+
+		Builder(Class<T> targetType, @Nullable ClassLoader classLoader) {
+			Assert.notNull(targetType, "targetType must not be null");
+
+			this.targetType = targetType;
+			this.classLoader = requireNonNullElse(classLoader, ClassUtils.getDefaultClassLoader());
+		}
+
+		public Builder<T> filter(@Nullable Predicate<Class<?>> filter) {
+			this.filter = requireNonNullElse(filter, c -> true);
+			return this;
+		}
+
+		public Builder<T> withSpringFactories() {
+			return withSpringFactories(FACTORIES_RESOURCE_LOCATION);
+		}
+
+		public Builder<T> withSpringFactories(@Nullable String resourceLocation) {
+			this.springFactoriesResourceLocation = requireNonNullElse(resourceLocation, FACTORIES_RESOURCE_LOCATION);
+			return this;
+		}
+
+		public Builder<T> withJdkServiceLoader() {
+			this.jdkServiceLoaderEnabled = true;
+			return this;
+		}
+
+		public Builder<T> orderComparator(Comparator<? super T> comparator) {
+			Assert.notNull(comparator, "comparator must not be null");
+			this.comparator = comparator;
+			return this;
+		}
+
+		public SPILoader<T> build() {
+			return new Default<>(
+				this.targetType,
+				this.classLoader,
+				this.springFactoriesResourceLocation,
+				this.jdkServiceLoaderEnabled,
+				this.filter,
+				this.comparator
+			);
+		}
 	}
 
+	// -----------------------------------------------------------------------------------------------------------------
+
+	record Default<T>(
+		@NonNull Class<T> targetType,
+		@NonNull ClassLoader classLoader,
+		@Nullable String springFactoriesResourceLocation,
+		boolean jdkServiceLoaderEnabled,
+		@NonNull Predicate<Class<?>> filter,
+		@Nullable Comparator<? super T> comparator) implements SPILoader<T> {
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public Stream<T> load() {
+			Stream<T> result = Stream.empty();
+
+			if (jdkServiceLoaderEnabled) {
+				var s1 = ServiceLoader.load(targetType, classLoader)
+					.stream()
+					.filter(provider -> filter.test(provider.type()))
+					.map(ServiceLoader.Provider::get);
+
+				result = Stream.concat(result, s1);
+			}
+
+			if (springFactoriesResourceLocation != null) {
+				var s2 = forResourceLocation(springFactoriesResourceLocation, classLoader)
+					.load(targetType)
+					.stream()
+					.filter(new Predicate<T>() {
+						@Override
+						public boolean test(T t) {
+							return filter.test(t.getClass());
+						}
+					});
+
+				result = Stream.concat(result, s2);
+			}
+
+			return comparator != null ? result.sorted(comparator) : result;
+		}
+	}
 }
