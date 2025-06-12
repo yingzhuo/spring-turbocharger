@@ -24,13 +24,11 @@ import org.springframework.util.ClassUtils;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.ServiceLoader;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import static java.util.Objects.requireNonNullElse;
 import static org.springframework.core.io.support.SpringFactoriesLoader.FACTORIES_RESOURCE_LOCATION;
-import static org.springframework.core.io.support.SpringFactoriesLoader.forResourceLocation;
 
 /**
  * SPI加载工具
@@ -106,7 +104,6 @@ public interface SPILoader<T> {
 
 		Builder(Class<T> targetType, @Nullable ClassLoader classLoader) {
 			Assert.notNull(targetType, "targetType must not be null");
-
 			this.targetType = targetType;
 			this.classLoader = requireNonNullElse(classLoader, ClassUtils.getDefaultClassLoader());
 		}
@@ -166,26 +163,11 @@ public interface SPILoader<T> {
 			Stream<T> result = Stream.empty();
 
 			if (jdkServiceLoaderEnabled) {
-				var s1 = ServiceLoader.load(targetType, classLoader)
-					.stream()
-					.filter(provider -> filter.test(provider.type()))
-					.map(ServiceLoader.Provider::get);
-
-				result = Stream.concat(result, s1);
+				result = Stream.concat(result, ServiceLoaderUtils.load(targetType, classLoader, filter));
 			}
 
 			if (springFactoriesResourceLocation != null) {
-				var s2 = forResourceLocation(springFactoriesResourceLocation, classLoader)
-					.load(targetType)
-					.stream()
-					.filter(new Predicate<T>() {
-						@Override
-						public boolean test(T t) {
-							return filter.test(t.getClass());
-						}
-					});
-
-				result = Stream.concat(result, s2);
+				result = Stream.concat(result, SpringFactoriesUtils.load(targetType, springFactoriesResourceLocation, classLoader, filter));
 			}
 
 			return comparator != null ? result.sorted(comparator) : result;
