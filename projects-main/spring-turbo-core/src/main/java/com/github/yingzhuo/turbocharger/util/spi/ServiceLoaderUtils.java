@@ -33,9 +33,9 @@ import java.util.stream.Stream;
  * @author 应卓
  * @see java.util.ServiceLoader
  * @see org.springframework.core.Ordered
- * @see SpringFactoriesUtils
  * @since 1.0.0
  */
+@Deprecated(forRemoval = true, since = "3.5.0")
 public final class ServiceLoaderUtils {
 
 	/**
@@ -66,14 +66,12 @@ public final class ServiceLoaderUtils {
 	 * @return Service实例
 	 * @throws ServiceConfigurationError 加载失败时抛出此错误
 	 */
-	public static <T> Stream<T> load(Class<T> targetType, @Nullable Predicate<Class<?>> filter) {
+	public static <T> Stream<T> load(Class<T> targetType, @Nullable Predicate<ServiceLoader.Provider<T>> filter) {
 		Assert.notNull(targetType, "targetType is required");
-
-		filter = Objects.requireNonNullElse(filter, c -> true);
 
 		return ServiceLoader.load(targetType)
 			.stream()
-			.filter(new ByTypePredicate<>(filter))
+			.filter(Objects.requireNonNullElse(filter, c -> true))
 			.map(ServiceLoader.Provider::get)
 			.sorted(OrderComparator.INSTANCE);
 	}

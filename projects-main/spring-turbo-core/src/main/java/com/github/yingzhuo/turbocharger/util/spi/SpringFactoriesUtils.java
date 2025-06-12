@@ -37,9 +37,9 @@ import static org.springframework.util.ClassUtils.getDefaultClassLoader;
  *
  * @author 应卓
  * @see SpringFactoriesLoader
- * @see ServiceLoaderUtils
  * @since 2.0.5
  */
+@Deprecated(forRemoval = true, since = "3.5.0")
 public final class SpringFactoriesUtils {
 
 	private static final SpringFactoriesLoader.FailureHandler NOOP = (factoryType, factoryImplementationName, failure) -> {

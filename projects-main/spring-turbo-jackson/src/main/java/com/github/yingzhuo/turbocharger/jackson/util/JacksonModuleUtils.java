@@ -49,15 +49,15 @@ public final class JacksonModuleUtils {
 			return;
 		}
 
-		final Predicate<Class<?>> predicateInUse = Objects.requireNonNullElse(predicate, c -> true);
+		final Predicate<Class<?>> predicateToUse = Objects.requireNonNullElse(predicate, c -> true);
 
 		var factoryType = Module.class;
 
 		var s1 = SpringFactoriesLoader.loadFactories(factoryType, null)
 			.stream()
-			.filter(module -> predicateInUse.test(module.getClass()));
+			.filter(module -> predicateToUse.test(module.getClass()));
 
-		var s2 = ServiceLoaderUtils.load(factoryType, predicateInUse);
+		var s2 = ServiceLoaderUtils.load(factoryType, moduleProvider -> predicateToUse.test(moduleProvider.type()));
 
 		Stream.concat(s1, s2)
 			.forEach(objectMapper::registerModule);
