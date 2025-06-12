@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.zxing.qrcode;
 
-import com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils;
 import lombok.Getter;
 import org.springframework.core.io.Resource;
 import org.springframework.lang.Nullable;
@@ -26,10 +25,7 @@ import org.springframework.util.Assert;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.Objects;
 
 /**
@@ -85,7 +81,7 @@ public final class Logo implements Serializable {
 			try {
 				return image(resource.getFile());
 			} catch (IOException e) {
-				throw IOExceptionUtils.toUnchecked(e);
+				throw new UncheckedIOException(e);
 			}
 		}
 
@@ -94,7 +90,7 @@ public final class Logo implements Serializable {
 				this.image = ImageIO.read(inputStream);
 				return this;
 			} catch (IOException e) {
-				throw IOExceptionUtils.toUnchecked(e);
+				throw new UncheckedIOException(e);
 			}
 		}
 
@@ -103,7 +99,7 @@ public final class Logo implements Serializable {
 				this.image = ImageIO.read(inputStream);
 				return this;
 			} catch (IOException e) {
-				throw IOExceptionUtils.toUnchecked(e);
+				throw new UncheckedIOException(e);
 			}
 		}
 
@@ -112,7 +108,7 @@ public final class Logo implements Serializable {
 				this.image = ImageIO.read(file);
 				return this;
 			} catch (IOException e) {
-				throw IOExceptionUtils.toUnchecked(e);
+				throw new UncheckedIOException(e);
 			}
 		}
 

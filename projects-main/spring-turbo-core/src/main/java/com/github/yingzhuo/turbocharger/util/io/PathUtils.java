@@ -23,6 +23,7 @@ import org.springframework.util.FileSystemUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -108,10 +109,10 @@ public final class PathUtils {
 			boolean success = toFile(path).createNewFile();
 			if (!success) {
 				final String msg = StringFormatter.format("unable to create file: {}", path);
-				throw IOExceptionUtils.toUnchecked(msg);
+				throw new UncheckedIOException(new IOException(msg));
 			}
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -141,14 +142,14 @@ public final class PathUtils {
 				return;
 			} else {
 				final String msg = StringFormatter.format("unable to create dir: {}", path);
-				throw IOExceptionUtils.toUnchecked(msg);
+				throw new UncheckedIOException(new IOException(msg));
 			}
 		}
 
 		boolean success = toFile(path).mkdirs();
 		if (!success) {
 			final String msg = StringFormatter.format("unable to create dir: {}", path);
-			throw IOExceptionUtils.toUnchecked(msg);
+			throw new UncheckedIOException(new IOException(msg));
 		}
 	}
 
@@ -170,7 +171,7 @@ public final class PathUtils {
 		try {
 			Files.move(source, target, copyOptions.toArray(new CopyOption[0]));
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -192,7 +193,7 @@ public final class PathUtils {
 		try {
 			Files.copy(source, target, copyOptions.toArray(new CopyOption[0]));
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -210,7 +211,7 @@ public final class PathUtils {
 				Files.createFile(path);
 			}
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -251,7 +252,7 @@ public final class PathUtils {
 				return !directory.iterator().hasNext();
 			}
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -338,13 +339,13 @@ public final class PathUtils {
 	 */
 	public static long size(Path path) {
 		if (!isExists(path)) {
-			throw IOExceptionUtils.toUnchecked("file not exists");
+			throw new UncheckedIOException(new IOException("file not exists"));
 		}
 
 		try {
 			return Files.size(path);
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -366,7 +367,7 @@ public final class PathUtils {
 				FileSystemUtils.deleteRecursively(path);
 			}
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -430,7 +431,7 @@ public final class PathUtils {
 			final BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);
 			return new Date(attributes.creationTime().to(TimeUnit.MILLISECONDS));
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -446,7 +447,7 @@ public final class PathUtils {
 			final BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);
 			return new Date(attributes.lastModifiedTime().to(TimeUnit.MILLISECONDS));
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -462,7 +463,7 @@ public final class PathUtils {
 			final BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);
 			return new Date(attributes.lastAccessTime().to(TimeUnit.MILLISECONDS));
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -489,7 +490,7 @@ public final class PathUtils {
 		try {
 			return Files.readAllLines(path, charset);
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -504,7 +505,7 @@ public final class PathUtils {
 		try {
 			return Files.readAllBytes(path);
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -533,7 +534,7 @@ public final class PathUtils {
 		try {
 			Files.write(path, bytes, openOptions.toArray(new OpenOption[0]));
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -577,7 +578,7 @@ public final class PathUtils {
 		try {
 			Files.write(path, lines, charset, openOptions.toArray(new OpenOption[0]));
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -603,7 +604,7 @@ public final class PathUtils {
 		try {
 			return Files.isSameFile(p1, p2);
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 

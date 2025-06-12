@@ -28,15 +28,10 @@ import lombok.Setter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils.toUnchecked;
 
 /**
  * <a href="https://freemarker.apache.org/">Freemarker</a>实现
@@ -77,9 +72,9 @@ public class StringTemplateRendererImpl implements StringTemplateRenderer, Initi
 			template.process(data, writer);
 			return writer.toString();
 		} catch (IOException e) {
-			throw toUnchecked(e);
+			throw new UncheckedIOException(e);
 		} catch (TemplateException e) {
-			throw toUnchecked(e.getMessage());
+			throw new UncheckedIOException(new IOException(e.getMessage()));
 		}
 	}
 
@@ -89,7 +84,7 @@ public class StringTemplateRendererImpl implements StringTemplateRenderer, Initi
 			this.cfg.setTemplateLoader(getTemplateLoader());
 			this.cfg.setDefaultEncoding(defaultEncoding);
 		} catch (IOException e) {
-			throw toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 

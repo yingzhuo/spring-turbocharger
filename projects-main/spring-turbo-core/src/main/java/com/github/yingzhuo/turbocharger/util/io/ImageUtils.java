@@ -23,9 +23,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
-
-import static com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils.toUnchecked;
 
 /**
  * {@code BufferedImage}相关工具
@@ -54,7 +53,7 @@ public final class ImageUtils {
 			ImageIO.write(image, format, os);
 			return os.toByteArray();
 		} catch (IOException e) {
-			throw toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 

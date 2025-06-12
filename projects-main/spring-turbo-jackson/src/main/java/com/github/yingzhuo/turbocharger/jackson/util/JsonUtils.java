@@ -33,8 +33,7 @@ import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
-
-import static com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils.toUnchecked;
+import java.io.UncheckedIOException;
 
 /**
  * Json相关工具
@@ -66,7 +65,7 @@ public final class JsonUtils {
 		try {
 			return getObjectMapper().writeValueAsString(obj);
 		} catch (JsonProcessingException e) {
-			throw toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -88,7 +87,7 @@ public final class JsonUtils {
 				.withoutFeatures(SerializationFeature.INDENT_OUTPUT)
 				.writeValueAsString(obj);
 		} catch (JsonProcessingException e) {
-			throw toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -110,7 +109,7 @@ public final class JsonUtils {
 				.withFeatures(SerializationFeature.INDENT_OUTPUT)
 				.writeValueAsString(obj);
 		} catch (JsonProcessingException e) {
-			throw toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -132,7 +131,7 @@ public final class JsonUtils {
 				.withView(viewClass)
 				.writeValueAsString(obj);
 		} catch (JsonProcessingException e) {
-			throw toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -157,11 +156,11 @@ public final class JsonUtils {
 				.withoutFeatures(SerializationFeature.INDENT_OUTPUT)
 				.writeValueAsString(obj);
 		} catch (JsonProcessingException e) {
-			throw toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
-	/**
+	/**≠
 	 * 序列化
 	 * <ul>
 	 *     <li>指定视图</li>
@@ -182,7 +181,7 @@ public final class JsonUtils {
 				.withFeatures(SerializationFeature.INDENT_OUTPUT)
 				.writeValueAsString(obj);
 		} catch (JsonProcessingException e) {
-			throw toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -199,7 +198,7 @@ public final class JsonUtils {
 		try {
 			return getObjectMapper().readValue(json, objClass);
 		} catch (JsonProcessingException e) {
-			throw toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -246,7 +245,7 @@ public final class JsonUtils {
 		try {
 			return getObjectMapper().readValue(json, objClass);
 		} catch (IOException e) {
-			throw toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
@@ -293,7 +292,7 @@ public final class JsonUtils {
 		try {
 			return getObjectMapper().readValue(json, objClass);
 		} catch (IOException e) {
-			throw toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 

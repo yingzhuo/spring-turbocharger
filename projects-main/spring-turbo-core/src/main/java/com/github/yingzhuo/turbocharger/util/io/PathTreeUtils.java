@@ -21,6 +21,7 @@ import com.github.yingzhuo.turbocharger.util.StringFormatter;
 import org.springframework.util.Assert;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -65,13 +66,13 @@ public final class PathTreeUtils {
 
 		if (!PathUtils.isExists(path)) {
 			final String msg = StringFormatter.format("'{}' not exists", path);
-			throw IOExceptionUtils.toUnchecked(msg);
+			throw new UncheckedIOException(new IOException(msg));
 		}
 
 		try {
 			return Files.walk(path, maxDepth, FileVisitOption.FOLLOW_LINKS);
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 

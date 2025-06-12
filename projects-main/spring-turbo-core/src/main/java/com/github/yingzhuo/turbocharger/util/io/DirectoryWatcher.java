@@ -19,6 +19,7 @@ package com.github.yingzhuo.turbocharger.util.io;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.*;
 
 /**
@@ -61,7 +62,7 @@ public final class DirectoryWatcher {
 			}
 
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		} catch (InterruptedException e) {
 			throw new IllegalStateException(e.getMessage(), e);
 		}

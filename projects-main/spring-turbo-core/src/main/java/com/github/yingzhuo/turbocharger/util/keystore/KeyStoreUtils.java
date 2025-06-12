@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.util.keystore;
 
-import com.github.yingzhuo.turbocharger.util.io.IOExceptionUtils;
 import org.springframework.util.Assert;
 
 import javax.crypto.SecretKey;
@@ -67,7 +66,7 @@ public final class KeyStoreUtils {
 			keyStore.load(input, storepass.toCharArray());
 			return keyStore;
 		} catch (IOException e) {
-			throw IOExceptionUtils.toUnchecked(e);
+			throw new UncheckedIOException(e);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
