@@ -23,6 +23,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
+import java.util.Comparator;
 import java.util.ServiceLoader;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -46,7 +47,12 @@ public final class SPILoaderBuilder<T> {
 	private SpringFactoriesConfig springFactoriesConfig = null;
 
 	private boolean jdkServiceLoaderEnabled = false;
+
+	@NonNull
 	private Predicate<Class<?>> filter = c -> true;
+
+	@Nullable
+	private Comparator<? super T> comparator;
 
 	SPILoaderBuilder(Class<T> targetType, @Nullable ClassLoader classLoader) {
 		Assert.notNull(targetType, "targetType must not be null");
@@ -74,13 +80,20 @@ public final class SPILoaderBuilder<T> {
 		return this;
 	}
 
+	public SPILoaderBuilder<T> orderComparator(Comparator<? super T> comparator) {
+		Assert.notNull(comparator, "comparator must not be null");
+		this.comparator = comparator;
+		return this;
+	}
+
 	public SPILoader<T> build() {
 		return new SPILoaderImpl<>(
 			this.targetType,
 			this.classLoader,
 			this.springFactoriesConfig,
 			this.jdkServiceLoaderEnabled,
-			this.filter
+			this.filter,
+			this.comparator
 		);
 	}
 
@@ -96,8 +109,9 @@ public final class SPILoaderBuilder<T> {
 		@NonNull Class<T> targetType,
 		@NonNull ClassLoader classLoader,
 		@Nullable SpringFactoriesConfig springFactoriesConfig,
-		@NonNull boolean jdkServiceLoaderEnabled,
-		@NonNull Predicate<Class<?>> filter) implements SPILoader<T> {
+		boolean jdkServiceLoaderEnabled,
+		@NonNull Predicate<Class<?>> filter,
+		@Nullable Comparator<? super T> comparator) implements SPILoader<T> {
 
 
 		@Override
@@ -128,7 +142,8 @@ public final class SPILoaderBuilder<T> {
 
 				result = Stream.concat(result, s2);
 			}
-			return result;
+
+			return comparator != null ? result.sorted(comparator) : result;
 		}
 	}
 }

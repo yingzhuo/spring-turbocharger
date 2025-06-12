@@ -19,13 +19,11 @@ package com.github.yingzhuo.turbocharger.jackson.util;
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.yingzhuo.turbocharger.util.spi.ServiceLoaderUtils;
-import org.springframework.core.io.support.SpringFactoriesLoader;
+import com.github.yingzhuo.turbocharger.util.spi.SPILoader;
 import org.springframework.lang.Nullable;
+import org.springframework.util.ClassUtils;
 
-import java.util.Objects;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 /**
  * Jackson模块加载工具
@@ -44,23 +42,16 @@ public final class JacksonModuleUtils {
 		super();
 	}
 
-	public static void loadModulesAndRegister(@Nullable ObjectMapper objectMapper, @Nullable Predicate<Class<?>> predicate) {
-		if (objectMapper == null) {
-			return;
+	public static void loadModulesAndRegister(@Nullable ObjectMapper mapper, @Nullable Predicate<Class<?>> predicate) {
+		if (mapper != null) {
+			SPILoader.builder(Module.class, ClassUtils.getDefaultClassLoader())
+				.withJdkServiceLoader()
+				.withSpringFactories()
+				.filter(predicate)
+				.build()
+				.load()
+				.forEach(mapper::registerModule);
 		}
-
-		final Predicate<Class<?>> predicateToUse = Objects.requireNonNullElse(predicate, c -> true);
-
-		var factoryType = Module.class;
-
-		var s1 = SpringFactoriesLoader.loadFactories(factoryType, null)
-			.stream()
-			.filter(module -> predicateToUse.test(module.getClass()));
-
-		var s2 = ServiceLoaderUtils.load(factoryType, moduleProvider -> predicateToUse.test(moduleProvider.type()));
-
-		Stream.concat(s1, s2)
-			.forEach(objectMapper::registerModule);
 	}
 
 }
