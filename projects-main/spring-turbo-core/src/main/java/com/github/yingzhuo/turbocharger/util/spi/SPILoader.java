@@ -20,6 +20,7 @@ package com.github.yingzhuo.turbocharger.util.spi;
 import org.springframework.lang.Nullable;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
@@ -29,25 +30,59 @@ import java.util.stream.Stream;
  * @author 应卓
  * @see java.util.ServiceLoader
  * @see org.springframework.core.io.support.SpringFactoriesLoader
+ * @see SPILoaderBuilder
  * @see #builder(Class)
  * @see #builder(Class, ClassLoader)
  * @since 3.5.0
  */
 @FunctionalInterface
-public interface SPILoader<T> {
+public interface SPILoader<T> extends Supplier<Stream<T>> {
 
+	/**
+	 * 生成创建器
+	 *
+	 * @param targetType 要加载的抽象类型
+	 * @param <T>        要加载的抽象类型
+	 * @return 创建器实例
+	 */
 	public static <T> SPILoaderBuilder<T> builder(Class<T> targetType) {
 		return builder(targetType, null);
 	}
 
+	/**
+	 * 生成创建器
+	 *
+	 * @param targetType  要加载的抽象类型
+	 * @param classLoader 类型加载器
+	 * @param <T>         要加载的抽象类型
+	 * @return 创建器实例
+	 */
 	public static <T> SPILoaderBuilder<T> builder(Class<T> targetType, @Nullable ClassLoader classLoader) {
 		return new SPILoaderBuilder<>(targetType, classLoader);
 	}
 
+	/**
+	 * 加载SPI实例
+	 *
+	 * @return SPI实例
+	 */
 	public Stream<T> load();
 
+	/**
+	 * 加载SPI实例
+	 *
+	 * @return SPI实例
+	 */
 	public default List<T> loadAsList() {
 		return load().toList();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public default Stream<T> get() {
+		return load();
 	}
 
 }
