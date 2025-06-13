@@ -213,6 +213,7 @@ public final class ResourceUtils {
 		return loadResourceAsProperties(location, xmlFormat)
 			.entrySet()
 			.stream()
+			.filter(entry -> entry.getKey() instanceof String)
 			.collect(Collectors.toMap(
 				e -> e.getKey().toString(),
 				e -> e.getValue().toString()

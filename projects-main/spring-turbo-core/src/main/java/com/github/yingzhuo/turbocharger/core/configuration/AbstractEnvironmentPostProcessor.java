@@ -18,18 +18,27 @@
 package com.github.yingzhuo.turbocharger.core.configuration;
 
 import com.github.yingzhuo.turbocharger.core.ResourceUtils;
-import org.springframework.core.env.MapPropertySource;
+import org.springframework.boot.env.EnvironmentPostProcessor;
+import org.springframework.core.Ordered;
+
+import java.util.Map;
 
 /**
  * @author 应卓
  * @since 3.5.0
  */
-public class PropertiesPropertySource extends MapPropertySource {
+public abstract class AbstractEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
 
-	public PropertiesPropertySource(String name, String resourceLocation, boolean xmlFormat) {
-		super(name,
-			ResourceUtils.loadResourceAsPropertiesConventToMap(resourceLocation, xmlFormat)
-		);
+	protected final Map<String, Object> loadProperties(String location, boolean xmlFormat) {
+		return ResourceUtils.loadResourceAsPropertiesConventToMap(location, xmlFormat);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int getOrder() {
+		return 0;
 	}
 
 }
