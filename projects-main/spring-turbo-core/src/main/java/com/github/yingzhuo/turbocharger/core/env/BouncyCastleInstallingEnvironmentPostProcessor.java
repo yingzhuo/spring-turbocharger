@@ -19,6 +19,7 @@ package com.github.yingzhuo.turbocharger.core.env;
 
 import com.github.yingzhuo.turbocharger.core.configuration.AbstractEnvironmentPostProcessor;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.logging.DeferredLogFactory;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.security.Provider;
@@ -37,6 +38,10 @@ import static org.springframework.util.ClassUtils.getDefaultClassLoader;
 public class BouncyCastleInstallingEnvironmentPostProcessor extends AbstractEnvironmentPostProcessor {
 
 	private static final String BOUNCY_CASTLE_PROVIDER_CLASS = "org.bouncycastle.jce.provider.BouncyCastleProvider";
+
+	public BouncyCastleInstallingEnvironmentPostProcessor(DeferredLogFactory logFactory) {
+		super(logFactory);
+	}
 
 	/**
 	 * {@inheritDoc}
