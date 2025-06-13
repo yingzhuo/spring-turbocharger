@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.core.env;
 
 import com.github.yingzhuo.turbocharger.core.SpringUtils;
+import com.github.yingzhuo.turbocharger.core.configuration.AbstractEnvironmentPostProcessor;
 import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
@@ -26,7 +27,6 @@ import org.springframework.boot.system.ApplicationHome;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.core.PriorityOrdered;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.lang.Nullable;
@@ -96,7 +96,7 @@ public final class SpringApplicationHolders {
 	 * @see EnvironmentPostProcessor
 	 * @see ApplicationListener
 	 */
-	private static class Hook implements EnvironmentPostProcessor, ApplicationListener<ContextRefreshedEvent>, PriorityOrdered {
+	private static class Hook extends AbstractEnvironmentPostProcessor implements ApplicationListener<ContextRefreshedEvent> {
 
 		/**
 		 * 私有构造方法

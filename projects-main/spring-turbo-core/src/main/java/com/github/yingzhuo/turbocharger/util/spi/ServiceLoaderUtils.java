@@ -76,8 +76,9 @@ public final class ServiceLoaderUtils {
 	public static <T> Stream<T> load(Class<T> targetType, @Nullable ClassLoader classLoader, @Nullable Predicate<Class<?>> filter) {
 		Assert.notNull(targetType, "targetType must not be null");
 
-		final Predicate<Class<?>> predicateToUse = filter != null ? filter : c -> true;
-		return ServiceLoader.load(targetType, classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader()).stream()
+		Predicate<Class<?>> predicateToUse = filter != null ? filter : c -> true;
+		return ServiceLoader.load(targetType, classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader())
+			.stream()
 			.filter(p -> predicateToUse.test(p.type())).map(ServiceLoader.Provider::get);
 	}
 

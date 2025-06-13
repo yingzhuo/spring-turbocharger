@@ -21,10 +21,9 @@ import com.github.yingzhuo.turbocharger.bean.injection.ApplicationHome;
 import com.github.yingzhuo.turbocharger.bean.injection.ApplicationParentPid;
 import com.github.yingzhuo.turbocharger.bean.injection.ApplicationPid;
 import com.github.yingzhuo.turbocharger.bean.injection.ApplicationProcessUser;
+import com.github.yingzhuo.turbocharger.core.configuration.AbstractEnvironmentPostProcessor;
 import com.github.yingzhuo.turbocharger.util.CurrentProcess;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.env.EnvironmentPostProcessor;
-import org.springframework.core.Ordered;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 
@@ -41,7 +40,8 @@ import java.util.Optional;
  * @see ApplicationProcessUser
  * @since 3.3.1
  */
-public class MiscellaneousPropertiesEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
+@Deprecated(forRemoval = true, since = "3.5.0")
+public class MiscellaneousPropertiesEnvironmentPostProcessor extends AbstractEnvironmentPostProcessor {
 
 	@Override
 	public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {

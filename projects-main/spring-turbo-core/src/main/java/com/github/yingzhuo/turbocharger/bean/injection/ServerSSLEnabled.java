@@ -32,5 +32,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Value("${server.ssl.enabled:false}")
+@Deprecated(forRemoval = true, since = "3.5.0")
 public @interface ServerSSLEnabled {
 }

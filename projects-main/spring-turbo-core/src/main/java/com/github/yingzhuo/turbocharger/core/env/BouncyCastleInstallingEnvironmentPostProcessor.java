@@ -17,9 +17,8 @@
  */
 package com.github.yingzhuo.turbocharger.core.env;
 
+import com.github.yingzhuo.turbocharger.core.configuration.AbstractEnvironmentPostProcessor;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.env.EnvironmentPostProcessor;
-import org.springframework.core.Ordered;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.security.Provider;
@@ -35,7 +34,7 @@ import static org.springframework.util.ClassUtils.getDefaultClassLoader;
  * @author 应卓
  * @since 3.3.2
  */
-public class BouncyCastleInstallingEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
+public class BouncyCastleInstallingEnvironmentPostProcessor extends AbstractEnvironmentPostProcessor {
 
 	private static final String BOUNCY_CASTLE_PROVIDER_CLASS = "org.bouncycastle.jce.provider.BouncyCastleProvider";
 

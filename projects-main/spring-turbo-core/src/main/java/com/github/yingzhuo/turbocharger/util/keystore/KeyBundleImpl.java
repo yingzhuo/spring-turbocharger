@@ -42,7 +42,6 @@ class KeyBundleImpl implements KeyBundle {
 	@Nullable
 	private final String alias;
 
-
 	KeyBundleImpl(List<X509Certificate> certificates, Key key, @Nullable String alias) {
 		this.certificates = certificates;
 		this.key = key;

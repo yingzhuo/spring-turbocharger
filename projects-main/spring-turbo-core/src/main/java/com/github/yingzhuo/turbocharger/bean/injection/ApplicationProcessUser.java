@@ -32,5 +32,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Value("${spring.process.user:}")
+@Deprecated(forRemoval = true, since = "3.5.0")
 public @interface ApplicationProcessUser {
 }

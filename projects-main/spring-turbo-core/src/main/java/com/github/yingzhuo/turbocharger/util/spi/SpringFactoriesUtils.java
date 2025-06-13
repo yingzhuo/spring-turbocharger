@@ -89,12 +89,13 @@ public final class SpringFactoriesUtils {
 	public static <T> Stream<T> load(Class<T> targetType, @Nullable String springFactoriesResourceLocation, @Nullable ClassLoader classLoader, @Nullable Predicate<Class<?>> filter) {
 		Assert.notNull(targetType, "targetType must not be null");
 
-		final Predicate<Class<?>> predicateToUse = filter != null ? filter : c -> true;
+		Predicate<Class<?>> predicateToUse = filter != null ? filter : c -> true;
 
 		return SpringFactoriesLoader.forResourceLocation(
 				springFactoriesResourceLocation != null ? springFactoriesResourceLocation : SpringFactoriesLoader.FACTORIES_RESOURCE_LOCATION,
 				classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader()
-			).load(targetType)
+			)
+			.load(targetType)
 			.stream()
 			.filter(t -> predicateToUse.test(t.getClass()));
 	}

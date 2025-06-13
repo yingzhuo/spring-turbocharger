@@ -32,5 +32,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Value("${server.port:8080}")
+@Deprecated(forRemoval = true, since = "3.5.0")
 public @interface ServerPort {
 }
