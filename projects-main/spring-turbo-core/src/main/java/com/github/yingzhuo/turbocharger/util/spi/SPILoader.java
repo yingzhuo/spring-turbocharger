@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ServiceLoader;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
@@ -42,7 +43,7 @@ import java.util.stream.Stream;
  * @see #builder(Class, ClassLoader)
  * @since 3.5.0
  */
-public sealed interface SPILoader<T> permits SPILoader.Default {
+public sealed interface SPILoader<T> extends Supplier<Stream<T>> permits SPILoader.Default {
 
 	/**
 	 * 获取默认的加载器
@@ -107,6 +108,14 @@ public sealed interface SPILoader<T> permits SPILoader.Default {
 	 */
 	public default List<T> loadAsList() {
 		return load().toList();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public default Stream<T> get() {
+		return load();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
