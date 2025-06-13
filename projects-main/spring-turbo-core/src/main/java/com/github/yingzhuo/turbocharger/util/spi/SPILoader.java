@@ -26,6 +26,7 @@ import org.springframework.util.ClassUtils;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.ServiceLoader;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -34,14 +35,40 @@ import java.util.stream.Stream;
  *
  * @param <T> 要加载的抽象类型
  * @author 应卓
- * @see java.util.ServiceLoader
- * @see org.springframework.core.io.support.SpringFactoriesLoader
+ * @see ServiceLoader
+ * @see SpringFactoriesLoader
  * @see Builder
  * @see #builder(Class)
  * @see #builder(Class, ClassLoader)
  * @since 3.5.0
  */
 public sealed interface SPILoader<T> permits SPILoader.Default {
+
+	/**
+	 * 获取默认的加载器
+	 *
+	 * @param targetType 要加载的抽象类型
+	 * @return 加载的实例
+	 */
+	public static <T> SPILoader<T> getDefault(Class<T> targetType) {
+		return getDefault(targetType, null);
+	}
+
+	/**
+	 * 获取默认的加载器
+	 *
+	 * @param targetType 要加载的抽象类型
+	 * @param filter     过滤器
+	 * @param <T>        要加载的抽象类型
+	 * @return 加载的实例
+	 */
+	public static <T> SPILoader<T> getDefault(Class<T> targetType, @Nullable Predicate<Class<?>> filter) {
+		return builder(targetType)
+			.filter(filter != null ? filter : c -> true)
+			.withSpringFactories()
+			.withJdkServiceLoader()
+			.build();
+	}
 
 	/**
 	 * 生成创建器
@@ -150,6 +177,7 @@ public sealed interface SPILoader<T> permits SPILoader.Default {
 		}
 	}
 
+	// @formatter:off
 	record Default<T>(
 		@NonNull Class<T> targetType,
 		@NonNull ClassLoader classLoader,
@@ -176,4 +204,6 @@ public sealed interface SPILoader<T> permits SPILoader.Default {
 			return comparator != null ? result.sorted(comparator) : result;
 		}
 	}
+	// @formatter:on
+
 }
