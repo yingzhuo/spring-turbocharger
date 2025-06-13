@@ -32,10 +32,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.github.yingzhuo.turbocharger.util.io.CloseUtils.closeQuietly;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -183,17 +181,6 @@ public final class ResourceUtils {
 	/**
 	 * 加载Properties文件
 	 *
-	 * @param location 资源位置
-	 * @return 加载的实例
-	 * @throws UncheckedIOException I/O错误
-	 */
-	public static Properties loadResourceAsProperties(String location) {
-		return loadResourceAsProperties(location, false);
-	}
-
-	/**
-	 * 加载Properties文件
-	 *
 	 * @param location  资源位置
 	 * @param xmlFormat 是否为xml格式
 	 * @return 加载的实例
@@ -212,6 +199,24 @@ public final class ResourceUtils {
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}
+	}
+
+	/**
+	 * 加载Properties文件并转换成Map类型
+	 *
+	 * @param location  资源位置
+	 * @param xmlFormat 是否为xml格式
+	 * @return 加载的实例
+	 * @throws UncheckedIOException I/O错误
+	 */
+	public static Map<String, Object> loadResourceAsPropertiesConventToMap(String location, boolean xmlFormat) {
+		return loadResourceAsProperties(location, xmlFormat)
+			.entrySet()
+			.stream()
+			.collect(Collectors.toMap(
+				e -> e.getKey().toString(),
+				e -> e.getValue().toString()
+			));
 	}
 
 	/**

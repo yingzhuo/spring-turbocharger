@@ -17,6 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.util.spi;
 
+import org.springframework.core.io.support.SpringFactoriesLoader;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -28,7 +29,6 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import static java.util.Objects.requireNonNullElse;
-import static org.springframework.core.io.support.SpringFactoriesLoader.FACTORIES_RESOURCE_LOCATION;
 
 /**
  * SPI加载工具
@@ -114,17 +114,18 @@ public interface SPILoader<T> {
 			return this;
 		}
 
-		public Builder<T> filterClassName(String regex) {
+		public Builder<T> filterByClassName(String regex) {
 			Assert.notNull(regex, "regex must not be null");
 			return filter(c -> c.getName().matches(regex));
 		}
 
 		public Builder<T> withSpringFactories() {
-			return withSpringFactories(FACTORIES_RESOURCE_LOCATION);
+			return withSpringFactories(SpringFactoriesLoader.FACTORIES_RESOURCE_LOCATION);
 		}
 
-		public Builder<T> withSpringFactories(@Nullable String resourceLocation) {
-			this.springFactoriesResourceLocation = requireNonNullElse(resourceLocation, FACTORIES_RESOURCE_LOCATION);
+		public Builder<T> withSpringFactories(String resourceLocation) {
+			Assert.notNull(resourceLocation, "resourceLocation must not be null");
+			this.springFactoriesResourceLocation = resourceLocation;
 			return this;
 		}
 

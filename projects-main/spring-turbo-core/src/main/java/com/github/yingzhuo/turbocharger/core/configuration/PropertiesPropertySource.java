@@ -17,33 +17,19 @@
  */
 package com.github.yingzhuo.turbocharger.core.configuration;
 
-import org.springframework.core.env.PropertySource;
-import org.springframework.lang.Nullable;
+import com.github.yingzhuo.turbocharger.core.ResourceUtils;
+import org.springframework.core.env.MapPropertySource;
 
 /**
  * @author 应卓
- * @see #of(String)
- * @since 2.1.3
+ * @since 3.5.0
  */
-public final class EmptyPropertySource extends PropertySource<Object> {
+public class PropertiesPropertySource extends MapPropertySource {
 
-	/**
-	 * 私有构造方法
-	 *
-	 * @param name 名称
-	 */
-	private EmptyPropertySource(String name) {
-		super(name);
-	}
-
-	public static EmptyPropertySource of(@Nullable String name) {
-		return new EmptyPropertySource(name != null ? name : "empty");
-	}
-
-	@Nullable
-	@Override
-	public Object getProperty(String name) {
-		return null;
+	public PropertiesPropertySource(String name, String resourceLocation, boolean xmlFormat) {
+		super(name,
+			ResourceUtils.loadResourceAsPropertiesConventToMap(resourceLocation, xmlFormat)
+		);
 	}
 
 }
