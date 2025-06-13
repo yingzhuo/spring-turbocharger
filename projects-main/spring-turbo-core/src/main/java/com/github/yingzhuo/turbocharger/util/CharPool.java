@@ -22,32 +22,25 @@ package com.github.yingzhuo.turbocharger.util;
  *
  * @author 应卓
  * @see StringPool
- * @since 1.0.0
+ * @since 3.5.0
  */
-public final class CharPool {
+public interface CharPool {
 
-	public static final char SPACE = ' ';
-	public static final char TAB = '\t';
-	public static final char DOT = '.';
-	public static final char SLASH = '/';
-	public static final char BACKSLASH = '\\';
-	public static final char CR = '\r';
-	public static final char LF = '\n';
-	public static final char QUESTION_MARK = '?';
-	public static final char HYPHEN = '-';
-	public static final char UNDERSCORE = '_';
-	public static final char COMMA = ',';
-	public static final char SINGLE_QUOTE = '\'';
-	public static final char DOUBLE_QUOTE = '"';
-	public static final char AT_SIGN = '@';
-	public static final char SEMICOLON = ';';
-	public static final char COLON = ':';
-
-	/**
-	 * 私有构造方法
-	 */
-	private CharPool() {
-		super();
-	}
+	char SPACE = ' ';
+	char TAB = '\t';
+	char DOT = '.';
+	char SLASH = '/';
+	char BACKSLASH = '\\';
+	char CR = '\r';
+	char LF = '\n';
+	char QUESTION_MARK = '?';
+	char HYPHEN = '-';
+	char UNDERSCORE = '_';
+	char COMMA = ',';
+	char SINGLE_QUOTE = '\'';
+	char DOUBLE_QUOTE = '"';
+	char AT_SIGN = '@';
+	char SEMICOLON = ';';
+	char COLON = ':';
 
 }

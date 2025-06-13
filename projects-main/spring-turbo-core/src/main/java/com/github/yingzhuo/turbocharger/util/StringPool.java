@@ -22,35 +22,28 @@ package com.github.yingzhuo.turbocharger.util;
  *
  * @author 应卓
  * @see CharPool
- * @since 1.0.0
+ * @since 3.5.0
  */
-public final class StringPool {
+public interface StringPool {
 
-	public static final String EMPTY = "";
-	public static final String SPACE = " ";
-	public static final String TAB = "\t";
-	public static final String COLON = ":";
-	public static final String SEMICOLON = ";";
-	public static final String DOT = ".";
-	public static final String DOT_DOT = "..";
-	public static final String SLASH = "/";
-	public static final String BACKSLASH = "\\";
-	public static final String CR = "\r";
-	public static final String LF = "\n";
-	public static final String QUESTION_MARK = "?";
-	public static final String HYPHEN = "-";
-	public static final String UNDERSCORE = "_";
-	public static final String COMMA = ",";
-	public static final String SHARP = "#";
+	String EMPTY = "";
+	String SPACE = " ";
+	String TAB = "\t";
+	String COLON = ":";
+	String SEMICOLON = ";";
+	String DOT = ".";
+	String DOT_DOT = "..";
+	String SLASH = "/";
+	String BACKSLASH = "\\";
+	String CR = "\r";
+	String LF = "\n";
+	String QUESTION_MARK = "?";
+	String HYPHEN = "-";
+	String UNDERSCORE = "_";
+	String COMMA = ",";
+	String SHARP = "#";
 
-	public static final String OK = "OK";
-	public static final String NG = "NG";
-
-	/**
-	 * 私有构造方法
-	 */
-	private StringPool() {
-		super();
-	}
+	String OK = "OK";
+	String NG = "NG";
 
 }
