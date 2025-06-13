@@ -34,5 +34,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @Scheduled(cron = "@midnight")
+@Deprecated(forRemoval = true, since = "3.5.0")
 public @interface ScheduledMidnight {
 }
