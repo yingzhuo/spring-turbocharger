@@ -25,10 +25,9 @@ import org.springframework.util.ClassUtils;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-
-import static java.util.Objects.requireNonNullElse;
 
 /**
  * SPI加载工具
@@ -42,8 +41,7 @@ import static java.util.Objects.requireNonNullElse;
  * @see #builder(Class, ClassLoader)
  * @since 3.5.0
  */
-@FunctionalInterface
-public interface SPILoader<T> {
+public sealed interface SPILoader<T> permits SPILoader.Default {
 
 	/**
 	 * 生成创建器
@@ -105,7 +103,7 @@ public interface SPILoader<T> {
 		Builder(Class<T> targetType, @Nullable ClassLoader classLoader) {
 			Assert.notNull(targetType, "targetType must not be null");
 			this.targetType = targetType;
-			this.classLoader = requireNonNullElse(classLoader, ClassUtils.getDefaultClassLoader());
+			this.classLoader = Objects.requireNonNullElse(classLoader, ClassUtils.getDefaultClassLoader());
 		}
 
 		public Builder<T> filter(Predicate<Class<?>> filter) {
@@ -151,8 +149,6 @@ public interface SPILoader<T> {
 			);
 		}
 	}
-
-	// -----------------------------------------------------------------------------------------------------------------
 
 	record Default<T>(
 		@NonNull Class<T> targetType,

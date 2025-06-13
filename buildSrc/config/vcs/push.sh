@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+git status
+
 # 添加所有文件
 git add .
 

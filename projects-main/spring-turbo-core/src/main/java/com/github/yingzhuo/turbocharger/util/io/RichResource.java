@@ -41,7 +41,7 @@ import static java.util.Objects.requireNonNullElse;
  * @see #of(Resource)
  * @since 3.3.2
  */
-public interface RichResource extends Resource, Serializable {
+public sealed interface RichResource extends Resource, Serializable permits RichResourceImpl {
 
 	/**
 	 * 装饰一个{@link Resource}
