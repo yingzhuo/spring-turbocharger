@@ -3,3 +3,6 @@ com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook,\
 com.github.yingzhuo.turbocharger.core.env.BouncyCastleInstallingEnvironmentPostProcessor
 org.springframework.context.ApplicationListener=\
 com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook
+org.springframework.core.io.ProtocolResolver=\
+com.github.yingzhuo.turbocharger.util.io.resource.TextResourceProtocolResolver,\
+com.github.yingzhuo.turbocharger.util.io.resource.PemResourceProtocolResolver
