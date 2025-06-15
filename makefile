@@ -13,6 +13,9 @@ refresh-dependencies:
 compile:
 	$(GRADLE) "classes"
 
+build:
+	$(GRADLE) --no-parallel -x "check" -x "test" "build"
+
 install: add-license-header
 	$(GRADLE) --no-parallel -x "test" -x "check" "publishToMavenLocal"
 
@@ -37,5 +40,5 @@ stop-gradle-daemon:
 push-to-vcs: add-license-header
 	$(GRADLE) "pushToVcs"
 
-.PHONY: usage clean clean-buildsrc refresh-dependencies compile publish install check test \
+.PHONY: usage clean clean-buildsrc refresh-dependencies compile build publish install check test \
 	setup-gradle-wrapper add-license-header stop-gradle-daemon push-to-vcs
