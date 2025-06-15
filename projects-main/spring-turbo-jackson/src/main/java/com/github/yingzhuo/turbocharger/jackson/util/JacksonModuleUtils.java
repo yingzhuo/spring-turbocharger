@@ -42,12 +42,16 @@ public final class JacksonModuleUtils {
 		super();
 	}
 
+	public static void loadModulesAndRegister(@Nullable ObjectMapper mapper) {
+		loadModulesAndRegister(mapper, null);
+	}
+
 	public static void loadModulesAndRegister(@Nullable ObjectMapper mapper, @Nullable Predicate<Class<?>> predicate) {
 		if (mapper != null) {
 			SPILoader.builder(Module.class, ClassUtils.getDefaultClassLoader())
 				.withJdkServiceLoader()
 				.withSpringFactories()
-				.filter(predicate)
+				.filter(predicate != null ? predicate : c -> true)
 				.build()
 				.load()
 				.forEach(mapper::registerModule);

@@ -29,11 +29,11 @@ import org.springframework.http.HttpHeaders;
  */
 public class BearerTokenResolver extends HeaderTokenResolver {
 
-    /**
-     * 构造方法
-     */
-    public BearerTokenResolver() {
-        super(HttpHeaders.AUTHORIZATION, "Bearer ");
-    }
+	/**
+	 * 构造方法
+	 */
+	public BearerTokenResolver() {
+		super(HttpHeaders.AUTHORIZATION, "Bearer ");
+	}
 
 }
