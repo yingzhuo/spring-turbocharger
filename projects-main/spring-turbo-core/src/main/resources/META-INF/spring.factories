@@ -4,4 +4,5 @@ com.github.yingzhuo.turbocharger.core.env.BouncyCastleInstallingEnvironmentPostP
 org.springframework.context.ApplicationListener=\
 com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook
 org.springframework.core.io.ProtocolResolver=\
-com.github.yingzhuo.turbocharger.util.io.resource.PemResourceProtocolResolver
+com.github.yingzhuo.turbocharger.util.io.resource.PemResourceProtocolResolver,\
+com.github.yingzhuo.turbocharger.util.io.resource.StringResourceProtocolResolver

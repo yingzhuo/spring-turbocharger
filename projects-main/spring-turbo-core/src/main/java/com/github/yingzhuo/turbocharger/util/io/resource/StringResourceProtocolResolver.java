@@ -17,52 +17,28 @@
  */
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
-import com.github.yingzhuo.turbocharger.util.StringPool;
-import org.springframework.core.io.AbstractResource;
+import org.springframework.core.io.ProtocolResolver;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.lang.Nullable;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 /**
  * @author 应卓
  * @since 3.5.0
  */
-public abstract class AbstractTextResource extends AbstractResource implements Resource {
+public class StringResourceProtocolResolver implements ProtocolResolver {
 
-	private final String text;
+	private static final String PREFIX = "string:";
 
-	protected AbstractTextResource(@Nullable String text) {
-		this.text = text == null ? StringPool.EMPTY : text;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public final String toString() {
-		return text;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
+	@Nullable
 	@Override
-	public final String getDescription() {
-		return text;
-	}
+	public Resource resolve(String location, ResourceLoader resourceLoader) {
+		if (location.startsWith(PREFIX)) {
+			var str = location.substring(PREFIX.length());
+			return new StringResource(str);
+		}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public InputStream getInputStream() {
-		return new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
-	}
-
-	public final int getTextLength() {
-		return text.length();
+		return null;
 	}
 
 }

@@ -21,18 +21,33 @@ import org.springframework.boot.ssl.pem.PemContent;
 import org.springframework.core.io.Resource;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.util.StringUtils;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.X509Certificate;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author 应卓
  * @since 3.5.0
  */
 @SuppressWarnings("unchecked")
-public class PemResource extends AbstractTextResource implements Resource {
+public class PemResource extends TextResource implements Resource {
+
+	@Nullable
+	private static String prettyPemContent(@Nullable String content) {
+		if (content == null) {
+			return null;
+		}
+
+		return Stream.of(content.split("\n"))
+			.map(String::trim)
+			.filter(StringUtils::hasText)
+			.collect(Collectors.joining("\n"));
+	}
 
 	@Nullable
 	private final String keypass;
@@ -40,8 +55,12 @@ public class PemResource extends AbstractTextResource implements Resource {
 	@NonNull
 	private final PemContent pc;
 
+	public PemResource(String content) {
+		this(content, null);
+	}
+
 	public PemResource(String content, @Nullable String keypass) {
-		super(content);
+		super(prettyPemContent(content));
 		this.keypass = keypass;
 		this.pc = PemContent.of(content);
 	}
