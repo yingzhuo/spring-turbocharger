@@ -34,6 +34,16 @@ public class PemResourceProtocolResolver implements ProtocolResolver {
 
 	private static final Pattern PATTERN = Pattern.compile("^pem:(.*?)(?:\\?keypass=(.*))?$");
 
+	/**
+	 * 默认构造方法
+	 */
+	public PemResourceProtocolResolver() {
+		super();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Nullable
 	@Override
 	public Resource resolve(String location, ResourceLoader resourceLoader) {

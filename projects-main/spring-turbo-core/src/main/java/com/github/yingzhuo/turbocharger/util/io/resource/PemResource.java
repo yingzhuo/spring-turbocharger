@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
 import org.springframework.boot.ssl.pem.PemContent;
+import org.springframework.core.io.Resource;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
@@ -31,7 +32,7 @@ import java.util.List;
  * @since 3.5.0
  */
 @SuppressWarnings("unchecked")
-public class PemResource extends TextResource {
+public class PemResource extends AbstractTextResource implements Resource {
 
 	@Nullable
 	private final String keypass;

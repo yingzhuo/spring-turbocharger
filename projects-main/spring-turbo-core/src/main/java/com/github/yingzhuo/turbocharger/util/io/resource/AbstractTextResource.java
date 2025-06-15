@@ -17,7 +17,9 @@
  */
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
+import com.github.yingzhuo.turbocharger.util.StringPool;
 import org.springframework.core.io.AbstractResource;
+import org.springframework.core.io.Resource;
 import org.springframework.lang.Nullable;
 
 import java.io.ByteArrayInputStream;
@@ -28,12 +30,12 @@ import java.nio.charset.StandardCharsets;
  * @author 应卓
  * @since 3.5.0
  */
-public class TextResource extends AbstractResource {
+public abstract class AbstractTextResource extends AbstractResource implements Resource {
 
 	private final String text;
 
-	public TextResource(@Nullable String text) {
-		this.text = text == null ? "" : text;
+	protected AbstractTextResource(@Nullable String text) {
+		this.text = text == null ? StringPool.EMPTY : text;
 	}
 
 	/**
@@ -59,7 +61,7 @@ public class TextResource extends AbstractResource {
 		return new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
 	}
 
-	public int getTextLength() {
+	public final int getTextLength() {
 		return text.length();
 	}
 
