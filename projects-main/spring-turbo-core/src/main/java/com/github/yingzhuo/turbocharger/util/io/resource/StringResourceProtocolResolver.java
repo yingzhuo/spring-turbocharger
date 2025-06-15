@@ -24,12 +24,23 @@ import org.springframework.lang.Nullable;
 
 /**
  * @author 应卓
+ * @see StringResource
  * @since 3.5.0
  */
 public class StringResourceProtocolResolver implements ProtocolResolver {
 
 	private static final String PREFIX = "string:";
 
+	/**
+	 * 默认构造方法
+	 */
+	public StringResourceProtocolResolver() {
+		super();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Nullable
 	@Override
 	public Resource resolve(String location, ResourceLoader resourceLoader) {
@@ -37,7 +48,6 @@ public class StringResourceProtocolResolver implements ProtocolResolver {
 			var str = location.substring(PREFIX.length());
 			return new StringResource(str);
 		}
-
 		return null;
 	}
 

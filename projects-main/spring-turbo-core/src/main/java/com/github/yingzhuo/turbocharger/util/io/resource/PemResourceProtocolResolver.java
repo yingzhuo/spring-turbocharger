@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author 应卓
+ * @see PemResource
  * @since 3.5.0
  */
 public class PemResourceProtocolResolver implements ProtocolResolver {

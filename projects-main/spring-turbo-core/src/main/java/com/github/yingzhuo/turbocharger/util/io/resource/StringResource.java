@@ -17,7 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
-import org.springframework.lang.Nullable;
+import java.util.Objects;
 
 /**
  * @author 应卓
@@ -25,8 +25,8 @@ import org.springframework.lang.Nullable;
  */
 public class StringResource extends TextResource {
 
-	public StringResource(@Nullable String text) {
-		super(text);
+	public StringResource(String text) {
+		super(Objects.requireNonNull(text));
 	}
 
 }

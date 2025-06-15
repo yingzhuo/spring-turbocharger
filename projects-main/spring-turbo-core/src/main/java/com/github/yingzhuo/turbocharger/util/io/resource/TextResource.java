@@ -17,12 +17,10 @@
  */
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
-import com.github.yingzhuo.turbocharger.util.StringPool;
 import org.springframework.core.io.AbstractResource;
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -35,8 +33,9 @@ public abstract class TextResource extends AbstractResource implements Resource 
 
 	private final String text;
 
-	protected TextResource(@Nullable String text) {
-		this.text = text == null ? StringPool.EMPTY : text;
+	protected TextResource(String text) {
+		Assert.notNull(text, "text must not be null");
+		this.text = text;
 	}
 
 	/**
@@ -59,7 +58,7 @@ public abstract class TextResource extends AbstractResource implements Resource 
 	 */
 	@Override
 	public InputStream getInputStream() {
-		return new BufferedInputStream(new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8)), 2048);
+		return new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
 	}
 
 	public final int getTextLength() {

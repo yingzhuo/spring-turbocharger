@@ -21,6 +21,7 @@ import org.springframework.boot.ssl.pem.PemContent;
 import org.springframework.core.io.Resource;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.security.PrivateKey;
@@ -37,11 +38,8 @@ import java.util.stream.Stream;
 @SuppressWarnings("unchecked")
 public class PemResource extends TextResource implements Resource {
 
-	@Nullable
-	private static String prettyPemContent(@Nullable String content) {
-		if (content == null) {
-			return null;
-		}
+	private static String prettyPemContent(String content) {
+		Assert.notNull(content, "content must not be null");
 
 		return Stream.of(content.split("\n"))
 			.map(String::trim)
@@ -49,11 +47,11 @@ public class PemResource extends TextResource implements Resource {
 			.collect(Collectors.joining("\n"));
 	}
 
-	@Nullable
-	private final String keypass;
-
 	@NonNull
 	private final PemContent pc;
+
+	@Nullable
+	private final String keypass;
 
 	public PemResource(String content) {
 		this(content, null);
@@ -69,12 +67,12 @@ public class PemResource extends TextResource implements Resource {
 		return pc.getCertificates();
 	}
 
-	public <T extends X509Certificate> T getFirstCertificate() {
+	public <T extends X509Certificate> T getUniqueCertificate() {
 		return (T) pc.getCertificates().get(0);
 	}
 
 	public <T extends PublicKey> T getPublicKey() {
-		return (T) getFirstCertificate().getPublicKey();
+		return (T) getUniqueCertificate().getPublicKey();
 	}
 
 	public <T extends PrivateKey> T getPrivateKey() {
