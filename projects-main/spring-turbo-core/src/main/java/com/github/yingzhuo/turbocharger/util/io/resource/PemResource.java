@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
 import org.springframework.boot.ssl.pem.PemContent;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.security.PrivateKey;
@@ -35,6 +36,7 @@ public class PemResource extends TextResource {
 	@Nullable
 	private final String keypass;
 
+	@NonNull
 	private final PemContent pc;
 
 	public PemResource(String content, @Nullable String keypass) {
@@ -59,6 +61,7 @@ public class PemResource extends TextResource {
 		return (T) pc.getPrivateKey(keypass);
 	}
 
+	@Nullable
 	public String getKeypass() {
 		return this.keypass;
 	}
