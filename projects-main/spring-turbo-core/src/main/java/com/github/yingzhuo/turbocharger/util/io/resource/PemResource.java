@@ -44,6 +44,7 @@ public class PemResource extends AbstractTextResource implements Resource {
 
 	@NonNull
 	private final PemContent pc;
+
 	@Nullable
 	private final String keypass;
 

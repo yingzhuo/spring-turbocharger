@@ -24,10 +24,7 @@ import org.springframework.util.Assert;
 
 import javax.crypto.SecretKey;
 import java.io.InputStream;
-import java.security.KeyPair;
-import java.security.KeyStore;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.*;
 import java.security.cert.Certificate;
 import java.util.List;
 
@@ -36,6 +33,8 @@ import java.util.List;
  * @see KeyStore
  * @see KeyStoreType
  * @see KeyStoreUtils
+ * @see JKSResource
+ * @see PKCS12Resource
  * @since 3.5.0
  */
 public class KeyStoreResource extends AbstractNullStreamResource {
@@ -92,6 +91,14 @@ public class KeyStoreResource extends AbstractNullStreamResource {
 		return KeyStoreUtils.getPrivateKey(store, alias, keypass == null ? storepass : keypass);
 	}
 
+	public final <T extends Key> T getKey(String alias) {
+		return getKey(alias, null);
+	}
+
+	public final <T extends Key> T getKey(String alias, @Nullable String keypass) {
+		return KeyStoreUtils.getKey(store, alias, keypass == null ? storepass : keypass);
+	}
+
 	public final <T extends SecretKey> T getSecretKey(String alias) {
 		return getSecretKey(alias, null);
 	}
@@ -102,6 +109,10 @@ public class KeyStoreResource extends AbstractNullStreamResource {
 
 	public final KeyPair getKeyPair(String alias, @Nullable String keypass) {
 		return KeyStoreUtils.getKeyPair(store, alias, keypass == null ? storepass : keypass);
+	}
+
+	public final List<String> getAliases() {
+		return KeyStoreUtils.getAliases(store);
 	}
 
 }
