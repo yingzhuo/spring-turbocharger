@@ -52,7 +52,7 @@ public sealed interface SPILoader<T> extends Supplier<Stream<T>> permits SPILoad
 	 * @return 加载的实例
 	 */
 	public static <T> SPILoader<T> getDefault(Class<T> targetType) {
-		return getDefault(targetType, null);
+		return getDefault(targetType, c -> true);
 	}
 
 	/**

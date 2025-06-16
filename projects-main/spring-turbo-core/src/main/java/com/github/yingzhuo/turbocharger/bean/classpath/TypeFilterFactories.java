@@ -48,6 +48,7 @@ public final class TypeFilterFactories {
 	 * 私有构造方法
 	 */
 	private TypeFilterFactories() {
+		super();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------

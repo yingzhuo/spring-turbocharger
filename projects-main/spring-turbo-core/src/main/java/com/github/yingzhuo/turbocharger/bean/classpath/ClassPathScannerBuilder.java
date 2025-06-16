@@ -22,7 +22,6 @@ import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;
 import org.springframework.boot.io.ApplicationResourceLoader;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.filter.TypeFilter;
 import org.springframework.lang.Nullable;
@@ -106,7 +105,7 @@ public final class ClassPathScannerBuilder {
 	 * @see org.springframework.context.ResourceLoaderAware
 	 */
 	public ClassPathScannerBuilder resourceLoader(@Nullable ResourceLoader resourceLoader) {
-		resourceLoader = Objects.requireNonNullElseGet(resourceLoader, DefaultResourceLoader::new);
+		resourceLoader = Objects.requireNonNullElseGet(resourceLoader, ApplicationResourceLoader::get);
 		this.resourceLoader = resourceLoader;
 		return this;
 	}

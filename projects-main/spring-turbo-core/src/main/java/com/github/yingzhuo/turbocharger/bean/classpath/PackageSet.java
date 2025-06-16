@@ -40,6 +40,7 @@ public final class PackageSet implements Iterable<String>, Serializable {
 	 * 私有构造方法
 	 */
 	private PackageSet() {
+		super();
 	}
 
 	/**

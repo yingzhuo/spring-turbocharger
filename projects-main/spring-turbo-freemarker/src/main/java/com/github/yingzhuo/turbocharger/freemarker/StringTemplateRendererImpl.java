@@ -23,9 +23,8 @@ import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
-import jakarta.annotation.Nullable;
-import lombok.Setter;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.io.*;
@@ -42,14 +41,8 @@ import java.util.List;
 public class StringTemplateRendererImpl implements StringTemplateRenderer, InitializingBean {
 
 	private final Configuration cfg = new Configuration(Configuration.VERSION_2_3_34);
-
-	@Setter
 	private String defaultEncoding = "UTF-8";
-
-	@Setter
 	private String[] templateLoaderPaths = new String[]{"classpath:/templates/"};
-
-	@Setter
 	private String suffix = ".ftl";
 
 	/**
@@ -121,4 +114,15 @@ public class StringTemplateRendererImpl implements StringTemplateRenderer, Initi
 		return new MultiTemplateLoader(loaders.toArray(new TemplateLoader[0]));
 	}
 
+	public void setDefaultEncoding(String defaultEncoding) {
+		this.defaultEncoding = defaultEncoding;
+	}
+
+	public void setTemplateLoaderPaths(String[] templateLoaderPaths) {
+		this.templateLoaderPaths = templateLoaderPaths;
+	}
+
+	public void setSuffix(String suffix) {
+		this.suffix = suffix;
+	}
 }
