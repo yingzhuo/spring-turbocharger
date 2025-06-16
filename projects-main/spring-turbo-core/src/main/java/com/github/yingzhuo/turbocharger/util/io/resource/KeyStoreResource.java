@@ -17,9 +17,10 @@
  */
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
-import com.github.yingzhuo.turbocharger.util.keystore.KeyStoreFormat;
+import com.github.yingzhuo.turbocharger.util.keystore.KeyStoreType;
 import com.github.yingzhuo.turbocharger.util.keystore.KeyStoreUtils;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
 
 import javax.crypto.SecretKey;
 import java.io.InputStream;
@@ -33,17 +34,21 @@ import java.util.List;
 /**
  * @author 应卓
  * @see KeyStore
- * @see KeyStoreFormat
+ * @see KeyStoreType
  * @see KeyStoreUtils
  * @since 3.5.0
  */
 public class KeyStoreResource extends AbstractNullStreamResource {
 
-	private final KeyStoreFormat type;
+	private final KeyStoreType type;
 	private final KeyStore store;
 	private final String storepass;
 
-	public KeyStoreResource(InputStream in, KeyStoreFormat type, String storepass) {
+	public KeyStoreResource(InputStream in, KeyStoreType type, String storepass) {
+		Assert.notNull(in, "inputStream must not be null");
+		Assert.notNull(type, "type must not be null");
+		Assert.notNull(storepass, "storepass must not be null");
+
 		this.type = type;
 		this.storepass = storepass;
 		this.store = KeyStoreUtils.loadKeyStore(in, type, storepass);
@@ -61,7 +66,7 @@ public class KeyStoreResource extends AbstractNullStreamResource {
 		return this.storepass;
 	}
 
-	public KeyStoreFormat getType() {
+	public KeyStoreType getType() {
 		return this.type;
 	}
 

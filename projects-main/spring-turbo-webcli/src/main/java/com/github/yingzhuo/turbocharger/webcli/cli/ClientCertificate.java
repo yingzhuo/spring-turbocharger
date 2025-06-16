@@ -18,7 +18,7 @@
 package com.github.yingzhuo.turbocharger.webcli.cli;
 
 import com.github.yingzhuo.turbocharger.core.ResourceUtils;
-import com.github.yingzhuo.turbocharger.util.keystore.KeyStoreFormat;
+import com.github.yingzhuo.turbocharger.util.keystore.KeyStoreType;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.core.io.Resource;
@@ -45,7 +45,7 @@ public interface ClientCertificate extends Serializable {
 	 * @param keyPassword      key密码
 	 * @return 实例
 	 */
-	public static ClientCertificate of(String resourceLocation, @Nullable KeyStoreFormat format, String storePassword, String keyPassword) {
+	public static ClientCertificate of(String resourceLocation, @Nullable KeyStoreType format, String storePassword, String keyPassword) {
 		return of(
 			(Resource) ResourceUtils.loadResource(resourceLocation),
 			format,
@@ -63,14 +63,14 @@ public interface ClientCertificate extends Serializable {
 	 * @param keyPassword   key密码
 	 * @return 实例
 	 */
-	public static ClientCertificate of(Resource resource, @Nullable KeyStoreFormat format, String storePassword, String keyPassword) {
+	public static ClientCertificate of(Resource resource, @Nullable KeyStoreType format, String storePassword, String keyPassword) {
 		Assert.notNull(resource, "resource must not be null");
 		Assert.notNull(storePassword, "storePassword must not be null");
 		Assert.notNull(keyPassword, "keyPassword must not be null");
 
 		final var cert = new Default();
 		cert.setResource(resource);
-		cert.setKeyStoreFormat(Objects.requireNonNullElse(format, KeyStoreFormat.PKCS12));
+		cert.setKeyStoreType(Objects.requireNonNullElse(format, KeyStoreType.PKCS12));
 		cert.setStorePassword(storePassword);
 		cert.setKeyPassword(keyPassword);
 		return cert;
@@ -88,7 +88,7 @@ public interface ClientCertificate extends Serializable {
 	 *
 	 * @return 证书文件格式
 	 */
-	public KeyStoreFormat getKeyStoreFormat();
+	public KeyStoreType getKeyStoreType();
 
 	/**
 	 * KeyStore密码
@@ -113,7 +113,7 @@ public interface ClientCertificate extends Serializable {
 	@Setter
 	class Default implements ClientCertificate {
 		private Resource resource;
-		private KeyStoreFormat keyStoreFormat = KeyStoreFormat.PKCS12;
+		private KeyStoreType keyStoreType = KeyStoreType.PKCS12;
 		private String storePassword;
 		private String keyPassword;
 	}

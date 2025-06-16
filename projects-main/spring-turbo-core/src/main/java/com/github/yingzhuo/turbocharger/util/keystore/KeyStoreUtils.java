@@ -34,7 +34,8 @@ import java.util.List;
  * {@link KeyStore} 相关工具类
  *
  * @author 应卓
- * @see KeyStoreFormat
+ * @see KeyStore
+ * @see KeyStoreType
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")
@@ -51,19 +52,19 @@ public final class KeyStoreUtils {
 	 * 加载密钥库
 	 *
 	 * @param inputStream 输入流
-	 * @param format      密钥库格式
+	 * @param type        密钥库格式
 	 * @param storepass   秘钥库的口令
 	 * @return 密钥库
 	 * @throws UncheckedIOException     IO错误
 	 * @throws IllegalArgumentException 其他错误
 	 */
-	public static KeyStore loadKeyStore(InputStream inputStream, KeyStoreFormat format, String storepass) {
+	public static KeyStore loadKeyStore(InputStream inputStream, KeyStoreType type, String storepass) {
 		Assert.notNull(inputStream, "inputStream is required");
-		Assert.notNull(format, "format is required");
+		Assert.notNull(type, "format is required");
 		Assert.notNull(storepass, "storepass is required");
 
 		try (var input = inputStream) {
-			var keyStore = KeyStore.getInstance(format.getValue());
+			var keyStore = KeyStore.getInstance(type.getValue());
 			keyStore.load(input, storepass.toCharArray());
 			return keyStore;
 		} catch (IOException e) {
@@ -110,7 +111,7 @@ public final class KeyStoreUtils {
 	 * @param keypass        私钥的密码
 	 * @param <T>            私钥类型的泛型
 	 * @return 私钥
-	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
+	 * @see #loadKeyStore(InputStream, KeyStoreType, String) 加载密钥库
 	 */
 	public static <T extends PrivateKey> T getPrivateKey(KeyStore loadedKeyStore, String alias, String keypass) {
 		return getKey(loadedKeyStore, alias, keypass);
@@ -123,7 +124,7 @@ public final class KeyStoreUtils {
 	 * @param alias          条目名称
 	 * @param <T>            私钥类型的泛型
 	 * @return 公钥
-	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
+	 * @see #loadKeyStore(InputStream, KeyStoreType, String) 加载密钥库
 	 */
 	public static <T extends PublicKey> T getPublicKey(KeyStore loadedKeyStore, String alias) {
 		var cert = getCertificate(loadedKeyStore, alias);
@@ -152,7 +153,7 @@ public final class KeyStoreUtils {
 	 * @param alias          条目名称
 	 * @param <T>            证书类型的泛型
 	 * @return 证书
-	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
+	 * @see #loadKeyStore(InputStream, KeyStoreType, String) 加载密钥库
 	 */
 	public static <T extends Certificate> T getCertificate(KeyStore loadedKeyStore, String alias) {
 		Assert.notNull(loadedKeyStore, "keyStore is required");
@@ -178,7 +179,7 @@ public final class KeyStoreUtils {
 	 * @param alias          条目名称
 	 * @param keypass        私钥类型的泛型
 	 * @return 密钥对
-	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
+	 * @see #loadKeyStore(InputStream, KeyStoreType, String) 加载密钥库
 	 */
 	public static KeyPair getKeyPair(KeyStore loadedKeyStore, String alias, String keypass) {
 		return new KeyPair(getPublicKey(loadedKeyStore, alias), getPrivateKey(loadedKeyStore, alias, keypass));
@@ -190,7 +191,7 @@ public final class KeyStoreUtils {
 	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias          条目名称
 	 * @return 签名算法名称
-	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
+	 * @see #loadKeyStore(InputStream, KeyStoreType, String) 加载密钥库
 	 */
 	public static String getSigAlgName(KeyStore loadedKeyStore, String alias) {
 		var cert = getCertificate(loadedKeyStore, alias);
@@ -206,7 +207,7 @@ public final class KeyStoreUtils {
 	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias          条目名称
 	 * @return 签名算法OID
-	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
+	 * @see #loadKeyStore(InputStream, KeyStoreType, String) 加载密钥库
 	 */
 	public static String getSigAlgOID(KeyStore loadedKeyStore, String alias) {
 		var cert = getCertificate(loadedKeyStore, alias);
@@ -251,7 +252,7 @@ public final class KeyStoreUtils {
 	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias          条目名称
 	 * @return 结果
-	 * @see #loadKeyStore(InputStream, KeyStoreFormat, String) 加载密钥库
+	 * @see #loadKeyStore(InputStream, KeyStoreType, String) 加载密钥库
 	 */
 	public static boolean containsAlias(KeyStore loadedKeyStore, String alias) {
 		Assert.notNull(loadedKeyStore, "keyStore is required");

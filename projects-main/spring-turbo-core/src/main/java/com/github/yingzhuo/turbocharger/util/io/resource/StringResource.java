@@ -23,12 +23,12 @@ package com.github.yingzhuo.turbocharger.util.io.resource;
  */
 public class StringResource extends AbstractTextResource {
 
-	public static StringResource of(CharSequence text) {
-		return new StringResource(text.toString());
-	}
-
 	public StringResource(String text) {
 		super(text);
+	}
+
+	public static StringResource of(CharSequence text) {
+		return new StringResource(text.toString());
 	}
 
 }

@@ -77,7 +77,7 @@ public final class KeyBundleFactories {
 	 * 从KeyStore文件中加载KeyBundle
 	 *
 	 * @param resourceLocation 资源位置
-	 * @param storeFormat      格式
+	 * @param storeType        格式
 	 * @param storepass        库密码
 	 * @param alias            别名
 	 * @param keypass          私钥密码
@@ -85,14 +85,14 @@ public final class KeyBundleFactories {
 	 */
 	public static KeyBundle loadStoreResource(
 		String resourceLocation,
-		KeyStoreFormat storeFormat,
+		KeyStoreType storeType,
 		String storepass,
 		String alias,
 		String keypass
 	) {
 		var storeResource = ResourceUtils.loadResource(resourceLocation);
 		try (var in = storeResource.getInputStream()) {
-			var loaded = KeyStoreUtils.loadKeyStore(in, storeFormat, storepass);
+			var loaded = KeyStoreUtils.loadKeyStore(in, storeType, storepass);
 			var cert = KeyStoreUtils.getCertificate(loaded, alias);
 			var key = KeyStoreUtils.getKey(loaded, alias, keypass);
 			return new KeyBundleImpl(List.of((X509Certificate) cert), key, alias);

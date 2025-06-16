@@ -42,13 +42,8 @@ import java.util.stream.Stream;
 @SuppressWarnings("unchecked")
 public class PemResource extends AbstractTextResource implements Resource {
 
-	public static PemResource of(CharSequence text) {
-		return new PemResource(text.toString());
-	}
-
 	@NonNull
 	private final PemContent pc;
-
 	@Nullable
 	private final String keypass;
 
@@ -65,6 +60,10 @@ public class PemResource extends AbstractTextResource implements Resource {
 		);
 		this.keypass = keypass;
 		this.pc = PemContent.of(content);
+	}
+
+	public static PemResource of(CharSequence text) {
+		return new PemResource(text.toString());
 	}
 
 	public List<X509Certificate> getCertificateChain() {

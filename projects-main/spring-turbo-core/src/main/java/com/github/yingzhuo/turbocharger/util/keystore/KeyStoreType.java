@@ -34,7 +34,7 @@ import java.io.Serializable;
  * @since 3.3.1
  */
 @Getter
-public enum KeyStoreFormat implements Serializable {
+public enum KeyStoreType implements Serializable {
 
 	/**
 	 * PKCS#12格式, Java9以后此格式为默认。 推荐此格式，文件扩展名为 p12或pfx。
@@ -54,10 +54,10 @@ public enum KeyStoreFormat implements Serializable {
 	/**
 	 * 私有构造方法
 	 *
-	 * @param value 字符串类型值
+	 * @param stringValue 字符串类型值
 	 */
-	private KeyStoreFormat(String value) {
-		this.value = value;
+	KeyStoreType(String stringValue) {
+		this.value = stringValue;
 	}
 
 }

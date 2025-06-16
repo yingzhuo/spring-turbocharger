@@ -71,7 +71,7 @@ public abstract class AbstractClientHttpRequestFactoryBean implements FactoryBea
 		if (clientCertificate != null) {
 			var keyStore = KeyStoreUtils.loadKeyStore(
 				clientCertificate.getResource().getInputStream(),
-				clientCertificate.getKeyStoreFormat(),
+				clientCertificate.getKeyStoreType(),
 				clientCertificate.getStorePassword()
 			);
 			builder.loadKeyMaterial(keyStore, clientCertificate.getKeyPassword().toCharArray());

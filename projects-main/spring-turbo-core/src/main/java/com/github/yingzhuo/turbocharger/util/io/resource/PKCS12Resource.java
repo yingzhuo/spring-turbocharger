@@ -17,18 +17,19 @@
  */
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
-import com.github.yingzhuo.turbocharger.util.keystore.KeyStoreFormat;
+import com.github.yingzhuo.turbocharger.util.keystore.KeyStoreType;
 
 import java.io.InputStream;
 
 /**
  * @author 应卓
+ * @see JKSResource
  * @since 3.5.0
  */
 public class PKCS12Resource extends KeyStoreResource {
 
-    public PKCS12Resource(InputStream in, String storepass) {
-        super(in, KeyStoreFormat.PKCS12, storepass);
-    }
+	public PKCS12Resource(InputStream in, String storepass) {
+		super(in, KeyStoreType.PKCS12, storepass);
+	}
 
 }
