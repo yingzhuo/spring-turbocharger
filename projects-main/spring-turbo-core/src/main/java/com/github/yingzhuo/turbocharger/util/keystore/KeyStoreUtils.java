@@ -26,6 +26,7 @@ import java.io.UncheckedIOException;
 import java.security.*;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -127,6 +128,21 @@ public final class KeyStoreUtils {
 	public static <T extends PublicKey> T getPublicKey(KeyStore loadedKeyStore, String alias) {
 		var cert = getCertificate(loadedKeyStore, alias);
 		return (T) cert.getPublicKey();
+	}
+
+	/**
+	 * 获取证书链
+	 *
+	 * @param loadedKeyStore 已加载的密钥库
+	 * @param alias          条目名称
+	 * @return 证书链
+	 */
+	public static List<Certificate> getCertificateChain(KeyStore loadedKeyStore, String alias) {
+		try {
+			return Arrays.asList(loadedKeyStore.getCertificateChain(alias));
+		} catch (KeyStoreException e) {
+			throw new IllegalArgumentException(e.getMessage(), e);
+		}
 	}
 
 	/**

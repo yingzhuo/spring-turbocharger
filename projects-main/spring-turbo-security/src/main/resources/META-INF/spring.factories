@@ -1,2 +1,6 @@
+# @formatter:off
+
 org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer=\
-com.github.yingzhuo.turbocharger.security.autoconfiguration.SpringSecurityAutoConfigurationDSL
+    com.github.yingzhuo.turbocharger.security.autoconfiguration.SpringSecurityAutoConfigurationDSL
+
+# @formatter:on

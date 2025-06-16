@@ -17,18 +17,18 @@
  */
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
+import com.github.yingzhuo.turbocharger.util.keystore.KeyStoreFormat;
+
+import java.io.InputStream;
+
 /**
  * @author 应卓
  * @since 3.5.0
  */
-public class StringResource extends AbstractTextResource {
+public class PKCS12Resource extends KeyStoreResource {
 
-	public static StringResource of(CharSequence text) {
-		return new StringResource(text.toString());
-	}
-
-	public StringResource(String text) {
-		super(text);
-	}
+    public PKCS12Resource(InputStream in, String storepass) {
+        super(in, KeyStoreFormat.PKCS12, storepass);
+    }
 
 }

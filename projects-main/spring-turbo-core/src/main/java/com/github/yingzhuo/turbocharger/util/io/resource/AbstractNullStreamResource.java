@@ -17,18 +17,29 @@
  */
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
+import org.springframework.core.io.AbstractResource;
+
+import java.io.InputStream;
+
 /**
  * @author 应卓
  * @since 3.5.0
  */
-public class StringResource extends AbstractTextResource {
+public abstract class AbstractNullStreamResource extends AbstractResource {
 
-	public static StringResource of(CharSequence text) {
-		return new StringResource(text.toString());
+	/**
+	 * 构造方法
+	 */
+	protected AbstractNullStreamResource() {
+		super();
 	}
 
-	public StringResource(String text) {
-		super(text);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final InputStream getInputStream() {
+		return InputStream.nullInputStream();
 	}
 
 }

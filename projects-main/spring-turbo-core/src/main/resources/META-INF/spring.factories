@@ -1,8 +1,16 @@
+# @formatter:off
+
 org.springframework.boot.env.EnvironmentPostProcessor=\
-com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook,\
-com.github.yingzhuo.turbocharger.core.env.BouncyCastleInstallingEnvironmentPostProcessor
+    com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook,\
+    com.github.yingzhuo.turbocharger.core.env.BouncyCastleInstallingEnvironmentPostProcessor
+
 org.springframework.context.ApplicationListener=\
-com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook
+    com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook
+
 org.springframework.core.io.ProtocolResolver=\
-com.github.yingzhuo.turbocharger.util.io.resource.PemResourceProtocolResolver,\
-com.github.yingzhuo.turbocharger.util.io.resource.StringResourceProtocolResolver
+    com.github.yingzhuo.turbocharger.util.io.resource.PemResourceProtocolResolver,\
+    com.github.yingzhuo.turbocharger.util.io.resource.StringResourceProtocolResolver,\
+    com.github.yingzhuo.turbocharger.util.io.resource.PKCS12ResourceProtocolProtocolResolver,\
+    com.github.yingzhuo.turbocharger.util.io.resource.JKSResourceProtocolProtocolResolver
+
+# @formatter:on

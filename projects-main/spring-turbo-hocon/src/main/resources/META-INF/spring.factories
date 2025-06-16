@@ -1,2 +1,6 @@
+# @formatter:off
+
 org.springframework.boot.env.PropertySourceLoader=\
-com.github.yingzhuo.turbocharger.configuration.env.HoconPropertySourceLoader
+    com.github.yingzhuo.turbocharger.configuration.env.HoconPropertySourceLoader
+
+# @formatter:on

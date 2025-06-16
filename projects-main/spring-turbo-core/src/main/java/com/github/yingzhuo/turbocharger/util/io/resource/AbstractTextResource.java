@@ -29,11 +29,11 @@ import java.nio.charset.StandardCharsets;
  * @author 应卓
  * @since 3.5.0
  */
-public abstract class TextResource extends AbstractResource implements Resource {
+public abstract class AbstractTextResource extends AbstractResource implements Resource {
 
 	private final String text;
 
-	protected TextResource(String text) {
+	protected AbstractTextResource(String text) {
 		Assert.notNull(text, "text must not be null");
 		this.text = text;
 	}
@@ -61,7 +61,7 @@ public abstract class TextResource extends AbstractResource implements Resource 
 		return new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
 	}
 
-	public final int getTextLength() {
+	public final int length() {
 		return text.length();
 	}
 

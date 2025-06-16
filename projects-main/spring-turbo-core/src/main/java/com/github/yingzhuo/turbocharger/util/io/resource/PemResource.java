@@ -21,7 +21,6 @@ import org.springframework.boot.ssl.pem.PemContent;
 import org.springframework.core.io.Resource;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.security.PrivateKey;
@@ -33,18 +32,18 @@ import java.util.stream.Stream;
 
 /**
  * @author 应卓
+ * @see PemResourceProtocolResolver
+ * @see PemContent
+ * @see X509Certificate
+ * @see PublicKey
+ * @see PrivateKey
  * @since 3.5.0
  */
 @SuppressWarnings("unchecked")
-public class PemResource extends TextResource implements Resource {
+public class PemResource extends AbstractTextResource implements Resource {
 
-	private static String prettyPemContent(String content) {
-		Assert.notNull(content, "content must not be null");
-
-		return Stream.of(content.split("\n"))
-			.map(String::trim)
-			.filter(StringUtils::hasText)
-			.collect(Collectors.joining("\n"));
+	public static PemResource of(CharSequence text) {
+		return new PemResource(text.toString());
 	}
 
 	@NonNull
@@ -58,12 +57,17 @@ public class PemResource extends TextResource implements Resource {
 	}
 
 	public PemResource(String content, @Nullable String keypass) {
-		super(prettyPemContent(content));
+		super(
+			Stream.of(content.split("\n"))
+				.map(String::trim)
+				.filter(StringUtils::hasText)
+				.collect(Collectors.joining("\n"))
+		);
 		this.keypass = keypass;
 		this.pc = PemContent.of(content);
 	}
 
-	public List<X509Certificate> getCertificateList() {
+	public List<X509Certificate> getCertificateChain() {
 		return pc.getCertificates();
 	}
 
