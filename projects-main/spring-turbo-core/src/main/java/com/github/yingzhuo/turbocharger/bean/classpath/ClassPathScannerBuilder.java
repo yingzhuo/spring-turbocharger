@@ -51,9 +51,10 @@ public final class ClassPathScannerBuilder {
 	private ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
 
 	/**
-	 * 默认构造方法
+	 * 构造方法
 	 */
 	ClassPathScannerBuilder() {
+		super();
 	}
 
 	/**
