@@ -36,6 +36,11 @@ import java.util.List;
  * @author 应卓
  * @see KeyStore
  * @see KeyStoreType
+ * @see com.github.yingzhuo.turbocharger.util.io.resource.KeyStoreResource
+ * @see com.github.yingzhuo.turbocharger.util.io.resource.JKSResource
+ * @see com.github.yingzhuo.turbocharger.util.io.resource.JKSResourceProtocolProtocolResolver
+ * @see com.github.yingzhuo.turbocharger.util.io.resource.PKCS12Resource
+ * @see com.github.yingzhuo.turbocharger.util.io.resource.PKCS12ResourceProtocolProtocolResolver
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")
@@ -60,7 +65,7 @@ public final class KeyStoreUtils {
 	 */
 	public static KeyStore loadKeyStore(InputStream inputStream, KeyStoreType type, String storepass) {
 		Assert.notNull(inputStream, "inputStream is required");
-		Assert.notNull(type, "format is required");
+		Assert.notNull(type, "type is required");
 		Assert.notNull(storepass, "storepass is required");
 
 		try (var input = inputStream) {
