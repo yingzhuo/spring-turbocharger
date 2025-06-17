@@ -9,7 +9,6 @@ org.springframework.context.ApplicationListener=\
 
 org.springframework.core.io.ProtocolResolver=\
     com.github.yingzhuo.turbocharger.util.io.resource.PemResourceProtocolResolver,\
-    com.github.yingzhuo.turbocharger.util.io.resource.StringResourceProtocolResolver,\
     com.github.yingzhuo.turbocharger.util.io.resource.PKCS12ResourceProtocolProtocolResolver,\
     com.github.yingzhuo.turbocharger.util.io.resource.JKSResourceProtocolProtocolResolver
 

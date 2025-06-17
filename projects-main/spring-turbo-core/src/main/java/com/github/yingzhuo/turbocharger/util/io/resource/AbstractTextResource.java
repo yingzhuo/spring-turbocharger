@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
 import org.springframework.core.io.AbstractResource;
-import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 
 import java.io.ByteArrayInputStream;
@@ -29,7 +28,7 @@ import java.nio.charset.StandardCharsets;
  * @author 应卓
  * @since 3.5.0
  */
-public abstract class AbstractTextResource extends AbstractResource implements Resource {
+public abstract class AbstractTextResource extends AbstractResource {
 
 	private final String text;
 

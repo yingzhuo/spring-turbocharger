@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
 import org.springframework.boot.ssl.pem.PemContent;
-import org.springframework.core.io.Resource;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
@@ -40,7 +39,7 @@ import java.util.stream.Stream;
  * @since 3.5.0
  */
 @SuppressWarnings("unchecked")
-public class PemResource extends AbstractTextResource implements Resource {
+public class PemResource extends AbstractTextResource {
 
 	@NonNull
 	private final PemContent pc;
