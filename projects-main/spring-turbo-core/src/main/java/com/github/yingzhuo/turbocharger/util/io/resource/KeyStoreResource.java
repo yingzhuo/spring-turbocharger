@@ -29,6 +29,8 @@ import java.security.cert.Certificate;
 import java.util.List;
 
 /**
+ * 基于{@link KeyStore}的资源
+ *
  * @author 应卓
  * @see KeyStore
  * @see KeyStoreType

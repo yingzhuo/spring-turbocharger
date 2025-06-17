@@ -22,6 +22,8 @@ import com.github.yingzhuo.turbocharger.util.keystore.KeyStoreType;
 import java.io.InputStream;
 
 /**
+ * 基于JKS格式的{@link org.springframework.core.io.Resource}
+ *
  * @author 应卓
  * @see PKCS12Resource
  * @see KeyStoreType#JKS

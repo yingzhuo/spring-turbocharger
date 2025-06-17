@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
 import org.springframework.core.io.AbstractResource;
+import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 
 import java.io.ByteArrayInputStream;
@@ -25,10 +26,12 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 /**
+ * 基于字符串的资源
+ *
  * @author 应卓
  * @since 3.5.0
  */
-public abstract class AbstractTextResource extends AbstractResource {
+public abstract class AbstractTextResource extends AbstractResource implements Resource {
 
 	private final String text;
 
@@ -60,6 +63,11 @@ public abstract class AbstractTextResource extends AbstractResource {
 		return new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
 	}
 
+	/**
+	 * 字符串长度
+	 *
+	 * @return 字符串长度
+	 */
 	public final int length() {
 		return text.length();
 	}

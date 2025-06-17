@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
 import org.springframework.core.io.AbstractResource;
+import org.springframework.core.io.Resource;
 
 import java.io.InputStream;
 
@@ -25,7 +26,7 @@ import java.io.InputStream;
  * @author 应卓
  * @since 3.5.0
  */
-public abstract class AbstractNullStreamResource extends AbstractResource {
+public abstract class AbstractNullStreamResource extends AbstractResource implements Resource {
 
 	/**
 	 * 构造方法
