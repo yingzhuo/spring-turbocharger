@@ -24,6 +24,7 @@ import java.io.InputStream;
 /**
  * @author 应卓
  * @see JKSResource
+ * @see KeyStoreType#PKCS12
  * @since 3.5.0
  */
 public class PKCS12Resource extends KeyStoreResource {

@@ -29,19 +29,19 @@ public interface JwtConstants extends Serializable {
 
 	// headers
 	// -----------------------------------------------------------------------------------------------------------------
-	public static final String HEADER_TYPE = "typ";
-	public static final String HEADER_KEY_ID = "kid";
-	public static final String HEADER_ALGORITHM = "alg";
-	public static final String HEADER_CONTENT_TYPE = "cty";
+	String HEADER_TYPE = "typ";
+	String HEADER_KEY_ID = "kid";
+	String HEADER_ALGORITHM = "alg";
+	String HEADER_CONTENT_TYPE = "cty";
 
 	// payload
 	// -----------------------------------------------------------------------------------------------------------------
-	public static final String PAYLOAD_ISSUER = "iss";
-	public static final String PAYLOAD_SUBJECT = "sub";
-	public static final String PAYLOAD_AUDIENCE = "aud";
-	public static final String PAYLOAD_EXPIRES = "exp";
-	public static final String PAYLOAD_NOT_BEFORE = "nbf";
-	public static final String PAYLOAD_ISSUED_AT = "iat";
-	public static final String PAYLOAD_JWT_ID = "jti";
+	String PAYLOAD_ISSUER = "iss";
+	String PAYLOAD_SUBJECT = "sub";
+	String PAYLOAD_AUDIENCE = "aud";
+	String PAYLOAD_EXPIRES = "exp";
+	String PAYLOAD_NOT_BEFORE = "nbf";
+	String PAYLOAD_ISSUED_AT = "iat";
+	String PAYLOAD_JWT_ID = "jti";
 
 }
