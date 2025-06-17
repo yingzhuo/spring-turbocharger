@@ -17,12 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.util.io.resource;
 
-import org.springframework.core.io.ProtocolResolver;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.lang.Nullable;
-
-import java.io.IOException;
 import java.util.regex.Pattern;
 
 /**
@@ -31,37 +25,13 @@ import java.util.regex.Pattern;
  * @see PKCS12ResourceProtocolProtocolResolver
  * @since 3.5.0
  */
-public class JKSResourceProtocolProtocolResolver implements ProtocolResolver {
-
-	private static final Pattern PATTERN = Pattern.compile("^jks:(.*?)\\?storepass=(.*)$");
+public class JKSResourceProtocolProtocolResolver extends AbstractKeyStoreProtocolResolver {
 
 	/**
 	 * 默认构造方法
 	 */
 	public JKSResourceProtocolProtocolResolver() {
-		super();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Nullable
-	@Override
-	public Resource resolve(String location, ResourceLoader resourceLoader) {
-		var matcher = PATTERN.matcher(location);
-
-		if (matcher.find()) {
-			try {
-				var realLocation = matcher.group(1);
-				var storepass = matcher.group(2);
-				var in = resourceLoader.getResource(realLocation).getInputStream();
-				return new PKCS12Resource(in, storepass);
-			} catch (IOException e) {
-				return null;
-			}
-		}
-
-		return null;
+		super(Pattern.compile("^jks:(.*?)\\?storepass=(.*)$"));
 	}
 
 }
