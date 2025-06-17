@@ -33,6 +33,7 @@ public final class CipherUtils {
 	 * 私有构造方法
 	 */
 	private CipherUtils() {
+		super();
 	}
 
 	/**

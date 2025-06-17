@@ -35,6 +35,7 @@ public final class SignatureUtils {
 	 * 私有构造方法
 	 */
 	private SignatureUtils() {
+		super();
 	}
 
 	/**
