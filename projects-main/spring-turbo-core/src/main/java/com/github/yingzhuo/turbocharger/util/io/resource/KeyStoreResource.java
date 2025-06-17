@@ -59,16 +59,28 @@ public class KeyStoreResource extends AbstractNullStreamResource {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getDescription() {
-		return "KeyStore Resource [%s]".formatted(type.getValue().toUpperCase());
+	public final String getDescription() {
+		return "KeyStore Resource [%s] [%d]".formatted(type.getValue().toUpperCase(), hashCode());
 	}
 
-	public String getStorepass() {
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final String toString() {
+		return getDescription();
+	}
+
+	public final String getStorepass() {
 		return this.storepass;
 	}
 
-	public KeyStoreType getType() {
+	public final KeyStoreType getType() {
 		return this.type;
+	}
+
+	public final KeyStore getKeyStore() {
+		return this.store;
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
@@ -115,6 +127,10 @@ public class KeyStoreResource extends AbstractNullStreamResource {
 
 	public final List<String> getAliases() {
 		return KeyStoreUtils.getAliases(store);
+	}
+
+	public final boolean containsAlias(String alias) {
+		return KeyStoreUtils.containsAlias(store, alias);
 	}
 
 }
