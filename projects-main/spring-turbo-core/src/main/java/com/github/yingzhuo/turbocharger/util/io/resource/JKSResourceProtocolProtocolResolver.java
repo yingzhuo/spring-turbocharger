@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
  * @see PKCS12ResourceProtocolProtocolResolver
  * @since 3.5.0
  */
-public class JKSResourceProtocolProtocolResolver extends AbstractKeyStoreProtocolResolver {
+public final class JKSResourceProtocolProtocolResolver extends AbstractKeyStoreProtocolResolver {
 
 	/**
 	 * 默认构造方法

@@ -227,12 +227,12 @@ public final class KeyStoreUtils {
 	 *
 	 * @param loadedKeyStore 已加载的密钥库
 	 * @param alias          条目名称
-	 * @param password       条目秘钥
+	 * @param keypass        条目秘钥
 	 * @param <T>            秘钥类型的泛型
 	 * @return 秘钥
 	 */
-	public static <T extends SecretKey> T getSecretKey(KeyStore loadedKeyStore, String alias, String password) {
-		return getKey(loadedKeyStore, alias, password);
+	public static <T extends SecretKey> T getSecretKey(KeyStore loadedKeyStore, String alias, String keypass) {
+		return getKey(loadedKeyStore, alias, keypass);
 	}
 
 	/**

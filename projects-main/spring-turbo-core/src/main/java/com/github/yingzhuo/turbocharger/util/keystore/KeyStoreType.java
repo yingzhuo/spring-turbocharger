@@ -17,8 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.util.keystore;
 
-import lombok.Getter;
-
 import java.io.Serializable;
 
 /**
@@ -33,7 +31,6 @@ import java.io.Serializable;
  * @author 应卓
  * @since 3.3.1
  */
-@Getter
 public enum KeyStoreType implements Serializable {
 
 	/**
@@ -58,6 +55,10 @@ public enum KeyStoreType implements Serializable {
 	 */
 	KeyStoreType(String stringValue) {
 		this.value = stringValue;
+	}
+
+	public String getValue() {
+		return value;
 	}
 
 }

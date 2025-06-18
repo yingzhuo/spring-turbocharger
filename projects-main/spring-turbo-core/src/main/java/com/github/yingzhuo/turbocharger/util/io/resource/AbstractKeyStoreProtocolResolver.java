@@ -21,7 +21,6 @@ import org.springframework.core.io.ProtocolResolver;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.lang.Nullable;
-import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -30,12 +29,13 @@ import java.util.regex.Pattern;
  * @author 应卓
  * @since 3.5.0
  */
-public abstract class AbstractKeyStoreProtocolResolver implements ProtocolResolver {
+public abstract sealed class AbstractKeyStoreProtocolResolver
+	implements ProtocolResolver
+	permits JKSResourceProtocolProtocolResolver, PKCS12ResourceProtocolProtocolResolver {
 
 	private final Pattern pattern;
 
 	protected AbstractKeyStoreProtocolResolver(Pattern pattern) {
-		Assert.notNull(pattern, "pattern must not be null");
 		this.pattern = pattern;
 	}
 

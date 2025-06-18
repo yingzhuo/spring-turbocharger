@@ -24,6 +24,7 @@ import org.springframework.util.Assert;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 /**
  * 基于字符串的资源
@@ -61,6 +62,25 @@ public abstract class AbstractTextResource extends AbstractResource implements R
 	@Override
 	public InputStream getInputStream() {
 		return new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final boolean equals(Object o) {
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		AbstractTextResource that = (AbstractTextResource) o;
+		return Objects.equals(text, that.text);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final int hashCode() {
+		return Objects.hash(super.hashCode(), text);
 	}
 
 	/**
