@@ -125,20 +125,20 @@ dependencies {
 
 #### 阅读源码
 
-* 建议通过[deepwiki.com](https://deepwiki.com/yingzhuo/spring-turbocharger)阅读。
+* 建议通过[deepwiki.com](https://deepwiki.com/yingzhuo/spring-turbocharger)阅读
 
 #### 示例程序
 
-* [使用freemarker字符串模板](./projects-example/freemarker-stringtemplate)
-* [生成QRCode](./projects-example/qrcode-gen)
-* [生成有状态验证码](./projects-example/stateful-captcha)
-* [生成无状态验证码](./projects-example/stateless-captcha)
-* [使用HOCON格式的配置文件](./projects-example/hocon-config-file)
-* [使用TOML格式的配置文件](./projects-example/toml-config-file)
-* [使用JWT技术集成SpringSecurity](./projects-example/spring-security-jwt)
-* [多数据源代理](./projects-example/routing-data-source)
-* [HttpClient](./projects-example/web-client)
-* [ID生成器](./projects-example/id-generator)
+* [使用freemarker字符串模板](./projects-example/example-freemarker-stringtemplate)
+* [生成QRCode](./projects-example/example-qrcode-gen)
+* [生成有状态验证码](./projects-example/example-stateful-captcha)
+* [生成无状态验证码](./projects-example/example-stateless-captcha)
+* [使用HOCON格式的配置文件](./projects-example/example-hocon-config-file)
+* [使用TOML格式的配置文件](./projects-example/example-toml-config-file)
+* [使用JWT技术集成SpringSecurity](./projects-example/example-spring-security-jwt)
+* [多数据源代理](./projects-example/example-routing-data-source)
+* [HttpClient](./projects-example/example-web-client)
+* [ID生成器](./projects-example/example-id-generator)
 
 #### 许可证
 
