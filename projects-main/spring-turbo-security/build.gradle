@@ -38,7 +38,7 @@ dependencies {
 	api project(':projects-main:spring-turbo-jwt')
 
 	// bouncy castle
-	compileOnly libs.bundles.bouncycastle
+	compileOnly libs.bcprov
 
 	// hutool
 	compileOnly libs.hutool.crypto

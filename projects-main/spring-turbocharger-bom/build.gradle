@@ -11,7 +11,7 @@ dependencies {
 			}
 		}
 
-		api libs.bundles.bouncycastle
+		api libs.bcprov
 		api libs.hutool.captcha
 		api libs.hutool.crypto
 		api libs.freemarker
