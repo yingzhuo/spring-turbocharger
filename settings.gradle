@@ -3,9 +3,9 @@ pluginManagement {
 		mavenLocal()
 		gradlePluginPortal()
 		mavenCentral()
-		maven { url = 'https://repo.spring.io/release' }
-		maven { url = 'https://repo.spring.io/milestone' }
-		maven { url = 'https://repo.spring.io/snapshot' }
+		maven { url = uri('https://repo.spring.io/release') }
+		maven { url = uri('https://repo.spring.io/milestone') }
+		maven { url = uri('https://repo.spring.io/snapshot') }
 	}
 }
 
@@ -19,43 +19,19 @@ dependencyResolutionManagement {
 	repositories {
 		mavenLocal()
 
-		if (providers.gradleProperty('useChinaMavenMirrors').getOrElse('true').toBoolean()) {
-			maven {
-				name = '阿里云'
-				url = 'https://maven.aliyun.com/repository/public/'
-			}
-			maven {
-				name = '腾讯云'
-				url = 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/'
-			}
-			maven {
-				name = '华为云'
-				url = 'https://repo.huaweicloud.com/repository/maven/'
-			}
-			maven {
-				name = '京东云'
-				url = 'https://maven.jdcloud.com/repos/content/groups/public/'
-			}
-			maven {
-				name = '网易云'
-				url = 'https://mirrors.163.com/maven/repository/maven-public/'
-			}
+		if (providers.gradleProperty('useChinaMavenRepositoryMirrors').getOrElse('true').toBoolean()) {
+			maven { url = uri('https://maven.aliyun.com/repository/public/') }
+			maven { url = uri('https://mirrors.cloud.tencent.com/nexus/repository/maven-public/') }
+			maven { url = uri('https://repo.huaweicloud.com/repository/maven/') }
+			maven { url = uri('https://maven.jdcloud.com/repos/content/groups/public/') }
+			maven { url = uri('https://mirrors.163.com/maven/repository/maven-public/') }
 		}
 
 		mavenCentral()
 		gradlePluginPortal()
-		maven {
-			name = 'spring-release'
-			url = 'https://repo.spring.io/release'
-		}
-		maven {
-			name = 'spring-milestone'
-			url = 'https://repo.spring.io/milestone'
-		}
-		maven {
-			name = 'spring-snapshot'
-			url = 'https://repo.spring.io/snapshot'
-		}
+		maven { url = uri('https://repo.spring.io/release') }
+		maven { url = uri('https://repo.spring.io/milestone') }
+		maven { url = uri('https://repo.spring.io/snapshot') }
 		google()
 	}
 
