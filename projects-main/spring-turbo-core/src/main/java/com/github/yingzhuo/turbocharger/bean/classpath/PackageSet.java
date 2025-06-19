@@ -29,11 +29,11 @@ import java.util.stream.Stream;
  *
  * @author 应卓
  * @see #newInstance()
+ * @see ClassPathScanner#builder()
  * @since 2.0.10
  */
 public final class PackageSet implements Iterable<String>, Serializable {
 
-	// 已排序
 	private final SortedSet<String> innerSet = new TreeSet<>();
 
 	/**

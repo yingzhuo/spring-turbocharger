@@ -29,6 +29,7 @@ import java.util.List;
  * @see #builder()
  * @see org.springframework.beans.factory.config.BeanDefinition
  * @see org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider
+ * @see org.springframework.context.annotation.ClassPathBeanDefinitionScanner
  * @see org.springframework.core.type.filter.TypeFilter
  * @since 1.0.0
  */
