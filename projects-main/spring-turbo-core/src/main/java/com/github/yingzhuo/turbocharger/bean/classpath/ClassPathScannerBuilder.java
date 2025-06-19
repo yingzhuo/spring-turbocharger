@@ -116,12 +116,16 @@ public final class ClassPathScannerBuilder {
 	 * @return {@link ClassPathScanner} 实例
 	 */
 	public ClassPathScanner build() {
-		var scanner = new DefaultClassPathScanner();
-		scanner.setIncludeTypeFilters(includeFilters);
-		scanner.setExcludeTypeFilters(excludeFilters);
-		scanner.setEnvironment(environment);
-		scanner.setResourceLoader(resourceLoader);
-		return scanner;
+		if (includeFilters.isEmpty()) {
+			return NoopClassPathScanner.getInstance();
+		} else {
+			var scanner = new DefaultClassPathScanner();
+			scanner.setIncludeTypeFilters(includeFilters);
+			scanner.setExcludeTypeFilters(excludeFilters);
+			scanner.setEnvironment(environment);
+			scanner.setResourceLoader(resourceLoader);
+			return scanner;
+		}
 	}
 
 }

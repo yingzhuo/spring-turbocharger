@@ -23,34 +23,29 @@ import org.springframework.lang.Nullable;
 import java.util.List;
 
 /**
- * ClassPath扫描器
- *
  * @author 应卓
- * @see #builder()
- * @see org.springframework.beans.factory.config.BeanDefinition
- * @see org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider
- * @see org.springframework.context.annotation.ClassPathBeanDefinitionScanner
- * @see org.springframework.core.type.filter.TypeFilter
- * @since 1.0.0
+ * @since 3.5.0
  */
-public sealed interface ClassPathScanner permits DefaultClassPathScanner, NoopClassPathScanner {
+final class NoopClassPathScanner implements ClassPathScanner {
 
-	/**
-	 * 新建创建器
-	 *
-	 * @return 创建器实例
-	 */
-	public static ClassPathScannerBuilder builder() {
-		return new ClassPathScannerBuilder();
+	public static NoopClassPathScanner getInstance() {
+		return AsyncAvoid.INSTANCE;
 	}
 
 	/**
-	 * 扫描类路径
-	 *
-	 * @param packageSet 扫描起点 (多个)
-	 * @return 扫描结果
-	 * @see PackageSet
+	 * 私有构造方法
 	 */
-	public List<BeanDefinition> scan(@Nullable PackageSet packageSet);
+	private NoopClassPathScanner() {
+		super();
+	}
 
+	@Override
+	public List<BeanDefinition> scan(@Nullable PackageSet packageSet) {
+		return List.of();
+	}
+
+	// 延迟加载
+	private static class AsyncAvoid {
+		private static final NoopClassPathScanner INSTANCE = new NoopClassPathScanner();
+	}
 }
