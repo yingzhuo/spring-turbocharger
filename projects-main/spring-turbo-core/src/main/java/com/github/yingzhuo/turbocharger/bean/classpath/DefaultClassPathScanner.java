@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.bean.classpath;
 
-import com.github.yingzhuo.turbocharger.util.ClassUtils;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
@@ -27,7 +26,6 @@ import org.springframework.core.type.filter.TypeFilter;
 import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import static com.github.yingzhuo.turbocharger.util.collection.CollectionUtils.nullSafeAddAll;
@@ -40,64 +38,49 @@ import static com.github.yingzhuo.turbocharger.util.collection.CollectionUtils.n
  */
 final class DefaultClassPathScanner implements ClassPathScanner {
 
-	private final ClassPathScannerCore provider = new ClassPathScannerCore();
-	private ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
+	private final InnerScanner innerScanner = new InnerScanner();
 
 	/**
 	 * 构造方法
 	 */
 	DefaultClassPathScanner() {
+		super();
 	}
 
 	@Override
-	public List<ClassDefinition> scan(@Nullable PackageSet packageSet) {
+	public List<BeanDefinition> scan(@Nullable PackageSet packageSet) {
 		if (packageSet == null) {
 			return List.of();
 		}
 
-		final List<BeanDefinition> list = new ArrayList<>();
+		List<BeanDefinition> list = new ArrayList<>();
 
 		for (String basePackage : packageSet) {
-			nullSafeAddAll(list, provider.findCandidateComponents(basePackage));
+			nullSafeAddAll(list, innerScanner.findCandidateComponents(basePackage));
 		}
 
-		return list.stream().map(bd -> new ClassDefinition(bd, classLoader))
-			.distinct()
-			.sorted(Comparator.naturalOrder())
-			.toList();
+		return list;
 	}
 
 	public void setResourceLoader(ResourceLoader resourceLoader) {
-		provider.setResourceLoader(resourceLoader);
+		innerScanner.setResourceLoader(resourceLoader);
 	}
 
 	public void setEnvironment(Environment environment) {
-		provider.setEnvironment(environment);
+		innerScanner.setEnvironment(environment);
 	}
 
 	public void setIncludeTypeFilters(List<TypeFilter> filters) {
-		filters.forEach(provider::addIncludeFilter);
+		filters.forEach(innerScanner::addIncludeFilter);
 	}
 
 	public void setExcludeTypeFilters(List<TypeFilter> filters) {
-		filters.forEach(provider::addExcludeFilter);
+		filters.forEach(innerScanner::addExcludeFilter);
 	}
 
-	public void setClassLoader(ClassLoader classLoader) {
-		this.classLoader = classLoader;
-	}
+	private static final class InnerScanner extends ClassPathScanningCandidateComponentProvider {
 
-	// -----------------------------------------------------------------------------------------------------------------
-
-	/**
-	 * 扫描器核心
-	 */
-	private static final class ClassPathScannerCore extends ClassPathScanningCandidateComponentProvider {
-
-		/**
-		 * 私有构造方法
-		 */
-		private ClassPathScannerCore() {
+		private InnerScanner() {
 			super(false);
 		}
 

@@ -17,6 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.bean.classpath;
 
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.lang.Nullable;
 
 import java.util.List;
@@ -31,7 +32,7 @@ import java.util.List;
  * @see org.springframework.core.type.filter.TypeFilter
  * @since 1.0.0
  */
-public interface ClassPathScanner {
+public sealed interface ClassPathScanner permits DefaultClassPathScanner {
 
 	/**
 	 * 新建创建器
@@ -49,6 +50,6 @@ public interface ClassPathScanner {
 	 * @return 扫描结果
 	 * @see PackageSet
 	 */
-	public List<ClassDefinition> scan(@Nullable PackageSet packageSet);
+	public List<BeanDefinition> scan(@Nullable PackageSet packageSet);
 
 }
