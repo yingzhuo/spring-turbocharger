@@ -1,13 +1,20 @@
 pluginManagement {
 	repositories {
 		mavenLocal()
-		maven { url = uri('https://maven.aliyun.com/repository/gradle-plugin') }
-		maven { url = uri('https://maven.aliyun.com/repository/spring-plugin') }
+
+		if (providers.gradleProperty('useChinaMavenRepositoryMirrors').getOrElse('true').toBoolean()) {
+			maven { url = uri('https://maven.aliyun.com/repository/gradle-plugin') }
+			maven { url = uri('https://maven.aliyun.com/repository/spring-plugin') }
+		}
+
 		gradlePluginPortal()
 		mavenCentral()
-		maven { url = uri('https://repo.spring.io/release') }
-		maven { url = uri('https://repo.spring.io/milestone') }
-		maven { url = uri('https://repo.spring.io/snapshot') }
+
+		if (providers.gradleProperty('useSpringMavenRepositoryMirrors').getOrElse('true').toBoolean()) {
+			maven { url = uri('https://repo.spring.io/release') }
+			maven { url = uri('https://repo.spring.io/milestone') }
+			maven { url = uri('https://repo.spring.io/snapshot') }
+		}
 	}
 }
 
@@ -29,18 +36,13 @@ dependencyResolutionManagement {
 
 		mavenCentral()
 		gradlePluginPortal()
-		maven {
-			name = 'spring-release'
-			url = 'https://repo.spring.io/release'
+
+		if (providers.gradleProperty('useSpringMavenRepositoryMirrors').getOrElse('true').toBoolean()) {
+			maven { url = uri('https://repo.spring.io/release') }
+			maven { url = uri('https://repo.spring.io/milestone') }
+			maven { url = uri('https://repo.spring.io/snapshot') }
 		}
-		maven {
-			name = 'spring-milestone'
-			url = 'https://repo.spring.io/milestone'
-		}
-		maven {
-			name = 'spring-snapshot'
-			url = 'https://repo.spring.io/snapshot'
-		}
+
 		google()
 	}
 
