@@ -17,21 +17,19 @@
  */
 package com.github.yingzhuo.turbocharger.util.keystore;
 
+import com.github.yingzhuo.turbocharger.bean.AbstractImportBeanDefinitionRegistrar;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
+import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.core.annotation.AnnotationAttributes;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.core.type.AnnotationMetadata;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.security.KeyStore;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -39,34 +37,25 @@ import java.util.stream.Stream;
  * @author 应卓
  * @since 3.5.2
  */
-class ImportKeyStoreConfig implements ImportBeanDefinitionRegistrar {
+class ImportKeyStoreConfig extends AbstractImportBeanDefinitionRegistrar {
 
-	private static final String SINGLE_ANNO_NAME = ImportKeyStore.class.getName();
-	private static final String LIST_ANNO_NAME = ImportKeyStore.RepeatableList.class.getName();
-
-	private final ResourceLoader resourceLoader;
-	private final List<AnnotationAttributes> importingAttributes = new ArrayList<>();
-
-	public ImportKeyStoreConfig(ResourceLoader resourceLoader) {
-		this.resourceLoader = resourceLoader;
+	public ImportKeyStoreConfig(Environment environment, ResourceLoader resourceLoader, BeanFactory beanFactory, ClassLoader beanClassLoader) {
+		super(environment, resourceLoader, beanFactory, beanClassLoader, ImportKeyStore.class, ImportKeyStore.RepeatableList.class);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
-		setupImportingAttributes(metadata);
-
-		for (var attr : importingAttributes) {
-			KeyStoreType keyStoreType = attr.getEnum("type");
-			String location = attr.getString("location");
-			String storepass = attr.getString("storepass");
-			String beanName = attr.getString("beanName");
+	protected void handleAnnotationAttributes(AnnotationAttributes attributes, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) {
+			KeyStoreType keyStoreType = attributes.getEnum("type");
+			String location = attributes.getString("location");
+			String storepass = attributes.getString("storepass");
+			String beanName = attributes.getString("beanName");
 
 			var beanDef =
 				BeanDefinitionBuilder.genericBeanDefinition(KeyStore.class, getSupplier(keyStoreType, location, storepass))
-					.setPrimary(attr.getBoolean("primary"))
+					.setPrimary(attributes.getBoolean("primary"))
 					.setScope(BeanDefinition.SCOPE_SINGLETON)
 					.setAbstract(false)
 					.setLazyInit(false)
@@ -74,24 +63,13 @@ class ImportKeyStoreConfig implements ImportBeanDefinitionRegistrar {
 
 			registry.registerBeanDefinition(beanName, beanDef);
 
-			Stream.of(attr.getStringArray("aliases"))
+			Stream.of(attributes.getStringArray("aliases"))
 				.forEach(alias -> registry.registerAlias(beanName, alias));
-		}
-	}
-
-	private void setupImportingAttributes(AnnotationMetadata metadata) {
-		var singleAttributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(SINGLE_ANNO_NAME));
-		Optional.ofNullable(singleAttributes).ifPresent(it -> importingAttributes.add(singleAttributes));
-
-		var listAttributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(LIST_ANNO_NAME));
-		if (listAttributes != null) {
-			Collections.addAll(importingAttributes, listAttributes.getAnnotationArray("value"));
-		}
 	}
 
 	private Supplier<KeyStore> getSupplier(KeyStoreType type, String location, String storepass) {
 		return () -> {
-			var resource = resourceLoader.getResource(location);
+			var resource = super.resourceLoader.getResource(location);
 			try {
 				return KeyStoreUtils.loadKeyStore(resource.getInputStream(), type, storepass);
 			} catch (IOException e) {
