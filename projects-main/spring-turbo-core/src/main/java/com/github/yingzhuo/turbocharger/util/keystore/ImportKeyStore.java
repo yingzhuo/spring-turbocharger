@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.util.keystore;
 
 import org.springframework.context.annotation.Import;
-import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 
@@ -32,14 +31,13 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import(ImportKeyStoreConfiguration.class)
+@Import(ImportKeyStoreConfig.class)
+@Repeatable(ImportKeyStore.RepeatableList.class)
 public @interface ImportKeyStore {
 
-	@AliasFor("value")
-	public String beanName() default "";
+	public String beanName();
 
-	@AliasFor("beanName")
-	public String value() default "";
+	public String[] aliases() default {};
 
 	public String location();
 
@@ -48,5 +46,14 @@ public @interface ImportKeyStore {
 	public String storepass();
 
 	public boolean primary() default false;
+
+	@Inherited
+	@Documented
+	@Retention(RetentionPolicy.RUNTIME)
+	@Target(ElementType.TYPE)
+	@Import(ImportKeyStoreConfig.class)
+	public static @interface RepeatableList {
+		public ImportKeyStore[] value();
+	}
 
 }
