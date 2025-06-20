@@ -36,14 +36,14 @@ import static com.github.yingzhuo.turbocharger.util.collection.CollectionUtils.n
  * @author 应卓
  * @since 1.0.0
  */
-final class DefaultClassPathScanner implements ClassPathScanner {
+public class DefaultClassPathScanner implements ClassPathScanner {
 
 	private final InnerScanner innerScanner = new InnerScanner();
 
 	/**
-	 * 构造方法
+	 * 默认构造方法
 	 */
-	DefaultClassPathScanner() {
+	public DefaultClassPathScanner() {
 		super();
 	}
 

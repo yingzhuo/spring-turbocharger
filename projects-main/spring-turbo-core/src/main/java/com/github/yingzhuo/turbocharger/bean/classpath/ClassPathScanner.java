@@ -33,7 +33,8 @@ import java.util.List;
  * @see org.springframework.core.type.filter.TypeFilter
  * @since 1.0.0
  */
-public sealed interface ClassPathScanner permits DefaultClassPathScanner, NoopClassPathScanner {
+@FunctionalInterface
+public interface ClassPathScanner {
 
 	/**
 	 * 新建创建器

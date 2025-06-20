@@ -23,11 +23,18 @@ import org.springframework.lang.Nullable;
 import java.util.List;
 
 /**
+ * 无动作类路径扫描器
+ *
  * @author 应卓
  * @since 3.5.0
  */
-final class NoopClassPathScanner implements ClassPathScanner {
+public class NoopClassPathScanner implements ClassPathScanner {
 
+	/**
+	 * 获取实例
+	 *
+	 * @return 实例
+	 */
 	public static NoopClassPathScanner getInstance() {
 		return AsyncAvoid.INSTANCE;
 	}
@@ -39,6 +46,9 @@ final class NoopClassPathScanner implements ClassPathScanner {
 		super();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<BeanDefinition> scan(@Nullable PackageSet packageSet) {
 		return List.of();
