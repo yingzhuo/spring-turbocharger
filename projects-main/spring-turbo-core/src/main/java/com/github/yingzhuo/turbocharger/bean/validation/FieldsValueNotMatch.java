@@ -29,11 +29,11 @@ import static java.lang.annotation.ElementType.*;
  * @see FieldsValueNotMatchValidator
  * @since 1.0.0
  */
-@Repeatable(FieldsValueNotMatch.List.class)
 @Documented
 @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = FieldsValueNotMatchValidator.class)
+@Repeatable(FieldsValueNotMatch.RepeatableList.class)
 public @interface FieldsValueNotMatch {
 
 	public String message() default "";
@@ -50,7 +50,7 @@ public @interface FieldsValueNotMatch {
 	@Documented
 	@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 	@Retention(RetentionPolicy.RUNTIME)
-	public @interface List {
+	public @interface RepeatableList {
 		public FieldsValueNotMatch[] value();
 	}
 
