@@ -3,7 +3,9 @@
 [![License](https://img.shields.io/badge/License-Apache%20v2.0-red?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Author](https://img.shields.io/badge/yingzhor%40gmail.com-F0FF00?style=flat-square)](mailto:yingzhor@gmail.com)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.yingzhuo/spring-turbocharger-bom.svg?label=Maven%20Central&style=flat-square)](https://search.maven.org/search?q=g:%22com.github.yingzhuo%22%20AND%20a:%22spring-turbocharger-bom%22)
+
 <br>
+
 Another enhancement library of SpringBoot & SpringFramework. Have fun! :)
 
 #### 依赖 (Gradle)
