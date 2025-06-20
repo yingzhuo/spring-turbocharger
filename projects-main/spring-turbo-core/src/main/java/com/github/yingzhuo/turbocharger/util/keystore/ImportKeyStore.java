@@ -47,6 +47,8 @@ public @interface ImportKeyStore {
 
 	public boolean primary() default false;
 
+	// -----------------------------------------------------------------------------------------------------------------
+
 	@Inherited
 	@Documented
 	@Retention(RetentionPolicy.RUNTIME)

@@ -41,6 +41,9 @@ import java.util.stream.Stream;
  */
 class ImportKeyStoreConfig implements ImportBeanDefinitionRegistrar {
 
+	private static final String SINGLE_ANNO_NAME = ImportKeyStore.class.getName();
+	private static final String LIST_ANNO_NAME = ImportKeyStore.RepeatableList.class.getName();
+
 	private final ResourceLoader resourceLoader;
 	private final List<AnnotationAttributes> importingAttributes = new ArrayList<>();
 
@@ -77,10 +80,10 @@ class ImportKeyStoreConfig implements ImportBeanDefinitionRegistrar {
 	}
 
 	private void setupImportingAttributes(AnnotationMetadata metadata) {
-		var singleAttributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(ImportKeyStore.class.getName()));
+		var singleAttributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(SINGLE_ANNO_NAME));
 		Optional.ofNullable(singleAttributes).ifPresent(it -> importingAttributes.add(singleAttributes));
 
-		var listAttributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(ImportKeyStore.RepeatableList.class.getName()));
+		var listAttributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(LIST_ANNO_NAME));
 		if (listAttributes != null) {
 			Collections.addAll(importingAttributes, listAttributes.getAnnotationArray("value"));
 		}
