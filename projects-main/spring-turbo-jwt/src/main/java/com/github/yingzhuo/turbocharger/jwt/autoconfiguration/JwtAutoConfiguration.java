@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.lang.Nullable;
 
 /**
  * 自动配置类
@@ -38,7 +37,7 @@ import org.springframework.lang.Nullable;
 public class JwtAutoConfiguration {
 
 	@Bean
-	public JwtService jsonWebTokenService(Algorithm algorithm, @Autowired(required = false) @Nullable VerificationCustomizer verificationCustomizer) {
+	public JwtService jsonWebTokenService(Algorithm algorithm, @Autowired(required = false) VerificationCustomizer verificationCustomizer) {
 		return new JwtServiceImpl(algorithm, verificationCustomizer);
 	}
 

@@ -17,7 +17,7 @@
  */
 package examples;
 
-import com.auth0.jwt.algorithms.Algorithm;
+import com.github.yingzhuo.turbocharger.jwt.autoconfiguration.ImportAlgorithm;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
 import com.github.yingzhuo.turbocharger.security.filter.factory.JwtTokenAuthenticationFilterFactoryBean;
@@ -43,13 +43,12 @@ import org.springframework.security.web.SecurityFilterChain;
 	securedEnabled = true,
 	jsr250Enabled = true
 )
+@ImportAlgorithm(
+	pemLocation = "classpath:rsa2048.pem",
+	keypass = "",
+	type = ImportAlgorithm.AlgorithmType.RSA512
+)
 public class ApplicationBootSecurity {
-
-
-	@Bean
-	public Algorithm jwtAlgorithm() {
-		return Algorithm.HMAC256("changeit");
-	}
 
 	@Bean
 	public JwtTokenAuthenticationFilterFactoryBean jwtTokenAuthenticationFilterFactoryBean(
@@ -73,11 +72,6 @@ public class ApplicationBootSecurity {
 		final var exceptionHandler = context.getBean(SecurityExceptionHandler.class);
 
 		http.securityMatcher("/**");
-
-		// enabled
-//		http.redirectToHttps(c ->
-//			c.requestMatchers(AnyRequestMatcher.INSTANCE)
-//		);
 
 		// enabled
 		// default role: 'ROLE_ANONYMOUS'
