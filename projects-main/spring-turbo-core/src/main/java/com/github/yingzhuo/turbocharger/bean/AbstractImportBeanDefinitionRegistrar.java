@@ -35,6 +35,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,9 +57,9 @@ public abstract class AbstractImportBeanDefinitionRegistrar
 
 	private final List<AnnotationAttributes> importingAnnotationAttributesList = new ArrayList<>();
 	protected Environment environment = new StandardEnvironment();
-	protected ResourceLoader resourceLoader = ApplicationResourceLoader.get();
-	protected BeanFactory beanFactory = new DefaultListableBeanFactory();
 	protected ClassLoader beanClassLoader = Thread.currentThread().getContextClassLoader();
+	protected ResourceLoader resourceLoader = ApplicationResourceLoader.get(beanClassLoader);
+	protected BeanFactory beanFactory = new DefaultListableBeanFactory();
 
 	@NonNull
 	private final Class<? extends Annotation> importingAnnotationType;
@@ -68,11 +69,23 @@ public abstract class AbstractImportBeanDefinitionRegistrar
 
 	private boolean ignoreExceptions = false;
 
+	/**
+	 * 构造方法
+	 *
+	 * @param importingAnnotationType 导入元注释类型
+	 */
 	protected AbstractImportBeanDefinitionRegistrar(Class<? extends Annotation> importingAnnotationType) {
 		this(importingAnnotationType, null);
 	}
 
+	/**
+	 * 构造方法
+	 *
+	 * @param importingAnnotationType           导入元注释类型
+	 * @param importingRepeatableAnnotationType 导入元注释类型 (Repeatable)
+	 */
 	protected AbstractImportBeanDefinitionRegistrar(Class<? extends Annotation> importingAnnotationType, @Nullable Class<? extends Annotation> importingRepeatableAnnotationType) {
+		Assert.notNull(importingAnnotationType, "importingAnnotationType must not be null");
 		this.importingAnnotationType = importingAnnotationType;
 		this.importingRepeatableAnnotationType = importingRepeatableAnnotationType;
 	}
@@ -86,7 +99,7 @@ public abstract class AbstractImportBeanDefinitionRegistrar
 
 		for (AnnotationAttributes attributes : this.importingAnnotationAttributesList) {
 			try {
-				this.handleAnnotationAttributes(attributes, registry, beanNameGenerator);
+				handleAnnotationAttributes(attributes, registry, beanNameGenerator);
 			} catch (Exception e) {
 				if (!ignoreExceptions) {
 					throw new BeanInitializationException(e.getMessage(), e);
@@ -117,7 +130,7 @@ public abstract class AbstractImportBeanDefinitionRegistrar
 		}
 	}
 
-	protected abstract void handleAnnotationAttributes(AnnotationAttributes attributes, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) throws Exception;
+	protected abstract void handleAnnotationAttributes(AnnotationAttributes attr, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) throws Exception;
 
 	public void setIgnoreExceptions(boolean ignoreExceptions) {
 		this.ignoreExceptions = ignoreExceptions;
@@ -149,10 +162,6 @@ public abstract class AbstractImportBeanDefinitionRegistrar
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}
-	}
-
-	protected final String loadResourceAsString(String location) {
-		return loadResourceAsString(location, UTF_8);
 	}
 
 	protected final String loadResourceAsString(String location, @Nullable Charset charset) {

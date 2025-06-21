@@ -22,7 +22,6 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
-import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
 
 import java.security.KeyStore;
@@ -33,12 +32,12 @@ import java.util.stream.Stream;
  * @author 应卓
  * @since 3.5.2
  */
-class ImportKeyStoreConfig extends AbstractImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
+class ImportKeyStoreCfg extends AbstractImportBeanDefinitionRegistrar {
 
 	/**
 	 * 默认构造方法
 	 */
-	public ImportKeyStoreConfig() {
+	public ImportKeyStoreCfg() {
 		super(ImportKeyStore.class, ImportKeyStore.RepeatableList.class);
 		super.setIgnoreExceptions(false);
 	}
@@ -47,15 +46,15 @@ class ImportKeyStoreConfig extends AbstractImportBeanDefinitionRegistrar impleme
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void handleAnnotationAttributes(AnnotationAttributes attributes, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) {
-		var keyStoreType = (KeyStoreType) attributes.getEnum("type");
-		var location = attributes.getString("location");
-		var storepass = attributes.getString("storepass");
-		var beanName = attributes.getString("beanName");
+	protected void handleAnnotationAttributes(AnnotationAttributes attr, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) {
+		var keyStoreType = (KeyStoreType) attr.getEnum("type");
+		var location = attr.getString("location");
+		var storepass = attr.getString("storepass");
+		var beanName = attr.getString("beanName");
 
 		var beanDef =
 			BeanDefinitionBuilder.genericBeanDefinition(KeyStore.class, getSupplier(keyStoreType, location, storepass))
-				.setPrimary(attributes.getBoolean("primary"))
+				.setPrimary(attr.getBoolean("primary"))
 				.setScope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 				.setAbstract(false)
 				.setLazyInit(false)
@@ -63,7 +62,7 @@ class ImportKeyStoreConfig extends AbstractImportBeanDefinitionRegistrar impleme
 
 		registry.registerBeanDefinition(beanName, beanDef);
 
-		Stream.of(attributes.getStringArray("aliases"))
+		Stream.of(attr.getStringArray("aliases"))
 			.forEach(alias -> registry.registerAlias(beanName, alias));
 	}
 

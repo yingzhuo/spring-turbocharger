@@ -18,20 +18,19 @@
 package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
 import org.springframework.context.annotation.Import;
-import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 
 /**
  * @author 应卓
- * @see ImportAlgorithmConfig
+ * @see ImportAlgorithmCfg
  * @since 3.5.3
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import(ImportAlgorithmConfig.class)
+@Import(ImportAlgorithmCfg.class)
 public @interface ImportAlgorithm {
 
 	public String pemLocation();
@@ -40,11 +39,7 @@ public @interface ImportAlgorithm {
 
 	public AlgorithmType type();
 
-	@AliasFor("value")
 	public String beanName() default "";
-
-	@AliasFor("beanName")
-	public String value() default "";
 
 	// -----------------------------------------------------------------------------------------------------------------
 

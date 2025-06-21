@@ -31,7 +31,7 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import(ImportKeyStoreConfig.class)
+@Import(ImportKeyStoreCfg.class)
 @Repeatable(ImportKeyStore.RepeatableList.class)
 public @interface ImportKeyStore {
 
@@ -53,7 +53,7 @@ public @interface ImportKeyStore {
 	@Documented
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.TYPE)
-	@Import(ImportKeyStoreConfig.class)
+	@Import(ImportKeyStoreCfg.class)
 	public static @interface RepeatableList {
 		public ImportKeyStore[] value();
 	}

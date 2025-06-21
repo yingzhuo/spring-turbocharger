@@ -25,8 +25,8 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.boot.ssl.pem.PemContent;
 import org.springframework.core.annotation.AnnotationAttributes;
-import org.springframework.util.StringUtils;
 
+import java.nio.charset.StandardCharsets;
 import java.security.interfaces.ECPrivateKey;
 import java.security.interfaces.ECPublicKey;
 import java.security.interfaces.RSAPrivateKey;
@@ -38,13 +38,13 @@ import java.util.function.Supplier;
  * @see ImportAlgorithm
  * @since 3.5.3
  */
-class ImportAlgorithmConfig extends AbstractImportBeanDefinitionRegistrar {
+class ImportAlgorithmCfg extends AbstractImportBeanDefinitionRegistrar {
 
 	/**
 	 * 默认构造方法
 	 */
-	public ImportAlgorithmConfig() {
-		super(ImportAlgorithm.class, null);
+	public ImportAlgorithmCfg() {
+		super(ImportAlgorithm.class);
 		super.setIgnoreExceptions(false);
 	}
 
@@ -52,10 +52,11 @@ class ImportAlgorithmConfig extends AbstractImportBeanDefinitionRegistrar {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void handleAnnotationAttributes(AnnotationAttributes attr, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) throws Exception {
+	protected void handleAnnotationAttributes(AnnotationAttributes attr, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) {
 		var location = attr.getString("pemLocation");
 		var keypass = attr.getString("keypass");
 		var type = (ImportAlgorithm.AlgorithmType) attr.getEnum("type");
+		var beanName = attr.getString("beanName");
 
 		var beanDef =
 			BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class, getSupplier(location, keypass, type))
@@ -65,8 +66,7 @@ class ImportAlgorithmConfig extends AbstractImportBeanDefinitionRegistrar {
 				.setPrimary(false)
 				.getBeanDefinition();
 
-		var beanName = attr.getString("beanName");
-		if (!StringUtils.hasText(beanName)) {
+		if (beanName.isBlank()) {
 			beanName = beanNameGenerator.generateBeanName(beanDef, registry);
 		}
 
@@ -75,7 +75,7 @@ class ImportAlgorithmConfig extends AbstractImportBeanDefinitionRegistrar {
 
 	private Supplier<Algorithm> getSupplier(String location, String keypass, ImportAlgorithm.AlgorithmType type) {
 		return () -> {
-			var pc = PemContent.of(super.loadResourceAsString(location));
+			var pc = PemContent.of(super.loadResourceAsString(location, StandardCharsets.UTF_8));
 			var publicKey = pc.getCertificates().get(0).getPublicKey();
 			var privateKey = pc.getPrivateKey(keypass);
 			return switch (type) {
