@@ -22,6 +22,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
+import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
 
 import java.security.KeyStore;
@@ -32,13 +33,14 @@ import java.util.stream.Stream;
  * @author 应卓
  * @since 3.5.2
  */
-class ImportKeyStoreConfig extends AbstractImportBeanDefinitionRegistrar {
+class ImportKeyStoreConfig extends AbstractImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
 
 	/**
 	 * 默认构造方法
 	 */
 	public ImportKeyStoreConfig() {
 		super(ImportKeyStore.class, ImportKeyStore.RepeatableList.class);
+		super.setIgnoreExceptions(false);
 	}
 
 	/**

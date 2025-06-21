@@ -55,10 +55,10 @@ public abstract class AbstractImportBeanDefinitionRegistrar
 	implements ImportBeanDefinitionRegistrar, EnvironmentAware, BeanFactoryAware, ResourceLoaderAware, BeanClassLoaderAware {
 
 	private final List<AnnotationAttributes> importingAnnotationAttributesList = new ArrayList<>();
-	private Environment environment = new StandardEnvironment();
-	private ResourceLoader resourceLoader = ApplicationResourceLoader.get();
-	private BeanFactory beanFactory = new DefaultListableBeanFactory();
-	private ClassLoader beanClassLoader = Thread.currentThread().getContextClassLoader();
+	protected Environment environment = new StandardEnvironment();
+	protected ResourceLoader resourceLoader = ApplicationResourceLoader.get();
+	protected BeanFactory beanFactory = new DefaultListableBeanFactory();
+	protected ClassLoader beanClassLoader = Thread.currentThread().getContextClassLoader();
 
 	@NonNull
 	private final Class<? extends Annotation> importingAnnotationType;
@@ -141,22 +141,6 @@ public abstract class AbstractImportBeanDefinitionRegistrar
 	@Override
 	public final void setBeanClassLoader(ClassLoader beanClassLoader) {
 		this.beanClassLoader = beanClassLoader;
-	}
-
-	protected final Environment getEnvironment() {
-		return environment;
-	}
-
-	protected final ResourceLoader getResourceLoader() {
-		return resourceLoader;
-	}
-
-	protected final BeanFactory getBeanFactory() {
-		return beanFactory;
-	}
-
-	protected final ClassLoader getBeanClassLoader() {
-		return beanClassLoader;
 	}
 
 	protected final InputStream loadResourceAsStream(String location) {
