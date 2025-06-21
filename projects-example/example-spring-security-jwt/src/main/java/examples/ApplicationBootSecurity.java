@@ -45,8 +45,7 @@ import org.springframework.security.web.SecurityFilterChain;
 )
 @ImportAlgorithm(
 	pemLocation = "classpath:rsa2048.pem",
-	keypass = "",
-	type = ImportAlgorithm.AlgorithmType.RSA512
+	kind = ImportAlgorithm.AlgorithmKind.RSA512
 )
 public class ApplicationBootSecurity {
 

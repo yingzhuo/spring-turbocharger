@@ -45,6 +45,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -62,10 +63,10 @@ public abstract class AbstractImportBeanDefinitionRegistrar
 	protected BeanFactory beanFactory = new DefaultListableBeanFactory();
 
 	@NonNull
-	private final Class<? extends Annotation> importingAnnotationType;
+	private final String importingAnnotationType;
 
 	@Nullable
-	private final Class<? extends Annotation> importingRepeatableAnnotationType;
+	private final String importingRepeatableAnnotationType;
 
 	private boolean ignoreExceptions = false;
 
@@ -86,8 +87,10 @@ public abstract class AbstractImportBeanDefinitionRegistrar
 	 */
 	protected AbstractImportBeanDefinitionRegistrar(Class<? extends Annotation> importingAnnotationType, @Nullable Class<? extends Annotation> importingRepeatableAnnotationType) {
 		Assert.notNull(importingAnnotationType, "importingAnnotationType must not be null");
-		this.importingAnnotationType = importingAnnotationType;
-		this.importingRepeatableAnnotationType = importingRepeatableAnnotationType;
+		this.importingAnnotationType = importingAnnotationType.getName();
+		this.importingRepeatableAnnotationType = Optional.ofNullable(importingRepeatableAnnotationType)
+			.map(Class::getName)
+			.orElse(null);
 	}
 
 	/**
@@ -117,13 +120,13 @@ public abstract class AbstractImportBeanDefinitionRegistrar
 	}
 
 	private void setupImportingAttributes(AnnotationMetadata metadata) {
-		var singleAttributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(importingAnnotationType.getName()));
+		var singleAttributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(importingAnnotationType));
 		if (singleAttributes != null) {
 			importingAnnotationAttributesList.add(singleAttributes);
 		}
 
 		if (importingRepeatableAnnotationType != null) {
-			var listAttributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(importingRepeatableAnnotationType.getName()));
+			var listAttributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(importingRepeatableAnnotationType));
 			if (listAttributes != null) {
 				Collections.addAll(importingAnnotationAttributesList, listAttributes.getAnnotationArray("value"));
 			}

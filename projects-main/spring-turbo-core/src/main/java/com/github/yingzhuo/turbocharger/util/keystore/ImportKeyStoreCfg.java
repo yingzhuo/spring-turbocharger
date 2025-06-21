@@ -26,10 +26,10 @@ import org.springframework.core.annotation.AnnotationAttributes;
 
 import java.security.KeyStore;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 /**
  * @author 应卓
+ * @see ImportKeyStore
  * @since 3.5.2
  */
 class ImportKeyStoreCfg extends AbstractImportBeanDefinitionRegistrar {
@@ -51,10 +51,11 @@ class ImportKeyStoreCfg extends AbstractImportBeanDefinitionRegistrar {
 		var location = attr.getString("location");
 		var storepass = attr.getString("storepass");
 		var beanName = attr.getString("beanName");
+		var isPrimary = attr.getBoolean("primary");
 
 		var beanDef =
 			BeanDefinitionBuilder.genericBeanDefinition(KeyStore.class, getSupplier(keyStoreType, location, storepass))
-				.setPrimary(attr.getBoolean("primary"))
+				.setPrimary(isPrimary)
 				.setScope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 				.setAbstract(false)
 				.setLazyInit(false)
@@ -62,8 +63,9 @@ class ImportKeyStoreCfg extends AbstractImportBeanDefinitionRegistrar {
 
 		registry.registerBeanDefinition(beanName, beanDef);
 
-		Stream.of(attr.getStringArray("aliases"))
-			.forEach(alias -> registry.registerAlias(beanName, alias));
+		for (var alias : attr.getStringArray("aliases")) {
+			registry.registerAlias(beanName, alias);
+		}
 	}
 
 	private Supplier<KeyStore> getSupplier(KeyStoreType type, String location, String storepass) {

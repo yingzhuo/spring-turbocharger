@@ -19,6 +19,7 @@ package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
 import org.springframework.context.annotation.Import;
 
+import java.io.Serializable;
 import java.lang.annotation.*;
 
 /**
@@ -37,19 +38,18 @@ public @interface ImportAlgorithm {
 
 	public String keypass() default "";
 
-	public AlgorithmType type();
+	public AlgorithmKind kind();
 
 	public String beanName() default "";
 
+	public String[] aliases() default {};
+
+	public boolean primary() default false;
+
 	// -----------------------------------------------------------------------------------------------------------------
 
-	enum AlgorithmType {
-		RSA256,
-		RSA384,
-		RSA512,
-		ECDSA256,
-		ECDSA384,
-		ECDSA512
+	enum AlgorithmKind implements Serializable {
+		RSA256, RSA384, RSA512, ECDSA256, ECDSA384, ECDSA512
 	}
 
 }

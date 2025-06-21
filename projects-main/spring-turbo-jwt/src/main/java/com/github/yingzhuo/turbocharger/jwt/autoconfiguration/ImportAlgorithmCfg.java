@@ -19,7 +19,7 @@ package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
 import com.auth0.jwt.algorithms.Algorithm;
 import com.github.yingzhuo.turbocharger.bean.AbstractImportBeanDefinitionRegistrar;
-import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
@@ -55,15 +55,16 @@ class ImportAlgorithmCfg extends AbstractImportBeanDefinitionRegistrar {
 	protected void handleAnnotationAttributes(AnnotationAttributes attr, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) {
 		var location = attr.getString("pemLocation");
 		var keypass = attr.getString("keypass");
-		var type = (ImportAlgorithm.AlgorithmType) attr.getEnum("type");
+		var type = (ImportAlgorithm.AlgorithmKind) attr.getEnum("kind");
 		var beanName = attr.getString("beanName");
+		var isPrimary = attr.getBoolean("primary");
 
 		var beanDef =
 			BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class, getSupplier(location, keypass, type))
-				.setScope(BeanDefinition.SCOPE_PROTOTYPE)
+				.setScope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 				.setAbstract(false)
 				.setLazyInit(false)
-				.setPrimary(false)
+				.setPrimary(isPrimary)
 				.getBeanDefinition();
 
 		if (beanName.isBlank()) {
@@ -71,13 +72,18 @@ class ImportAlgorithmCfg extends AbstractImportBeanDefinitionRegistrar {
 		}
 
 		registry.registerBeanDefinition(beanName, beanDef);
+
+		for (var alias : attr.getStringArray("aliases")) {
+			registry.registerAlias(beanName, alias);
+		}
 	}
 
-	private Supplier<Algorithm> getSupplier(String location, String keypass, ImportAlgorithm.AlgorithmType type) {
+	private Supplier<Algorithm> getSupplier(String location, String keypass, ImportAlgorithm.AlgorithmKind type) {
 		return () -> {
 			var pc = PemContent.of(super.loadResourceAsString(location, StandardCharsets.UTF_8));
 			var publicKey = pc.getCertificates().get(0).getPublicKey();
 			var privateKey = pc.getPrivateKey(keypass);
+
 			return switch (type) {
 				case RSA256 -> Algorithm.RSA256((RSAPublicKey) publicKey, (RSAPrivateKey) privateKey);
 				case RSA384 -> Algorithm.RSA384((RSAPublicKey) publicKey, (RSAPrivateKey) privateKey);
@@ -88,4 +94,5 @@ class ImportAlgorithmCfg extends AbstractImportBeanDefinitionRegistrar {
 			};
 		};
 	}
+
 }
