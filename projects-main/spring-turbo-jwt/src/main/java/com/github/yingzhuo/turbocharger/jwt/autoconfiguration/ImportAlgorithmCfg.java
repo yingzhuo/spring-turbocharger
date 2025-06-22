@@ -57,14 +57,13 @@ class ImportAlgorithmCfg extends AbstractImportBeanDefinitionRegistrar {
 		var keypass = attr.getString("keypass");
 		var kind = (AlgorithmKind) attr.getEnum("kind");
 		var beanName = attr.getString("beanName");
-		var isPrimary = attr.getBoolean("primary");
 
 		var beanDef =
 			BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class, getSupplier(location, keypass, kind))
 				.setScope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 				.setAbstract(false)
 				.setLazyInit(false)
-				.setPrimary(isPrimary)
+				.setPrimary(false)
 				.getBeanDefinition();
 
 		if (beanName.isBlank()) {

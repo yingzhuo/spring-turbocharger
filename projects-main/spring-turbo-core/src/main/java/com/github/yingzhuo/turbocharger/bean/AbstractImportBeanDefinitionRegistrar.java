@@ -32,6 +32,9 @@ import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -60,6 +63,7 @@ public abstract class AbstractImportBeanDefinitionRegistrar
 	protected Environment environment = new StandardEnvironment();
 	protected ClassLoader beanClassLoader = Thread.currentThread().getContextClassLoader();
 	protected ResourceLoader resourceLoader = ApplicationResourceLoader.get(beanClassLoader);
+	protected ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver(resourceLoader);
 	protected BeanFactory beanFactory = new DefaultListableBeanFactory();
 
 	@NonNull
@@ -147,6 +151,7 @@ public abstract class AbstractImportBeanDefinitionRegistrar
 	@Override
 	public final void setResourceLoader(ResourceLoader resourceLoader) {
 		this.resourceLoader = resourceLoader;
+		this.resourcePatternResolver = ResourcePatternUtils.getResourcePatternResolver(resourceLoader);
 	}
 
 	@Override

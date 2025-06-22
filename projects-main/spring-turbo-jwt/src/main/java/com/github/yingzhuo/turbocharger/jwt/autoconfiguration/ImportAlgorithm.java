@@ -17,13 +17,17 @@
  */
 package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
+import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
+ * 通过PEM文件导入{@link Algorithm}实例
+ *
  * @author 应卓
  * @see ImportAlgorithmCfg
+ * @see Algorithm
  * @since 3.5.3
  */
 @Inherited
@@ -33,16 +37,39 @@ import java.lang.annotation.*;
 @Import(ImportAlgorithmCfg.class)
 public @interface ImportAlgorithm {
 
+	/**
+	 * pem资源位置
+	 *
+	 * @return pem资源位置
+	 */
 	public String pemLocation();
 
+	/**
+	 * 私钥密码
+	 *
+	 * @return 私钥密码
+	 */
 	public String keypass() default "";
 
+	/**
+	 * 算法类型
+	 *
+	 * @return 算法类型
+	 */
 	public AlgorithmKind kind();
 
+	/**
+	 * Bean的名称
+	 *
+	 * @return Bean的名称
+	 */
 	public String beanName() default "";
 
+	/**
+	 * Bean的别名
+	 *
+	 * @return Bean的别名
+	 */
 	public String[] aliases() default {};
-
-	public boolean primary() default false;
 
 }
