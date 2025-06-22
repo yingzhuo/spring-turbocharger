@@ -55,12 +55,12 @@ class ImportAlgorithmCfg extends AbstractImportBeanDefinitionRegistrar {
 	protected void handleAnnotationAttributes(AnnotationAttributes attr, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) {
 		var location = attr.getString("pemLocation");
 		var keypass = attr.getString("keypass");
-		var type = (ImportAlgorithm.AlgorithmKind) attr.getEnum("kind");
+		var kind = (AlgorithmKind) attr.getEnum("kind");
 		var beanName = attr.getString("beanName");
 		var isPrimary = attr.getBoolean("primary");
 
 		var beanDef =
-			BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class, getSupplier(location, keypass, type))
+			BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class, getSupplier(location, keypass, kind))
 				.setScope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 				.setAbstract(false)
 				.setLazyInit(false)
@@ -78,13 +78,13 @@ class ImportAlgorithmCfg extends AbstractImportBeanDefinitionRegistrar {
 		}
 	}
 
-	private Supplier<Algorithm> getSupplier(String location, String keypass, ImportAlgorithm.AlgorithmKind type) {
+	private Supplier<Algorithm> getSupplier(String location, String keypass, AlgorithmKind kind) {
 		return () -> {
 			var pc = PemContent.of(super.loadResourceAsString(location, StandardCharsets.UTF_8));
 			var publicKey = pc.getCertificates().get(0).getPublicKey();
 			var privateKey = pc.getPrivateKey(keypass);
 
-			return switch (type) {
+			return switch (kind) {
 				case RSA256 -> Algorithm.RSA256((RSAPublicKey) publicKey, (RSAPrivateKey) privateKey);
 				case RSA384 -> Algorithm.RSA384((RSAPublicKey) publicKey, (RSAPrivateKey) privateKey);
 				case RSA512 -> Algorithm.RSA512((RSAPublicKey) publicKey, (RSAPrivateKey) privateKey);

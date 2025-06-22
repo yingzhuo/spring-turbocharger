@@ -17,6 +17,7 @@
  */
 package examples;
 
+import com.github.yingzhuo.turbocharger.jwt.autoconfiguration.AlgorithmKind;
 import com.github.yingzhuo.turbocharger.jwt.autoconfiguration.ImportAlgorithm;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
@@ -45,7 +46,7 @@ import org.springframework.security.web.SecurityFilterChain;
 )
 @ImportAlgorithm(
 	pemLocation = "classpath:rsa2048.pem",
-	kind = ImportAlgorithm.AlgorithmKind.RSA512
+	kind = AlgorithmKind.RSA512
 )
 public class ApplicationBootSecurity {
 

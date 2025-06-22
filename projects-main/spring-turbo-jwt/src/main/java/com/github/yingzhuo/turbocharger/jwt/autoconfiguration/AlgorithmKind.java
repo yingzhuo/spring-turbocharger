@@ -17,32 +17,12 @@
  */
 package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
-import org.springframework.context.annotation.Import;
-
-import java.lang.annotation.*;
-
 /**
  * @author 应卓
- * @see ImportAlgorithmCfg
  * @since 3.5.3
  */
-@Inherited
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Import(ImportAlgorithmCfg.class)
-public @interface ImportAlgorithm {
+public enum AlgorithmKind {
 
-	public String pemLocation();
-
-	public String keypass() default "";
-
-	public AlgorithmKind kind();
-
-	public String beanName() default "";
-
-	public String[] aliases() default {};
-
-	public boolean primary() default false;
+	RSA256, RSA384, RSA512, ECDSA256, ECDSA384, ECDSA512
 
 }
