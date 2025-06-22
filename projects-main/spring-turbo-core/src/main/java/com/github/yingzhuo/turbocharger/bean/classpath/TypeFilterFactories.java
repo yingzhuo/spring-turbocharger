@@ -138,7 +138,6 @@ public final class TypeFilterFactories {
 				return metadata.isInterface();
 			}
 		};
-
 	}
 
 	/**

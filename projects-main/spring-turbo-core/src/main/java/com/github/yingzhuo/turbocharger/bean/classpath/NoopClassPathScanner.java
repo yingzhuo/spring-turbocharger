@@ -20,7 +20,7 @@ package com.github.yingzhuo.turbocharger.bean.classpath;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.lang.Nullable;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * 无动作类路径扫描器
@@ -50,8 +50,8 @@ public class NoopClassPathScanner implements ClassPathScanner {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<AbstractBeanDefinition> scan(@Nullable PackageSet packageSet) {
-		return List.of();
+	public Set<AbstractBeanDefinition> scan(@Nullable PackageSet packageSet) {
+		return Set.of();
 	}
 
 	// 延迟加载

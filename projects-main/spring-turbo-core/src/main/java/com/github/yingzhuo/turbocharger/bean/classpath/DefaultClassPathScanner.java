@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.bean.classpath;
 
-import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
@@ -27,10 +26,10 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.filter.TypeFilter;
 import org.springframework.lang.Nullable;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
-import static com.github.yingzhuo.turbocharger.util.collection.CollectionUtils.nullSafeAddAll;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * {@link ClassPathScanner} 默认实现
@@ -40,7 +39,7 @@ import static com.github.yingzhuo.turbocharger.util.collection.CollectionUtils.n
  */
 public class DefaultClassPathScanner implements ClassPathScanner {
 
-	private final InnerScanner innerScanner = new InnerScanner();
+	private final ClassPathScanningCandidateComponentProvider innerScanner = new ClassPathScanningCandidateComponentProvider(false);
 
 	/**
 	 * 默认构造方法
@@ -50,25 +49,26 @@ public class DefaultClassPathScanner implements ClassPathScanner {
 	}
 
 	@Override
-	public List<AbstractBeanDefinition> scan(@Nullable PackageSet packageSet) {
+	public Set<AbstractBeanDefinition> scan(@Nullable PackageSet packageSet) {
 		if (packageSet == null || packageSet.isEmpty()) {
-			return List.of();
+			return Set.of();
 		}
 
-		List<BeanDefinition> list = new ArrayList<>();
+		final Set<BeanDefinition> result = new HashSet<>();
 
 		for (String basePackage : packageSet) {
-			nullSafeAddAll(list, innerScanner.findCandidateComponents(basePackage));
+			result.addAll(innerScanner.findCandidateComponents(basePackage));
 		}
 
-		return list.stream()
+		return result.stream()
 			.map(beanDef -> {
 				if (beanDef instanceof AbstractBeanDefinition abstractBeanDef) {
 					return abstractBeanDef;
 				} else {
 					return new GenericBeanDefinition(beanDef);
 				}
-			}).toList();
+			})
+			.collect(Collectors.toSet());
 	}
 
 	public void setResourceLoader(ResourceLoader resourceLoader) {
@@ -85,24 +85,6 @@ public class DefaultClassPathScanner implements ClassPathScanner {
 
 	public void setExcludeTypeFilters(List<TypeFilter> filters) {
 		filters.forEach(innerScanner::addExcludeFilter);
-	}
-
-	private static final class InnerScanner extends ClassPathScanningCandidateComponentProvider {
-
-		private InnerScanner() {
-			super(false);
-		}
-
-		@Override
-		protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
-			boolean isCandidate = false;
-			if (beanDefinition.getMetadata().isIndependent()) {
-				if (!beanDefinition.getMetadata().isAnnotation()) {
-					isCandidate = true;
-				}
-			}
-			return isCandidate;
-		}
 	}
 
 }

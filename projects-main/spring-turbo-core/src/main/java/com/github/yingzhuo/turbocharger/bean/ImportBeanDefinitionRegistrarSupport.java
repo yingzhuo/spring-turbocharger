@@ -32,6 +32,7 @@ import java.util.List;
  * {@link ImportBeanDefinitionRegistrar} 支持类
  *
  * @author 应卓
+ * @see com.github.yingzhuo.turbocharger.bean.classpath.ClassPathScanner
  * @since 3.5.3
  */
 public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBeanDefinitionRegistrar {

@@ -20,7 +20,7 @@ package com.github.yingzhuo.turbocharger.bean.classpath;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.lang.Nullable;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * ClassPath扫描器
@@ -52,6 +52,6 @@ public interface ClassPathScanner {
 	 * @return 扫描结果
 	 * @see PackageSet
 	 */
-	public List<AbstractBeanDefinition> scan(@Nullable PackageSet packageSet);
+	public Set<AbstractBeanDefinition> scan(@Nullable PackageSet packageSet);
 
 }

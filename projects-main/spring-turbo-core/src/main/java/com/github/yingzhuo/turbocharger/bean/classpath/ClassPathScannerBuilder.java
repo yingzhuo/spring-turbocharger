@@ -23,6 +23,7 @@ import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.filter.TypeFilter;
 import org.springframework.lang.Nullable;
+import org.springframework.util.ClassUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -34,7 +35,6 @@ import static java.util.Objects.requireNonNullElseGet;
  * ClassPath扫描器的创建器
  *
  * @author 应卓
- * @see ClassPathScanner#builder()
  * @see TypeFilter
  * @see TypeFilterFactories
  * @see Environment
@@ -47,7 +47,7 @@ public final class ClassPathScannerBuilder {
 	private final List<TypeFilter> includeFilters = new LinkedList<>();
 	private final List<TypeFilter> excludeFilters = new LinkedList<>();
 	private Environment environment = new StandardEnvironment();
-	private ResourceLoader resourceLoader = ApplicationResourceLoader.get();
+	private ResourceLoader resourceLoader = ApplicationResourceLoader.get(ClassUtils.getDefaultClassLoader());
 
 	/**
 	 * 构造方法
