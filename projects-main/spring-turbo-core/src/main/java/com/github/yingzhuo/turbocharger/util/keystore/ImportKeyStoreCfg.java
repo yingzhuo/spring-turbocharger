@@ -17,13 +17,16 @@
  */
 package com.github.yingzhuo.turbocharger.util.keystore;
 
-import com.github.yingzhuo.turbocharger.bean.AbstractImportBeanDefinitionRegistrar;
+import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
-import org.springframework.core.annotation.AnnotationAttributes;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.type.AnnotationMetadata;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.security.KeyStore;
 import java.util.function.Supplier;
 
@@ -32,44 +35,61 @@ import java.util.function.Supplier;
  * @see ImportKeyStore
  * @since 3.5.2
  */
-class ImportKeyStoreCfg extends AbstractImportBeanDefinitionRegistrar {
+class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 
-	/**
-	 * 默认构造方法
-	 */
-	public ImportKeyStoreCfg() {
-		super(ImportKeyStore.class, ImportKeyStore.RepeatableList.class);
-		super.setIgnoreExceptions(false);
+	private final ResourceLoader resourceLoader;
+
+	public ImportKeyStoreCfg(ResourceLoader resourceLoader) {
+		this.resourceLoader = resourceLoader;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
-	protected void handleAnnotationAttributes(AnnotationAttributes attr, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) {
-		var keyStoreType = (KeyStoreType) attr.getEnum("type");
-		var location = attr.getString("location");
-		var storepass = attr.getString("storepass");
-		var beanName = attr.getString("beanName");
-		var isPrimary = attr.getBoolean("primary");
+	public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator importBeanNameGenerator) {
+		getAnnotationAttributesStream(metadata, ImportKeyStore.class, ImportKeyStore.RepeatableList.class)
+			.forEach(attr -> {
+				var location = attr.getString("location");
+				var type = (KeyStoreType) attr.getEnum("type");
+				var storepass = attr.getString("storepass");
+				var beanName = attr.getString("beanName");
+				var isPrimary = attr.getBoolean("primary");
 
-		var beanDef =
-			BeanDefinitionBuilder.genericBeanDefinition(KeyStore.class, getSupplier(keyStoreType, location, storepass))
-				.setPrimary(isPrimary)
-				.setScope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-				.setAbstract(false)
-				.setLazyInit(false)
-				.getBeanDefinition();
+				var beanDef =
+					BeanDefinitionBuilder.genericBeanDefinition(KeyStore.class)
+						.setPrimary(isPrimary)
+						.setScope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+						.setAbstract(false)
+						.setLazyInit(false)
+						.getBeanDefinition();
 
-		registry.registerBeanDefinition(beanName, beanDef);
+				beanDef.setInstanceSupplier(new KeyStoreSupplier(resourceLoader, location, storepass, type));
 
-		for (var alias : attr.getStringArray("aliases")) {
-			registry.registerAlias(beanName, alias);
-		}
+				registry.registerBeanDefinition(beanName, beanDef);
+
+				for (var alias : attr.getStringArray("aliases")) {
+					registry.registerAlias(beanName, alias);
+				}
+			});
 	}
 
-	private Supplier<KeyStore> getSupplier(KeyStoreType type, String location, String storepass) {
-		return () -> KeyStoreUtils.loadKeyStore(super.loadResourceAsStream(location), type, storepass);
+
+	private record KeyStoreSupplier(
+		ResourceLoader resourceLoader,
+		String location,
+		String storepass,
+		KeyStoreType type) implements Supplier<KeyStore> {
+
+		@Override
+		public KeyStore get() {
+			try {
+				return doGet();
+			} catch (IOException e) {
+				throw new UncheckedIOException(e);
+			}
+		}
+
+		private KeyStore doGet() throws IOException {
+			return KeyStoreUtils.loadKeyStore(resourceLoader.getResource(location).getInputStream(), type, storepass);
+		}
 	}
 
 }
