@@ -24,9 +24,13 @@ import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.lang.annotation.Annotation;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
+ * {@link ImportBeanDefinitionRegistrar} 支持类
+ *
  * @author 应卓
  * @since 3.5.3
  */
@@ -34,26 +38,26 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 
 	private static final String ATTRIBUTE_NAME_VALUE = "value";
 
-	protected final Stream<AnnotationAttributes> getAnnotationAttributesStream(AnnotationMetadata metadata, Class<? extends Annotation> importingPrimaryAnnotationType) {
-		return getAnnotationAttributesStream(metadata, importingPrimaryAnnotationType, null);
+	protected final List<AnnotationAttributes> getAnnotationAttributesList(AnnotationMetadata metadata, Class<? extends Annotation> importingPrimaryAnnotationType) {
+		return getAnnotationAttributesList(metadata, importingPrimaryAnnotationType, null);
 	}
 
-	protected final Stream<AnnotationAttributes> getAnnotationAttributesStream(
+	protected final List<AnnotationAttributes> getAnnotationAttributesList(
 		AnnotationMetadata metadata,
 		@NonNull Class<? extends Annotation> importingPrimaryAnnotationType,
 		@Nullable Class<? extends Annotation> importingRepeatableAnnotationType
 	) {
-		var result = Stream.<AnnotationAttributes>of();
+		var result = new ArrayList<AnnotationAttributes>();
 
 		var primary = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(importingPrimaryAnnotationType.getName()));
 		if (primary != null) {
-			result = Stream.concat(result, Stream.of(primary));
+			result.add(primary);
 		}
 
 		if (importingRepeatableAnnotationType != null) {
 			var repeatable = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(importingRepeatableAnnotationType.getName()));
 			if (repeatable != null) {
-				result = Stream.concat(result, Stream.of(repeatable.getAnnotationArray(ATTRIBUTE_NAME_VALUE)));
+				Collections.addAll(result, repeatable.getAnnotationArray(ATTRIBUTE_NAME_VALUE));
 			}
 		}
 

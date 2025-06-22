@@ -19,6 +19,8 @@ package com.github.yingzhuo.turbocharger.bean.classpath;
 
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
@@ -48,8 +50,8 @@ public class DefaultClassPathScanner implements ClassPathScanner {
 	}
 
 	@Override
-	public List<BeanDefinition> scan(@Nullable PackageSet packageSet) {
-		if (packageSet == null) {
+	public List<AbstractBeanDefinition> scan(@Nullable PackageSet packageSet) {
+		if (packageSet == null || packageSet.isEmpty()) {
 			return List.of();
 		}
 
@@ -59,7 +61,14 @@ public class DefaultClassPathScanner implements ClassPathScanner {
 			nullSafeAddAll(list, innerScanner.findCandidateComponents(basePackage));
 		}
 
-		return list;
+		return list.stream()
+			.map(beanDef -> {
+				if (beanDef instanceof AbstractBeanDefinition abstractBeanDef) {
+					return abstractBeanDef;
+				} else {
+					return new GenericBeanDefinition(beanDef);
+				}
+			}).toList();
 	}
 
 	public void setResourceLoader(ResourceLoader resourceLoader) {

@@ -51,33 +51,32 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	@Override
 	public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) {
-		getAnnotationAttributesStream(metadata, ImportAlgorithm.class)
-			.forEach(attr -> {
-				var location = attr.getString("pemLocation");
-				var keypass = attr.getString("keypass");
-				var kind = (AlgorithmKind) attr.getEnum("kind");
-				var beanName = attr.getString("beanName");
+		for (var attr : getAnnotationAttributesList(metadata, ImportAlgorithm.class)) {
+			var location = attr.getString("pemLocation");
+			var keypass = attr.getString("keypass");
+			var kind = (AlgorithmKind) attr.getEnum("kind");
+			var beanName = attr.getString("beanName");
 
-				var beanDef =
-					BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class)
-						.setScope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-						.setAbstract(false)
-						.setLazyInit(false)
-						.setPrimary(false)
-						.getBeanDefinition();
+			var beanDef =
+				BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class)
+					.setScope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+					.setAbstract(false)
+					.setLazyInit(false)
+					.setPrimary(false)
+					.getBeanDefinition();
 
-				beanDef.setInstanceSupplier(new AlgorithmSupplier(resourceLoader, location, keypass, kind));
+			beanDef.setInstanceSupplier(new AlgorithmSupplier(resourceLoader, location, keypass, kind));
 
-				if (beanName.isBlank()) {
-					beanName = beanNameGenerator.generateBeanName(beanDef, registry);
-				}
+			if (beanName.isBlank()) {
+				beanName = beanNameGenerator.generateBeanName(beanDef, registry);
+			}
 
-				registry.registerBeanDefinition(beanName, beanDef);
+			registry.registerBeanDefinition(beanName, beanDef);
 
-				for (var alias : attr.getStringArray("aliases")) {
-					registry.registerAlias(beanName, alias);
-				}
-			});
+			for (var alias : attr.getStringArray("aliases")) {
+				registry.registerAlias(beanName, alias);
+			}
+		}
 	}
 
 

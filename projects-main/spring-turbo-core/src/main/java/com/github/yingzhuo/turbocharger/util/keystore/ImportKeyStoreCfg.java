@@ -45,32 +45,30 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	@Override
 	public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator importBeanNameGenerator) {
-		getAnnotationAttributesStream(metadata, ImportKeyStore.class, ImportKeyStore.RepeatableList.class)
-			.forEach(attr -> {
-				var location = attr.getString("location");
-				var type = (KeyStoreType) attr.getEnum("type");
-				var storepass = attr.getString("storepass");
-				var beanName = attr.getString("beanName");
-				var isPrimary = attr.getBoolean("primary");
+		for (var attr : getAnnotationAttributesList(metadata, ImportKeyStore.class, ImportKeyStore.RepeatableList.class)) {
+			var location = attr.getString("location");
+			var type = (KeyStoreType) attr.getEnum("type");
+			var storepass = attr.getString("storepass");
+			var beanName = attr.getString("beanName");
+			var isPrimary = attr.getBoolean("primary");
 
-				var beanDef =
-					BeanDefinitionBuilder.genericBeanDefinition(KeyStore.class)
-						.setPrimary(isPrimary)
-						.setScope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-						.setAbstract(false)
-						.setLazyInit(false)
-						.getBeanDefinition();
+			var beanDef =
+				BeanDefinitionBuilder.genericBeanDefinition(KeyStore.class)
+					.setPrimary(isPrimary)
+					.setScope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+					.setAbstract(false)
+					.setLazyInit(false)
+					.getBeanDefinition();
 
-				beanDef.setInstanceSupplier(new KeyStoreSupplier(resourceLoader, location, storepass, type));
+			beanDef.setInstanceSupplier(new KeyStoreSupplier(resourceLoader, location, storepass, type));
 
-				registry.registerBeanDefinition(beanName, beanDef);
+			registry.registerBeanDefinition(beanName, beanDef);
 
-				for (var alias : attr.getStringArray("aliases")) {
-					registry.registerAlias(beanName, alias);
-				}
-			});
+			for (var alias : attr.getStringArray("aliases")) {
+				registry.registerAlias(beanName, alias);
+			}
+		}
 	}
-
 
 	private record KeyStoreSupplier(
 		ResourceLoader resourceLoader,
