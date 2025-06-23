@@ -54,7 +54,7 @@ public @interface ImportKeyStore {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.TYPE)
 	@Import(ImportKeyStoreCfg.class)
-	public static @interface Container {
+	@interface Container {
 		public ImportKeyStore[] value();
 	}
 
