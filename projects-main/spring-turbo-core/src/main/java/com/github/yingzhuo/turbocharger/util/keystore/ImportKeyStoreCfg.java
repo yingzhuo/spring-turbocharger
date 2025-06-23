@@ -22,6 +22,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 
@@ -37,10 +38,8 @@ import java.util.function.Supplier;
  */
 class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 
-	private final ResourceLoader resourceLoader;
-
-	public ImportKeyStoreCfg(ResourceLoader resourceLoader) {
-		this.resourceLoader = resourceLoader;
+	public ImportKeyStoreCfg(ResourceLoader resourceLoader, Environment environment) {
+		super(resourceLoader, environment);
 	}
 
 	@Override

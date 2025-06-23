@@ -17,8 +17,11 @@
  */
 package com.github.yingzhuo.turbocharger.bean;
 
+import com.github.yingzhuo.turbocharger.bean.classpath.ClassPathScanner;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -38,6 +41,14 @@ import java.util.List;
 public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBeanDefinitionRegistrar {
 
 	private static final String ATTRIBUTE_NAME_VALUE = "value";
+
+	protected final ResourceLoader resourceLoader;
+	protected final Environment environment;
+
+	protected ImportBeanDefinitionRegistrarSupport(ResourceLoader resourceLoader, Environment environment) {
+		this.resourceLoader = resourceLoader;
+		this.environment = environment;
+	}
 
 	protected final List<AnnotationAttributes> getAnnotationAttributesList(AnnotationMetadata metadata, Class<? extends Annotation> importingPrimaryAnnotationType) {
 		return getAnnotationAttributesList(metadata, importingPrimaryAnnotationType, null);
@@ -63,6 +74,14 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 		}
 
 		return result;
+	}
+
+	protected final ClassPathScanner createClassPathScanner() {
+		var scanner = new ClassPathScanner();
+		scanner.setResourceLoader(resourceLoader);
+		scanner.setEnvironment(environment);
+		scanner.setUseDefaultFilters(false);
+		return scanner;
 	}
 
 }

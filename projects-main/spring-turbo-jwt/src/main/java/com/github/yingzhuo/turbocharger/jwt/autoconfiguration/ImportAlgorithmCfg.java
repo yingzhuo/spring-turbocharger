@@ -24,6 +24,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.boot.ssl.pem.PemContent;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 
@@ -43,10 +44,8 @@ import java.util.function.Supplier;
  */
 class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 
-	private final ResourceLoader resourceLoader;
-
-	public ImportAlgorithmCfg(ResourceLoader resourceLoader) {
-		this.resourceLoader = resourceLoader;
+	public ImportAlgorithmCfg(ResourceLoader resourceLoader, Environment environment) {
+		super(resourceLoader, environment);
 	}
 
 	@Override
