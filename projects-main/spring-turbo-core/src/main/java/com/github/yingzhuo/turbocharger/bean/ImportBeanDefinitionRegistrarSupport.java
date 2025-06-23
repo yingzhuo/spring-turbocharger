@@ -36,7 +36,6 @@ import java.io.UncheckedIOException;
 import java.lang.annotation.Annotation;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -95,10 +94,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 	 */
 	protected Set<AnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
 		var attrMap = metadata.getAnnotationAttributes(importingAnnotation.getName(), false);
-		return Optional.ofNullable(attrMap)
-			.map(AnnotationAttributes::fromMap)
-			.map(Set::of)
-			.orElse(Set.of());
+		return attrMap == null ? Set.of() : Set.of(AnnotationAttributes.fromMap(attrMap));
 	}
 
 	/**

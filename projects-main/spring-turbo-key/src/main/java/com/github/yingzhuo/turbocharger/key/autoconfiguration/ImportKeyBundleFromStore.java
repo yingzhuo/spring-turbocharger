@@ -40,7 +40,7 @@ public @interface ImportKeyBundleFromStore {
 
 	public boolean primary() default false;
 
-	public String location() default "";
+	public String location();
 
 	public KeyStoreType type() default KeyStoreType.PKCS12;
 
