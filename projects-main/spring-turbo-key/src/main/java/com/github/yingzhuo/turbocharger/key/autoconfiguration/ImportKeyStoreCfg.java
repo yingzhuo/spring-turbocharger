@@ -15,10 +15,12 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.util.keystore;
+package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.bean.BeanInstanceSupplier;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
+import com.github.yingzhuo.turbocharger.util.KeyStoreType;
+import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -33,7 +35,7 @@ import java.security.KeyStore;
 /**
  * @author 应卓
  * @see ImportKeyStore
- * @since 3.5.2
+ * @since 3.5.3
  */
 class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 

@@ -15,36 +15,40 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.util.keystore;
+package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
+import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
  * @author 应卓
- * @see java.security.KeyStore
- * @since 3.5.2
+ * @since 3.5.3
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import(ImportKeyStoreCfg.class)
-@Repeatable(ImportKeyStore.Container.class)
-public @interface ImportKeyStore {
+@Import(ImportKeyBundleFromStoreCfg.class)
+@Repeatable(ImportKeyBundleFromStore.Container.class)
+public @interface ImportKeyBundleFromStore {
 
 	public String beanName() default "";
 
 	public String[] aliases() default {};
 
-	public String location();
+	public boolean primary() default false;
+
+	public String location() default "";
 
 	public KeyStoreType type() default KeyStoreType.PKCS12;
 
 	public String storepass();
 
-	public boolean primary() default false;
+	public String aliasOfStore();
+
+	public String keypass() default "";
 
 	// -----------------------------------------------------------------------------------------------------------------
 
@@ -52,9 +56,9 @@ public @interface ImportKeyStore {
 	@Documented
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.TYPE)
-	@Import(ImportKeyStoreCfg.class)
-	public static @interface Container {
-		public ImportKeyStore[] value();
+	@Import(ImportKeyBundleFromStoreCfg.class)
+	@interface Container {
+		ImportKeyBundleFromStore[] value();
 	}
 
 }

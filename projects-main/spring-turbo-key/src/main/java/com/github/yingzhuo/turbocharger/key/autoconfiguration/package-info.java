@@ -17,7 +17,7 @@
  */
 @NonNullApi
 @NonNullFields
-package com.github.yingzhuo.turbocharger.util.keystore;
+package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

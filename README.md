@@ -23,6 +23,7 @@ dependencies {
     implementation 'com.github.yingzhuo:spring-turbo-jackson'
     implementation 'com.github.yingzhuo:spring-turbo-jdbc'
     implementation 'com.github.yingzhuo:spring-turbo-jwt'
+    implementation 'com.github.yingzhuo:spring-turbo-key'
     implementation 'com.github.yingzhuo:spring-turbo-redis'
     implementation 'com.github.yingzhuo:spring-turbo-security'
     implementation 'com.github.yingzhuo:spring-turbo-webcli'
@@ -92,6 +93,10 @@ dependencies {
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-key</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-webcli</artifactId>
         </dependency>
         <dependency>
@@ -141,6 +146,7 @@ dependencies {
 * [多数据源代理](./projects-example/example-routing-data-source)
 * [HttpClient](./projects-example/example-web-client)
 * [ID生成器](./projects-example/example-id-generator)
+* [导入密钥库](./projects-example/example-import-keys)
 
 #### 许可证
 

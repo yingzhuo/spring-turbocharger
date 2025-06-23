@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.util.keystore;
+package com.github.yingzhuo.turbocharger.util;
 
 import java.io.Serializable;
 

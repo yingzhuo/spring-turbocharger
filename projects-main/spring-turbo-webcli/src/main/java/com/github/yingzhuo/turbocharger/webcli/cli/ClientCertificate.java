@@ -18,7 +18,7 @@
 package com.github.yingzhuo.turbocharger.webcli.cli;
 
 import com.github.yingzhuo.turbocharger.core.ResourceUtils;
-import com.github.yingzhuo.turbocharger.util.keystore.KeyStoreType;
+import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.core.io.Resource;
