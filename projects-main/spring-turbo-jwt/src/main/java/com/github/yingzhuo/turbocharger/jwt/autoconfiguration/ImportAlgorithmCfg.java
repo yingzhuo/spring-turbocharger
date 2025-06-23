@@ -78,7 +78,6 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 		}
 	}
 
-
 	private record AlgorithmSupplier(
 		ResourceLoader resourceLoader,
 		String location,

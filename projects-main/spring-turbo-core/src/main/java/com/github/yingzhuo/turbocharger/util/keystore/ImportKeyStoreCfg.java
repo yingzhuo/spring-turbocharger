@@ -49,11 +49,11 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 			var type = (KeyStoreType) attr.getEnum("type");
 			var storepass = attr.getString("storepass");
 			var beanName = attr.getString("beanName");
-			var isPrimary = attr.getBoolean("primary");
+			var primary = attr.getBoolean("primary");
 
 			var beanDef =
 				BeanDefinitionBuilder.genericBeanDefinition(KeyStore.class)
-					.setPrimary(isPrimary)
+					.setPrimary(primary)
 					.setScope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 					.setAbstract(false)
 					.setLazyInit(false)
