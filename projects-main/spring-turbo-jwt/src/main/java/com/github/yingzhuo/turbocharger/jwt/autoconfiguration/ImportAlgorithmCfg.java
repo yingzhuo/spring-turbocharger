@@ -28,6 +28,7 @@ import org.springframework.boot.ssl.pem.PemContent;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.util.StringUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.security.interfaces.ECPrivateKey;
@@ -67,7 +68,7 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 
 			beanDef.setInstanceSupplier(new AlgorithmSupplier(resourceLoader, location, keypass, kind));
 
-			if (beanName.isBlank()) {
+			if (!StringUtils.hasText(beanName)) {
 				beanName = beanNameGen.generateBeanName(beanDef, registry);
 			}
 

@@ -21,10 +21,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
+ * (内部使用)
+ *
  * @author 应卓
  * @since 3.5.3
  */
 @Retention(RetentionPolicy.SOURCE)
 public @interface UselessAnnotationContainer {
-	int value() default 0;
+	int value();
 }
