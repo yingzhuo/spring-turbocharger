@@ -24,8 +24,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
-import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.util.ClassUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,9 +33,8 @@ import java.io.UncheckedIOException;
 import java.lang.annotation.Annotation;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * {@link ImportBeanDefinitionRegistrar} 支持类
@@ -65,42 +64,49 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 	/**
 	 * 获取导入元注释的相关信息
 	 *
-	 * @param metadata                       导入元注释
-	 * @param importingPrimaryAnnotationType 导入元注释类型
+	 * @param metadata            导入元注释
+	 * @param importingAnnotation 导入元注释类型
 	 * @return 导入元注释的相关信息
 	 */
-	protected List<AnnotationAttributes> getAnnotationAttributesList(AnnotationMetadata metadata, Class<? extends Annotation> importingPrimaryAnnotationType) {
-		return getAnnotationAttributesList(metadata, importingPrimaryAnnotationType, null);
+	protected Set<AnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
+		return getAnnotationAttributesSet(metadata, importingAnnotation, null);
 	}
 
 	/**
 	 * 获取导入元注释的相关信息
 	 *
-	 * @param metadata                          导入元注释
-	 * @param importingPrimaryAnnotationType    导入元注释类型
-	 * @param importingRepeatableAnnotationType 导入元注释类型 (repeatable)
+	 * @param metadata                     导入元信息
+	 * @param importingAnnotation          导入元注释类型
+	 * @param importingContainerAnnotation 导入元注释类型 (repeatable)
 	 * @return 导入元注释的相关信息
 	 */
-	protected List<AnnotationAttributes> getAnnotationAttributesList(
-		AnnotationMetadata metadata,
-		@NonNull Class<? extends Annotation> importingPrimaryAnnotationType,
-		@Nullable Class<? extends Annotation> importingRepeatableAnnotationType
-	) {
-		var result = new ArrayList<AnnotationAttributes>();
+	protected Set<AnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation, @Nullable Class<? extends Annotation> importingContainerAnnotation) {
+		return metadata.getMergedRepeatableAnnotationAttributes(
+			importingAnnotation,
+			Objects.requireNonNullElse(importingContainerAnnotation, importingAnnotation), // 欺骗IDEA一下，实际传null也不会有NPE抛出。
+			false,
+			true
+		);
+	}
 
-		var primary = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(importingPrimaryAnnotationType.getName()));
-		if (primary != null) {
-			result.add(primary);
-		}
+	/**
+	 * 获取导入类
+	 *
+	 * @param metadata 导入元信息
+	 * @return 导入类
+	 */
+	protected Class<?> getImportingClass(AnnotationMetadata metadata) {
+		return ClassUtils.resolveClassName(metadata.getClassName(), null);
+	}
 
-		if (importingRepeatableAnnotationType != null) {
-			var repeatable = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(importingRepeatableAnnotationType.getName()));
-			if (repeatable != null) {
-				Collections.addAll(result, repeatable.getAnnotationArray("value"));
-			}
-		}
-
-		return result;
+	/**
+	 * 获取导入类所在的包
+	 *
+	 * @param metadata 导入元信息
+	 * @return 导入类所在的包
+	 */
+	protected Package getImportingClassPackage(AnnotationMetadata metadata) {
+		return getImportingClass(metadata).getPackage();
 	}
 
 	/**

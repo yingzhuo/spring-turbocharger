@@ -50,7 +50,7 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	@Override
 	public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) {
-		for (var attr : getAnnotationAttributesList(metadata, ImportAlgorithm.class)) {
+		for (var attr : getAnnotationAttributesSet(metadata, ImportAlgorithm.class)) {
 			var location = attr.getString("pemLocation");
 			var keypass = attr.getString("keypass");
 			var kind = (AlgorithmKind) attr.getEnum("kind");

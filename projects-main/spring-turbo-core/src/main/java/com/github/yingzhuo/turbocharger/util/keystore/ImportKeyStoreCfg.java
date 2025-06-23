@@ -44,7 +44,7 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	@Override
 	public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator importBeanNameGenerator) {
-		for (var attr : getAnnotationAttributesList(metadata, ImportKeyStore.class, ImportKeyStore.RepeatableList.class)) {
+		for (var attr : getAnnotationAttributesSet(metadata, ImportKeyStore.class, ImportKeyStore.RepeatableList.class)) {
 			var location = attr.getString("location");
 			var type = (KeyStoreType) attr.getEnum("type");
 			var storepass = attr.getString("storepass");

@@ -39,7 +39,6 @@ import java.util.regex.Pattern;
  * @see AbstractClassTestingTypeFilter
  * @see AbstractTypeHierarchyTraversingFilter
  * @see ClassPathScanner
- * @see ClassPathScannerBuilder
  * @since 1.0.0
  */
 public final class TypeFilterFactories {
