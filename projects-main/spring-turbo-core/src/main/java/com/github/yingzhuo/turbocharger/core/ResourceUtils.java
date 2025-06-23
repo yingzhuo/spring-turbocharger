@@ -17,6 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.core;
 
+import com.github.yingzhuo.turbocharger.util.io.CloseUtils;
 import org.springframework.boot.io.ApplicationResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -26,17 +27,14 @@ import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
-import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static com.github.yingzhuo.turbocharger.util.io.CloseUtils.closeQuietly;
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * {@link Resource}等相关工具
@@ -108,34 +106,6 @@ public final class ResourceUtils {
 	}
 
 	/**
-	 * 尝试多个资源位置，直到找到一个存在的资源为止
-	 *
-	 * @param locations 资源位置
-	 * @return 结果或{@code null}
-	 */
-	@Nullable
-	public static Resource loadFirstExistsResource(@Nullable Iterable<String> locations) {
-		if (locations == null) {
-			return null;
-		}
-
-		for (var location : locations) {
-			if (!StringUtils.hasText(location)) {
-				continue;
-			}
-
-			try {
-				var resource = RESOURCE_LOADER.getResource(location);
-				if (resource.exists()) {
-					return resource;
-				}
-			} catch (Exception ignored) {
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * 通过某种模式，加载多个资源
 	 *
 	 * @param locationPattern 资源为止模式
@@ -171,7 +141,7 @@ public final class ResourceUtils {
 	 */
 	public static String readResourceAsString(String location, @Nullable Charset charset) {
 		try {
-			charset = Objects.requireNonNullElse(charset, UTF_8);
+			charset = Objects.requireNonNullElse(charset, StandardCharsets.UTF_8);
 			return loadResource(location).getContentAsString(charset);
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
@@ -248,7 +218,7 @@ public final class ResourceUtils {
 
 		if (resource.isOpen()) {
 			try {
-				closeQuietly(resource.getInputStream());
+				CloseUtils.closeQuietly(resource.getInputStream());
 			} catch (IOException ignored) {
 				// noop
 			}
@@ -256,7 +226,7 @@ public final class ResourceUtils {
 
 		if (resource instanceof WritableResource wr) {
 			try {
-				closeQuietly(wr.getOutputStream());
+				CloseUtils.closeQuietly(wr.getOutputStream());
 			} catch (IOException ignored) {
 				// noop
 			}

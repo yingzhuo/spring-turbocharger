@@ -18,6 +18,9 @@
 package com.github.yingzhuo.turbocharger.bean;
 
 import com.github.yingzhuo.turbocharger.bean.classpath.ClassPathScanner;
+import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.env.Environment;
@@ -62,6 +65,28 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 		this.resourceLoader = resourceLoader;
 		this.environment = environment;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
+		try {
+			doRegisterBeanDefinitions(metadata, registry, beanNameGen);
+		} catch (Exception e) {
+			throw new BeanCreationException(e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+		// noop
+	}
+
+	protected abstract void doRegisterBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception;
 
 	/**
 	 * 获取导入元注释的相关信息

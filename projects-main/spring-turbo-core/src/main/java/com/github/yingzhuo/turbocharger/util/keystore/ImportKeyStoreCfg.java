@@ -17,6 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.util.keystore;
 
+import com.github.yingzhuo.turbocharger.bean.BeanInstanceSupplier;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -27,10 +28,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.security.KeyStore;
-import java.util.function.Supplier;
 
 /**
  * @author 应卓
@@ -43,8 +41,11 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 		super(resourceLoader, environment);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) {
+	public void doRegisterBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		for (var attr : getAnnotationAttributesSet(metadata, ImportKeyStore.class, ImportKeyStore.Container.class)) {
 			var location = attr.getString("location");
 			var type = (KeyStoreType) attr.getEnum("type");
@@ -63,7 +64,7 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 			beanDef.setInstanceSupplier(new KeyStoreSupplier(resourceLoader, location, storepass, type));
 
 			if (!StringUtils.hasText(beanName)) {
-				beanName = beanNameGenerator.generateBeanName(beanDef, registry);
+				beanName = beanNameGen.generateBeanName(beanDef, registry);
 			}
 
 			registry.registerBeanDefinition(beanName, beanDef);
@@ -74,22 +75,20 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 		}
 	}
 
-	private record KeyStoreSupplier(
-		ResourceLoader resourceLoader,
-		String location,
-		String storepass,
-		KeyStoreType type) implements Supplier<KeyStore> {
+	private static class KeyStoreSupplier extends BeanInstanceSupplier<KeyStore> {
+		private final ResourceLoader resourceLoader;
+		private final String location;
+		private final String storepass;
+		private final KeyStoreType type;
 
-		@Override
-		public KeyStore get() {
-			try {
-				return doGet();
-			} catch (IOException e) {
-				throw new UncheckedIOException(e);
-			}
+		KeyStoreSupplier(ResourceLoader resourceLoader, String location, String storepass, KeyStoreType type) {
+			this.resourceLoader = resourceLoader;
+			this.location = location;
+			this.storepass = storepass;
+			this.type = type;
 		}
 
-		private KeyStore doGet() throws IOException {
+		protected KeyStore doGet() throws Exception {
 			return KeyStoreUtils.loadKeyStore(resourceLoader.getResource(location).getInputStream(), type, storepass);
 		}
 	}

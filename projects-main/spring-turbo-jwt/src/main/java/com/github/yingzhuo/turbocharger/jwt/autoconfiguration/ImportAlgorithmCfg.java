@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
 import com.auth0.jwt.algorithms.Algorithm;
+import com.github.yingzhuo.turbocharger.bean.BeanInstanceSupplier;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -28,14 +29,11 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.security.interfaces.ECPrivateKey;
 import java.security.interfaces.ECPublicKey;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-import java.util.function.Supplier;
 
 /**
  * @author 应卓
@@ -48,8 +46,11 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 		super(resourceLoader, environment);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) {
+	public void doRegisterBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		for (var attr : getAnnotationAttributesSet(metadata, ImportAlgorithm.class)) {
 			var location = attr.getString("pemLocation");
 			var keypass = attr.getString("keypass");
@@ -67,7 +68,7 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 			beanDef.setInstanceSupplier(new AlgorithmSupplier(resourceLoader, location, keypass, kind));
 
 			if (beanName.isBlank()) {
-				beanName = beanNameGenerator.generateBeanName(beanDef, registry);
+				beanName = beanNameGen.generateBeanName(beanDef, registry);
 			}
 
 			registry.registerBeanDefinition(beanName, beanDef);
@@ -78,22 +79,21 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 		}
 	}
 
-	private record AlgorithmSupplier(
-		ResourceLoader resourceLoader,
-		String location,
-		String keypass,
-		AlgorithmKind kind) implements Supplier<Algorithm> {
+	private static class AlgorithmSupplier extends BeanInstanceSupplier<Algorithm> {
 
-		@Override
-		public Algorithm get() {
-			try {
-				return doGet();
-			} catch (IOException e) {
-				throw new UncheckedIOException(e);
-			}
+		private final ResourceLoader resourceLoader;
+		private final String location;
+		private final String keypass;
+		private final AlgorithmKind kind;
+
+		public AlgorithmSupplier(ResourceLoader resourceLoader, String location, String keypass, AlgorithmKind kind) {
+			this.resourceLoader = resourceLoader;
+			this.location = location;
+			this.keypass = keypass;
+			this.kind = kind;
 		}
 
-		private Algorithm doGet() throws IOException {
+		protected Algorithm doGet() throws Exception {
 			var pc = PemContent.of(resourceLoader.getResource(location).getContentAsString(StandardCharsets.UTF_8));
 			var publicKey = pc.getCertificates().get(0).getPublicKey();
 			var privateKey = pc.getPrivateKey(keypass);
