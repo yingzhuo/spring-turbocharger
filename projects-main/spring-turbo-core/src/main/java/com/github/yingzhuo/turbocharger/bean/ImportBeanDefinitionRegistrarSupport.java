@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.bean;
 
 import com.github.yingzhuo.turbocharger.bean.classpath.ClassPathScanner;
-import com.github.yingzhuo.turbocharger.useless.UselessAnnotationContainer;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
@@ -37,7 +36,7 @@ import java.io.UncheckedIOException;
 import java.lang.annotation.Annotation;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -95,7 +94,11 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 	 * @return 导入元注释的相关信息
 	 */
 	protected Set<AnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
-		return getAnnotationAttributesSet(metadata, importingAnnotation, null);
+		var attrMap = metadata.getAnnotationAttributes(importingAnnotation.getName(), false);
+		return Optional.ofNullable(attrMap)
+			.map(AnnotationAttributes::fromMap)
+			.map(Set::of)
+			.orElse(Set.of());
 	}
 
 	/**
@@ -107,9 +110,13 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 	 * @return 导入元注释的相关信息
 	 */
 	protected Set<AnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation, @Nullable Class<? extends Annotation> importingContainerAnnotation) {
+		if (importingContainerAnnotation == null) {
+			return getAnnotationAttributesSet(metadata, importingAnnotation);
+		}
+
 		return metadata.getMergedRepeatableAnnotationAttributes(
 			importingAnnotation,
-			Objects.requireNonNullElse(importingContainerAnnotation, UselessAnnotationContainer.class),
+			importingContainerAnnotation,
 			false,
 			true
 		);
