@@ -23,7 +23,6 @@ import java.lang.annotation.*;
 
 /**
  * @author 应卓
- * @see org.springframework.context.annotation.ImportBeanDefinitionRegistrar
  * @see java.security.KeyStore
  * @since 3.5.2
  */
@@ -32,10 +31,10 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Import(ImportKeyStoreCfg.class)
-@Repeatable(ImportKeyStore.RepeatableList.class)
+@Repeatable(ImportKeyStore.Container.class)
 public @interface ImportKeyStore {
 
-	public String beanName();
+	public String beanName() default "";
 
 	public String[] aliases() default {};
 
@@ -54,7 +53,7 @@ public @interface ImportKeyStore {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.TYPE)
 	@Import(ImportKeyStoreCfg.class)
-	public static @interface RepeatableList {
+	public static @interface Container {
 		public ImportKeyStore[] value();
 	}
 

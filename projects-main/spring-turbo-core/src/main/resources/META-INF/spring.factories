@@ -7,9 +7,4 @@ org.springframework.boot.env.EnvironmentPostProcessor=\
 org.springframework.context.ApplicationListener=\
     com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook
 
-org.springframework.core.io.ProtocolResolver=\
-    com.github.yingzhuo.turbocharger.util.io.resource.PemResourceProtocolResolver,\
-    com.github.yingzhuo.turbocharger.util.io.resource.PKCS12ResourceProtocolProtocolResolver,\
-    com.github.yingzhuo.turbocharger.util.io.resource.JKSResourceProtocolProtocolResolver
-
 # @formatter:on

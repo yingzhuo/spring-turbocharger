@@ -31,6 +31,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.lang.annotation.Annotation;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
@@ -83,7 +85,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 	protected Set<AnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation, @Nullable Class<? extends Annotation> importingContainerAnnotation) {
 		return metadata.getMergedRepeatableAnnotationAttributes(
 			importingAnnotation,
-			Objects.requireNonNullElse(importingContainerAnnotation, importingAnnotation), // 欺骗IDEA一下，实际传null也不会有NPE抛出。
+			Objects.requireNonNullElse(importingContainerAnnotation, UselessShit.class), // 欺骗IDEA一下，实际传null也不会有NPE抛出。
 			false,
 			true
 		);
@@ -183,6 +185,13 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}
+	}
+
+	// -----------------------------------------------------------------------------------------------------------------
+
+	@Retention(RetentionPolicy.SOURCE)
+	private @interface UselessShit {
+		boolean value() default false;
 	}
 
 }

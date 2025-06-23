@@ -36,11 +36,6 @@ import java.util.List;
  * @author 应卓
  * @see KeyStore
  * @see KeyStoreType
- * @see com.github.yingzhuo.turbocharger.util.io.resource.KeyStoreResource
- * @see com.github.yingzhuo.turbocharger.util.io.resource.JKSResource
- * @see com.github.yingzhuo.turbocharger.util.io.resource.JKSResourceProtocolProtocolResolver
- * @see com.github.yingzhuo.turbocharger.util.io.resource.PKCS12Resource
- * @see com.github.yingzhuo.turbocharger.util.io.resource.PKCS12ResourceProtocolProtocolResolver
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")

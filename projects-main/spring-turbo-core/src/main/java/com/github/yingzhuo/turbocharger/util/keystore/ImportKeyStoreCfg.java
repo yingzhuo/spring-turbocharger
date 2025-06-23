@@ -25,6 +25,7 @@ import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -43,8 +44,8 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 	}
 
 	@Override
-	public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator importBeanNameGenerator) {
-		for (var attr : getAnnotationAttributesSet(metadata, ImportKeyStore.class, ImportKeyStore.RepeatableList.class)) {
+	public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGenerator) {
+		for (var attr : getAnnotationAttributesSet(metadata, ImportKeyStore.class, ImportKeyStore.Container.class)) {
 			var location = attr.getString("location");
 			var type = (KeyStoreType) attr.getEnum("type");
 			var storepass = attr.getString("storepass");
@@ -60,6 +61,10 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 					.getBeanDefinition();
 
 			beanDef.setInstanceSupplier(new KeyStoreSupplier(resourceLoader, location, storepass, type));
+
+			if (!StringUtils.hasText(beanName)) {
+				beanName = beanNameGenerator.generateBeanName(beanDef, registry);
+			}
 
 			registry.registerBeanDefinition(beanName, beanDef);
 

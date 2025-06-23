@@ -33,7 +33,7 @@ import static java.lang.annotation.ElementType.*;
 @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = FieldsValueMatchValidator.class)
-@Repeatable(FieldsValueMatch.RepeatableList.class)
+@Repeatable(FieldsValueMatch.Container.class)
 public @interface FieldsValueMatch {
 
 	public String message() default "";
@@ -46,11 +46,12 @@ public @interface FieldsValueMatch {
 
 	public Class<? extends Payload>[] payload() default {};
 
-	@Inherited
+	// -----------------------------------------------------------------------------------------------------------------
+
 	@Documented
 	@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 	@Retention(RetentionPolicy.RUNTIME)
-	public @interface RepeatableList {
+	@interface Container {
 		public FieldsValueMatch[] value();
 	}
 
