@@ -35,13 +35,12 @@ compileJava {
 
 jar {
 	manifest {
-		final var attr = [
+		attributes([
 			'Module-Name'           : project.name,
 			'Implementation-Version': project.version,
 			'Build-Jdk-Spec'        : jdkVersion,
-			'Created-By'            : "Gradle ${gradle.gradleVersion}"
-		]
-		attributes(attr)
+			'Build-By': "Gradle ${gradle.gradleVersion}"
+		])
 	}
 }
 
