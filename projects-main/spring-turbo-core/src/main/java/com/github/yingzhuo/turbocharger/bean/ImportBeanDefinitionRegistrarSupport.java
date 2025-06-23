@@ -50,11 +50,11 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 		this.environment = environment;
 	}
 
-	protected final List<AnnotationAttributes> getAnnotationAttributesList(AnnotationMetadata metadata, Class<? extends Annotation> importingPrimaryAnnotationType) {
+	protected List<AnnotationAttributes> getAnnotationAttributesList(AnnotationMetadata metadata, Class<? extends Annotation> importingPrimaryAnnotationType) {
 		return getAnnotationAttributesList(metadata, importingPrimaryAnnotationType, null);
 	}
 
-	protected final List<AnnotationAttributes> getAnnotationAttributesList(
+	protected List<AnnotationAttributes> getAnnotationAttributesList(
 		AnnotationMetadata metadata,
 		@NonNull Class<? extends Annotation> importingPrimaryAnnotationType,
 		@Nullable Class<? extends Annotation> importingRepeatableAnnotationType
@@ -76,7 +76,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 		return result;
 	}
 
-	protected final ClassPathScanner createClassPathScanner() {
+	protected ClassPathScanner createClassPathScanner() {
 		var scanner = new ClassPathScanner();
 		scanner.setResourceLoader(resourceLoader);
 		scanner.setEnvironment(environment);

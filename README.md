@@ -145,7 +145,3 @@ dependencies {
 #### 许可证
 
 * [LICENSE](./LICENSE.txt)
-
-#### 联系我
-
-* [应卓](mailto:yingzhor@gmail.com)
