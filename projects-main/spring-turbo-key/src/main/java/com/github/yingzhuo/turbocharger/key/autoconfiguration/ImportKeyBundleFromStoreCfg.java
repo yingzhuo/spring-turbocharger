@@ -21,7 +21,6 @@ import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSuppor
 import com.github.yingzhuo.turbocharger.key.KeyBundle;
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
@@ -55,7 +54,7 @@ class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 				.setPrimary(attr.getBoolean("primary"))
 				.setLazyInit(false)
 				.setAbstract(false)
-				.setScope(BeanDefinition.SCOPE_SINGLETON)
+				.setScope(SCOPE_SINGLETON)
 				.getBeanDefinition();
 
 			if (!StringUtils.hasText(beanName)) {

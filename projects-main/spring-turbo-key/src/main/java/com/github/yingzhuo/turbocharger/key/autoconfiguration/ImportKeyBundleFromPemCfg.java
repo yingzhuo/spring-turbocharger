@@ -19,7 +19,6 @@ package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.key.KeyBundle;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
@@ -54,7 +53,7 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 				.setPrimary(attr.getBoolean("primary"))
 				.setLazyInit(false)
 				.setAbstract(false)
-				.setScope(BeanDefinition.SCOPE_SINGLETON)
+				.setScope(SCOPE_SINGLETON)
 				.getBeanDefinition();
 
 			var beanName = attr.getString("beanName");

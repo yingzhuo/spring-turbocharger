@@ -19,7 +19,6 @@ package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
 import com.auth0.jwt.algorithms.Algorithm;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
@@ -55,7 +54,7 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 
 			var beanDef =
 				BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class)
-					.setScope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+					.setScope(SCOPE_SINGLETON)
 					.setAbstract(false)
 					.setLazyInit(false)
 					.setPrimary(primary)

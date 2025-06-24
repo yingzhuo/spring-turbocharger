@@ -20,7 +20,6 @@ package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
@@ -52,7 +51,7 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 			var beanDef =
 				BeanDefinitionBuilder.genericBeanDefinition(KeyStore.class)
 					.setPrimary(primary)
-					.setScope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+					.setScope(SCOPE_SINGLETON)
 					.setAbstract(false)
 					.setLazyInit(false)
 					.getBeanDefinition();
