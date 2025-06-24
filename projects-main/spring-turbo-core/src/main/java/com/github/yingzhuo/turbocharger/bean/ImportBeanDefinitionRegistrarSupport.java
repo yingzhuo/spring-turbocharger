@@ -19,6 +19,7 @@ package com.github.yingzhuo.turbocharger.bean;
 
 import com.github.yingzhuo.turbocharger.bean.classpath.ClassPathScanner;
 import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
@@ -49,6 +50,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 
 	protected final ResourceLoader resourceLoader;
 	protected final Environment environment;
+	protected final BeanFactory beanFactory;
 
 	/**
 	 * 构造方法
@@ -58,9 +60,10 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 	 * @see org.springframework.context.ResourceLoaderAware
 	 * @see org.springframework.context.EnvironmentAware
 	 */
-	protected ImportBeanDefinitionRegistrarSupport(ResourceLoader resourceLoader, Environment environment) {
+	protected ImportBeanDefinitionRegistrarSupport(ResourceLoader resourceLoader, Environment environment, BeanFactory beanFactory) {
 		this.resourceLoader = resourceLoader;
 		this.environment = environment;
+		this.beanFactory = beanFactory;
 	}
 
 	/**

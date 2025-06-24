@@ -21,6 +21,7 @@ import com.github.yingzhuo.turbocharger.bean.BeanInstanceSupplier;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -39,8 +40,8 @@ import java.security.KeyStore;
  */
 class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 
-	public ImportKeyStoreCfg(ResourceLoader resourceLoader, Environment environment) {
-		super(resourceLoader, environment);
+	public ImportKeyStoreCfg(ResourceLoader resourceLoader, Environment environment, BeanFactory beanFactory) {
+		super(resourceLoader, environment, beanFactory);
 	}
 
 	/**

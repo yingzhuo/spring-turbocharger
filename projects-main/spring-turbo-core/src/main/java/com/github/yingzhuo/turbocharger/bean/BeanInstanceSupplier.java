@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.bean;
 
-import com.github.yingzhuo.turbocharger.util.reflection.InstanceUtils;
 import org.springframework.beans.factory.BeanCreationException;
 
 import java.util.function.Supplier;
@@ -27,15 +26,6 @@ import java.util.function.Supplier;
  * @since 3.5.3
  */
 public abstract class BeanInstanceSupplier<T> implements Supplier<T> {
-
-	public static <T> BeanInstanceSupplier<T> forType(Class<T> type) {
-		return new BeanInstanceSupplier<T>() {
-			@Override
-			protected T doGet() {
-				return InstanceUtils.newInstanceElseThrow(type);
-			}
-		};
-	}
 
 	@Override
 	public final T get() {

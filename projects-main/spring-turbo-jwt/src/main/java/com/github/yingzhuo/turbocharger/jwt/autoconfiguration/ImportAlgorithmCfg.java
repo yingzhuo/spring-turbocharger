@@ -20,6 +20,7 @@ package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.github.yingzhuo.turbocharger.bean.BeanInstanceSupplier;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -43,8 +44,8 @@ import java.security.interfaces.RSAPublicKey;
  */
 class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 
-	public ImportAlgorithmCfg(ResourceLoader resourceLoader, Environment environment) {
-		super(resourceLoader, environment);
+	public ImportAlgorithmCfg(ResourceLoader resourceLoader, Environment environment, BeanFactory beanFactory) {
+		super(resourceLoader, environment, beanFactory);
 	}
 
 	/**
@@ -57,13 +58,14 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 			var keypass = attr.getString("keypass");
 			var kind = (AlgorithmKind) attr.getEnum("kind");
 			var beanName = attr.getString("beanName");
+			var primary = attr.getBoolean("primary");
 
 			var beanDef =
 				BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class)
 					.setScope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 					.setAbstract(false)
 					.setLazyInit(false)
-					.setPrimary(false)
+					.setPrimary(primary)
 					.getBeanDefinition();
 
 			beanDef.setInstanceSupplier(new AlgorithmSupplier(resourceLoader, location, keypass, kind));
@@ -74,7 +76,7 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 
 			registry.registerBeanDefinition(beanName, beanDef);
 
-			for (var alias : attr.getStringArray("aliases")) {
+			for (var alias : attr.getStringArray("aliasesOfBean")) {
 				registry.registerAlias(beanName, alias);
 			}
 		}

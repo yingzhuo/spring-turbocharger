@@ -38,6 +38,27 @@ import java.lang.annotation.*;
 public @interface ImportAlgorithm {
 
 	/**
+	 * Bean的名称
+	 *
+	 * @return Bean的名称
+	 */
+	public String beanName() default "";
+
+	/**
+	 * Bean的别名
+	 *
+	 * @return Bean的别名
+	 */
+	public String[] aliasesOfBean() default {};
+
+	/**
+	 * 是否为primary属性的Bean
+	 *
+	 * @return 是否为primary属性的Bean
+	 */
+	public boolean primary() default false;
+
+	/**
 	 * pem资源位置
 	 *
 	 * @return pem资源位置
@@ -57,19 +78,5 @@ public @interface ImportAlgorithm {
 	 * @return 算法类型
 	 */
 	public AlgorithmKind kind();
-
-	/**
-	 * Bean的名称
-	 *
-	 * @return Bean的名称
-	 */
-	public String beanName() default "";
-
-	/**
-	 * Bean的别名
-	 *
-	 * @return Bean的别名
-	 */
-	public String[] aliases() default {};
 
 }

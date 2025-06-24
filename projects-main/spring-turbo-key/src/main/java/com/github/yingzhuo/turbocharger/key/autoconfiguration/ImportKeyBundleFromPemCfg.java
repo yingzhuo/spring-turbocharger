@@ -19,6 +19,7 @@ package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.key.KeyBundle;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -43,8 +44,8 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 
-	public ImportKeyBundleFromPemCfg(ResourceLoader resourceLoader, Environment environment) {
-		super(resourceLoader, environment);
+	public ImportKeyBundleFromPemCfg(ResourceLoader resourceLoader, Environment environment, BeanFactory beanFactory) {
+		super(resourceLoader, environment, beanFactory);
 	}
 
 	@Override

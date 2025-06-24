@@ -21,6 +21,7 @@ import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSuppor
 import com.github.yingzhuo.turbocharger.key.KeyBundle;
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -42,8 +43,8 @@ import java.util.List;
  */
 class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 
-	public ImportKeyBundleFromStoreCfg(ResourceLoader resourceLoader, Environment environment) {
-		super(resourceLoader, environment);
+	public ImportKeyBundleFromStoreCfg(ResourceLoader resourceLoader, Environment environment, BeanFactory beanFactory) {
+		super(resourceLoader, environment, beanFactory);
 	}
 
 	@Override
