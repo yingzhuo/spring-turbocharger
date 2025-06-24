@@ -38,8 +38,7 @@ jar {
 		attributes([
 			'Module-Name'           : project.name,
 			'Implementation-Version': project.version,
-			'Build-Jdk-Spec'        : jdkVersion,
-			'Build-By': "Gradle ${gradle.gradleVersion}"
+			'Build-Jdk-Spec'        : jdkVersion
 		])
 	}
 }
@@ -60,11 +59,6 @@ javadoc {
 
 processResources {
 	exclude('**/.DS_Store', '**/.gitkeep', '.gitignore')
-
-	from(rootDir) {
-		include('LICENSE.txt', 'NOTICE.txt')
-		into 'META-INF'
-	}
 }
 
 processTestResources {
