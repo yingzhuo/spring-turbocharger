@@ -2,7 +2,7 @@
 #  https://docs.gradle.org/current/userguide/version_catalogs.html
 [versions]
 zxing = "3.5.3"
-hutool = "5.8.38"
+hutool = "5.8.39"
 
 [libraries]
 hocon = { module = "com.typesafe:config", version = "1.4.3" }

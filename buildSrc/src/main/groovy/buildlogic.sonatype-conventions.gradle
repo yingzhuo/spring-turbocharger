@@ -13,10 +13,10 @@ pkmerBoot {
 	}
 }
 
-//tasks.named('publishToMavenCentralPortal') {
-//	doFirst {
-//		if ("$springTurbochargerVersion".endsWith('SNAPSHOT')) {
-//			throw new GradleException('Not able to publish SNAPSHOT items')
-//		}
-//	}
-//}
+tasks.named('publishToMavenCentralPortal') {
+	doFirst {
+		if ("$springTurbochargerVersion".endsWith('SNAPSHOT')) {
+			throw new GradleException('Not able to publish SNAPSHOT items')
+		}
+	}
+}

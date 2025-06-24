@@ -59,14 +59,6 @@ tasks.named('bootBuildImage') {
 	enabled = false
 }
 
-tasks.named('bootRun') {
-	var arguments = [
-		'--spring.profiles.active=dev'
-	] as List
-
-	args(arguments.join(' '))
-}
-
 springBoot {
 	buildInfo {
 		enabled = true
