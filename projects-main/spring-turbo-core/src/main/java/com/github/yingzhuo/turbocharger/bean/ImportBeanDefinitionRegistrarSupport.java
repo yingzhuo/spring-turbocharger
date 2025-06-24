@@ -23,7 +23,6 @@ import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -59,8 +58,8 @@ import java.util.function.Supplier;
 public abstract class ImportBeanDefinitionRegistrarSupport
 	implements ImportBeanDefinitionRegistrar, ResourceLoaderAware, EnvironmentAware, BeanFactoryAware, BeanClassLoaderAware {
 
-	protected final String SCOPE_SINGLETON = BeanDefinition.SCOPE_SINGLETON;
-	protected final String SCOPE_PROTOTYPE = BeanDefinition.SCOPE_PROTOTYPE;
+	protected final String SCOPE_SINGLETON = "singleton";
+	protected final String SCOPE_PROTOTYPE = "prototype";
 
 	protected ResourceLoader resourceLoader = ApplicationResourceLoader.get();
 	protected Environment environment = new StandardEnvironment();
