@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.bean.classpath;
 
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.env.Environment;
@@ -37,6 +36,8 @@ import java.util.stream.Stream;
  * ClassPath扫描器
  *
  * @author 应卓
+ * @see ClassPathScanningCandidateComponentProvider
+ * @see GenericBeanDefinition
  * @since 3.5.3
  */
 public final class ClassPathScanner {
@@ -51,7 +52,7 @@ public final class ClassPathScanner {
 		provider.setEnvironment(Objects.requireNonNullElseGet(environment, StandardEnvironment::new));
 	}
 
-	public void setUseDefaultFilters(boolean useDefaultFilters) {
+	public void resetFilters(boolean useDefaultFilters) {
 		provider.resetFilters(useDefaultFilters);
 	}
 
@@ -78,24 +79,20 @@ public final class ClassPathScanner {
 	 * @return 扫描结果
 	 * @see PackageSet
 	 */
-	public Set<AbstractBeanDefinition> scan(@Nullable PackageSet packageSet) {
+	public Set<GenericBeanDefinition> scan(@Nullable PackageSet packageSet) {
 		if (packageSet == null || packageSet.isEmpty()) {
 			return Set.of();
 		}
 
-		var set = new HashSet<AbstractBeanDefinition>();
+		var set = new HashSet<GenericBeanDefinition>();
 
 		for (var basePackage : packageSet) {
 			provider.findCandidateComponents(basePackage)
 				.stream()
-				.map(bd -> {
-					if (bd instanceof AbstractBeanDefinition abd) {
-						return abd;
-					}
-					return new GenericBeanDefinition(bd);
-				})
+				.map(bd -> bd instanceof GenericBeanDefinition g ? g : new GenericBeanDefinition(bd))
 				.forEach(set::add);
 		}
+
 		return Collections.unmodifiableSet(set);
 	}
 

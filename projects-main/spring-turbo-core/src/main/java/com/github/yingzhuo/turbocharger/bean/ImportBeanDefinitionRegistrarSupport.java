@@ -111,7 +111,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	@Override
 	public final void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		try {
-			doRegisterBeanDefinitions(metadata, registry, beanNameGen);
+			doRegister(metadata, registry, beanNameGen);
 		} catch (Exception e) {
 			throw new BeanCreationException(e.getMessage(), e);
 		}
@@ -125,7 +125,15 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 		// noop
 	}
 
-	protected abstract void doRegisterBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception;
+	/**
+	 * 注册Bean
+	 *
+	 * @param metadata    导入类及导入元注释信息
+	 * @param registry    注册器
+	 * @param beanNameGen BeanName生成器
+	 * @throws Exception 尝试注册时发生的错误
+	 */
+	protected abstract void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception;
 
 	/**
 	 * 获取导入元注释的相关信息

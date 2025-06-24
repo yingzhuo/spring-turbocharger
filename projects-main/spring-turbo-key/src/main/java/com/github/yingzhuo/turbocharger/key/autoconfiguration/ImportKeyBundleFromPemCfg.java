@@ -42,7 +42,7 @@ import java.util.List;
 class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	@Override
-	protected void doRegisterBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception {
+	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception {
 		var attrs =
 			getAnnotationAttributesSet(metadata, ImportKeyBundleFromPem.class, ImportKeyBundleFromPem.Container.class);
 

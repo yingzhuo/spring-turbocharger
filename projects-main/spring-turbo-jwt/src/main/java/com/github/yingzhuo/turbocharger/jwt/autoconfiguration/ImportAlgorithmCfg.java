@@ -44,7 +44,7 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void doRegisterBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
+	public void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		for (var attr : getAnnotationAttributesSet(metadata, ImportAlgorithm.class)) {
 			var location = environment.resolvePlaceholders(attr.getString("pemLocation"));
 			var keypass = environment.resolvePlaceholders(attr.getString("keypass"));

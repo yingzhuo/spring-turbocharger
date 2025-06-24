@@ -41,7 +41,7 @@ import java.util.List;
 class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	@Override
-	protected void doRegisterBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception {
+	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception {
 		var attrs =
 			getAnnotationAttributesSet(metadata, ImportKeyBundleFromStore.class, ImportKeyBundleFromStore.Container.class);
 
