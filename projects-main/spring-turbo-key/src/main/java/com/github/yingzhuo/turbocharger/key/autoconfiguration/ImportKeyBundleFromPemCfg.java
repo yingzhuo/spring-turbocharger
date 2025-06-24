@@ -19,15 +19,12 @@ package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.key.KeyBundle;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.boot.ssl.pem.PemContent;
 import org.springframework.core.annotation.AnnotationAttributes;
-import org.springframework.core.env.Environment;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
 
@@ -44,10 +41,6 @@ import java.util.List;
  */
 @SuppressWarnings("unchecked")
 class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
-
-	public ImportKeyBundleFromPemCfg(ResourceLoader resourceLoader, Environment environment, BeanFactory beanFactory) {
-		super(resourceLoader, environment, beanFactory);
-	}
 
 	@Override
 	protected void doRegisterBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception {

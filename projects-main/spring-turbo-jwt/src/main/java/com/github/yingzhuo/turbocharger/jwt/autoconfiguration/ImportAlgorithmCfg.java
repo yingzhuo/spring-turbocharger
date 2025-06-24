@@ -19,13 +19,11 @@ package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
 import com.auth0.jwt.algorithms.Algorithm;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.boot.ssl.pem.PemContent;
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
@@ -42,10 +40,6 @@ import java.security.interfaces.RSAPublicKey;
  * @since 3.5.3
  */
 class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
-
-	public ImportAlgorithmCfg(ResourceLoader resourceLoader, Environment environment, BeanFactory beanFactory) {
-		super(resourceLoader, environment, beanFactory);
-	}
 
 	/**
 	 * {@inheritDoc}

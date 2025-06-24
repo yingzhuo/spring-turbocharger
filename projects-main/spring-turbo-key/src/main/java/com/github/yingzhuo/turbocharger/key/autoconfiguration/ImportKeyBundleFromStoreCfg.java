@@ -21,14 +21,11 @@ import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSuppor
 import com.github.yingzhuo.turbocharger.key.KeyBundle;
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.core.annotation.AnnotationAttributes;
-import org.springframework.core.env.Environment;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
 
@@ -43,10 +40,6 @@ import java.util.List;
  * @since 3.5.3
  */
 class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
-
-	public ImportKeyBundleFromStoreCfg(ResourceLoader resourceLoader, Environment environment, BeanFactory beanFactory) {
-		super(resourceLoader, environment, beanFactory);
-	}
 
 	@Override
 	protected void doRegisterBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception {

@@ -18,13 +18,21 @@
 package com.github.yingzhuo.turbocharger.bean;
 
 import com.github.yingzhuo.turbocharger.bean.classpath.ClassPathScanner;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.StandardEnvironment;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
@@ -47,24 +55,51 @@ import java.util.function.Supplier;
  * @see ClassPathScanner
  * @since 3.5.3
  */
-public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBeanDefinitionRegistrar {
+public abstract class ImportBeanDefinitionRegistrarSupport
+	implements ImportBeanDefinitionRegistrar, ResourceLoaderAware, EnvironmentAware, BeanFactoryAware, BeanClassLoaderAware {
 
-	protected final ResourceLoader resourceLoader;
-	protected final Environment environment;
-	protected final BeanFactory beanFactory;
+	protected ResourceLoader resourceLoader = new DefaultResourceLoader();
+	protected Environment environment = new StandardEnvironment();
+	protected ClassLoader beanClassLoader = Thread.currentThread().getContextClassLoader();
+	protected BeanFactory beanFactory = new DefaultListableBeanFactory();
 
 	/**
-	 * 构造方法
-	 *
-	 * @param resourceLoader {@link ResourceLoader} 实例
-	 * @param environment    {@link Environment} 实例
-	 * @see org.springframework.context.ResourceLoaderAware
-	 * @see org.springframework.context.EnvironmentAware
+	 * 默认构造方法
 	 */
-	protected ImportBeanDefinitionRegistrarSupport(ResourceLoader resourceLoader, Environment environment, BeanFactory beanFactory) {
-		this.resourceLoader = resourceLoader;
-		this.environment = environment;
+	protected ImportBeanDefinitionRegistrarSupport() {
+		super();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setBeanClassLoader(ClassLoader classLoader) {
+		this.beanClassLoader = classLoader;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		this.beanFactory = beanFactory;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setResourceLoader(ResourceLoader resourceLoader) {
+		this.resourceLoader = resourceLoader;
 	}
 
 	/**
