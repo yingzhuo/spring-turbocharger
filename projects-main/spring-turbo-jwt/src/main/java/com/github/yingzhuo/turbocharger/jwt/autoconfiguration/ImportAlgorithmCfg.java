@@ -51,10 +51,11 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 			var kind = (AlgorithmKind) attr.getEnum("kind");
 			var beanName = attr.getString("beanName");
 			var primary = attr.getBoolean("primary");
+			var scope = attr.getString("scope");
 
 			var beanDef =
 				BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class)
-					.setScope(SCOPE_SINGLETON)
+					.setScope(scope)
 					.setAbstract(false)
 					.setLazyInit(false)
 					.setPrimary(primary)

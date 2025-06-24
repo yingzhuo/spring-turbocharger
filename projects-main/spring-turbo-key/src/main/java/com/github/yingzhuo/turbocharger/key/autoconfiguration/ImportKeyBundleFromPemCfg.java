@@ -53,7 +53,7 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 				.setPrimary(attr.getBoolean("primary"))
 				.setLazyInit(false)
 				.setAbstract(false)
-				.setScope(SCOPE_SINGLETON)
+				.setScope(attr.getString("scope"))
 				.getBeanDefinition();
 
 			var beanName = attr.getString("beanName");

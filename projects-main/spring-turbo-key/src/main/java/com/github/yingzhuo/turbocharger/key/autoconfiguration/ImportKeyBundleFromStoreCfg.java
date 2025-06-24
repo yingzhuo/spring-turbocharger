@@ -54,7 +54,7 @@ class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 				.setPrimary(attr.getBoolean("primary"))
 				.setLazyInit(false)
 				.setAbstract(false)
-				.setScope(SCOPE_SINGLETON)
+				.setScope(attr.getString("scope"))
 				.getBeanDefinition();
 
 			if (!StringUtils.hasText(beanName)) {

@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
 import com.auth0.jwt.algorithms.Algorithm;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -57,6 +58,15 @@ public @interface ImportAlgorithm {
 	 * @return 是否为primary属性的Bean
 	 */
 	public boolean primary() default false;
+
+	/**
+	 * Bean的Scope
+	 *
+	 * @return bean的Scope
+	 * @see BeanDefinition#SCOPE_SINGLETON
+	 * @see BeanDefinition#SCOPE_PROTOTYPE
+	 */
+	public String scope() default BeanDefinition.SCOPE_SINGLETON;
 
 	/**
 	 * pem资源位置

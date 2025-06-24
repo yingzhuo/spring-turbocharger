@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -39,6 +40,8 @@ public @interface ImportKeyBundleFromStore {
 	String[] aliasesOfBean() default {};
 
 	boolean primary() default false;
+
+	String scope() default BeanDefinition.SCOPE_SINGLETON;
 
 	String location();
 

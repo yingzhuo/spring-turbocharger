@@ -51,7 +51,7 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 			var beanDef =
 				BeanDefinitionBuilder.genericBeanDefinition(KeyStore.class)
 					.setPrimary(primary)
-					.setScope(SCOPE_SINGLETON)
+					.setScope(attr.getString("scope"))
 					.setAbstract(false)
 					.setLazyInit(false)
 					.getBeanDefinition();
