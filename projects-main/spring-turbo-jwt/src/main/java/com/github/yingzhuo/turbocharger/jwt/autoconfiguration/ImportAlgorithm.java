@@ -23,6 +23,9 @@ import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.TYPE;
+
 /**
  * 通过PEM文件导入{@link Algorithm}实例
  *
@@ -34,7 +37,7 @@ import java.lang.annotation.*;
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target({TYPE, ANNOTATION_TYPE})
 @Import(ImportAlgorithmCfg.class)
 public @interface ImportAlgorithm {
 

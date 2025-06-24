@@ -17,9 +17,9 @@
  */
 package examples;
 
-import com.github.yingzhuo.turbocharger.key.KeyBundle;
 import com.github.yingzhuo.turbocharger.key.autoconfiguration.ImportKeyBundleFromPem;
 import com.github.yingzhuo.turbocharger.key.autoconfiguration.ImportKeyBundleFromStore;
+import com.github.yingzhuo.turbocharger.key.autoconfiguration.ImportUserDefaultKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
@@ -27,16 +27,17 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.security.PrivateKey;
+import java.security.KeyStore;
 
 @SpringBootApplication
 @ImportKeyBundleFromPem(beanName = "kb1", location = "classpath:/rsa2048-nopassword.pem")
 @ImportKeyBundleFromStore(beanName = "kb3", location = "classpath:keystore.p12", storepass = "123456", aliasOfStore = "rsa2048")
+@ImportUserDefaultKeyStore(beanName = "defaultKeyStore", storepass = "123456")
 public class ApplicationBoot implements ApplicationRunner {
 
 	@Autowired
-	@Qualifier("kb1")
-	private KeyBundle keyBundle;
+	@Qualifier("defaultKeyStore")
+	private KeyStore defaultKeyStore;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApplicationBoot.class, args);
@@ -44,6 +45,6 @@ public class ApplicationBoot implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		System.out.println((PrivateKey) keyBundle.getPrivateKey());
+		System.out.println(defaultKeyStore);
 	}
 }

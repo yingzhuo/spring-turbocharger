@@ -22,6 +22,9 @@ import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.TYPE;
+
 /**
  * @author 应卓
  * @since 3.5.3
@@ -29,7 +32,7 @@ import java.lang.annotation.*;
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target({TYPE, ANNOTATION_TYPE})
 @Import(ImportKeyBundleFromPemCfg.class)
 @Repeatable(ImportKeyBundleFromPem.Container.class)
 public @interface ImportKeyBundleFromPem {
@@ -51,7 +54,7 @@ public @interface ImportKeyBundleFromPem {
 	@Inherited
 	@Documented
 	@Retention(RetentionPolicy.RUNTIME)
-	@Target(ElementType.TYPE)
+	@Target({TYPE, ANNOTATION_TYPE})
 	@Import(ImportKeyBundleFromPemCfg.class)
 	@interface Container {
 		ImportKeyBundleFromPem[] value();

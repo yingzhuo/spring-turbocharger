@@ -19,49 +19,39 @@ package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Import;
+import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.TYPE;
-
 /**
  * @author 应卓
- * @see java.security.KeyStore
+ * @see ImportKeyStore
+ * @see ImportKeyStoreCfg
  * @since 3.5.3
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({TYPE, ANNOTATION_TYPE})
-@Import(ImportKeyStoreCfg.class)
-@Repeatable(ImportKeyStore.Container.class)
-public @interface ImportKeyStore {
+@Target(ElementType.TYPE)
+@ImportKeyStore(location = "file:${user.home}/.keystore", storepass = "changeit")
+public @interface ImportUserDefaultKeyStore {
 
+	@AliasFor(annotation = ImportKeyStore.class, attribute = "beanName")
 	String beanName() default "";
 
+	@AliasFor(annotation = ImportKeyStore.class, attribute = "aliasesOfBean")
 	String[] aliasesOfBean() default {};
 
+	@AliasFor(annotation = ImportKeyStore.class, attribute = "primary")
 	boolean primary() default false;
 
+	@AliasFor(annotation = ImportKeyStore.class, attribute = "scope")
 	String scope() default BeanDefinition.SCOPE_SINGLETON;
 
-	String location();
-
+	@AliasFor(annotation = ImportKeyStore.class, attribute = "type")
 	KeyStoreType type() default KeyStoreType.PKCS12;
 
+	@AliasFor(annotation = ImportKeyStore.class, attribute = "storepass")
 	String storepass();
-
-	// -----------------------------------------------------------------------------------------------------------------
-
-	@Inherited
-	@Documented
-	@Retention(RetentionPolicy.RUNTIME)
-	@Target({TYPE, ANNOTATION_TYPE})
-	@Import(ImportKeyStoreCfg.class)
-	@interface Container {
-		public ImportKeyStore[] value();
-	}
 
 }
