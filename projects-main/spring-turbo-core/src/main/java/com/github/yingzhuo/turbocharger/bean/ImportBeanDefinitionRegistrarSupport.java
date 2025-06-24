@@ -23,17 +23,17 @@ import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.boot.io.ApplicationResourceLoader;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
@@ -59,10 +59,10 @@ import java.util.function.Supplier;
 public abstract class ImportBeanDefinitionRegistrarSupport
 	implements ImportBeanDefinitionRegistrar, ResourceLoaderAware, EnvironmentAware, BeanFactoryAware, BeanClassLoaderAware {
 
-	protected final String SCOPE_SINGLETON = ConfigurableListableBeanFactory.SCOPE_SINGLETON;
-	protected final String SCOPE_PROTOTYPE = ConfigurableListableBeanFactory.SCOPE_PROTOTYPE;
+	protected final String SCOPE_SINGLETON = BeanDefinition.SCOPE_SINGLETON;
+	protected final String SCOPE_PROTOTYPE = BeanDefinition.SCOPE_PROTOTYPE;
 
-	protected ResourceLoader resourceLoader = new DefaultResourceLoader();
+	protected ResourceLoader resourceLoader = ApplicationResourceLoader.get();
 	protected Environment environment = new StandardEnvironment();
 	protected ClassLoader beanClassLoader = Thread.currentThread().getContextClassLoader();
 	protected BeanFactory beanFactory = new DefaultListableBeanFactory();
@@ -70,7 +70,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	/**
 	 * 默认构造方法
 	 */
-	protected ImportBeanDefinitionRegistrarSupport() {
+	public ImportBeanDefinitionRegistrarSupport() {
 		super();
 	}
 
@@ -254,6 +254,37 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 			return getResource(location).getInputStream();
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
+		}
+	}
+
+	/**
+	 * 获取bean
+	 *
+	 * @param type     bean类型
+	 * @param beanName bean名称
+	 * @return bean
+	 */
+	@Nullable
+	protected <T> T getBean(Class<T> type, String beanName) {
+		try {
+			return beanFactory.getBean(beanName, type);
+		} catch (BeansException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * 获取bean
+	 *
+	 * @param type bean类型
+	 * @return bean
+	 */
+	@Nullable
+	protected <T> T getBean(Class<T> type) {
+		try {
+			return beanFactory.getBean(type);
+		} catch (BeansException e) {
+			return null;
 		}
 	}
 
