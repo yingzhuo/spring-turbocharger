@@ -33,15 +33,15 @@ import java.lang.annotation.*;
 @Repeatable(ImportKeyBundleFromPem.Container.class)
 public @interface ImportKeyBundleFromPem {
 
-	public String beanName() default "";
+	String beanName() default "";
 
-	public String[] aliases() default {};
+	String[] aliasesOfBean() default {};
 
-	public String location();
+	boolean primary() default false;
 
-	public String keypass() default "";
+	String location();
 
-	public boolean primary() default false;
+	String keypass() default "";
 
 	// -----------------------------------------------------------------------------------------------------------------
 

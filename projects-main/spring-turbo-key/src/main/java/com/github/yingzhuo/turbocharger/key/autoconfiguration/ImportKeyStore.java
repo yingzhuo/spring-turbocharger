@@ -35,17 +35,17 @@ import java.lang.annotation.*;
 @Repeatable(ImportKeyStore.Container.class)
 public @interface ImportKeyStore {
 
-	public String beanName() default "";
+	String beanName() default "";
 
-	public String[] aliases() default {};
+	String[] aliasesOfBean() default {};
 
-	public String location();
+	String location();
 
-	public KeyStoreType type() default KeyStoreType.PKCS12;
+	KeyStoreType type() default KeyStoreType.PKCS12;
 
-	public String storepass();
+	String storepass();
 
-	public boolean primary() default false;
+	boolean primary() default false;
 
 	// -----------------------------------------------------------------------------------------------------------------
 

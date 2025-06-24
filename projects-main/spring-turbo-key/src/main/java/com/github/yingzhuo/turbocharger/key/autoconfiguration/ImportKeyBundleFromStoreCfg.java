@@ -69,7 +69,7 @@ class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 
 			registry.registerBeanDefinition(beanName, beanDef);
 
-			for (var aliasOfBean : attr.getStringArray("aliases")) {
+			for (var aliasOfBean : attr.getStringArray("aliasesOfBean")) {
 				registry.registerAlias(aliasOfBean, beanName);
 			}
 		}

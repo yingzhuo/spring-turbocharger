@@ -130,7 +130,6 @@ public final class TypeFilterFactories {
 	 * @see #isNotInterface()
 	 */
 	public static TypeFilter isInterface() {
-		// 是接口
 		return new AbstractClassTestingTypeFilter() {
 			@Override
 			protected boolean match(ClassMetadata metadata) {

@@ -34,21 +34,21 @@ import java.lang.annotation.*;
 @Repeatable(ImportKeyBundleFromStore.Container.class)
 public @interface ImportKeyBundleFromStore {
 
-	public String beanName() default "";
+	String beanName() default "";
 
-	public String[] aliases() default {};
+	String[] aliasesOfBean() default {};
 
-	public boolean primary() default false;
+	boolean primary() default false;
 
-	public String location();
+	String location();
 
-	public KeyStoreType type() default KeyStoreType.PKCS12;
+	KeyStoreType type() default KeyStoreType.PKCS12;
 
-	public String storepass();
+	String storepass();
 
-	public String aliasOfStore();
+	String aliasOfStore();
 
-	public String keypass() default "";
+	String keypass() default "";
 
 	// -----------------------------------------------------------------------------------------------------------------
 
