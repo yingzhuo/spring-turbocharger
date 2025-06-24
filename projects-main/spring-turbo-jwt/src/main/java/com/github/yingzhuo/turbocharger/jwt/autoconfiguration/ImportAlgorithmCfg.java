@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
 import com.auth0.jwt.algorithms.Algorithm;
-import com.github.yingzhuo.turbocharger.bean.BeanInstanceSupplier;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -54,8 +53,8 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 	@Override
 	public void doRegisterBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		for (var attr : getAnnotationAttributesSet(metadata, ImportAlgorithm.class)) {
-			var location = attr.getString("pemLocation");
-			var keypass = attr.getString("keypass");
+			var location = environment.resolvePlaceholders(attr.getString("pemLocation"));
+			var keypass = environment.resolvePlaceholders(attr.getString("keypass"));
 			var kind = (AlgorithmKind) attr.getEnum("kind");
 			var beanName = attr.getString("beanName");
 			var primary = attr.getBoolean("primary");

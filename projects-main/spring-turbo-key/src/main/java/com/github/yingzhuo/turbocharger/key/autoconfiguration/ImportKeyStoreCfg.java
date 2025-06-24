@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
-import com.github.yingzhuo.turbocharger.bean.BeanInstanceSupplier;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
@@ -50,9 +49,9 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 	@Override
 	public void doRegisterBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		for (var attr : getAnnotationAttributesSet(metadata, ImportKeyStore.class, ImportKeyStore.Container.class)) {
-			var location = attr.getString("location");
+			var location = environment.resolvePlaceholders(attr.getString("location"));
 			var type = (KeyStoreType) attr.getEnum("type");
-			var storepass = attr.getString("storepass");
+			var storepass = environment.resolvePlaceholders(attr.getString("storepass"));
 			var beanName = attr.getString("beanName");
 			var primary = attr.getBoolean("primary");
 

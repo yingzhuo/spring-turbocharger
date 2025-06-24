@@ -38,6 +38,7 @@ import java.lang.annotation.Annotation;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
+import java.util.function.Supplier;
 
 /**
  * {@link ImportBeanDefinitionRegistrar} 支持类
@@ -215,6 +216,26 @@ public abstract class ImportBeanDefinitionRegistrarSupport implements ImportBean
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}
+	}
+
+	// -----------------------------------------------------------------------------------------------------------------
+
+	/**
+	 * @author 应卓
+	 * @since 3.5.3
+	 */
+	public abstract static class BeanInstanceSupplier<T> implements Supplier<T> {
+
+		@Override
+		public final T get() {
+			try {
+				return doGet();
+			} catch (Exception e) {
+				throw new BeanCreationException(e.getMessage(), e);
+			}
+		}
+
+		protected abstract T doGet() throws Exception;
 	}
 
 }

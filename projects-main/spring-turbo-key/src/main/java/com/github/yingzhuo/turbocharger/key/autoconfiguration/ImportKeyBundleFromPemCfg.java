@@ -39,6 +39,7 @@ import java.util.List;
 
 /**
  * @author 应卓
+ * @see ImportKeyBundleFromPem
  * @since 3.5.3
  */
 @SuppressWarnings("unchecked")
@@ -77,8 +78,8 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 	}
 
 	private KeyBundle createKeyBundle(AnnotationAttributes attr) throws Exception {
-		final var location = attr.getString("location");
-		final var keypass = attr.getString("keypass");
+		final var location = environment.resolvePlaceholders(attr.getString("location"));
+		final var keypass = environment.resolvePlaceholders(attr.getString("keypass"));
 
 		final var pemContent =
 			PemContent.of(resourceLoader.getResource(location).getContentAsString(StandardCharsets.UTF_8));
