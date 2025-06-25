@@ -41,6 +41,9 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception {
 		var attrs =

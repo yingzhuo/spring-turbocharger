@@ -40,6 +40,9 @@ import java.util.List;
  */
 class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception {
 		var attrs =
