@@ -36,8 +36,9 @@ import java.util.stream.Stream;
  * ClassPath扫描器
  *
  * @author 应卓
- * @see ClassPathScanningCandidateComponentProvider
+ * @see PackageSet
  * @see GenericBeanDefinition
+ * @see ClassPathScanningCandidateComponentProvider
  * @since 3.5.3
  */
 public final class ClassPathScanner {

@@ -29,16 +29,17 @@ import java.util.stream.Stream;
  *
  * @author 应卓
  * @see #newInstance()
- * @since 2.0.10
+ * @see ClassPathScanner
+ * @since 3.5.0
  */
 public final class PackageSet implements Iterable<String>, Serializable {
 
-	private final SortedSet<String> innerSet = new TreeSet<>();
+	private final SortedSet<String> innerSet = new TreeSet<>(Comparator.naturalOrder());
 
 	/**
-	 * 私有构造方法
+	 * 默认构造方法
 	 */
-	private PackageSet() {
+	public PackageSet() {
 		super();
 	}
 
@@ -59,12 +60,10 @@ public final class PackageSet implements Iterable<String>, Serializable {
 	 */
 	public PackageSet acceptPackages(@Nullable String... packages) {
 		if (packages != null) {
-			// @formatter:off
             Stream.of(packages)
                     .filter(StringUtils::isNotBlank)
                     .map(String::trim)
                     .forEach(innerSet::add);
-            // @formatter:on
 		}
 		return this;
 	}
@@ -75,14 +74,12 @@ public final class PackageSet implements Iterable<String>, Serializable {
 	 * @param packages 包
 	 * @return this
 	 */
-	public PackageSet acceptPackages(@Nullable Collection<String> packages) {
+	public PackageSet acceptPackages(@Nullable Package... packages) {
 		if (packages != null) {
-			// @formatter:off
-            packages.stream()
-                    .filter(StringUtils::isNotBlank)
-                    .map(String::trim)
-                    .forEach(innerSet::add);
-            // @formatter:on
+			Stream.of(packages)
+				.filter(Objects::nonNull)
+				.map(Package::getName)
+				.forEach(innerSet::add);
 		}
 		return this;
 	}
@@ -95,32 +92,12 @@ public final class PackageSet implements Iterable<String>, Serializable {
 	 */
 	public PackageSet acceptBaseClasses(@Nullable Class<?>... baseClasses) {
 		if (baseClasses != null) {
-			// @formatter:off
             Arrays.stream(baseClasses)
                     .filter(Objects::nonNull)
                     .map(c -> c.getPackage().getName())
                     .forEach(innerSet::add);
-            // @formatter:on
 		}
 		return this;
-	}
-
-	/**
-	 * 添加要扫描的基础类所在的包
-	 *
-	 * @param baseClasses 基础类
-	 * @return this
-	 */
-	public PackageSet acceptBaseClasses(@Nullable Collection<Class<?>> baseClasses) {
-		// @formatter:off
-        if (baseClasses != null) {
-            baseClasses.stream()
-                    .filter(Objects::nonNull)
-                    .map(c -> c.getPackage().getName())
-                    .forEach(innerSet::add);
-        }
-        return this;
-        // @formatter:on
 	}
 
 	/**
@@ -154,7 +131,7 @@ public final class PackageSet implements Iterable<String>, Serializable {
 	}
 
 	public SortedSet<String> asSet() {
-		return innerSet;
+		return Collections.unmodifiableSortedSet(innerSet);
 	}
 
 	/**
