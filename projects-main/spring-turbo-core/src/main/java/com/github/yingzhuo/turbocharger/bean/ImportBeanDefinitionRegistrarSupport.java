@@ -197,7 +197,6 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 		var scanner = new ClassPathScanner();
 		scanner.setResourceLoader(resourceLoader);
 		scanner.setEnvironment(environment);
-		scanner.setUseDefaultFilters(false);
 		return scanner;
 	}
 
