@@ -28,6 +28,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
@@ -97,9 +98,22 @@ public final class ResourceUtils {
 	 * @return inputStream
 	 * @throws UncheckedIOException I/O错误
 	 */
-	public static InputStream loadResourceAsInputStream(String location) {
+	public static InputStream loadResourceAsInputStream(String location) throws IOException {
+		return loadResourceAsInputStream(location, -1);
+	}
+
+	/**
+	 * 加载资源并打开输入流
+	 *
+	 * @param location 资源位置
+	 * @param bufferSize bufferSize
+	 * @return inputStream
+	 * @throws UncheckedIOException I/O错误
+	 */
+	public static InputStream loadResourceAsInputStream(String location, int bufferSize) throws IOException {
 		try {
-			return loadResource(location).getInputStream();
+			var in = loadResource(location).getInputStream();
+			return bufferSize > 0 ? new BufferedInputStream(in, bufferSize) : in;
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}

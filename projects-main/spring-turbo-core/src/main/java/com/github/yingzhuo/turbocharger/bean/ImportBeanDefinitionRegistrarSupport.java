@@ -41,6 +41,7 @@ import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
@@ -288,8 +289,20 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	 * @return 输入流实例
 	 */
 	protected InputStream getResourceAsInputStream(String location) {
+		return getResourceAsInputStream(location, -1);
+	}
+
+	/**
+	 * 获取资源的输入流
+	 *
+	 * @param location   资源位置
+	 * @param bufferSize bufferSize
+	 * @return 输入流实例
+	 */
+	protected InputStream getResourceAsInputStream(String location, int bufferSize) {
 		try {
-			return getResource(location).getInputStream();
+			var in = getResource(location).getInputStream();
+			return bufferSize > 0 ? new BufferedInputStream(in, bufferSize) : in;
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}
