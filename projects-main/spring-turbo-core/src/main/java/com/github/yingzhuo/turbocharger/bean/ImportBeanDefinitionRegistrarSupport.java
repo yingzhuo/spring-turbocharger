@@ -194,7 +194,17 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	 * @return 类扫描器实例
 	 */
 	protected ClassPathScanner createClassPathScanner() {
-		var scanner = new ClassPathScanner();
+		return createClassPathScanner(null);
+	}
+
+	/**
+	 * 创建类扫描器
+	 *
+	 * @param registry Bean注册器
+	 * @return 类扫描器实例
+	 */
+	protected ClassPathScanner createClassPathScanner(@Nullable BeanDefinitionRegistry registry) {
+		var scanner = registry == null ? new ClassPathScanner(false) : new ClassPathScanner(registry, false);
 		scanner.setResourceLoader(resourceLoader);
 		scanner.setEnvironment(environment);
 		return scanner;

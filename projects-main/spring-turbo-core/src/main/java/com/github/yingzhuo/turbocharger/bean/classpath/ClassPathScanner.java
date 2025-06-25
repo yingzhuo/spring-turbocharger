@@ -17,8 +17,10 @@
  */
 package com.github.yingzhuo.turbocharger.bean.classpath;
 
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.boot.io.ApplicationResourceLoader;
+import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
@@ -39,6 +41,7 @@ import java.util.stream.Stream;
  * @see PackageSet
  * @see GenericBeanDefinition
  * @see ClassPathScanningCandidateComponentProvider
+ * @see ClassPathBeanDefinitionScanner
  * @since 3.5.3
  */
 public final class ClassPathScanner {
@@ -59,6 +62,25 @@ public final class ClassPathScanner {
 	 */
 	public ClassPathScanner(boolean useDefaultFilters) {
 		provider = new ClassPathScanningCandidateComponentProvider(false);
+	}
+
+	/**
+	 * 构造方法
+	 *
+	 * @param registry Bean注册器
+	 */
+	public ClassPathScanner(BeanDefinitionRegistry registry) {
+		this(registry, false);
+	}
+
+	/**
+	 * 构造方法
+	 *
+	 * @param registry          Bean注册器
+	 * @param useDefaultFilters 是否包含Spring提供的默认过滤器
+	 */
+	public ClassPathScanner(BeanDefinitionRegistry registry, boolean useDefaultFilters) {
+		provider = new ClassPathBeanDefinitionScanner(registry, useDefaultFilters);
 	}
 
 	/**
