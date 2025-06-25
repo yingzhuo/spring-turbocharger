@@ -42,9 +42,9 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 	@Override
 	public void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		for (var attr : getAnnotationAttributesSet(metadata, ImportKeyStore.class, ImportKeyStore.Container.class)) {
-			var location = environment.resolvePlaceholders(attr.getString("location"));
+			var location = getEnvironment().resolvePlaceholders(attr.getString("location"));
 			var type = (KeyStoreType) attr.getEnum("type");
-			var storepass = environment.resolvePlaceholders(attr.getString("storepass"));
+			var storepass = getEnvironment().resolvePlaceholders(attr.getString("storepass"));
 			var beanName = attr.getString("beanName");
 			var primary = attr.getBoolean("primary");
 
@@ -56,7 +56,7 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 					.setLazyInit(false)
 					.getBeanDefinition();
 
-			beanDef.setInstanceSupplier(new KeyStoreSupplier(resourceLoader, location, storepass, type));
+			beanDef.setInstanceSupplier(new KeyStoreSupplier(getResourceLoader(), location, storepass, type));
 
 			if (!StringUtils.hasText(beanName)) {
 				beanName = beanNameGen.generateBeanName(beanDef, registry);

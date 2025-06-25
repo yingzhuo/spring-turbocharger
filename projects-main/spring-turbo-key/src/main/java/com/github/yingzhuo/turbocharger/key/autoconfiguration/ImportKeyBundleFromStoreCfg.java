@@ -44,7 +44,7 @@ class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception {
+	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		var attrs =
 			getAnnotationAttributesSet(metadata, ImportKeyBundleFromStore.class, ImportKeyBundleFromStore.Container.class);
 
@@ -72,14 +72,14 @@ class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 		}
 	}
 
-	private KeyBundle createKeyBundle(AnnotationAttributes attr) throws Exception {
-		var location = environment.resolvePlaceholders(attr.getString("location"));
+	private KeyBundle createKeyBundle(AnnotationAttributes attr) {
+		var location = getEnvironment().resolvePlaceholders(attr.getString("location"));
 		var type = (KeyStoreType) attr.getEnum("type");
-		var storepass = environment.resolvePlaceholders(attr.getString("storepass"));
-		var alias = environment.resolvePlaceholders(attr.getString("aliasOfStore"));
-		var keypass = environment.resolvePlaceholders(StringUtils.hasText(attr.getString("keypass")) ? attr.getString("keypass") : storepass);
+		var storepass = getEnvironment().resolvePlaceholders(attr.getString("storepass"));
+		var alias = getEnvironment().resolvePlaceholders(attr.getString("aliasOfStore"));
+		var keypass = getEnvironment().resolvePlaceholders(StringUtils.hasText(attr.getString("keypass")) ? attr.getString("keypass") : storepass);
 
-		var ks = KeyStoreUtils.loadKeyStore(resourceLoader.getResource(location).getInputStream(), type, storepass);
+		var ks = KeyStoreUtils.loadKeyStore(getResourceAsInputStream(location), type, storepass);
 
 		return new KeyBundle() {
 			@Override

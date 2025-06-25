@@ -33,6 +33,7 @@ import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.EnvironmentCapable;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -57,15 +58,15 @@ import java.util.function.Supplier;
  * @since 3.5.3
  */
 public abstract class ImportBeanDefinitionRegistrarSupport
-	implements ImportBeanDefinitionRegistrar, ResourceLoaderAware, EnvironmentAware, BeanFactoryAware, BeanClassLoaderAware {
+	implements ImportBeanDefinitionRegistrar, ResourceLoaderAware, EnvironmentAware, BeanFactoryAware, BeanClassLoaderAware, EnvironmentCapable {
 
 	protected final String SCOPE_SINGLETON = ConfigurableBeanFactory.SCOPE_SINGLETON;
 	protected final String SCOPE_PROTOTYPE = ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
-	protected ResourceLoader resourceLoader = ApplicationResourceLoader.get();
-	protected Environment environment = new StandardEnvironment();
-	protected ClassLoader beanClassLoader = Thread.currentThread().getContextClassLoader();
-	protected BeanFactory beanFactory = new DefaultListableBeanFactory();
+	private ResourceLoader resourceLoader = ApplicationResourceLoader.get();
+	private Environment environment = new StandardEnvironment();
+	private ClassLoader beanClassLoader = Thread.currentThread().getContextClassLoader();
+	private BeanFactory beanFactory = new DefaultListableBeanFactory();
 
 	/**
 	 * 默认构造方法
@@ -96,6 +97,26 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	@Override
 	public void setEnvironment(Environment environment) {
 		this.environment = environment;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Environment getEnvironment() {
+		return this.environment;
+	}
+
+	public ResourceLoader getResourceLoader() {
+		return resourceLoader;
+	}
+
+	public ClassLoader getBeanClassLoader() {
+		return beanClassLoader;
+	}
+
+	public BeanFactory getBeanFactory() {
+		return beanFactory;
 	}
 
 	/**

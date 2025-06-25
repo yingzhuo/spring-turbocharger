@@ -46,8 +46,8 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 	@Override
 	public void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		for (var attr : getAnnotationAttributesSet(metadata, ImportAlgorithm.class)) {
-			var location = environment.resolvePlaceholders(attr.getString("pemLocation"));
-			var keypass = environment.resolvePlaceholders(attr.getString("keypass"));
+			var location = getEnvironment().resolvePlaceholders(attr.getString("pemLocation"));
+			var keypass = getEnvironment().resolvePlaceholders(attr.getString("keypass"));
 			var kind = (AlgorithmKind) attr.getEnum("kind");
 			var beanName = attr.getString("beanName");
 			var primary = attr.getBoolean("primary");
@@ -61,7 +61,7 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 					.setPrimary(primary)
 					.getBeanDefinition();
 
-			beanDef.setInstanceSupplier(new AlgorithmSupplier(resourceLoader, location, keypass, kind));
+			beanDef.setInstanceSupplier(new AlgorithmSupplier(getResourceLoader(), location, keypass, kind));
 
 			if (!StringUtils.hasText(beanName)) {
 				beanName = beanNameGen.generateBeanName(beanDef, registry);

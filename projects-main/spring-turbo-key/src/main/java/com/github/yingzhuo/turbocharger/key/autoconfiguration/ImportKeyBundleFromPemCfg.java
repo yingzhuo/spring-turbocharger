@@ -27,7 +27,6 @@ import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
 
-import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.X509Certificate;
@@ -45,7 +44,7 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception {
+	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		var attrs =
 			getAnnotationAttributesSet(metadata, ImportKeyBundleFromPem.class, ImportKeyBundleFromPem.Container.class);
 
@@ -72,12 +71,11 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 		}
 	}
 
-	private KeyBundle createKeyBundle(AnnotationAttributes attr) throws Exception {
-		final var location = environment.resolvePlaceholders(attr.getString("location"));
-		final var keypass = environment.resolvePlaceholders(attr.getString("keypass"));
+	private KeyBundle createKeyBundle(AnnotationAttributes attr) {
+		final var location = getEnvironment().resolvePlaceholders(attr.getString("location"));
+		final var keypass = getEnvironment().resolvePlaceholders(attr.getString("keypass"));
 
-		final var pemContent =
-			PemContent.of(resourceLoader.getResource(location).getContentAsString(StandardCharsets.UTF_8));
+		final var pemContent = PemContent.of(getResourceAsString(location));
 
 		return new KeyBundle() {
 
