@@ -118,18 +118,34 @@ public final class PackageSet implements Iterable<String>, Serializable {
 		return innerSet.iterator();
 	}
 
+	/**
+	 * 判断是否为空
+	 *
+	 * @return 判断结果
+	 * @see Set#isEmpty()
+	 */
 	public boolean isEmpty() {
 		return innerSet.isEmpty();
 	}
 
-	public boolean isNotEmpty() {
-		return !innerSet.isEmpty();
-	}
-
+	/**
+	 * 获取保存的包数量
+	 *
+	 * @return 保存的包数
+	 * @see Set#size()
+	 */
 	public int size() {
 		return innerSet.size();
 	}
 
+	/**
+	 * 转换成{@link SortedSet}
+	 *
+	 * @return {@link SortedSet}实例
+	 * @see SortedSet
+	 * @see TreeSet
+	 * @see Comparator#naturalOrder()
+	 */
 	public SortedSet<String> asSet() {
 		return Collections.unmodifiableSortedSet(innerSet);
 	}
