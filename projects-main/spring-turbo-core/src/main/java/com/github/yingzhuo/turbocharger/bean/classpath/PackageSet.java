@@ -30,7 +30,7 @@ import java.util.stream.Stream;
  * @author 应卓
  * @see #newInstance()
  * @see ClassPathScanner
- * @since 3.5.0
+ * @since 3.5.3
  */
 public final class PackageSet implements Iterable<String>, Serializable {
 

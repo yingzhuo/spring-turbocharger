@@ -145,7 +145,7 @@ public final class ClassPathScanner {
 	/**
 	 * 扫描类路径
 	 *
-	 * @param packageSet 扫描起点 (多个)
+	 * @param packageSet 扫描起点 (多个起点)
 	 * @return 扫描结果
 	 * @see PackageSet
 	 */
