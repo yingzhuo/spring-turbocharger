@@ -24,9 +24,7 @@ import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.BeanNameGenerator;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.support.*;
 import org.springframework.boot.io.ApplicationResourceLoader;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.ResourceLoaderAware;
@@ -51,6 +49,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * {@link ImportBeanDefinitionRegistrar} 支持类
@@ -109,14 +108,34 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 		return this.environment;
 	}
 
+	/**
+	 * 获取{@link ResourceLoader} 实例
+	 *
+	 * @return {@link ResourceLoader} 实例
+	 * @see #getResource(String)
+	 * @see #getResourceAsBytes(String)
+	 * @see #getResourceAsString(String)
+	 * @see #getResourceAsString(String, Charset)
+	 * @see #getResourceAsLines(String, Charset)
+	 */
 	public ResourceLoader getResourceLoader() {
 		return resourceLoader;
 	}
 
+	/**
+	 * 获取{@link ClassLoader }实例
+	 *
+	 * @return {@link ClassLoader} 实例
+	 */
 	public ClassLoader getBeanClassLoader() {
 		return beanClassLoader;
 	}
 
+	/**
+	 * 获取{@link BeanFactory }实例
+	 *
+	 * @return {@link BeanFactory} 实例
+	 */
 	public BeanFactory getBeanFactory() {
 		return beanFactory;
 	}
@@ -293,6 +312,27 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	}
 
 	/**
+	 * 加载资源的所有文本行
+	 *
+	 * @param location 资源位置
+	 * @return 资源的文本内容
+	 */
+	protected Stream<String> getResourceAsLines(String location) {
+		return getResourceAsLines(location, null);
+	}
+
+	/**
+	 * 加载资源的所有文本行
+	 *
+	 * @param location 资源位置
+	 * @param charset  编码
+	 * @return 资源的文本内容
+	 */
+	protected Stream<String> getResourceAsLines(String location, @Nullable Charset charset) {
+		return getResourceAsString(location, charset).lines();
+	}
+
+	/**
 	 * 加载资源的二进制内容
 	 *
 	 * @param location 资源位置
@@ -367,6 +407,8 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 
 	/**
 	 * @author 应卓
+	 * @see BeanDefinitionBuilder#genericBeanDefinition(Class, Supplier)
+	 * @see AbstractBeanDefinition#setInstanceSupplier(Supplier)
 	 * @since 3.5.3
 	 */
 	public abstract static class BeanInstanceSupplier<T> implements Supplier<T> {

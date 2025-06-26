@@ -19,6 +19,7 @@ package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.key.KeyBundle;
+import com.github.yingzhuo.turbocharger.util.StringPool;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
@@ -31,6 +32,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.X509Certificate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author 应卓
@@ -72,10 +74,15 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 	}
 
 	private KeyBundle createKeyBundle(AnnotationAttributes attr) {
-		final var location = getEnvironment().resolvePlaceholders(attr.getString("location"));
-		final var keypass = getEnvironment().resolvePlaceholders(attr.getString("keypass"));
+		var location = getEnvironment().resolvePlaceholders(attr.getString("location"));
+		var keypass = getEnvironment().resolvePlaceholders(attr.getString("keypass"));
 
-		final var pemContent = PemContent.of(getResourceAsString(location));
+		var pemText = getResourceAsLines(location)
+				.map(String::trim)
+				.filter(StringUtils::hasText)
+				.collect(Collectors.joining(StringPool.LF));
+
+		var pemContent = PemContent.of(pemText);
 
 		return new KeyBundle() {
 
