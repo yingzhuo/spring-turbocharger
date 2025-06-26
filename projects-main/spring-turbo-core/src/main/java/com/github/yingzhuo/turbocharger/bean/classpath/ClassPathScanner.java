@@ -105,7 +105,7 @@ public final class ClassPathScanner {
 	 * 重置所有过滤器
 	 */
 	public void resetFilters() {
-		resetFilters(false);
+		provider.resetFilters(false);
 	}
 
 	/**
@@ -123,10 +123,12 @@ public final class ClassPathScanner {
 	 * @see TypeFilter
 	 * @see TypeFilterFactories
 	 */
-	public void addIncludeFilters(TypeFilter... includeFilters) {
-		Stream.of(includeFilters)
-			.filter(Objects::nonNull)
-			.forEach(provider::addIncludeFilter);
+	public void addIncludeFilters(@Nullable TypeFilter... includeFilters) {
+		if (includeFilters != null) {
+			Stream.of(includeFilters)
+				.filter(Objects::nonNull)
+				.forEach(provider::addIncludeFilter);
+		}
 	}
 
 	/**
@@ -136,10 +138,12 @@ public final class ClassPathScanner {
 	 * @see TypeFilter
 	 * @see TypeFilterFactories
 	 */
-	public void addExcludeFilters(TypeFilter... excludeFilters) {
-		Stream.of(excludeFilters)
-			.filter(Objects::nonNull)
-			.forEach(provider::addExcludeFilter);
+	public void addExcludeFilters(@Nullable TypeFilter... excludeFilters) {
+		if (excludeFilters != null) {
+			Stream.of(excludeFilters)
+				.filter(Objects::nonNull)
+				.forEach(provider::addExcludeFilter);
+		}
 	}
 
 	/**
