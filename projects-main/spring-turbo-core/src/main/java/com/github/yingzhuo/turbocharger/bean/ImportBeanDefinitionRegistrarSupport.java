@@ -32,6 +32,7 @@ import org.springframework.context.EnvironmentAware;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.EnvironmentCapable;
 import org.springframework.core.env.StandardEnvironment;
@@ -192,13 +193,23 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	}
 
 	/**
+	 * 获取导入类的名称
+	 *
+	 * @param importingAnnotation 导入元信息
+	 * @return 导入类的名称
+	 */
+	public String getUnderlyingClassName(AnnotationMetadata importingAnnotation) {
+		return importingAnnotation.getClassName();
+	}
+
+	/**
 	 * 获取导入类
 	 *
 	 * @param metadata 导入元信息
 	 * @return 导入类
 	 */
-	protected Class<?> getImportingClass(AnnotationMetadata metadata) {
-		return ClassUtils.resolveClassName(metadata.getClassName(), null);
+	protected Class<?> getUnderlyingClass(AnnotationMetadata metadata) {
+		return ClassUtils.resolveClassName(getUnderlyingClassName(metadata), ClassUtils.getDefaultClassLoader());
 	}
 
 	/**
@@ -207,8 +218,21 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	 * @param metadata 导入元信息
 	 * @return 导入类所在的包
 	 */
-	protected Package getImportingClassPackage(AnnotationMetadata metadata) {
-		return getImportingClass(metadata).getPackage();
+	protected Package getUnderlyingClassPackage(AnnotationMetadata metadata) {
+		return getUnderlyingClass(metadata).getPackage();
+	}
+
+	/**
+	 * 获取导入类上的元注释
+	 *
+	 * @param metadata       导入元信息
+	 * @param annotationType 要查找的元注释类型
+	 * @return 结果
+	 * @see AnnotationUtils#findAnnotation(Class, Class)
+	 */
+	@Nullable
+	protected <A extends Annotation> A getAnnotationOfUnderlyingClass(AnnotationMetadata metadata, Class<A> annotationType) {
+		return AnnotationUtils.findAnnotation(getUnderlyingClass(metadata), annotationType);
 	}
 
 	/**
