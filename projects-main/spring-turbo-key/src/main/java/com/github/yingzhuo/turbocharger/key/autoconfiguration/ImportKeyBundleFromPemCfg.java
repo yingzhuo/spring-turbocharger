@@ -19,6 +19,7 @@ package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.key.KeyBundle;
+import com.github.yingzhuo.turbocharger.key.SimpleKeyBundle;
 import com.github.yingzhuo.turbocharger.util.StringPool;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -28,10 +29,6 @@ import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
 
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.cert.X509Certificate;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -39,7 +36,6 @@ import java.util.stream.Collectors;
  * @see ImportKeyBundleFromPem
  * @since 3.5.3
  */
-@SuppressWarnings("unchecked")
 class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	/**
@@ -84,27 +80,10 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 
 		var pemContent = PemContent.of(pemText);
 
-		return new KeyBundle() {
-
-			@Override
-			public <T extends PublicKey> T getPublicKey() {
-				return (T) getCertificate().getPublicKey();
-			}
-
-			@Override
-			public <T extends PrivateKey> T getPrivateKey() {
-				return (T) pemContent.getPrivateKey(keypass);
-			}
-
-			@Override
-			public <T extends X509Certificate> T getCertificate() {
-				return (T) getCertificateChain().get(0);
-			}
-
-			@Override
-			public List<X509Certificate> getCertificateChain() {
-				return pemContent.getCertificates();
-			}
-		};
+		return new SimpleKeyBundle(
+			null,
+			pemContent.getCertificates().get(0),
+			pemContent.getPrivateKey(keypass)
+		);
 	}
 }

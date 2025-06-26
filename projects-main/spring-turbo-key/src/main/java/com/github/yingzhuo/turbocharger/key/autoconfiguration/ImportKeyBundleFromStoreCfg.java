@@ -19,6 +19,7 @@ package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.key.KeyBundle;
+import com.github.yingzhuo.turbocharger.key.SimpleKeyBundle;
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -27,11 +28,6 @@ import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
-
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.cert.X509Certificate;
-import java.util.List;
 
 /**
  * @author 应卓
@@ -81,32 +77,11 @@ class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 
 		var ks = KeyStoreUtils.loadKeyStore(getResourceAsInputStream(location), type, storepass);
 
-		return new KeyBundle() {
-			@Override
-			public <T extends PublicKey> T getPublicKey() {
-				return KeyStoreUtils.getPublicKey(ks, alias);
-			}
-
-			@Override
-			public <T extends PrivateKey> T getPrivateKey() {
-				return KeyStoreUtils.getPrivateKey(ks, alias, keypass);
-			}
-
-			@Override
-			public <T extends X509Certificate> T getCertificate() {
-				return KeyStoreUtils.getCertificate(ks, alias);
-			}
-
-			@Override
-			public List<X509Certificate> getCertificateChain() {
-				return KeyStoreUtils.getCertificate(ks, alias);
-			}
-
-			@Override
-			public String alias() {
-				return alias;
-			}
-		};
+		return new SimpleKeyBundle(
+			alias,
+			KeyStoreUtils.getCertificate(ks, alias),
+			KeyStoreUtils.getPrivateKey(ks, alias, keypass)
+		);
 	}
 
 }
