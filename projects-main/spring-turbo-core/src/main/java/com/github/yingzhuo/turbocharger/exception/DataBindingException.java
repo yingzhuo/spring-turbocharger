@@ -67,6 +67,7 @@ public final class DataBindingException extends IllegalArgumentException impleme
 	 * 私有构造方法
 	 */
 	private DataBindingException() {
+		super();
 	}
 
 	/**

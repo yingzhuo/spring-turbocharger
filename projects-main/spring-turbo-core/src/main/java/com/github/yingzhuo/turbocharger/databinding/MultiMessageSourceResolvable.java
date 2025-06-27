@@ -19,6 +19,7 @@ package com.github.yingzhuo.turbocharger.databinding;
 
 import org.springframework.context.MessageSourceResolvable;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -31,7 +32,7 @@ import java.util.stream.StreamSupport;
  * @since 3.3.1
  */
 @FunctionalInterface
-public interface MultiMessageSourceResolvable extends Iterable<MessageSourceResolvable> {
+public interface MultiMessageSourceResolvable extends Iterable<MessageSourceResolvable>, Serializable {
 
 	/**
 	 * {@inheritDoc}
@@ -45,7 +46,17 @@ public interface MultiMessageSourceResolvable extends Iterable<MessageSourceReso
 	 * @return stream
 	 */
 	public default Stream<MessageSourceResolvable> stream() {
-		return StreamSupport.stream(spliterator(), false);
+		return stream(false);
+	}
+
+	/**
+	 * 转换成 {@link Stream}
+	 *
+	 * @param parallel 是否生成并行的Stream
+	 * @return stream
+	 */
+	public default Stream<MessageSourceResolvable> stream(boolean parallel) {
+		return StreamSupport.stream(spliterator(), parallel);
 	}
 
 }

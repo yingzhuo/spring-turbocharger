@@ -32,6 +32,7 @@ public final class DirectMessageCodesResolver implements MessageCodesResolver {
 	 * 私有构造方法
 	 */
 	private DirectMessageCodesResolver() {
+		super();
 	}
 
 	/**
