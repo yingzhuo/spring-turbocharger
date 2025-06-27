@@ -42,8 +42,15 @@ class ImportSM2AlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 
 			var publicKey = getEnvironment().resolvePlaceholders(attr.getString("publicKeyText"));
 			var privateKey = getEnvironment().resolvePlaceholders(attr.getString("privateKeyText"));
+			var id = getEnvironment().resolvePlaceholders(attr.getString("id"));
 
-			var beanDef = BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class, () -> new SM2Algorithm(publicKey, privateKey))
+			if (id.isEmpty()) {
+				id = null;
+			}
+
+			var alg = new SM2Algorithm(publicKey, privateKey, id);
+
+			var beanDef = BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class, () -> alg)
 				.setScope(attr.getString("scope"))
 				.setPrimary(attr.getBoolean("primary"))
 				.getBeanDefinition();

@@ -73,4 +73,5 @@ public @interface ImportSM2Algorithm {
 	 */
 	String privateKeyText();
 
+	String id() default "";
 }

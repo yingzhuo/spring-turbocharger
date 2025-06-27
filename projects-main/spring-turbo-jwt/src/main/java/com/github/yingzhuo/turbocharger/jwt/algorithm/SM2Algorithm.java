@@ -23,37 +23,44 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.SignatureGenerationException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import org.springframework.lang.Nullable;
 
-import java.nio.ByteBuffer;
 import java.util.Base64;
+import java.util.Optional;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
+ * 国密SM2签名算法
+ *
  * @author 应卓
  * @since 3.5.3
  */
 public class SM2Algorithm extends Algorithm {
 
+	private static final byte[] DEFAULT_ID = "国密-SM2".getBytes(UTF_8);
+
 	private final SM2 sm2;
+	private final byte[] id;
 
 	public SM2Algorithm(String publicKey, String privateKey) {
+		this(publicKey, privateKey, null);
+	}
+
+	public SM2Algorithm(String publicKey, String privateKey, @Nullable String id) {
 		super("SM2", "SM2");
 		this.sm2 = SmUtil.sm2(privateKey, publicKey);
+		this.id = Optional.ofNullable(id)
+			.map(s -> s.getBytes(UTF_8))
+			.orElse(DEFAULT_ID);
 	}
 
 	@Override
 	public void verify(DecodedJWT jwt) throws SignatureVerificationException {
-		byte[] signatureBytes = Base64.getUrlDecoder().decode(jwt.getSignature());
+		var data = String.join(".", jwt.getHeader(), jwt.getPayload()).getBytes(UTF_8);
+		var signature = Base64.getUrlDecoder().decode(jwt.getSignature());
 
-		byte[] headerBytes = Base64.getUrlDecoder().decode(jwt.getHeader());
-		byte[] payloadBytes = Base64.getUrlDecoder().decode(jwt.getPayload());
-		byte[] combinedData = new byte[headerBytes.length + payloadBytes.length];
-
-		ByteBuffer buffer = ByteBuffer.wrap(combinedData);
-		buffer.put(headerBytes);
-		buffer.put(payloadBytes);
-		combinedData = buffer.array();
-
-		var ok = sm2.verify(combinedData, signatureBytes);
+		var ok = sm2.verify(data, signature, id);
 		if (!ok) {
 			throw new SignatureVerificationException(this);
 		}
@@ -61,7 +68,7 @@ public class SM2Algorithm extends Algorithm {
 
 	@Override
 	public byte[] sign(byte[] bytes) throws SignatureGenerationException {
-		return sm2.sign(bytes);
+		return sm2.sign(bytes, id);
 	}
 
 }
