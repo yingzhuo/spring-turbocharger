@@ -22,6 +22,14 @@ import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
+/**
+ * 导入SM2签名算法
+ *
+ * @author 应卓
+ * @see com.github.yingzhuo.turbocharger.jwt.algorithm.SM2Algorithm
+ * @see cn.hutool.crypto.asymmetric.SM2
+ * @since 3.5.3
+ */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
@@ -73,5 +81,24 @@ public @interface ImportSM2Algorithm {
 	 */
 	String privateKeyText();
 
+	/**
+	 * SM2 - id
+	 *
+	 * @return SM2 - id
+	 */
 	String id() default "";
+
+	/**
+	 * SM2 - Mode
+	 *
+	 * @return SM2 - Mode
+	 */
+	Mode mode() default Mode.C1C3C2;
+
+	// -----------------------------------------------------------------------------------------------------------------
+
+	enum Mode {
+		C1C2C3, C1C3C2
+	}
+
 }

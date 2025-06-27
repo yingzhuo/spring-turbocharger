@@ -23,6 +23,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.SignatureGenerationException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import org.bouncycastle.crypto.engines.SM2Engine;
 import org.springframework.lang.Nullable;
 
 import java.util.Base64;
@@ -53,6 +54,8 @@ public class SM2Algorithm extends Algorithm {
 		this.id = Optional.ofNullable(id)
 			.map(s -> s.getBytes(UTF_8))
 			.orElse(DEFAULT_ID);
+
+		this.sm2.setMode(SM2Engine.Mode.C1C3C2);
 	}
 
 	@Override
@@ -69,6 +72,10 @@ public class SM2Algorithm extends Algorithm {
 	@Override
 	public byte[] sign(byte[] bytes) throws SignatureGenerationException {
 		return sm2.sign(bytes, id);
+	}
+
+	public void setMode(SM2Engine.Mode mode) {
+		this.sm2.setMode(mode);
 	}
 
 }
