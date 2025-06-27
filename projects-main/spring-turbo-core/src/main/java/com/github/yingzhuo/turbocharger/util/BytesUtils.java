@@ -29,6 +29,9 @@ import java.util.stream.Stream;
  */
 public final class BytesUtils {
 
+	/**
+	 * 私有构造方法
+	 */
 	private BytesUtils() {
 		super();
 	}

@@ -19,14 +19,11 @@ package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.asymmetric.SM2;
-import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.SignatureGenerationException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import org.bouncycastle.crypto.engines.SM2Engine;
 import org.springframework.lang.Nullable;
 
-import java.util.Base64;
 import java.util.Optional;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -37,7 +34,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * @author 应卓
  * @since 3.5.3
  */
-public class SM2Algorithm extends Algorithm {
+public class SM2Algorithm extends AbstractAlgorithm {
 
 	private static final byte[] DEFAULT_ID = "国密-SM2".getBytes(UTF_8);
 
@@ -49,7 +46,7 @@ public class SM2Algorithm extends Algorithm {
 	}
 
 	public SM2Algorithm(String publicKey, String privateKey, @Nullable String id) {
-		super("SM2", "SM2");
+		super("SM2");
 		this.sm2 = SmUtil.sm2(privateKey, publicKey);
 		this.id = Optional.ofNullable(id)
 			.map(s -> s.getBytes(UTF_8))
@@ -58,39 +55,20 @@ public class SM2Algorithm extends Algorithm {
 		this.sm2.setMode(SM2Engine.Mode.C1C3C2);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
-	public void verify(DecodedJWT jwt) throws SignatureVerificationException {
-		try {
-			doVerify(jwt);
-		} catch (SignatureVerificationException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new SignatureVerificationException(this, e);
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public byte[] sign(byte[] bytes) throws SignatureGenerationException {
-		return sm2.sign(bytes, id);
-	}
-
-	public void setMode(SM2Engine.Mode mode) {
-		this.sm2.setMode(mode);
-	}
-
-	private void doVerify(DecodedJWT jwt) throws SignatureVerificationException {
-		var data = String.join(".", jwt.getHeader(), jwt.getPayload()).getBytes(UTF_8);
-		var signature = Base64.getUrlDecoder().decode(jwt.getSignature());
-
-		var ok = sm2.verify(data, signature, id);
-		if (!ok) {
+	protected void doVerify(byte[] data, byte[] signature) throws SignatureVerificationException {
+		if (!sm2.verify(data, signature, id)) {
 			throw new SignatureVerificationException(this);
 		}
 	}
+
+	@Override
+	protected byte[] doSign(byte[] data) throws SignatureGenerationException {
+		return sm2.sign(data, id);
+	}
+
+	public void setMode(SM2Engine.Mode mode) {
+		sm2.setMode(mode);
+	}
+
 }

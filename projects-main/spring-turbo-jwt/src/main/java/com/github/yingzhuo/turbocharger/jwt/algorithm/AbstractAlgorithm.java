@@ -1,0 +1,79 @@
+/*
+ *
+ * Copyright 2022-present the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+package com.github.yingzhuo.turbocharger.jwt.algorithm;
+
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.SignatureGenerationException;
+import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
+
+import java.util.Base64;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+/**
+ * @author 应卓
+ * @since 3.5.3
+ */
+public abstract class AbstractAlgorithm extends Algorithm {
+
+	public AbstractAlgorithm(String name) {
+		super(name, name);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final void verify(DecodedJWT jwt) throws SignatureVerificationException {
+
+		// header + '.' + payload
+		var data = String.join(".", jwt.getHeader(), jwt.getPayload())
+			.getBytes(UTF_8);
+
+		// 签名
+		var signature = Base64.getUrlDecoder().decode(jwt.getSignature());
+
+		try {
+			doVerify(data, signature);
+		} catch (SignatureVerificationException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new SignatureVerificationException(this, e);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final byte[] sign(byte[] bytes) throws SignatureGenerationException {
+		try {
+			return doSign(bytes);
+		} catch (SignatureGenerationException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new SignatureGenerationException(this, e);
+		}
+	}
+
+	protected abstract void doVerify(byte[] data, byte[] signature) throws SignatureVerificationException;
+
+	protected abstract byte[] doSign(byte[] data) throws SignatureGenerationException;
+
+}
