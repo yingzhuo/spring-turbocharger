@@ -25,6 +25,7 @@ dependencies {
 
 	api libs.java.jwt
 	api libs.hutool.crypto
+	api libs.bcprov
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

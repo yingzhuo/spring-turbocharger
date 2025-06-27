@@ -15,53 +15,62 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.key.autoconfiguration;
+package com.github.yingzhuo.turbocharger.jwt.autoconfiguration;
 
-import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.TYPE;
-
-/**
- * @author 应卓
- * @see java.security.KeyStore
- * @since 3.5.3
- */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({TYPE, ANNOTATION_TYPE})
-@Import(ImportKeyStoreCfg.class)
-@Repeatable(ImportKeyStore.Container.class)
-public @interface ImportKeyStore {
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+@Import(ImportSM2AlgorithmCfg.class)
+public @interface ImportSM2Algorithm {
 
+	/**
+	 * Bean的名称
+	 *
+	 * @return Bean的名称
+	 */
 	String beanName() default "";
 
+	/**
+	 * Bean的别名 (多个)
+	 *
+	 * @return Bean的别名
+	 */
 	String[] aliasesOfBean() default {};
 
+	/**
+	 * 是否为primary属性的Bean
+	 *
+	 * @return 是否为primary属性的Bean
+	 */
 	boolean primary() default false;
 
+	/**
+	 * Bean的Scope
+	 *
+	 * @return bean的Scope
+	 * @see BeanDefinition#SCOPE_SINGLETON
+	 * @see BeanDefinition#SCOPE_PROTOTYPE
+	 */
 	String scope() default BeanDefinition.SCOPE_SINGLETON;
 
-	String location();
+	/**
+	 * 公钥字符串 (Hex或Base64)
+	 *
+	 * @return 公钥字符串
+	 */
+	String publicKeyText();
 
-	KeyStoreType type() default KeyStoreType.PKCS12;
-
-	String storepass();
-
-	// -----------------------------------------------------------------------------------------------------------------
-
-	@Inherited
-	@Documented
-	@Retention(RetentionPolicy.RUNTIME)
-	@Target({TYPE, ANNOTATION_TYPE})
-	@Import(ImportKeyStoreCfg.class)
-	@interface Container {
-		public ImportKeyStore[] value();
-	}
+	/**
+	 * 私钥字符串 (Hex或Base64)
+	 *
+	 * @return 公钥字符串
+	 */
+	String privateKeyText();
 
 }

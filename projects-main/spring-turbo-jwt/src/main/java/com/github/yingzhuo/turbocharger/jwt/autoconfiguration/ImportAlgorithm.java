@@ -46,21 +46,21 @@ public @interface ImportAlgorithm {
 	 *
 	 * @return Bean的名称
 	 */
-	public String beanName() default "";
+	String beanName() default "";
 
 	/**
-	 * Bean的别名
+	 * Bean的别名 (多个)
 	 *
 	 * @return Bean的别名
 	 */
-	public String[] aliasesOfBean() default {};
+	String[] aliasesOfBean() default {};
 
 	/**
 	 * 是否为primary属性的Bean
 	 *
 	 * @return 是否为primary属性的Bean
 	 */
-	public boolean primary() default false;
+	boolean primary() default false;
 
 	/**
 	 * Bean的Scope
@@ -69,27 +69,27 @@ public @interface ImportAlgorithm {
 	 * @see BeanDefinition#SCOPE_SINGLETON
 	 * @see BeanDefinition#SCOPE_PROTOTYPE
 	 */
-	public String scope() default BeanDefinition.SCOPE_SINGLETON;
+	String scope() default BeanDefinition.SCOPE_SINGLETON;
 
 	/**
 	 * pem资源位置
 	 *
 	 * @return pem资源位置
 	 */
-	public String pemLocation();
+	String pemLocation();
 
 	/**
 	 * 私钥密码
 	 *
 	 * @return 私钥密码
 	 */
-	public String keypass() default "";
+	String keypass() default "";
 
 	/**
 	 * 算法类型
 	 *
 	 * @return 算法类型
 	 */
-	public AlgorithmKind kind();
+	AlgorithmKind kind();
 
 }

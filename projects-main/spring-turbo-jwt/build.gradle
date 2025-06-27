@@ -37,6 +37,12 @@ dependencies {
 	// jwt tool
 	api libs.java.jwt
 
+	// hutool-crypto
+	implementation libs.hutool.crypto
+
+	// BC
+	implementation libs.bcprov
+
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

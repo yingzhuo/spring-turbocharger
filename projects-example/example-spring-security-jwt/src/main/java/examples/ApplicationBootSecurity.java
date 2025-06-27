@@ -17,8 +17,7 @@
  */
 package examples;
 
-import com.github.yingzhuo.turbocharger.jwt.autoconfiguration.AlgorithmKind;
-import com.github.yingzhuo.turbocharger.jwt.autoconfiguration.ImportAlgorithm;
+import com.github.yingzhuo.turbocharger.jwt.autoconfiguration.ImportSM2Algorithm;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
 import com.github.yingzhuo.turbocharger.security.filter.factory.JwtTokenAuthenticationFilterFactoryBean;
@@ -44,9 +43,10 @@ import org.springframework.security.web.SecurityFilterChain;
 	securedEnabled = true,
 	jsr250Enabled = true
 )
-@ImportAlgorithm(
-	pemLocation = "classpath:rsa2048.pem",
-	kind = AlgorithmKind.RSA512
+@ImportSM2Algorithm(
+	primary = true,
+	publicKeyText = "3059301306072a8648ce3d020106082a811ccf5501822d0342000437aa2b53bcff60b2a27c9cb688092100bddf075f13c717ad490503431ba417b432d304b3fb1192748240089b557da204204e1ce263e84f8d33a77388761ec74a",
+	privateKeyText = "308193020100301306072a8648ce3d020106082a811ccf5501822d047930770201010420f69a150953889cd069e2b7e818226ffb854dcc3e41479a87489049ae0bfa868ca00a06082a811ccf5501822da1440342000437aa2b53bcff60b2a27c9cb688092100bddf075f13c717ad490503431ba417b432d304b3fb1192748240089b557da204204e1ce263e84f8d33a77388761ec74a"
 )
 public class ApplicationBootSecurity {
 
