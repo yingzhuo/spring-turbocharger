@@ -92,4 +92,13 @@ public @interface ImportAlgorithm {
 	 */
 	AlgorithmKind kind();
 
+	// -----------------------------------------------------------------------------------------------------------------
+
+	/**
+	 * @author 应卓
+	 * @since 3.5.3
+	 */
+	enum AlgorithmKind {
+		RSA256, RSA384, RSA512, ECDSA256, ECDSA384, ECDSA512;
+	}
 }
