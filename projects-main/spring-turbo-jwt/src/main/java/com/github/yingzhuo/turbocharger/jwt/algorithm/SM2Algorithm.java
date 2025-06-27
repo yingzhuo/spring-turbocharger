@@ -58,17 +58,23 @@ public class SM2Algorithm extends Algorithm {
 		this.sm2.setMode(SM2Engine.Mode.C1C3C2);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void verify(DecodedJWT jwt) throws SignatureVerificationException {
-		var data = String.join(".", jwt.getHeader(), jwt.getPayload()).getBytes(UTF_8);
-		var signature = Base64.getUrlDecoder().decode(jwt.getSignature());
-
-		var ok = sm2.verify(data, signature, id);
-		if (!ok) {
-			throw new SignatureVerificationException(this);
+		try {
+			doVerify(jwt);
+		} catch (SignatureVerificationException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new SignatureVerificationException(this, e);
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public byte[] sign(byte[] bytes) throws SignatureGenerationException {
 		return sm2.sign(bytes, id);
@@ -78,4 +84,13 @@ public class SM2Algorithm extends Algorithm {
 		this.sm2.setMode(mode);
 	}
 
+	private void doVerify(DecodedJWT jwt) throws SignatureVerificationException {
+		var data = String.join(".", jwt.getHeader(), jwt.getPayload()).getBytes(UTF_8);
+		var signature = Base64.getUrlDecoder().decode(jwt.getSignature());
+
+		var ok = sm2.verify(data, signature, id);
+		if (!ok) {
+			throw new SignatureVerificationException(this);
+		}
+	}
 }
