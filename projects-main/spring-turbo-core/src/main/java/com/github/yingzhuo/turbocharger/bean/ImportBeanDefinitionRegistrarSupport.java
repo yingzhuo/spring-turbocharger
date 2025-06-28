@@ -71,13 +71,6 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	private BeanFactory beanFactory = new DefaultListableBeanFactory();
 
 	/**
-	 * 默认构造方法
-	 */
-	public ImportBeanDefinitionRegistrarSupport() {
-		super();
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -186,9 +179,9 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	 * @param importingAnnotation 导入元注释类型
 	 * @return 导入元注释的相关信息
 	 */
-	protected Set<AnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
+	protected Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
 		var attrMap = metadata.getAnnotationAttributes(importingAnnotation.getName(), false);
-		return attrMap == null ? Set.of() : Set.of(new EnvironmentAnnotationAttributes(environment, AnnotationAttributes.fromMap(attrMap)));
+		return attrMap == null ? Set.of() : Set.of(new SmartAnnotationAttributes(environment, AnnotationAttributes.fromMap(attrMap)));
 	}
 
 	/**
@@ -199,7 +192,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	 * @param importingContainerAnnotation 导入元注释类型 (repeatable)
 	 * @return 导入元注释的相关信息
 	 */
-	protected Set<AnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation, @Nullable Class<? extends Annotation> importingContainerAnnotation) {
+	protected Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation, @Nullable Class<? extends Annotation> importingContainerAnnotation) {
 		if (importingContainerAnnotation == null) {
 			return getAnnotationAttributesSet(metadata, importingAnnotation);
 		}
@@ -207,7 +200,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 		return metadata
 			.getMergedRepeatableAnnotationAttributes(importingAnnotation, importingContainerAnnotation, false, true)
 			.stream()
-			.map(aa -> new EnvironmentAnnotationAttributes(environment, aa))
+			.map(aa -> new SmartAnnotationAttributes(environment, aa))
 			.collect(Collectors.toSet());
 	}
 

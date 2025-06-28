@@ -28,11 +28,11 @@ import java.util.stream.Stream;
  * @author 应卓
  * @since 3.5.3
  */
-public class EnvironmentAnnotationAttributes extends AnnotationAttributes {
+public class SmartAnnotationAttributes extends AnnotationAttributes {
 
 	private final Environment environment;
 
-	public EnvironmentAnnotationAttributes(Environment environment, AnnotationAttributes other) {
+	public SmartAnnotationAttributes(Environment environment, AnnotationAttributes other) {
 		super(other);
 		this.environment = environment;
 	}
@@ -55,6 +55,11 @@ public class EnvironmentAnnotationAttributes extends AnnotationAttributes {
 		return Stream.of(array)
 			.map(environment::resolvePlaceholders)
 			.toArray(String[]::new);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends Enum<T>> T getEnum(String attributeName, Class<T> enumType) {
+		return (T) super.getEnum(attributeName);
 	}
 
 }
