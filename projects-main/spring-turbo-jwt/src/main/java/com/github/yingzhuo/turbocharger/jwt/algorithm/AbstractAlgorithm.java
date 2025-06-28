@@ -22,9 +22,8 @@ import com.auth0.jwt.exceptions.SignatureGenerationException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author 应卓
@@ -32,6 +31,11 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  */
 public abstract class AbstractAlgorithm extends Algorithm {
 
+	/**
+	 * 构造方法
+	 *
+	 * @param name 算法名称
+	 */
 	public AbstractAlgorithm(String name) {
 		super(name, name);
 	}
@@ -44,7 +48,7 @@ public abstract class AbstractAlgorithm extends Algorithm {
 
 		// header + '.' + payload
 		var data = String.join(".", jwt.getHeader(), jwt.getPayload())
-			.getBytes(UTF_8);
+			.getBytes(StandardCharsets.UTF_8);
 
 		// 签名
 		var signature = Base64.getUrlDecoder().decode(jwt.getSignature());
@@ -72,8 +76,22 @@ public abstract class AbstractAlgorithm extends Algorithm {
 		}
 	}
 
+	/**
+	 * 验证
+	 *
+	 * @param data 需要验证的部分
+	 * @param signature 签名部分
+	 * @throws SignatureVerificationException 签名验证错误
+	 */
 	protected abstract void doVerify(byte[] data, byte[] signature) throws SignatureVerificationException;
 
+	/**
+	 * 签名
+	 *
+	 * @param data 需要签名的数据
+	 * @return 签名后的数据
+	 * @throws SignatureGenerationException 签名错误
+	 */
 	protected abstract byte[] doSign(byte[] data) throws SignatureGenerationException;
 
 }
