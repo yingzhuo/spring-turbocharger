@@ -45,7 +45,8 @@ import java.util.stream.Stream;
  * @see SpringFactoriesUtils
  * @since 3.5.0
  */
-public sealed interface SPILoader<T> extends Supplier<Stream<T>> permits SPILoader.Default {
+@FunctionalInterface
+public interface SPILoader<T> extends Supplier<Stream<T>> {
 
 	/**
 	 * 获取默认的加载器

@@ -19,7 +19,6 @@ package com.github.yingzhuo.turbocharger.bean;
 
 import com.github.yingzhuo.turbocharger.bean.classpath.ClassPathScanner;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -57,26 +56,22 @@ import java.util.stream.Stream;
  *
  * @author 应卓
  * @see ClassPathScanner
+ * @see Environment
+ * @see BeanFactory
+ * @see ResourceLoader
+ * @see AnnotationAttributes
+ * @see SmartAnnotationAttributes
  * @since 3.5.3
  */
 public abstract class ImportBeanDefinitionRegistrarSupport
-	implements ImportBeanDefinitionRegistrar, ResourceLoaderAware, EnvironmentAware, BeanFactoryAware, BeanClassLoaderAware, EnvironmentCapable {
+	implements ImportBeanDefinitionRegistrar, ResourceLoaderAware, EnvironmentAware, BeanFactoryAware, EnvironmentCapable {
 
 	protected final String SCOPE_SINGLETON = ConfigurableBeanFactory.SCOPE_SINGLETON;
 	protected final String SCOPE_PROTOTYPE = ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
 	private ResourceLoader resourceLoader = ApplicationResourceLoader.get();
 	private Environment environment = new StandardEnvironment();
-	private ClassLoader beanClassLoader = Thread.currentThread().getContextClassLoader();
 	private BeanFactory beanFactory = new DefaultListableBeanFactory();
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setBeanClassLoader(ClassLoader classLoader) {
-		this.beanClassLoader = classLoader;
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -114,15 +109,6 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	 */
 	public ResourceLoader getResourceLoader() {
 		return resourceLoader;
-	}
-
-	/**
-	 * 获取{@link ClassLoader }实例
-	 *
-	 * @return {@link ClassLoader} 实例
-	 */
-	public ClassLoader getBeanClassLoader() {
-		return beanClassLoader;
 	}
 
 	/**

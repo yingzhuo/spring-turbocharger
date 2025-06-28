@@ -22,6 +22,8 @@ import com.github.yingzhuo.turbocharger.util.StringPool;
 import java.util.UUID;
 
 /**
+ * {@link UUID} 相关工具
+ *
  * @author 应卓
  * @since 3.4.4
  */

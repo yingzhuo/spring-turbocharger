@@ -30,12 +30,6 @@ import org.springframework.util.StringUtils;
  */
 final class InternalConverterUtils {
 
-	/**
-	 * 私有构造方法
-	 */
-	private InternalConverterUtils() {
-	}
-
 	public static <T extends RuntimeException> RuntimeException transform(T e) {
 
 		if ((e instanceof MessageSourceResolvable) || (e instanceof MultiMessageSourceResolvable)) {

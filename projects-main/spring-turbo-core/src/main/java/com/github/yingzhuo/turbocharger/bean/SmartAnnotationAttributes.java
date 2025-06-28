@@ -63,6 +63,14 @@ public class SmartAnnotationAttributes extends AnnotationAttributes {
 			.toArray(String[]::new);
 	}
 
+	/**
+	 * 获取枚举值
+	 *
+	 * @param attributeName 属性名称
+	 * @param enumType      枚举类型
+	 * @return 枚举值
+	 * @see AnnotationAttributes#getEnum(String)
+	 */
 	@SuppressWarnings("unchecked")
 	public <T extends Enum<T>> T getEnum(String attributeName, Class<T> enumType) {
 		return (T) super.getEnum(attributeName);

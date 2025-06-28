@@ -27,23 +27,61 @@ import java.security.cert.X509Certificate;
 import java.util.List;
 
 /**
+ * 对秘钥/密钥对的简易封装
+ *
  * @author 应卓
+ * @see com.github.yingzhuo.turbocharger.util.crypto.CipherUtils
+ * @see com.github.yingzhuo.turbocharger.util.crypto.SignatureUtils
  * @since 3.5.3
  */
 public interface KeyBundle extends Serializable {
 
+	/**
+	 * 获取公钥
+	 *
+	 * @param <T> 公钥的具体类型
+	 * @return 公钥
+	 */
 	public <T extends PublicKey> T getPublicKey();
 
+	/**
+	 * 获取私钥
+	 *
+	 * @param <T> 私钥的具体类型
+	 * @return 私钥
+	 */
 	public <T extends PrivateKey> T getPrivateKey();
 
+	/**
+	 * 获取密钥对
+	 *
+	 * @return 秘钥对
+	 */
 	public default KeyPair getKeyPair() {
 		return new KeyPair(getPublicKey(), getPrivateKey());
 	}
 
+	/**
+	 * 获取证书
+	 *
+	 * @param <T> 证书的具体类型
+	 * @return 证书
+	 */
 	public <T extends X509Certificate> T getCertificate();
 
+	/**
+	 * 获取证书链
+	 *
+	 * @return 证书链
+	 */
 	public List<X509Certificate> getCertificateChain();
 
+	/**
+	 * 获取alias <br>
+	 * 当秘钥从 {@link java.security.KeyStore} 中获取时不为空值
+	 *
+	 * @return alias
+	 */
 	@Nullable
 	public default String alias() {
 		return null;
