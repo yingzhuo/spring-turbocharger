@@ -32,6 +32,12 @@ public class SmartAnnotationAttributes extends AnnotationAttributes {
 
 	private final Environment environment;
 
+	/**
+	 * 构造方法
+	 *
+	 * @param environment {@link Environment} 实例
+	 * @param other       需要包装的 {@link AnnotationAttributes} 实例
+	 */
 	public SmartAnnotationAttributes(Environment environment, AnnotationAttributes other) {
 		super(other);
 		this.environment = environment;

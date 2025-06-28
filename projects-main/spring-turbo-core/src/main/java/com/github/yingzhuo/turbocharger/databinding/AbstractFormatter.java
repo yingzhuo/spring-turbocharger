@@ -63,6 +63,7 @@ public abstract class AbstractFormatter<T> implements Formatter<T> {
 	 * @param <O>        共享对象类型实例
 	 * @see ThreadSharedObjects#put(Class, Object)
 	 */
+	@Deprecated(since = "3.5.3")
 	protected final <O> void setSharedObject(Class<O> objectType, O object) {
 		ThreadSharedObjects.put(objectType, object);
 	}
@@ -74,6 +75,7 @@ public abstract class AbstractFormatter<T> implements Formatter<T> {
 	 * @param object     共享对象
 	 * @see ThreadSharedObjects#put(String, Object)
 	 */
+	@Deprecated(since = "3.5.3")
 	protected final void setSharedObject(String objectName, Object object) {
 		ThreadSharedObjects.put(objectName, object);
 	}

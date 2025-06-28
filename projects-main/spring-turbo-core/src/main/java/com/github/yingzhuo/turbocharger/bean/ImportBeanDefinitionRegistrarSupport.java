@@ -200,7 +200,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 		return metadata
 			.getMergedRepeatableAnnotationAttributes(importingAnnotation, importingContainerAnnotation, false, true)
 			.stream()
-			.map(aa -> new SmartAnnotationAttributes(environment, aa))
+			.map(attr -> new SmartAnnotationAttributes(environment, attr))
 			.collect(Collectors.toSet());
 	}
 

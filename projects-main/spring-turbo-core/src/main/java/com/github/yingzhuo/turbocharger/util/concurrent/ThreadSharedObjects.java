@@ -30,6 +30,7 @@ import java.util.Map;
  * @since 3.3.1
  */
 @SuppressWarnings("unchecked")
+@Deprecated(since = "3.5.3")
 public final class ThreadSharedObjects {
 
 	/**
