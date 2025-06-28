@@ -49,6 +49,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -187,7 +188,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	 */
 	protected Set<AnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
 		var attrMap = metadata.getAnnotationAttributes(importingAnnotation.getName(), false);
-		return attrMap == null ? Set.of() : Set.of(AnnotationAttributes.fromMap(attrMap));
+		return attrMap == null ? Set.of() : Set.of(new EnvironmentAnnotationAttributes(environment, AnnotationAttributes.fromMap(attrMap)));
 	}
 
 	/**
@@ -203,12 +204,11 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 			return getAnnotationAttributesSet(metadata, importingAnnotation);
 		}
 
-		return metadata.getMergedRepeatableAnnotationAttributes(
-			importingAnnotation,
-			importingContainerAnnotation,
-			false,
-			true
-		);
+		return metadata
+			.getMergedRepeatableAnnotationAttributes(importingAnnotation, importingContainerAnnotation, false, true)
+			.stream()
+			.map(aa -> new EnvironmentAnnotationAttributes(environment, aa))
+			.collect(Collectors.toSet());
 	}
 
 	/**

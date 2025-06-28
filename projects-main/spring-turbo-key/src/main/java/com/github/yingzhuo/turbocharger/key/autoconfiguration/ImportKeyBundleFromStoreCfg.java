@@ -69,11 +69,11 @@ class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 	}
 
 	private KeyBundle createKeyBundle(AnnotationAttributes attr) {
-		var location = getEnvironment().resolvePlaceholders(attr.getString("location"));
+		var location = attr.getString("location");
 		var type = (KeyStoreType) attr.getEnum("type");
-		var storepass = getEnvironment().resolvePlaceholders(attr.getString("storepass"));
-		var alias = getEnvironment().resolvePlaceholders(attr.getString("aliasOfStore"));
-		var keypass = getEnvironment().resolvePlaceholders(StringUtils.hasText(attr.getString("keypass")) ? attr.getString("keypass") : storepass);
+		var storepass = attr.getString("storepass");
+		var alias = attr.getString("aliasOfStore");
+		var keypass = StringUtils.hasText(attr.getString("keypass")) ? attr.getString("keypass") : storepass;
 
 		var ks = KeyStoreUtils.loadKeyStore(getResourceAsInputStream(location), type, storepass);
 

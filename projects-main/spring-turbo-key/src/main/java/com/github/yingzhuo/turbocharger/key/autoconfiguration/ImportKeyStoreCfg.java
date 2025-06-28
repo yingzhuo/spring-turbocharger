@@ -42,9 +42,9 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 	@Override
 	public void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		for (var attr : getAnnotationAttributesSet(metadata, ImportKeyStore.class, ImportKeyStore.Container.class)) {
-			var location = getEnvironment().resolvePlaceholders(attr.getString("location"));
+			var location = attr.getString("location");
 			var type = (KeyStoreType) attr.getEnum("type");
-			var storepass = getEnvironment().resolvePlaceholders(attr.getString("storepass"));
+			var storepass = attr.getString("storepass");
 			var beanName = attr.getString("beanName");
 			var primary = attr.getBoolean("primary");
 

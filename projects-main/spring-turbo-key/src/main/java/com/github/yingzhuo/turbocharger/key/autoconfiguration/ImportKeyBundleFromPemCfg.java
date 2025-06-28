@@ -70,8 +70,8 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 	}
 
 	private KeyBundle createKeyBundle(AnnotationAttributes attr) {
-		var location = getEnvironment().resolvePlaceholders(attr.getString("location"));
-		var keypass = getEnvironment().resolvePlaceholders(attr.getString("keypass"));
+		var location = attr.getString("location");
+		var keypass = attr.getString("keypass");
 
 		var pemText = getResourceAsLines(location)
 				.map(String::trim)

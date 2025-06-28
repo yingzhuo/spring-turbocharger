@@ -41,9 +41,9 @@ class ImportSM2AlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 
 		for (var attr : getAnnotationAttributesSet(metadata, ImportSM2Algorithm.class)) {
 
-			var publicKey = getEnvironment().resolvePlaceholders(attr.getString("publicKeyText"));
-			var privateKey = getEnvironment().resolvePlaceholders(attr.getString("privateKeyText"));
-			var id = getEnvironment().resolvePlaceholders(attr.getString("id"));
+			var publicKey = attr.getString("publicKeyText");
+			var privateKey = attr.getString("privateKeyText");
+			var id = attr.getString("id");
 
 			if (id.isEmpty()) {
 				id = null;
@@ -70,4 +70,5 @@ class ImportSM2AlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 			}
 		}
 	}
+
 }
