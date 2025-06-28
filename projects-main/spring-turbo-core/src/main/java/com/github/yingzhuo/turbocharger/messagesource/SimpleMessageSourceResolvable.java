@@ -59,6 +59,7 @@ public final class SimpleMessageSourceResolvable implements MessageSourceResolva
 	/**
 	 * {@inheritDoc}
 	 */
+	@Nullable
 	@Override
 	public Object[] getArguments() {
 		return arguments;
@@ -67,6 +68,7 @@ public final class SimpleMessageSourceResolvable implements MessageSourceResolva
 	/**
 	 * {@inheritDoc}
 	 */
+	@Nullable
 	@Override
 	public String getDefaultMessage() {
 		return defaultMessages;

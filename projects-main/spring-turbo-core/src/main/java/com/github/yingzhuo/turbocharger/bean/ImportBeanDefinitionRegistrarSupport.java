@@ -167,7 +167,12 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	 */
 	protected Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
 		var attrMap = metadata.getAnnotationAttributes(importingAnnotation.getName(), false);
-		return attrMap == null ? Set.of() : Set.of(new SmartAnnotationAttributes(environment, AnnotationAttributes.fromMap(attrMap)));
+
+		if (attrMap == null) {
+			return Set.of();
+		} else {
+			return Set.of(new SmartAnnotationAttributes(environment, AnnotationAttributes.fromMap(attrMap)));
+		}
 	}
 
 	/**
