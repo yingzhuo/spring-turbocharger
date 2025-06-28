@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.databinding;
 
-import com.github.yingzhuo.turbocharger.util.concurrent.ThreadSharedObjects;
 import org.springframework.util.ClassUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -61,28 +60,5 @@ public abstract class AbstractValidator<T> implements Validator {
 	 * @param errors 错误
 	 */
 	protected abstract void doValidate(T target, Errors errors);
-
-	/**
-	 * 加入一个线程安全的共享对象。在线程的其他地方可以取出这个共享对象。
-	 *
-	 * @param objectType 共享对象类型
-	 * @param object     共享对象
-	 * @param <O>        共享对象类型实例
-	 * @see ThreadSharedObjects#put(Class, Object)
-	 */
-	protected final <O> void setSharedObject(Class<O> objectType, O object) {
-		ThreadSharedObjects.put(objectType, object);
-	}
-
-	/**
-	 * 加入一个线程安全的共享对象。在线程的其他地方可以取出这个共享对象。
-	 *
-	 * @param objectName 共享对象名称
-	 * @param object     共享对象
-	 * @see ThreadSharedObjects#put(String, Object)
-	 */
-	protected final void setSharedObject(String objectName, Object object) {
-		ThreadSharedObjects.put(objectName, object);
-	}
 
 }

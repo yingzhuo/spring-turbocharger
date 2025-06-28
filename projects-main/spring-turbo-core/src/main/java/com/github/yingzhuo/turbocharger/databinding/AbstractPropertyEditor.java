@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.databinding;
 
 import com.github.yingzhuo.turbocharger.exception.DataBindingException;
-import com.github.yingzhuo.turbocharger.util.concurrent.ThreadSharedObjects;
 
 import java.beans.PropertyEditor;
 import java.beans.PropertyEditorSupport;
@@ -52,30 +51,5 @@ public abstract class AbstractPropertyEditor<T> extends PropertyEditorSupport im
 	 * @throws DataBindingException 数据转换失败或数据非法
 	 */
 	protected abstract T convert(String text) throws DataBindingException;
-
-	/**
-	 * 加入一个线程安全的共享对象。在线程的其他地方可以取出这个共享对象。
-	 *
-	 * @param objectType 共享对象类型
-	 * @param object     共享对象
-	 * @param <O>        共享对象类型实例
-	 * @see ThreadSharedObjects#put(Class, Object)
-	 */
-	@Deprecated(since = "3.5.3")
-	protected final <O> void setSharedObject(Class<O> objectType, O object) {
-		ThreadSharedObjects.put(objectType, object);
-	}
-
-	/**
-	 * 加入一个线程安全的共享对象。在线程的其他地方可以取出这个共享对象。
-	 *
-	 * @param objectName 共享对象名称
-	 * @param object     共享对象
-	 * @see ThreadSharedObjects#put(String, Object)
-	 */
-	@Deprecated(since = "3.5.3")
-	protected final void setSharedObject(String objectName, Object object) {
-		ThreadSharedObjects.put(objectName, object);
-	}
 
 }

@@ -19,7 +19,6 @@ package com.github.yingzhuo.turbocharger.databinding;
 
 import com.github.yingzhuo.turbocharger.exception.DataBindingException;
 import com.github.yingzhuo.turbocharger.util.collection.ArrayUtils;
-import com.github.yingzhuo.turbocharger.util.concurrent.ThreadSharedObjects;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.GenericConverter;
 import org.springframework.lang.Nullable;
@@ -98,30 +97,5 @@ public abstract class AbstractGenericConverter implements GenericConverter {
 	 */
 	@Nullable
 	protected abstract Object doConvert(@Nullable Object source, TypeDescriptor sourceType, TypeDescriptor targetType) throws DataBindingException;
-
-	/**
-	 * 加入一个线程安全的共享对象。在线程的其他地方可以取出这个共享对象。
-	 *
-	 * @param objectType 共享对象类型
-	 * @param object     共享对象
-	 * @param <O>        共享对象类型实例
-	 * @see ThreadSharedObjects#put(Class, Object)
-	 */
-	@Deprecated(since = "3.5.3")
-	protected final <O> void setSharedObject(Class<O> objectType, O object) {
-		ThreadSharedObjects.put(objectType, object);
-	}
-
-	/**
-	 * 加入一个线程安全的共享对象。在线程的其他地方可以取出这个共享对象。
-	 *
-	 * @param objectName 共享对象名称
-	 * @param object     共享对象
-	 * @see ThreadSharedObjects#put(String, Object)
-	 */
-	@Deprecated(since = "3.5.3")
-	protected final void setSharedObject(String objectName, Object object) {
-		ThreadSharedObjects.put(objectName, object);
-	}
 
 }
