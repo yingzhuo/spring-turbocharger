@@ -41,8 +41,6 @@ public @interface ImportKeyStore {
 
 	String beanName() default "";
 
-	String[] aliasesOfBean() default {};
-
 	boolean primary() default false;
 
 	String scope() default BeanDefinition.SCOPE_SINGLETON;

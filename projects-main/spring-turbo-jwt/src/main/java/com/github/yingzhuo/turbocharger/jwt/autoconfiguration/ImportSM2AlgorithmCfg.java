@@ -64,10 +64,6 @@ class ImportSM2AlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 			}
 
 			registry.registerBeanDefinition(beanName, beanDef);
-
-			for (var alias : attr.getStringArray("aliasesOfBean")) {
-				registry.registerAlias(alias, beanName);
-			}
 		}
 	}
 

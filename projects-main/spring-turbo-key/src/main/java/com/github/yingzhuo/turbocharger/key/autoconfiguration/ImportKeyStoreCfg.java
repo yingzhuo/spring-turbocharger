@@ -63,10 +63,6 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 			}
 
 			registry.registerBeanDefinition(beanName, beanDef);
-
-			for (var alias : attr.getStringArray("aliasesOfBean")) {
-				registry.registerAlias(beanName, alias);
-			}
 		}
 	}
 

@@ -62,10 +62,6 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 			}
 
 			registry.registerBeanDefinition(beanName, beanDef);
-
-			for (String alias : attr.getStringArray("aliasesOfBean")) {
-				registry.registerAlias(alias, beanName);
-			}
 		}
 	}
 

@@ -49,13 +49,6 @@ public @interface ImportAlgorithm {
 	String beanName() default "";
 
 	/**
-	 * Bean的别名 (多个)
-	 *
-	 * @return Bean的别名
-	 */
-	String[] aliasesOfBean() default {};
-
-	/**
 	 * 是否为primary属性的Bean
 	 *
 	 * @return 是否为primary属性的Bean
