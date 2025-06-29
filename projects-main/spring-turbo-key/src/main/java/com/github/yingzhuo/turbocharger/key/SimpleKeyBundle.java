@@ -33,26 +33,41 @@ public record SimpleKeyBundle(@Nullable String alias,
 							  X509Certificate certificate,
 							  PrivateKey privateKey) implements KeyBundle {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public <T extends PublicKey> T getPublicKey() {
 		return (T) getCertificate().getPublicKey();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public <T extends PrivateKey> T getPrivateKey() {
 		return (T) this.privateKey;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public <T extends X509Certificate> T getCertificate() {
 		return (T) this.certificate;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<X509Certificate> getCertificateChain() {
 		return List.of(this.certificate);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Nullable
 	@Override
 	public String alias() {

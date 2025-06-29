@@ -22,6 +22,8 @@ import org.springframework.core.io.support.PropertySourceFactory;
 
 /**
  * @author 应卓
+ * @see org.springframework.context.annotation.PropertySource
+ * @see org.springframework.context.annotation.PropertySources
  * @since 3.4.5
  */
 public class TomlPropertySourceFactory extends AbstractPropertySourceFactory implements PropertySourceFactory {

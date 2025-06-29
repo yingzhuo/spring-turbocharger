@@ -20,6 +20,7 @@ package com.github.yingzhuo.turbocharger.webcli.cli;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.lang.Nullable;
 
+import java.security.KeyStore;
 import java.time.Duration;
 
 /**
@@ -35,23 +36,24 @@ public final class Apache5ClientHttpRequestFactoryFactories {
 	 * 私有构造方法
 	 */
 	private Apache5ClientHttpRequestFactoryFactories() {
-		super();
 	}
 
 	public static HttpComponentsClientHttpRequestFactory create() {
-		return create(null, null, null);
+		return create(null, null, null, null);
 	}
 
 	public static HttpComponentsClientHttpRequestFactory create(
-		@Nullable ClientCertificate certificate,
+		@Nullable KeyStore loadedKeyStore,
+		@Nullable String keyStorePassword,
 		@Nullable Duration connectTimeout,
 		@Nullable Duration requestTimeout
 	) {
-		var factoryBean = new Apache5ClientHttpRequestFactoryBean();
-		factoryBean.setClientCertificate(certificate);
-		factoryBean.setConnectTimeout(connectTimeout);
-		factoryBean.setRequestTimeout(requestTimeout);
-		return (HttpComponentsClientHttpRequestFactory) factoryBean.getObject();
+		var factory = new Apache5ClientHttpRequestFactoryBean();
+		factory.setLoadedKeyStore(loadedKeyStore);
+		factory.setKeyPassword(keyStorePassword);
+		factory.setConnectTimeout(connectTimeout);
+		factory.setRequestTimeout(requestTimeout);
+		return (HttpComponentsClientHttpRequestFactory) factory.getObject();
 	}
 
 }

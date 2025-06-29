@@ -17,8 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.webcli.cli.support;
 
-import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
-import com.github.yingzhuo.turbocharger.webcli.cli.ClientCertificate;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import org.apache.hc.client5.http.ssl.TrustAllStrategy;
@@ -28,6 +26,7 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.lang.Nullable;
 
 import javax.net.ssl.SSLContext;
+import java.security.KeyStore;
 import java.time.Duration;
 
 /**
@@ -46,7 +45,10 @@ public abstract class AbstractClientHttpRequestFactoryBean implements FactoryBea
 	protected Duration requestTimeout;
 
 	@Nullable
-	private ClientCertificate clientCertificate;
+	private KeyStore loadedKeyStore;
+
+	@Nullable
+	private String keyPassword;
 
 	/**
 	 * 构造方法
@@ -68,13 +70,8 @@ public abstract class AbstractClientHttpRequestFactoryBean implements FactoryBea
 		var builder = SSLContextBuilder.create()
 			.loadTrustMaterial(TrustAllStrategy.INSTANCE);
 
-		if (clientCertificate != null) {
-			var keyStore = KeyStoreUtils.loadKeyStore(
-				clientCertificate.getResource().getInputStream(),
-				clientCertificate.getKeyStoreType(),
-				clientCertificate.getStorePassword()
-			);
-			builder.loadKeyMaterial(keyStore, clientCertificate.getKeyPassword().toCharArray());
+		if (loadedKeyStore != null && keyPassword != null) {
+			builder.loadKeyMaterial(loadedKeyStore, keyPassword.toCharArray());
 		}
 
 		return builder.build();

@@ -23,9 +23,6 @@ import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.TYPE;
-
 /**
  * @author 应卓
  * @see java.security.KeyStore
@@ -34,7 +31,7 @@ import static java.lang.annotation.ElementType.TYPE;
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({TYPE, ANNOTATION_TYPE})
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Import(ImportKeyStoreCfg.class)
 @Repeatable(ImportKeyStore.Container.class)
 public @interface ImportKeyStore {
@@ -56,7 +53,7 @@ public @interface ImportKeyStore {
 	@Inherited
 	@Documented
 	@Retention(RetentionPolicy.RUNTIME)
-	@Target({TYPE, ANNOTATION_TYPE})
+	@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 	@Import(ImportKeyStoreCfg.class)
 	@interface Container {
 		public ImportKeyStore[] value();

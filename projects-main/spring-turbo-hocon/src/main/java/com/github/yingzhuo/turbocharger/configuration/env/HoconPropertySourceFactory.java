@@ -23,6 +23,8 @@ import com.github.yingzhuo.turbocharger.core.configuration.YamlPropertySourceFac
 /**
  * @author 应卓
  * @see YamlPropertySourceFactory
+ * @see org.springframework.context.annotation.PropertySource
+ * @see org.springframework.context.annotation.PropertySources
  * @since 2.1.3
  */
 public class HoconPropertySourceFactory extends AbstractPropertySourceFactory {
