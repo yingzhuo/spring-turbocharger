@@ -21,6 +21,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.jwt.algorithm.SM2Algorithm;
 import org.bouncycastle.crypto.engines.SM2Engine;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
@@ -56,6 +57,7 @@ class ImportSM2AlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 			var beanDef = BeanDefinitionBuilder.genericBeanDefinition(Algorithm.class, () -> alg)
 				.setScope(attr.getString("scope"))
 				.setPrimary(attr.getBoolean("primary"))
+				.setRole(BeanDefinition.ROLE_APPLICATION)
 				.getBeanDefinition();
 
 			var beanName = attr.getString("beanName");
