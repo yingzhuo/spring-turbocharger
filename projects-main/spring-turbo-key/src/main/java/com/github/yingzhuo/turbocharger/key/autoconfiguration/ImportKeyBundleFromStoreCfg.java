@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
+import com.github.yingzhuo.turbocharger.bean.SmartAnnotationAttributes;
 import com.github.yingzhuo.turbocharger.key.KeyBundle;
 import com.github.yingzhuo.turbocharger.key.SimpleKeyBundle;
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
@@ -25,7 +26,6 @@ import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
-import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
 
@@ -64,11 +64,11 @@ class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 		}
 	}
 
-	private KeyBundle createKeyBundle(AnnotationAttributes attr) {
+	private KeyBundle createKeyBundle(SmartAnnotationAttributes attr) {
 		var location = attr.getString("location");
 		var type = (KeyStoreType) attr.getEnum("type");
 		var storepass = attr.getString("storepass");
-		var alias = attr.getString("aliasOfStore");
+		var alias = attr.getString("alias");
 		var keypass = StringUtils.hasText(attr.getString("keypass")) ? attr.getString("keypass") : storepass;
 
 		var ks = KeyStoreUtils.loadKeyStore(getResourceAsInputStream(location), type, storepass);

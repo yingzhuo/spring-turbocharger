@@ -90,7 +90,7 @@ public @interface ImportKeyBundleFromStore {
 	 *
 	 * @return 库中条目别名
 	 */
-	String aliasOfStore();
+	String alias();
 
 	/**
 	 * 私钥密码

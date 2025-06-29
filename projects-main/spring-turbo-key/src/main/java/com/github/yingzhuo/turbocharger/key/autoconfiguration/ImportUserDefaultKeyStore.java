@@ -39,9 +39,6 @@ public @interface ImportUserDefaultKeyStore {
 	@AliasFor(annotation = ImportKeyStore.class, attribute = "beanName")
 	String beanName() default "";
 
-	@AliasFor(annotation = ImportKeyStore.class, attribute = "aliasesOfBean")
-	String[] aliasesOfBean() default {};
-
 	@AliasFor(annotation = ImportKeyStore.class, attribute = "primary")
 	boolean primary() default false;
 

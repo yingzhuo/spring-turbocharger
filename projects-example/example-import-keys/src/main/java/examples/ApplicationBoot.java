@@ -31,7 +31,7 @@ import java.security.KeyStore;
 
 @SpringBootApplication
 @ImportKeyBundleFromPem(beanName = "kb1", location = "classpath:/rsa2048-nopassword.pem")
-@ImportKeyBundleFromStore(beanName = "kb3", location = "classpath:keystore.p12", storepass = "123456", aliasOfStore = "rsa2048")
+@ImportKeyBundleFromStore(beanName = "kb3", location = "classpath:keystore.p12", storepass = "123456", alias = "rsa2048")
 @ImportUserDefaultKeyStore(beanName = "defaultKeyStore", storepass = "123456")
 public class ApplicationBoot implements ApplicationRunner {
 
