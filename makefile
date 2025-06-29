@@ -19,7 +19,7 @@ build:
 install: add-license-header
 	$(GRADLE) --no-parallel -x "test" -x "check" "publishToMavenLocal"
 
-publish: install
+publish:
 	$(GRADLE) --no-parallel -x "test" -x "check" "publishToMavenCentralPortal"
 
 setup-gradle-wrapper:
