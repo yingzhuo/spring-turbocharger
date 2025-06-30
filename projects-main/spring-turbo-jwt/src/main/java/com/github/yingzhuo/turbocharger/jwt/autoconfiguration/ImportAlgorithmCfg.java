@@ -49,7 +49,7 @@ class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 		for (var attr : getAnnotationAttributesSet(metadata, ImportAlgorithm.class)) {
 			var location = attr.getString("pemLocation");
 			var keypass = attr.getString("keypass");
-			var kind = attr.getEnum("kind", ImportAlgorithm.AlgorithmKind.class);
+			var kind = (ImportAlgorithm.AlgorithmKind) attr.getEnum("kind");
 			var beanName = attr.getString("beanName");
 			var primary = attr.getBoolean("primary");
 			var scope = attr.getString("scope");

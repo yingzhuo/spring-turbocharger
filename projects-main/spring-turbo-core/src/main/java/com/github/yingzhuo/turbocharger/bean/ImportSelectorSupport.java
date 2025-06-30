@@ -23,14 +23,21 @@ import org.springframework.core.type.AnnotationMetadata;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
 
 /**
  * @author 应卓
  * @see ImportBeanDefinitionRegistrarSupport
+ * @see org.springframework.context.annotation.ImportAware
  * @since 3.5.3
  */
 public abstract class ImportSelectorSupport extends AbstractImportingSupport implements ImportSelector {
+
+    /**
+     * 默认构造方法
+     */
+    public ImportSelectorSupport() {
+        super();
+    }
 
     /**
      * {@inheritDoc}
@@ -42,7 +49,7 @@ public abstract class ImportSelectorSupport extends AbstractImportingSupport imp
                     .stream()
                     .filter(Objects::nonNull)
                     .map(String::trim)
-                    .filter(((Predicate<String>) String::isBlank).negate())
+                    .filter(s -> !s.isBlank())
                     .toArray(String[]::new);
         } catch (BeanCreationException e) {
             throw e;

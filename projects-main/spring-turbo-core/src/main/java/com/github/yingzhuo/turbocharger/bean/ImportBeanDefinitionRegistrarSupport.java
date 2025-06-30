@@ -38,6 +38,13 @@ import java.util.function.Supplier;
 public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImportingSupport implements ImportBeanDefinitionRegistrar {
 
 	/**
+	 * 默认构造方法
+	 */
+	public ImportBeanDefinitionRegistrarSupport() {
+		super();
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -108,6 +115,8 @@ public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImpor
 		public final T get() {
 			try {
 				return doGet();
+			} catch (BeanCreationException e) {
+				throw e;
 			} catch (Exception e) {
 				throw new BeanCreationException(e.getMessage(), e);
 			}

@@ -50,6 +50,9 @@ import java.util.stream.Stream;
  * @author 应卓
  * @see org.springframework.context.annotation.ImportSelector
  * @see org.springframework.context.annotation.ImportBeanDefinitionRegistrar
+ * @see Resource
+ * @see Environment
+ * @see BeanFactory
  * @since 3.5.3
  */
 public abstract class AbstractImportingSupport

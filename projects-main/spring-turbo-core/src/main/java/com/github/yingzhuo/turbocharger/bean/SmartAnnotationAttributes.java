@@ -28,6 +28,7 @@ import java.util.stream.Stream;
  * @author 应卓
  * @since 3.5.3
  */
+@SuppressWarnings("unchecked")
 public class SmartAnnotationAttributes extends AnnotationAttributes {
 
 	private final Environment environment;
@@ -71,9 +72,8 @@ public class SmartAnnotationAttributes extends AnnotationAttributes {
 	 * @return 枚举值
 	 * @see AnnotationAttributes#getEnum(String)
 	 */
-	@SuppressWarnings("unchecked")
-	public <T extends Enum<T>> T getEnum(String attributeName, Class<T> enumType) {
-		return (T) super.getEnum(attributeName);
+	public <E extends Enum<E>> E getEnum(String attributeName, Class<E> enumType) {
+		return (E) super.getEnum(attributeName);
 	}
 
 }
