@@ -62,7 +62,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImpor
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+	public final void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
 		// noop
 	}
 
@@ -107,7 +107,6 @@ public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImpor
 	 * @author 应卓
 	 * @see BeanDefinitionBuilder#genericBeanDefinition(Class, Supplier)
 	 * @see AbstractBeanDefinition#setInstanceSupplier(Supplier)
-	 * @since 3.5.3
 	 */
 	public abstract static class BeanInstanceSupplier<T> implements Supplier<T> {
 

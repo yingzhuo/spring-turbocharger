@@ -25,7 +25,6 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.io.ApplicationResourceLoader;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.ResourceLoaderAware;
-import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
@@ -62,6 +61,13 @@ public abstract class AbstractImportingSupport
 	private Environment environment = new StandardEnvironment();
 	private BeanFactory beanFactory = new DefaultListableBeanFactory();
 	private ClassLoader beanClassLoader = Thread.currentThread().getContextClassLoader();
+
+	/**
+	 * 默认构造方法
+	 */
+	public AbstractImportingSupport() {
+		super();
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -124,13 +130,10 @@ public abstract class AbstractImportingSupport
 	 * @return 导入元注释的相关信息
 	 */
 	protected final Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
-		var attrMap = metadata.getAnnotationAttributes(importingAnnotation.getName(), false);
-
-		if (attrMap == null) {
-			return Set.of();
-		} else {
-			return Set.of(new SmartAnnotationAttributes(environment, AnnotationAttributes.fromMap(attrMap)));
-		}
+		return AnnotationAttributesUtils.getAnnotationAttributesSet(metadata, importingAnnotation)
+			.stream()
+			.map(o -> new SmartAnnotationAttributes(environment, o))
+			.collect(Collectors.toUnmodifiableSet());
 	}
 
 	/**
@@ -142,15 +145,10 @@ public abstract class AbstractImportingSupport
 	 * @return 导入元注释的相关信息
 	 */
 	protected final Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation, @Nullable Class<? extends Annotation> importingContainerAnnotation) {
-		if (importingContainerAnnotation == null) {
-			return getAnnotationAttributesSet(metadata, importingAnnotation);
-		}
-
-		return metadata
-			.getMergedRepeatableAnnotationAttributes(importingAnnotation, importingContainerAnnotation, false, true)
+		return AnnotationAttributesUtils.getAnnotationAttributesSet(metadata, importingAnnotation, importingContainerAnnotation)
 			.stream()
-			.map(attr -> new SmartAnnotationAttributes(environment, attr))
-			.collect(Collectors.toSet());
+			.map(o -> new SmartAnnotationAttributes(environment, o))
+			.collect(Collectors.toUnmodifiableSet());
 	}
 
 	/**
@@ -170,7 +168,7 @@ public abstract class AbstractImportingSupport
 	 * @return 导入类
 	 */
 	protected final Class<?> getImportingClass(AnnotationMetadata metadata) {
-		return ClassUtils.resolveClassName(getImportingClassName(metadata), ClassUtils.getDefaultClassLoader());
+		return ClassUtils.resolveClassName(getImportingClassName(metadata), beanClassLoader);
 	}
 
 	/**
