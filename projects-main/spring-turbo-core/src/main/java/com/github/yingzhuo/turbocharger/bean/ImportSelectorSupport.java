@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * {@link ImportSelector} 支持类
+ *
  * @author 应卓
  * @see ImportBeanDefinitionRegistrarSupport
  * @see org.springframework.context.annotation.ImportAware
@@ -45,12 +47,12 @@ public abstract class ImportSelectorSupport extends AbstractImportingSupport imp
     @Override
     public final String[] selectImports(AnnotationMetadata metadata) {
         try {
-            return doSelectImports(metadata)
-                    .stream()
-                    .filter(Objects::nonNull)
-                    .map(String::trim)
-                    .filter(s -> !s.isBlank())
-                    .toArray(String[]::new);
+			return doSelectImports(metadata).stream()
+				.filter(Objects::nonNull)
+				.map(Class::getName)
+				.distinct()
+				.toArray(String[]::new);
+
         } catch (BeanCreationException e) {
             throw e;
         } catch (Exception e) {
@@ -58,6 +60,6 @@ public abstract class ImportSelectorSupport extends AbstractImportingSupport imp
         }
     }
 
-    protected abstract List<String> doSelectImports(AnnotationMetadata metadata) throws Exception;
+	protected abstract List<Class<?>> doSelectImports(AnnotationMetadata metadata) throws Exception;
 
 }
