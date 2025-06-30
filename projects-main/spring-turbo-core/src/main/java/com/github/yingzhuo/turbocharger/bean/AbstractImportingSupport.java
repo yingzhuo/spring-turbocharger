@@ -31,8 +31,8 @@ import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.core.type.ClassMetadata;
 import org.springframework.lang.Nullable;
-import org.springframework.util.ClassUtils;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -103,19 +103,19 @@ public abstract class AbstractImportingSupport
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	protected final Environment getEnvironment() {
+	public final Environment getEnvironment() {
 		return this.environment;
 	}
 
-	protected final ResourceLoader getResourceLoader() {
+	public final ResourceLoader getResourceLoader() {
 		return resourceLoader;
 	}
 
-	protected final BeanFactory getBeanFactory() {
+	public final BeanFactory getBeanFactory() {
 		return beanFactory;
 	}
 
-	protected final ClassLoader getBeanClassLoader() {
+	public final ClassLoader getBeanClassLoader() {
 		return beanClassLoader;
 	}
 
@@ -129,8 +129,8 @@ public abstract class AbstractImportingSupport
 	 * @param importingAnnotation 导入元注释类型
 	 * @return 导入元注释的相关信息
 	 */
-	protected final Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
-		return AnnotationAttributesUtils.getAnnotationAttributesSet(metadata, importingAnnotation)
+	public final Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
+		return ImportingUtils.getAnnotationAttributesSet(metadata, importingAnnotation)
 			.stream()
 			.map(o -> new SmartAnnotationAttributes(environment, o))
 			.collect(Collectors.toUnmodifiableSet());
@@ -144,8 +144,8 @@ public abstract class AbstractImportingSupport
 	 * @param importingContainerAnnotation 导入元注释类型 (repeatable)
 	 * @return 导入元注释的相关信息
 	 */
-	protected final Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation, @Nullable Class<? extends Annotation> importingContainerAnnotation) {
-		return AnnotationAttributesUtils.getAnnotationAttributesSet(metadata, importingAnnotation, importingContainerAnnotation)
+	public final Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation, @Nullable Class<? extends Annotation> importingContainerAnnotation) {
+		return ImportingUtils.getAnnotationAttributesSet(metadata, importingAnnotation, importingContainerAnnotation)
 			.stream()
 			.map(o -> new SmartAnnotationAttributes(environment, o))
 			.collect(Collectors.toUnmodifiableSet());
@@ -157,8 +157,8 @@ public abstract class AbstractImportingSupport
 	 * @param metadata 导入元信息
 	 * @return 导入类的名称
 	 */
-	public final String getImportingClassName(AnnotationMetadata metadata) {
-		return metadata.getClassName();
+	public final String getImportingClassName(ClassMetadata metadata) {
+		return ImportingUtils.getImportingClassName(metadata);
 	}
 
 	/**
@@ -167,8 +167,8 @@ public abstract class AbstractImportingSupport
 	 * @param metadata 导入元信息
 	 * @return 导入类
 	 */
-	protected final Class<?> getImportingClass(AnnotationMetadata metadata) {
-		return ClassUtils.resolveClassName(getImportingClassName(metadata), beanClassLoader);
+	public final Class<?> getImportingClass(ClassMetadata metadata) {
+		return ImportingUtils.getImportingClass(metadata);
 	}
 
 	/**
@@ -177,8 +177,8 @@ public abstract class AbstractImportingSupport
 	 * @param metadata 导入元信息
 	 * @return 导入类所在的包
 	 */
-	protected final Package getImportingClassPackage(AnnotationMetadata metadata) {
-		return getImportingClass(metadata).getPackage();
+	public final Package getImportingClassPackage(ClassMetadata metadata) {
+		return ImportingUtils.getImportingClassPackage(metadata);
 	}
 
 	/**
@@ -190,8 +190,8 @@ public abstract class AbstractImportingSupport
 	 * @see AnnotationUtils#findAnnotation(Class, Class)
 	 */
 	@Nullable
-	protected final <A extends Annotation> A getAnnotationOfImportingClass(AnnotationMetadata metadata, Class<A> annotationType) {
-		return AnnotationUtils.findAnnotation(getImportingClass(metadata), annotationType);
+	public final <A extends Annotation> A getAnnotationOfImportingClass(ClassMetadata metadata, Class<A> annotationType) {
+		return ImportingUtils.getAnnotationOfImportingClass(metadata, annotationType);
 	}
 
 	// ResourceLoader相关
@@ -203,7 +203,7 @@ public abstract class AbstractImportingSupport
 	 * @param location 资源位置
 	 * @return 资源实例
 	 */
-	protected final Resource getResource(String location) {
+	public final Resource getResource(String location) {
 		return resourceLoader.getResource(location);
 	}
 
@@ -213,7 +213,7 @@ public abstract class AbstractImportingSupport
 	 * @param location 资源位置
 	 * @return 资源的文本内容
 	 */
-	protected final String getResourceAsString(String location) {
+	public final String getResourceAsString(String location) {
 		return getResourceAsString(location, null);
 	}
 
@@ -224,7 +224,7 @@ public abstract class AbstractImportingSupport
 	 * @param charset  编码
 	 * @return 资源的文本内容
 	 */
-	protected final String getResourceAsString(String location, @Nullable Charset charset) {
+	public final String getResourceAsString(String location, @Nullable Charset charset) {
 		try {
 			return getResource(location).getContentAsString(charset != null ? charset : StandardCharsets.UTF_8);
 		} catch (IOException e) {
@@ -238,7 +238,7 @@ public abstract class AbstractImportingSupport
 	 * @param location 资源位置
 	 * @return 资源的文本内容
 	 */
-	protected final Stream<String> getResourceAsLines(String location) {
+	public final Stream<String> getResourceAsLines(String location) {
 		return getResourceAsLines(location, null);
 	}
 
@@ -249,7 +249,7 @@ public abstract class AbstractImportingSupport
 	 * @param charset  编码
 	 * @return 资源的文本内容
 	 */
-	protected final Stream<String> getResourceAsLines(String location, @Nullable Charset charset) {
+	public final Stream<String> getResourceAsLines(String location, @Nullable Charset charset) {
 		return getResourceAsString(location, charset).lines();
 	}
 
@@ -259,7 +259,7 @@ public abstract class AbstractImportingSupport
 	 * @param location 资源位置
 	 * @return 二进制内容
 	 */
-	protected final byte[] getResourceAsBytes(String location) {
+	public final byte[] getResourceAsBytes(String location) {
 		try {
 			return getResource(location).getContentAsByteArray();
 		} catch (IOException e) {
@@ -273,7 +273,7 @@ public abstract class AbstractImportingSupport
 	 * @param location 资源位置
 	 * @return 输入流实例
 	 */
-	protected final InputStream getResourceAsInputStream(String location) {
+	public final InputStream getResourceAsInputStream(String location) {
 		return getResourceAsInputStream(location, -1);
 	}
 
@@ -284,7 +284,7 @@ public abstract class AbstractImportingSupport
 	 * @param bufferSize bufferSize
 	 * @return 输入流实例
 	 */
-	protected final InputStream getResourceAsInputStream(String location, int bufferSize) {
+	public final InputStream getResourceAsInputStream(String location, int bufferSize) {
 		try {
 			var in = getResource(location).getInputStream();
 			return bufferSize > 0 ? new BufferedInputStream(in, bufferSize) : in;
@@ -304,7 +304,7 @@ public abstract class AbstractImportingSupport
 	 * @return bean
 	 */
 	@Nullable
-	protected final <T> T getBean(Class<T> type, String beanName) {
+	public final <T> T getBean(Class<T> type, String beanName) {
 		try {
 			return beanFactory.getBean(beanName, type);
 		} catch (BeansException e) {
@@ -319,7 +319,7 @@ public abstract class AbstractImportingSupport
 	 * @return bean
 	 */
 	@Nullable
-	protected final <T> T getBean(Class<T> type) {
+	public final <T> T getBean(Class<T> type) {
 		try {
 			return beanFactory.getBean(type);
 		} catch (BeansException e) {

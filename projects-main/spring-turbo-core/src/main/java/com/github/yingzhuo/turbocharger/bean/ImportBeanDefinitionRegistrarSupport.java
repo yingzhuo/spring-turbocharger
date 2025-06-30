@@ -84,7 +84,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImpor
 	 *
 	 * @return 类扫描器实例
 	 */
-	protected final ClassPathScanner createClassPathScanner() {
+	public final ClassPathScanner createClassPathScanner() {
 		return createClassPathScanner(null);
 	}
 
@@ -94,7 +94,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImpor
 	 * @param registry Bean注册器
 	 * @return 类扫描器实例
 	 */
-	protected final ClassPathScanner createClassPathScanner(@Nullable BeanDefinitionRegistry registry) {
+	public final ClassPathScanner createClassPathScanner(@Nullable BeanDefinitionRegistry registry) {
 		var scanner = registry == null ? new ClassPathScanner(false) : new ClassPathScanner(registry, false);
 		scanner.setResourceLoader(getResourceLoader());
 		scanner.setEnvironment(getEnvironment());

@@ -52,7 +52,6 @@ public abstract class ImportSelectorSupport extends AbstractImportingSupport imp
 				.map(Class::getName)
 				.distinct()
 				.toArray(String[]::new);
-
         } catch (BeanCreationException e) {
             throw e;
         } catch (Exception e) {
