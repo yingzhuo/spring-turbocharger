@@ -1,0 +1,56 @@
+/*
+ *
+ * Copyright 2022-present the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+package com.github.yingzhuo.turbocharger.bean;
+
+import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.context.annotation.ImportSelector;
+import org.springframework.core.type.AnnotationMetadata;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
+
+/**
+ * @author 应卓
+ * @see ImportBeanDefinitionRegistrarSupport
+ * @since 3.5.3
+ */
+public abstract class ImportSelectorSupport extends AbstractImportingSupport implements ImportSelector {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String[] selectImports(AnnotationMetadata metadata) {
+        try {
+            return doSelectImports(metadata)
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .map(String::trim)
+                    .filter(((Predicate<String>) String::isBlank).negate())
+                    .toArray(String[]::new);
+        } catch (BeanCreationException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new BeanCreationException(e.getMessage(), e);
+        }
+    }
+
+    protected abstract List<String> doSelectImports(AnnotationMetadata metadata) throws Exception;
+
+}

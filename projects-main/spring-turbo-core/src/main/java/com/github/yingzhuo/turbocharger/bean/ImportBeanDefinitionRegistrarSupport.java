@@ -18,111 +18,24 @@
 package com.github.yingzhuo.turbocharger.bean;
 
 import com.github.yingzhuo.turbocharger.bean.classpath.ClassPathScanner;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.support.*;
-import org.springframework.boot.io.ApplicationResourceLoader;
-import org.springframework.context.EnvironmentAware;
-import org.springframework.context.ResourceLoaderAware;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
-import org.springframework.core.annotation.AnnotationAttributes;
-import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.core.env.Environment;
-import org.springframework.core.env.EnvironmentCapable;
-import org.springframework.core.env.StandardEnvironment;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.lang.Nullable;
-import org.springframework.util.ClassUtils;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UncheckedIOException;
-import java.lang.annotation.Annotation;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Set;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * {@link ImportBeanDefinitionRegistrar} 支持类
  *
  * @author 应卓
- * @see ClassPathScanner
- * @see Environment
- * @see BeanFactory
- * @see ResourceLoader
- * @see AnnotationAttributes
- * @see SmartAnnotationAttributes
  * @since 3.5.3
  */
-public abstract class ImportBeanDefinitionRegistrarSupport
-	implements ImportBeanDefinitionRegistrar, ResourceLoaderAware, EnvironmentAware, BeanFactoryAware, EnvironmentCapable {
-
-	private ResourceLoader resourceLoader = ApplicationResourceLoader.get();
-	private Environment environment = new StandardEnvironment();
-	private BeanFactory beanFactory = new DefaultListableBeanFactory();
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-		this.beanFactory = beanFactory;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setEnvironment(Environment environment) {
-		this.environment = environment;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Environment getEnvironment() {
-		return this.environment;
-	}
-
-	/**
-	 * 获取{@link ResourceLoader} 实例
-	 *
-	 * @return {@link ResourceLoader} 实例
-	 * @see #getResource(String)
-	 * @see #getResourceAsBytes(String)
-	 * @see #getResourceAsString(String)
-	 * @see #getResourceAsString(String, Charset)
-	 * @see #getResourceAsLines(String, Charset)
-	 */
-	public ResourceLoader getResourceLoader() {
-		return resourceLoader;
-	}
-
-	/**
-	 * 获取{@link BeanFactory }实例
-	 *
-	 * @return {@link BeanFactory} 实例
-	 */
-	public BeanFactory getBeanFactory() {
-		return beanFactory;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setResourceLoader(ResourceLoader resourceLoader) {
-		this.resourceLoader = resourceLoader;
-	}
+public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImportingSupport implements ImportBeanDefinitionRegistrar {
 
 	/**
 	 * {@inheritDoc}
@@ -131,6 +44,8 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	public final void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		try {
 			doRegister(metadata, registry, beanNameGen);
+		} catch (BeanCreationException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new BeanCreationException(e.getMessage(), e);
 		}
@@ -154,92 +69,15 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	 */
 	protected abstract void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception;
 
-	/**
-	 * 获取导入元注释的相关信息
-	 *
-	 * @param metadata            导入元注释
-	 * @param importingAnnotation 导入元注释类型
-	 * @return 导入元注释的相关信息
-	 */
-	protected Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
-		var attrMap = metadata.getAnnotationAttributes(importingAnnotation.getName(), false);
-
-		if (attrMap == null) {
-			return Set.of();
-		} else {
-			return Set.of(new SmartAnnotationAttributes(environment, AnnotationAttributes.fromMap(attrMap)));
-		}
-	}
-
-	/**
-	 * 获取导入元注释的相关信息
-	 *
-	 * @param metadata                     导入元信息
-	 * @param importingAnnotation          导入元注释类型
-	 * @param importingContainerAnnotation 导入元注释类型 (repeatable)
-	 * @return 导入元注释的相关信息
-	 */
-	protected Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation, @Nullable Class<? extends Annotation> importingContainerAnnotation) {
-		if (importingContainerAnnotation == null) {
-			return getAnnotationAttributesSet(metadata, importingAnnotation);
-		}
-
-		return metadata
-			.getMergedRepeatableAnnotationAttributes(importingAnnotation, importingContainerAnnotation, false, true)
-			.stream()
-			.map(attr -> new SmartAnnotationAttributes(environment, attr))
-			.collect(Collectors.toSet());
-	}
-
-	/**
-	 * 获取导入类的名称
-	 *
-	 * @param importingAnnotation 导入元信息
-	 * @return 导入类的名称
-	 */
-	public String getUnderlyingClassName(AnnotationMetadata importingAnnotation) {
-		return importingAnnotation.getClassName();
-	}
-
-	/**
-	 * 获取导入类
-	 *
-	 * @param metadata 导入元信息
-	 * @return 导入类
-	 */
-	protected Class<?> getUnderlyingClass(AnnotationMetadata metadata) {
-		return ClassUtils.resolveClassName(getUnderlyingClassName(metadata), ClassUtils.getDefaultClassLoader());
-	}
-
-	/**
-	 * 获取导入类所在的包
-	 *
-	 * @param metadata 导入元信息
-	 * @return 导入类所在的包
-	 */
-	protected Package getUnderlyingClassPackage(AnnotationMetadata metadata) {
-		return getUnderlyingClass(metadata).getPackage();
-	}
-
-	/**
-	 * 获取导入类上的元注释
-	 *
-	 * @param metadata       导入元信息
-	 * @param annotationType 要查找的元注释类型
-	 * @return 结果
-	 * @see AnnotationUtils#findAnnotation(Class, Class)
-	 */
-	@Nullable
-	protected <A extends Annotation> A getAnnotationOfUnderlyingClass(AnnotationMetadata metadata, Class<A> annotationType) {
-		return AnnotationUtils.findAnnotation(getUnderlyingClass(metadata), annotationType);
-	}
+	// ClassPathScanner相关
+	// -----------------------------------------------------------------------------------------------------------------
 
 	/**
 	 * 创建类扫描器
 	 *
 	 * @return 类扫描器实例
 	 */
-	protected ClassPathScanner createClassPathScanner() {
+	protected final ClassPathScanner createClassPathScanner() {
 		return createClassPathScanner(null);
 	}
 
@@ -249,138 +87,11 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	 * @param registry Bean注册器
 	 * @return 类扫描器实例
 	 */
-	protected ClassPathScanner createClassPathScanner(@Nullable BeanDefinitionRegistry registry) {
+	protected final ClassPathScanner createClassPathScanner(@Nullable BeanDefinitionRegistry registry) {
 		var scanner = registry == null ? new ClassPathScanner(false) : new ClassPathScanner(registry, false);
-		scanner.setResourceLoader(resourceLoader);
-		scanner.setEnvironment(environment);
+		scanner.setResourceLoader(getResourceLoader());
+		scanner.setEnvironment(getEnvironment());
 		return scanner;
-	}
-
-	/**
-	 * 加载资源
-	 *
-	 * @param location 资源位置
-	 * @return 资源实例
-	 */
-	protected Resource getResource(String location) {
-		return resourceLoader.getResource(location);
-	}
-
-	/**
-	 * 加载资源的文本内容
-	 *
-	 * @param location 资源位置
-	 * @return 资源的文本内容
-	 */
-	protected String getResourceAsString(String location) {
-		return getResourceAsString(location, null);
-	}
-
-	/**
-	 * 加载资源的文本内容
-	 *
-	 * @param location 资源位置
-	 * @param charset  编码
-	 * @return 资源的文本内容
-	 */
-	protected String getResourceAsString(String location, @Nullable Charset charset) {
-		try {
-			return getResource(location).getContentAsString(charset != null ? charset : StandardCharsets.UTF_8);
-		} catch (IOException e) {
-			throw new UncheckedIOException(e);
-		}
-	}
-
-	/**
-	 * 加载资源的所有文本行
-	 *
-	 * @param location 资源位置
-	 * @return 资源的文本内容
-	 */
-	protected Stream<String> getResourceAsLines(String location) {
-		return getResourceAsLines(location, null);
-	}
-
-	/**
-	 * 加载资源的所有文本行
-	 *
-	 * @param location 资源位置
-	 * @param charset  编码
-	 * @return 资源的文本内容
-	 */
-	protected Stream<String> getResourceAsLines(String location, @Nullable Charset charset) {
-		return getResourceAsString(location, charset).lines();
-	}
-
-	/**
-	 * 加载资源的二进制内容
-	 *
-	 * @param location 资源位置
-	 * @return 二进制内容
-	 */
-	protected byte[] getResourceAsBytes(String location) {
-		try {
-			return getResource(location).getContentAsByteArray();
-		} catch (IOException e) {
-			throw new UncheckedIOException(e);
-		}
-	}
-
-	/**
-	 * 获取资源的输入流
-	 *
-	 * @param location 资源位置
-	 * @return 输入流实例
-	 */
-	protected InputStream getResourceAsInputStream(String location) {
-		return getResourceAsInputStream(location, -1);
-	}
-
-	/**
-	 * 获取资源的输入流
-	 *
-	 * @param location   资源位置
-	 * @param bufferSize bufferSize
-	 * @return 输入流实例
-	 */
-	protected InputStream getResourceAsInputStream(String location, int bufferSize) {
-		try {
-			var in = getResource(location).getInputStream();
-			return bufferSize > 0 ? new BufferedInputStream(in, bufferSize) : in;
-		} catch (IOException e) {
-			throw new UncheckedIOException(e);
-		}
-	}
-
-	/**
-	 * 获取bean
-	 *
-	 * @param type     bean类型
-	 * @param beanName bean名称
-	 * @return bean
-	 */
-	@Nullable
-	protected <T> T getBean(Class<T> type, String beanName) {
-		try {
-			return beanFactory.getBean(beanName, type);
-		} catch (BeansException e) {
-			return null;
-		}
-	}
-
-	/**
-	 * 获取bean
-	 *
-	 * @param type bean类型
-	 * @return bean
-	 */
-	@Nullable
-	protected <T> T getBean(Class<T> type) {
-		try {
-			return beanFactory.getBean(type);
-		} catch (BeansException e) {
-			return null;
-		}
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
