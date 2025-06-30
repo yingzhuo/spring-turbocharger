@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.bean;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -27,7 +28,6 @@ import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.env.Environment;
-import org.springframework.core.env.EnvironmentCapable;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -53,11 +53,12 @@ import java.util.stream.Stream;
  * @since 3.5.3
  */
 public abstract class AbstractImportingSupport
-	implements ResourceLoaderAware, EnvironmentAware, BeanFactoryAware, EnvironmentCapable {
+	implements ResourceLoaderAware, EnvironmentAware, BeanFactoryAware, BeanClassLoaderAware {
 
 	private ResourceLoader resourceLoader = ApplicationResourceLoader.get();
 	private Environment environment = new StandardEnvironment();
 	private BeanFactory beanFactory = new DefaultListableBeanFactory();
+	private ClassLoader beanClassLoader = Thread.currentThread().getContextClassLoader();
 
 	/**
 	 * {@inheritDoc}
@@ -79,24 +80,34 @@ public abstract class AbstractImportingSupport
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final void setEnvironment(Environment environment) {
-		this.environment = environment;
+	public void setBeanClassLoader(ClassLoader classLoader) {
+		this.beanClassLoader = classLoader;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final Environment getEnvironment() {
+	public final void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
+
+	// -----------------------------------------------------------------------------------------------------------------
+
+	protected final Environment getEnvironment() {
 		return this.environment;
 	}
 
-	public final ResourceLoader getResourceLoader() {
+	protected final ResourceLoader getResourceLoader() {
 		return resourceLoader;
 	}
 
-	public final BeanFactory getBeanFactory() {
+	protected final BeanFactory getBeanFactory() {
 		return beanFactory;
+	}
+
+	protected final ClassLoader getBeanClassLoader() {
+		return beanClassLoader;
 	}
 
 	// AnnotationMetadata相关
