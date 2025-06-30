@@ -34,6 +34,7 @@ public final class NoopComparator<T> implements Comparator<T> {
 	 * 私有构造方法
 	 */
 	private NoopComparator() {
+		super();
 	}
 
 	/**

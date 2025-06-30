@@ -34,6 +34,7 @@ public final class EnumUtils {
 	 * 私有构造方法
 	 */
 	private EnumUtils() {
+		super();
 	}
 
 	/**

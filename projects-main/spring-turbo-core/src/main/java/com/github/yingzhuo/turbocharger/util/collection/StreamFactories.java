@@ -45,26 +45,15 @@ public final class StreamFactories {
 	}
 
 	@SafeVarargs
-	public static <T> Stream<T> newStream(T... elements) {
-		return Stream.of(elements);
-	}
-
-	@SafeVarargs
 	public static <T> Stream<T> nullSafeNewStream(@Nullable T... elements) {
 		return ListFactories.nullSafeNewArrayList(elements).stream();
 	}
 
-	// -----------------------------------------------------------------------------------------------------------------
-
-	public static <T> Stream<T> newStream(@Nullable Iterator<T> iterator) {
-		if (iterator == null) {
-			return Stream.empty();
-		}
-		final Spliterator<T> spliterator = Spliterators.spliteratorUnknownSize(iterator, 0);
-		return StreamSupport.stream(spliterator, false);
+	public static <T> Stream<T> of(@Nullable Iterator<T> iterator) {
+		return of(iterator, false);
 	}
 
-	public static <T> Stream<T> newStream(@Nullable Iterator<T> iterator, boolean parallel) {
+	public static <T> Stream<T> of(@Nullable Iterator<T> iterator, boolean parallel) {
 		if (iterator == null) {
 			return Stream.empty();
 		}
@@ -72,18 +61,11 @@ public final class StreamFactories {
 		return StreamSupport.stream(spliterator, parallel);
 	}
 
-	// -----------------------------------------------------------------------------------------------------------------
-
-	public static <T> Stream<T> newSteam(@Nullable Enumeration<T> enumeration) {
-		if (enumeration == null) {
-			return Stream.empty();
-		}
-		final Spliterator<T> spliterator = Spliterators.spliteratorUnknownSize(new EnumerationIterator<>(enumeration),
-			0);
-		return StreamSupport.stream(spliterator, false);
+	public static <T> Stream<T> of(@Nullable Enumeration<T> enumeration) {
+		return of(enumeration, false);
 	}
 
-	public static <T> Stream<T> newSteam(@Nullable Enumeration<T> enumeration, boolean parallel) {
+	public static <T> Stream<T> of(@Nullable Enumeration<T> enumeration, boolean parallel) {
 		if (enumeration == null) {
 			return Stream.empty();
 		}

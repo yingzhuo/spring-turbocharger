@@ -67,7 +67,6 @@ public final class RandomUtils {
 		if (startInclusive == endExclusive) {
 			return startInclusive;
 		}
-
 		return startInclusive + ThreadLocalRandom.current().nextInt(endExclusive - startInclusive);
 	}
 
@@ -91,7 +90,6 @@ public final class RandomUtils {
 		if (startInclusive == endExclusive) {
 			return startInclusive;
 		}
-
 		return startInclusive + nextLong(endExclusive - startInclusive);
 	}
 
@@ -126,7 +124,6 @@ public final class RandomUtils {
 		if (startInclusive == endExclusive) {
 			return startInclusive;
 		}
-
 		return startInclusive + ((endExclusive - startInclusive) * ThreadLocalRandom.current().nextDouble());
 	}
 
@@ -150,7 +147,6 @@ public final class RandomUtils {
 		if (startInclusive == endExclusive) {
 			return startInclusive;
 		}
-
 		return startInclusive + ((endExclusive - startInclusive) * ThreadLocalRandom.current().nextFloat());
 	}
 
