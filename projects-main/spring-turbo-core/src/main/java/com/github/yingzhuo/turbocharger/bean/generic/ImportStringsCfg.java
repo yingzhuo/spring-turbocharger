@@ -24,37 +24,34 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.util.Assert;
 
 import java.util.stream.Collectors;
 
 /**
  * @author 应卓
- * @see ImportStringBean
- * @see ImportStringBeans
+ * @see ImportString
+ * @see ImportStrings
  * @since 3.5.3
  */
-class ImportStringBeansCfg extends ImportBeanDefinitionRegistrarSupport implements ImportBeanDefinitionRegistrar {
+class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport implements ImportBeanDefinitionRegistrar {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
-		getAnnotationAttributesSet(metadata, ImportStringBean.class, ImportStringBeans.class)
+		getAnnotationAttributesSet(metadata, ImportString.class, ImportStrings.class)
 			.forEach(attr -> {
-				var beanName = attr.getString("beanName");
-				if (beanName.isBlank()) {
-					throw new IllegalArgumentException("beanName is blank");
-				}
+				final var beanName = attr.getString("beanName");
+				final var location = attr.getString("location");
+				final var charset = attr.getString("charset");
+				final var trim = attr.getBoolean("trim");
+				final var trimEachLine = attr.getBoolean("trimEachLine");
 
-				var location = attr.getString("location");
-				if (location.isBlank()) {
-					throw new IllegalArgumentException("location is blank");
-				}
-
-				var charset = attr.getString("charset");
-				var trim = attr.getBoolean("trim");
-				var trimEachLine = attr.getBoolean("trimEachLine");
+				Assert.hasText(beanName, "beanName must not be empty");
+				Assert.hasText(location, "location must not be empty");
+				Assert.hasText(charset, "charset must not be empty");
 
 				var text = super.getResourceAsString(location, charset);
 

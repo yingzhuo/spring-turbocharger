@@ -23,50 +23,15 @@ import java.lang.annotation.*;
 
 /**
  * @author 应卓
- * @see ImportStringBeansCfg
  * @since 3.5.3
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
-@Import(ImportStringBeansCfg.class)
-@Repeatable(ImportStringBeans.class)
-public @interface ImportStringBean {
+@Import(ImportStringsCfg.class)
+public @interface ImportStrings {
 
-	/**
-	 * Bean的名称
-	 *
-	 * @return Bean的名称
-	 */
-	String beanName();
-
-	/**
-	 * 资源位置
-	 *
-	 * @return 资源位置
-	 */
-	String location();
-
-	/**
-	 * 编码
-	 *
-	 * @return 编码
-	 */
-	String charset() default "UTF-8";
-
-	/**
-	 * 是否需要trim
-	 *
-	 * @return 是否需要trim
-	 */
-	boolean trim() default false;
-
-	/**
-	 * 是否需要trim每一行
-	 *
-	 * @return 是否需要trim每一行
-	 */
-	boolean trimEachLine() default false;
+	public ImportString[] value();
 
 }
