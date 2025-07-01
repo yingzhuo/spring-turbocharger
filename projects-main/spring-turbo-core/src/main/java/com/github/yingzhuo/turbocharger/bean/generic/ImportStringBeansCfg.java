@@ -22,6 +22,7 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
+import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 
 import java.util.stream.Collectors;
@@ -32,15 +33,21 @@ import java.util.stream.Collectors;
  * @see ImportStringBeans
  * @since 3.5.3
  */
-class ImportStringBeansCfg extends ImportBeanDefinitionRegistrarSupport {
+class ImportStringBeansCfg extends ImportBeanDefinitionRegistrarSupport implements ImportBeanDefinitionRegistrar {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		getAnnotationAttributesSet(metadata, ImportStringBean.class, ImportStringBeans.class)
 			.forEach(attr -> {
 				var beanName = attr.getString("beanName");
-				var location = attr.getString("location");
+				if (beanName.isBlank()) {
+					throw new IllegalArgumentException("beanName is blank");
+				}
 
+				var location = attr.getString("location");
 				if (location.isBlank()) {
 					throw new IllegalArgumentException("location is blank");
 				}
@@ -58,7 +65,7 @@ class ImportStringBeansCfg extends ImportBeanDefinitionRegistrarSupport {
 				if (trimEachLine) {
 					text = text.lines()
 						.map(String::trim)
-						.collect(Collectors.joining("\n"));
+						.collect(Collectors.joining(System.lineSeparator()));
 				}
 
 				var beanDef = BeanDefinitionBuilder.genericBeanDefinition(String.class)

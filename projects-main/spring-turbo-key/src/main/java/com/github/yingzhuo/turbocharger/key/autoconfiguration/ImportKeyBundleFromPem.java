@@ -28,6 +28,7 @@ import java.lang.annotation.*;
  * 通过PKCS#8格式的PEM文件 在 {@link ApplicationContext} 中导入 {@link KeyBundle} 实例
  *
  * @author 应卓
+ * @see ImportKeyBundleFromPemCfg
  * @since 3.5.3
  */
 @Inherited

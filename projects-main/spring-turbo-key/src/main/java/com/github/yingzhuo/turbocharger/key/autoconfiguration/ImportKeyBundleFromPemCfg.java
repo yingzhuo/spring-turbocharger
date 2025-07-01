@@ -20,7 +20,6 @@ package com.github.yingzhuo.turbocharger.key.autoconfiguration;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.key.KeyBundle;
 import com.github.yingzhuo.turbocharger.key.SimpleKeyBundle;
-import com.github.yingzhuo.turbocharger.util.StringPool;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -74,7 +73,7 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 		var pemText = getResourceAsLines(location)
 				.map(String::trim)
 				.filter(StringUtils::hasText)
-				.collect(Collectors.joining(StringPool.LF));
+				.collect(Collectors.joining(System.lineSeparator()));
 
 		var pemContent = PemContent.of(pemText);
 
