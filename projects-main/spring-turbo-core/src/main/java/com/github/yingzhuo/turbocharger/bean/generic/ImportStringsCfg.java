@@ -22,7 +22,6 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
-import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.Assert;
 
@@ -34,7 +33,7 @@ import java.util.stream.Collectors;
  * @see ImportStrings
  * @since 3.5.3
  */
-class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport implements ImportBeanDefinitionRegistrar {
+class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	/**
 	 * {@inheritDoc}

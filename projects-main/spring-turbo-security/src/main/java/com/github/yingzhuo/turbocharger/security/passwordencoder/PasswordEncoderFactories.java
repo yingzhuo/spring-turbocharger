@@ -44,7 +44,7 @@ import static com.github.yingzhuo.turbocharger.util.reflection.InstanceUtils.new
  */
 @Slf4j
 @SuppressWarnings("deprecation")
-public final class PasswordEncoderFactories {
+public final class PasswordEncoderFactories implements EncodingIds {
 
 	/**
 	 * 私有构造方法
@@ -53,6 +53,11 @@ public final class PasswordEncoderFactories {
 		super();
 	}
 
+	/**
+	 * 创建 {@link BCryptPasswordEncoder} 实例
+	 *
+	 * @return 实例
+	 */
 	public static BCryptPasswordEncoder createBCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
@@ -76,7 +81,7 @@ public final class PasswordEncoderFactories {
 
 		if (log.isInfoEnabled()) {
 			var ids = encodersMap.keySet();
-			log.info("supported encoder ids: [{}]", String.join(",", ids));
+			log.info("supported encoder ids: [{}]", String.join(", ", ids));
 		}
 
 		if (isNotBlank(defaultPasswordEncoderForMatches)) {
@@ -88,34 +93,22 @@ public final class PasswordEncoderFactories {
 
 	private static Map<String, PasswordEncoder> getEncoders() {
 		var map = new HashMap<String, PasswordEncoder>();
-		map.put(EncodingIds.bcrypt, new BCryptPasswordEncoder());
-		map.put(EncodingIds.noop, NoOpPasswordEncoder.getInstance());
-		map.put(EncodingIds.ldap, new LdapShaPasswordEncoder());
-		map.put(EncodingIds.MD4, new Md4PasswordEncoder());
-		map.put(EncodingIds.MD5, new MessageDigestPasswordEncoder("MD5"));
-		map.put(EncodingIds.SHA_1, new MessageDigestPasswordEncoder("SHA-1"));
-		map.put(EncodingIds.SHA_256, new MessageDigestPasswordEncoder("SHA-256"));
-		map.put(EncodingIds.pbkdf2, Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8());
-		map.put(EncodingIds.scrypt, SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8());
-		map.put(EncodingIds.argon2, Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8());
+		map.put(bcrypt, new BCryptPasswordEncoder());
+		map.put(noop, NoOpPasswordEncoder.getInstance());
+		map.put(ldap, new LdapShaPasswordEncoder());
+		map.put(MD4, new Md4PasswordEncoder());
+		map.put(MD5, new MessageDigestPasswordEncoder("MD5"));
+		map.put(SHA_1, new MessageDigestPasswordEncoder("SHA-1"));
+		map.put(SHA_256, new MessageDigestPasswordEncoder("SHA-256"));
+		map.put(pbkdf2, Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8());
+		map.put(scrypt, SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8());
+		map.put(argon2, Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8());
 
 		Optional<PasswordEncoder> encoderOp;
 
-		// MD2
-		encoderOp = loadInstance("com.github.yingzhuo.turbocharger.security.passwordencoder.hutool.MD2PasswordEncoder");
-		encoderOp.ifPresent(e -> map.put(EncodingIds.MD2, e));
-
-		// SHA384
-		encoderOp = loadInstance("com.github.yingzhuo.turbocharger.security.passwordencoder.hutool.SHA384PasswordEncoder");
-		encoderOp.ifPresent(e -> map.put(EncodingIds.SHA_384, e));
-
-		// SHA512
-		encoderOp = loadInstance("com.github.yingzhuo.turbocharger.security.passwordencoder.hutool.SHA512PasswordEncoder");
-		encoderOp.ifPresent(e -> map.put(EncodingIds.SHA_512, e));
-
-		// SM3
+		// SM3 (弹性加载)
 		encoderOp = loadInstance("com.github.yingzhuo.turbocharger.security.passwordencoder.hutool.SM3PasswordEncoder");
-		encoderOp.ifPresent(e -> map.put(EncodingIds.SM3, e));
+		encoderOp.ifPresent(e -> map.put(SM3, e));
 
 		return Collections.unmodifiableMap(map);
 	}

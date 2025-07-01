@@ -17,6 +17,8 @@
  */
 package com.github.yingzhuo.turbocharger.bean;
 
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportAware;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.type.AnnotationMetadata;
@@ -30,10 +32,10 @@ import java.util.Set;
 
 /**
  * @author 应卓
- * @see org.springframework.context.annotation.Import
+ * @see Import
  * @see AnnotationMetadata
  * @see ClassMetadata
- * @see org.springframework.context.annotation.ImportAware#setImportMetadata(AnnotationMetadata)
+ * @see ImportAware#setImportMetadata(AnnotationMetadata)
  * @since 3.5.3
  */
 public final class ImportingUtils {
@@ -43,6 +45,19 @@ public final class ImportingUtils {
 	 */
 	private ImportingUtils() {
 		super();
+	}
+
+	/**
+	 * 获取导入元注释的相关信息
+	 *
+	 * @param metadata            导入元信息
+	 * @param importingAnnotation 导入元注释类型
+	 * @return 导入元注释的相关信息
+	 */
+	public static Set<AnnotationAttributes> getAnnotationAttributesSet(
+		AnnotationMetadata metadata,
+		Class<? extends Annotation> importingAnnotation) {
+		return getAnnotationAttributesSet(metadata, importingAnnotation, null);
 	}
 
 	/**

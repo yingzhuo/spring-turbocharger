@@ -25,6 +25,8 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.io.ApplicationResourceLoader;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.ResourceLoaderAware;
+import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
+import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
@@ -47,8 +49,8 @@ import java.util.stream.Stream;
 
 /**
  * @author 应卓
- * @see org.springframework.context.annotation.ImportSelector
- * @see org.springframework.context.annotation.ImportBeanDefinitionRegistrar
+ * @see ImportSelector
+ * @see ImportBeanDefinitionRegistrar
  * @see Resource
  * @see Environment
  * @see BeanFactory
@@ -125,6 +127,17 @@ public abstract class AbstractImportingSupport
 	/**
 	 * 获取导入元注释的相关信息
 	 *
+	 * @param metadata            导入元信息
+	 * @param importingAnnotation 导入元注释类型
+	 * @return 导入元注释的相关信息
+	 */
+	public final Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
+		return getAnnotationAttributesSet(metadata, importingAnnotation, null);
+	}
+
+	/**
+	 * 获取导入元注释的相关信息
+	 *
 	 * @param metadata                     导入元信息
 	 * @param importingAnnotation          导入元注释类型
 	 * @param importingContainerAnnotation 导入元注释类型 (repeatable)
@@ -133,7 +146,7 @@ public abstract class AbstractImportingSupport
 	public final Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation, @Nullable Class<? extends Annotation> importingContainerAnnotation) {
 		return ImportingUtils.getAnnotationAttributesSet(metadata, importingAnnotation, importingContainerAnnotation)
 			.stream()
-			.map(o -> new SmartAnnotationAttributes(environment, o))
+			.map(a -> new SmartAnnotationAttributes(environment, a))
 			.collect(Collectors.toUnmodifiableSet());
 	}
 

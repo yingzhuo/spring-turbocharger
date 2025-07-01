@@ -23,82 +23,61 @@ package com.github.yingzhuo.turbocharger.security.passwordencoder;
  * @see PasswordEncoderFactories#createDelegatingPasswordEncoder(String, String)
  * @since 1.1.0
  */
-public final class EncodingIds {
+public interface EncodingIds {
 
 	/**
 	 * Noop
 	 */
-	public static final String noop = "noop";
+	String noop = "noop";
 
 	/**
 	 * bcrypt
 	 */
-	public static final String bcrypt = "bcrypt";
+	String bcrypt = "bcrypt";
 
 	/**
 	 * ldap
 	 */
-	public static final String ldap = "ldap";
+	String ldap = "ldap";
 
 	/**
 	 * pbkdf2
 	 */
-	public static final String pbkdf2 = "pbkdf2";
+	String pbkdf2 = "pbkdf2";
 
 	/**
 	 * scrypt
 	 */
-	public static final String scrypt = "scrypt";
+	String scrypt = "scrypt";
 
 	/**
 	 * argon2
 	 */
-	public static final String argon2 = "argon2";
+	String argon2 = "argon2";
 
 	/**
 	 * sha1
 	 */
-	public static final String SHA_1 = "SHA-1";
+	String SHA_1 = "SHA-1";
 
 	/**
 	 * sha256
 	 */
-	public static final String SHA_256 = "SHA-256";
-
-	/**
-	 * sha384
-	 */
-	public static final String SHA_384 = "SHA-384";
-
-	/**
-	 * sha512
-	 */
-	public static final String SHA_512 = "SHA-512";
-
-	/**
-	 * MD2
-	 */
-	public static final String MD2 = "MD2";
+	String SHA_256 = "SHA-256";
 
 	/**
 	 * MD4
 	 */
-	public static final String MD4 = "MD4";
+	String MD4 = "MD4";
 
 	/**
 	 * MD5
 	 */
-	public static final String MD5 = "MD5";
+	String MD5 = "MD5";
 
 	/**
 	 * SM3 (国密)
 	 */
-	public static final String SM3 = "SM3";
-
-	/**
-	 * 私有构造方法
-	 */
-	private EncodingIds() {
-	}
+	String SM3 = "SM3";
 
 }

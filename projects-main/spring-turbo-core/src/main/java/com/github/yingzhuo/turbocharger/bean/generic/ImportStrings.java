@@ -32,6 +32,6 @@ import java.lang.annotation.*;
 @Import(ImportStringsCfg.class)
 public @interface ImportStrings {
 
-	public ImportString[] value();
+	ImportString[] value();
 
 }

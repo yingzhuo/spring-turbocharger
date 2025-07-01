@@ -23,8 +23,6 @@ import com.github.yingzhuo.turbocharger.security.passwordencoder.EncodingIds;
 import com.github.yingzhuo.turbocharger.security.passwordencoder.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static com.github.yingzhuo.turbocharger.security.passwordencoder.EncodingIds.SM3;
-
 /**
  * 国密算法 (SM3)
  *
@@ -48,7 +46,7 @@ public final class SM3PasswordEncoder implements PasswordEncoder {
 	 */
 	@Override
 	public String encode(CharSequence rawPassword) {
-		final Digester digester = DigestUtil.digester(SM3);
+		final Digester digester = DigestUtil.digester("SM3");
 		return digester.digestHex(rawPassword.toString());
 	}
 
