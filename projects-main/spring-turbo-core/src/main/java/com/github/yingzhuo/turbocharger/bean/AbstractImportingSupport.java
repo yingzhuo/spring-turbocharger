@@ -200,7 +200,18 @@ public abstract class AbstractImportingSupport
 	 * @return 资源的文本内容
 	 */
 	public final String getResourceAsString(String location) {
-		return getResourceAsString(location, null);
+		return getResourceAsString(location, (Charset) null);
+	}
+
+	/**
+	 * 加载资源的文本内容
+	 *
+	 * @param location 资源位置
+	 * @param charset  编码
+	 * @return 资源的文本内容
+	 */
+	public final String getResourceAsString(String location, @Nullable String charset) {
+		return getResourceAsString(location, Charset.forName(charset != null ? charset : "UTF-8"));
 	}
 
 	/**
@@ -225,7 +236,7 @@ public abstract class AbstractImportingSupport
 	 * @return 资源的文本内容
 	 */
 	public final Stream<String> getResourceAsLines(String location) {
-		return getResourceAsLines(location, null);
+		return getResourceAsLines(location, (Charset) null);
 	}
 
 	/**
@@ -236,6 +247,17 @@ public abstract class AbstractImportingSupport
 	 * @return 资源的文本内容
 	 */
 	public final Stream<String> getResourceAsLines(String location, @Nullable Charset charset) {
+		return getResourceAsString(location, charset).lines();
+	}
+
+	/**
+	 * 加载资源的所有文本行
+	 *
+	 * @param location 资源位置
+	 * @param charset  编码
+	 * @return 资源的文本内容
+	 */
+	public final Stream<String> getResourceAsLines(String location, @Nullable String charset) {
 		return getResourceAsString(location, charset).lines();
 	}
 
