@@ -18,6 +18,7 @@
 package com.github.yingzhuo.turbocharger.bean.generic;
 
 import org.springframework.context.annotation.Import;
+import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 
@@ -39,14 +40,23 @@ public @interface ImportString {
 	 *
 	 * @return Bean的名称
 	 */
-	String beanName();
+	String beanName() default "";
 
 	/**
 	 * 资源位置
 	 *
 	 * @return 资源位置
 	 */
-	String location();
+	@AliasFor(attribute = "location")
+	String value() default "";
+
+	/**
+	 * 资源位置
+	 *
+	 * @return 资源位置
+	 */
+	@AliasFor(attribute = "value")
+	String location() default "";
 
 	/**
 	 * 编码

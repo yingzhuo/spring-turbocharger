@@ -39,18 +39,21 @@ class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
+	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator __) {
 		getAnnotationAttributesSet(metadata, ImportString.class, ImportStrings.class)
 			.forEach(attr -> {
-				final var beanName = attr.getString("beanName");
-				final var location = attr.getString("location");
-				final var charset = attr.getString("charset");
-				final var trim = attr.getBoolean("trim");
-				final var trimEachLine = attr.getBoolean("trimEachLine");
+				var beanName = attr.getString("beanName");
+				var location = attr.getString("location");
+				var charset = attr.getString("charset");
+				var trim = attr.getBoolean("trim");
+				var trimEachLine = attr.getBoolean("trimEachLine");
 
-				Assert.hasText(beanName, "beanName must not be empty");
 				Assert.hasText(location, "location must not be empty");
 				Assert.hasText(charset, "charset must not be empty");
+
+				if (beanName.isBlank()) {
+					beanName = location;
+				}
 
 				var text = super.getResourceAsString(location, charset);
 

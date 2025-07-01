@@ -22,7 +22,10 @@ import org.springframework.context.annotation.Import;
 import java.lang.annotation.*;
 
 /**
+ * {@link ImportString} 支持类
+ *
  * @author 应卓
+ * @see Repeatable
  * @since 3.5.3
  */
 @Inherited
