@@ -43,7 +43,6 @@ import static com.github.yingzhuo.turbocharger.util.reflection.InstanceUtils.new
  * @since 1.0.0
  */
 @Slf4j
-@SuppressWarnings("deprecation")
 public final class PasswordEncoderFactories implements EncodingIds {
 
 	/**
@@ -91,6 +90,7 @@ public final class PasswordEncoderFactories implements EncodingIds {
 		return ret;
 	}
 
+	@SuppressWarnings("deprecation")
 	private static Map<String, PasswordEncoder> getEncoders() {
 		var map = new HashMap<String, PasswordEncoder>();
 		map.put(bcrypt, new BCryptPasswordEncoder());
@@ -104,12 +104,9 @@ public final class PasswordEncoderFactories implements EncodingIds {
 		map.put(scrypt, SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8());
 		map.put(argon2, Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8());
 
-		Optional<PasswordEncoder> encoderOp;
-
 		// SM3 (弹性加载)
-		encoderOp = loadInstance("com.github.yingzhuo.turbocharger.security.passwordencoder.hutool.SM3PasswordEncoder");
+		var encoderOp = loadInstance("com.github.yingzhuo.turbocharger.security.passwordencoder.hutool.SM3PasswordEncoder");
 		encoderOp.ifPresent(e -> map.put(SM3, e));
-
 		return Collections.unmodifiableMap(map);
 	}
 
