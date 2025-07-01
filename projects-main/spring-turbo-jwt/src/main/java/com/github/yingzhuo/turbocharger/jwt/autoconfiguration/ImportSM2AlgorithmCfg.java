@@ -30,6 +30,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * @author 应卓
+ * @see ImportSM2Algorithm
  * @since 3.5.3
  */
 class ImportSM2AlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
@@ -39,14 +40,13 @@ class ImportSM2AlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 	 */
 	@Override
 	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
-
-		for (var attr : getAnnotationAttributesSet(metadata, ImportSM2Algorithm.class)) {
+		for (var attr : getAnnotationAttributesSet(metadata, ImportSM2Algorithm.class, null)) {
 
 			var publicKey = attr.getString("publicKeyText");
 			var privateKey = attr.getString("privateKeyText");
 			var id = attr.getString("id");
 
-			if (id.isEmpty()) {
+			if (id.isBlank()) {
 				id = null;
 			}
 
@@ -58,6 +58,7 @@ class ImportSM2AlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 				.setScope(attr.getString("scope"))
 				.setPrimary(attr.getBoolean("primary"))
 				.setRole(BeanDefinition.ROLE_APPLICATION)
+				.setAbstract(false)
 				.getBeanDefinition();
 
 			var beanName = attr.getString("beanName");

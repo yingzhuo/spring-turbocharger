@@ -125,20 +125,6 @@ public abstract class AbstractImportingSupport
 	/**
 	 * 获取导入元注释的相关信息
 	 *
-	 * @param metadata            导入元注释
-	 * @param importingAnnotation 导入元注释类型
-	 * @return 导入元注释的相关信息
-	 */
-	public final Set<SmartAnnotationAttributes> getAnnotationAttributesSet(AnnotationMetadata metadata, Class<? extends Annotation> importingAnnotation) {
-		return ImportingUtils.getAnnotationAttributesSet(metadata, importingAnnotation)
-			.stream()
-			.map(o -> new SmartAnnotationAttributes(environment, o))
-			.collect(Collectors.toUnmodifiableSet());
-	}
-
-	/**
-	 * 获取导入元注释的相关信息
-	 *
 	 * @param metadata                     导入元信息
 	 * @param importingAnnotation          导入元注释类型
 	 * @param importingContainerAnnotation 导入元注释类型 (repeatable)

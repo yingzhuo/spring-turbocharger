@@ -48,29 +48,6 @@ public final class ImportingUtils {
 	/**
 	 * 获取导入元注释的相关信息
 	 *
-	 * @param metadata            导入元信息
-	 * @param importingAnnotation 导入元注释类型
-	 * @return 导入元注释的相关信息
-	 */
-	public static Set<AnnotationAttributes> getAnnotationAttributesSet(
-		AnnotationMetadata metadata,
-		Class<? extends Annotation> importingAnnotation) {
-
-		Assert.notNull(metadata, "metadata must not be null");
-		Assert.notNull(metadata, "importingAnnotation must not be null");
-
-		var attrMap = metadata.getAnnotationAttributes(importingAnnotation.getName(), false);
-
-		if (attrMap == null) {
-			return Set.of();
-		} else {
-			return Set.of(AnnotationAttributes.fromMap(attrMap));
-		}
-	}
-
-	/**
-	 * 获取导入元注释的相关信息
-	 *
 	 * @param metadata                     导入元信息
 	 * @param importingAnnotation          导入元注释类型
 	 * @param importingContainerAnnotation 导入元注释类型 (repeatable)
@@ -85,7 +62,8 @@ public final class ImportingUtils {
 		Assert.notNull(metadata, "importingAnnotation must not be null");
 
 		if (importingContainerAnnotation == null) {
-			return getAnnotationAttributesSet(metadata, importingAnnotation);
+			var attrMap = metadata.getAnnotationAttributes(importingAnnotation.getName(), false);
+			return attrMap == null ? Set.of() : Set.of(AnnotationAttributes.fromMap(attrMap));
 		}
 
 		return metadata.getMergedRepeatableAnnotationAttributes(importingAnnotation, importingContainerAnnotation, false);
