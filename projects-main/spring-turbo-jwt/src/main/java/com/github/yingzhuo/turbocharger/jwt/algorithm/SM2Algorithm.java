@@ -19,7 +19,6 @@ package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.asymmetric.SM2;
-import com.auth0.jwt.exceptions.SignatureGenerationException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import org.bouncycastle.crypto.engines.SM2Engine;
 import org.springframework.lang.Nullable;
@@ -72,7 +71,7 @@ public class SM2Algorithm extends AbstractAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doVerify(byte[] data, byte[] signature) throws SignatureVerificationException {
+	protected void doVerify(byte[] data, byte[] signature) {
 		if (!sm2.verify(data, signature, id)) {
 			throw new SignatureVerificationException(this);
 		}
@@ -82,7 +81,7 @@ public class SM2Algorithm extends AbstractAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected byte[] doSign(byte[] data) throws SignatureGenerationException {
+	protected byte[] doSign(byte[] data) {
 		return sm2.sign(data, id);
 	}
 

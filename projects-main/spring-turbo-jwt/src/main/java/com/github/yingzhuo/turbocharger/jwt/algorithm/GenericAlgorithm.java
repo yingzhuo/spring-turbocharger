@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
-import com.auth0.jwt.exceptions.SignatureGenerationException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.github.yingzhuo.turbocharger.util.crypto.SignatureUtils;
 import org.springframework.boot.ssl.pem.PemContent;
@@ -87,7 +86,7 @@ public class GenericAlgorithm extends AbstractAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected byte[] doSign(byte[] data) throws SignatureGenerationException {
+	protected byte[] doSign(byte[] data) {
 		return SignatureUtils.sign(data, sigAlgName, privateKey);
 	}
 
@@ -95,7 +94,7 @@ public class GenericAlgorithm extends AbstractAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doVerify(byte[] data, byte[] signature) throws SignatureVerificationException {
+	protected void doVerify(byte[] data, byte[] signature) {
 		if (!SignatureUtils.verify(data, signature, sigAlgName, publicKey)) {
 			throw new SignatureVerificationException(this);
 		}
