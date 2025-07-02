@@ -36,6 +36,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * {@link Resource}等相关工具
@@ -142,7 +143,7 @@ public final class ResourceUtils {
 	 * @throws UncheckedIOException I/O错误
 	 */
 	public static String readResourceAsString(String location) {
-		return readResourceAsString(location, null);
+		return readResourceAsString(location, (Charset) null);
 	}
 
 	/**
@@ -160,6 +161,57 @@ public final class ResourceUtils {
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}
+	}
+
+	/**
+	 * 读取资源中的文本
+	 *
+	 * @param location 资源位置
+	 * @param charset  字符集
+	 * @return 文本
+	 * @throws UncheckedIOException I/O错误
+	 */
+	public static String readResourceAsString(String location, @Nullable String charset) {
+		var cs = Optional.ofNullable(charset)
+			.map(Charset::forName)
+			.orElse(StandardCharsets.UTF_8);
+
+		return readResourceAsString(location, cs);
+	}
+
+	/**
+	 * 读取资源中的每一行
+	 *
+	 * @param location 资源位置
+	 * @return 行
+	 * @throws UncheckedIOException I/O错误
+	 */
+	public static Stream<String> readResourceAsLines(String location) {
+		return readResourceAsString(location).lines();
+	}
+
+	/**
+	 * 读取资源中的每一行
+	 *
+	 * @param location 资源位置
+	 * @param charset  字符集
+	 * @return 行
+	 * @throws UncheckedIOException I/O错误
+	 */
+	public static Stream<String> readResourceAsLines(String location, @Nullable Charset charset) {
+		return readResourceAsString(location, charset).lines();
+	}
+
+	/**
+	 * 读取资源中的每一行
+	 *
+	 * @param location 资源位置
+	 * @param charset  字符集
+	 * @return 行
+	 * @throws UncheckedIOException I/O错误
+	 */
+	public static Stream<String> readResourceAsLines(String location, @Nullable String charset) {
+		return readResourceAsString(location, charset).lines();
 	}
 
 	/**
