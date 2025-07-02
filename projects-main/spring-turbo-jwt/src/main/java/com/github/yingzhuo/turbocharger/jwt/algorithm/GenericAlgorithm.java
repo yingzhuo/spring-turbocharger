@@ -28,7 +28,8 @@ import java.security.PublicKey;
 import java.util.Map;
 
 /**
- * 通用型JWT算法
+ * 通用型JWT算法 <br>
+ * 签名/验证算法由PKCS#8格式的PEM文件决定
  *
  * @author 应卓
  * @see PemContent
