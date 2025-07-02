@@ -36,10 +36,18 @@ import java.util.Map;
  */
 public class GenericAlgorithm extends AbstractAlgorithm {
 
-	private final String sigAlgName;
+	private static final Map<String, String> ALG_NAME_MAPPING = Map.of(
+		"SHA256withRSA", "RS256",
+		"SHA385withRSA", "RS384",
+		"SHA512withRSA", "RS512",
+		"SHA256withECDSA", "ES256",
+		"SHA384withECDSA", "ES384",
+		"SHA512withECDSA", "ES512"
+	);
+
 	private final PublicKey publicKey;
 	private final PrivateKey privateKey;
-	private final Map<String, String> algNameMapping;
+	private final String sigAlgName;
 
 	/**
 	 * 构造方法
@@ -57,17 +65,7 @@ public class GenericAlgorithm extends AbstractAlgorithm {
 	 * @param password   秘钥密码
 	 */
 	public GenericAlgorithm(String pemContent, @Nullable String password) {
-		super("<no name>");
-		this.algNameMapping =
-			Map.of(
-				"SHA256withRSA", "RS256",
-				"SHA385withRSA", "RS384",
-				"SHA512withRSA", "RS512",
-				"SHA256withECDSA", "ES256",
-				"SHA384withECDSA", "ES384",
-				"SHA512withECDSA", "ES512"
-			);
-
+		super("<no name>", "<no description>");
 		var pc = PemContent.of(pemContent);
 		var cert = pc.getCertificates().get(0);
 		this.sigAlgName = cert.getSigAlgName();
@@ -80,7 +78,7 @@ public class GenericAlgorithm extends AbstractAlgorithm {
 	 */
 	@Override
 	public String getName() {
-		var newName = algNameMapping.get(sigAlgName);
+		var newName = ALG_NAME_MAPPING.get(sigAlgName);
 		return newName != null ? newName : sigAlgName;
 	}
 

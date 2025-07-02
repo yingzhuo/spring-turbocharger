@@ -37,7 +37,17 @@ public abstract class AbstractAlgorithm extends Algorithm {
 	 * @param name 算法名称
 	 */
 	public AbstractAlgorithm(String name) {
-		super(name, name);
+		this(name, name);
+	}
+
+	/**
+	 * 构造方法
+	 *
+	 * @param name        算法名称
+	 * @param description 算法描述
+	 */
+	public AbstractAlgorithm(String name, String description) {
+		super(name, description);
 	}
 
 	/**
