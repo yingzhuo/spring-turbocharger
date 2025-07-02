@@ -39,6 +39,7 @@ import java.util.stream.Collectors;
  * @see ImportAlgorithm
  * @since 3.5.3
  */
+@Deprecated
 class ImportAlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	/**

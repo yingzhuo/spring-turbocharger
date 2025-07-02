@@ -35,6 +35,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Import(ImportSM2AlgorithmCfg.class)
+@Deprecated // 不易理解，使用起来有难度
 public @interface ImportSM2Algorithm {
 
 	/**

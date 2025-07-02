@@ -77,6 +77,15 @@ public abstract class AbstractAlgorithm extends Algorithm {
 	}
 
 	/**
+	 * 签名
+	 *
+	 * @param data 需要签名的数据
+	 * @return 签名后的数据
+	 * @throws SignatureGenerationException 签名错误
+	 */
+	protected abstract byte[] doSign(byte[] data) throws SignatureGenerationException;
+
+	/**
 	 * 验证
 	 *
 	 * @param data      需要验证的部分
@@ -85,13 +94,5 @@ public abstract class AbstractAlgorithm extends Algorithm {
 	 */
 	protected abstract void doVerify(byte[] data, byte[] signature) throws SignatureVerificationException;
 
-	/**
-	 * 签名
-	 *
-	 * @param data 需要签名的数据
-	 * @return 签名后的数据
-	 * @throws SignatureGenerationException 签名错误
-	 */
-	protected abstract byte[] doSign(byte[] data) throws SignatureGenerationException;
 
 }

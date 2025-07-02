@@ -33,6 +33,7 @@ import org.springframework.util.StringUtils;
  * @see ImportSM2Algorithm
  * @since 3.5.3
  */
+@Deprecated
 class ImportSM2AlgorithmCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	/**

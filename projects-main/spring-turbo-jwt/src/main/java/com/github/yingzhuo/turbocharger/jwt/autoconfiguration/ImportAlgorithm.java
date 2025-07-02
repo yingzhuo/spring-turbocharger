@@ -39,6 +39,7 @@ import static java.lang.annotation.ElementType.TYPE;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({TYPE, ANNOTATION_TYPE})
 @Import(ImportAlgorithmCfg.class)
+@Deprecated // 不易理解，使用起来有难度
 public @interface ImportAlgorithm {
 
 	/**
