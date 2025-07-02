@@ -73,8 +73,8 @@ public @interface ImportKeyBundleFromStore {
 	/**
 	 * {@link KeyStore} 格式
 	 *
-	 * @see KeyStore#getDefaultType()
 	 * @return {@link KeyStore} 格式
+	 * @see KeyStore#getDefaultType()
 	 */
 	KeyStoreType type() default KeyStoreType.PKCS12;
 

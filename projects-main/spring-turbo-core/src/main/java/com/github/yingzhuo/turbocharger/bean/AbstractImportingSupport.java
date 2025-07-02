@@ -71,28 +71,8 @@ public abstract class AbstractImportingSupport
 		super();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void setResourceLoader(ResourceLoader resourceLoader) {
-		this.resourceLoader = resourceLoader;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-		this.beanFactory = beanFactory;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setBeanClassLoader(ClassLoader classLoader) {
-		this.beanClassLoader = classLoader;
+	public final Environment getEnvironment() {
+		return this.environment;
 	}
 
 	/**
@@ -103,22 +83,42 @@ public abstract class AbstractImportingSupport
 		this.environment = environment;
 	}
 
-	// -----------------------------------------------------------------------------------------------------------------
-
-	public final Environment getEnvironment() {
-		return this.environment;
-	}
-
 	public final ResourceLoader getResourceLoader() {
 		return resourceLoader;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final void setResourceLoader(ResourceLoader resourceLoader) {
+		this.resourceLoader = resourceLoader;
+	}
+
+	// -----------------------------------------------------------------------------------------------------------------
 
 	public final BeanFactory getBeanFactory() {
 		return beanFactory;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+		this.beanFactory = beanFactory;
+	}
+
 	public final ClassLoader getBeanClassLoader() {
 		return beanClassLoader;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setBeanClassLoader(ClassLoader classLoader) {
+		this.beanClassLoader = classLoader;
 	}
 
 	// AnnotationMetadata相关

@@ -71,9 +71,9 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 		var keypass = attr.getString("keypass");
 
 		var pemText = getResourceAsLines(location)
-				.map(String::trim)
-				.filter(StringUtils::hasText)
-				.collect(Collectors.joining(System.lineSeparator()));
+			.map(String::trim)
+			.filter(StringUtils::hasText)
+			.collect(Collectors.joining(System.lineSeparator()));
 
 		var pemContent = PemContent.of(pemText);
 

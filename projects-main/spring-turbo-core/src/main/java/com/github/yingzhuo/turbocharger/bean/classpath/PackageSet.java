@@ -60,10 +60,10 @@ public final class PackageSet implements Iterable<String>, Serializable {
 	 */
 	public PackageSet acceptPackages(@Nullable String... packages) {
 		if (packages != null) {
-            Stream.of(packages)
-                    .filter(StringUtils::isNotBlank)
-                    .map(String::trim)
-                    .forEach(innerSet::add);
+			Stream.of(packages)
+				.filter(StringUtils::isNotBlank)
+				.map(String::trim)
+				.forEach(innerSet::add);
 		}
 		return this;
 	}
@@ -92,10 +92,10 @@ public final class PackageSet implements Iterable<String>, Serializable {
 	 */
 	public PackageSet acceptBaseClasses(@Nullable Class<?>... baseClasses) {
 		if (baseClasses != null) {
-            Arrays.stream(baseClasses)
-                    .filter(Objects::nonNull)
-                    .map(c -> c.getPackage().getName())
-                    .forEach(innerSet::add);
+			Arrays.stream(baseClasses)
+				.filter(Objects::nonNull)
+				.map(c -> c.getPackage().getName())
+				.forEach(innerSet::add);
 		}
 		return this;
 	}

@@ -119,6 +119,7 @@ public final class ClassPathScanner {
 
 	/**
 	 * 添加包括型过滤器
+	 *
 	 * @param includeFilters 过滤器
 	 * @see TypeFilter
 	 * @see TypeFilterFactories

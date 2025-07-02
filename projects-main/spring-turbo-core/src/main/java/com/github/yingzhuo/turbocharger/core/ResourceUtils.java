@@ -105,7 +105,7 @@ public final class ResourceUtils {
 	/**
 	 * 加载资源并打开输入流
 	 *
-	 * @param location 资源位置
+	 * @param location   资源位置
 	 * @param bufferSize bufferSize
 	 * @return inputStream
 	 * @throws UncheckedIOException I/O错误

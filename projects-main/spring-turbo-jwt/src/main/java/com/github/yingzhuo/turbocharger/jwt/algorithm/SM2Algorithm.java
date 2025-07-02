@@ -55,7 +55,7 @@ public class SM2Algorithm extends AbstractAlgorithm {
 	 *
 	 * @param publicKey  公钥 (HEX或者Base64)
 	 * @param privateKey 私钥 (HEX或者Base64)
-	 * @param id 加密salt
+	 * @param id         加密salt
 	 */
 	public SM2Algorithm(String publicKey, String privateKey, @Nullable String id) {
 		super("SM2");

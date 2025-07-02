@@ -79,7 +79,7 @@ public abstract class AbstractAlgorithm extends Algorithm {
 	/**
 	 * 验证
 	 *
-	 * @param data 需要验证的部分
+	 * @param data      需要验证的部分
 	 * @param signature 签名部分
 	 * @throws SignatureVerificationException 签名验证错误
 	 */
