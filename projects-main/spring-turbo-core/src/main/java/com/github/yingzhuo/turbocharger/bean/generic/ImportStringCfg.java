@@ -22,6 +22,7 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
+import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.Assert;
 
@@ -30,19 +31,19 @@ import java.util.stream.Collectors;
 /**
  * @author 应卓
  * @see ImportString
- * @see ImportStrings
  * @since 3.5.3
  */
-class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport {
+class ImportStringCfg extends ImportBeanDefinitionRegistrarSupport implements ImportBeanDefinitionRegistrar {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator __) {
-		getAnnotationAttributesSet(metadata, ImportString.class, ImportStrings.class)
+	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
+		getAnnotationAttributesSet(metadata, ImportString.class, ImportString.Container.class)
 			.forEach(attr -> {
 				var beanName = attr.getString("beanName");
+				var primary = attr.getBoolean("primary");
 				var location = attr.getString("location");
 				var charset = attr.getString("charset");
 				var trim = attr.getBoolean("trim");
@@ -67,16 +68,15 @@ class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport {
 						.collect(Collectors.joining(System.lineSeparator()));
 				}
 
-				var beanDef = BeanDefinitionBuilder.genericBeanDefinition(String.class)
-					.setPrimary(false)
+				final var s = text; // final var used in lambda
+
+				var beanDef = BeanDefinitionBuilder.genericBeanDefinition(String.class, () -> s)
+					.setPrimary(primary)
 					.setAbstract(false)
 					.setLazyInit(false)
 					.setScope(AbstractBeanDefinition.SCOPE_SINGLETON)
 					.setRole(AbstractBeanDefinition.ROLE_APPLICATION)
 					.getBeanDefinition();
-
-				final var s = text;
-				beanDef.setInstanceSupplier(() -> s);
 
 				registry.registerBeanDefinition(beanName, beanDef);
 			});

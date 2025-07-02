@@ -24,15 +24,15 @@ import java.lang.annotation.*;
 
 /**
  * @author 应卓
- * @see ImportStringsCfg
+ * @see ImportStringCfg
  * @since 3.5.3
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
-@Import(ImportStringsCfg.class)
-@Repeatable(ImportStrings.class)
+@Import(ImportStringCfg.class)
+@Repeatable(ImportString.Container.class)
 public @interface ImportString {
 
 	/**
@@ -41,6 +41,13 @@ public @interface ImportString {
 	 * @return Bean的名称
 	 */
 	String beanName() default "";
+
+	/**
+	 * Bean的Primary属性
+	 *
+	 * @return Bean的Primary属性
+	 */
+	boolean primary() default false;
 
 	/**
 	 * 资源位置
@@ -78,5 +85,16 @@ public @interface ImportString {
 	 * @return 是否需要trim每一行
 	 */
 	boolean trimEachLine() default false;
+
+	// -----------------------------------------------------------------------------------------------------------------
+
+	@Inherited
+	@Documented
+	@Retention(RetentionPolicy.RUNTIME)
+	@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+	@Import(ImportStringCfg.class)
+	@interface Container {
+		ImportString[] value();
+	}
 
 }
