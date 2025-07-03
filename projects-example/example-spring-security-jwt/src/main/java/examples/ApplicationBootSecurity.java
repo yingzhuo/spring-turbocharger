@@ -17,7 +17,7 @@
  */
 package examples;
 
-import com.auth0.jwt.algorithms.Algorithm;
+import com.github.yingzhuo.turbocharger.jwt.algorithm.GenericAlgorithmFactoryBean;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
 import com.github.yingzhuo.turbocharger.security.filter.factory.JwtTokenAuthenticationFilterFactoryBean;
@@ -37,6 +37,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.nio.charset.StandardCharsets;
+
 @Configuration
 @EnableMethodSecurity(
 	prePostEnabled = true,
@@ -46,8 +48,12 @@ import org.springframework.security.web.SecurityFilterChain;
 public class ApplicationBootSecurity {
 
 	@Bean
-	public Algorithm jwtAlg() {
-		return Algorithm.HMAC256("secret");
+	public GenericAlgorithmFactoryBean genericAlgorithmFactoryBean() {
+		var factoryBean = new GenericAlgorithmFactoryBean();
+		factoryBean.setPemLocation("classpath:jwt-ecdsa.pem");
+		factoryBean.setPemCharset(StandardCharsets.UTF_8);
+		factoryBean.setPassword("123456");
+		return factoryBean;
 	}
 
 	@Bean
