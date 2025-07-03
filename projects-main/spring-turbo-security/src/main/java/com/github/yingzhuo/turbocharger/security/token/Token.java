@@ -17,13 +17,15 @@
  */
 package com.github.yingzhuo.turbocharger.security.token;
 
+import org.springframework.util.Assert;
+
 import java.io.Serializable;
 
 /**
  * 令牌
  *
  * @author 应卓
- * @see #ofString(String)
+ * @see #ofString(CharSequence)
  * @since 1.0.0
  */
 @FunctionalInterface
@@ -35,8 +37,9 @@ public interface Token extends Serializable {
 	 * @param stringValue 令牌
 	 * @return 实例
 	 */
-	public static Token ofString(String stringValue) {
-		return StringToken.of(stringValue);
+	public static Token ofString(CharSequence stringValue) {
+		Assert.notNull(stringValue, "stringValue must not be null");
+		return StringToken.of(stringValue.toString());
 	}
 
 	/**

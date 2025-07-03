@@ -17,17 +17,12 @@
  */
 package com.github.yingzhuo.turbocharger.security.autoconfiguration;
 
-import com.github.yingzhuo.turbocharger.security.authentication.UserDetailsFinder;
-import com.github.yingzhuo.turbocharger.security.authentication.UserDetailsServiceUserDetailsFinder;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandlerImpl;
 import com.github.yingzhuo.turbocharger.security.misc.GrantedAuthorityConverter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
 
@@ -50,15 +45,6 @@ public class SpringSecurityAutoConfiguration {
 	@ConditionalOnMissingBean
 	public SecurityExceptionHandler securityExceptionHandler() {
 		return new SecurityExceptionHandlerImpl();
-	}
-
-	@Bean
-	@ConditionalOnMissingBean
-	@ConditionalOnBean({UserDetailsService.class, PasswordEncoder.class})
-	public UserDetailsFinder userDetailsFinder(
-		UserDetailsService userDetailsService, PasswordEncoder passwordEncoder
-	) {
-		return new UserDetailsServiceUserDetailsFinder(userDetailsService, passwordEncoder);
 	}
 
 	@Bean

@@ -17,13 +17,11 @@
  */
 package com.github.yingzhuo.turbocharger.security.filter;
 
-import com.github.yingzhuo.turbocharger.security.authentication.MapTokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.filter.factory.JwtTokenAuthenticationFilterFactoryBean;
 import com.github.yingzhuo.turbocharger.security.token.BearerTokenResolver;
 
 /**
  * @author 应卓
- * @see MapTokenToUserConverter
  * @see TokenAuthenticationFilter
  * @see JwtTokenAuthenticationFilterFactoryBean
  * @since 1.0.1

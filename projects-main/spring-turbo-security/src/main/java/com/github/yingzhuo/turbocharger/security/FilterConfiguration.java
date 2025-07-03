@@ -68,11 +68,13 @@ public interface FilterConfiguration<T extends Filter> {
 			return filter;
 		}
 
+		@Nullable
 		@Override
 		public Class<? extends Filter> positionInChain() {
 			return positionInChain;
 		}
 
+		@Nullable
 		@Override
 		public Position position() {
 			return this.position;
