@@ -56,8 +56,10 @@ public class GenericAlgorithmFactoryBean implements FactoryBean<GenericAlgorithm
 		Assert.notNull(pemCharset, "pemCharset must not be null");
 
 		var resource = resourceLoader.getResource(pemLocation);
-		var pemContent = resource.getContentAsString(pemCharset);
-		return new GenericAlgorithm(pemContent, password);
+		return new GenericAlgorithm(
+			resource.getContentAsString(pemCharset),
+			password
+		);
 	}
 
 	/**

@@ -32,7 +32,9 @@ import java.util.Map;
  * 签名/验证算法由PKCS#8格式的PEM文件决定
  *
  * @author 应卓
+ * @see com.auth0.jwt.algorithms.Algorithm
  * @see PemContent
+ * @see GenericAlgorithmFactoryBean
  * @since 3.5.3
  */
 public class GenericAlgorithm extends AbstractAlgorithm {
