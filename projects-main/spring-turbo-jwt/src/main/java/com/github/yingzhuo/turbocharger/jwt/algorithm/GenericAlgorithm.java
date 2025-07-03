@@ -24,6 +24,7 @@ import org.springframework.lang.Nullable;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.cert.X509Certificate;
 import java.util.Map;
 
 /**
@@ -45,6 +46,7 @@ public class GenericAlgorithm extends AbstractAlgorithm {
 		"SHA512withECDSA", "ES512"
 	);
 
+	private final X509Certificate certificate;
 	private final PublicKey publicKey;
 	private final PrivateKey privateKey;
 	private final String sigAlgName;
@@ -67,9 +69,9 @@ public class GenericAlgorithm extends AbstractAlgorithm {
 	public GenericAlgorithm(String pemContent, @Nullable String password) {
 		super("<no name>", "<no description>");
 		var pc = PemContent.of(pemContent);
-		var cert = pc.getCertificates().get(0);
-		this.sigAlgName = cert.getSigAlgName();
-		this.publicKey = cert.getPublicKey();
+		this.certificate = pc.getCertificates().get(0);
+		this.sigAlgName = this.certificate.getSigAlgName();
+		this.publicKey = this.certificate.getPublicKey();
 		this.privateKey = pc.getPrivateKey(password);
 	}
 
@@ -98,6 +100,30 @@ public class GenericAlgorithm extends AbstractAlgorithm {
 		if (!SignatureUtils.verify(data, signature, sigAlgName, publicKey)) {
 			throw new SignatureVerificationException(this);
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public X509Certificate getCertificate() {
+		return this.certificate;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public PublicKey getPublicKey() {
+		return this.publicKey;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public PrivateKey getPrivateKey() {
+		return this.privateKey;
 	}
 
 }

@@ -23,6 +23,10 @@ import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
 import java.nio.charset.StandardCharsets;
+import java.security.KeyPair;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.cert.X509Certificate;
 import java.util.Base64;
 
 /**
@@ -101,5 +105,35 @@ public abstract class AbstractAlgorithm extends Algorithm {
 	 * @param signature 签名部分
 	 */
 	protected abstract void doVerify(byte[] data, byte[] signature) throws Exception;
+
+	/**
+	 * 获取证书
+	 *
+	 * @return 证书
+	 */
+	public abstract X509Certificate getCertificate();
+
+	/**
+	 * 获取公钥
+	 *
+	 * @return 公钥
+	 */
+	public abstract PublicKey getPublicKey();
+
+	/**
+	 * 获取私钥
+	 *
+	 * @return 私钥
+	 */
+	public abstract PrivateKey getPrivateKey();
+
+	/**
+	 * 获取密钥对
+	 *
+	 * @return 密钥对
+	 */
+	public final KeyPair getKeyPair() {
+		return new KeyPair(getPublicKey(), getPrivateKey());
+	}
 
 }

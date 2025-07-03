@@ -24,6 +24,9 @@ import org.bouncycastle.crypto.engines.SM2Engine;
 import org.springframework.lang.Nullable;
 
 import java.nio.charset.StandardCharsets;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.cert.X509Certificate;
 import java.util.Optional;
 
 /**
@@ -83,6 +86,30 @@ public class SM2Algorithm extends AbstractAlgorithm {
 	@Override
 	protected byte[] doSign(byte[] data) {
 		return sm2.sign(data, id);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public X509Certificate getCertificate() {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public PublicKey getPublicKey() {
+		return this.sm2.getPublicKey();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public PrivateKey getPrivateKey() {
+		return this.sm2.getPrivateKey();
 	}
 
 	public void setMode(SM2Engine.Mode mode) {
