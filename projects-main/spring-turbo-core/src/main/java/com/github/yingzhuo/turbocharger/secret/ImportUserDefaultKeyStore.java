@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.key.autoconfiguration;
+package com.github.yingzhuo.turbocharger.secret;
 
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import org.springframework.beans.factory.config.BeanDefinition;

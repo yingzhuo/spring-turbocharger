@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.key;
+package com.github.yingzhuo.turbocharger.secret;
 
 import org.springframework.lang.Nullable;
 

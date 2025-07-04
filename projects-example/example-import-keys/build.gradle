@@ -17,7 +17,6 @@ dependencies {
 
 	// spring-turbocharger
 	api project(':projects-main:spring-turbo-core')
-	api project(':projects-main:spring-turbo-key')
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

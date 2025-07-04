@@ -15,8 +15,9 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.key;
+package com.github.yingzhuo.turbocharger.secret;
 
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.security.PrivateKey;
@@ -29,9 +30,9 @@ import java.util.List;
  * @since 3.5.3
  */
 @SuppressWarnings("unchecked")
-public record SimpleKeyBundle(@Nullable String alias,
-							  X509Certificate certificate,
-							  PrivateKey privateKey) implements KeyBundle {
+public record KeyBundleImpl(@NonNull X509Certificate certificate,
+							@NonNull PrivateKey privateKey,
+							@Nullable String alias) implements KeyBundle {
 
 	/**
 	 * {@inheritDoc}

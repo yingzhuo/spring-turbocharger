@@ -15,28 +15,25 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.key.autoconfiguration;
+package com.github.yingzhuo.turbocharger.secret;
 
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
-import com.github.yingzhuo.turbocharger.key.KeyBundle;
-import com.github.yingzhuo.turbocharger.key.SimpleKeyBundle;
+import com.github.yingzhuo.turbocharger.bean.SmartAnnotationAttributes;
+import com.github.yingzhuo.turbocharger.util.KeyStoreType;
+import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
-import org.springframework.boot.ssl.pem.PemContent;
-import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
 
-import java.util.stream.Collectors;
-
 /**
  * @author 应卓
- * @see ImportKeyBundleFromPem
+ * @see ImportKeyBundleFromStore
  * @since 3.5.3
  */
-class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
+class ImportKeyBundleFromStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	/**
 	 * {@inheritDoc}
@@ -44,9 +41,11 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 	@Override
 	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		var attrs =
-			getAnnotationAttributesSet(metadata, ImportKeyBundleFromPem.class, ImportKeyBundleFromPem.Container.class);
+			getAnnotationAttributesSet(metadata, ImportKeyBundleFromStore.class, ImportKeyBundleFromStore.Container.class);
 
 		for (var attr : attrs) {
+			var beanName = attr.getString("beanName");
+
 			var keyBundle = createKeyBundle(attr);
 
 			var beanDef = BeanDefinitionBuilder.genericBeanDefinition(KeyBundle.class, () -> keyBundle)
@@ -57,7 +56,6 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 				.setScope(attr.getString("scope"))
 				.getBeanDefinition();
 
-			var beanName = attr.getString("beanName");
 			if (!StringUtils.hasText(beanName)) {
 				beanName = beanNameGen.generateBeanName(beanDef, registry);
 			}
@@ -66,21 +64,20 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 		}
 	}
 
-	private KeyBundle createKeyBundle(AnnotationAttributes attr) {
+	private KeyBundle createKeyBundle(SmartAnnotationAttributes attr) {
 		var location = attr.getString("location");
-		var keypass = attr.getString("keypass");
+		var type = (KeyStoreType) attr.getEnum("type");
+		var storepass = attr.getString("storepass");
+		var alias = attr.getString("alias");
+		var keypass = StringUtils.hasText(attr.getString("keypass")) ? attr.getString("keypass") : storepass;
 
-		var pemText = getResourceAsLines(location)
-			.map(String::trim)
-			.filter(StringUtils::hasText)
-			.collect(Collectors.joining(System.lineSeparator()));
+		var ks = KeyStoreUtils.loadKeyStore(getResourceAsInputStream(location), type, storepass);
 
-		var pemContent = PemContent.of(pemText);
-
-		return new SimpleKeyBundle(
-			null,
-			pemContent.getCertificates().get(0),
-			pemContent.getPrivateKey(keypass)
+		return new KeyBundleImpl(
+			KeyStoreUtils.getCertificate(ks, alias),
+			KeyStoreUtils.getPrivateKey(ks, alias, keypass),
+			alias
 		);
 	}
+
 }
