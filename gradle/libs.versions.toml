@@ -6,7 +6,6 @@ hutool = "5.8.39"
 
 [libraries]
 hocon = { module = "com.typesafe:config", version = "1.4.3" }
-toml4j = { module = "com.moandjiezana.toml:toml4j", version = "0.7.2" }
 bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version = "1.81" }
 java-jwt = { module = "com.auth0:java-jwt", version = "4.5.0" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxing" }

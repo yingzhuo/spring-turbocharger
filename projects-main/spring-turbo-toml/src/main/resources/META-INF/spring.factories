@@ -1,6 +1,0 @@
-# @formatter:off
-
-org.springframework.boot.env.PropertySourceLoader=\
-    com.github.yingzhuo.turbocharger.configuration.env.TomlPropertySourceLoader
-
-# @formatter:on
