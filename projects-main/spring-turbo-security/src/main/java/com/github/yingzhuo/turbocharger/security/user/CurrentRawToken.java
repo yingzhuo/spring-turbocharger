@@ -40,6 +40,6 @@ import java.lang.annotation.*;
 public @interface CurrentRawToken {
 
 	@AliasFor(annotation = CurrentSecurityContext.class, attribute = "errorOnInvalidType")
-	public boolean errorOnInvalidType() default false;
+	boolean errorOnInvalidType() default false;
 
 }

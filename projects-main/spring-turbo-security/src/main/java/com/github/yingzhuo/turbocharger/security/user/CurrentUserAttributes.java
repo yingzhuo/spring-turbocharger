@@ -43,6 +43,6 @@ import java.lang.annotation.*;
 public @interface CurrentUserAttributes {
 
 	@AliasFor(annotation = AuthenticationPrincipal.class, attribute = "errorOnInvalidType")
-	public boolean errorOnInvalidType() default false;
+	boolean errorOnInvalidType() default false;
 
 }
