@@ -32,8 +32,9 @@ import java.util.List;
  * 对秘钥/密钥对的简易封装
  *
  * @author 应卓
- * @see com.github.yingzhuo.turbocharger.util.crypto.CipherUtils
- * @see com.github.yingzhuo.turbocharger.util.crypto.SignatureUtils
+ * @see CipherUtils
+ * @see SignatureUtils
+ * @see KeyBundleFactories
  * @since 3.5.3
  */
 public interface KeyBundle extends Serializable {

@@ -22,6 +22,7 @@ import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
 import org.springframework.boot.ssl.pem.PemContent;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
 
 import java.security.cert.X509Certificate;
 
@@ -42,12 +43,37 @@ public final class KeyBundleFactories {
 	 * 从资源中加载
 	 *
 	 * @param location 资源位置
+	 * @return {@link KeyBundle} 实例
+	 */
+	public static KeyBundle loadFromPem(String location) {
+		return loadFromPem(location, null);
+	}
+
+	/**
+	 * 从资源中加载
+	 *
+	 * @param location 资源位置
 	 * @param keypass  私钥密码
 	 * @return {@link KeyBundle} 实例
 	 */
-	public static KeyBundle fromPem(String location, @Nullable String keypass) {
+	public static KeyBundle loadFromPem(String location, @Nullable String keypass) {
+		Assert.hasText(location, "location must not be empty");
+
 		var pc = PemContent.of(ResourceUtils.readResourceAsString(location));
 		return new KeyBundleImpl(pc.getCertificates().get(0), pc.getPrivateKey(keypass));
+	}
+
+	/**
+	 * 从PKCS#12或JKS中加载
+	 *
+	 * @param location  资源位置
+	 * @param type      资源类型
+	 * @param storepass 库密码
+	 * @param alias     别名
+	 * @return {@link KeyBundle} 实例
+	 */
+	public static KeyBundle loadFromStore(String location, KeyStoreType type, String storepass, String alias) {
+		return loadFromStore(location, type, storepass, alias, null);
 	}
 
 	/**
@@ -60,9 +86,14 @@ public final class KeyBundleFactories {
 	 * @param keypass   私钥密码
 	 * @return {@link KeyBundle} 实例
 	 */
-	public static KeyBundle fromStore(String location, @Nullable KeyStoreType type, String storepass, String alias, @Nullable String keypass) {
+	public static KeyBundle loadFromStore(String location, KeyStoreType type, String storepass, String alias, @Nullable String keypass) {
+		Assert.hasText(location, "location must not be empty");
+		Assert.notNull(type, "type must not be null");
+		Assert.hasText(storepass, "storepass must not be empty");
+		Assert.hasText(alias, "alias must not be empty");
+
 		var input = ResourceUtils.loadResourceAsInputStream(location);
-		var ks = KeyStoreUtils.loadKeyStore(input, type != null ? type : KeyStoreType.PKCS12, storepass);
+		var ks = KeyStoreUtils.loadKeyStore(input, type, storepass);
 
 		if (keypass == null) {
 			keypass = storepass;
