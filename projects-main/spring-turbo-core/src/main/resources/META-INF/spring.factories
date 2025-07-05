@@ -1,10 +1,5 @@
-# @formatter:off
-
 org.springframework.boot.env.EnvironmentPostProcessor=\
-    com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook,\
-    com.github.yingzhuo.turbocharger.core.env.BouncyCastleInstallingEnvironmentPostProcessor
-
+com.github.yingzhuo.turbocharger.core.environment.SpringApplicationHolders.Hook,\
+com.github.yingzhuo.turbocharger.core.environment.BouncyCastleInstallingEnvironmentPostProcessor
 org.springframework.context.ApplicationListener=\
-    com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders.Hook
-
-# @formatter:on
+com.github.yingzhuo.turbocharger.core.environment.SpringApplicationHolders.Hook

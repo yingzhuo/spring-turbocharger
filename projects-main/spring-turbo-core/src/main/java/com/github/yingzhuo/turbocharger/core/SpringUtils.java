@@ -17,7 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.core;
 
-import com.github.yingzhuo.turbocharger.core.env.SpringApplicationHolders;
+import com.github.yingzhuo.turbocharger.core.environment.SpringApplicationHolders;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.boot.ApplicationArguments;

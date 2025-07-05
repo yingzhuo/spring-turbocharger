@@ -50,6 +50,11 @@ indent_style = space
 indent_size = 2
 charset = latin1
 
+[spring.factories]
+indent_style = space
+indent_size = 2
+charset = latin1
+
 [*.{json,json5}]
 indent_style = tab
 indent_size = 2

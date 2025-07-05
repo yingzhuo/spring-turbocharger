@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.core.env;
+package com.github.yingzhuo.turbocharger.core.environment;
 
 import com.github.yingzhuo.turbocharger.core.SpringUtils;
 import com.github.yingzhuo.turbocharger.core.configuration.AbstractEnvironmentPostProcessor;

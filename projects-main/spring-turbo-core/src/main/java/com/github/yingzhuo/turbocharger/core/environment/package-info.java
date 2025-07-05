@@ -17,7 +17,7 @@
  */
 @NonNullApi
 @NonNullFields
-package com.github.yingzhuo.turbocharger.core.env;
+package com.github.yingzhuo.turbocharger.core.environment;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;
