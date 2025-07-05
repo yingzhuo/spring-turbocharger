@@ -90,6 +90,21 @@ public interface KeyBundle extends Serializable {
 	}
 
 	/**
+	 * 获取描述信息
+	 *
+	 * @return 描述信息
+	 */
+	@Nullable
+	public String getDescription();
+
+	/**
+	 * 设置描述信息
+	 *
+	 * @param description 描述信息
+	 */
+	public void setDescription(@Nullable String description);
+
+	/**
 	 * 签名
 	 *
 	 * @param data 待签名的数据
