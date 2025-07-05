@@ -19,15 +19,11 @@ package com.github.yingzhuo.turbocharger.bean;
 
 import com.github.yingzhuo.turbocharger.bean.classpath.ClassPathScanner;
 import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.lang.Nullable;
-
-import java.util.function.Supplier;
 
 /**
  * {@link ImportBeanDefinitionRegistrar} 支持类
@@ -99,29 +95,6 @@ public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImpor
 		scanner.setResourceLoader(getResourceLoader());
 		scanner.setEnvironment(getEnvironment());
 		return scanner;
-	}
-
-	// -----------------------------------------------------------------------------------------------------------------
-
-	/**
-	 * @author 应卓
-	 * @see BeanDefinitionBuilder#genericBeanDefinition(Class, Supplier)
-	 * @see AbstractBeanDefinition#setInstanceSupplier(Supplier)
-	 */
-	public abstract static class BeanInstanceSupplier<T> implements Supplier<T> {
-
-		@Override
-		public final T get() {
-			try {
-				return doGet();
-			} catch (BeanCreationException e) {
-				throw e;
-			} catch (Exception e) {
-				throw new BeanCreationException(e.getMessage(), e);
-			}
-		}
-
-		protected abstract T doGet() throws Exception;
 	}
 
 }

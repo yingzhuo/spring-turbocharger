@@ -20,6 +20,7 @@ package com.github.yingzhuo.turbocharger.secret;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
+import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -28,7 +29,9 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
 
+import java.io.IOException;
 import java.security.KeyStore;
+import java.util.function.Supplier;
 
 /**
  * @author 应卓
@@ -68,21 +71,18 @@ class ImportKeyStoreCfg extends ImportBeanDefinitionRegistrarSupport {
 		}
 	}
 
-	private static class KeyStoreSupplier extends BeanInstanceSupplier<KeyStore> {
-		private final ResourceLoader resourceLoader;
-		private final String location;
-		private final String storepass;
-		private final KeyStoreType type;
+	private record KeyStoreSupplier(
+		ResourceLoader resourceLoader,
+		String location, String storepass,
+		KeyStoreType type) implements Supplier<KeyStore> {
 
-		KeyStoreSupplier(ResourceLoader resourceLoader, String location, String storepass, KeyStoreType type) {
-			this.resourceLoader = resourceLoader;
-			this.location = location;
-			this.storepass = storepass;
-			this.type = type;
-		}
-
-		protected KeyStore doGet() throws Exception {
-			return KeyStoreUtils.loadKeyStore(resourceLoader.getResource(location).getInputStream(), type, storepass);
+		@Override
+		public KeyStore get() {
+			try {
+				return KeyStoreUtils.loadKeyStore(resourceLoader.getResource(location).getInputStream(), type, storepass);
+			} catch (IOException e) {
+				throw new BeanCreationException(e.getMessage(), e);
+			}
 		}
 	}
 
