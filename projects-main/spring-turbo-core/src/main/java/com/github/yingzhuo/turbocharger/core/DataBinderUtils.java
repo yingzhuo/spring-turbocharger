@@ -63,7 +63,7 @@ public final class DataBinderUtils {
 			SpringUtils.getBean(ConversionService.class)
 				.orElseGet(DefaultFormattingConversionService::new);
 
-		var binder = new DataBinder(target, objectName);
+		var binder = new DataBinder(target, objectName != null ? objectName : DataBinder.DEFAULT_OBJECT_NAME);
 		binder.setConversionService(conversionService);
 		return binder;
 	}

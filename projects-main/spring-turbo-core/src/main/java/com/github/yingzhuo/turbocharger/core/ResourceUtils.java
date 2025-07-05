@@ -37,11 +37,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Stream;
 
+import static java.io.File.separator;
+
 /**
  * {@link Resource}等相关工具
  *
  * @author 应卓
- * @see ResourceLocationUtils
  * @since 3.3.2
  */
 @SuppressWarnings("unchecked")
@@ -277,6 +278,16 @@ public final class ResourceUtils {
 				// noop
 			}
 		}
+	}
+
+	public static String getResourceLocation(Class<?> fromPackage, String filename) {
+		Assert.notNull(fromPackage, "fromPackage must not be null");
+		Assert.hasText(filename, "filename must not be empty");
+		return new StringBuilder("classpath:")
+			.append(fromPackage.getPackage().getName().replaceAll("\\.", separator))
+			.append(separator)
+			.append(filename)
+			.toString();
 	}
 
 }

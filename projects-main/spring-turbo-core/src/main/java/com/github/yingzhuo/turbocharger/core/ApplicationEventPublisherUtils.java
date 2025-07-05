@@ -30,6 +30,7 @@ import static com.github.yingzhuo.turbocharger.core.SpringUtils.getApplicationEv
  * @see SpringUtils
  * @since 3.3.2
  */
+@Deprecated(forRemoval = true, since = "3.5.3")
 public final class ApplicationEventPublisherUtils {
 
 	/**

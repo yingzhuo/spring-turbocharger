@@ -29,6 +29,7 @@ import org.springframework.core.env.Profiles;
  * @see Profiles#of(String...)
  * @since 1.0.13
  */
+@Deprecated(forRemoval = true, since = "3.5.3")
 public final class ProfileUtils {
 
 	/**

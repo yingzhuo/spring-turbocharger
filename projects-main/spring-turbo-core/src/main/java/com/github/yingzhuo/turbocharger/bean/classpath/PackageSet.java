@@ -28,7 +28,6 @@ import java.util.stream.Stream;
  * 辅助工具封装多个搜索起点
  *
  * @author 应卓
- * @see #newInstance()
  * @see ClassPathScanner
  * @since 3.5.3
  */
@@ -41,15 +40,6 @@ public final class PackageSet implements Iterable<String>, Serializable {
 	 */
 	public PackageSet() {
 		super();
-	}
-
-	/**
-	 * 获取实例
-	 *
-	 * @return 实例
-	 */
-	public static PackageSet newInstance() {
-		return new PackageSet();
 	}
 
 	/**

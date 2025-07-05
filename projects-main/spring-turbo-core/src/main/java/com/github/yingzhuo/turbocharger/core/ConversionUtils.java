@@ -30,6 +30,7 @@ import org.springframework.util.Assert;
  * @see ConversionService
  * @since 1.0.0
  */
+@Deprecated(forRemoval = true, since = "3.5.3")
 public final class ConversionUtils {
 
 	/**

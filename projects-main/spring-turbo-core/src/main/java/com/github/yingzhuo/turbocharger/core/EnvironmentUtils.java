@@ -29,6 +29,7 @@ import java.util.Objects;
  * @see SpringUtils
  * @since 1.0.0
  */
+@Deprecated(forRemoval = true, since = "3.5.3")
 public final class EnvironmentUtils {
 
 	/**
