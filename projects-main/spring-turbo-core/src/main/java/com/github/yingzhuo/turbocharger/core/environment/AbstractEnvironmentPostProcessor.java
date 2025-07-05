@@ -17,10 +17,16 @@
  */
 package com.github.yingzhuo.turbocharger.core.environment;
 
+import com.github.yingzhuo.turbocharger.core.ResourceUtils;
 import org.apache.commons.logging.Log;
 import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.boot.logging.DeferredLogFactory;
 import org.springframework.core.Ordered;
+import org.springframework.core.env.PropertiesPropertySource;
+import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
+
+import java.util.Optional;
 
 /**
  * @author 应卓
@@ -32,7 +38,7 @@ public abstract class AbstractEnvironmentPostProcessor implements EnvironmentPos
 	protected final int order;
 
 	protected AbstractEnvironmentPostProcessor(DeferredLogFactory logFactory) {
-		this(logFactory, 0);
+		this(logFactory, LOWEST_PRECEDENCE);
 	}
 
 	protected AbstractEnvironmentPostProcessor(DeferredLogFactory logFactory, int order) {
@@ -44,8 +50,20 @@ public abstract class AbstractEnvironmentPostProcessor implements EnvironmentPos
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getOrder() {
-		return 0;
+	public final int getOrder() {
+		return this.order;
+	}
+
+	protected Optional<PropertiesPropertySource> loadPropertiesPropertySource(String location, @Nullable String name) {
+		Assert.notNull(location, "location must not be null");
+
+		try {
+			var maybeXml = location.endsWith(".xml") || location.endsWith(".XML");
+			var properties = ResourceUtils.loadResourceAsProperties(location, maybeXml);
+			return Optional.of(new PropertiesPropertySource(name != null ? name : "empty", properties));
+		} catch (Exception ex) {
+			return Optional.empty();
+		}
 	}
 
 }
