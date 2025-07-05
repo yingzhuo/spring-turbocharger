@@ -18,10 +18,12 @@
 package com.github.yingzhuo.turbocharger.core.env;
 
 import com.github.yingzhuo.turbocharger.core.SpringUtils;
+import com.github.yingzhuo.turbocharger.core.configuration.AbstractEnvironmentPostProcessor;
 import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.env.EnvironmentPostProcessor;
+import org.springframework.boot.logging.DeferredLogFactory;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -96,14 +98,15 @@ public final class SpringApplicationHolders {
 	 * @see EnvironmentPostProcessor
 	 * @see ApplicationListener
 	 */
-	private static class Hook implements EnvironmentPostProcessor, Ordered, ApplicationListener<ContextRefreshedEvent> {
+	private static class Hook extends AbstractEnvironmentPostProcessor implements Ordered, ApplicationListener<ContextRefreshedEvent> {
 
 		/**
-		 * 私有构造方法
+		 * 构造方法
+		 *
+		 * @param logFactory 日志提供器
 		 */
-		private Hook() {
-			// SpringBoot 可以使用私有构造方法
-			super();
+		public Hook(DeferredLogFactory logFactory) {
+			super(logFactory);
 		}
 
 		/**

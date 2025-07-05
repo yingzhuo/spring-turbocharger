@@ -17,13 +17,10 @@
  */
 package com.github.yingzhuo.turbocharger.core.configuration;
 
-import com.github.yingzhuo.turbocharger.core.ResourceUtils;
 import org.apache.commons.logging.Log;
 import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.boot.logging.DeferredLogFactory;
 import org.springframework.core.Ordered;
-
-import java.util.Map;
 
 /**
  * @author 应卓
@@ -35,10 +32,6 @@ public abstract class AbstractEnvironmentPostProcessor implements EnvironmentPos
 
 	protected AbstractEnvironmentPostProcessor(DeferredLogFactory logFactory) {
 		this.log = logFactory.getLog(getClass());
-	}
-
-	protected final Map<String, Object> loadProperties(String location, boolean xmlFormat) {
-		return ResourceUtils.loadResourceAsPropertiesConventToMap(location, xmlFormat);
 	}
 
 	/**

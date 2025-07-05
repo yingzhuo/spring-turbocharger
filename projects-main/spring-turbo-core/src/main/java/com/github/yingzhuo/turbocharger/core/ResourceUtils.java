@@ -35,7 +35,6 @@ import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -235,25 +234,6 @@ public final class ResourceUtils {
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}
-	}
-
-	/**
-	 * 加载Properties文件并转换成Map类型
-	 *
-	 * @param location  资源位置
-	 * @param xmlFormat 是否为xml格式
-	 * @return 加载的实例
-	 * @throws UncheckedIOException I/O错误
-	 */
-	public static Map<String, Object> loadResourceAsPropertiesConventToMap(String location, boolean xmlFormat) {
-		return loadResourceAsProperties(location, xmlFormat)
-			.entrySet()
-			.stream()
-			.filter(entry -> entry.getKey() instanceof String)
-			.collect(Collectors.toMap(
-				e -> e.getKey().toString(),
-				e -> e.getValue().toString()
-			));
 	}
 
 	/**
