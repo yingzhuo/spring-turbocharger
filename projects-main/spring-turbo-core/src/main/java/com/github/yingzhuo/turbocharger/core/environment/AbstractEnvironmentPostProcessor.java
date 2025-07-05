@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.core.configuration;
+package com.github.yingzhuo.turbocharger.core.environment;
 
 import org.apache.commons.logging.Log;
 import org.springframework.boot.env.EnvironmentPostProcessor;

@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.core.environment;
 
-import com.github.yingzhuo.turbocharger.core.configuration.AbstractEnvironmentPostProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.logging.DeferredLogFactory;
 import org.springframework.core.env.ConfigurableEnvironment;

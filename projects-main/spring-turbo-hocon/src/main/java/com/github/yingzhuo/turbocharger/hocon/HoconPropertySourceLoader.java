@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.configuration.env;
+package com.github.yingzhuo.turbocharger.hocon;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
@@ -42,11 +42,17 @@ public class HoconPropertySourceLoader implements PropertySourceLoader {
 		super();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String[] getFileExtensions() {
 		return new String[]{"conf"};
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<PropertySource<?>> load(String name, Resource resource) throws IOException {
 		Config config = ConfigFactory.parseURL(resource.getURL());

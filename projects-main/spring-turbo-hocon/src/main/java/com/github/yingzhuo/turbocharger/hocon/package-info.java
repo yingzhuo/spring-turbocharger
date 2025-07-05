@@ -15,21 +15,9 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.core.configuration;
+@NonNullApi
+@NonNullFields
+package com.github.yingzhuo.turbocharger.hocon;
 
-import org.springframework.boot.env.YamlPropertySourceLoader;
-
-/**
- * @author 应卓
- * @since 2.1.3
- */
-public class YamlPropertySourceFactory extends AbstractPropertySourceFactory {
-
-	/**
-	 * 默认构造方法
-	 */
-	public YamlPropertySourceFactory() {
-		super(new YamlPropertySourceLoader());
-	}
-
-}
+import org.springframework.lang.NonNullApi;
+import org.springframework.lang.NonNullFields;

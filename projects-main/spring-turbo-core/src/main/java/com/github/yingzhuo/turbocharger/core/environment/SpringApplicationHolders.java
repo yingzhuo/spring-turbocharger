@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.core.environment;
 
 import com.github.yingzhuo.turbocharger.core.SpringUtils;
-import com.github.yingzhuo.turbocharger.core.configuration.AbstractEnvironmentPostProcessor;
 import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;

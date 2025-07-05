@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.core.configuration;
+package com.github.yingzhuo.turbocharger.core.environment;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import com.github.yingzhuo.turbocharger.util.id.UUIDs;
@@ -41,6 +41,9 @@ public abstract class AbstractPropertySourceFactory implements PropertySourceFac
 		this.loader = loader;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public final PropertySource<?> createPropertySource(@Nullable String name, EncodedResource resource)
 		throws IOException {
@@ -48,7 +51,7 @@ public abstract class AbstractPropertySourceFactory implements PropertySourceFac
 		final var list = loader.load(propertySourceName, resource.getResource());
 
 		if (list.isEmpty()) {
-			return EmptyPropertySource.of(propertySourceName);
+			return new EmptyPropertySource(propertySourceName);
 		} else if (list.size() == 1) {
 			return list.get(0);
 		} else {
