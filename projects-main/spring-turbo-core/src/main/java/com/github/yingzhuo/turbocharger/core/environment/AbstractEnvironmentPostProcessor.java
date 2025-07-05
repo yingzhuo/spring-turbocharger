@@ -29,9 +29,15 @@ import org.springframework.core.Ordered;
 public abstract class AbstractEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
 
 	protected final Log log;
+	protected final int order;
 
 	protected AbstractEnvironmentPostProcessor(DeferredLogFactory logFactory) {
+		this(logFactory, 0);
+	}
+
+	protected AbstractEnvironmentPostProcessor(DeferredLogFactory logFactory, int order) {
 		this.log = logFactory.getLog(getClass());
+		this.order = order;
 	}
 
 	/**

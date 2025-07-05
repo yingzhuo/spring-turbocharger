@@ -63,7 +63,6 @@ public final class SpringApplicationHolders {
 	 * 私有构造方法
 	 */
 	private SpringApplicationHolders() {
-		super();
 	}
 
 	@Nullable
@@ -105,7 +104,7 @@ public final class SpringApplicationHolders {
 		 * @param logFactory 日志提供器
 		 */
 		public Hook(DeferredLogFactory logFactory) {
-			super(logFactory);
+			super(logFactory, HIGHEST_PRECEDENCE);
 		}
 
 		/**
@@ -125,14 +124,6 @@ public final class SpringApplicationHolders {
 		@Override
 		public void onApplicationEvent(ContextRefreshedEvent event) {
 			SpringApplicationHolders.APPLICATION_CONTEXT = event.getApplicationContext();
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public int getOrder() {
-			return HIGHEST_PRECEDENCE;
 		}
 
 		private Path getAppHomeDir(SpringApplication springApplication) {
