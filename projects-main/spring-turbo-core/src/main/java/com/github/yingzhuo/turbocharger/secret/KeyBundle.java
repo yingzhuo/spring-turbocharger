@@ -17,6 +17,8 @@
  */
 package com.github.yingzhuo.turbocharger.secret;
 
+import com.github.yingzhuo.turbocharger.util.crypto.CipherUtils;
+import com.github.yingzhuo.turbocharger.util.crypto.SignatureUtils;
 import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
@@ -85,6 +87,67 @@ public interface KeyBundle extends Serializable {
 	@Nullable
 	public default String alias() {
 		return null;
+	}
+
+	/**
+	 * 签名
+	 *
+	 * @param data 待签名的数据
+	 * @return 签名结果
+	 */
+	public default byte[] sign(byte[] data) {
+		return SignatureUtils.sign(data, getCertificate().getSigAlgName(), getPrivateKey());
+	}
+
+	/**
+	 * 验证签名
+	 *
+	 * @param data      原始数据
+	 * @param signature 签名
+	 * @return 检验结果
+	 */
+	public default boolean verify(byte[] data, byte[] signature) {
+		return SignatureUtils.verify(data, signature, getCertificate().getSigAlgName(), getPrivateKey());
+	}
+
+	/**
+	 * 使用公钥加密
+	 *
+	 * @param data 原始数据
+	 * @return 加密结果
+	 */
+	public default byte[] encryptWithPublicKey(byte[] data) {
+		return CipherUtils.encrypt(data, getPublicKey());
+	}
+
+	/**
+	 * 使用私钥加密
+	 *
+	 * @param data 原始数据
+	 * @return 加密结果
+	 */
+	public default byte[] encryptWithPrivateKey(byte[] data) {
+		return CipherUtils.encrypt(data, getPrivateKey());
+	}
+
+	/**
+	 * 使用公钥解密
+	 *
+	 * @param encryptedData 已加密数据
+	 * @return 解密结果
+	 */
+	public default byte[] decryptWithPublicKey(byte[] encryptedData) {
+		return CipherUtils.decrypt(encryptedData, getPublicKey());
+	}
+
+	/**
+	 * 使用私钥解密
+	 *
+	 * @param encryptedData 已加密数据
+	 * @return 解密结果
+	 */
+	public default byte[] decryptWithPrivateKey(byte[] encryptedData) {
+		return CipherUtils.decrypt(encryptedData, getPrivateKey());
 	}
 
 }

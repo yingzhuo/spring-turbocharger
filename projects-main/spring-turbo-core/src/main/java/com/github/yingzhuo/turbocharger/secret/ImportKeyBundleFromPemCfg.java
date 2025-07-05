@@ -77,8 +77,7 @@ class ImportKeyBundleFromPemCfg extends ImportBeanDefinitionRegistrarSupport {
 
 		return new KeyBundleImpl(
 			pemContent.getCertificates().get(0),
-			pemContent.getPrivateKey(keypass),
-			null
+			pemContent.getPrivateKey(keypass)
 		);
 	}
 

@@ -99,7 +99,7 @@ public final class ResourceUtils {
 	 * @return inputStream
 	 * @throws UncheckedIOException I/O错误
 	 */
-	public static InputStream loadResourceAsInputStream(String location) throws IOException {
+	public static InputStream loadResourceAsInputStream(String location) {
 		return loadResourceAsInputStream(location, -1);
 	}
 
@@ -111,7 +111,7 @@ public final class ResourceUtils {
 	 * @return inputStream
 	 * @throws UncheckedIOException I/O错误
 	 */
-	public static InputStream loadResourceAsInputStream(String location, int bufferSize) throws IOException {
+	public static InputStream loadResourceAsInputStream(String location, int bufferSize) {
 		try {
 			var in = loadResource(location).getInputStream();
 			return bufferSize > 0 ? new BufferedInputStream(in, bufferSize) : in;

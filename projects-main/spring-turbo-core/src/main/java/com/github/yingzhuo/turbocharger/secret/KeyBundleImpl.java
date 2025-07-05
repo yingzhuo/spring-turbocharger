@@ -30,9 +30,37 @@ import java.util.List;
  * @since 3.5.3
  */
 @SuppressWarnings("unchecked")
-public record KeyBundleImpl(@NonNull X509Certificate certificate,
-							@NonNull PrivateKey privateKey,
-							@Nullable String alias) implements KeyBundle {
+public class KeyBundleImpl implements KeyBundle {
+
+	private final @NonNull X509Certificate certificate;
+	private final @NonNull PrivateKey privateKey;
+	private final @Nullable String alias;
+
+	/**
+	 * 构造方法
+	 *
+	 * @param certificate 证书
+	 * @param privateKey  私钥
+	 */
+	public KeyBundleImpl(@NonNull X509Certificate certificate,
+						 @NonNull PrivateKey privateKey) {
+		this(certificate, privateKey, null);
+	}
+
+	/**
+	 * 构造方法
+	 *
+	 * @param certificate 证书
+	 * @param privateKey  私钥
+	 * @param alias       别名
+	 */
+	public KeyBundleImpl(@NonNull X509Certificate certificate,
+						 @NonNull PrivateKey privateKey,
+						 @Nullable String alias) {
+		this.certificate = certificate;
+		this.privateKey = privateKey;
+		this.alias = alias;
+	}
 
 	/**
 	 * {@inheritDoc}
