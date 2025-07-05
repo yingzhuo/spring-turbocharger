@@ -24,7 +24,6 @@ import com.github.yingzhuo.turbocharger.util.StringFormatter;
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;
 import com.github.yingzhuo.turbocharger.util.collection.iterator.NoopComparator;
-import com.github.yingzhuo.turbocharger.util.function.GenericGenerator;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -51,7 +50,6 @@ import java.util.stream.Collectors;
  * @see Errors
  * @see BindingResult
  * @see org.springframework.core.convert.converter.Converter
- * @see GenericGenerator
  * @see org.springframework.core.convert.converter.ConverterFactory
  * @see org.springframework.format.Parser
  * @see org.springframework.format.Formatter
