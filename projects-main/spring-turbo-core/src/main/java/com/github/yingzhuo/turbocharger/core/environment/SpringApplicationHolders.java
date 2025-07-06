@@ -22,7 +22,6 @@ import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.env.EnvironmentPostProcessor;
-import org.springframework.boot.logging.DeferredLogFactory;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -96,16 +95,7 @@ public final class SpringApplicationHolders {
 	 * @see EnvironmentPostProcessor
 	 * @see ApplicationListener
 	 */
-	private static class Hook extends AbstractEnvironmentPostProcessor implements Ordered, ApplicationListener<ContextRefreshedEvent> {
-
-		/**
-		 * 构造方法
-		 *
-		 * @param logFactory 日志提供器
-		 */
-		public Hook(DeferredLogFactory logFactory) {
-			super(logFactory, HIGHEST_PRECEDENCE);
-		}
+	private static class Hook implements EnvironmentPostProcessor, Ordered, ApplicationListener<ContextRefreshedEvent> {
 
 		/**
 		 * {@inheritDoc}
@@ -116,6 +106,14 @@ public final class SpringApplicationHolders {
 			SpringApplicationHolders.APPLICATION_SOURCES = application.getAllSources();
 			SpringApplicationHolders.APPLICATION_WEB_APPLICATION_TYPE = application.getWebApplicationType();
 			SpringApplicationHolders.ENVIRONMENT = environment;
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public int getOrder() {
+			return LOWEST_PRECEDENCE;
 		}
 
 		/**

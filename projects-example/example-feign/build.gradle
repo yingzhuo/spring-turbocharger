@@ -1,0 +1,28 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+plugins {
+	id 'buildlogic.java-conventions'
+	id 'buildlogic.spring-boot-conventions'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom SpringBootPlugin.BOM_COORDINATES
+	}
+}
+
+dependencies {
+	// spring-boot
+	api 'org.springframework.boot:spring-boot-starter-web'
+
+	// spring-turbocharger
+	api project(':projects-main:spring-turbo-core')
+	api project(':projects-main:spring-turbo-feign')
+
+	// lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// slf4j
+	api 'org.slf4j:slf4j-api'
+}

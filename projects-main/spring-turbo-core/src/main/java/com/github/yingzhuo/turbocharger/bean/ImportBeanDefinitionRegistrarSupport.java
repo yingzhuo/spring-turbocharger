@@ -23,7 +23,6 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
-import org.springframework.lang.Nullable;
 
 /**
  * {@link ImportBeanDefinitionRegistrar} 支持类
@@ -81,17 +80,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImpor
 	 * @return 类扫描器实例
 	 */
 	public final ClassPathScanner createClassPathScanner() {
-		return createClassPathScanner(null);
-	}
-
-	/**
-	 * 创建类扫描器
-	 *
-	 * @param registry Bean注册器
-	 * @return 类扫描器实例
-	 */
-	public final ClassPathScanner createClassPathScanner(@Nullable BeanDefinitionRegistry registry) {
-		var scanner = registry == null ? new ClassPathScanner(false) : new ClassPathScanner(registry, false);
+		var scanner = new ClassPathScanner();
 		scanner.setResourceLoader(getResourceLoader());
 		scanner.setEnvironment(getEnvironment());
 		return scanner;

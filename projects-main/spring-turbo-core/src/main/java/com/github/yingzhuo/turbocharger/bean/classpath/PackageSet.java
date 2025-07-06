@@ -80,7 +80,7 @@ public final class PackageSet implements Iterable<String>, Serializable {
 	 * @param baseClasses 基础类
 	 * @return this
 	 */
-	public PackageSet acceptBaseClasses(@Nullable Class<?>... baseClasses) {
+	public PackageSet acceptBasePackageClasses(@Nullable Class<?>... baseClasses) {
 		if (baseClasses != null) {
 			Arrays.stream(baseClasses)
 				.filter(Objects::nonNull)

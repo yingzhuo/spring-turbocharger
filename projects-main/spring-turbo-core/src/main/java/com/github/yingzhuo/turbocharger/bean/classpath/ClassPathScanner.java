@@ -17,7 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.bean.classpath;
 
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.boot.io.ApplicationResourceLoader;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
@@ -27,6 +27,8 @@ import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.filter.TypeFilter;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
+import org.springframework.util.ClassUtils;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -46,41 +48,14 @@ import java.util.stream.Stream;
  */
 public final class ClassPathScanner {
 
-	private final ClassPathScanningCandidateComponentProvider provider;
+	private final ClassPathScannerCore provider = new ClassPathScannerCore();
+	private ClassLoader classLoader = ClassPathScanner.class.getClassLoader();
 
 	/**
 	 * 默认构造方法
 	 */
 	public ClassPathScanner() {
-		this(false);
-	}
-
-	/**
-	 * 构造方法
-	 *
-	 * @param useDefaultFilters 是否包含Spring提供的默认过滤器
-	 */
-	public ClassPathScanner(boolean useDefaultFilters) {
-		provider = new ClassPathScanningCandidateComponentProvider(false);
-	}
-
-	/**
-	 * 构造方法
-	 *
-	 * @param registry Bean注册器
-	 */
-	public ClassPathScanner(BeanDefinitionRegistry registry) {
-		this(registry, false);
-	}
-
-	/**
-	 * 构造方法
-	 *
-	 * @param registry          Bean注册器
-	 * @param useDefaultFilters 是否包含Spring提供的默认过滤器
-	 */
-	public ClassPathScanner(BeanDefinitionRegistry registry, boolean useDefaultFilters) {
-		provider = new ClassPathBeanDefinitionScanner(registry, useDefaultFilters);
+		super();
 	}
 
 	/**
@@ -99,6 +74,16 @@ public final class ClassPathScanner {
 	 */
 	public void setEnvironment(@Nullable Environment environment) {
 		provider.setEnvironment(Objects.requireNonNullElseGet(environment, StandardEnvironment::new));
+	}
+
+	/**
+	 * 设置classLoader
+	 *
+	 * @param classLoader ClassLoader实例
+	 */
+	public void setClassLoader(@Nullable ClassLoader classLoader) {
+		Assert.notNull(classLoader, "classLoader must not be null");
+		this.classLoader = classLoader;
 	}
 
 	/**
@@ -168,7 +153,41 @@ public final class ClassPathScanner {
 				.forEach(set::add);
 		}
 
+		// 强行初始化clazz
+
+		for (var beanDef : set) {
+			var className = beanDef.getBeanClassName();
+			if (className != null) {
+				var clazz = ClassUtils.resolveClassName(className, this.classLoader);
+				beanDef.setBeanClass(clazz);
+			}
+		}
+
 		return Collections.unmodifiableSet(set);
+	}
+
+	/**
+	 * 扫描器核心
+	 */
+	private static final class ClassPathScannerCore extends ClassPathScanningCandidateComponentProvider {
+
+		/**
+		 * 私有构造方法
+		 */
+		private ClassPathScannerCore() {
+			super(false);
+		}
+
+		@Override
+		protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
+			boolean isCandidate = false;
+			if (beanDefinition.getMetadata().isIndependent()) {
+				if (!beanDefinition.getMetadata().isAnnotation()) {
+					isCandidate = true;
+				}
+			}
+			return isCandidate;
+		}
 	}
 
 }
