@@ -40,7 +40,7 @@ import java.lang.annotation.*;
 @AuthenticationPrincipal(expression = "#root.phoneNumber")
 public @interface CurrentUserPhoneNumber {
 
-    @AliasFor(annotation = AuthenticationPrincipal.class, attribute = "errorOnInvalidType")
-    boolean errorOnInvalidType() default false;
+	@AliasFor(annotation = AuthenticationPrincipal.class, attribute = "errorOnInvalidType")
+	boolean errorOnInvalidType() default false;
 
 }
