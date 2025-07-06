@@ -38,14 +38,17 @@ class EnableOpenFeignCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(EnableOpenFeignCfg.class);
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception {
 		var packageSet = createPackageSet(metadata);
 		var scanner = createScanner();
 
-		for (var genericBeanDefinition : scanner.scan(packageSet)) {
+		for (var beanDef : scanner.scan(packageSet)) {
 			// TODO:
-			System.out.println(genericBeanDefinition.getBeanClassName());
+			System.out.println(beanDef.getBeanClassName());
 		}
 	}
 

@@ -26,6 +26,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.filter.TypeFilter;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
@@ -46,7 +47,7 @@ import java.util.stream.Stream;
  * @see ClassPathBeanDefinitionScanner
  * @since 3.5.3
  */
-public final class ClassPathScanner {
+public class ClassPathScanner {
 
 	private final ClassPathScannerCore provider = new ClassPathScannerCore();
 	private ClassLoader classLoader = ClassPathScanner.class.getClassLoader();
@@ -81,7 +82,7 @@ public final class ClassPathScanner {
 	 *
 	 * @param classLoader ClassLoader实例
 	 */
-	public void setClassLoader(@Nullable ClassLoader classLoader) {
+	public void setClassLoader(@NonNull ClassLoader classLoader) {
 		Assert.notNull(classLoader, "classLoader must not be null");
 		this.classLoader = classLoader;
 	}
@@ -177,6 +178,9 @@ public final class ClassPathScanner {
 			super(false);
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
 			boolean isCandidate = false;
