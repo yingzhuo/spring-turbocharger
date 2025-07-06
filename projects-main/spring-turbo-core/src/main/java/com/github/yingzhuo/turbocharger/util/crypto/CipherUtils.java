@@ -24,9 +24,9 @@ import java.security.Key;
  * 加密工具
  *
  * @author 应卓
- * @see SignatureUtils
  * @since 3.3.1
  */
+@Deprecated(forRemoval = true, since = "3.5.3")
 public final class CipherUtils {
 
 	/**

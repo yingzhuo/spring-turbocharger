@@ -126,44 +126,4 @@ public interface KeyBundle extends Serializable {
 		return SignatureUtils.verify(data, signature, getCertificate().getSigAlgName(), getPrivateKey());
 	}
 
-	/**
-	 * 使用公钥加密
-	 *
-	 * @param data 原始数据
-	 * @return 加密结果
-	 */
-	public default byte[] encryptWithPublicKey(byte[] data) {
-		return CipherUtils.encrypt(data, getPublicKey());
-	}
-
-	/**
-	 * 使用私钥加密
-	 *
-	 * @param data 原始数据
-	 * @return 加密结果
-	 */
-	public default byte[] encryptWithPrivateKey(byte[] data) {
-		return CipherUtils.encrypt(data, getPrivateKey());
-	}
-
-	/**
-	 * 使用公钥解密
-	 *
-	 * @param encryptedData 已加密数据
-	 * @return 解密结果
-	 */
-	public default byte[] decryptWithPublicKey(byte[] encryptedData) {
-		return CipherUtils.decrypt(encryptedData, getPublicKey());
-	}
-
-	/**
-	 * 使用私钥解密
-	 *
-	 * @param encryptedData 已加密数据
-	 * @return 解密结果
-	 */
-	public default byte[] decryptWithPrivateKey(byte[] encryptedData) {
-		return CipherUtils.decrypt(encryptedData, getPrivateKey());
-	}
-
 }
