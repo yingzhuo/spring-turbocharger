@@ -50,13 +50,6 @@ public @interface ImportString {
 	boolean primary() default false;
 
 	/**
-	 * Bean的Description
-	 *
-	 * @return Bean的Description
-	 */
-	String beanDescription() default "";
-
-	/**
 	 * 资源位置
 	 *
 	 * @return 资源位置

@@ -18,10 +18,12 @@
 package com.github.yingzhuo.turbocharger.bean.generic;
 
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
-import org.springframework.beans.factory.support.*;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
 import java.util.stream.Collectors;
 
@@ -46,7 +48,6 @@ class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport {
 				var charset = attr.getString("charset");
 				var trim = attr.getBoolean("trim");
 				var trimEachLine = attr.getBoolean("trimEachLine");
-				var beanDescription = attr.getString("beanDescription");
 
 				Assert.hasText(location, "location must not be empty");
 				Assert.hasText(charset, "charset must not be empty");
@@ -76,12 +77,6 @@ class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport {
 					.setScope(AbstractBeanDefinition.SCOPE_SINGLETON)
 					.setRole(AbstractBeanDefinition.ROLE_APPLICATION)
 					.getBeanDefinition();
-
-				if (StringUtils.hasText(beanDescription) &&
-					beanDef instanceof GenericBeanDefinition genericBeanDef) {
-
-					genericBeanDef.setDescription(beanDescription);
-				}
 
 				registry.registerBeanDefinition(beanName, beanDef);
 			});

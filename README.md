@@ -135,7 +135,6 @@ dependencies {
 * [多数据源代理](./projects-example/example-routing-data-source)
 * [HttpClient](./projects-example/example-web-client)
 * [ID生成器](./projects-example/example-id-generator)
-* [导入密钥库](./projects-example/example-import-keys)
 
 #### 许可证
 
