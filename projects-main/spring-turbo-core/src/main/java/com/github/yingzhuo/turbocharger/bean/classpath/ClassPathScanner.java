@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.bean.classpath;
 
-import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.boot.io.ApplicationResourceLoader;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
@@ -31,7 +30,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -49,7 +47,7 @@ import java.util.stream.Stream;
  */
 public class ClassPathScanner {
 
-	private final ClassPathScannerCore provider = new ClassPathScannerCore();
+	private final ClassPathScannerCore core = new ClassPathScannerCore();
 	private ClassLoader classLoader = ClassPathScanner.class.getClassLoader();
 
 	/**
@@ -65,7 +63,7 @@ public class ClassPathScanner {
 	 * @param resourceLoader 资源加载器
 	 */
 	public void setResourceLoader(@Nullable ResourceLoader resourceLoader) {
-		provider.setResourceLoader(Objects.requireNonNullElseGet(resourceLoader, ApplicationResourceLoader::get));
+		core.setResourceLoader(Objects.requireNonNullElseGet(resourceLoader, ApplicationResourceLoader::get));
 	}
 
 	/**
@@ -74,7 +72,7 @@ public class ClassPathScanner {
 	 * @param environment 环境
 	 */
 	public void setEnvironment(@Nullable Environment environment) {
-		provider.setEnvironment(Objects.requireNonNullElseGet(environment, StandardEnvironment::new));
+		core.setEnvironment(Objects.requireNonNullElseGet(environment, StandardEnvironment::new));
 	}
 
 	/**
@@ -91,7 +89,7 @@ public class ClassPathScanner {
 	 * 重置所有过滤器
 	 */
 	public void resetFilters() {
-		provider.resetFilters(false);
+		core.resetFilters(false);
 	}
 
 	/**
@@ -100,7 +98,7 @@ public class ClassPathScanner {
 	 * @param useDefaultFilters 是否包含Spring提供的默认过滤器
 	 */
 	public void resetFilters(boolean useDefaultFilters) {
-		provider.resetFilters(useDefaultFilters);
+		core.resetFilters(useDefaultFilters);
 	}
 
 	/**
@@ -114,7 +112,7 @@ public class ClassPathScanner {
 		if (includeFilters != null) {
 			Stream.of(includeFilters)
 				.filter(Objects::nonNull)
-				.forEach(provider::addIncludeFilter);
+				.forEach(core::addIncludeFilter);
 		}
 	}
 
@@ -129,7 +127,7 @@ public class ClassPathScanner {
 		if (excludeFilters != null) {
 			Stream.of(excludeFilters)
 				.filter(Objects::nonNull)
-				.forEach(provider::addExcludeFilter);
+				.forEach(core::addExcludeFilter);
 		}
 	}
 
@@ -148,7 +146,7 @@ public class ClassPathScanner {
 		var set = new HashSet<GenericBeanDefinition>();
 
 		for (var basePackage : packageSet) {
-			provider.findCandidateComponents(basePackage)
+			core.findCandidateComponents(basePackage)
 				.stream()
 				.map(bd -> bd instanceof GenericBeanDefinition g ? g : new GenericBeanDefinition(bd))
 				.forEach(set::add);
@@ -163,34 +161,7 @@ public class ClassPathScanner {
 			}
 		}
 
-		return Collections.unmodifiableSet(set);
-	}
-
-	/**
-	 * 扫描器核心
-	 */
-	private static final class ClassPathScannerCore extends ClassPathScanningCandidateComponentProvider {
-
-		/**
-		 * 私有构造方法
-		 */
-		private ClassPathScannerCore() {
-			super(false);
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
-			boolean isCandidate = false;
-			if (beanDefinition.getMetadata().isIndependent()) {
-				if (!beanDefinition.getMetadata().isAnnotation()) {
-					isCandidate = true;
-				}
-			}
-			return isCandidate;
-		}
+		return set;
 	}
 
 }
