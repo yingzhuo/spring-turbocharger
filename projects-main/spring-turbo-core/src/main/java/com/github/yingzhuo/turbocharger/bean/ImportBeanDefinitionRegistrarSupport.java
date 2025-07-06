@@ -81,6 +81,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImpor
 	 */
 	public final ClassPathScanner createClassPathScanner() {
 		var scanner = new ClassPathScanner();
+		scanner.setClassLoader(getBeanClassLoader());
 		scanner.setResourceLoader(getResourceLoader());
 		scanner.setEnvironment(getEnvironment());
 		return scanner;

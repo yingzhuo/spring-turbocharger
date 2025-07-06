@@ -154,7 +154,6 @@ public final class ClassPathScanner {
 		}
 
 		// 强行初始化clazz
-
 		for (var beanDef : set) {
 			var className = beanDef.getBeanClassName();
 			if (className != null) {

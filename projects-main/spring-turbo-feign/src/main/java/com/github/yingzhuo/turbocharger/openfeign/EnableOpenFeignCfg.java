@@ -20,12 +20,14 @@ package com.github.yingzhuo.turbocharger.openfeign;
 import com.github.yingzhuo.turbocharger.bean.ImportBeanDefinitionRegistrarSupport;
 import com.github.yingzhuo.turbocharger.bean.classpath.ClassPathScanner;
 import com.github.yingzhuo.turbocharger.bean.classpath.PackageSet;
-import com.github.yingzhuo.turbocharger.openfeign.support.OpenFeignTypeFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.core.type.classreading.MetadataReader;
+import org.springframework.core.type.classreading.MetadataReaderFactory;
+import org.springframework.core.type.filter.TypeFilter;
 
 /**
  * @author 应卓
@@ -39,10 +41,11 @@ class EnableOpenFeignCfg extends ImportBeanDefinitionRegistrarSupport {
 	@Override
 	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) throws Exception {
 		var packageSet = createPackageSet(metadata);
-		var scanner = createScanner(registry);
+		var scanner = createScanner();
 
 		for (var genericBeanDefinition : scanner.scan(packageSet)) {
 			// TODO:
+			System.out.println(genericBeanDefinition.getBeanClassName());
 		}
 	}
 
@@ -63,9 +66,19 @@ class EnableOpenFeignCfg extends ImportBeanDefinitionRegistrarSupport {
 		return ps;
 	}
 
-	private ClassPathScanner createScanner(BeanDefinitionRegistry registry) {
+	private ClassPathScanner createScanner() {
 		var scanner = new ClassPathScanner();
-		scanner.addIncludeFilters(new OpenFeignTypeFilter());
+		scanner.addIncludeFilters(new OpenFeignCliTypeFilter());
 		return scanner;
 	}
+
+	// ----------------------------------------------------------------------------------------------------------------
+
+	private static class OpenFeignCliTypeFilter implements TypeFilter {
+		public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) {
+			return metadataReader.getClassMetadata().isInterface() &&
+				metadataReader.getAnnotationMetadata().hasAnnotation(OpenFeignClient.class.getName());
+		}
+	}
+
 }
