@@ -22,5 +22,6 @@ dependencies {
 		api libs.xxljob
 		api libs.bundles.zxing
 		api libs.open.feign
+		api libs.open.feign.jackson
 	}
 }
