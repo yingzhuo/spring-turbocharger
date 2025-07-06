@@ -15,6 +15,7 @@ Another enhancement library of SpringBoot & SpringFramework. Have fun! :)
 dependencies {
     implementation platform("com.github.yingzhuo:spring-turbocharger-bom:$springTurbochargerVersion")
     implementation 'com.github.yingzhuo:spring-turbo-core'
+    implementation 'com.github.yingzhuo:spring-turbo-feign'
     implementation 'com.github.yingzhuo:spring-turbo-captcha'
     implementation 'com.github.yingzhuo:spring-turbo-freemarker'
     implementation 'com.github.yingzhuo:spring-turbo-hocon'
@@ -48,6 +49,10 @@ dependencies {
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yingzhuo</groupId>
+            <artifactId>spring-turbo-feign</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>

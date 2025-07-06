@@ -21,5 +21,6 @@ dependencies {
 		api libs.java.jwt
 		api libs.xxljob
 		api libs.bundles.zxing
+		api libs.open.feign
 	}
 }
