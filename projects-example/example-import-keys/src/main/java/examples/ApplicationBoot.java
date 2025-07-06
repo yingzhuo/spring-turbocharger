@@ -17,9 +17,9 @@
  */
 package examples;
 
-import com.github.yingzhuo.turbocharger.secret.ImportKeyBundleFromPem;
-import com.github.yingzhuo.turbocharger.secret.ImportKeyBundleFromStore;
-import com.github.yingzhuo.turbocharger.secret.ImportUserDefaultKeyStore;
+import com.github.yingzhuo.turbocharger.bean.generic.ImportKeyBundleFromPem;
+import com.github.yingzhuo.turbocharger.bean.generic.ImportKeyBundleFromStore;
+import com.github.yingzhuo.turbocharger.bean.generic.ImportUserDefaultKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;

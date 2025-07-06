@@ -30,16 +30,17 @@ import java.util.stream.Collectors;
 /**
  * @author 应卓
  * @see ImportString
+ * @see ImportStrings
  * @since 3.5.3
  */
-class ImportStringCfg extends ImportBeanDefinitionRegistrarSupport {
+class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
-		getAnnotationAttributesSet(metadata, ImportString.class, ImportString.Container.class)
+		getAnnotationAttributesSet(metadata, ImportString.class, ImportStrings.class)
 			.forEach(attr -> {
 				var beanName = attr.getString("beanName");
 				var primary = attr.getBoolean("primary");

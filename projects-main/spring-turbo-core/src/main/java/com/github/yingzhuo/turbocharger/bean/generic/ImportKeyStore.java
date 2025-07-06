@@ -15,41 +15,48 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.secret;
+package com.github.yingzhuo.turbocharger.bean.generic;
 
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.core.annotation.AliasFor;
+import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
  * @author 应卓
  * @see java.security.KeyStore
- * @see ImportKeyStore
- * @see ImportKeyStoreCfg
  * @since 3.5.3
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@ImportKeyStore(location = "file:${user.home}/.keystore", storepass = "changeit")
-public @interface ImportUserDefaultKeyStore {
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+@Import(ImportKeyStoreCfg.class)
+@Repeatable(ImportKeyStore.Container.class)
+public @interface ImportKeyStore {
 
-	@AliasFor(annotation = ImportKeyStore.class, attribute = "beanName")
 	String beanName() default "";
 
-	@AliasFor(annotation = ImportKeyStore.class, attribute = "primary")
 	boolean primary() default false;
 
-	@AliasFor(annotation = ImportKeyStore.class, attribute = "scope")
 	String scope() default BeanDefinition.SCOPE_SINGLETON;
 
-	@AliasFor(annotation = ImportKeyStore.class, attribute = "type")
+	String location();
+
 	KeyStoreType type() default KeyStoreType.PKCS12;
 
-	@AliasFor(annotation = ImportKeyStore.class, attribute = "storepass")
 	String storepass();
+
+	// -----------------------------------------------------------------------------------------------------------------
+
+	@Inherited
+	@Documented
+	@Retention(RetentionPolicy.RUNTIME)
+	@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+	@Import(ImportKeyStoreCfg.class)
+	@interface Container {
+		public ImportKeyStore[] value();
+	}
 
 }

@@ -15,28 +15,30 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.secret;
+package com.github.yingzhuo.turbocharger.bean.generic;
 
+import com.github.yingzhuo.turbocharger.secret.KeyBundle;
+import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
+import java.security.KeyStore;
 
 /**
- * 通过PKCS#8格式的PEM文件 在 {@link ApplicationContext} 中导入 {@link KeyBundle} 实例
+ * 通过{@link KeyStore} 在 {@link ApplicationContext} 中导入 {@link KeyBundle} 实例
  *
  * @author 应卓
- * @see ImportKeyBundleFromPemCfg
  * @since 3.5.3
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
-@Import(ImportKeyBundleFromPemCfg.class)
-@Repeatable(ImportKeyBundleFromPem.Container.class)
-public @interface ImportKeyBundleFromPem {
+@Import(ImportKeyBundleFromStoreCfg.class)
+@Repeatable(ImportKeyBundleFromStore.Container.class)
+public @interface ImportKeyBundleFromStore {
 
 	/**
 	 * Bean的名称
@@ -69,6 +71,28 @@ public @interface ImportKeyBundleFromPem {
 	String location();
 
 	/**
+	 * {@link KeyStore} 格式
+	 *
+	 * @return {@link KeyStore} 格式
+	 * @see KeyStore#getDefaultType()
+	 */
+	KeyStoreType type() default KeyStoreType.PKCS12;
+
+	/**
+	 * 库密码
+	 *
+	 * @return 库密码
+	 */
+	String storepass();
+
+	/**
+	 * 库中条目别名
+	 *
+	 * @return 库中条目别名
+	 */
+	String alias();
+
+	/**
 	 * 私钥密码
 	 *
 	 * @return 私钥密码
@@ -81,9 +105,9 @@ public @interface ImportKeyBundleFromPem {
 	@Documented
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
-	@Import(ImportKeyBundleFromPemCfg.class)
+	@Import(ImportKeyBundleFromStoreCfg.class)
 	@interface Container {
-		ImportKeyBundleFromPem[] value();
+		ImportKeyBundleFromStore[] value();
 	}
 
 }
