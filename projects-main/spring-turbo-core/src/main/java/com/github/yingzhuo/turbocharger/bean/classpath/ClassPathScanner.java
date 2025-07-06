@@ -47,14 +47,23 @@ import java.util.stream.Stream;
  */
 public class ClassPathScanner {
 
-	private final ClassPathScannerCore core = new ClassPathScannerCore();
+	private final ClassPathScannerCore core;
 	private ClassLoader classLoader = ClassPathScanner.class.getClassLoader();
 
 	/**
 	 * 默认构造方法
 	 */
 	public ClassPathScanner() {
-		super();
+		this(false);
+	}
+
+	/**
+	 * 构造方法
+	 *
+	 * @param useDefaultFilters 是否启用默认类型过滤器
+	 */
+	public ClassPathScanner(boolean useDefaultFilters) {
+		this.core = new ClassPathScannerCore(useDefaultFilters);
 	}
 
 	/**

@@ -30,7 +30,9 @@ import org.springframework.core.type.AnnotationMetadata;
  * @author 应卓
  * @since 3.5.3
  */
-public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImportingSupport implements ImportBeanDefinitionRegistrar {
+public abstract class ImportBeanDefinitionRegistrarSupport
+	extends AbstractImportingSupport
+	implements ImportBeanDefinitionRegistrar {
 
 	/**
 	 * 默认构造方法
@@ -80,7 +82,17 @@ public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImpor
 	 * @return 类扫描器实例
 	 */
 	public final ClassPathScanner createClassPathScanner() {
-		var scanner = new ClassPathScanner();
+		return createClassPathScanner(false);
+	}
+
+	/**
+	 * 创建类扫描器
+	 *
+	 * @param useDefaultFilters 是否启用默认类型过滤器
+	 * @return 类扫描器实例
+	 */
+	public final ClassPathScanner createClassPathScanner(boolean useDefaultFilters) {
+		var scanner = new ClassPathScanner(useDefaultFilters);
 		scanner.setClassLoader(getBeanClassLoader());
 		scanner.setResourceLoader(getResourceLoader());
 		scanner.setEnvironment(getEnvironment());
