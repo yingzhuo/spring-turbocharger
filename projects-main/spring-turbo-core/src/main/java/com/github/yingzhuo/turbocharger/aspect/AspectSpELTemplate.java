@@ -15,8 +15,9 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.core;
+package com.github.yingzhuo.turbocharger.aspect;
 
+import com.github.yingzhuo.turbocharger.core.SpELUtils;
 import lombok.Getter;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -34,7 +35,7 @@ import java.util.Objects;
  *
  * @param <T> SpEL结果类型
  * @author 应卓
- * @see SpEL
+ * @see SpELUtils
  * @since 3.4.0
  */
 public final class AspectSpELTemplate<T> implements Serializable {
@@ -84,7 +85,7 @@ public final class AspectSpELTemplate<T> implements Serializable {
 	}
 
 	public T getValue() {
-		return Objects.requireNonNull(SpEL.getValue(expression, rootObject, expressionVariables));
+		return Objects.requireNonNull(SpELUtils.getValue(expression, rootObject, expressionVariables));
 	}
 
 }

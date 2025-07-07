@@ -62,6 +62,7 @@ public final class SpringApplicationHolders {
 	 * 私有构造方法
 	 */
 	private SpringApplicationHolders() {
+		super();
 	}
 
 	@Nullable

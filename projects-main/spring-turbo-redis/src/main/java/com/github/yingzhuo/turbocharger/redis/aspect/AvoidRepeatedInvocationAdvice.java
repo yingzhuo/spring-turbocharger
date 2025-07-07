@@ -17,7 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.redis.aspect;
 
-import com.github.yingzhuo.turbocharger.core.AspectSpELTemplate;
+import com.github.yingzhuo.turbocharger.aspect.AspectSpELTemplate;
 import com.github.yingzhuo.turbocharger.core.AspectUtils;
 import com.github.yingzhuo.turbocharger.exception.RuntimeExceptionSupplier;
 import org.aspectj.lang.ProceedingJoinPoint;

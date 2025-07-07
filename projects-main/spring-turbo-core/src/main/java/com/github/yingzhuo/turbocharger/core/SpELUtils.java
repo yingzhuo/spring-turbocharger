@@ -17,6 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.core;
 
+import com.github.yingzhuo.turbocharger.aspect.AspectSpELTemplate;
 import org.springframework.expression.spel.SpelParserConfiguration;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
@@ -27,19 +28,19 @@ import org.springframework.util.CollectionUtils;
 import java.util.Map;
 
 /**
- * 简易SpEL相关工具，这个工具适用于一般绝大部分情况。
+ * 简易SpEL相关工具 这个工具适用于一般绝大部分情况
  *
  * @author 应卓
  * @see AspectSpELTemplate
  * @since 3.4.0
  */
 @SuppressWarnings("unchecked")
-public final class SpEL {
+public final class SpELUtils {
 
 	/**
 	 * 私有构造方法
 	 */
-	private SpEL() {
+	private SpELUtils() {
 		super();
 	}
 
