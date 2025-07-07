@@ -30,6 +30,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @author 应卓
+ * @see GenericAlgorithm
  * @since 3.5.3
  */
 public class GenericAlgorithmFactoryBean implements FactoryBean<GenericAlgorithm>, ResourceLoaderAware {
