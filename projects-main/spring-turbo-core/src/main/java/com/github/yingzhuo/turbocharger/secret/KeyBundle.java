@@ -17,9 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.secret;
 
-import com.github.yingzhuo.turbocharger.util.crypto.CipherUtils;
-import com.github.yingzhuo.turbocharger.util.crypto.SignatureUtils;
-import org.springframework.lang.Nullable;
+import com.github.yingzhuo.turbocharger.util.SignatureUtils;
 
 import java.io.Serializable;
 import java.security.KeyPair;
@@ -32,7 +30,7 @@ import java.util.List;
  * 对秘钥/密钥对的简易封装
  *
  * @author 应卓
- * @see CipherUtils
+ * @see KeyPair
  * @see SignatureUtils
  * @see KeyBundleFactories
  * @since 3.5.3
@@ -78,52 +76,5 @@ public interface KeyBundle extends Serializable {
 	 * @return 证书链
 	 */
 	public List<X509Certificate> getCertificateChain();
-
-	/**
-	 * 获取alias <br>
-	 * 当秘钥从 {@link java.security.KeyStore} 中获取时不为空值
-	 *
-	 * @return alias
-	 */
-	@Nullable
-	public default String alias() {
-		return null;
-	}
-
-	/**
-	 * 获取描述信息
-	 *
-	 * @return 描述信息
-	 */
-	@Nullable
-	public String getDescription();
-
-	/**
-	 * 设置描述信息
-	 *
-	 * @param description 描述信息
-	 */
-	public void setDescription(@Nullable String description);
-
-	/**
-	 * 签名
-	 *
-	 * @param data 待签名的数据
-	 * @return 签名结果
-	 */
-	public default byte[] sign(byte[] data) {
-		return SignatureUtils.sign(data, getCertificate().getSigAlgName(), getPrivateKey());
-	}
-
-	/**
-	 * 验证签名
-	 *
-	 * @param data      原始数据
-	 * @param signature 签名
-	 * @return 检验结果
-	 */
-	public default boolean verify(byte[] data, byte[] signature) {
-		return SignatureUtils.verify(data, signature, getCertificate().getSigAlgName(), getPrivateKey());
-	}
 
 }

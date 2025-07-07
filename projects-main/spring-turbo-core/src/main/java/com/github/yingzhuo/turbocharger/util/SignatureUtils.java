@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.util.crypto;
+package com.github.yingzhuo.turbocharger.util;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;

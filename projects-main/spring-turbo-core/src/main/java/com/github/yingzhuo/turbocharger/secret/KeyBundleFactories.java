@@ -101,7 +101,7 @@ public final class KeyBundleFactories {
 
 		var cert = (X509Certificate) KeyStoreUtils.getCertificate(ks, alias);
 		var privateKey = KeyStoreUtils.getPrivateKey(ks, alias, keypass);
-		return new KeyBundleImpl(cert, privateKey, alias);
+		return new KeyBundleImpl(cert, privateKey);
 	}
 
 }

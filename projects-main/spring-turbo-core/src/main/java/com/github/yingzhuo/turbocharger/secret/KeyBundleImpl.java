@@ -18,7 +18,6 @@
 package com.github.yingzhuo.turbocharger.secret;
 
 import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -34,8 +33,6 @@ public class KeyBundleImpl implements KeyBundle {
 
 	private final @NonNull X509Certificate certificate;
 	private final @NonNull PrivateKey privateKey;
-	private final @Nullable String alias;
-	private @Nullable String description;
 
 	/**
 	 * 构造方法
@@ -45,22 +42,8 @@ public class KeyBundleImpl implements KeyBundle {
 	 */
 	public KeyBundleImpl(@NonNull X509Certificate certificate,
 						 @NonNull PrivateKey privateKey) {
-		this(certificate, privateKey, null);
-	}
-
-	/**
-	 * 构造方法
-	 *
-	 * @param certificate 证书
-	 * @param privateKey  私钥
-	 * @param alias       别名
-	 */
-	public KeyBundleImpl(@NonNull X509Certificate certificate,
-						 @NonNull PrivateKey privateKey,
-						 @Nullable String alias) {
 		this.certificate = certificate;
 		this.privateKey = privateKey;
-		this.alias = alias;
 	}
 
 	/**
@@ -93,32 +76,6 @@ public class KeyBundleImpl implements KeyBundle {
 	@Override
 	public List<X509Certificate> getCertificateChain() {
 		return List.of(this.certificate);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Nullable
-	@Override
-	public String alias() {
-		return this.alias;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Nullable
-	@Override
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setDescription(@Nullable String description) {
-		this.description = description;
 	}
 
 }
