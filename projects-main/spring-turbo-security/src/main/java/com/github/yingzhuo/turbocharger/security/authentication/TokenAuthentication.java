@@ -32,7 +32,9 @@ import java.util.Objects;
  * @author 应卓
  * @see org.springframework.security.core.Authentication
  * @since 1.0.0
+ * @deprecated 使用 {@link GenericAuthentication} 代替
  */
+@Deprecated(forRemoval = true, since = "3.5.3")
 public final class TokenAuthentication extends AbstractAuthenticationToken {
 
 	/**

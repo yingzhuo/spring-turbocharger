@@ -18,12 +18,12 @@
 package com.github.yingzhuo.turbocharger.security.filter;
 
 import com.github.yingzhuo.turbocharger.security.FilterConfiguration;
-import com.github.yingzhuo.turbocharger.security.authentication.TokenAuthentication;
+import com.github.yingzhuo.turbocharger.security.authentication.GenericAuthentication;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.event.AuthenticationFailureEvent;
 import com.github.yingzhuo.turbocharger.security.event.AuthenticationSuccessEvent;
-import com.github.yingzhuo.turbocharger.security.token.resolver.BearerTokenResolver;
 import com.github.yingzhuo.turbocharger.security.token.Token;
+import com.github.yingzhuo.turbocharger.security.token.resolver.BearerTokenResolver;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -91,7 +91,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 				}
 			}
 
-			var authentication = new TokenAuthentication(user, token);
+			var authentication = new GenericAuthentication(user, token);
 			authentication.setAuthenticated(true);
 			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

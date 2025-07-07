@@ -70,7 +70,9 @@ public final class AuthorityUtils {
 		if (CollectionUtils.isEmpty(list)) {
 			return NO_AUTHORITIES;
 		} else {
-			return list.stream().filter(Objects::nonNull).collect(Collectors.toUnmodifiableList());
+			return list.stream()
+				.filter(Objects::nonNull)
+				.collect(Collectors.toUnmodifiableList());
 		}
 	}
 
