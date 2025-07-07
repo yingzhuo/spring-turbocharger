@@ -22,11 +22,9 @@ import com.github.yingzhuo.turbocharger.security.util.AuthorityUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * 认证对象，本类是 {@link org.springframework.security.core.Authentication} 的实现
@@ -35,7 +33,7 @@ import java.util.Optional;
  * @see org.springframework.security.core.Authentication
  * @since 1.0.0
  */
-public final class TokenAuthentication extends AbstractAuthenticationToken implements Authentication {
+public final class TokenAuthentication extends AbstractAuthenticationToken {
 
 	/**
 	 * 当前用户
@@ -45,8 +43,6 @@ public final class TokenAuthentication extends AbstractAuthenticationToken imple
 
 	/**
 	 * 当前认证的令牌 (optional)
-	 *
-	 * @since 1.2.3
 	 */
 	@Nullable
 	private final Token token;
@@ -96,31 +92,16 @@ public final class TokenAuthentication extends AbstractAuthenticationToken imple
 	@NonNull
 	@Override
 	public Object getCredentials() {
-		return Optional.ofNullable(userDetails).map(UserDetails::getPassword)
-			.orElse(Long.toString(System.identityHashCode(this)));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		if (!super.equals(o))
-			return false;
-		TokenAuthentication that = (TokenAuthentication) o;
-		return Objects.equals(userDetails, that.userDetails) && Objects.equals(token, that.token);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), userDetails, token);
+		if (token != null) {
+			return token.asString();
+		}
+		if (userDetails != null) {
+			var pwd = userDetails.getPassword();
+			if (pwd != null) {
+				return pwd;
+			}
+		}
+		return "";
 	}
 
 	@Nullable
