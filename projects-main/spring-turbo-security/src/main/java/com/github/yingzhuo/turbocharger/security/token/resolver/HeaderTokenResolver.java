@@ -15,17 +15,17 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.token;
+package com.github.yingzhuo.turbocharger.security.token.resolver;
 
+import com.github.yingzhuo.turbocharger.security.token.StringToken;
+import com.github.yingzhuo.turbocharger.security.token.Token;
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
-import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.Objects;
 import java.util.Optional;
-
-import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
 
 /**
  * 通过HTTP header解析令牌
@@ -47,7 +47,7 @@ public class HeaderTokenResolver implements TokenResolver {
 	 * @param headerName 请求头名
 	 */
 	public HeaderTokenResolver(String headerName) {
-		this(headerName, EMPTY);
+		this(headerName, null);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class HeaderTokenResolver implements TokenResolver {
 	 */
 	public HeaderTokenResolver(String headerName, @Nullable String prefix) {
 		Assert.hasText(headerName, "headerName is required");
-		prefix = Objects.requireNonNullElse(prefix, EMPTY);
+		prefix = Objects.requireNonNullElse(prefix, "");
 
 		this.headerName = headerName;
 		this.prefix = prefix;
@@ -72,7 +72,7 @@ public class HeaderTokenResolver implements TokenResolver {
 	 * @return 令牌Optional，不能成功解析时返回empty-optional
 	 */
 	@Override
-	public Optional<Token> resolve(NativeWebRequest request) {
+	public Optional<Token> resolve(WebRequest request) {
 		var headerValue = request.getHeader(headerName);
 
 		if (headerValue == null || !headerValue.startsWith(prefix)) {
@@ -85,7 +85,7 @@ public class HeaderTokenResolver implements TokenResolver {
 			return Optional.empty();
 		}
 
-		return Optional.of(StringToken.of(headerValue));
+		return Optional.of(new StringToken(headerValue));
 	}
 
 }

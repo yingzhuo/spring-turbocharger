@@ -22,7 +22,7 @@ import com.github.yingzhuo.turbocharger.security.authentication.TokenAuthenticat
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.event.AuthenticationFailureEvent;
 import com.github.yingzhuo.turbocharger.security.event.AuthenticationSuccessEvent;
-import com.github.yingzhuo.turbocharger.security.token.BearerTokenResolver;
+import com.github.yingzhuo.turbocharger.security.token.resolver.BearerTokenResolver;
 import com.github.yingzhuo.turbocharger.security.token.Token;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -30,7 +30,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.lang.Nullable;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -49,8 +48,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 
 	private static final Logger log = LoggerFactory.getLogger(TokenAuthenticationFilter.class);
 
-	@Nullable
-	private TokenToUserConverter tokenToUserConverter;
+	private TokenToUserConverter tokenToUserConverter = token -> null;
 
 	/**
 	 * 构造方法
@@ -141,11 +139,6 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 		}
 
 		filterChain.doFilter(request, response);
-	}
-
-	@Nullable
-	public TokenToUserConverter getTokenToUserConverter() {
-		return tokenToUserConverter;
 	}
 
 	public void setTokenToUserConverter(TokenToUserConverter converter) {

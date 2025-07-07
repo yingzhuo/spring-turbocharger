@@ -15,21 +15,27 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.filter;
+package com.github.yingzhuo.turbocharger.security.token.resolver;
 
-import com.github.yingzhuo.turbocharger.security.token.resolver.BearerTokenResolver;
+import org.springframework.http.HttpHeaders;
 
 /**
+ * HTTP Bearer 令牌解析器
+ *
  * @author 应卓
- * @since 3.3.1
+ * @see HeaderTokenResolver
+ * @see HttpHeaders#AUTHORIZATION
+ * @since 1.0.5
  */
-public class BearerTokenAuthenticationFilter extends TokenAuthenticationFilter {
+public class BearerTokenResolver extends HeaderTokenResolver {
+
+	private static final String PREFIX = "Bearer ";
 
 	/**
 	 * 默认构造方法
 	 */
-	public BearerTokenAuthenticationFilter() {
-		super.setTokenResolver(new BearerTokenResolver());
+	public BearerTokenResolver() {
+		super(HttpHeaders.AUTHORIZATION, PREFIX);
 	}
 
 }

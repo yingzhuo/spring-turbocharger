@@ -17,7 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.security.token;
 
-import org.springframework.util.Assert;
+import org.springframework.lang.NonNull;
 
 import java.io.Serializable;
 
@@ -25,28 +25,25 @@ import java.io.Serializable;
  * 令牌
  *
  * @author 应卓
- * @see #ofString(CharSequence)
  * @since 1.0.0
  */
 @FunctionalInterface
-public interface Token extends Serializable {
-
-	/**
-	 * 创建 {@link StringToken}
-	 *
-	 * @param stringValue 令牌
-	 * @return 实例
-	 */
-	public static Token ofString(CharSequence stringValue) {
-		Assert.notNull(stringValue, "stringValue must not be null");
-		return StringToken.of(stringValue.toString());
-	}
+public interface Token extends Comparable<Token>, Serializable {
 
 	/**
 	 * 获取令牌的值
 	 *
 	 * @return 令牌的值
 	 */
+	@NonNull
 	public String asString();
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public default int compareTo(Token o) {
+		return this.asString().compareTo(o.asString());
+	}
 
 }

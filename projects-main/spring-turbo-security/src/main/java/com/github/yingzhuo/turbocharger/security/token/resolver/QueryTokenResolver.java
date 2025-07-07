@@ -15,17 +15,17 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.token;
+package com.github.yingzhuo.turbocharger.security.token.resolver;
 
+import com.github.yingzhuo.turbocharger.security.token.StringToken;
+import com.github.yingzhuo.turbocharger.security.token.Token;
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
-import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.Objects;
 import java.util.Optional;
-
-import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
 
 /**
  * 从HTTP QUERY中解析令牌
@@ -46,7 +46,7 @@ public class QueryTokenResolver implements TokenResolver {
 	 * @param paramName query name
 	 */
 	public QueryTokenResolver(String paramName) {
-		this(paramName, EMPTY);
+		this(paramName, null);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class QueryTokenResolver implements TokenResolver {
 	 */
 	public QueryTokenResolver(String paramName, @Nullable String prefix) {
 		Assert.notNull(paramName, "paramName must not be null");
-		prefix = Objects.requireNonNullElse(prefix, EMPTY);
+		prefix = Objects.requireNonNullElse(prefix, "");
 
 		this.paramName = paramName;
 		this.prefix = prefix;
@@ -71,7 +71,7 @@ public class QueryTokenResolver implements TokenResolver {
 	 * @return 令牌Optional，不能成功解析时返回empty-optional
 	 */
 	@Override
-	public Optional<Token> resolve(NativeWebRequest request) {
+	public Optional<Token> resolve(WebRequest request) {
 		String paramValue = request.getParameter(paramName);
 
 		if (paramValue == null || !paramValue.startsWith(prefix)) {
@@ -84,7 +84,7 @@ public class QueryTokenResolver implements TokenResolver {
 			return Optional.empty();
 		}
 
-		return Optional.of(StringToken.of(paramValue));
+		return Optional.of(new StringToken(paramValue));
 	}
 
 }

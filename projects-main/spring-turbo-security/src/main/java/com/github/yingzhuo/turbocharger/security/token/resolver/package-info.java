@@ -15,25 +15,9 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.token;
+@NonNullApi
+@NonNullFields
+package com.github.yingzhuo.turbocharger.security.token.resolver;
 
-import org.springframework.http.HttpHeaders;
-
-/**
- * HTTP Bearer 令牌解析器
- *
- * @author 应卓
- * @see HeaderTokenResolver
- * @see HttpHeaders#AUTHORIZATION
- * @since 1.0.5
- */
-public class BearerTokenResolver extends HeaderTokenResolver {
-
-	/**
-	 * 构造方法
-	 */
-	public BearerTokenResolver() {
-		super(HttpHeaders.AUTHORIZATION, "Bearer ");
-	}
-
-}
+import org.springframework.lang.NonNullApi;
+import org.springframework.lang.NonNullFields;

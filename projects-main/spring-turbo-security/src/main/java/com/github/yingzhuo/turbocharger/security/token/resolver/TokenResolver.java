@@ -15,10 +15,11 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.token;
+package com.github.yingzhuo.turbocharger.security.token.resolver;
 
+import com.github.yingzhuo.turbocharger.security.token.Token;
 import org.springframework.core.Ordered;
-import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.Optional;
 
@@ -50,7 +51,7 @@ public interface TokenResolver extends Ordered {
 	 * @param request HTTP请求
 	 * @return 令牌Optional，不能成功解析时返回empty-optional
 	 */
-	public Optional<Token> resolve(NativeWebRequest request);
+	public Optional<Token> resolve(WebRequest request);
 
 	/**
 	 * 获取排序值

@@ -18,7 +18,7 @@
 package com.github.yingzhuo.turbocharger.security.filter;
 
 import com.github.yingzhuo.turbocharger.security.filter.factory.JwtTokenAuthenticationFilterFactoryBean;
-import com.github.yingzhuo.turbocharger.security.token.BearerTokenResolver;
+import com.github.yingzhuo.turbocharger.security.token.resolver.BearerTokenResolver;
 
 /**
  * @author 应卓

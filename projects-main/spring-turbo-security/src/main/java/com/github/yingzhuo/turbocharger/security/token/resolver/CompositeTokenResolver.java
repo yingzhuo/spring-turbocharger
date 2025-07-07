@@ -15,17 +15,15 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.token;
+package com.github.yingzhuo.turbocharger.security.token.resolver;
 
+import com.github.yingzhuo.turbocharger.security.token.Token;
 import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;
 import org.springframework.core.OrderComparator;
 import org.springframework.lang.Nullable;
-import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.context.request.WebRequest;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * 组合型令牌解析器
@@ -36,7 +34,7 @@ import java.util.Optional;
  * @see TokenResolver#builder()
  * @since 1.0.0
  */
-public final class CompositeTokenResolver implements TokenResolver {
+public final class CompositeTokenResolver implements TokenResolver, Iterable<TokenResolver> {
 
 	private final List<TokenResolver> resolvers = new ArrayList<>();
 
@@ -58,7 +56,7 @@ public final class CompositeTokenResolver implements TokenResolver {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Optional<Token> resolve(NativeWebRequest request) {
+	public Optional<Token> resolve(WebRequest request) {
 		for (TokenResolver it : resolvers) {
 			Optional<Token> op = doResolve(it, request);
 			if (op.isPresent()) {
@@ -68,7 +66,15 @@ public final class CompositeTokenResolver implements TokenResolver {
 		return Optional.empty();
 	}
 
-	private Optional<Token> doResolve(@Nullable TokenResolver resolver, NativeWebRequest request) {
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Iterator<TokenResolver> iterator() {
+		return this.resolvers.iterator();
+	}
+
+	private Optional<Token> doResolve(@Nullable TokenResolver resolver, WebRequest request) {
 		try {
 			if (resolver != null) {
 				return resolver.resolve(request);

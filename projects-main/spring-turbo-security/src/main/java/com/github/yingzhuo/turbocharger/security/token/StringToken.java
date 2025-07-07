@@ -31,13 +31,14 @@ public class StringToken implements Token {
 
 	private final String string;
 
+	/**
+	 * 构造方法
+	 *
+	 * @param tokenValue 令牌内容
+	 */
 	public StringToken(String tokenValue) {
-		this.string = tokenValue;
-	}
-
-	public static StringToken of(String token) {
 		Assert.hasText("token", "token is null or blank");
-		return new StringToken(token);
+		this.string = tokenValue;
 	}
 
 	/**
@@ -61,10 +62,12 @@ public class StringToken implements Token {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
+		}
 		StringToken that = (StringToken) o;
 		return string.equals(that.string);
 	}

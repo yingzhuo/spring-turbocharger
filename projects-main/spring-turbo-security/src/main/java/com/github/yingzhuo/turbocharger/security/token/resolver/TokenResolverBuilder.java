@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.github.yingzhuo.turbocharger.security.token;
+package com.github.yingzhuo.turbocharger.security.token.resolver;
 
 import org.springframework.lang.Nullable;
 

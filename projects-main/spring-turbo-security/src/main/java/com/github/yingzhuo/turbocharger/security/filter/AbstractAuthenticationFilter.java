@@ -17,7 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.security.filter;
 
-import com.github.yingzhuo.turbocharger.security.token.TokenResolver;
+import com.github.yingzhuo.turbocharger.security.token.resolver.TokenResolver;
 import com.github.yingzhuo.turbocharger.security.token.blacklist.TokenBlacklistManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,6 +33,8 @@ import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import java.util.Optional;
+
 /**
  * @author 应卓
  * @see TokenAuthenticationFilter
@@ -43,8 +45,7 @@ public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter 
 
 	protected SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
 
-	@Nullable
-	protected TokenResolver tokenResolver;
+	protected TokenResolver tokenResolver = request -> Optional.empty();
 
 	@Nullable
 	protected TokenBlacklistManager tokenBlacklistManager;
