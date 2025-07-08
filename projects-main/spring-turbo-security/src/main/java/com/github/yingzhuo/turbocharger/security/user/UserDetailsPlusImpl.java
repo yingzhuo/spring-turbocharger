@@ -35,6 +35,7 @@ import java.util.Optional;
  * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
+@Deprecated(since = "3.5.3")
 public class UserDetailsPlusImpl implements UserDetailsPlus {
 
 	@NonNull

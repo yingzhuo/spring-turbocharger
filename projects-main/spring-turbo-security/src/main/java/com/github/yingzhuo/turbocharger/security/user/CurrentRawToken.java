@@ -37,6 +37,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
 @CurrentSecurityContext(expression = "authentication.token.asString()")
+@Deprecated(since = "3.5.3")
 public @interface CurrentRawToken {
 
 	@AliasFor(annotation = CurrentSecurityContext.class, attribute = "errorOnInvalidType")

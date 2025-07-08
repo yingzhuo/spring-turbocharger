@@ -38,6 +38,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
 @AuthenticationPrincipal(expression = "#root.url")
+@Deprecated(since = "3.5.3")
 public @interface CurrentUserUrl {
 
 	@AliasFor(annotation = AuthenticationPrincipal.class, attribute = "errorOnInvalidType")

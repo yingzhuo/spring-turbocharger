@@ -37,6 +37,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
 @CurrentSecurityContext(expression = "authentication.token")
+@Deprecated(since = "3.5.3")
 public @interface CurrentToken {
 
 	@AliasFor(annotation = CurrentSecurityContext.class, attribute = "errorOnInvalidType")

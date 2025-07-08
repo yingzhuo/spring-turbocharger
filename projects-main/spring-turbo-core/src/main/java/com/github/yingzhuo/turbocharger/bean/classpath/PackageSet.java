@@ -91,6 +91,14 @@ public final class PackageSet implements Iterable<String>, Serializable {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Iterator<String> iterator() {
+		return innerSet.iterator();
+	}
+
+	/**
 	 * 清空所有数据
 	 *
 	 * @return this
@@ -98,14 +106,6 @@ public final class PackageSet implements Iterable<String>, Serializable {
 	public PackageSet clear() {
 		innerSet.clear();
 		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Iterator<String> iterator() {
-		return innerSet.iterator();
 	}
 
 	/**
@@ -145,11 +145,13 @@ public final class PackageSet implements Iterable<String>, Serializable {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
-		PackageSet strings = (PackageSet) o;
+		}
+		var strings = (PackageSet) o;
 		return innerSet.equals(strings.innerSet);
 	}
 

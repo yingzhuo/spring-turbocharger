@@ -37,6 +37,7 @@ import java.util.Objects;
  * @see TokenToUserConverter
  * @since 1.0.0
  */
+@Deprecated(since = "3.5.3")
 public interface UserDetailsPlus extends UserDetails, Principal {
 
 	/**

@@ -39,6 +39,7 @@ import java.util.function.Function;
  * @see UserDetailsPlus
  * @since 1.0.0
  */
+@Deprecated(since = "3.5.3")
 public final class UserDetailsPlusBuilder {
 
 	private static final String DEFAULT_PASSWORD = "<NO PASSWORD>";
