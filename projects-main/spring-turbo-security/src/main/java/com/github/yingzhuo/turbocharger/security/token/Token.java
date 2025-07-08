@@ -20,6 +20,7 @@ package com.github.yingzhuo.turbocharger.security.token;
 import org.springframework.lang.NonNull;
 
 import java.io.Serializable;
+import java.util.function.Supplier;
 
 /**
  * 令牌
@@ -28,7 +29,7 @@ import java.io.Serializable;
  * @since 1.0.0
  */
 @FunctionalInterface
-public interface Token extends Comparable<Token>, Serializable {
+public interface Token extends Comparable<Token>, Supplier<String>, Serializable {
 
 	/**
 	 * 获取令牌的值
@@ -37,6 +38,16 @@ public interface Token extends Comparable<Token>, Serializable {
 	 */
 	@NonNull
 	public String asString();
+
+	/**
+	 * 获取令牌的值
+	 *
+	 * @return 令牌的值
+	 */
+	@Override
+	public default String get() {
+		return this.asString();
+	}
 
 	/**
 	 * {@inheritDoc}

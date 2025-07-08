@@ -22,7 +22,7 @@ import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConve
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
 import com.github.yingzhuo.turbocharger.security.filter.factory.JwtTokenAuthenticationFilterFactoryBean;
 import com.github.yingzhuo.turbocharger.security.passwordencoder.EncodingIds;
-import com.github.yingzhuo.turbocharger.security.passwordencoder.PasswordEncoderFactories;
+import com.github.yingzhuo.turbocharger.security.passwordencoder.PasswordEncoderFactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -68,8 +68,8 @@ public class ApplicationBootSecurity {
 	}
 
 	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder(EncodingIds.bcrypt, EncodingIds.noop);
+	public PasswordEncoderFactoryBean passwordEncoderFactoryBean() {
+		return new PasswordEncoderFactoryBean();
 	}
 
 	@Bean

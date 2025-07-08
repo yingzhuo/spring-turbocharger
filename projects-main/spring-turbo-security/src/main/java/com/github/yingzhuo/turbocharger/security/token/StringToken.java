@@ -36,9 +36,9 @@ public class StringToken implements Token {
 	 *
 	 * @param tokenValue 令牌内容
 	 */
-	public StringToken(String tokenValue) {
+	public StringToken(CharSequence tokenValue) {
 		Assert.hasText("token", "token is null or blank");
-		this.string = tokenValue;
+		this.string = tokenValue.toString();
 	}
 
 	/**

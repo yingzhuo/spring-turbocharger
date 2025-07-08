@@ -20,7 +20,6 @@ package com.github.yingzhuo.turbocharger.security.passwordencoder.hutool;
 import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.crypto.digest.Digester;
 import com.github.yingzhuo.turbocharger.security.passwordencoder.EncodingIds;
-import com.github.yingzhuo.turbocharger.security.passwordencoder.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**

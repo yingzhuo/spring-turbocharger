@@ -19,8 +19,6 @@ package com.github.yingzhuo.turbocharger.security.passwordencoder;
 
 /**
  * @author 应卓
- * @see PasswordEncoderFactories#createDelegatingPasswordEncoder(String)
- * @see PasswordEncoderFactories#createDelegatingPasswordEncoder(String, String)
  * @since 1.1.0
  */
 public interface EncodingIds {
@@ -74,10 +72,5 @@ public interface EncodingIds {
 	 * MD5
 	 */
 	String MD5 = "MD5";
-
-	/**
-	 * SM3 (国密)
-	 */
-	String SM3 = "SM3";
 
 }
