@@ -57,22 +57,24 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 		super.setTokenResolver(new BearerTokenResolver());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	@SuppressWarnings("DuplicatedCode")
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 		throws ServletException, IOException {
 
+		// 如果之前的过滤器已经完成认证了
+		// 则本过滤不工作
 		if (!authenticationIsRequired()) {
 			filterChain.doFilter(request, response);
 			return;
 		}
 
 		try {
-			final Token token = tokenResolver.resolve(new ServletWebRequest(request)).orElse(null);
 
-			if (this.tokenBlacklistManager != null && token != null) {
-				this.tokenBlacklistManager.verify(token);
-			}
+			// 尝试解析令牌
+			final Token token = tokenResolver.resolve(new ServletWebRequest(request)).orElse(null);
 
 			if (token == null) {
 				log.trace("token cannot be resolved");
@@ -80,6 +82,12 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 				return;
 			}
 
+			// 检查黑名单
+			if (this.tokenBlacklistManager != null) {
+				this.tokenBlacklistManager.verify(token);
+			}
+
+			// 尝试获取用户对象
 			final UserDetails user = tokenToUserConverter.convert(token);
 			if (user == null) {
 				log.trace("cannot convert token to UserDetails instance");
@@ -91,19 +99,21 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 				}
 			}
 
-			var authentication = new GenericAuthentication(user, token);
+			// 构建认证对象
+			var authentication = new GenericAuthentication(
+				user,
+				token,
+				new WebAuthenticationDetailsSource().buildDetails(request) // details
+			);
 			authentication.setAuthenticated(true);
-			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
+			// 设置认证上下文
 			var securityContext = securityContextHolderStrategy.getContext();
 			securityContext.setAuthentication(authentication);
 
-			if (this.rememberMeServices != null) {
-				rememberMeServices.loginSuccess(request, response, authentication);
-			}
-
 			onSuccessfulAuthentication(request, response, authentication);
 
+			// 发布认证成功通知 (可选)
 			if (this.applicationEventPublisher != null) {
 				final var event = new AuthenticationSuccessEvent(authentication, token);
 				event.setRequest(request);
@@ -119,12 +129,9 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 
 			securityContextHolderStrategy.clearContext();
 
-			if (rememberMeServices != null) {
-				rememberMeServices.loginFail(request, response);
-			}
-
 			onUnsuccessfulAuthentication(request, response, e);
 
+			// 发布认证失败通知 (可选)
 			if (this.applicationEventPublisher != null) {
 				final var event = new AuthenticationFailureEvent(e);
 				event.setRequest(request);

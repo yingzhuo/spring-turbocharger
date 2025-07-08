@@ -17,8 +17,8 @@
  */
 package com.github.yingzhuo.turbocharger.security.filter;
 
-import com.github.yingzhuo.turbocharger.security.token.resolver.TokenResolver;
 import com.github.yingzhuo.turbocharger.security.token.blacklist.TokenBlacklistManager;
+import com.github.yingzhuo.turbocharger.security.token.resolver.TokenResolver;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationEventPublisher;
@@ -29,7 +29,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -49,9 +48,6 @@ public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter 
 
 	@Nullable
 	protected TokenBlacklistManager tokenBlacklistManager;
-
-	@Nullable
-	protected RememberMeServices rememberMeServices;
 
 	@Nullable
 	protected AuthenticationEntryPoint authenticationEntryPoint;
@@ -83,10 +79,6 @@ public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter 
 
 	public void setTokenBlacklistManager(@Nullable TokenBlacklistManager tokenBlacklistManager) {
 		this.tokenBlacklistManager = tokenBlacklistManager;
-	}
-
-	public final void setRememberMeServices(@Nullable RememberMeServices rememberMeServices) {
-		this.rememberMeServices = rememberMeServices;
 	}
 
 	public final void setAuthenticationEntryPoint(@Nullable AuthenticationEntryPoint authenticationEntryPoint) {

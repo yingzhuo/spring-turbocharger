@@ -21,16 +21,15 @@ import com.github.yingzhuo.turbocharger.security.FilterConfiguration;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
 import com.github.yingzhuo.turbocharger.security.filter.JwtTokenAuthenticationFilter;
+import com.github.yingzhuo.turbocharger.security.token.blacklist.TokenBlacklistManager;
 import com.github.yingzhuo.turbocharger.security.token.resolver.BearerTokenResolver;
 import com.github.yingzhuo.turbocharger.security.token.resolver.TokenResolver;
-import com.github.yingzhuo.turbocharger.security.token.blacklist.TokenBlacklistManager;
 import jakarta.servlet.Filter;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.lang.Nullable;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.util.Assert;
 
 /**
@@ -45,7 +44,6 @@ public class JwtTokenAuthenticationFilterFactoryBean implements FactoryBean<Filt
 	private @Nullable TokenToUserConverter tokenToUserConverter;
 	private @Nullable ApplicationEventPublisher applicationEventPublisher;
 	private @Nullable AuthenticationEntryPoint authenticationEntryPoint;
-	private @Nullable RememberMeServices rememberMeServices;
 	private @Nullable TokenBlacklistManager tokenBlacklistManager;
 
 	/**
@@ -64,7 +62,6 @@ public class JwtTokenAuthenticationFilterFactoryBean implements FactoryBean<Filt
 		filter.setTokenToUserConverter(tokenToUserConverter);
 		filter.setApplicationEventPublisher(applicationEventPublisher);
 		filter.setAuthenticationEntryPoint(authenticationEntryPoint);
-		filter.setRememberMeServices(rememberMeServices);
 		filter.setTokenBlacklistManager(tokenBlacklistManager);
 		return new FilterConfiguration.Default(filter, positionInChain, position);
 	}
@@ -110,10 +107,6 @@ public class JwtTokenAuthenticationFilterFactoryBean implements FactoryBean<Filt
 
 	public void setSecurityExceptionHandler(SecurityExceptionHandler securityExceptionHandler) {
 		this.setAuthenticationEntryPoint((AuthenticationEntryPoint) securityExceptionHandler);
-	}
-
-	public void setRememberMeServices(RememberMeServices rememberMeServices) {
-		this.rememberMeServices = rememberMeServices;
 	}
 
 	public void setTokenBlacklistManager(TokenBlacklistManager tokenBlacklistManager) {

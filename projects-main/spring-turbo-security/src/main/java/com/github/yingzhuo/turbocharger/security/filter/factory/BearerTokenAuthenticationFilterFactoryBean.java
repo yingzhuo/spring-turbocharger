@@ -20,15 +20,14 @@ package com.github.yingzhuo.turbocharger.security.filter.factory;
 import com.github.yingzhuo.turbocharger.security.FilterConfiguration;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.filter.BearerTokenAuthenticationFilter;
+import com.github.yingzhuo.turbocharger.security.token.blacklist.TokenBlacklistManager;
 import com.github.yingzhuo.turbocharger.security.token.resolver.BearerTokenResolver;
 import com.github.yingzhuo.turbocharger.security.token.resolver.TokenResolver;
-import com.github.yingzhuo.turbocharger.security.token.blacklist.TokenBlacklistManager;
 import jakarta.servlet.Filter;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.lang.Nullable;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.util.Assert;
 
 /**
@@ -43,7 +42,6 @@ public class BearerTokenAuthenticationFilterFactoryBean implements FactoryBean<F
 	private @Nullable TokenToUserConverter tokenToUserConverter;
 	private @Nullable ApplicationEventPublisher applicationEventPublisher;
 	private @Nullable AuthenticationEntryPoint authenticationEntryPoint;
-	private @Nullable RememberMeServices rememberMeServices;
 	private @Nullable TokenBlacklistManager tokenBlacklistManager;
 
 	@Override
@@ -56,7 +54,6 @@ public class BearerTokenAuthenticationFilterFactoryBean implements FactoryBean<F
 		filter.setTokenToUserConverter(tokenToUserConverter);
 		filter.setApplicationEventPublisher(applicationEventPublisher);
 		filter.setAuthenticationEntryPoint(authenticationEntryPoint);
-		filter.setRememberMeServices(rememberMeServices);
 		filter.setTokenBlacklistManager(tokenBlacklistManager);
 		return new FilterConfiguration.Default(filter, positionInChain, position);
 	}
@@ -88,10 +85,6 @@ public class BearerTokenAuthenticationFilterFactoryBean implements FactoryBean<F
 
 	public void setAuthenticationEntryPoint(@Nullable AuthenticationEntryPoint authenticationEntryPoint) {
 		this.authenticationEntryPoint = authenticationEntryPoint;
-	}
-
-	public void setRememberMeServices(@Nullable RememberMeServices rememberMeServices) {
-		this.rememberMeServices = rememberMeServices;
 	}
 
 	public void setTokenBlacklistManager(@Nullable TokenBlacklistManager tokenBlacklistManager) {

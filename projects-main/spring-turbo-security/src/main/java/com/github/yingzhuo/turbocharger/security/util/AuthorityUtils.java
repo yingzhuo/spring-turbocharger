@@ -17,17 +17,19 @@
  */
 package com.github.yingzhuo.turbocharger.security.util;
 
-import com.github.yingzhuo.turbocharger.util.StringUtils;
 import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.StringUtils;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-
-import static com.github.yingzhuo.turbocharger.util.StringPool.COMMA;
+import java.util.stream.Stream;
 
 /**
  * {@link org.springframework.security.core.GrantedAuthority} 相关工具
@@ -83,15 +85,14 @@ public final class AuthorityUtils {
 	 * @return 权限集合
 	 */
 	public static List<GrantedAuthority> createAuthorityList(@Nullable String... authorities) {
-		final List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-		if (authorities != null) {
-			for (String authority : authorities) {
-				if (authority != null) {
-					grantedAuthorities.add(new SimpleGrantedAuthority(authority));
-				}
-			}
+		if (authorities == null || authorities.length == 0) {
+			return NO_AUTHORITIES;
 		}
-		return Collections.unmodifiableList(grantedAuthorities);
+
+		return Stream.of(authorities)
+			.filter(StringUtils::hasText)
+			.map(SimpleGrantedAuthority::new)
+			.collect(Collectors.toUnmodifiableList());
 	}
 
 	/**
@@ -101,11 +102,11 @@ public final class AuthorityUtils {
 	 * @return 权限集合
 	 */
 	public static List<GrantedAuthority> commaSeparatedStringToAuthorityList(@Nullable String authorityString) {
-		if (StringUtils.isBlank(authorityString)) {
+		if (!StringUtils.hasText(authorityString)) {
 			return NO_AUTHORITIES;
 		}
 
-		final String[] authoritiesArray = authorityString.split(COMMA);
+		final String[] authoritiesArray = authorityString.split(",");
 		for (int i = 0; i < authoritiesArray.length; i++) {
 			String authority = authoritiesArray[i];
 			if (authority != null) {

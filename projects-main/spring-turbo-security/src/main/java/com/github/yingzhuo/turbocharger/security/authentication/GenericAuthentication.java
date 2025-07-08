@@ -146,11 +146,11 @@ public class GenericAuthentication implements Authentication {
 	@Override
 	public String toString() {
 		var creator = new ToStringCreator(this);
-		creator.append(getClass().getSimpleName()).append(" [");
+		creator.append("Authentication").append(" [");
 		creator.append("Principal=").append(getPrincipal()).append(", ");
 		creator.append("Credentials=[PROTECTED], ");
 		creator.append("Authenticated=").append(isAuthenticated()).append(", ");
-		creator.append("Granted Authorities=").append(isAuthenticated());
+		creator.append("Granted Authorities=").append(getAuthorities());
 		creator.append("]");
 		return creator.toString();
 	}
