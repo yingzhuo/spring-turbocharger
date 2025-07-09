@@ -72,11 +72,6 @@ public class JwtTokenAuthenticationFilterFactoryBean implements FactoryBean<Filt
 	}
 
 	@Override
-	public boolean isSingleton() {
-		return true;
-	}
-
-	@Override
 	public void afterPropertiesSet() {
 		Assert.notNull(tokenToUserConverter, "tokenToUserConverter is required");
 	}
