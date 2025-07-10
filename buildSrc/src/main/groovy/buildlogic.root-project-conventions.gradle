@@ -6,7 +6,7 @@ plugins {
 defaultTasks 'classes'
 
 tasks.named('wrapper') {
-	distributionUrl = gradleWrapperDistributionUrl
+	distributionUrl = "https://mirrors.cloud.tencent.com/gradle/gradle-$gradleVersion-bin.zip"
 }
 
 tasks.register('pushToVcs', Exec) {
