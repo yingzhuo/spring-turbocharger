@@ -36,17 +36,6 @@ public final class KeyBundleFactories {
 	 * 私有构造方法
 	 */
 	private KeyBundleFactories() {
-		super();
-	}
-
-	/**
-	 * 从资源中加载
-	 *
-	 * @param location 资源位置
-	 * @return {@link KeyBundle} 实例
-	 */
-	public static KeyBundle loadFromPem(String location) {
-		return loadFromPem(location, null);
 	}
 
 	/**
@@ -61,19 +50,6 @@ public final class KeyBundleFactories {
 
 		var pc = PemContent.of(ResourceUtils.readResourceAsString(location));
 		return new KeyBundleImpl(pc.getCertificates().get(0), pc.getPrivateKey(keypass));
-	}
-
-	/**
-	 * 从PKCS#12或JKS中加载
-	 *
-	 * @param location  资源位置
-	 * @param type      资源类型
-	 * @param storepass 库密码
-	 * @param alias     别名
-	 * @return {@link KeyBundle} 实例
-	 */
-	public static KeyBundle loadFromStore(String location, KeyStoreType type, String storepass, String alias) {
-		return loadFromStore(location, type, storepass, alias, null);
 	}
 
 	/**

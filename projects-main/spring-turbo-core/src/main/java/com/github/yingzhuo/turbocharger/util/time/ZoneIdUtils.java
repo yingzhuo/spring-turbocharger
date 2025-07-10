@@ -46,14 +46,6 @@ public final class ZoneIdUtils {
 	public static final String ASIA_SHANGHAI_VALUE = "Asia/Shanghai";
 	public static final ZoneId ASIA_SHANGHAI = ZoneId.of(ASIA_SHANGHAI_VALUE);
 
-	// 美国
-	public static final String AMERICA_CHICAGO_VALUE = "America/Chicago";
-	public static final ZoneId AMERICA_CHICAGO = ZoneId.of(AMERICA_CHICAGO_VALUE);
-
-	// 日本
-	public static final String ASIA_TOKYO_VALUE = "Asia/Tokyo";
-	public static final ZoneId ASIA_TOKYO = ZoneId.of(ASIA_TOKYO_VALUE);
-
 	/**
 	 * 私有构造方法
 	 */
