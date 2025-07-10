@@ -108,10 +108,12 @@ public final class Tuple<A, B, C> implements Serializable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
+		}
 		Tuple<?, ?, ?> tuple = (Tuple<?, ?, ?>) o;
 		return Objects.equals(a, tuple.a) && Objects.equals(b, tuple.b) && Objects.equals(c, tuple.c);
 	}

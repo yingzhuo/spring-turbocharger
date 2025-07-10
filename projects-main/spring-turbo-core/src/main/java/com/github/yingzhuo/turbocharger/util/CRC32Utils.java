@@ -23,7 +23,6 @@ import java.util.zip.CRC32;
  * CRC32相关工具
  *
  * @author 应卓
- * @see CRC16Utils
  * @since 3.3.5
  */
 public final class CRC32Utils {

@@ -90,7 +90,7 @@ public final class KeyStoreUtils {
 		Assert.hasText(alias, "alias is required");
 		Assert.notNull(keypass, "keypass is required");
 
-		T key = null;
+		T key;
 		try {
 			key = (T) loadedKeyStore.getKey(alias, keypass.toCharArray());
 		} catch (Exception e) {
@@ -159,7 +159,7 @@ public final class KeyStoreUtils {
 		Assert.notNull(loadedKeyStore, "keyStore is required");
 		Assert.hasText(alias, "alias is required");
 
-		T certificate = null;
+		T certificate;
 		try {
 			certificate = (T) loadedKeyStore.getCertificate(alias);
 		} catch (Exception e) {
