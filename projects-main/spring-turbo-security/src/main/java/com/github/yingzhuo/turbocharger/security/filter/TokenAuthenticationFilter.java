@@ -109,8 +109,6 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 			var securityContext = securityContextHolderStrategy.getContext();
 			securityContext.setAuthentication(authentication);
 
-			onSuccessfulAuthentication(request, response, authentication);
-
 			// 发布认证成功通知 (可选)
 			if (this.applicationEventPublisher != null) {
 				var event = new AuthenticationSuccessEvent(authentication, token);
@@ -126,8 +124,6 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 			}
 
 			securityContextHolderStrategy.clearContext();
-
-			onUnsuccessfulAuthentication(request, response, e);
 
 			// 发布认证失败通知 (可选)
 			if (this.applicationEventPublisher != null) {

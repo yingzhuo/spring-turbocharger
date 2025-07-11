@@ -27,13 +27,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.RequestCacheConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-
-import java.nio.charset.StandardCharsets;
 
 @Configuration
 @EnableMethodSecurity(
@@ -45,11 +42,10 @@ public class ApplicationBootSecurity {
 
 	@Bean
 	public GenericAlgorithmFactoryBean genericAlgorithmFactoryBean() {
-		var factoryBean = new GenericAlgorithmFactoryBean();
-		factoryBean.setPemLocation("classpath:jwt-ecdsa.pem");
-		factoryBean.setPemCharset(StandardCharsets.UTF_8);
-		factoryBean.setPassword("123456");
-		return factoryBean;
+		var factory = new GenericAlgorithmFactoryBean();
+		factory.setPemLocation("classpath:jwt-ecdsa.pem");
+		factory.setPassword("123456");
+		return factory;
 	}
 
 	@Bean
@@ -119,11 +115,6 @@ public class ApplicationBootSecurity {
 		);
 
 		return http.build();
-	}
-
-	@Bean
-	public WebSecurityCustomizer webSecurityCustomizer() {
-		return web -> web.debug(true);
 	}
 
 }

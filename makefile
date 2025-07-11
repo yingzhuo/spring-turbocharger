@@ -23,7 +23,7 @@ publish:
 	$(GRADLE) --no-parallel -x "test" -x "check" "publishToMavenCentralPortal"
 
 setup-gradle-wrapper:
-	$(GRADLE) "wrapper"
+	gradle "wrapper"
 
 add-license-header:
 	$(GRADLE) "addLicenseHeader"

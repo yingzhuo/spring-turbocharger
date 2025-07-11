@@ -58,6 +58,7 @@ public class HeaderTokenResolver implements TokenResolver {
 	 */
 	public HeaderTokenResolver(String headerName, @Nullable String prefix) {
 		Assert.hasText(headerName, "headerName is required");
+
 		prefix = Objects.requireNonNullElse(prefix, "");
 
 		this.headerName = headerName;

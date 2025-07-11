@@ -19,13 +19,10 @@ package com.github.yingzhuo.turbocharger.security.filter;
 
 import com.github.yingzhuo.turbocharger.security.token.blacklist.TokenBlacklistManager;
 import com.github.yingzhuo.turbocharger.security.token.resolver.TokenResolver;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -45,15 +42,9 @@ public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter 
 	protected SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
 
 	protected TokenResolver tokenResolver = request -> Optional.empty();
-
-	@Nullable
-	protected TokenBlacklistManager tokenBlacklistManager;
-
-	@Nullable
-	protected AuthenticationEntryPoint authenticationEntryPoint;
-
-	@Nullable
-	protected ApplicationEventPublisher applicationEventPublisher;
+	protected @Nullable TokenBlacklistManager tokenBlacklistManager;
+	protected @Nullable AuthenticationEntryPoint authenticationEntryPoint;
+	protected @Nullable ApplicationEventPublisher applicationEventPublisher;
 
 	protected final boolean authenticationIsRequired() {
 		final Authentication existingAuth = securityContextHolderStrategy.getContext().getAuthentication();
@@ -61,16 +52,6 @@ public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter 
 			return true;
 		}
 		return (existingAuth instanceof AnonymousAuthenticationToken);
-	}
-
-	protected void onSuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-											  Authentication authResult) {
-		// noop
-	}
-
-	protected void onUnsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-												AuthenticationException failed) {
-		// noop
 	}
 
 	public final void setTokenResolver(TokenResolver tokenResolver) {
