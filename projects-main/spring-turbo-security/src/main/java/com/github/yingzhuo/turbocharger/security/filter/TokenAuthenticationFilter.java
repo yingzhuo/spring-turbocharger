@@ -17,7 +17,6 @@
  */
 package com.github.yingzhuo.turbocharger.security.filter;
 
-import com.github.yingzhuo.turbocharger.security.FilterConfiguration;
 import com.github.yingzhuo.turbocharger.security.authentication.GenericAuthentication;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.event.AuthenticationFailureEvent;
@@ -41,7 +40,6 @@ import java.io.IOException;
  * 基于令牌的认证过滤器
  *
  * @author 应卓
- * @see FilterConfiguration
  * @since 1.0.0
  */
 public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
@@ -115,7 +113,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 
 			// 发布认证成功通知 (可选)
 			if (this.applicationEventPublisher != null) {
-				final var event = new AuthenticationSuccessEvent(authentication, token);
+				var event = new AuthenticationSuccessEvent(authentication, token);
 				event.setRequest(request);
 				event.setResponse(response);
 				this.applicationEventPublisher.publishEvent(event);
@@ -133,7 +131,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 
 			// 发布认证失败通知 (可选)
 			if (this.applicationEventPublisher != null) {
-				final var event = new AuthenticationFailureEvent(e);
+				var event = new AuthenticationFailureEvent(e);
 				event.setRequest(request);
 				event.setResponse(response);
 				this.applicationEventPublisher.publishEvent(event);

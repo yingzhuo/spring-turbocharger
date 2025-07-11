@@ -19,7 +19,6 @@ package com.github.yingzhuo.turbocharger.security.authentication;
 
 import com.github.yingzhuo.turbocharger.security.token.StringToken;
 import com.github.yingzhuo.turbocharger.security.token.Token;
-import com.github.yingzhuo.turbocharger.security.user.UserDetailsPlus;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,7 +30,6 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @see Token
  * @see StringToken
  * @see UserDetails
- * @see UserDetailsPlus
  * @see org.springframework.security.core.userdetails.AuthenticationUserDetailsService
  * @since 1.0.0
  */

@@ -18,10 +18,7 @@
 package examples;
 
 import com.github.yingzhuo.turbocharger.jwt.algorithm.GenericAlgorithmFactoryBean;
-import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
-import com.github.yingzhuo.turbocharger.security.filter.factory.JwtTokenAuthenticationFilterFactoryBean;
-import com.github.yingzhuo.turbocharger.security.passwordencoder.EncodingIds;
 import com.github.yingzhuo.turbocharger.security.passwordencoder.PasswordEncoderFactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +31,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.RequestCacheConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.nio.charset.StandardCharsets;
@@ -54,17 +50,6 @@ public class ApplicationBootSecurity {
 		factoryBean.setPemCharset(StandardCharsets.UTF_8);
 		factoryBean.setPassword("123456");
 		return factoryBean;
-	}
-
-	@Bean
-	public JwtTokenAuthenticationFilterFactoryBean jwtTokenAuthenticationFilterFactoryBean(
-		TokenToUserConverter tokenToUserConverter,
-		SecurityExceptionHandler exceptionHandler
-	) {
-		var factory = new JwtTokenAuthenticationFilterFactoryBean();
-		factory.setTokenToUserConverter(tokenToUserConverter);
-		factory.setSecurityExceptionHandler(exceptionHandler);
-		return factory;
 	}
 
 	@Bean
