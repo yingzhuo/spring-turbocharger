@@ -1,5 +1,3 @@
-import org.springframework.boot.gradle.plugin.SpringBootPlugin
-
 plugins {
 	id 'buildlogic.java-conventions'
 	id 'buildlogic.spring-boot-conventions'
@@ -7,7 +5,7 @@ plugins {
 
 dependencyManagement {
 	imports {
-		mavenBom SpringBootPlugin.BOM_COORDINATES
+		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
 	}
 }
 
