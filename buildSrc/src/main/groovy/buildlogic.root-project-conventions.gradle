@@ -7,6 +7,8 @@ defaultTasks 'classes'
 
 tasks.named('wrapper') {
 	distributionUrl = "https://mirrors.cloud.tencent.com/gradle/gradle-$gradleVersion-bin.zip"
+	networkTimeout = 30000
+	validateDistributionUrl = false
 }
 
 tasks.register('pushToVcs', Exec) {
