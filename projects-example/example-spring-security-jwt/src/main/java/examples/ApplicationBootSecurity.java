@@ -18,8 +18,11 @@
 package examples;
 
 import com.github.yingzhuo.turbocharger.jwt.algorithm.GenericAlgorithmFactoryBean;
+import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.exception.SecurityExceptionHandler;
+import com.github.yingzhuo.turbocharger.security.filter.TokenAuthenticationFilter;
 import com.github.yingzhuo.turbocharger.security.passwordencoder.PasswordEncoderFactoryBean;
+import com.github.yingzhuo.turbocharger.security.token.resolver.BearerTokenResolver;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +34,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.RequestCacheConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity(
@@ -114,7 +118,20 @@ public class ApplicationBootSecurity {
 				.anyRequest().hasAnyRole("USER", "ADMIN")
 		);
 
+
+		http.addFilterAfter(
+			createTokenAuthenticationFilter(context),
+			BasicAuthenticationFilter.class
+		);
+
 		return http.build();
+	}
+
+	private TokenAuthenticationFilter createTokenAuthenticationFilter(ApplicationContext context) {
+		var filter = new TokenAuthenticationFilter();
+		filter.setTokenResolver(new BearerTokenResolver());
+		filter.setTokenToUserConverter(context.getBean(TokenToUserConverter.class));
+		return	filter;
 	}
 
 }

@@ -21,14 +21,11 @@ import com.github.yingzhuo.turbocharger.security.authentication.GenericAuthentic
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.event.AuthenticationFailureEvent;
 import com.github.yingzhuo.turbocharger.security.event.AuthenticationSuccessEvent;
-import com.github.yingzhuo.turbocharger.security.token.Token;
 import com.github.yingzhuo.turbocharger.security.token.resolver.BearerTokenResolver;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -43,8 +40,6 @@ import java.io.IOException;
  * @since 1.0.0
  */
 public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
-
-	private static final Logger log = LoggerFactory.getLogger(TokenAuthenticationFilter.class);
 
 	private TokenToUserConverter tokenToUserConverter = token -> null;
 
@@ -72,10 +67,9 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 		try {
 
 			// 尝试解析令牌
-			final Token token = tokenResolver.resolve(new ServletWebRequest(request)).orElse(null);
+			var token = tokenResolver.resolve(new ServletWebRequest(request)).orElse(null);
 
 			if (token == null) {
-				log.trace("token cannot be resolved");
 				filterChain.doFilter(request, response);
 				return;
 			}
@@ -88,13 +82,8 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 			// 尝试获取用户对象
 			final UserDetails user = tokenToUserConverter.convert(token);
 			if (user == null) {
-				log.trace("cannot convert token to UserDetails instance");
 				filterChain.doFilter(request, response);
 				return;
-			} else {
-				if (log.isTraceEnabled()) {
-					log.trace("UserDetails converted. (username: {})", user.getUsername());
-				}
 			}
 
 			// 构建认证对象
@@ -118,10 +107,6 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 			}
 
 		} catch (AuthenticationException e) {
-
-			if (log.isDebugEnabled()) {
-				log.debug(e.getMessage(), e);
-			}
 
 			securityContextHolderStrategy.clearContext();
 

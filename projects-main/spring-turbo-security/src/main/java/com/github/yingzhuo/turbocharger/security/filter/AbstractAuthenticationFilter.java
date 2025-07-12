@@ -20,6 +20,7 @@ package com.github.yingzhuo.turbocharger.security.filter;
 import com.github.yingzhuo.turbocharger.security.token.blacklist.TokenBlacklistManager;
 import com.github.yingzhuo.turbocharger.security.token.resolver.TokenResolver;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -39,9 +40,8 @@ import java.util.Optional;
  */
 public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter {
 
-	protected SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
-
-	protected TokenResolver tokenResolver = request -> Optional.empty();
+	protected @NonNull SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
+	protected @NonNull TokenResolver tokenResolver = request -> Optional.empty();
 	protected @Nullable TokenBlacklistManager tokenBlacklistManager;
 	protected @Nullable AuthenticationEntryPoint authenticationEntryPoint;
 	protected @Nullable ApplicationEventPublisher applicationEventPublisher;
