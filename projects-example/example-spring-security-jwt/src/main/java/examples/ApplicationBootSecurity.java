@@ -131,7 +131,7 @@ public class ApplicationBootSecurity {
 		var filter = new TokenAuthenticationFilter();
 		filter.setTokenResolver(new BearerTokenResolver());
 		filter.setTokenToUserConverter(context.getBean(TokenToUserConverter.class));
-		return	filter;
+		return filter;
 	}
 
 }
