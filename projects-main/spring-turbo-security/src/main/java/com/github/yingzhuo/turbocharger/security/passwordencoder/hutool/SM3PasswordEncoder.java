@@ -18,8 +18,6 @@
 package com.github.yingzhuo.turbocharger.security.passwordencoder.hutool;
 
 import cn.hutool.crypto.digest.DigestUtil;
-import cn.hutool.crypto.digest.Digester;
-import com.github.yingzhuo.turbocharger.security.passwordencoder.EncodingIds;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -27,8 +25,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  *
  * @author 应卓
  * @see org.springframework.security.crypto.factory.PasswordEncoderFactories
- * @see PasswordEncoderFactories
- * @see EncodingIds#SM3
  * @since 1.0.1
  */
 public final class SM3PasswordEncoder implements PasswordEncoder {
@@ -45,7 +41,7 @@ public final class SM3PasswordEncoder implements PasswordEncoder {
 	 */
 	@Override
 	public String encode(CharSequence rawPassword) {
-		final Digester digester = DigestUtil.digester("SM3");
+		var digester = DigestUtil.digester("SM3");
 		return digester.digestHex(rawPassword.toString());
 	}
 
