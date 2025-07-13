@@ -55,7 +55,6 @@ public abstract class AbstractJwtTokenToUserConverter implements TokenToUserConv
 	@Nullable
 	@Override
 	public final UserDetails convert(@Nullable Token token) throws AuthenticationException {
-
 		if (token == null) {
 			return null;
 		}
@@ -87,7 +86,6 @@ public abstract class AbstractJwtTokenToUserConverter implements TokenToUserConv
 		var payloadJson = new String(decoder.decode(parts[1].getBytes(UTF_8)));
 
 		return doAuthenticate(
-			rawToken,
 			headerJson,
 			payloadJson
 		);
@@ -95,7 +93,6 @@ public abstract class AbstractJwtTokenToUserConverter implements TokenToUserConv
 
 	@Nullable
 	protected abstract UserDetails doAuthenticate(
-		String rawToken,
 		String headerJson,
 		String payloadJson) throws AuthenticationException;
 

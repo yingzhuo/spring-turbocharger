@@ -43,12 +43,9 @@ public class PasswordEncoderFactoryBean implements FactoryBean<PasswordEncoder>,
 	public PasswordEncoder getObject() {
 		var encodersInUse = enableDefaultEncoders ? getDefaultEncoders() : new HashMap<String, PasswordEncoder>();
 
-		SPILoader.builder(NamedPasswordEncoderProvider.class)
-			.withJdkServiceLoader()
-			.withSpringFactories()
-			.build()
+		SPILoader.getDefault(PasswordEncoderProvider.class)
 			.load()
-			.forEach(provider -> encodersInUse.put(provider.name(), provider.passwordEncoder()));
+			.forEach(p -> encodersInUse.put(p.getId(), p.getEncoder()));
 
 		if (encodersInUse.isEmpty()) {
 			return new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2B);

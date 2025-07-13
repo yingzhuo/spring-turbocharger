@@ -42,7 +42,7 @@ public class JwtTokenToUserConverter extends AbstractJwtTokenToUserConverter imp
 
 	@Nullable
 	@Override
-	protected UserDetails doAuthenticate(String rawToken, String headerJson, String payloadJson) throws AuthenticationException {
+	protected UserDetails doAuthenticate(String headerJson, String payloadJson) throws AuthenticationException {
 		return JsonUtils.parseJson(payloadJson, UserAttributes.class)
 			.toUserDetails();
 	}
