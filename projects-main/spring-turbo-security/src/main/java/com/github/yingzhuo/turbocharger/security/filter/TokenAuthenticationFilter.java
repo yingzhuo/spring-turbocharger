@@ -28,7 +28,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import java.io.IOException;
@@ -90,7 +89,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 			var authentication = new GenericAuthentication(
 				user,
 				token,
-				new WebAuthenticationDetailsSource().buildDetails(request) // details
+				authenticationDetailsCreator == null ? null : authenticationDetailsCreator.createDetails(request, response)
 			);
 			authentication.setAuthenticated(true);
 

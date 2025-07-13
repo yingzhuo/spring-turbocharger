@@ -17,6 +17,7 @@
  */
 package com.github.yingzhuo.turbocharger.security.filter;
 
+import com.github.yingzhuo.turbocharger.security.authentication.AuthenticationDetailsCreator;
 import com.github.yingzhuo.turbocharger.security.token.blacklist.TokenBlacklistManager;
 import com.github.yingzhuo.turbocharger.security.token.resolver.TokenResolver;
 import org.springframework.context.ApplicationEventPublisher;
@@ -42,6 +43,7 @@ public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter 
 
 	protected @NonNull SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
 	protected @NonNull TokenResolver tokenResolver = request -> Optional.empty();
+	protected @Nullable AuthenticationDetailsCreator authenticationDetailsCreator;
 	protected @Nullable TokenBlacklistManager tokenBlacklistManager;
 	protected @Nullable AuthenticationEntryPoint authenticationEntryPoint;
 	protected @Nullable ApplicationEventPublisher applicationEventPublisher;
@@ -72,6 +74,10 @@ public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter 
 
 	public final void setSecurityContextHolderStrategy(SecurityContextHolderStrategy securityContextHolderStrategy) {
 		this.securityContextHolderStrategy = securityContextHolderStrategy;
+	}
+
+	public final void setAuthenticationDetailsCreator(@Nullable AuthenticationDetailsCreator authenticationDetailsCreator) {
+		this.authenticationDetailsCreator = authenticationDetailsCreator;
 	}
 
 }
