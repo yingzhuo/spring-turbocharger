@@ -26,6 +26,8 @@ import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.Signature;
 import java.security.cert.X509Certificate;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -40,14 +42,18 @@ import java.util.Map;
  */
 public class GenericAlgorithm extends AbstractAlgorithm {
 
-	private static final Map<String, String> ALG_NAME_MAPPING = Map.of(
-		"SHA256withRSA", "RS256",
-		"SHA385withRSA", "RS384",
-		"SHA512withRSA", "RS512",
-		"SHA256withECDSA", "ES256",
-		"SHA384withECDSA", "ES384",
-		"SHA512withECDSA", "ES512"
-	);
+	private static final Map<String, String> ALG_NAME_MAPPING;
+
+	static {
+		Map<String, String> algNameMapping = new HashMap<>();
+		algNameMapping.put("SHA256withRSA", "RS256");
+		algNameMapping.put("SHA385withRSA", "RS384");
+		algNameMapping.put("SHA512withRSA", "RS512");
+		algNameMapping.put("SHA256withECDSA", "ES256");
+		algNameMapping.put("SHA384withECDSA", "ES384");
+		algNameMapping.put("SHA512withECDSA", "ES512");
+		ALG_NAME_MAPPING = Collections.unmodifiableMap(algNameMapping);
+	}
 
 	private final X509Certificate certificate;
 	private final PublicKey publicKey;

@@ -41,7 +41,7 @@ public abstract class AbstractAlgorithm extends Algorithm {
 	 * @param name 算法名称
 	 */
 	public AbstractAlgorithm(String name) {
-		this(name, name);
+		this(name, "<no description>");
 	}
 
 	/**
