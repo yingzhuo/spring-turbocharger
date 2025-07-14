@@ -30,9 +30,7 @@ import org.springframework.core.type.AnnotationMetadata;
  * @author 应卓
  * @since 3.5.3
  */
-public abstract class ImportBeanDefinitionRegistrarSupport
-	extends AbstractImportingSupport
-	implements ImportBeanDefinitionRegistrar {
+public abstract class ImportBeanDefinitionRegistrarSupport extends AbstractImportingSupport implements ImportBeanDefinitionRegistrar {
 
 	/**
 	 * 默认构造方法
@@ -60,7 +58,7 @@ public abstract class ImportBeanDefinitionRegistrarSupport
 	 */
 	@Override
 	public final void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
-		// noop
+		// 不允许覆盖此方法
 	}
 
 	/**
