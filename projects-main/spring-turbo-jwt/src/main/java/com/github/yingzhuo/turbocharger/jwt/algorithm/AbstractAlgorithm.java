@@ -30,6 +30,8 @@ import java.security.cert.X509Certificate;
 import java.util.Base64;
 
 /**
+ * 抽象的JWT签名算法基类
+ *
  * @author 应卓
  * @since 3.5.3
  */
@@ -40,8 +42,8 @@ public abstract class AbstractAlgorithm extends Algorithm {
 	 *
 	 * @param name 算法名称
 	 */
-	public AbstractAlgorithm(String name) {
-		this(name, "<no description>");
+	protected AbstractAlgorithm(String name) {
+		this(name, name);
 	}
 
 	/**
@@ -50,7 +52,7 @@ public abstract class AbstractAlgorithm extends Algorithm {
 	 * @param name        算法名称
 	 * @param description 算法描述
 	 */
-	public AbstractAlgorithm(String name, String description) {
+	protected AbstractAlgorithm(String name, String description) {
 		super(name, description);
 	}
 

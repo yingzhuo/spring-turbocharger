@@ -20,19 +20,20 @@ package com.github.yingzhuo.turbocharger.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.*;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
+ * {@link JwtService} 默认实现
+ *
  * @author 应卓
  * @since 3.5.0
  */
 public class JwtServiceImpl implements JwtService {
 
-	private final Algorithm algorithm;
-
-	@Nullable
-	private final VerificationCustomizer verificationCustomizer;
+	private final @NonNull Algorithm algorithm;
+	private final @Nullable VerificationCustomizer verificationCustomizer;
 
 	/**
 	 * 构造方法

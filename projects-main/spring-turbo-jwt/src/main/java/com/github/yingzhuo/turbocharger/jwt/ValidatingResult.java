@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
  * 验证结果
  *
  * @author 应卓
+ * @see JwtService#validateToken(String)
  * @since 3.3.2
  */
 public enum ValidatingResult implements Serializable {
