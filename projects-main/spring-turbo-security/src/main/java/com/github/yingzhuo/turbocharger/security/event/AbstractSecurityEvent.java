@@ -19,28 +19,37 @@ package com.github.yingzhuo.turbocharger.security.event;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.lang.Nullable;
-import org.springframework.security.core.GrantedAuthority;
-
-import java.util.Collection;
+import org.springframework.web.context.request.ServletWebRequest;
 
 /**
- * 认证成功事件
- *
  * @author 应卓
- * @since 2.0.5
+ * @since 3.5.3
  */
-public class AuthenticationSuccessEvent extends AbstractSecurityEvent {
+public abstract class AbstractSecurityEvent extends ApplicationEvent {
 
-	private final Collection<? extends GrantedAuthority> authorities;
-
-	public AuthenticationSuccessEvent(HttpServletRequest request, @Nullable HttpServletResponse response, Collection<? extends GrantedAuthority> authorities) {
-		super(request, response);
-		this.authorities = authorities;
+	/**
+	 * 构造方法
+	 *
+	 * @param request 请求
+	 */
+	public AbstractSecurityEvent(HttpServletRequest request) {
+		this(request, null);
 	}
 
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return authorities;
+	/**
+	 * 构造方法
+	 *
+	 * @param request  请求
+	 * @param response 应答
+	 */
+	public AbstractSecurityEvent(HttpServletRequest request, @Nullable HttpServletResponse response) {
+		super(new ServletWebRequest(request, response));
+	}
+
+	public ServletWebRequest getWebRequest() {
+		return (ServletWebRequest) getSource();
 	}
 
 }

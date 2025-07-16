@@ -99,9 +99,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 
 			// 发布认证成功通知 (可选)
 			if (this.applicationEventPublisher != null) {
-				var event = new AuthenticationSuccessEvent(authentication, token);
-				event.setRequest(request);
-				event.setResponse(response);
+				var event = new AuthenticationSuccessEvent(request, response, authentication.getAuthorities());
 				this.applicationEventPublisher.publishEvent(event);
 			}
 
@@ -111,9 +109,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 
 			// 发布认证失败通知 (可选)
 			if (this.applicationEventPublisher != null) {
-				var event = new AuthenticationFailureEvent(e);
-				event.setRequest(request);
-				event.setResponse(response);
+				var event = new AuthenticationFailureEvent(request, response, e);
 				this.applicationEventPublisher.publishEvent(event);
 			}
 

@@ -19,7 +19,6 @@ package com.github.yingzhuo.turbocharger.security.event;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.AuthenticationException;
 
@@ -29,38 +28,17 @@ import org.springframework.security.core.AuthenticationException;
  * @author 应卓
  * @since 2.0.5
  */
-public class AuthenticationFailureEvent extends ApplicationEvent {
+public class AuthenticationFailureEvent extends AbstractSecurityEvent {
 
-	@Nullable
-	private HttpServletRequest request;
+	private final AuthenticationException authenticationException;
 
-	@Nullable
-	private HttpServletResponse response;
-
-	public AuthenticationFailureEvent(AuthenticationException source) {
-		super(source);
+	public AuthenticationFailureEvent(HttpServletRequest request, @Nullable HttpServletResponse response, AuthenticationException authenticationException) {
+		super(request, response);
+		this.authenticationException = authenticationException;
 	}
 
 	public AuthenticationException getAuthenticationException() {
-		return (AuthenticationException) super.getSource();
-	}
-
-	@Nullable
-	public HttpServletRequest getRequest() {
-		return request;
-	}
-
-	public void setRequest(@Nullable HttpServletRequest request) {
-		this.request = request;
-	}
-
-	@Nullable
-	public HttpServletResponse getResponse() {
-		return response;
-	}
-
-	public void setResponse(@Nullable HttpServletResponse response) {
-		this.response = response;
+		return authenticationException;
 	}
 
 }

@@ -28,7 +28,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.util.Optional;
@@ -36,12 +35,11 @@ import java.util.Optional;
 /**
  * @author 应卓
  * @see TokenAuthenticationFilter
- * @see RequestMatcher
  * @since 1.2.3
  */
 public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter {
 
-	protected @NonNull SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
+	protected SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
 	protected @NonNull TokenResolver tokenResolver = request -> Optional.empty();
 	protected @Nullable AuthenticationDetailsCreator authenticationDetailsCreator;
 	protected @Nullable TokenBlacklistManager tokenBlacklistManager;

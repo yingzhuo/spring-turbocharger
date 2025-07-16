@@ -26,6 +26,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
+import java.io.Serializable;
+import java.security.Principal;
 import java.util.Collection;
 
 /**
@@ -34,7 +36,7 @@ import java.util.Collection;
  * @author 应卓
  * @since 3.5.3
  */
-public class GenericAuthentication implements Authentication {
+public class GenericAuthentication implements Authentication, Serializable, Principal {
 
 	private final @NonNull UserDetails userDetails;
 	private final @Nullable Token token;
