@@ -16,7 +16,7 @@ compile:
 build:
 	$(GRADLE) --no-parallel -x "check" -x "test" "build"
 
-install: add-license-header
+install: update-license-header
 	$(GRADLE) --no-parallel -x "test" -x "check" "publishToMavenLocal"
 
 publish:
@@ -25,8 +25,8 @@ publish:
 setup-gradle-wrapper:
 	gradle "wrapper"
 
-add-license-header:
-	$(GRADLE) "addLicenseHeader"
+update-license-header:
+	$(GRADLE) "licenseFormat"
 
 test:
 	$(GRADLE) "test"
@@ -37,8 +37,8 @@ check:
 stop-gradle-daemon:
 	$(GRADLE) --stop
 
-push-to-vcs: add-license-header
+push-to-vcs: update-license-header
 	$(GRADLE) "pushToVcs"
 
 .PHONY: usage clean clean-buildsrc refresh-dependencies compile build publish install check test \
-	setup-gradle-wrapper add-license-header stop-gradle-daemon push-to-vcs
+	setup-gradle-wrapper update-license-header stop-gradle-daemon push-to-vcs
