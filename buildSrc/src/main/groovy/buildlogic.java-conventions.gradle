@@ -76,17 +76,26 @@ test {
 }
 
 license {
-	includes(['**/*.java'])
+	includes([
+		'**/*.java', '**/*.kt', '**/*.scala', '**/*.groovy',
+		'**/spring.factories', '**/',
+		'**/org.springframework.boot.autoconfigure.AutoConfiguration.imports'
+	])
 
-	header = rootProject.file('buildSrc/config/license/HEADER.txt')
+	excludes([
+	  '**/*.properties', '**/*.xml', '**/*.yaml', '**/*.yml', '**/*.conf', '**/*.toml'
+	])
+
+	header = rootProject.file('buildSrc/config/license/header.txt')
 	strictCheck = true
+
+	mapping('java', 'SLASHSTAR_STYLE')
+	mapping('factories', 'SCRIPT_STYLE')
+	mapping('imports', 'SCRIPT_STYLE')
 
 	ext {
 		year = 2025
 		email = 'yingzhor@gmail.com'
 	}
 
-	mapping {
-		java = 'PHP'
-	}
 }
