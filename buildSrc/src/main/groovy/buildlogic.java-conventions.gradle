@@ -94,7 +94,7 @@ license {
 	mapping('imports', 'SCRIPT_STYLE')
 
 	ext {
-		year = 2025
+		inceptionYear = "2022"
 		email = 'yingzhor@gmail.com'
 	}
 
