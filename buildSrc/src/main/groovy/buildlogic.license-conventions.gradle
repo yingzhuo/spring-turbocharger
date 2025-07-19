@@ -1,0 +1,30 @@
+import java.time.LocalDate
+
+plugins {
+	id 'com.github.hierynomus.license'
+}
+
+license {
+	includes([
+		'**/*.java', '**/*.kt', '**/*.scala', '**/*.groovy',
+		'**/spring.factories', '**/',
+		'**/org.springframework.boot.autoconfigure.AutoConfiguration.imports'
+	])
+
+	excludes([
+		'**/*.properties', '**/*.xml', '**/*.yaml', '**/*.yml', '**/*.conf', '**/*.toml'
+	])
+
+	header = rootProject.file('buildSrc/config/license/header_template.txt')
+	strictCheck = true
+
+	mapping('java', 'SLASHSTAR_STYLE')
+	mapping('factories', 'SCRIPT_STYLE')
+	mapping('imports', 'SCRIPT_STYLE')
+
+	ext {
+		inceptionYear = 2022
+		presentYear = LocalDate.now().year
+		email = 'yingzhor@gmail.com'
+	}
+}

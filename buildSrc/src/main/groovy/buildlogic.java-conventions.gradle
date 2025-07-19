@@ -2,7 +2,6 @@ plugins {
 	id 'java'
 	id 'java-library'
 	id 'io.spring.dependency-management'
-	id 'com.github.hierynomus.license'
 }
 
 java {
@@ -73,29 +72,4 @@ processTestResources {
 
 test {
 	useJUnitPlatform()
-}
-
-license {
-	includes([
-		'**/*.java', '**/*.kt', '**/*.scala', '**/*.groovy',
-		'**/spring.factories', '**/',
-		'**/org.springframework.boot.autoconfigure.AutoConfiguration.imports'
-	])
-
-	excludes([
-	  '**/*.properties', '**/*.xml', '**/*.yaml', '**/*.yml', '**/*.conf', '**/*.toml'
-	])
-
-	header = rootProject.file('buildSrc/config/license/header.txt')
-	strictCheck = true
-
-	mapping('java', 'SLASHSTAR_STYLE')
-	mapping('factories', 'SCRIPT_STYLE')
-	mapping('imports', 'SCRIPT_STYLE')
-
-	ext {
-		inceptionYear = "2022"
-		email = 'yingzhor@gmail.com'
-	}
-
 }
