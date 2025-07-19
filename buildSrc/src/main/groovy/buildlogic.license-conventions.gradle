@@ -5,8 +5,7 @@ plugins {
 license {
 	includes([
 		'**/*.java', '**/*.kt', '**/*.scala', '**/*.groovy',
-		'**/spring.factories', '**/',
-		'**/org.springframework.boot.autoconfigure.AutoConfiguration.imports'
+		'**/spring.factories', '**/org.springframework.boot.autoconfigure.AutoConfiguration.imports'
 	])
 
 	excludes([
@@ -22,7 +21,7 @@ license {
 
 	ext {
 		inceptionYear = 2022
-		presentYear = Calendar.getInstance(TimeZone.getTimeZone("$timezone")).get(Calendar.YEAR)
+		presentYear = Calendar.getInstance(TimeZone.getTimeZone(timezone)).get(Calendar.YEAR)
 		email = 'yingzhor@gmail.com'
 	}
 }
