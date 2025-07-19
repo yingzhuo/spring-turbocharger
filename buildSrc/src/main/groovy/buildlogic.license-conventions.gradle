@@ -1,5 +1,3 @@
-import java.time.LocalDate
-
 plugins {
 	id 'com.github.hierynomus.license'
 }
@@ -24,7 +22,7 @@ license {
 
 	ext {
 		inceptionYear = 2022
-		presentYear = LocalDate.now().year
+		presentYear = Calendar.getInstance(TimeZone.getTimeZone("$timezone")).get(Calendar.YEAR)
 		email = 'yingzhor@gmail.com'
 	}
 }
