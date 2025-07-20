@@ -1,44 +1,45 @@
 MAKEFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-GRADLE        := $(MAKEFILE_PATH)/gradlew
+GRADLE := $(shell which gradle)
+GRADLEW := $(MAKEFILE_PATH)/gradlew
 
 clean:
-	$(GRADLE) "clean"
+	$(GRADLEW) "clean"
 
 clean-buildsrc:
-	$(GRADLE) -p $(MAKEFILE_PATH)/buildSrc/ "clean"
+	$(GRADLEW) -p $(MAKEFILE_PATH)/buildSrc/ "clean"
 
 refresh-dependencies:
-	$(GRADLE) -U
+	$(GRADLEW) -U
 
 compile:
-	$(GRADLE) "classes"
+	$(GRADLEW) "classes"
 
 build:
-	$(GRADLE) --no-parallel -x "check" -x "test" "build"
+	$(GRADLEW) --no-parallel -x "check" -x "test" "build"
 
 install: update-license-header
-	$(GRADLE) --no-parallel -x "test" -x "check" "publishToMavenLocal"
+	$(GRADLEW) --no-parallel -x "test" -x "check" "publishToMavenLocal"
 
 publish:
-	$(GRADLE) --no-parallel -x "test" -x "check" "publishToMavenCentralPortal"
+	$(GRADLEW) --no-parallel -x "test" -x "check" "publishToMavenCentralPortal"
 
 setup-gradle-wrapper:
-	gradle "wrapper"
+	$(GRADLE) "wrapper"
 
 update-license-header:
-	$(GRADLE) "licenseFormat"
+	$(GRADLEW) "licenseFormat"
 
 test:
-	$(GRADLE) "test"
+	$(GRADLEW) "test"
 
 check:
-	$(GRADLE) "check"
+	$(GRADLEW) "check"
 
 stop-gradle-daemon:
-	$(GRADLE) --stop
+	$(GRADLEW) --stop
 
 push-to-vcs: update-license-header
-	$(GRADLE) "pushToVcs"
+	$(GRADLEW) "pushToVcs"
 
 .PHONY: usage clean clean-buildsrc refresh-dependencies compile build publish install check test \
 	setup-gradle-wrapper update-license-header stop-gradle-daemon push-to-vcs

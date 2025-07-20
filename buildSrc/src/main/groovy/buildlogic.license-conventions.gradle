@@ -11,7 +11,9 @@ license {
 	excludes([
 		'**/*.properties', '**/*.xml',
 		'**/*.yaml', '**/*.yml',
-		'**/*.conf', '**/*.toml'
+		'**/*.conf', '**/*.toml',
+		'**/*.json',
+		'**/*.pem'
 	])
 
 	header = rootProject.file('buildSrc/config/license/header_template.txt')
