@@ -4,16 +4,22 @@ plugins {
 
 license {
 	includes([
-		'**/*.java', '**/*.kt', '**/*.scala', '**/*.groovy',
-		'**/spring.factories', '**/org.springframework.boot.autoconfigure.AutoConfiguration.imports'
+		'**/*.java',
+		'**/*.kt',
+		'**/*.scala',
+		'**/*.groovy',
+		'**/spring.factories',
+		'**/org.springframework.boot.autoconfigure.AutoConfiguration.imports'
 	])
 
 	excludes([
-		'**/*.properties', '**/*.xml',
-		'**/*.yaml', '**/*.yml',
-		'**/*.conf', '**/*.toml',
-		'**/*.json',
-		'**/*.pem'
+		'**/*.properties',
+		'**/*.xml',
+		'**/*.yaml',
+		'**/*.yml',
+		'**/*.conf',
+		'**/*.toml',
+		'**/*.json'
 	])
 
 	header = rootProject.file('buildSrc/config/license/header_template.txt')
