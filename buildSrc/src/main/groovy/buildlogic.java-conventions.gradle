@@ -29,7 +29,7 @@ compileJava {
 		'-Xlint:divzero',
 		'-Xlint:finally',
 		'-Xlint:static',
-		// '-Werror',
+		//'-Werror'
 	]
 }
 

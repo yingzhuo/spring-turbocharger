@@ -34,6 +34,21 @@ public final class KeyBundleFactories {
 	 * 私有构造方法
 	 */
 	private KeyBundleFactories() {
+		super();
+	}
+
+	/**
+	 * 从PEM文件内容中加载
+	 *
+	 * @param pemContent PEM文件内容
+	 * @param keypass    私钥密码
+	 * @return {@link KeyBundle} 实例
+	 */
+	public static KeyBundle loadFromPemContent(String pemContent, @Nullable String keypass) {
+		Assert.hasText(pemContent, "pemContent must not be empty");
+
+		var pc = PemContent.of(pemContent);
+		return new KeyBundleImpl(pc.getCertificates().get(0), pc.getPrivateKey(keypass));
 	}
 
 	/**
