@@ -35,6 +35,5 @@ license {
 	ext {
 		inceptionYear = 2022
 		presentYear = LocalDate.now(ZoneId.of(timezone)).year
-		email = 'yingzhor@gmail.com'
 	}
 }
