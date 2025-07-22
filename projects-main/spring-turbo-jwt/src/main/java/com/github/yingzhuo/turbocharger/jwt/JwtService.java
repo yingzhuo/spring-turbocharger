@@ -20,25 +20,9 @@ package com.github.yingzhuo.turbocharger.jwt;
  * 核心服务
  *
  * @author 应卓
+ * @see JwtCreator
+ * @see JwtValidator
  * @since 3.1.1
  */
-public interface JwtService {
-
-	/**
-	 * 生成JWT令牌
-	 *
-	 * @param data 令牌数据
-	 * @return JWT令牌
-	 */
-	public String createToken(JwtData data);
-
-	/**
-	 * 验证令牌是否合法
-	 *
-	 * @param token 令牌
-	 * @return 验证结果
-	 * @see ValidatingResult
-	 */
-	public ValidatingResult validateToken(String token);
-
+public interface JwtService extends JwtCreator, JwtValidator {
 }

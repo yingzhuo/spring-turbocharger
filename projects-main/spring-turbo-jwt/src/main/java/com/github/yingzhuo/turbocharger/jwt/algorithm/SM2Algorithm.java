@@ -21,11 +21,12 @@ import com.auth0.jwt.exceptions.SignatureVerificationException;
 import org.bouncycastle.crypto.engines.SM2Engine;
 import org.springframework.lang.Nullable;
 
-import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.X509Certificate;
 import java.util.Optional;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * 国密SM2签名算法
@@ -35,7 +36,7 @@ import java.util.Optional;
  */
 public class SM2Algorithm extends AbstractAlgorithm {
 
-	private static final byte[] DEFAULT_ID = "国密-SM2".getBytes(StandardCharsets.UTF_8);
+	private static final byte[] DEFAULT_ID = "国密-SM2".getBytes(UTF_8);
 
 	private final SM2 sm2;
 	private final byte[] id;
@@ -64,7 +65,7 @@ public class SM2Algorithm extends AbstractAlgorithm {
 		this.sm2.setMode(SM2Engine.Mode.C1C3C2);
 
 		this.id = Optional.ofNullable(id)
-			.map(s -> s.getBytes(StandardCharsets.UTF_8))
+			.map(s -> s.getBytes(UTF_8))
 			.orElse(DEFAULT_ID);
 	}
 

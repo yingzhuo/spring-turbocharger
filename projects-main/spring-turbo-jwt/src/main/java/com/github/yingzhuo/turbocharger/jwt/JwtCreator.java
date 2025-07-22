@@ -15,47 +15,19 @@
  */
 package com.github.yingzhuo.turbocharger.jwt;
 
-import java.io.Serializable;
-import java.time.Duration;
-import java.time.LocalDateTime;
-
 /**
- * 验证结果
- *
  * @author 应卓
- * @see JwtService#validateToken(String)
- * @since 3.3.2
+ * @since 3.5.3
  */
-public enum ValidatingResult implements Serializable {
+@FunctionalInterface
+public interface JwtCreator {
 
 	/**
-	 * 没有错误
-	 */
-	OK,
-
-	/**
-	 * 令牌格式不合法
-	 */
-	INVALID_JWT_FORMAT,
-
-	/**
-	 * 令牌签名不合法
-	 */
-	INVALID_SIGNATURE,
-
-	/**
-	 * 令牌相关时间不合法
+	 * 生成JWT令牌
 	 *
-	 * @see JwtData#addPayloadExpiresAt(LocalDateTime)
-	 * @see JwtData#addPayloadExpiresAtFuture(Duration)
-	 * @see JwtData#addPayloadNotBefore(LocalDateTime)
-	 * @see JwtData#addPayloadNotBeforeAtFuture(Duration)
+	 * @param data 令牌数据
+	 * @return JWT令牌
 	 */
-	INVALID_TIME,
-
-	/**
-	 * 被断言的Claim缺失或不正确
-	 */
-	INVALID_CLAIM;
+	public String createToken(JwtData data);
 
 }

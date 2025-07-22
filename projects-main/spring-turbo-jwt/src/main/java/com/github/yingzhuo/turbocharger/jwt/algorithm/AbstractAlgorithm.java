@@ -20,6 +20,7 @@ import com.auth0.jwt.exceptions.SignatureGenerationException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 import java.security.PrivateKey;
@@ -33,7 +34,7 @@ import java.util.Base64;
  * @author 应卓
  * @since 3.5.3
  */
-public abstract class AbstractAlgorithm extends Algorithm {
+public abstract class AbstractAlgorithm extends Algorithm implements Serializable {
 
 	/**
 	 * 构造方法
