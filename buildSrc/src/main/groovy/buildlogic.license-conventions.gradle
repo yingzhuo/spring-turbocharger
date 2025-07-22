@@ -18,8 +18,7 @@ license {
 	excludes([
 		'**/*.properties',
 		'**/*.xml',
-		'**/*.yaml',
-		'**/*.yml',
+		'**/*.yaml', '**/*.yml',
 		'**/*.conf',
 		'**/*.toml',
 		'**/*.json'
