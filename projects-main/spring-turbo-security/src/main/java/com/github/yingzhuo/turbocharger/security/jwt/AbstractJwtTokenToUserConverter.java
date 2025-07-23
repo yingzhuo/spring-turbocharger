@@ -15,7 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.security.jwt;
 
-import com.github.yingzhuo.turbocharger.jwt.JwtService;
+import com.github.yingzhuo.turbocharger.jwt.JwtValidator;
 import com.github.yingzhuo.turbocharger.security.authentication.TokenToUserConverter;
 import com.github.yingzhuo.turbocharger.security.jwt.exception.BadJwtAlgorithmTokenException;
 import com.github.yingzhuo.turbocharger.security.jwt.exception.BadJwtClaimTokenException;
@@ -38,16 +38,16 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  */
 public abstract class AbstractJwtTokenToUserConverter implements TokenToUserConverter {
 
-	private final JwtService jwtService;
+	private final JwtValidator jwtValidator;
 
 	/**
 	 * 构造方法
 	 *
-	 * @param jwtService JWT验证器
+	 * @param jwtValidator JWT验证器
 	 */
-	protected AbstractJwtTokenToUserConverter(JwtService jwtService) {
-		Assert.notNull(jwtService, "jwtService is required");
-		this.jwtService = jwtService;
+	protected AbstractJwtTokenToUserConverter(JwtValidator jwtValidator) {
+		Assert.notNull(jwtValidator, "jwtValidator is required");
+		this.jwtValidator = jwtValidator;
 	}
 
 	@Nullable
@@ -64,7 +64,7 @@ public abstract class AbstractJwtTokenToUserConverter implements TokenToUserConv
 			throw new BadJwtFormatTokenException(StringFormatter.format("invalid toke: {}", rawToken));
 		}
 
-		var result = jwtService.validateToken(token.asString());
+		var result = jwtValidator.validateToken(token.asString());
 
 		switch (result) {
 			case INVALID_JWT_FORMAT:

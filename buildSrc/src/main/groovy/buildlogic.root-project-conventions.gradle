@@ -19,7 +19,7 @@ tasks.register('pushToVcs', Exec) {
 }
 
 tasks.named('clean') {
-	mustRunAfter(SharedFunctions.getLeafProjectNames(rootProject).collect { "${it}:clean" })
+	//mustRunAfter(SharedFunctions.getLeafProjectNames(rootProject).collect { "${it}:clean" })
 
 	delete fileTree(rootDir) {
 		include '**/.DS_Store'

@@ -20,6 +20,6 @@ subprojects {
 }
 
 allprojects {
-	group = 'com.github.yingzhuo'
+	group = springTurbochargerGroup
 	version = springTurbochargerVersion
 }

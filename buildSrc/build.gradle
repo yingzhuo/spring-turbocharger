@@ -2,12 +2,10 @@ plugins {
 	id 'groovy-gradle-plugin'
 }
 
-['../gradle.properties', 'gradle.properties'].each {
-	try (var reader = file(it).newReader('utf-8')) {
-		final var props = new Properties()
-		props.load(reader)
-		props.forEach(ext::set)
-	}
+try (var inputStream = rootProject.file('../gradle.properties').newDataInputStream()) {
+	var properties = new Properties()
+	properties.load(inputStream)
+	properties.forEach(ext::set)
 }
 
 dependencies {
