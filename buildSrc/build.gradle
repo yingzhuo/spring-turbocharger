@@ -2,10 +2,17 @@ plugins {
 	id 'groovy-gradle-plugin'
 }
 
-try (var inputStream = rootProject.file('../gradle.properties').newDataInputStream()) {
-	var properties = new Properties()
-	properties.load(inputStream)
-	properties.forEach(ext::set)
+[file('../gradle.properties'), file('build-source.properties')].forEach { file ->
+	if (file.exists()) {
+		file.withInputStream { inputStream ->
+			var props = new Properties()
+			props.load(inputStream)
+			props.forEach(ext::set)
+			inputStream.close()
+		}
+	} else {
+		logger.info("$file is NOT exists.")
+	}
 }
 
 dependencies {

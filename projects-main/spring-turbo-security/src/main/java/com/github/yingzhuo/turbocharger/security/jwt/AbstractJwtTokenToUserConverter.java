@@ -50,6 +50,9 @@ public abstract class AbstractJwtTokenToUserConverter implements TokenToUserConv
 		this.jwtValidator = jwtValidator;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Nullable
 	@Override
 	public final UserDetails convert(@Nullable Token token) throws AuthenticationException {

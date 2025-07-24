@@ -17,6 +17,7 @@ package com.github.yingzhuo.turbocharger.security.authentication;
 
 import com.github.yingzhuo.turbocharger.security.token.StringToken;
 import com.github.yingzhuo.turbocharger.security.token.Token;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,7 +33,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @since 1.0.0
  */
 @FunctionalInterface
-public interface TokenToUserConverter {
+public interface TokenToUserConverter extends Converter<Token, UserDetails> {
 
 	/**
 	 * 将令牌转换为UserDetails
