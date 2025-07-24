@@ -3,7 +3,7 @@ plugins {
 }
 
 [file('../gradle.properties'), file('build-source.properties')].forEach { file ->
-	if (file.exists()) {
+	if (file.exists() && file.isFile()) {
 		file.withInputStream { inputStream ->
 			var props = new Properties()
 			props.load(inputStream)
