@@ -8,7 +8,6 @@ plugins {
 			var props = new Properties()
 			props.load(inputStream)
 			props.forEach(ext::set)
-			inputStream.close()
 		}
 	} else {
 		logger.info("$file is NOT exists.")
