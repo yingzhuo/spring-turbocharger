@@ -28,6 +28,8 @@ license {
 	strictCheck = true
 
 	mapping('java', 'SLASHSTAR_STYLE')
+	mapping('kt', 'SLASHSTAR_STYLE')
+	mapping('groovy', 'SLASHSTAR_STYLE')
 	mapping('factories', 'SCRIPT_STYLE')
 	mapping('imports', 'SCRIPT_STYLE')
 

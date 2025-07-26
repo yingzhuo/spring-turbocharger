@@ -54,7 +54,7 @@ class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport {
 					beanName = location;
 				}
 
-				var text = super.getResourceAsString(location, charset);
+				var text = getResourceAsString(location, charset);
 
 				if (trim) {
 					text = text.trim();
@@ -66,7 +66,7 @@ class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport {
 						.collect(Collectors.joining(System.lineSeparator()));
 				}
 
-				final var s = text; // final var used in lambda
+				var s = text; // final var used in lambda
 
 				var beanDef = BeanDefinitionBuilder.genericBeanDefinition(String.class, () -> s)
 					.setPrimary(primary)
@@ -75,7 +75,6 @@ class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport {
 					.setScope(AbstractBeanDefinition.SCOPE_SINGLETON)
 					.setRole(AbstractBeanDefinition.ROLE_APPLICATION)
 					.getBeanDefinition();
-
 				registry.registerBeanDefinition(beanName, beanDef);
 			});
 	}

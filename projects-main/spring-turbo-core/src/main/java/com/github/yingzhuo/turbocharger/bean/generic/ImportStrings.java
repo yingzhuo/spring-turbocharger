@@ -22,6 +22,7 @@ import java.lang.annotation.*;
 /**
  * @author 应卓
  * @see ImportString
+ * @see Repeatable
  * @since 3.5.3
  */
 @Inherited
@@ -31,6 +32,11 @@ import java.lang.annotation.*;
 @Import(ImportStringsCfg.class)
 public @interface ImportStrings {
 
+	/**
+	 * {@link ImportString} 实例 (多个)
+	 *
+	 * @return {@link ImportString} 实例
+	 */
 	ImportString[] value();
 
 }
