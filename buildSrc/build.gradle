@@ -2,17 +2,17 @@ plugins {
 	id 'groovy-gradle-plugin'
 }
 
-[file('../gradle.properties'), file('build-source.properties')].forEach { file ->
-	if (file.exists() && file.isFile()) {
-		file.withInputStream { inputStream ->
+['../gradle.properties', 'build-source.properties']
+	.stream()
+	.map { file(it) }
+	.filter { it.exists() && it.isFile() }
+	.forEach {
+		it.withInputStream { inputStream ->
 			var props = new Properties()
 			props.load(inputStream)
 			props.forEach(ext::set)
 		}
-	} else {
-		logger.info("$file is NOT exists.")
 	}
-}
 
 dependencies {
 	implementation "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
