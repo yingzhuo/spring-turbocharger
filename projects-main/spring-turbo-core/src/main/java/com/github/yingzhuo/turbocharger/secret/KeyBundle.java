@@ -23,6 +23,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.X509Certificate;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * 对秘钥/密钥对的简易封装
@@ -33,7 +34,7 @@ import java.util.List;
  * @see KeyBundleFactories
  * @since 3.5.3
  */
-public interface KeyBundle extends Serializable {
+public interface KeyBundle extends Supplier<KeyPair>, Serializable {
 
 	/**
 	 * 获取公钥
@@ -58,6 +59,14 @@ public interface KeyBundle extends Serializable {
 	 */
 	public default KeyPair getKeyPair() {
 		return new KeyPair(getPublicKey(), getPrivateKey());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public default KeyPair get() {
+		return getKeyPair();
 	}
 
 	/**

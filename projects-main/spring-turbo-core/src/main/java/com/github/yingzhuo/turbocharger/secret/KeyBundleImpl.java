@@ -23,6 +23,8 @@ import java.security.cert.X509Certificate;
 import java.util.List;
 
 /**
+ * {@link KeyBundle} 默认实现类
+ *
  * @author 应卓
  * @since 3.5.3
  */

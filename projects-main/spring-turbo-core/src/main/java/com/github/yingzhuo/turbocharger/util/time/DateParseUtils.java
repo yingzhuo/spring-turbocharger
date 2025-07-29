@@ -58,6 +58,7 @@ public final class DateParseUtils {
 	 * 私有构造方法
 	 */
 	private DateParseUtils() {
+		super();
 	}
 
 	public static Date parse(String string, String pattern, String... fallbackPatterns) {

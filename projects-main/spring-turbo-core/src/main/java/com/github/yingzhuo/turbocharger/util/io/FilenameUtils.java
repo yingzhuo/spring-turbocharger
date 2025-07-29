@@ -38,6 +38,7 @@ public final class FilenameUtils {
 	 * 私有构造方法
 	 */
 	private FilenameUtils() {
+		super();
 	}
 
 	/**

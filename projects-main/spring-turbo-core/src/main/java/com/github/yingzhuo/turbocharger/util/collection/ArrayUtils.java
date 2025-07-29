@@ -31,6 +31,7 @@ public final class ArrayUtils {
 	 * 私有构造方法
 	 */
 	private ArrayUtils() {
+		super();
 	}
 
 	/**

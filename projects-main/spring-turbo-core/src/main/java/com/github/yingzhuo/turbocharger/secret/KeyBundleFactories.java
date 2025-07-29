@@ -25,7 +25,10 @@ import org.springframework.util.Assert;
 import java.security.cert.X509Certificate;
 
 /**
+ * {@link KeyBundle} 生成工具类
+ *
  * @author 应卓
+ * @see KeyBundle
  * @since 3.5.3
  */
 public final class KeyBundleFactories {
