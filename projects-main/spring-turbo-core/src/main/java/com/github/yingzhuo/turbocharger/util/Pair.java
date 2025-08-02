@@ -71,6 +71,9 @@ public final class Pair<A, B> implements Serializable {
 		return Objects.requireNonNull(b);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -83,11 +86,17 @@ public final class Pair<A, B> implements Serializable {
 		return Objects.equals(a, pair.a) && Objects.equals(b, pair.b);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(a, b);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return StringFormatter.format("({}, {})", a, b);

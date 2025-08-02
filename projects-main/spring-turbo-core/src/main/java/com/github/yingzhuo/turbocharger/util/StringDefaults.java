@@ -32,6 +32,7 @@ public final class StringDefaults {
 	 * 私有构造方法
 	 */
 	private StringDefaults() {
+		super();
 	}
 
 	public static String nullToDefault(@Nullable String string, String defaultString) {

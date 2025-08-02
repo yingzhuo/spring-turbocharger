@@ -37,6 +37,7 @@ public final class BigDecimalUtils {
 	 * 私有构造方法
 	 */
 	private BigDecimalUtils() {
+		super();
 	}
 
 	/**

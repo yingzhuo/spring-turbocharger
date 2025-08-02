@@ -42,6 +42,7 @@ public final class DigestUtils {
 	 * 私有构造方法
 	 */
 	private DigestUtils() {
+		super();
 	}
 
 	/**
@@ -50,7 +51,7 @@ public final class DigestUtils {
 	 * @param data 数据
 	 * @return 信息摘要
 	 */
-	public static byte[] md2(final byte[] data) {
+	public static byte[] md2(byte[] data) {
 		try {
 			var digest = MessageDigest.getInstance(ALG_MD2);
 			return digest.digest(data);
@@ -65,7 +66,7 @@ public final class DigestUtils {
 	 * @param data 数据
 	 * @return 信息摘要
 	 */
-	public static String md2Hex(final String data) {
+	public static String md2Hex(String data) {
 		Assert.notNull(data, "data is required");
 		return HexUtils.encodeToString(md2(data.getBytes(UTF_8)));
 	}
@@ -76,7 +77,7 @@ public final class DigestUtils {
 	 * @param data 数据
 	 * @return 信息摘要
 	 */
-	public static byte[] md5(final byte[] data) {
+	public static byte[] md5(byte[] data) {
 		try {
 			var digest = MessageDigest.getInstance(ALG_MD5);
 			return digest.digest(data);
@@ -91,7 +92,7 @@ public final class DigestUtils {
 	 * @param data 数据
 	 * @return 信息摘要
 	 */
-	public static String md5Hex(final String data) {
+	public static String md5Hex(String data) {
 		Assert.notNull(data, "data is required");
 		return HexUtils.encodeToString(md5(data.getBytes(UTF_8)));
 	}
@@ -102,7 +103,7 @@ public final class DigestUtils {
 	 * @param data 数据
 	 * @return 信息摘要
 	 */
-	public static byte[] sha1(final byte[] data) {
+	public static byte[] sha1(byte[] data) {
 		try {
 			var digest = MessageDigest.getInstance(ALG_SHA_1);
 			return digest.digest(data);
@@ -117,7 +118,7 @@ public final class DigestUtils {
 	 * @param data 数据
 	 * @return 信息摘要
 	 */
-	public static String sha1Hex(final String data) {
+	public static String sha1Hex(String data) {
 		Assert.notNull(data, "data is required");
 		return HexUtils.encodeToString(sha1(data.getBytes(UTF_8)));
 	}
@@ -128,7 +129,7 @@ public final class DigestUtils {
 	 * @param data 数据
 	 * @return 信息摘要
 	 */
-	public static byte[] sha256(final byte[] data) {
+	public static byte[] sha256(byte[] data) {
 		try {
 			var digest = MessageDigest.getInstance(ALG_SHA_256);
 			return digest.digest(data);
@@ -143,7 +144,7 @@ public final class DigestUtils {
 	 * @param data 数据
 	 * @return 信息摘要
 	 */
-	public static String sha256Hex(final String data) {
+	public static String sha256Hex(String data) {
 		Assert.notNull(data, "data is required");
 		return HexUtils.encodeToString(sha256(data.getBytes(UTF_8)));
 	}
@@ -154,7 +155,7 @@ public final class DigestUtils {
 	 * @param data 数据
 	 * @return 信息摘要
 	 */
-	public static byte[] sha384(final byte[] data) {
+	public static byte[] sha384(byte[] data) {
 		try {
 			var digest = MessageDigest.getInstance(ALG_SHA_384);
 			return digest.digest(data);
@@ -169,7 +170,7 @@ public final class DigestUtils {
 	 * @param data 数据
 	 * @return 信息摘要
 	 */
-	public static String sha384Hex(final String data) {
+	public static String sha384Hex(String data) {
 		Assert.notNull(data, "data is required");
 		return HexUtils.encodeToString(sha384(data.getBytes(UTF_8)));
 	}
@@ -180,7 +181,7 @@ public final class DigestUtils {
 	 * @param data 数据
 	 * @return 信息摘要
 	 */
-	public static byte[] sha512(final byte[] data) {
+	public static byte[] sha512(byte[] data) {
 		try {
 			var digest = MessageDigest.getInstance(ALG_SHA_512);
 			return digest.digest(data);
@@ -195,7 +196,7 @@ public final class DigestUtils {
 	 * @param data 数据
 	 * @return 信息摘要
 	 */
-	public static String sha512Hex(final String data) {
+	public static String sha512Hex(String data) {
 		Assert.notNull(data, "data is required");
 		return HexUtils.encodeToString(sha512(data.getBytes(UTF_8)));
 	}

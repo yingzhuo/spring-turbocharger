@@ -104,6 +104,9 @@ public final class Tuple<A, B, C> implements Serializable {
 		return Objects.requireNonNull(c);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -116,11 +119,17 @@ public final class Tuple<A, B, C> implements Serializable {
 		return Objects.equals(a, tuple.a) && Objects.equals(b, tuple.b) && Objects.equals(c, tuple.c);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(a, b, c);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return StringFormatter.format("({}, {}, {})", a, b, c);

@@ -29,6 +29,7 @@ public final class Base64Utils {
 	 * 私有构造方法
 	 */
 	private Base64Utils() {
+		super();
 	}
 
 	/**

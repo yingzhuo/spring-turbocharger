@@ -27,6 +27,7 @@ public final class CurrentProcess {
 	 * 私有构造方法
 	 */
 	private CurrentProcess() {
+		super();
 	}
 
 	/**

@@ -30,6 +30,7 @@ public class ClassLoadingException extends IllegalStateException {
 	 * 构造方法
 	 */
 	public ClassLoadingException() {
+		super();
 	}
 
 	/**
