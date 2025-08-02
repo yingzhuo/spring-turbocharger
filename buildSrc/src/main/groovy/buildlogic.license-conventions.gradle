@@ -21,7 +21,8 @@ license {
 		'**/*.yaml', '**/*.yml',
 		'**/*.conf',
 		'**/*.toml',
-		'**/*.json'
+		'**/*.json',
+		'**/*.ftl'
 	])
 
 	header = rootProject.file('buildSrc/config/license/header_template.txt')
