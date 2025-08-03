@@ -8,6 +8,7 @@ tasks.named('wrapper') {
 	distributionUrl = gradleWrapperDistributionUrl
 	networkTimeout = 30000
 	validateDistributionUrl = false
+	distributionType = Wrapper.DistributionType.ALL
 }
 
 tasks.register('pushToVcs', Exec) {
