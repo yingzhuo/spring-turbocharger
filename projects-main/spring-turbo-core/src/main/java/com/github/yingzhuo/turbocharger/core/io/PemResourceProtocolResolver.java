@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.yingzhuo.turbocharger.secret;
+package com.github.yingzhuo.turbocharger.core.io;
 
 import org.springframework.core.io.ProtocolResolver;
 import org.springframework.core.io.Resource;
@@ -25,18 +25,13 @@ import java.util.regex.Pattern;
 
 /**
  * @author 应卓
+ * @see PemResource
+ * @see org.springframework.boot.ssl.pem.PemContent
  * @since 3.5.4
  */
 public class PemResourceProtocolResolver implements ProtocolResolver {
 
 	private static final Pattern PATTERN = Pattern.compile("^pem:(.+?)(?:\\?keypass=(.*))?$");
-
-	/**
-	 * 默认构造方法
-	 */
-	public PemResourceProtocolResolver() {
-		super();
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -46,10 +41,10 @@ public class PemResourceProtocolResolver implements ProtocolResolver {
 	public Resource resolve(String location, ResourceLoader resourceLoader) {
 		var matcher = PATTERN.matcher(location);
 		if (matcher.find()) {
-			var resourcePath = matcher.group(1);  // 必选
+			var realResourceLocation = matcher.group(1);  // 必选
 			var keypass = matcher.group(2); // 可选
 
-			if (!StringUtils.hasText(resourcePath)) {
+			if (!StringUtils.hasText(realResourceLocation)) {
 				return null;
 			}
 
@@ -57,7 +52,7 @@ public class PemResourceProtocolResolver implements ProtocolResolver {
 				keypass = null;
 			}
 
-			var delegatingResource = resourceLoader.getResource(resourcePath);
+			var delegatingResource = resourceLoader.getResource(realResourceLocation);
 			return new PemResource(delegatingResource, keypass);
 		}
 		return null;

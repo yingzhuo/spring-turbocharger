@@ -20,4 +20,4 @@ com.github.yingzhuo.turbocharger.core.environment.BouncyCastleInstallingEnvironm
 org.springframework.context.ApplicationListener=\
 com.github.yingzhuo.turbocharger.core.environment.SpringApplicationHolders.Hook
 org.springframework.core.io.ProtocolResolver=\
-com.github.yingzhuo.turbocharger.secret.PemResourceProtocolResolver
+com.github.yingzhuo.turbocharger.core.io.PemResourceProtocolResolver
