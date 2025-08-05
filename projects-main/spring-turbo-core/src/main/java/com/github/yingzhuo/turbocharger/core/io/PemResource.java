@@ -97,7 +97,6 @@ public class PemResource extends DelegatingResource {
 	}
 
 	public KeyPair getKeyPair() {
-		return new KeyPair((PublicKey) getPublicKey(), (PrivateKey) getPrivateKey());
+		return new KeyPair(getPublicKey(), getPrivateKey());
 	}
-
 }

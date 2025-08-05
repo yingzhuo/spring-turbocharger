@@ -34,6 +34,13 @@ public class PemResourceProtocolResolver implements ProtocolResolver {
 	private static final Pattern PATTERN = Pattern.compile("^pem:(.+?)(?:\\?keypass=(.*))?$");
 
 	/**
+	 * 默认构造方法
+	 */
+	public PemResourceProtocolResolver() {
+		super();
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Nullable
@@ -41,10 +48,10 @@ public class PemResourceProtocolResolver implements ProtocolResolver {
 	public Resource resolve(String location, ResourceLoader resourceLoader) {
 		var matcher = PATTERN.matcher(location);
 		if (matcher.find()) {
-			var realResourceLocation = matcher.group(1);  // 必选
+			var resourceLocation = matcher.group(1);  // 必选
 			var keypass = matcher.group(2); // 可选
 
-			if (!StringUtils.hasText(realResourceLocation)) {
+			if (!StringUtils.hasText(resourceLocation)) {
 				return null;
 			}
 
@@ -52,7 +59,7 @@ public class PemResourceProtocolResolver implements ProtocolResolver {
 				keypass = null;
 			}
 
-			var delegatingResource = resourceLoader.getResource(realResourceLocation);
+			var delegatingResource = resourceLoader.getResource(resourceLocation);
 			return new PemResource(delegatingResource, keypass);
 		}
 		return null;
