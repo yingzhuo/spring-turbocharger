@@ -41,20 +41,11 @@ import java.util.Set;
  */
 public final class SpringApplicationHolders {
 
-	@Nullable
-	private static ApplicationContext APPLICATION_CONTEXT;
-
-	@Nullable
-	private static Path APPLICATION_HOME;
-
-	@Nullable
-	private static Set<Object> APPLICATION_SOURCES;
-
-	@Nullable
-	private static WebApplicationType APPLICATION_WEB_APPLICATION_TYPE;
-
-	@Nullable
-	private static Environment ENVIRONMENT;
+	private static @Nullable ApplicationContext APPLICATION_CONTEXT;
+	private static @Nullable Path APPLICATION_HOME;
+	private static @Nullable Set<Object> APPLICATION_SOURCES;
+	private static @Nullable WebApplicationType APPLICATION_WEB_APPLICATION_TYPE;
+	private static @Nullable Environment ENVIRONMENT;
 
 	/**
 	 * 私有构造方法
