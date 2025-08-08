@@ -39,8 +39,6 @@ dependencyResolutionManagement {
 			maven { url = 'https://repo.spring.io/milestone' }
 			maven { url = 'https://repo.spring.io/snapshot' }
 		}
-
-		google()
 	}
 
 	repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
