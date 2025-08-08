@@ -25,7 +25,7 @@ license {
 		'**/*.ftl'
 	])
 
-	header = rootProject.file('buildSrc/config/license/header_template.txt')
+	header = rootProject.file('gradle/config/license/header_template.txt')
 	strictCheck = true
 
 	mapping('java', 'SLASHSTAR_STYLE')

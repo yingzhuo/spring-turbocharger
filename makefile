@@ -6,7 +6,7 @@ clean:
 	$(GRADLEW) "clean"
 
 clean-buildsrc:
-	$(GRADLEW) -p $(MAKEFILE_PATH)/buildSrc/ "clean"
+	$(GRADLEW) -p $(MAKEFILE_PATH)/gradle/ "clean"
 
 refresh-dependencies:
 	$(GRADLEW) -U

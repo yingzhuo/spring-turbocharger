@@ -18,7 +18,7 @@ tasks.register('pushToVcs', Exec) {
 	description = 'Commit and push codes to gitee/github.'
 
 	workingDir(rootDir)
-	commandLine('bash', "$rootDir/buildSrc/config/vcs/push.sh")
+	commandLine('bash', "$rootDir/gradle/config/vcs/push.sh")
 }
 
 tasks.named('clean') {
