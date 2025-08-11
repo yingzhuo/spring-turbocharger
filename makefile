@@ -15,13 +15,13 @@ compile:
 	$(GRADLEW) "classes"
 
 build:
-	$(GRADLEW) --no-parallel -x "check" -x "test" "build"
+	$(GRADLEW) -x "check" -x "test" "build" --no-parallel
 
 install: update-license-header
-	$(GRADLEW) --no-parallel -x "test" -x "check" "publishToMavenLocal"
+	$(GRADLEW) -x "test" -x "check" "publishToMavenLocal" --no-parallel
 
 publish:
-	$(GRADLEW) --no-parallel -x "test" -x "check" "publishToMavenCentralPortal"
+	$(GRADLEW) -x "test" -x "check" "publishToMavenCentralPortal" --no-parallel
 
 setup-gradle-wrapper:
 	$(GRADLE) "wrapper"
@@ -41,5 +41,9 @@ stop-gradle-daemon:
 push-to-vcs: update-license-header
 	$(GRADLEW) "pushToVcs"
 
-.PHONY: usage clean clean-buildsrc refresh-dependencies compile build publish install check test \
-	setup-gradle-wrapper update-license-header stop-gradle-daemon push-to-vcs
+.PHONY: \
+clean clean-buildsrc \
+refresh-dependencies compile \
+build publish install check test \
+setup-gradle-wrapper update-license-header \
+stop-gradle-daemon push-to-vcs

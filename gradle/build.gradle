@@ -2,7 +2,7 @@ plugins {
 	id 'groovy-gradle-plugin'
 }
 
-['../gradle.properties', 'build-source.properties']
+['../gradle.properties', 'gradle.properties']
 	.stream()
 	.map { file(it) }
 	.filter { it.exists() && it.isFile() }
