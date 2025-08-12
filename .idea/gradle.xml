@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/gradle" name="gradle">
+                <projects>
+                  <project path="$PROJECT_DIR$/gradle" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="#GRADLE_JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/gradle" />
+            <option value="$PROJECT_DIR$/projects-example" />
+            <option value="$PROJECT_DIR$/projects-example/example-freemarker-stringtemplate" />
+            <option value="$PROJECT_DIR$/projects-example/example-hocon-config-file" />
+            <option value="$PROJECT_DIR$/projects-example/example-id-generator" />
+            <option value="$PROJECT_DIR$/projects-example/example-qrcode-gen" />
+            <option value="$PROJECT_DIR$/projects-example/example-routing-data-source" />
+            <option value="$PROJECT_DIR$/projects-example/example-spring-security-jwt" />
+            <option value="$PROJECT_DIR$/projects-example/example-stateful-captcha" />
+            <option value="$PROJECT_DIR$/projects-example/example-stateless-captcha" />
+            <option value="$PROJECT_DIR$/projects-example/example-web-client" />
+            <option value="$PROJECT_DIR$/projects-main" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-captcha" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-core" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-freemarker" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-hocon" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-idgen" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-jackson" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-jdbc" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-jwt" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-properties" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-redis" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-security" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-webcli" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-webmvc" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-xxljob" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbo-zxing" />
+            <option value="$PROJECT_DIR$/projects-main/spring-turbocharger-bom" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
