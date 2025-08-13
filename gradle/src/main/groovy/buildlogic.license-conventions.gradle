@@ -22,7 +22,8 @@ license {
 		'**/*.conf',
 		'**/*.toml',
 		'**/*.json',
-		'**/*.ftl'
+		'**/*.ftl',
+		'**/*.lua'
 	])
 
 	header = rootProject.file('gradle/config/license/header_template.txt')
