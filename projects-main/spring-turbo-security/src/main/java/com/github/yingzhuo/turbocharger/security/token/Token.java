@@ -15,9 +15,9 @@
  */
 package com.github.yingzhuo.turbocharger.security.token;
 
-import org.springframework.lang.NonNull;
-
 import java.io.Serializable;
+import java.util.Comparator;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
@@ -34,7 +34,6 @@ public interface Token extends Comparable<Token>, Supplier<String>, Serializable
 	 *
 	 * @return 令牌的值
 	 */
-	@NonNull
 	public String asString();
 
 	/**
@@ -52,7 +51,7 @@ public interface Token extends Comparable<Token>, Supplier<String>, Serializable
 	 */
 	@Override
 	public default int compareTo(Token o) {
-		return this.asString().compareTo(o.asString());
+		return Objects.compare(this.asString(), o.asString(), Comparator.naturalOrder());
 	}
 
 }

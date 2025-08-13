@@ -4,7 +4,7 @@ pluginManagement {
 		gradlePluginPortal()
 		mavenCentral()
 
-		if (providers.gradleProperty('useSpringMavenRepositoryMirrors').getOrElse('true').toBoolean()) {
+		if (providers.gradleProperty('useSpringMavenRepositoryMirrors').getOrElse('true').equalsIgnoreCase('true')) {
 			maven { url = 'https://repo.spring.io/release' }
 			maven { url = 'https://repo.spring.io/milestone' }
 			maven { url = 'https://repo.spring.io/snapshot' }
@@ -23,7 +23,7 @@ dependencyResolutionManagement {
 	repositories {
 		mavenLocal()
 
-		if (providers.gradleProperty('useChinaMavenRepositoryMirrors').getOrElse('true').toBoolean()) {
+		if (providers.gradleProperty('useChinaMavenRepositoryMirrors').getOrElse('true').equalsIgnoreCase('true')) {
 			maven { url = 'https://maven.aliyun.com/repository/public/' }
 			maven { url = 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
 			maven { url = 'https://repo.huaweicloud.com/repository/maven/' }
@@ -34,7 +34,7 @@ dependencyResolutionManagement {
 		mavenCentral()
 		gradlePluginPortal()
 
-		if (providers.gradleProperty('useSpringMavenRepositoryMirrors').getOrElse('true').toBoolean()) {
+		if (providers.gradleProperty('useSpringMavenRepositoryMirrors').getOrElse('true').equalsIgnoreCase('true')) {
 			maven { url = 'https://repo.spring.io/release' }
 			maven { url = 'https://repo.spring.io/milestone' }
 			maven { url = 'https://repo.spring.io/snapshot' }

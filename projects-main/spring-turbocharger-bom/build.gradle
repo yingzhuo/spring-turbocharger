@@ -6,7 +6,7 @@ plugins {
 dependencies {
 	constraints {
 		rootProject.findProject('projects-main').subprojects { subproject ->
-			if (subproject.name != 'spring-turbocharger-bom') {
+			if (subproject.name != 'spring-turbocharger-bom') { // 排除自己
 				api(subproject)
 			}
 		}
