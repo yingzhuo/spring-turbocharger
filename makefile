@@ -6,7 +6,13 @@ clean:
 	$(GRADLEW) "clean"
 
 clean-buildsrc:
-	$(GRADLEW) -p $(MAKEFILE_PATH)/gradle/ "clean"
+	$(GRADLEW) ":gradle:clean"
+
+purge: clean clean-buildsrc
+	@find $(MAKEFILE_PATH) -type f -name ".DS_Store" -delete
+	@find $(MAKEFILE_PATH) -type f -name "*.log" -delete
+	@rm -rf .gradle/
+	@rm -rf $(MAKEFILE_PATH)/.gradle/
 
 refresh-dependencies:
 	$(GRADLEW) -U
@@ -42,7 +48,7 @@ push-to-vcs: update-license-header
 	$(GRADLEW) "pushToVcs"
 
 .PHONY: \
-clean clean-buildsrc \
+clean clean-buildsrc purge \
 refresh-dependencies compile \
 build publish install check test \
 setup-gradle-wrapper update-license-header \
