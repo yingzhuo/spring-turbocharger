@@ -21,10 +21,10 @@ compile:
 	$(GRADLEW) "classes"
 
 build:
-	$(GRADLEW) -x "check" -x "test" "build" --no-parallel
+	$(GRADLEW) -x "check" -x "test" "build"
 
 install: update-license-header
-	$(GRADLEW) -x "test" -x "check" "publishToMavenLocal" --no-parallel
+	$(GRADLEW) -x "test" -x "check" "publishToMavenLocal"
 
 publish:
 	$(GRADLEW) -x "test" -x "check" "publishToMavenCentralPortal" --no-parallel
