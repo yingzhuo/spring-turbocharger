@@ -8,16 +8,14 @@ ext {
 	// https://docs.spring.io/spring-boot/appendix/dependency-versions/properties.html
 }
 
-subprojects {
-	configurations.configureEach {
-		resolutionStrategy {
-			cacheChangingModulesFor 12, 'hours'
-			cacheDynamicVersionsFor 12, 'hours'
-		}
-	}
-}
-
 allprojects {
 	group = springTurbochargerGroup
 	version = springTurbochargerVersion
+
+	configurations.configureEach {
+		resolutionStrategy {
+			cacheChangingModulesFor 24, 'hours'
+			cacheDynamicVersionsFor 24, 'hours'
+		}
+	}
 }
