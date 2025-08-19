@@ -11,8 +11,8 @@ clean-buildsrc:
 purge: clean clean-buildsrc
 	@find $(MAKEFILE_PATH) -type f -name ".DS_Store" -delete
 	@find $(MAKEFILE_PATH) -type f -name "*.log" -delete
-	@rm -rf .gradle/
 	@rm -rf $(MAKEFILE_PATH)/.gradle/
+	@rm -rf $(MAKEFILE_PATH)/gradle/.gradle/
 
 refresh-dependencies:
 	$(GRADLEW) -U
