@@ -45,7 +45,7 @@ public final class ThreadPoolFactories {
 	 * 创建线程数固定的线程池 <br>
 	 * 本方法不适合用在严肃的生产环境
 	 *
-	 * @param n 　线程数
+	 * @param n 线程数
 	 * @return 线程池实例
 	 */
 	public static ExecutorService createFixed(int n) {

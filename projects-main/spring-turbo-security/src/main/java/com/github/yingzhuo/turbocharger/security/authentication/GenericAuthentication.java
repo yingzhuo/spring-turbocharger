@@ -91,21 +91,21 @@ public class GenericAuthentication implements Authentication, Serializable, Prin
 	}
 
 	/**
-	 * 设置其他认证信息
-	 *
-	 * @param details 其他认证信息
-	 */
-	public void setDetails(@Nullable Object details) {
-		this.details = details;
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Nullable
 	@Override
 	public Object getDetails() {
 		return this.details;
+	}
+
+	/**
+	 * 设置其他认证信息
+	 *
+	 * @param details 其他认证信息
+	 */
+	public void setDetails(@Nullable Object details) {
+		this.details = details;
 	}
 
 	/**
