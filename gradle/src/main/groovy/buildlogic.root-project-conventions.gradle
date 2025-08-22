@@ -2,12 +2,10 @@ plugins {
 	id 'base'
 }
 
-defaultTasks 'classes'
+defaultTasks 'clean', 'classes'
 
 tasks.named('wrapper') {
-	if (providers.gradleProperty('useChinaGradleWrapperDistributionMirror').getOrElse('true').equalsIgnoreCase('true')) {
-		distributionUrl = gradleWrapperDistributionUrl
-	}
+	distributionUrl = gradleWrapperDistributionUrl
 	networkTimeout = 30000
 	validateDistributionUrl = false
 	distributionType = Wrapper.DistributionType.ALL
@@ -22,12 +20,5 @@ tasks.register('pushToVcs', Exec) {
 }
 
 tasks.named('clean') {
-	mustRunAfter(SharedFunctions.getLeafProjectNames(rootProject).collect { "${it}:clean" })
-
-	doLast {
-		delete fileTree(rootDir) {
-			include '**/.DS_Store'
-			include '**/*.log'
-		}
-	}
+	mustRunAfter(SharedFunctions.getLeafProjectNames(rootProject).collect { "$it:clean" })
 }
