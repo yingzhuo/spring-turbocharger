@@ -19,6 +19,3 @@ allprojects {
 		}
 	}
 }
-
-subprojects {
-}
