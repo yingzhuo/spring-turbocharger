@@ -18,7 +18,3 @@ tasks.register('pushToVcs', Exec) {
 	workingDir(rootDir)
 	commandLine('bash', "$rootDir/gradle/config/vcs/push.sh")
 }
-
-tasks.named('clean') {
-	mustRunAfter(SharedFunctions.getLeafProjectNames(rootProject).collect { "$it:clean" })
-}
