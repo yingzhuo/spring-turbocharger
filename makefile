@@ -3,10 +3,10 @@ GRADLE := $(shell which gradle)
 GRADLEW := $(MAKEFILE_PATH)/gradlew
 
 clean:
-	$(GRADLEW) "clean"
+	@$(GRADLEW) "clean" -q
 
 clean-buildsrc:
-	$(GRADLEW) ":gradle:clean"
+	@$(GRADLEW) ":gradle:clean" -q
 
 purge: clean clean-buildsrc
 	@find $(MAKEFILE_PATH) -type f -name ".DS_Store" -delete
@@ -15,41 +15,40 @@ purge: clean clean-buildsrc
 	@rm -rf $(MAKEFILE_PATH)/gradle/.gradle/
 
 refresh-dependencies:
-	$(GRADLEW) -U
+	@$(GRADLEW) -U
 
 compile:
-	$(GRADLEW) "classes"
+	@$(GRADLEW) "classes"
 
 build:
-	$(GRADLEW) -x "check" -x "test" "build"
+	@$(GRADLEW) -x "check" -x "test" "build"
 
 install: update-license-header
-	$(GRADLEW) -x "test" -x "check" "publishToMavenLocal"
+	@$(GRADLEW) -x "test" -x "check" "publishToMavenLocal"
 
 publish:
-	$(GRADLEW) -x "test" -x "check" "publishToMavenCentralPortal" --no-parallel
+	@$(GRADLEW) -x "test" -x "check" "publishToMavenCentralPortal" --no-parallel
 
 setup-gradle-wrapper:
-	$(GRADLE) "wrapper"
+	@$(GRADLE) "wrapper" -q
 
 update-license-header:
-	$(GRADLEW) "licenseFormat"
+	@$(GRADLEW) "licenseFormat" -q
 
 test:
-	$(GRADLEW) "test"
+	@$(GRADLEW) "test"
 
 check:
-	$(GRADLEW) "check"
+	@$(GRADLEW) "check"
 
 stop-gradle-daemon:
-	$(GRADLEW) --stop
+	@$(GRADLEW) --stop -q
 
 push-to-vcs: update-license-header
-	$(GRADLEW) "pushToVcs"
+	@$(GRADLEW) "pushToVcs"
 
-.PHONY: \
-clean clean-buildsrc purge \
-refresh-dependencies compile \
-build publish install check test \
-setup-gradle-wrapper update-license-header \
-stop-gradle-daemon push-to-vcs
+.PHONY: clean clean-buildsrc purge \
+	refresh-dependencies compile \
+	build publish install check test \
+	setup-gradle-wrapper update-license-header \
+	stop-gradle-daemon push-to-vcs
