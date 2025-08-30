@@ -28,12 +28,6 @@ public class AdditionalPortTomcatWebServerCustomizer implements WebServerFactory
 	private int port = 8080;
 	private String protocol = TomcatServletWebServerFactory.DEFAULT_PROTOCOL;
 
-	/**
-	 * 默认构造方法
-	 */
-	public AdditionalPortTomcatWebServerCustomizer() {
-	}
-
 	public void setPort(int port) {
 		this.port = port;
 	}
