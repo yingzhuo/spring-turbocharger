@@ -52,7 +52,7 @@ javadoc {
 
 	options {
 		locale = 'en_US'
-		encoding = 'UTF-8'
+		encoding = defaultEncoding
 		addBooleanOption("html5", true)
 		addBooleanOption("Xdoclint:none", true)
 	}
