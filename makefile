@@ -24,7 +24,7 @@ build:
 	@$(GRADLEW) -x "check" -x "test" "build"
 
 install: update-license-header
-	@$(GRADLEW) -x "test" -x "check" "publishToMavenLocal"
+	@$(GRADLEW) -x "test" -x "check" "publishToMavenLocal" --no-parallel
 
 publish:
 	@$(GRADLEW) -x "test" -x "check" "publishToMavenCentralPortal" --no-parallel
