@@ -48,6 +48,7 @@ public final class ZoneIdUtils {
 	 * 私有构造方法
 	 */
 	private ZoneIdUtils() {
+		super();
 	}
 
 	public static ZoneId toZoneIdOrSystemDefault(@Nullable String name) {

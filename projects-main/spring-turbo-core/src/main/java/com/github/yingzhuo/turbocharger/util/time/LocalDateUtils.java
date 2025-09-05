@@ -38,6 +38,7 @@ public final class LocalDateUtils {
 	 * 私有构造方法
 	 */
 	private LocalDateUtils() {
+		super();
 	}
 
 	/**

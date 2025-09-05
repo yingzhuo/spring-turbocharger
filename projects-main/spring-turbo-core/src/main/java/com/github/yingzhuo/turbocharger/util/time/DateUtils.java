@@ -65,6 +65,7 @@ public final class DateUtils {
 	 * 私有构造方法
 	 */
 	private DateUtils() {
+		super();
 	}
 
 	public static boolean isSameDay(final Date date1, final Date date2) {

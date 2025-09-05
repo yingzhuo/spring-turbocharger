@@ -36,6 +36,7 @@ public final class LocalDateTimeUtils {
 	 * 私有构造方法
 	 */
 	private LocalDateTimeUtils() {
+		super();
 	}
 
 	/**

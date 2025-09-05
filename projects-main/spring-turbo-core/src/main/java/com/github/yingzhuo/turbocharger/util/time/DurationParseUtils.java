@@ -36,6 +36,7 @@ public final class DurationParseUtils {
 	 * 私有构造方法
 	 */
 	private DurationParseUtils() {
+		super();
 	}
 
 	/**
