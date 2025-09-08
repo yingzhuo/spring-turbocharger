@@ -46,8 +46,6 @@ dependencyResolutionManagement {
 
 rootProject.name = 'spring-turbocharger'
 
-includeBuild 'gradle'
-
 ['projects-main', 'projects-example'].each {
 	file(it).eachDirMatch(~/.*/) { projectDir ->
 		include "$it:${projectDir.name}"

@@ -3,7 +3,7 @@ plugins {
 }
 
 checkstyle {
-	configFile = file("${rootDir}/gradle/config/checkstyle/yingzhuo.xml")
+	configFile = file("${rootDir}/buildSrc/config/checkstyle/yingzhuo.xml")
 }
 
 checkstyleMain {

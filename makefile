@@ -2,19 +2,25 @@ MAKEFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 GRADLE := $(shell which gradle)
 GRADLEW := $(MAKEFILE_PATH)/gradlew
 
+.PHONY: clean clean-buildsrc purge \
+	update-dependencies compile \
+	build publish install check test \
+	update-gradle-wrapper update-license-header \
+	stop-gradle-daemon push-to-vcs
+
 clean:
 	@$(GRADLEW) "clean" -q
 
 clean-buildsrc:
-	@$(GRADLEW) ":gradle:clean" -q
+	@$(GRADLEW) ":buildSrc:clean" -q
 
 purge: clean clean-buildsrc
 	@find $(MAKEFILE_PATH) -type f -name ".DS_Store" -delete
 	@find $(MAKEFILE_PATH) -type f -name "*.log" -delete
 	@rm -rf $(MAKEFILE_PATH)/.gradle/
-	@rm -rf $(MAKEFILE_PATH)/gradle/.gradle/
+	@rm -rf $(MAKEFILE_PATH)/buildSrc/.gradle/
 
-refresh-dependencies:
+update-dependencies:
 	@$(GRADLEW) -U
 
 compile:
@@ -29,7 +35,7 @@ install: update-license-header
 publish:
 	@$(GRADLEW) -x "test" -x "check" "publishToMavenCentralPortal" --no-parallel
 
-setup-gradle-wrapper:
+update-gradle-wrapper:
 	@$(GRADLE) "wrapper" -q
 
 update-license-header:
@@ -46,9 +52,3 @@ stop-gradle-daemon:
 
 push-to-vcs: update-license-header
 	@$(GRADLEW) "pushToVcs"
-
-.PHONY: clean clean-buildsrc purge \
-	refresh-dependencies compile \
-	build publish install check test \
-	setup-gradle-wrapper update-license-header \
-	stop-gradle-daemon push-to-vcs
