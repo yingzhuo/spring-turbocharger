@@ -2,11 +2,7 @@ MAKEFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 GRADLE := $(shell which gradle)
 GRADLEW := $(MAKEFILE_PATH)/gradlew
 
-.PHONY: clean clean-buildsrc purge \
-	update-dependencies compile \
-	build publish install check test \
-	update-gradle-wrapper update-license-header \
-	stop-gradle-daemon push-to-vcs
+.PHONY: clean clean-buildsrc purge update-dependencies compile build publish install check test update-gradle-wrapper update-license-header stop-gradle-daemon push-to-vcs
 
 clean:
 	@$(GRADLEW) "clean" -q

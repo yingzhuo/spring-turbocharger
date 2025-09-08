@@ -48,6 +48,8 @@ rootProject.name = 'spring-turbocharger'
 
 ['projects-main', 'projects-example'].each {
 	file(it).eachDirMatch(~/.*/) { projectDir ->
-		include "$it:${projectDir.name}"
+		if (projectDir.directory && new File(projectDir, 'build.gradle').exists()) {
+			include "$it:${projectDir.name}"
+		}
 	}
 }
