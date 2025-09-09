@@ -58,7 +58,7 @@ public final class ThreadPoolFactories {
 	 *
 	 * @param corePoolSize      核心池容量
 	 * @param maximumPoolSize   最大容量
-	 * @param keepAlive         现成最大空闲时间
+	 * @param keepAlive         线程最大空闲时间
 	 * @param blockingQueueSize 阻塞队列容量
 	 * @return 线程池实例
 	 */
@@ -71,7 +71,7 @@ public final class ThreadPoolFactories {
 	 *
 	 * @param corePoolSize             核心池容量
 	 * @param maximumPoolSize          最大容量
-	 * @param keepAlive                现成最大空闲时间
+	 * @param keepAlive                线程最大空闲时间
 	 * @param blockingQueueSize        阻塞队列容量
 	 * @param rejectedExecutionHandler 拒绝策略
 	 * @return 线程池实例
@@ -87,4 +87,5 @@ public final class ThreadPoolFactories {
 			rejectedExecutionHandler != null ? rejectedExecutionHandler : new ThreadPoolExecutor.AbortPolicy()
 		);
 	}
+
 }
