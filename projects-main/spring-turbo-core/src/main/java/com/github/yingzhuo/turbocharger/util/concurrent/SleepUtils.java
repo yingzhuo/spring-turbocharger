@@ -24,6 +24,7 @@ import java.time.Duration;
  * 线程休眠工具
  *
  * @author 应卓
+ * @see ThreadUtils
  * @see CurrentThreadUtils
  * @since 3.3.5
  */
@@ -33,6 +34,7 @@ public final class SleepUtils {
 	 * 私有构造方法
 	 */
 	private SleepUtils() {
+		super();
 	}
 
 	/**

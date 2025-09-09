@@ -37,6 +37,7 @@ public final class ThreadUtils {
 	 * 私有构造方法
 	 */
 	private ThreadUtils() {
+		super();
 	}
 
 	/**

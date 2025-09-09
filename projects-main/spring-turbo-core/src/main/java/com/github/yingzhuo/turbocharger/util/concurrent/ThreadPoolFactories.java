@@ -39,6 +39,7 @@ public final class ThreadPoolFactories {
 	 * 私有构造方法
 	 */
 	private ThreadPoolFactories() {
+		super();
 	}
 
 	/**
@@ -86,5 +87,4 @@ public final class ThreadPoolFactories {
 			rejectedExecutionHandler != null ? rejectedExecutionHandler : new ThreadPoolExecutor.AbortPolicy()
 		);
 	}
-
 }

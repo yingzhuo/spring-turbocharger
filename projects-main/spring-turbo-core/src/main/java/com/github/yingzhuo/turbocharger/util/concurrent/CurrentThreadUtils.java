@@ -31,6 +31,7 @@ public final class CurrentThreadUtils {
 	 * 私有构造方法
 	 */
 	private CurrentThreadUtils() {
+		super();
 	}
 
 	/**
