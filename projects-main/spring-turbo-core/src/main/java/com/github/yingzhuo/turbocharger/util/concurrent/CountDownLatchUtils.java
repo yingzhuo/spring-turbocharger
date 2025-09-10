@@ -32,6 +32,7 @@ public final class CountDownLatchUtils {
 	 * 私有构造方法
 	 */
 	private CountDownLatchUtils() {
+		super();
 	}
 
 	/**

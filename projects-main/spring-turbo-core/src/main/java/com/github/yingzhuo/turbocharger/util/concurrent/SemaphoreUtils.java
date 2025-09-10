@@ -32,6 +32,7 @@ public final class SemaphoreUtils {
 	 * 私有构造方法
 	 */
 	private SemaphoreUtils() {
+		super();
 	}
 
 	/**
