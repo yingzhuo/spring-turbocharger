@@ -25,7 +25,7 @@ compile:
 build:
 	@$(GRADLEW) -x "check" -x "test" "build"
 
-install: update-license-header
+install: update-license-header stop-gradle-daemon
 	@$(GRADLEW) -x "test" -x "check" "publishToMavenLocal" --no-parallel
 
 publish:
