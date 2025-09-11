@@ -2,6 +2,8 @@ plugins {
 	id 'buildlogic.root-project-conventions'
 }
 
+defaultTasks 'clean'
+
 description = 'Another enhancement library of SpringBoot & SpringFramework.'
 
 ext {
@@ -11,16 +13,15 @@ ext {
 }
 
 subprojects {
-}
-
-allprojects {
-	group = springTurbochargerGroup
-	version = springTurbochargerVersion
-
 	configurations.configureEach {
 		resolutionStrategy {
 			cacheChangingModulesFor 24, 'hours'
 			cacheDynamicVersionsFor 24, 'hours'
 		}
 	}
+}
+
+allprojects {
+	group = springTurbochargerGroup
+	version = springTurbochargerVersion
 }

@@ -2,8 +2,6 @@ plugins {
 	id 'base'
 }
 
-defaultTasks 'clean', 'classes'
-
 tasks.named('wrapper') {
 	distributionUrl = "https://mirrors.cloud.tencent.com/gradle/gradle-$gradleWrapperVersion-bin.zip"
 	networkTimeout = 30000
@@ -13,7 +11,7 @@ tasks.named('wrapper') {
 
 tasks.register('pushToVcs', Exec) {
 	group = 'vcs'
-	description = 'Commit and push codes to gitee/github.'
+	description = 'Commit and push codes to version control system.'
 
 	workingDir(rootDir)
 	commandLine('bash', "$rootDir/buildSrc/config/vcs/push.sh")
