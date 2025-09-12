@@ -5,6 +5,10 @@ pluginManagement {
 			mavenLocal()
 		}
 
+		if (providers.gradleProperty('useMavenLocalRepository').getOrElse('true').equalsIgnoreCase('true')) {
+			mavenLocal()
+		}
+
 		gradlePluginPortal()
 		mavenCentral()
 
