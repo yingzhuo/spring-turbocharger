@@ -9,6 +9,7 @@ dependencyManagement {
 }
 
 dependencies {
+
 	// spring-boot
 	api 'org.springframework.boot:spring-boot-starter-web'
 
@@ -16,6 +17,10 @@ dependencies {
 	api project(':projects-main:spring-turbo-core')
 	api project(':projects-main:spring-turbo-jackson')
 	api project(':projects-main:spring-turbo-webcli')
+
+	// spring-framework
+	compileOnly 'org.springframework:spring-context-indexer'
+	annotationProcessor 'org.springframework:spring-context-indexer'
 
 	// apache httpclient
 	api 'org.apache.httpcomponents.client5:httpclient5'

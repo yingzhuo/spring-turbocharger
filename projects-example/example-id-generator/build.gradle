@@ -12,6 +12,10 @@ dependencies {
 	// spring-boot
 	api 'org.springframework.boot:spring-boot-starter-web'
 
+	// spring-framework
+	compileOnly 'org.springframework:spring-context-indexer'
+	annotationProcessor 'org.springframework:spring-context-indexer'
+
 	// spring-turbocharger
 	api project(':projects-main:spring-turbo-core')
 	api project(':projects-main:spring-turbo-idgen')

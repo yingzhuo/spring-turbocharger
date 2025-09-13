@@ -1,5 +1,4 @@
 # https://editorconfig.org/
-
 root = true
 
 [*]
@@ -48,12 +47,10 @@ indent_size = 2
 [*.properties]
 indent_style = space
 indent_size = 2
-charset = utf-8
 
 [spring.factories]
 indent_style = space
 indent_size = 2
-charset = utf-8
 
 [*.{json,json5}]
 indent_style = tab
