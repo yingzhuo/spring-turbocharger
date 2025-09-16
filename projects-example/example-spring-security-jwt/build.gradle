@@ -2,6 +2,8 @@ plugins {
 	id 'buildlogic.java-conventions'
 }
 
+description = '使用JWT技术集成SpringSecurity'
+
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"

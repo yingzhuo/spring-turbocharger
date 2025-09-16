@@ -2,6 +2,8 @@ plugins {
 	id 'buildlogic.java-conventions'
 }
 
+description = 'HttpClient示例'
+
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"

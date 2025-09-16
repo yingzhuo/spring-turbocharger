@@ -120,10 +120,6 @@ dependencies {
 ./gradlew --no-parallel -x 'test' -x 'check' 'publishToMavenLocal'
 ```
 
-#### 阅读源码
-
-* 建议通过[deepwiki.com](https://deepwiki.com/yingzhuo/spring-turbocharger)阅读
-
 #### 示例程序
 
 * [使用freemarker字符串模板](./projects-example/example-freemarker-stringtemplate)

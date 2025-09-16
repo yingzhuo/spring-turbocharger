@@ -2,6 +2,8 @@ plugins {
 	id 'buildlogic.java-conventions'
 }
 
+description = 'ID生成器'
+
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"

@@ -2,7 +2,12 @@ MAKEFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 GRADLE := $(shell which gradle)
 GRADLEW := $(MAKEFILE_PATH)/gradlew
 
-.PHONY: clean clean-buildsrc purge update-dependencies compile build publish install check test update-gradle-wrapper update-license-header stop-gradle-daemon push-to-vcs
+.PHONY: \
+clean clean-buildsrc purge rebuild-build-logic \
+update-dependencies compile build publish install check test \
+update-gradle-wrapper update-license-header \
+stop-gradle-daemon \
+push-to-vcs
 
 clean:
 	@$(GRADLEW) "clean" -q
@@ -15,6 +20,10 @@ purge: clean clean-buildsrc
 	@find $(MAKEFILE_PATH) -type f -name "*.log" -delete
 	@rm -rf $(MAKEFILE_PATH)/.gradle/
 	@rm -rf $(MAKEFILE_PATH)/buildSrc/.gradle/
+
+rebuild-build-logic:
+	@$(GRADLEW) ':buildSrc:clean' --quiet
+	@$(GRADLEW) ':buildSrc:jar' --quiet
 
 update-dependencies:
 	@$(GRADLEW) -U

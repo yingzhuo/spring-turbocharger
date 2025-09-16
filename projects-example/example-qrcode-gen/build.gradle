@@ -2,6 +2,8 @@ plugins {
 	id 'buildlogic.java-conventions'
 }
 
+description = '生成QRCode'
+
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
