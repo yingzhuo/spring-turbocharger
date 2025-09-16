@@ -6,6 +6,8 @@ plugins {
 	id 'buildlogic.license-conventions'
 }
 
+description = '独立配置项程序包'
+
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"

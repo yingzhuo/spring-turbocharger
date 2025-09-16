@@ -3,6 +3,8 @@ plugins {
 	id 'buildlogic.sonatype-conventions'
 }
 
+description = 'BOM'
+
 dependencies {
 	constraints {
 		rootProject.findProject('projects-main').subprojects { subproject ->
