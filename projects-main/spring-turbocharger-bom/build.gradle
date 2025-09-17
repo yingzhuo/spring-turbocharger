@@ -3,12 +3,12 @@ plugins {
 	id 'buildlogic.sonatype-conventions'
 }
 
-description = 'BOM'
+description = 'SpringTurbocharger BOM'
 
 dependencies {
 	constraints {
 		rootProject.findProject('projects-main').subprojects { subproject ->
-			if (subproject.name != 'spring-turbocharger-bom') { // 排除自己
+			if (subproject.name != 'spring-turbocharger-bom') {
 				api(subproject)
 			}
 		}

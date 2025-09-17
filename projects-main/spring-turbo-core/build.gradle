@@ -38,6 +38,9 @@ dependencies {
 	// bouncy castle
 	compileOnly libs.bcprov
 
+	// groovy
+	compileOnly 'org.apache.groovy:groovy'
+
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
