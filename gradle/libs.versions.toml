@@ -5,7 +5,7 @@ zxing = "3.5.3"
 hutool = "5.8.40"
 
 [libraries]
-hocon = { module = "com.typesafe:config", version = "1.4.4" }
+hocon = { module = "com.typesafe:config", version = "1.4.5" }
 bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version = "1.81" }
 java-jwt = { module = "com.auth0:java-jwt", version = "4.5.0" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxing" }
