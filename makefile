@@ -16,14 +16,12 @@ clean-buildsrc:
 	@$(GRADLEW) ":buildSrc:clean" -q
 
 purge: clean clean-buildsrc
-	@find $(MAKEFILE_PATH) -type f -name ".DS_Store" -delete
-	@find $(MAKEFILE_PATH) -type f -name "*.log" -delete
 	@rm -rf $(MAKEFILE_PATH)/.gradle/
 	@rm -rf $(MAKEFILE_PATH)/buildSrc/.gradle/
 
 rebuild-build-logic:
-	@$(GRADLEW) ':buildSrc:clean' --quiet
-	@$(GRADLEW) ':buildSrc:jar' --quiet
+	@$(GRADLEW) ':buildSrc:clean' -q
+	@$(GRADLEW) ':buildSrc:jar' -q
 
 update-dependencies:
 	@$(GRADLEW) -U

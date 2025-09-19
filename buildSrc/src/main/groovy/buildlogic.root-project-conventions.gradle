@@ -16,3 +16,16 @@ tasks.register('pushToVcs', Exec) {
 	workingDir(rootDir)
 	commandLine('bash', "$rootDir/buildSrc/config/vcs/push.sh")
 }
+
+tasks.named('clean') {
+	finalizedBy 'tidy'
+}
+
+tasks.register('tidy', DefaultTask) {
+	group = 'build'
+	description = 'Deletes useless files.'
+
+	delete fileTree(rootProject.projectDir) {
+		include '**/.DS_Store', '**/*.log', '**/*.hprof', '**/hs_err_pid*'
+	}
+}
