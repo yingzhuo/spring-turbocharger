@@ -12,5 +12,5 @@ checkstyleMain {
 
 checkstyleTest {
 	enabled = false
-	// source = 'src/test/java'
+	source = 'src/test/java'
 }

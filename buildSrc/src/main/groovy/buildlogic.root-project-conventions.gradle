@@ -10,7 +10,7 @@ tasks.named('wrapper') {
 }
 
 tasks.register('pushToVcs', Exec) {
-	group = 'vcs'
+	group = 'other'
 	description = 'Commit and push codes to version control system.'
 
 	workingDir(rootDir)
