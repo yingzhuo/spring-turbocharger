@@ -1,22 +1,11 @@
 pluginManagement {
 	repositories {
-
-		if (providers.gradleProperty('useMavenLocalRepository').getOrElse('true').equalsIgnoreCase('true')) {
-			mavenLocal()
-		}
-
-		if (providers.gradleProperty('useMavenLocalRepository').getOrElse('true').equalsIgnoreCase('true')) {
-			mavenLocal()
-		}
-
+		mavenLocal()
 		gradlePluginPortal()
 		mavenCentral()
-
-		if (providers.gradleProperty('useSpringMavenRepositoryMirrors').getOrElse('true').equalsIgnoreCase('true')) {
-			maven { url = 'https://repo.spring.io/release' }
-			maven { url = 'https://repo.spring.io/milestone' }
-			maven { url = 'https://repo.spring.io/snapshot' }
-		}
+		maven { url = 'https://repo.spring.io/release' }
+		maven { url = 'https://repo.spring.io/milestone' }
+		maven { url = 'https://repo.spring.io/snapshot' }
 	}
 }
 
@@ -29,27 +18,17 @@ plugins {
 
 dependencyResolutionManagement {
 	repositories {
-
-		if (providers.gradleProperty('useMavenLocalRepository').getOrElse('true').equalsIgnoreCase('true')) {
-			mavenLocal()
-		}
-
-		if (providers.gradleProperty('useChinaMavenRepositoryMirrors').getOrElse('true').equalsIgnoreCase('true')) {
-			maven { url = 'https://maven.aliyun.com/repository/public/' }
-			maven { url = 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
-			maven { url = 'https://repo.huaweicloud.com/repository/maven/' }
-			maven { url = 'https://maven.jdcloud.com/repos/content/groups/public/' }
-			maven { url = 'https://mirrors.163.com/maven/repository/maven-public/' }
-		}
-
+		mavenLocal()
+		maven { url = 'https://maven.aliyun.com/repository/public/' }
+		maven { url = 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
+		maven { url = 'https://repo.huaweicloud.com/repository/maven/' }
+		maven { url = 'https://maven.jdcloud.com/repos/content/groups/public/' }
+		maven { url = 'https://mirrors.163.com/maven/repository/maven-public/' }
 		mavenCentral()
 		gradlePluginPortal()
-
-		if (providers.gradleProperty('useSpringMavenRepositoryMirrors').getOrElse('true').equalsIgnoreCase('true')) {
-			maven { url = 'https://repo.spring.io/release' }
-			maven { url = 'https://repo.spring.io/milestone' }
-			maven { url = 'https://repo.spring.io/snapshot' }
-		}
+		maven { url = 'https://repo.spring.io/release' }
+		maven { url = 'https://repo.spring.io/milestone' }
+		maven { url = 'https://repo.spring.io/snapshot' }
 	}
 
 	repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
