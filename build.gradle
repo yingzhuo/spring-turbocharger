@@ -6,7 +6,7 @@ defaultTasks 'clean'
 
 description = 'Another enhancement library of SpringBoot & SpringFramework.'
 
-["$rootDir/../versions.xml"]
+['versions.xml', 'gradle.xml']
 	.stream()
 	.forEach { filePath ->
 		var file = file(filePath)

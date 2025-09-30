@@ -4,7 +4,7 @@ plugins {
 
 description = 'build logic'
 
-['../gradle.properties', 'gradle.properties', "$rootDir/../versions.xml"]
+['../gradle.properties', '../gradle.xml', 'gradle.properties', '../versions.xml']
 	.stream()
 	.forEach { filePath ->
 		var file = file(filePath)
