@@ -6,6 +6,29 @@ defaultTasks 'clean'
 
 description = 'Another enhancement library of SpringBoot & SpringFramework.'
 
+["$rootDir/../versions.xml"]
+	.stream()
+	.forEach { filePath ->
+		var file = file(filePath)
+		if (file.exists() && file.isFile()) {
+			var props = new Properties()
+
+			if (filePath.endsWithIgnoreCase('.properties')) {
+				file.withDataInputStream { stream ->
+					props.load(stream)
+				}
+			}
+
+			if (filePath.endsWithIgnoreCase('.xml')) {
+				file.withDataInputStream { stream ->
+					props.loadFromXML(stream)
+				}
+			}
+
+			props.forEach(ext::set)
+		}
+	}
+
 ext {
 	// SpringBoot BOM 版本微调
 	// https://docs.spring.io/spring-boot/appendix/dependency-versions/coordinates.html
