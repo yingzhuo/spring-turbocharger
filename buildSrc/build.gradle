@@ -35,8 +35,4 @@ dependencies {
 	implementation "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:$dependencyManagementPluginVersion"
 	implementation "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
 	implementation "com.github.hierynomus.license:com.github.hierynomus.license.gradle.plugin:$licensePluginVersion"
-
-	if (providers.gradleProperty('gitPluginVersion').getOrElse('2.5.3') < '2.5.3') {
-		implementation "com.gorylenko.gradle-git-properties:gradle-git-properties:$gitPluginVersion"
-	}
 }
