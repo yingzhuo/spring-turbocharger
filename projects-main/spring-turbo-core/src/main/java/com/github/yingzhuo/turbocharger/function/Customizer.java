@@ -13,16 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.yingzhuo.turbocharger.jwt;
-
-import com.auth0.jwt.interfaces.Verification;
-import com.github.yingzhuo.turbocharger.function.Customizer;
+package com.github.yingzhuo.turbocharger.function;
 
 /**
- * {@link Verification} 客制化工具
+ * 客制化器
  *
  * @author 应卓
- * @since 3.5.0
+ * @since 3.5.6
  */
-public interface VerificationCustomizer extends Customizer<Verification> {
+@FunctionalInterface
+public interface Customizer<T> {
+
+	/**
+	 * 客制某组建
+	 *
+	 * @param component 组建
+	 */
+	public void customize(T component);
+
 }

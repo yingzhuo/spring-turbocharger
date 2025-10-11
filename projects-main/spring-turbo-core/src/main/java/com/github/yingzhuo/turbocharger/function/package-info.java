@@ -13,16 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.yingzhuo.turbocharger.jwt;
+@NonNullApi
+@NonNullFields
+package com.github.yingzhuo.turbocharger.function;
 
-import com.auth0.jwt.interfaces.Verification;
-import com.github.yingzhuo.turbocharger.function.Customizer;
-
-/**
- * {@link Verification} 客制化工具
- *
- * @author 应卓
- * @since 3.5.0
- */
-public interface VerificationCustomizer extends Customizer<Verification> {
-}
+import org.springframework.lang.NonNullApi;
+import org.springframework.lang.NonNullFields;
