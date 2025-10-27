@@ -55,7 +55,7 @@ public final class CompositeTokenResolver implements TokenResolver, Iterable<Tok
 	 */
 	@Override
 	public Optional<Token> resolve(WebRequest request) {
-		for (TokenResolver it : resolvers) {
+		for (TokenResolver it : this) {
 			Optional<Token> op = doResolve(it, request);
 			if (op.isPresent()) {
 				return op;
