@@ -19,6 +19,12 @@ java {
 	withJavadocJar()
 }
 
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
+	}
+}
+
 compileJava {
 	options.compilerArgs += [
 		'-parameters',

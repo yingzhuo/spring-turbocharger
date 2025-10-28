@@ -4,12 +4,6 @@ plugins {
 
 description = '生成有状态验证码'
 
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
-	}
-}
-
 dependencies {
 
 	// spring-boot

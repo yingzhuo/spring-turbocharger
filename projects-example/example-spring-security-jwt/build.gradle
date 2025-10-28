@@ -4,12 +4,6 @@ plugins {
 
 description = '使用JWT技术集成SpringSecurity'
 
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
-	}
-}
-
 dependencies {
 
 	// spring-boot

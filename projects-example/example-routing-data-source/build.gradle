@@ -4,12 +4,6 @@ plugins {
 
 description = '多数据源代理'
 
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
-	}
-}
-
 dependencies {
 	// spring-boot
 	api 'org.springframework.boot:spring-boot-starter-jdbc'
