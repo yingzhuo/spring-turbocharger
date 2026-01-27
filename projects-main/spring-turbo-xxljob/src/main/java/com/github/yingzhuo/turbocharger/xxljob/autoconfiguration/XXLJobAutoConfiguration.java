@@ -17,6 +17,7 @@ package com.github.yingzhuo.turbocharger.xxljob.autoconfiguration;
 
 import com.github.yingzhuo.turbocharger.xxljob.XXLJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -26,6 +27,7 @@ import org.springframework.context.annotation.Bean;
  * @author 应卓
  * @since 3.4.3
  */
+@AutoConfiguration
 @EnableConfigurationProperties(XXLJobProperties.class)
 @ConditionalOnProperty(prefix = "springturbo.xxljob", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class XXLJobAutoConfiguration {

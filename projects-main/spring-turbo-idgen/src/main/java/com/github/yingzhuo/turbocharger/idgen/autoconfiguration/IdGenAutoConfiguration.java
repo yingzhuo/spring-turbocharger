@@ -19,6 +19,7 @@ import com.github.yingzhuo.turbocharger.idgen.TSIDGenerator;
 import com.github.yingzhuo.turbocharger.idgen.UUIDGenerator;
 import com.github.yingzhuo.turbocharger.idgen.impl.TSIDGeneratorImpl;
 import com.github.yingzhuo.turbocharger.idgen.impl.UUIDGeneratorImpl;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 
@@ -26,6 +27,7 @@ import org.springframework.context.annotation.Bean;
  * @author 应卓
  * @since 3.4.3
  */
+@AutoConfiguration
 public class IdGenAutoConfiguration {
 
 	@Bean

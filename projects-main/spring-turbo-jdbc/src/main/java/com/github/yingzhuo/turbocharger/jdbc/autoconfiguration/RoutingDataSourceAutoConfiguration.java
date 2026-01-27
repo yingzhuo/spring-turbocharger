@@ -19,6 +19,7 @@ import com.github.yingzhuo.turbocharger.jdbc.RoutingDataSourceProperties;
 import com.github.yingzhuo.turbocharger.jdbc.datasource.DataSourceFactories;
 import com.github.yingzhuo.turbocharger.jdbc.datasource.DataSourceSwitchAdvice;
 import com.github.yingzhuo.turbocharger.jdbc.datasource.RoutingDataSource;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -34,6 +35,7 @@ import java.util.HashMap;
  * @author 应卓
  * @since 3.4.1
  */
+@AutoConfiguration
 @EnableConfigurationProperties(RoutingDataSourceProperties.class)
 @ConditionalOnProperty(prefix = "springturbo.routing-data-source", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class RoutingDataSourceAutoConfiguration {

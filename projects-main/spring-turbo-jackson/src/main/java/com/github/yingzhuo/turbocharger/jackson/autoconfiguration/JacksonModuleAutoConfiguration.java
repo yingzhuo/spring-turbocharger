@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.yingzhuo.turbocharger.util.spi.SPILoader;
 import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 /**
  * 加载Jackson模块
@@ -27,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 应卓
  * @since 3.3.1
  */
+@AutoConfiguration
 public class JacksonModuleAutoConfiguration {
 
 	@Autowired(required = false)

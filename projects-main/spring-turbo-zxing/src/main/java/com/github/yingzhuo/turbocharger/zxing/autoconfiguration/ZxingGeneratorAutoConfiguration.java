@@ -19,6 +19,7 @@ import com.github.yingzhuo.turbocharger.zxing.barcode.BarCodeGenerator;
 import com.github.yingzhuo.turbocharger.zxing.barcode.BarCodeGeneratorImpl;
 import com.github.yingzhuo.turbocharger.zxing.qrcode.QRCodeGenerator;
 import com.github.yingzhuo.turbocharger.zxing.qrcode.QRCodeGeneratorImpl;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 
@@ -26,6 +27,7 @@ import org.springframework.context.annotation.Bean;
  * @author 应卓
  * @since 1.3.0
  */
+@AutoConfiguration
 public class ZxingGeneratorAutoConfiguration {
 
 	@Bean

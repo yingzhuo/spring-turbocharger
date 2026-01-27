@@ -20,6 +20,7 @@ import com.github.yingzhuo.turbocharger.webmvc.databinding.DataBinderInitializin
 import com.github.yingzhuo.turbocharger.webmvc.support.argument.RemoteAddressHandlerMethodArgumentResolver;
 import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -35,6 +36,7 @@ import java.util.List;
  * @author 应卓
  * @since 1.3.0
  */
+@AutoConfiguration
 @EnableConfigurationProperties(SpringTurboWebMvcProperties.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class WebMvcAutoConfiguration implements WebMvcConfigurer {
