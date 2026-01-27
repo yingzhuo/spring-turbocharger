@@ -15,7 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.util.concurrent;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.time.Duration;
 import java.util.concurrent.*;

@@ -16,8 +16,7 @@
 package com.github.yingzhuo.turbocharger.util;
 
 import com.github.yingzhuo.turbocharger.util.reflection.InstanceUtils;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.Assert;
 
 import java.util.Optional;
@@ -61,7 +60,7 @@ public final class ClassUtils {
 	 * @see #forName(String)
 	 * @see #forNameElseThrow(String, Supplier)
 	 */
-	public static Class<?> forNameElseThrow(@NonNull String className) {
+	public static Class<?> forNameElseThrow(String className) {
 		return forNameElseThrow(className, new ClassLoadingExceptionSupplier(className));
 	}
 
@@ -72,8 +71,8 @@ public final class ClassUtils {
 	 * @param exceptionIfCannotLoad 异常提供者，不可为 {@code null}
 	 * @return 加载结果
 	 */
-	public static Class<?> forNameElseThrow(@NonNull String className,
-											@NonNull Supplier<? extends RuntimeException> exceptionIfCannotLoad) {
+	public static Class<?> forNameElseThrow(String className,
+											Supplier<? extends RuntimeException> exceptionIfCannotLoad) {
 		Assert.notNull(exceptionIfCannotLoad, "exceptionIfCannotLoad is required");
 		return forName(className).orElseThrow(exceptionIfCannotLoad);
 	}

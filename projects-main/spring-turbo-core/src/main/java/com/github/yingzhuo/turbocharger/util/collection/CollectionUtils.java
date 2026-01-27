@@ -15,7 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.util.collection;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.Assert;
 
 import java.util.Collection;

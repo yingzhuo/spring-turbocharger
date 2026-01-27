@@ -17,6 +17,7 @@ package com.github.yingzhuo.turbocharger.core.environment;
 
 import com.github.yingzhuo.turbocharger.core.SpringUtils;
 import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.env.EnvironmentPostProcessor;
@@ -27,7 +28,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
-import org.springframework.lang.Nullable;
 
 import java.nio.file.Path;
 import java.util.Set;

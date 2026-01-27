@@ -15,8 +15,8 @@
  */
 package com.github.yingzhuo.turbocharger.webcli.cli;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.lang.Nullable;
 
 import java.security.KeyStore;
 import java.time.Duration;
@@ -49,7 +49,7 @@ public final class Apache5ClientHttpRequestFactoryFactories {
 		var factory = new Apache5ClientHttpRequestFactoryBean();
 		factory.setLoadedKeyStore(loadedKeyStore);
 		factory.setKeyPassword(keyStorePassword);
-		factory.setConnectTimeout(connectTimeout);
+//		factory.setConnectTimeout(connectTimeout);
 		factory.setRequestTimeout(requestTimeout);
 		return (HttpComponentsClientHttpRequestFactory) factory.getObject();
 	}

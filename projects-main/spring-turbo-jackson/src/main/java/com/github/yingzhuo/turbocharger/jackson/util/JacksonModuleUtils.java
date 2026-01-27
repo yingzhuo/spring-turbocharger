@@ -18,7 +18,7 @@ package com.github.yingzhuo.turbocharger.jackson.util;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.yingzhuo.turbocharger.util.spi.SPILoader;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.ClassUtils;
 
 import java.util.function.Predicate;

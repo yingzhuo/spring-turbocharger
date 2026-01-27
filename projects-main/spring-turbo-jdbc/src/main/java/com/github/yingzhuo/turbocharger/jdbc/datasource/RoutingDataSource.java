@@ -15,10 +15,10 @@
  */
 package com.github.yingzhuo.turbocharger.jdbc.datasource;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.jdbc.datasource.lookup.MapDataSourceLookup;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import javax.sql.DataSource;

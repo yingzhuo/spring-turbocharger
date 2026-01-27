@@ -17,8 +17,8 @@ package com.github.yingzhuo.turbocharger.redis.lock;
 
 import com.github.yingzhuo.turbocharger.util.time.LocalDateTimeUtils;
 import lombok.Getter;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.style.ToStringCreator;
-import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
 import java.time.format.DateTimeFormatter;

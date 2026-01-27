@@ -17,7 +17,7 @@ package com.github.yingzhuo.turbocharger.util.text;
 
 import com.github.yingzhuo.turbocharger.util.CharPool;
 import com.github.yingzhuo.turbocharger.util.CharSequenceUtils;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Arrays;
 

@@ -19,7 +19,7 @@ import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.asymmetric.SM2;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import org.bouncycastle.crypto.engines.SM2Engine;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;

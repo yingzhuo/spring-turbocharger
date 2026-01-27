@@ -3,12 +3,12 @@ package examples.github;
 import com.github.yingzhuo.turbocharger.jackson.util.JsonUtils;
 import com.github.yingzhuo.turbocharger.webcli.cli.Apache5ClientHttpRequestFactoryFactories;
 import com.github.yingzhuo.turbocharger.webcli.error.NoopResponseErrorHandler;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 

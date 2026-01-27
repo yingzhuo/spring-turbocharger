@@ -16,11 +16,10 @@
 package com.github.yingzhuo.turbocharger.webmvc.support.response;
 
 import com.github.yingzhuo.turbocharger.util.io.CloseUtils;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
-import org.springframework.lang.Nullable;
-import org.springframework.util.MultiValueMap;
 import org.springframework.util.StreamUtils;
 
 import java.io.File;
@@ -38,7 +37,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  */
 public class AttachmentResponseEntity extends ResponseEntity<byte[]> {
 
-	private AttachmentResponseEntity(byte[] body, MultiValueMap<String, String> headers, HttpStatus status) {
+	private AttachmentResponseEntity(byte[] body, HttpHeaders headers, HttpStatus status) {
 		super(body, headers, status);
 	}
 

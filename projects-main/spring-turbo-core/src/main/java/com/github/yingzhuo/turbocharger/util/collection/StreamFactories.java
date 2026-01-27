@@ -16,7 +16,7 @@
 package com.github.yingzhuo.turbocharger.util.collection;
 
 import com.github.yingzhuo.turbocharger.util.collection.iterator.EnumerationIterator;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Enumeration;
 import java.util.Iterator;

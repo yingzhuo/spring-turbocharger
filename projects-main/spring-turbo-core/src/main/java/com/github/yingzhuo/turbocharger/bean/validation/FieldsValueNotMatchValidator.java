@@ -17,8 +17,8 @@ package com.github.yingzhuo.turbocharger.bean.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.util.Objects;

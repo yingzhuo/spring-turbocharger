@@ -17,9 +17,9 @@ package com.github.yingzhuo.turbocharger.jdbc.datasource;
 
 import com.github.yingzhuo.turbocharger.jdbc.HikariProperties;
 import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.boot.autoconfigure.jdbc.JdbcConnectionDetails;
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.lang.Nullable;
+import org.springframework.boot.jdbc.autoconfigure.JdbcConnectionDetails;
 import org.springframework.util.ClassUtils;
 
 import javax.sql.DataSource;

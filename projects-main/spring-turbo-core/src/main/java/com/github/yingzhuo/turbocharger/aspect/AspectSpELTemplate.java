@@ -18,7 +18,7 @@ package com.github.yingzhuo.turbocharger.aspect;
 import com.github.yingzhuo.turbocharger.core.SpELUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.Assert;
 
 import java.io.Serializable;

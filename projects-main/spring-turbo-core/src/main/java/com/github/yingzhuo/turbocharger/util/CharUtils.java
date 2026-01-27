@@ -15,7 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.util;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * 字符相关工具

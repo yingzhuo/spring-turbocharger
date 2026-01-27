@@ -16,11 +16,10 @@
 package com.github.yingzhuo.turbocharger.webmvc.support.response;
 
 import com.github.yingzhuo.turbocharger.util.io.ImageUtils;
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
-import org.springframework.util.MultiValueMap;
 
 import java.awt.image.BufferedImage;
 
@@ -31,7 +30,7 @@ import java.awt.image.BufferedImage;
  */
 public final class ImageResponseEntity extends ResponseEntity<byte[]> {
 
-	private ImageResponseEntity(byte[] body, MultiValueMap<String, String> headers, HttpStatus status) {
+	private ImageResponseEntity(byte[] body, HttpHeaders headers, HttpStatus status) {
 		super(body, headers, status);
 	}
 
@@ -78,7 +77,7 @@ public final class ImageResponseEntity extends ResponseEntity<byte[]> {
 			final byte[] bytes = ImageUtils.toByteArray(image, format);
 			final int size = bytes.length;
 
-			final MultiValueMap<String, String> headers = new HttpHeaders();
+			final HttpHeaders headers = new HttpHeaders();
 			headers.add(HttpHeaders.CONTENT_TYPE, "image/" + format);
 			headers.add(HttpHeaders.CONTENT_LENGTH, String.valueOf(size));
 			return new ImageResponseEntity(bytes, headers, status);

@@ -16,11 +16,10 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.algorithms.Algorithm;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.nio.charset.Charset;
@@ -36,7 +35,7 @@ public class GenericAlgorithmFactoryBean implements FactoryBean<GenericAlgorithm
 	private @Nullable ResourceLoader resourceLoader;
 	private @Nullable String pemLocation;
 	private @Nullable String password;
-	private @NonNull Charset pemCharset = StandardCharsets.UTF_8;
+	private Charset pemCharset = StandardCharsets.UTF_8;
 
 	/**
 	 * 默认构造方法

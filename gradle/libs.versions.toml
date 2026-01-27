@@ -1,17 +1,17 @@
 # Version Catalogs
 #  https://docs.gradle.org/current/userguide/version_catalogs.html
 [versions]
-zxing = "3.5.3"
-hutool = "5.8.41"
+zxing = "3.5.4"
+hutool = "5.8.43"
 
 [libraries]
 hocon = { module = "com.typesafe:config", version = "1.4.5" }
-bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version = "1.82" }
+bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version = "1.83" }
 java-jwt = { module = "com.auth0:java-jwt", version = "4.5.0" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxing" }
 zxing-javase = { module = "com.google.zxing:javase", version.ref = "zxing" }
 freemarker = { module = "org.freemarker:freemarker", version = "2.3.34" }
-xxljob = { module = "com.xuxueli:xxl-job-core", version = "3.2.0" }
+xxljob = { module = "com.xuxueli:xxl-job-core", version = "3.3.2" }
 hutool-core = { module = "cn.hutool:hutool-core", version.ref = "hutool" }
 hutool-captcha = { module = "cn.hutool:hutool-captcha", version.ref = "hutool" }
 hutool-crypto = { module = "cn.hutool:hutool-crypto", version.ref = "hutool" }

@@ -18,7 +18,7 @@ package com.github.yingzhuo.turbocharger.security.token.resolver;
 import com.github.yingzhuo.turbocharger.security.token.StringToken;
 import com.github.yingzhuo.turbocharger.security.token.Token;
 import com.github.yingzhuo.turbocharger.util.StringUtils;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.WebRequest;
 

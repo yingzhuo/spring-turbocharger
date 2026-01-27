@@ -15,10 +15,10 @@
  */
 package com.github.yingzhuo.turbocharger.core.io;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.io.ProtocolResolver;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 import java.util.regex.Pattern;

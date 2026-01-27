@@ -16,8 +16,8 @@
 package com.github.yingzhuo.turbocharger.jwt.algorithm;
 
 import com.auth0.jwt.exceptions.SignatureVerificationException;
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.ssl.pem.PemContent;
-import org.springframework.lang.Nullable;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;

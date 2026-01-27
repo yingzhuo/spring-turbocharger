@@ -17,11 +17,11 @@ package com.github.yingzhuo.turbocharger.hocon;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.env.PropertySourceLoader;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 
 import java.io.IOException;
 import java.util.*;

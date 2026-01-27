@@ -17,8 +17,8 @@ package com.github.yingzhuo.turbocharger.security.token.resolver;
 
 import com.github.yingzhuo.turbocharger.security.token.Token;
 import com.github.yingzhuo.turbocharger.util.collection.CollectionUtils;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.OrderComparator;
-import org.springframework.lang.Nullable;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.*;

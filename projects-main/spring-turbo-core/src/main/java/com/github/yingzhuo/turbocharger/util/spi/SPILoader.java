@@ -15,9 +15,8 @@
  */
 package com.github.yingzhuo.turbocharger.util.spi;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.io.support.SpringFactoriesLoader;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
@@ -131,7 +130,7 @@ public interface SPILoader<T> extends Supplier<Stream<T>> {
 
 		private boolean jdkServiceLoaderEnabled = false;
 
-		@NonNull
+
 		private Predicate<Class<?>> filter = c -> true;
 
 		@Nullable
@@ -189,11 +188,11 @@ public interface SPILoader<T> extends Supplier<Stream<T>> {
 
 	// @formatter:off
 	record Default<T>(
-		@NonNull Class<T> targetType,
-		@NonNull ClassLoader classLoader,
+		 Class<T> targetType,
+		 ClassLoader classLoader,
 		@Nullable String springFactoriesResourceLocation,
 		boolean jdkServiceLoaderEnabled,
-		@NonNull Predicate<Class<?>> filter,
+		 Predicate<Class<?>> filter,
 		@Nullable Comparator<? super T> comparator) implements SPILoader<T> {
 
 		/**

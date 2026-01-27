@@ -17,8 +17,8 @@ package com.github.yingzhuo.turbocharger.security.event;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.jspecify.annotations.Nullable;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.lang.Nullable;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**

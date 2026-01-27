@@ -15,7 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.exception;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 

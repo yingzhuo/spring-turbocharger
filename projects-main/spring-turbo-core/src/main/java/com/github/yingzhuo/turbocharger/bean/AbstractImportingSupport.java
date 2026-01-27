@@ -15,6 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.bean;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanFactory;
@@ -32,7 +33,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.ClassMetadata;
-import org.springframework.lang.Nullable;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

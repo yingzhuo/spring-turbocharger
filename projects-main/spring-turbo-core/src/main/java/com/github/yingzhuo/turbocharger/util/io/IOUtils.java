@@ -15,7 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.util.io;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StreamUtils;
 

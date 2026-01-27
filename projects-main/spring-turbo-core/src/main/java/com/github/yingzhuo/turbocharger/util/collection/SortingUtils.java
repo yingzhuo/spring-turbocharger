@@ -15,8 +15,8 @@
  */
 package com.github.yingzhuo.turbocharger.util.collection;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.OrderComparator;
-import org.springframework.lang.Nullable;
 
 import java.util.Arrays;
 import java.util.Comparator;

@@ -15,8 +15,8 @@
  */
 package com.github.yingzhuo.turbocharger.exception;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.context.MessageSourceResolvable;
-import org.springframework.lang.Nullable;
 
 /**
  * 业务异常

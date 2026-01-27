@@ -15,8 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.util;
 
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.Assert;
 
 import java.io.Serializable;
@@ -60,7 +59,7 @@ public final class Tuple<A, B, C> implements Serializable {
 		return new Tuple<>(a, b, c);
 	}
 
-	public static <A, B, C> Tuple<A, B, C> ofNonNull(@NonNull A a, @NonNull B b, @NonNull C c) {
+	public static <A, B, C> Tuple<A, B, C> ofNonNull(A a, B b, C c) {
 		Assert.notNull(a, "a is required");
 		Assert.notNull(b, "b is required");
 		Assert.notNull(b, "c is required");

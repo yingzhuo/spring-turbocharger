@@ -19,7 +19,6 @@ import cn.hutool.captcha.ICaptcha;
 import com.github.yingzhuo.turbocharger.captcha.Captcha;
 import com.github.yingzhuo.turbocharger.captcha.CaptchaService;
 import com.github.yingzhuo.turbocharger.util.io.CloseUtils;
-import org.springframework.lang.NonNull;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -56,7 +55,6 @@ public abstract class AbstractHutoolCaptchaService implements CaptchaService {
 		}
 	}
 
-	@NonNull
 	protected abstract ICaptcha createCaptcha();
 
 }

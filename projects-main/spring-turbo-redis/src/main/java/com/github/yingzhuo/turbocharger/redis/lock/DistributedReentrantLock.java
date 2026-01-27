@@ -16,11 +16,11 @@
 package com.github.yingzhuo.turbocharger.redis.lock;
 
 import com.github.yingzhuo.turbocharger.util.concurrent.CurrentThreadUtils;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.io.Serializable;

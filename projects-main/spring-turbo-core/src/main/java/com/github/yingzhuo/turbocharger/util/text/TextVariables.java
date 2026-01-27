@@ -15,9 +15,9 @@
  */
 package com.github.yingzhuo.turbocharger.util.text;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
-import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
 import java.util.HashMap;

@@ -15,7 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.security.token.resolver;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;

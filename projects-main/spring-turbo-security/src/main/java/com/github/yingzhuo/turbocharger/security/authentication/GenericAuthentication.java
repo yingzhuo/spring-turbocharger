@@ -16,9 +16,8 @@
 package com.github.yingzhuo.turbocharger.security.authentication;
 
 import com.github.yingzhuo.turbocharger.security.token.Token;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.style.ToStringCreator;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,7 +35,7 @@ import java.util.Collection;
  */
 public class GenericAuthentication implements Authentication, Serializable, Principal {
 
-	private final @NonNull UserDetails userDetails;
+	private final UserDetails userDetails;
 	private final @Nullable Token token;
 	private boolean authenticated = true;
 	private @Nullable Object details;

@@ -15,8 +15,8 @@
  */
 package com.github.yingzhuo.turbocharger.captcha.support;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.lang.Nullable;
 
 import java.time.Duration;
 

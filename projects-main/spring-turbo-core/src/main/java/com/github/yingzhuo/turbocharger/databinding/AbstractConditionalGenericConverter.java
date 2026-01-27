@@ -17,9 +17,9 @@ package com.github.yingzhuo.turbocharger.databinding;
 
 import com.github.yingzhuo.turbocharger.exception.DataBindingException;
 import com.github.yingzhuo.turbocharger.util.collection.ArrayUtils;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.ConditionalGenericConverter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.MultiValueMap;
 

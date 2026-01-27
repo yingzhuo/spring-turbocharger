@@ -20,9 +20,9 @@ import com.github.yingzhuo.turbocharger.util.hash.BloomFilter;
 import com.github.yingzhuo.turbocharger.util.hash.DigestHashFunction;
 import com.github.yingzhuo.turbocharger.util.hash.HashFunction;
 import lombok.Getter;
+import org.jspecify.annotations.Nullable;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;

@@ -15,10 +15,9 @@
  */
 package com.github.yingzhuo.turbocharger.core.io;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.ssl.pem.PemContent;
 import org.springframework.core.io.Resource;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -38,7 +37,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 @SuppressWarnings("unchecked")
 public class PemResource extends DelegatingResource {
 
-	private final @NonNull PemContent pemContent;
+	private final PemContent pemContent;
 	private final @Nullable String keypass;
 
 	/**

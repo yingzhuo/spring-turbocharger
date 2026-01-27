@@ -19,11 +19,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.github.yingzhuo.turbocharger.jwt.JwtService;
 import com.github.yingzhuo.turbocharger.jwt.JwtServiceImpl;
 import com.github.yingzhuo.turbocharger.jwt.VerificationCustomizer;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.lang.Nullable;
 
 /**
  * 自动配置类

@@ -15,9 +15,8 @@
  */
 package com.github.yingzhuo.turbocharger.util.time;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.convert.DurationStyle;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.time.Duration;
@@ -74,7 +73,7 @@ public final class DurationParseUtils {
 	 * @return 解析结果
 	 * @throws IllegalArgumentException 字符串格式不正确
 	 */
-	public static Duration parse(@NonNull String string, @Nullable ChronoUnit unit) {
+	public static Duration parse(String string, @Nullable ChronoUnit unit) {
 		Assert.hasText(string, "string is required");
 
 		Duration duration = parseFromSimpleStyle(string, unit);

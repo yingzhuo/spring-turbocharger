@@ -15,7 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.freemarker;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * 文本模板渲染器

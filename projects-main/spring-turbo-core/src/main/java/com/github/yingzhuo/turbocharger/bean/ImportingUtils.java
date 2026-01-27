@@ -15,14 +15,13 @@
  */
 package com.github.yingzhuo.turbocharger.bean;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportAware;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.ClassMetadata;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
@@ -54,8 +53,8 @@ public final class ImportingUtils {
 	 * @return 导入元注释的相关信息
 	 */
 	public static Set<AnnotationAttributes> getAnnotationAttributesSet(
-		@NonNull AnnotationMetadata metadata,
-		@NonNull Class<? extends Annotation> importingAnnotation) {
+		AnnotationMetadata metadata,
+		Class<? extends Annotation> importingAnnotation) {
 		return getAnnotationAttributesSet(metadata, importingAnnotation, null);
 	}
 
@@ -68,8 +67,8 @@ public final class ImportingUtils {
 	 * @return 导入元注释的相关信息
 	 */
 	public static Set<AnnotationAttributes> getAnnotationAttributesSet(
-		@NonNull AnnotationMetadata metadata,
-		@NonNull Class<? extends Annotation> importingAnnotation,
+		AnnotationMetadata metadata,
+		Class<? extends Annotation> importingAnnotation,
 		@Nullable Class<? extends Annotation> importingContainerAnnotation) {
 
 		Assert.notNull(metadata, "metadata must not be null");

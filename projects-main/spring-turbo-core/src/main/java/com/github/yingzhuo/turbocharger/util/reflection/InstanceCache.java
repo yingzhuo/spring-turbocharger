@@ -15,11 +15,11 @@
  */
 package com.github.yingzhuo.turbocharger.util.reflection;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.ApplicationContext;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.util.HashMap;

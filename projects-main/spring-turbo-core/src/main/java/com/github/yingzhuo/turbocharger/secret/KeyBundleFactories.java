@@ -18,8 +18,8 @@ package com.github.yingzhuo.turbocharger.secret;
 import com.github.yingzhuo.turbocharger.core.ResourceUtils;
 import com.github.yingzhuo.turbocharger.util.KeyStoreType;
 import com.github.yingzhuo.turbocharger.util.KeyStoreUtils;
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.ssl.pem.PemContent;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.security.cert.X509Certificate;

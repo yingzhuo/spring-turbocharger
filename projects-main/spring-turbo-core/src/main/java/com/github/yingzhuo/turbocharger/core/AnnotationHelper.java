@@ -15,9 +15,9 @@
  */
 package com.github.yingzhuo.turbocharger.core;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.lang.Nullable;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;

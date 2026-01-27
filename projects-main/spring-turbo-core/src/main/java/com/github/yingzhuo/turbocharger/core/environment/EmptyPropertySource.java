@@ -15,8 +15,8 @@
  */
 package com.github.yingzhuo.turbocharger.core.environment;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.env.PropertySource;
-import org.springframework.lang.Nullable;
 
 /**
  * @author 应卓

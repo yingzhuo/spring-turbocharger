@@ -15,8 +15,6 @@
  */
 package com.github.yingzhuo.turbocharger.secret;
 
-import org.springframework.lang.NonNull;
-
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.X509Certificate;
@@ -31,8 +29,8 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class KeyBundleImpl implements KeyBundle {
 
-	private final @NonNull X509Certificate certificate;
-	private final @NonNull PrivateKey privateKey;
+	private final X509Certificate certificate;
+	private final PrivateKey privateKey;
 
 	/**
 	 * 构造方法
@@ -40,8 +38,8 @@ public class KeyBundleImpl implements KeyBundle {
 	 * @param certificate 证书
 	 * @param privateKey  私钥
 	 */
-	public KeyBundleImpl(@NonNull X509Certificate certificate,
-						 @NonNull PrivateKey privateKey) {
+	public KeyBundleImpl(X509Certificate certificate,
+						 PrivateKey privateKey) {
 		this.certificate = certificate;
 		this.privateKey = privateKey;
 	}

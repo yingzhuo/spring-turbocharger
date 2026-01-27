@@ -15,8 +15,8 @@
  */
 package com.github.yingzhuo.turbocharger.core.environment;
 
+import org.springframework.boot.EnvironmentPostProcessor;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.security.Provider;

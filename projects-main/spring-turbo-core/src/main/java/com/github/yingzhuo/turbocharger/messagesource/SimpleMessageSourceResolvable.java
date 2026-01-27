@@ -17,8 +17,8 @@ package com.github.yingzhuo.turbocharger.messagesource;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import com.github.yingzhuo.turbocharger.util.collection.ArrayUtils;
+import org.jspecify.annotations.Nullable;
 import org.springframework.context.MessageSourceResolvable;
-import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
 

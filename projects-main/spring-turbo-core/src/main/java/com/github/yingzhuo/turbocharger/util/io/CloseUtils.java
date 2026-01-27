@@ -15,8 +15,8 @@
  */
 package com.github.yingzhuo.turbocharger.util.io;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 
 import java.io.Closeable;
 import java.io.IOException;

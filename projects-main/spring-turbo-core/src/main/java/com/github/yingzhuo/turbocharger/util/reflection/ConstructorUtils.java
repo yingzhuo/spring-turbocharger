@@ -15,7 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.util.reflection;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Constructor;

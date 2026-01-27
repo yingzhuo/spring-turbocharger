@@ -15,8 +15,8 @@
  */
 package com.github.yingzhuo.turbocharger.util.time;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.convert.DurationStyle;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.time.Duration;

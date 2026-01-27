@@ -15,7 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.redis.lock;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.Stack;

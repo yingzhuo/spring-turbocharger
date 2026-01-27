@@ -17,8 +17,8 @@ package com.github.yingzhuo.turbocharger.core;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.annotation.AnnotationAttributes;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.lang.annotation.Annotation;

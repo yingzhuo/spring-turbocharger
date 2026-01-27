@@ -16,7 +16,7 @@
 package com.github.yingzhuo.turbocharger.util.collection;
 
 import com.github.yingzhuo.turbocharger.util.StringFormatter;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.LinkedMultiValueMap;

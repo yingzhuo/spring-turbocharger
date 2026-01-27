@@ -15,9 +15,8 @@
  */
 package com.github.yingzhuo.turbocharger.messagesource;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.context.MessageSourceResolvable;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.io.Serializable;
@@ -63,7 +62,7 @@ public record StringMessageSourceResolvable(
 	/**
 	 * {@inheritDoc}
 	 */
-	@NonNull
+
 	@Override
 	public String getDefaultMessage() {
 		return defaultMessage;

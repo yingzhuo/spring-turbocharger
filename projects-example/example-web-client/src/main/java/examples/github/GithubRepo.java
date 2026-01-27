@@ -1,6 +1,6 @@
 package examples.github;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 @FunctionalInterface
 public interface GithubRepo {

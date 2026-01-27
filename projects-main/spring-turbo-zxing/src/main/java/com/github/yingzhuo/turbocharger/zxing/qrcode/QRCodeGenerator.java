@@ -17,7 +17,7 @@ package com.github.yingzhuo.turbocharger.zxing.qrcode;
 
 import com.github.yingzhuo.turbocharger.util.io.ImageUtils;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.awt.image.BufferedImage;
 

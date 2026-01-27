@@ -20,10 +20,10 @@ import com.github.yingzhuo.turbocharger.core.SpringUtils;
 import com.github.yingzhuo.turbocharger.messagesource.StringMessageSourceResolvable;
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import com.github.yingzhuo.turbocharger.util.collection.ArrayUtils;
+import org.jspecify.annotations.Nullable;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.NoSuchMessageException;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.util.Locale;

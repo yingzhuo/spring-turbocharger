@@ -16,8 +16,8 @@
 package com.github.yingzhuo.turbocharger.zxing.qrcode;
 
 import lombok.Getter;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import javax.imageio.ImageIO;

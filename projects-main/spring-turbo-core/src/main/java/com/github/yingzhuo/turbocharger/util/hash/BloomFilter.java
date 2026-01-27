@@ -15,7 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.util.hash;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * 布隆过滤器

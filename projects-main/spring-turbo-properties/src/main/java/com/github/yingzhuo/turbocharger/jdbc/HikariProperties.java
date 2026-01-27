@@ -18,7 +18,7 @@ package com.github.yingzhuo.turbocharger.jdbc;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.boot.autoconfigure.jdbc.JdbcConnectionDetails;
+import org.springframework.boot.jdbc.autoconfigure.JdbcConnectionDetails;
 
 import java.io.Serializable;
 

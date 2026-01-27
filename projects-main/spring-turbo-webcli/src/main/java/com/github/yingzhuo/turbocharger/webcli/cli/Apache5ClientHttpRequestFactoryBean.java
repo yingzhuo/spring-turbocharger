@@ -65,8 +65,8 @@ public class Apache5ClientHttpRequestFactoryBean extends AbstractClientHttpReque
 
 		Optional.ofNullable(super.requestTimeout)
 			.ifPresent(bean::setConnectionRequestTimeout);
-		Optional.ofNullable(super.connectTimeout)
-			.ifPresent(bean::setConnectTimeout);
+//		Optional.ofNullable(super.connectTimeout)
+//			.ifPresent(bean::setConnectTimeout);
 
 		return bean;
 	}

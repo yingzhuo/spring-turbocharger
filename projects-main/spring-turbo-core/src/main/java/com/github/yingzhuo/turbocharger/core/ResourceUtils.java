@@ -16,13 +16,13 @@
 package com.github.yingzhuo.turbocharger.core;
 
 import com.github.yingzhuo.turbocharger.util.io.CloseUtils;
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.io.ApplicationResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.WritableResource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternUtils;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 

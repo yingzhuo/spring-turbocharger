@@ -17,8 +17,8 @@ package com.github.yingzhuo.turbocharger.webmvc.support.argument;
 
 import com.github.yingzhuo.turbocharger.webmvc.util.RemoteAddressUtils;
 import jakarta.servlet.http.HttpServletRequest;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;

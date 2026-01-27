@@ -15,7 +15,6 @@
  */
 package com.github.yingzhuo.turbocharger.security.passwordencoder;
 
-import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -32,13 +31,13 @@ public interface PasswordEncoderProvider {
 	 *
 	 * @return ID
 	 */
-	public @NonNull String getId();
+	public String getId();
 
 	/**
 	 * 获取{@link PasswordEncoder} 实例
 	 *
 	 * @return {@link PasswordEncoder} 实例
 	 */
-	public @NonNull PasswordEncoder getEncoder();
+	public PasswordEncoder getEncoder();
 
 }

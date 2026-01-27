@@ -13,20 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.yingzhuo.turbocharger.misc.ip;
+@NullMarked
+package com.github.yingzhuo.turbocharger.captcha.autoconfiguration;
 
-import jakarta.annotation.Nullable;
-
-/**
- * 通过IP地址解析所属城市的工具
- *
- * @author 应卓
- * @since 3.5.6
- */
-@FunctionalInterface
-public interface IP2LocationParser {
-
-	@Nullable
-	public String parse(String ip);
-
-}
+import org.jspecify.annotations.NullMarked;

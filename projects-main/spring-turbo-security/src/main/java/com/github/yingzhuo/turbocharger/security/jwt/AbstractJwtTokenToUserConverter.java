@@ -23,7 +23,7 @@ import com.github.yingzhuo.turbocharger.security.jwt.exception.BadJwtFormatToken
 import com.github.yingzhuo.turbocharger.security.jwt.exception.BadJwtTimeTokenException;
 import com.github.yingzhuo.turbocharger.security.token.Token;
 import com.github.yingzhuo.turbocharger.util.StringFormatter;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;

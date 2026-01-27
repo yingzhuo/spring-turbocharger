@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-org.springframework.boot.env.EnvironmentPostProcessor=\
+org.springframework.boot.EnvironmentPostProcessor=\
 com.github.yingzhuo.turbocharger.core.environment.SpringApplicationHolders.Hook,\
 com.github.yingzhuo.turbocharger.core.environment.BouncyCastleInstallingEnvironmentPostProcessor
 org.springframework.context.ApplicationListener=\

@@ -17,7 +17,7 @@ package com.github.yingzhuo.turbocharger.webmvc.util;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.*;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 

@@ -15,6 +15,7 @@
  */
 package com.github.yingzhuo.turbocharger.bean.classpath;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.boot.io.ApplicationResourceLoader;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
@@ -23,8 +24,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.filter.TypeFilter;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
@@ -87,7 +86,7 @@ public class ClassPathScanner {
 	 *
 	 * @param classLoader ClassLoader实例
 	 */
-	public void setClassLoader(@NonNull ClassLoader classLoader) {
+	public void setClassLoader(ClassLoader classLoader) {
 		Assert.notNull(classLoader, "classLoader must not be null");
 		this.classLoader = classLoader;
 	}

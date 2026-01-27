@@ -17,11 +17,11 @@ package com.github.yingzhuo.turbocharger.core.environment;
 
 import com.github.yingzhuo.turbocharger.util.StringUtils;
 import com.github.yingzhuo.turbocharger.util.id.UUIDs;
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.env.PropertySourceLoader;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.support.EncodedResource;
 import org.springframework.core.io.support.PropertySourceFactory;
-import org.springframework.lang.Nullable;
 
 import java.io.IOException;
 

@@ -16,7 +16,7 @@
 package com.github.yingzhuo.turbocharger.webmvc.tomcat;
 
 import org.apache.catalina.connector.Connector;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 
 /**
@@ -41,7 +41,8 @@ public class AdditionalPortTomcatWebServerCustomizer implements WebServerFactory
 	 */
 	@Override
 	public void customize(TomcatServletWebServerFactory factory) {
-		factory.addAdditionalTomcatConnectors(createStanderConnector());
+		//factory.addAdditionalTomcatConnectors(createStanderConnector());
+		factory.addAdditionalConnectors(createStanderConnector());
 	}
 
 	private Connector createStanderConnector() {
