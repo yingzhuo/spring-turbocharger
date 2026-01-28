@@ -36,7 +36,7 @@ public class StringTemplateAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public StringTemplateRenderer stringTemplateRenderer(StringTemplateRendererProperties properties) {
-		final var bean = new StringTemplateRendererImpl();
+		var bean = new StringTemplateRendererImpl();
 		bean.setSuffix(properties.getSuffix());
 		bean.setDefaultEncoding(properties.getDefaultEncoding());
 		bean.setTemplateLoaderPaths(properties.getTemplateLoaderPaths());
