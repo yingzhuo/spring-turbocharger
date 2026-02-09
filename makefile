@@ -42,7 +42,7 @@ update-gradle-wrapper:
 	@$(GRADLE) "wrapper" -q
 
 update-license-header:
-	@$(GRADLEW) "licenseFormat" -q
+	@$(GRADLEW) "applyLicenses" -q
 
 test:
 	@$(GRADLEW) "test"

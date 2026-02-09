@@ -3,7 +3,7 @@ plugins {
 }
 
 tasks.named('wrapper') {
-	distributionUrl = "https://mirrors.cloud.tencent.com/gradle/gradle-$gradleWrapperVersion-bin.zip"
+	distributionUrl = gradleWrapperDownloadUrl
 	networkTimeout = 30000
 	validateDistributionUrl = false
 	distributionType = Wrapper.DistributionType.ALL
