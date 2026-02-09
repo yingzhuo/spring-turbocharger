@@ -3,11 +3,23 @@ plugins {
 }
 
 license {
-	rule(file("$rootDir/buildSrc/config/license/LICENSE_TEMPLATE.txt"))
+	rule(rootProject.file('buildSrc/config/license/template.txt'))
 
-	include '**/*.java'
-	exclude '**/*.properties'
-	exclude '**/*.xml'
-	exclude '**/*.yaml'
-	exclude '**/*.yml'
+	include(
+		'**/*.java',
+		'**/*.kt',
+		'**/*.scala',
+		'**/*.kotlin'
+	)
+
+	exclude(
+		'**/*.properties',
+		'**/*.xml',
+		'**/*.yaml',
+		'**/*.yml',
+		'**/*.toml',
+		'**/*.conf',
+		'**/*.ini',
+		'**/*.json'
+	)
 }
