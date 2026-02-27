@@ -2,6 +2,8 @@ plugins {
 	id 'base'
 }
 
+defaultTasks 'clean'
+
 tasks.named('wrapper') {
 	distributionUrl = gradleWrapperDownloadUrl
 	networkTimeout = 30000
