@@ -28,7 +28,6 @@ dependencies {
     implementation 'com.github.yingzhuo:spring-turbo-webmvc'
     implementation 'com.github.yingzhuo:spring-turbo-xxljob'
     implementation 'com.github.yingzhuo:spring-turbo-zxing'
-    implementation 'com.github.yingzhuo:spring-turbo-misc'
     implementation 'com.github.yingzhuo:spring-turbo-properties'
 }
 ```
@@ -101,10 +100,6 @@ dependencies {
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>spring-turbo-zxing</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.yingzhuo</groupId>
-            <artifactId>spring-turbo-misc</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
