@@ -1,13 +1,19 @@
-MAKEFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-GRADLE := $(shell which gradle)
-GRADLEW := $(MAKEFILE_PATH)/gradlew
+ifeq ($(OS), Windows_NT)
+    MAKEFILE_PATH := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+    GRADLEW := $(MAKEFILE_PATH)/gradlew.bat
+else
+    MAKEFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+		GRADLEW := $(MAKEFILE_PATH)/gradlew
+endif
+
+.DEFAULT_GOAL=purge
 
 .PHONY: \
-clean clean-buildsrc purge rebuild-build-logic \
-update-dependencies compile build publish install check test \
-update-gradle-wrapper update-license-header \
-stop-gradle-daemon \
-push-to-vcs
+	clean clean-buildsrc purge rebuild-build-logic \
+	update-dependencies compile build publish install check test \
+	update-gradle-wrapper update-license-header \
+	stop-gradle-daemon \
+	push-to-vcs
 
 clean:
 	@$(GRADLEW) "clean" -q
