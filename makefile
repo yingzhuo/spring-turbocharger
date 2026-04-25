@@ -45,7 +45,7 @@ publish:
 	@$(GRADLEW) -x "test" -x "check" "publishToMavenCentralPortal" --no-parallel
 
 update-gradle-wrapper:
-	@$(GRADLE) "wrapper" -q
+	@$(GRADLEW) "wrapper" -q
 
 update-license-header:
 	@$(GRADLEW) "applyLicenses" -q
