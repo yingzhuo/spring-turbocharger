@@ -6,7 +6,7 @@ else
 		GRADLEW := $(MAKEFILE_PATH)/gradlew
 endif
 
-.DEFAULT_GOAL=purge
+.DEFAULT_GOAL := purge
 
 .PHONY: \
 	clean clean-buildsrc purge rebuild-build-logic \
