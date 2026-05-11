@@ -47,7 +47,6 @@ publish:
 	echo "警告：即将发布到 Maven 中央仓库！"
 	read -p "确认继续？(yes/no) " confirm && [ $$confirm = "yes" ] || exit 1
 	$(GRADLEW) -x "test" -x "check" "publishToMavenCentralPortal" --no-parallel
-	$(GRADLEW) "pushToVcs"
 
 update-gradle-wrapper:
 	$(GRADLEW) "wrapper" -q
