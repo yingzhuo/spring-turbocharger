@@ -5,9 +5,9 @@ zxing = "3.5.4"
 hutool = "5.8.44"
 
 [libraries]
-hocon = { module = "com.typesafe:config", version = "1.4.7" }
+hocon = { module = "com.typesafe:config", version = "1.4.8" }
 bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version = "1.84" }
-java-jwt = { module = "com.auth0:java-jwt", version = "4.5.1" }
+java-jwt = { module = "com.auth0:java-jwt", version = "4.5.2" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxing" }
 zxing-javase = { module = "com.google.zxing:javase", version.ref = "zxing" }
 freemarker = { module = "org.freemarker:freemarker", version = "2.3.34" }
