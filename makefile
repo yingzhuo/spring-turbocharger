@@ -40,11 +40,11 @@ compile:
 build:
 	$(GRADLEW) -x "check" -x "test" "build"
 
-install: update-license-header stop-gradle-daemon
+install: update-license-header
 	$(GRADLEW) -x "test" -x "check" "publishToMavenLocal" --no-parallel
 
-publish:
-	echo "警告：即将发布到 Maven 中央仓库！"
+publish: install
+	echo "警告：即将发布到Maven中央仓库！"
 	read -p "确认继续？(yes/no) " confirm && [ $$confirm = "yes" ] || exit 1
 	$(GRADLEW) -x "test" -x "check" "publishToMavenCentralPortal" --no-parallel
 
