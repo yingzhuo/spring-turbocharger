@@ -17,13 +17,6 @@ import org.springframework.core.env.Environment;
 import java.nio.file.Path;
 import java.util.Set;
 
-/**
- * 内部工具，用来保存 {@link ApplicationContext} 实例等。
- *
- * @author 应卓
- * @see SpringUtils
- * @since 1.0.2
- */
 public final class SpringApplicationHolders {
 
 	private static @Nullable ApplicationContext APPLICATION_CONTEXT;
@@ -32,9 +25,6 @@ public final class SpringApplicationHolders {
 	private static @Nullable WebApplicationType APPLICATION_WEB_APPLICATION_TYPE;
 	private static @Nullable Environment ENVIRONMENT;
 
-	/**
-	 * 私有构造方法
-	 */
 	private SpringApplicationHolders() {
 		super();
 	}
@@ -64,17 +54,8 @@ public final class SpringApplicationHolders {
 		return ENVIRONMENT;
 	}
 
-	/**
-	 * 被SpringBoot回调的挂钩
-	 *
-	 * @see EnvironmentPostProcessor
-	 * @see ApplicationListener
-	 */
 	private static class Hook implements EnvironmentPostProcessor, Ordered, ApplicationListener<ContextRefreshedEvent> {
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
 			SpringApplicationHolders.APPLICATION_HOME = getAppHomeDir(application).toAbsolutePath();
@@ -83,17 +64,11 @@ public final class SpringApplicationHolders {
 			SpringApplicationHolders.ENVIRONMENT = environment;
 		}
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public int getOrder() {
 			return LOWEST_PRECEDENCE;
 		}
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public void onApplicationEvent(ContextRefreshedEvent event) {
 			SpringApplicationHolders.APPLICATION_CONTEXT = event.getApplicationContext();

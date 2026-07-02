@@ -15,26 +15,14 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 import java.io.IOException;
 
-/**
- * 基于令牌的认证过滤器
- *
- * @author 应卓
- * @since 1.0.0
- */
 public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
 
 	private TokenToUserConverter tokenToUserConverter = token -> null;
 
-	/**
-	 * 构造方法
-	 */
 	public TokenAuthenticationFilter() {
 		super.setTokenResolver(new BearerTokenResolver());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 		throws ServletException, IOException {

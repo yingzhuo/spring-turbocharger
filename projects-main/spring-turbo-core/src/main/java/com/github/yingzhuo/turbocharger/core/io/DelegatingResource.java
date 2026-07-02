@@ -7,10 +7,6 @@ import org.springframework.util.Assert;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * @author 应卓
- * @since 3.5.4
- */
 public abstract class DelegatingResource extends AbstractResource {
 
 	private final Resource delegatingResource;
@@ -20,17 +16,11 @@ public abstract class DelegatingResource extends AbstractResource {
 		this.delegatingResource = delegatingResource;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String getDescription() {
 		return delegatingResource.getDescription();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public InputStream getInputStream() throws IOException {
 		return delegatingResource.getInputStream();

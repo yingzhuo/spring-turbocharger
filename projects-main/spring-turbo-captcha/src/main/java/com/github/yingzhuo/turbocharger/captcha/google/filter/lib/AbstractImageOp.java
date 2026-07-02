@@ -8,9 +8,6 @@ import java.awt.image.BufferedImageOp;
 import java.awt.image.ColorModel;
 import java.awt.image.IndexColorModel;
 
-/**
- * @since 1.0.0
- */
 public abstract class AbstractImageOp implements BufferedImageOp {
 
 	public static final int EDGE_ZERO = 0;

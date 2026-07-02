@@ -1,8 +1,5 @@
 package com.github.yingzhuo.turbocharger.captcha.google.renderer;
 
-/**
- * @since 1.0.0
- */
 public class BestFitTextRenderer extends AbstractTextRenderer {
 
 	@Override

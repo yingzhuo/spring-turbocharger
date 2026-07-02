@@ -12,14 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * 增强型 {@link String} 创建器。功能比 {@link StringBuffer} 和 {@link StringBuilder}更强大。
- *
- * @author 应卓
- * @see StringBuilder
- * @see StringBuffer
- * @since 2.0.2
- */
 public final class TextStringBuilder implements Serializable, CharSequence, Appendable {
 
 	public static final int CAPACITY = 32;
@@ -35,26 +27,15 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 	private int reallocations;
 	private int size;
 
-	/**
-	 * 默认构造方法
-	 */
 	public TextStringBuilder() {
 		this(CAPACITY);
 	}
 
-	/**
-	 * 本构造方法仅供内部使用
-	 */
 	private TextStringBuilder(final char[] initialBuffer, final int length) {
 		this.buffer = initialBuffer;
 		this.size = length;
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param string 初始化字符串
-	 */
 	public TextStringBuilder(@Nullable CharSequence string) {
 		this(CharSequenceUtils.length(string) + CAPACITY);
 		if (string != null) {
@@ -62,21 +43,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		}
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param initialCapacity 初始容量
-	 */
 	public TextStringBuilder(int initialCapacity) {
 		buffer = new char[initialCapacity <= 0 ? CAPACITY : initialCapacity];
 	}
 
-	/**
-	 * Appends a boolean value to the string builder.
-	 *
-	 * @param value the value to append
-	 * @return this, to enable chaining
-	 */
 	public TextStringBuilder append(boolean value) {
 		if (value) {
 			ensureCapacity(size + TRUE_STRING_SIZE);
@@ -88,12 +58,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * Appends a char value to the string builder.
-	 *
-	 * @param ch the value to append
-	 * @return this, to enable chaining
-	 */
 	@Override
 	public TextStringBuilder append(char ch) {
 		final int len = length();
@@ -102,12 +66,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * Appends a char array to the string builder. Appending null will call {@link #appendNull()}.
-	 *
-	 * @param chars the char array to append
-	 * @return this, to enable chaining
-	 */
 	public TextStringBuilder append(@Nullable char[] chars) {
 		if (chars == null) {
 			return appendNull();
@@ -122,17 +80,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * Appends a char array to the string builder. Appending null will call {@link #appendNull()}.
-	 *
-	 * @param chars      the char array to append
-	 * @param startIndex the start index, inclusive, must be valid
-	 * @param length     the length to append, must be valid
-	 * @return this, to enable chaining
-	 * @throws StringIndexOutOfBoundsException if {@code startIndex} is not in the range {@code 0 <= startIndex <= chars.length}
-	 * @throws StringIndexOutOfBoundsException if {@code length < 0}
-	 * @throws StringIndexOutOfBoundsException if {@code startIndex + length > chars.length}
-	 */
 	public TextStringBuilder append(@Nullable char[] chars, final int startIndex, final int length) {
 		if (chars == null) {
 			return appendNull();
@@ -152,24 +99,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param str 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder append(@Nullable CharBuffer str) {
 		return append(str, 0, CharSequenceUtils.length(str));
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param buf        追加对象
-	 * @param startIndex 初始位置
-	 * @param length     长度
-	 * @return this
-	 */
 	public TextStringBuilder append(@Nullable CharBuffer buf, int startIndex, int length) {
 		if (buf == null) {
 			return appendNull();
@@ -192,12 +125,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param seq 追加对象
-	 * @return this
-	 */
 	@Override
 	public TextStringBuilder append(@Nullable CharSequence seq) {
 		if (seq == null) {
@@ -218,14 +145,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return append(seq.toString());
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param seq        追加对象
-	 * @param startIndex 初始位置
-	 * @param endIndex   结束位置
-	 * @return this
-	 */
 	@Override
 	public TextStringBuilder append(@Nullable CharSequence seq, int startIndex, int endIndex) {
 		if (seq == null) {
@@ -240,52 +159,22 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return append(seq.toString(), startIndex, endIndex - startIndex);
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param value 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder append(double value) {
 		return append(String.valueOf(value));
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param value 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder append(float value) {
 		return append(String.valueOf(value));
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param value 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder append(int value) {
 		return append(String.valueOf(value));
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param value 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder append(long value) {
 		return append(String.valueOf(value));
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param obj 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder append(@Nullable Object obj) {
 		if (obj == null) {
 			return appendNull();
@@ -296,24 +185,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return append(obj.toString());
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param str 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder append(@Nullable String str) {
 		return append(str, 0, CharSequenceUtils.length(str));
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param str        追加对象
-	 * @param startIndex 初始位置
-	 * @param length     长度
-	 * @return this
-	 */
 	public TextStringBuilder append(@Nullable String str, int startIndex, int length) {
 		if (str == null) {
 			return appendNull();
@@ -333,24 +208,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param str 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder append(@Nullable StringBuffer str) {
 		return append(str, 0, CharSequenceUtils.length(str));
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param str        追加对象
-	 * @param startIndex 初始位置
-	 * @param length     长度
-	 * @return this
-	 */
 	public TextStringBuilder append(@Nullable StringBuffer str, int startIndex, int length) {
 		if (str == null) {
 			return appendNull();
@@ -370,24 +231,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param str 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder append(@Nullable StringBuilder str) {
 		return append(str, 0, CharSequenceUtils.length(str));
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param str        追加对象
-	 * @param startIndex 初始位置
-	 * @param length     长度
-	 * @return this
-	 */
 	public TextStringBuilder append(@Nullable StringBuilder str, int startIndex, int length) {
 		if (str == null) {
 			return appendNull();
@@ -407,24 +254,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param str 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder append(@Nullable TextStringBuilder str) {
 		return append(str, 0, CharSequenceUtils.length(str));
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param str        追加对象
-	 * @param startIndex 初始位置
-	 * @param length     长度
-	 * @return this
-	 */
 	public TextStringBuilder append(@Nullable TextStringBuilder str, final int startIndex, final int length) {
 		if (str == null) {
 			return appendNull();
@@ -444,12 +277,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param iterable 追加对象(多个)
-	 * @return this
-	 */
 	public TextStringBuilder appendAll(@Nullable Iterable<?> iterable) {
 		if (iterable != null) {
 			iterable.forEach(this::append);
@@ -457,12 +284,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param it 追加对象(多个)
-	 * @return this
-	 */
 	public TextStringBuilder appendAll(@Nullable Iterator<?> it) {
 		if (it != null) {
 			it.forEachRemaining(this::append);
@@ -470,12 +291,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加
-	 *
-	 * @param array 追加对象(多个)
-	 * @return this
-	 */
 	@SuppressWarnings("unchecked")
 	public <T> TextStringBuilder appendAll(@Nullable T... array) {
 		if (array != null && array.length > 0) {
@@ -486,26 +301,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 带左填充的追加
-	 *
-	 * @param value   追加对象
-	 * @param width   固定宽度
-	 * @param padChar 填充字符
-	 * @return this
-	 */
 	public TextStringBuilder appendFixedWidthPadLeft(int value, int width, char padChar) {
 		return appendFixedWidthPadLeft(String.valueOf(value), width, padChar);
 	}
 
-	/**
-	 * 带左填充的追加
-	 *
-	 * @param obj     追加对象
-	 * @param width   固定宽度
-	 * @param padChar 填充字符
-	 * @return this
-	 */
 	public TextStringBuilder appendFixedWidthPadLeft(@Nullable Object obj, int width, char padChar) {
 		if (width > 0) {
 			ensureCapacity(size + width);
@@ -528,26 +327,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 带右填充的追加
-	 *
-	 * @param value   追加对象
-	 * @param width   固定宽度
-	 * @param padChar 填充字符
-	 * @return this
-	 */
 	public TextStringBuilder appendFixedWidthPadRight(int value, int width, char padChar) {
 		return appendFixedWidthPadRight(String.valueOf(value), width, padChar);
 	}
 
-	/**
-	 * 带右填充的追加
-	 *
-	 * @param obj     追加对象
-	 * @param width   固定宽度
-	 * @param padChar 填充字符
-	 * @return this
-	 */
 	public TextStringBuilder appendFixedWidthPadRight(@Nullable Object obj, int width, char padChar) {
 		if (width > 0) {
 			ensureCapacity(size + width);
@@ -570,192 +353,74 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param value 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder appendln(boolean value) {
 		return append(value).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param ch 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder appendln(char ch) {
 		return append(ch).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param chars 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder appendln(@Nullable char[] chars) {
 		return append(chars).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param chars      追加对象
-	 * @param startIndex 初始位置
-	 * @param length     长度
-	 * @return this
-	 */
 	public TextStringBuilder appendln(char[] chars, int startIndex, int length) {
 		return append(chars, startIndex, length).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param value 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder appendln(double value) {
 		return append(value).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param value 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder appendln(float value) {
 		return append(value).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param value 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder appendln(int value) {
 		return append(value).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param value 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder appendln(long value) {
 		return append(value).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param obj 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder appendln(@Nullable Object obj) {
 		return append(obj).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param str 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder appendln(@Nullable String str) {
 		return append(str).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param str        追加对象
-	 * @param startIndex 初始位置
-	 * @param length     长度
-	 * @return this
-	 */
 	public TextStringBuilder appendln(@Nullable String str, int startIndex, int length) {
 		return append(str, startIndex, length).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param str 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder appendln(@Nullable StringBuffer str) {
 		return append(str).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param str        追加对象
-	 * @param startIndex 初始位置
-	 * @param length     长度
-	 * @return this
-	 */
 	public TextStringBuilder appendln(@Nullable StringBuffer str, int startIndex, int length) {
 		return append(str, startIndex, length).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param str 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder appendln(@Nullable StringBuilder str) {
 		return append(str).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param str        追加对象
-	 * @param startIndex 初始位置
-	 * @param length     长度
-	 * @return this
-	 */
 	public TextStringBuilder appendln(StringBuilder str, int startIndex, int length) {
 		return append(str, startIndex, length).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param str 追加对象
-	 * @return this
-	 */
 	public TextStringBuilder appendln(TextStringBuilder str) {
 		return append(str).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @param str        追加对象
-	 * @param startIndex 初始位置
-	 * @param length     长度
-	 * @return this
-	 */
 	public TextStringBuilder appendln(TextStringBuilder str, int startIndex, int length) {
 		return append(str, startIndex, length).appendNewLine();
 	}
 
-	/**
-	 * 追加并追加一个新行
-	 *
-	 * @return this
-	 * @see #setNewLineText(String)
-	 */
 	public TextStringBuilder appendNewLine() {
 		if (newLine == null) {
 			append(System.lineSeparator());
@@ -764,12 +429,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return append(newLine);
 	}
 
-	/**
-	 * 追加并追加一个控制
-	 *
-	 * @return this
-	 * @see #setNullText(String)
-	 */
 	public TextStringBuilder appendNull() {
 		if (nullText == null) {
 			return this;
@@ -777,13 +436,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return append(nullText);
 	}
 
-	/**
-	 * 追加一个填充
-	 *
-	 * @param length  填充的长度
-	 * @param padChar 填充的字符
-	 * @return this
-	 */
 	public TextStringBuilder appendPadding(int length, char padChar) {
 		if (length >= 0) {
 			ensureCapacity(size + length);
@@ -794,12 +446,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加一个分隔符。当 {@link TextStringBuilder}是空的时候，本方法不会起作用。
-	 *
-	 * @param separator 分隔符
-	 * @return this
-	 */
 	public TextStringBuilder appendSeparator(char separator) {
 		if (isNotEmpty()) {
 			append(separator);
@@ -807,13 +453,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加一个分隔符。 当 {@link TextStringBuilder}是空的时候，追加 defaultIfEmpty，否则追加 standard。
-	 *
-	 * @param standard       标准分隔符
-	 * @param defaultIfEmpty {@link TextStringBuilder} 为空时使用的分隔符。
-	 * @return this
-	 */
 	public TextStringBuilder appendSeparator(char standard, char defaultIfEmpty) {
 		if (isEmpty()) {
 			append(defaultIfEmpty);
@@ -823,23 +462,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加一个分隔符。当 {@link TextStringBuilder}是空的时候，本方法不会起作用。
-	 *
-	 * @param separator 分隔符
-	 * @return this
-	 */
 	public TextStringBuilder appendSeparator(String separator) {
 		return appendSeparator(separator, null);
 	}
 
-	/**
-	 * 追加一个分隔符。 当 {@link TextStringBuilder}是空的时候，追加 defaultIfEmpty，否则追加 standard。
-	 *
-	 * @param standard       标准分隔符
-	 * @param defaultIfEmpty {@link TextStringBuilder} 为空时使用的分隔符。
-	 * @return this
-	 */
 	public TextStringBuilder appendSeparator(@Nullable String standard, @Nullable String defaultIfEmpty) {
 		final String str = isEmpty() ? defaultIfEmpty : standard;
 		if (str != null) {
@@ -848,13 +474,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加多个元素并在其之中添加分隔符
-	 *
-	 * @param iterable  多个元素
-	 * @param separator 分隔符，{@code null} 时意味着没有分隔符。
-	 * @return this
-	 */
 	public TextStringBuilder appendWithSeparators(@Nullable Iterable<?> iterable, @Nullable String separator) {
 		if (iterable != null) {
 			appendWithSeparators(iterable.iterator(), separator);
@@ -862,13 +481,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加多个元素并在其之中添加分隔符
-	 *
-	 * @param it        多个元素
-	 * @param separator 分隔符，{@code null} 时意味着没有分隔符。
-	 * @return this
-	 */
 	public TextStringBuilder appendWithSeparators(@Nullable Iterator<?> it, @Nullable String separator) {
 		if (it != null) {
 			String sep = Objects.toString(separator, StringPool.EMPTY);
@@ -882,13 +494,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 追加多个元素并在其之中添加分隔符
-	 *
-	 * @param array     多个元素
-	 * @param separator 分隔符，{@code null} 时意味着没有分隔符。
-	 * @return this
-	 */
 	public TextStringBuilder appendWithSeparators(@Nullable Object[] array, @Nullable String separator) {
 		if (array != null && array.length > 0) {
 			String sep = Objects.toString(separator, StringPool.EMPTY);
@@ -901,59 +506,29 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 转换成 {@link StringTokenizer} 对象
-	 *
-	 * @return 结果
-	 */
 	public StringTokenizer asTokenizer() {
 		return new TextStringBuilderTokenizer();
 	}
 
-	/**
-	 * 构建字符串
-	 *
-	 * @return 字符串
-	 * @see #toString()
-	 */
 	public String build() {
 		return toString();
 	}
 
-	/**
-	 * 获取容量
-	 *
-	 * @return 容量
-	 */
 	public int capacity() {
 		return buffer.length;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public char charAt(int index) {
 		validateIndex(index);
 		return buffer[index];
 	}
 
-	/**
-	 * 清空所有内容
-	 *
-	 * @return this
-	 */
 	public TextStringBuilder clear() {
 		size = 0;
 		return this;
 	}
 
-	/**
-	 * 判断是否包含指定的字符
-	 *
-	 * @param ch 待查找的字符
-	 * @return 结果
-	 */
 	public boolean contains(char ch) {
 		final char[] thisBuf = buffer;
 		for (int i = 0; i < this.size; i++) {
@@ -964,33 +539,14 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return false;
 	}
 
-	/**
-	 * 判断是否包含指定的子串
-	 *
-	 * @param str 待查找的子串
-	 * @return 结果
-	 */
 	public boolean contains(String str) {
 		return indexOf(str, 0) >= 0;
 	}
 
-	/**
-	 * 判断是否包含指定的子串
-	 *
-	 * @param matcher 匹配器
-	 * @return 结果
-	 */
 	public boolean contains(StringMatcher matcher) {
 		return indexOf(matcher, 0) >= 0;
 	}
 
-	/**
-	 * 删除一部分
-	 *
-	 * @param startIndex 开始位置 (包含)
-	 * @param endIndex   结束位置 (不包含)
-	 * @return this
-	 */
 	public TextStringBuilder delete(int startIndex, int endIndex) {
 		final int actualEndIndex = validateRange(startIndex, endIndex);
 		final int len = actualEndIndex - startIndex;
@@ -1000,12 +556,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 删除单个所有的固定字符
-	 *
-	 * @param ch 待删除的字符
-	 * @return this
-	 */
 	public TextStringBuilder deleteAll(char ch) {
 		for (int i = 0; i < size; i++) {
 			if (buffer[i] == ch) {
@@ -1023,12 +573,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 删除单个所有的固定字符串
-	 *
-	 * @param str 待删除的字符串
-	 * @return this
-	 */
 	public TextStringBuilder deleteAll(@Nullable String str) {
 		final int len = str == null ? 0 : str.length();
 		if (len > 0) {
@@ -1041,36 +585,16 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 删除单个所有的固定字符串
-	 *
-	 * @param matcher 字符串匹配器
-	 * @return this
-	 */
 	public TextStringBuilder deleteAll(StringMatcher matcher) {
 		return replace(matcher, null, 0, size, -1);
 	}
 
-	/**
-	 * 删除指定位置的字符
-	 *
-	 * @param index 位置
-	 * @return this
-	 * @see #charAt(int)
-	 * @see #setCharAt(int, char)
-	 */
 	public TextStringBuilder deleteCharAt(int index) {
 		validateIndex(index);
 		deleteImpl(index, index + 1, 1);
 		return this;
 	}
 
-	/**
-	 * 删除首个出现的字符
-	 *
-	 * @param ch 待删除的字符
-	 * @return this
-	 */
 	public TextStringBuilder deleteFirst(char ch) {
 		for (int i = 0; i < size; i++) {
 			if (buffer[i] == ch) {
@@ -1081,12 +605,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 删除首个出现的字符串
-	 *
-	 * @param str 待删除的字符串
-	 * @return this
-	 */
 	public TextStringBuilder deleteFirst(@Nullable String str) {
 		final int len = str == null ? 0 : str.length();
 		if (len > 0) {
@@ -1098,12 +616,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 删除首个出现的字符串
-	 *
-	 * @param matcher 待删除的字符串匹配器
-	 * @return this
-	 */
 	public TextStringBuilder deleteFirst(StringMatcher matcher) {
 		return replace(matcher, null, 0, size, 1);
 	}
@@ -1113,12 +625,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		size -= len;
 	}
 
-	/**
-	 * 判断是否为指定的后缀
-	 *
-	 * @param str 待测试的后缀
-	 * @return 结果
-	 */
 	public boolean endsWith(String str) {
 		final int len = str.length();
 		if (len == 0) {
@@ -1136,12 +642,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return true;
 	}
 
-	/**
-	 * 确保容量不小于指定值
-	 *
-	 * @param capacity 容量指定值
-	 * @return this
-	 */
 	public TextStringBuilder ensureCapacity(int capacity) {
 		// checks for overflow
 		if (capacity > 0 && capacity - buffer.length > 0) {
@@ -1150,20 +650,11 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof TextStringBuilder && equals((TextStringBuilder) obj);
 	}
 
-	/**
-	 * 相等性测试
-	 *
-	 * @param other 右值
-	 * @return 结果
-	 */
 	public boolean equals(@Nullable TextStringBuilder other) {
 		if (this == other) {
 			return true;
@@ -1186,12 +677,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return true;
 	}
 
-	/**
-	 * 相等性测试 (大小写不敏感)
-	 *
-	 * @param other 右值
-	 * @return 结果
-	 */
 	public boolean equalsIgnoreCase(@Nullable TextStringBuilder other) {
 		if (this == other) {
 			return true;
@@ -1227,43 +712,21 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		System.arraycopy(buffer, startIndex, target, targetIndex, endIndex - startIndex);
 	}
 
-	/**
-	 * 获取空行文本
-	 *
-	 * @return 结果
-	 */
 	@Nullable
 	public String getNewLineText() {
 		return newLine;
 	}
 
-	/**
-	 * 设置新行字符串
-	 *
-	 * @param newLine 新行字符串
-	 * @return this
-	 */
 	public TextStringBuilder setNewLineText(@Nullable String newLine) {
 		this.newLine = newLine;
 		return this;
 	}
 
-	/**
-	 * 获取空值文本
-	 *
-	 * @return 结果
-	 */
 	@Nullable
 	public String getNullText() {
 		return nullText;
 	}
 
-	/**
-	 * 设置空值字符串
-	 *
-	 * @param nullText 空值字符串
-	 * @return this
-	 */
 	public TextStringBuilder setNullText(@Nullable String nullText) {
 		if (nullText != null && nullText.isEmpty()) {
 			nullText = null;
@@ -1272,31 +735,15 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int hashCode() {
 		return this.toString().hashCode();
 	}
 
-	/**
-	 * 查找指定字符
-	 *
-	 * @param ch 待查找的字符
-	 * @return 第一次出现的位置，找不到时返回 -1
-	 */
 	public int indexOf(char ch) {
 		return indexOf(ch, 0);
 	}
 
-	/**
-	 * 查找指定字符
-	 *
-	 * @param ch         待查找的字符
-	 * @param startIndex 查找起点
-	 * @return 第一次出现的位置，找不到时返回 -1
-	 */
 	public int indexOf(char ch, int startIndex) {
 		startIndex = Math.max(0, startIndex);
 		if (startIndex >= size) {
@@ -1311,23 +758,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return -1;
 	}
 
-	/**
-	 * 查找指定字符串
-	 *
-	 * @param str 待查找的字符
-	 * @return 第一次出现的位置，找不到时返回 -1
-	 */
 	public int indexOf(@Nullable String str) {
 		return indexOf(str, 0);
 	}
 
-	/**
-	 * 查找指定字符
-	 *
-	 * @param str        待查找的字符
-	 * @param startIndex 查找起点
-	 * @return 第一次出现的位置，找不到时返回 -1
-	 */
 	public int indexOf(@Nullable String str, int startIndex) {
 		startIndex = Math.max(0, startIndex);
 		if (str == null || startIndex >= size) {
@@ -1357,23 +791,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return -1;
 	}
 
-	/**
-	 * 查找指定字符串
-	 *
-	 * @param matcher 待查找的字符匹配器
-	 * @return 第一次出现的位置，找不到时返回 -1
-	 */
 	public int indexOf(@Nullable StringMatcher matcher) {
 		return indexOf(matcher, 0);
 	}
 
-	/**
-	 * 查找指定字符串
-	 *
-	 * @param matcher    待查找的字符匹配器
-	 * @param startIndex 查找起点
-	 * @return 第一次出现的位置，找不到时返回 -1
-	 */
 	public int indexOf(@Nullable StringMatcher matcher, int startIndex) {
 		startIndex = Math.max(0, startIndex);
 		if (matcher == null || startIndex >= size) {
@@ -1389,13 +810,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return -1;
 	}
 
-	/**
-	 * 插入值
-	 *
-	 * @param index 插入位置
-	 * @param value 值
-	 * @return this
-	 */
 	public TextStringBuilder insert(int index, boolean value) {
 		validateIndex(index);
 		if (value) {
@@ -1410,13 +824,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 插入值
-	 *
-	 * @param index 插入位置
-	 * @param value 值
-	 * @return this
-	 */
 	public TextStringBuilder insert(int index, char value) {
 		validateIndex(index);
 		ensureCapacity(size + 1);
@@ -1426,13 +833,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 插入值
-	 *
-	 * @param index 插入位置
-	 * @param chars 值
-	 * @return this
-	 */
 	public TextStringBuilder insert(int index, @Nullable char[] chars) {
 		validateIndex(index);
 		if (chars == null) {
@@ -1448,15 +848,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 插入值
-	 *
-	 * @param index  插入位置
-	 * @param chars  值
-	 * @param offset 偏移量
-	 * @param length 长度
-	 * @return this
-	 */
 	public TextStringBuilder insert(int index, @Nullable char[] chars, int offset, int length) {
 		validateIndex(index);
 		if (chars == null) {
@@ -1477,57 +868,22 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 插入值
-	 *
-	 * @param index 插入位置
-	 * @param value 值
-	 * @return this
-	 */
 	public TextStringBuilder insert(int index, double value) {
 		return insert(index, String.valueOf(value));
 	}
 
-	/**
-	 * 插入值
-	 *
-	 * @param index 插入位置
-	 * @param value 值
-	 * @return this
-	 */
 	public TextStringBuilder insert(int index, float value) {
 		return insert(index, String.valueOf(value));
 	}
 
-	/**
-	 * 插入值
-	 *
-	 * @param index 插入位置
-	 * @param value 值
-	 * @return this
-	 */
 	public TextStringBuilder insert(int index, int value) {
 		return insert(index, String.valueOf(value));
 	}
 
-	/**
-	 * 插入值
-	 *
-	 * @param index 插入位置
-	 * @param value 值
-	 * @return this
-	 */
 	public TextStringBuilder insert(int index, long value) {
 		return insert(index, String.valueOf(value));
 	}
 
-	/**
-	 * 插入值
-	 *
-	 * @param index 插入位置
-	 * @param obj   值
-	 * @return this
-	 */
 	public TextStringBuilder insert(int index, @Nullable Object obj) {
 		if (obj == null) {
 			return insert(index, nullText);
@@ -1535,13 +891,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return insert(index, obj.toString());
 	}
 
-	/**
-	 * 插入值
-	 *
-	 * @param index 插入位置
-	 * @param str   值
-	 * @return this
-	 */
 	public TextStringBuilder insert(int index, @Nullable String str) {
 		validateIndex(index);
 		if (str == null) {
@@ -1560,41 +909,18 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 判断本创建器是否为空
-	 *
-	 * @return 结果
-	 */
 	public boolean isEmpty() {
 		return size == 0;
 	}
 
-	/**
-	 * 判断本创建器是否不为空
-	 *
-	 * @return 结果
-	 */
 	public boolean isNotEmpty() {
 		return size != 0;
 	}
 
-	/**
-	 * 反向查找
-	 *
-	 * @param ch 待查找的东西
-	 * @return 索引或-1
-	 */
 	public int lastIndexOf(char ch) {
 		return lastIndexOf(ch, size - 1);
 	}
 
-	/**
-	 * 反向查找
-	 *
-	 * @param ch         待查找的东西
-	 * @param startIndex 查找起点
-	 * @return 索引或-1
-	 */
 	public int lastIndexOf(char ch, int startIndex) {
 		startIndex = startIndex >= size ? size - 1 : startIndex;
 		if (startIndex < 0) {
@@ -1608,23 +934,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return -1;
 	}
 
-	/**
-	 * 反向查找
-	 *
-	 * @param str 待查找的东西
-	 * @return 索引或-1
-	 */
 	public int lastIndexOf(@Nullable String str) {
 		return lastIndexOf(str, size - 1);
 	}
 
-	/**
-	 * 反向查找
-	 *
-	 * @param str        待查找的东西
-	 * @param startIndex 查找起点
-	 * @return 索引或-1
-	 */
 	public int lastIndexOf(@Nullable String str, int startIndex) {
 		startIndex = startIndex >= size ? size - 1 : startIndex;
 		if (str == null || startIndex < 0) {
@@ -1652,23 +965,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return -1;
 	}
 
-	/**
-	 * 反向查找
-	 *
-	 * @param matcher 待查找的东西
-	 * @return 索引或-1
-	 */
 	public int lastIndexOf(StringMatcher matcher) {
 		return lastIndexOf(matcher, size);
 	}
 
-	/**
-	 * 反向查找
-	 *
-	 * @param matcher    待查找的东西
-	 * @param startIndex 查找起点
-	 * @return 索引或-1
-	 */
 	public int lastIndexOf(StringMatcher matcher, int startIndex) {
 		startIndex = startIndex >= size ? size - 1 : startIndex;
 		if (startIndex < 0) {
@@ -1684,21 +984,11 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return -1;
 	}
 
-	/**
-	 * 获取字符串长度
-	 *
-	 * @return 长度
-	 */
 	@Override
 	public int length() {
 		return size;
 	}
 
-	/**
-	 * 最小化容量
-	 *
-	 * @return this
-	 */
 	public TextStringBuilder minimizeCapacity() {
 		if (buffer.length > size) {
 			reallocate(size);
@@ -1711,14 +1001,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		this.reallocations++;
 	}
 
-	/**
-	 * 替换字符串
-	 *
-	 * @param startIndex 替换开始位置 (包含)
-	 * @param endIndex   替换结束位置 (不包含)
-	 * @param replaceStr 替换字符串
-	 * @return this
-	 */
 	public TextStringBuilder replace(int startIndex, int endIndex, String replaceStr) {
 		endIndex = validateRange(startIndex, endIndex);
 		final int insertLen = CharSequenceUtils.length(replaceStr);
@@ -1726,29 +1008,12 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 替换字符串 (高级)
-	 *
-	 * @param matcher      需要替换的部分字符串匹配器
-	 * @param replaceStr   要替换的字符串
-	 * @param startIndex   要替换的字符串开始位置 (包含)
-	 * @param endIndex     要替换的字符串结束位置 (不包含)
-	 * @param replaceCount 查找并替换的次数, -1 为不限次数
-	 * @return this
-	 */
 	public TextStringBuilder replace(StringMatcher matcher, String replaceStr, int startIndex, int endIndex,
 									 int replaceCount) {
 		endIndex = validateRange(startIndex, endIndex);
 		return replaceImpl(matcher, replaceStr, startIndex, endIndex, replaceCount);
 	}
 
-	/**
-	 * 替换所有的指定字符
-	 *
-	 * @param search  查找字符
-	 * @param replace 替换字符
-	 * @return this
-	 */
 	public TextStringBuilder replaceAll(char search, char replace) {
 		if (search != replace) {
 			for (int i = 0; i < size; i++) {
@@ -1760,13 +1025,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 替换所有的指定字符串
-	 *
-	 * @param searchStr  查找字符串
-	 * @param replaceStr 替换字符串
-	 * @return this
-	 */
 	public TextStringBuilder replaceAll(@Nullable String searchStr, String replaceStr) {
 		int searchLen = searchStr == null ? 0 : searchStr.length();
 		if (searchLen > 0) {
@@ -1780,24 +1038,10 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 替换所有的指定字符串
-	 *
-	 * @param matcher    查找字符串匹配器
-	 * @param replaceStr 替换字符串
-	 * @return this
-	 */
 	public TextStringBuilder replaceAll(StringMatcher matcher, String replaceStr) {
 		return replace(matcher, replaceStr, 0, size, -1);
 	}
 
-	/**
-	 * 替换首个指定字符
-	 *
-	 * @param search  查找字符
-	 * @param replace 替换字符
-	 * @return this
-	 */
 	public TextStringBuilder replaceFirst(char search, char replace) {
 		if (search != replace) {
 			for (int i = 0; i < size; i++) {
@@ -1810,13 +1054,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 替换首个指定字符串
-	 *
-	 * @param searchStr  查找字符
-	 * @param replaceStr 替换字符
-	 * @return this
-	 */
 	public TextStringBuilder replaceFirst(String searchStr, String replaceStr) {
 		final int searchLen = CharSequenceUtils.length(searchStr);
 		if (searchLen > 0) {
@@ -1829,13 +1066,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 替换首个指定字符串
-	 *
-	 * @param matcher    查找字符匹配器
-	 * @param replaceStr 替换字符
-	 * @return this
-	 */
 	public TextStringBuilder replaceFirst(StringMatcher matcher, String replaceStr) {
 		return replace(matcher, replaceStr, 0, size, 1);
 	}
@@ -1873,11 +1103,6 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 反向
-	 *
-	 * @return this
-	 */
 	public TextStringBuilder reverse() {
 		if (size == 0) {
 			return this;
@@ -1893,46 +1118,22 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return this;
 	}
 
-	/**
-	 * 重置字符串
-	 *
-	 * @param str 要重置的字符串
-	 * @return this
-	 */
 	public TextStringBuilder set(CharSequence str) {
 		clear();
 		append(str);
 		return this;
 	}
 
-	/**
-	 * 设置指定位置上的字符
-	 *
-	 * @param index 位置
-	 * @param ch    要设置的字符
-	 * @return this
-	 */
 	public TextStringBuilder setCharAt(int index, char ch) {
 		validateIndex(index);
 		buffer[index] = ch;
 		return this;
 	}
 
-	/**
-	 * 获取长度
-	 *
-	 * @return 长度
-	 */
 	public int size() {
 		return size;
 	}
 
-	/**
-	 * 判断是否为指定的字符串开始
-	 *
-	 * @param str 待测试的前缀
-	 * @return 结果
-	 */
 	public boolean startsWith(String str) {
 		final int len = str.length();
 		if (len == 0) {
@@ -1949,31 +1150,15 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return true;
 	}
 
-	/**
-	 * 取子串
-	 *
-	 * @param start 开始位置
-	 * @return 结果
-	 */
 	public String substring(int start) {
 		return substring(start, size);
 	}
 
-	/**
-	 * 取子串
-	 *
-	 * @param startIndex 开始位置 (包含)
-	 * @param endIndex   结束位置 (不包含)
-	 * @return 结果
-	 */
 	public String substring(int startIndex, int endIndex) {
 		endIndex = validateRange(startIndex, endIndex);
 		return new String(buffer, startIndex, endIndex - startIndex);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public CharSequence subSequence(int startIndex, int endIndex) {
 		if (startIndex < 0) {
@@ -1988,59 +1173,29 @@ public final class TextStringBuilder implements Serializable, CharSequence, Appe
 		return substring(startIndex, endIndex);
 	}
 
-	/**
-	 * 转换成 char[]
-	 *
-	 * @return 结果
-	 */
 	public char[] toCharArray() {
 		return size == 0 ? new char[0] : Arrays.copyOf(buffer, size);
 	}
 
-	/**
-	 * 转换成 char[]
-	 *
-	 * @param startIndex 开始位置 (包含)
-	 * @param endIndex   结束位置 (不包含)
-	 * @return 结果
-	 */
 	public char[] toCharArray(int startIndex, int endIndex) {
 		endIndex = validateRange(startIndex, endIndex);
 		final int len = endIndex - startIndex;
 		return len == 0 ? new char[0] : Arrays.copyOfRange(buffer, startIndex, endIndex);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		return new String(buffer, 0, size);
 	}
 
-	/**
-	 * 转换为 {@link StringBuffer}
-	 *
-	 * @return 结果
-	 */
 	public StringBuffer toStringBuffer() {
 		return new StringBuffer(size).append(buffer, 0, size);
 	}
 
-	/**
-	 * 转换为 {@link StringBuilder}
-	 *
-	 * @return 结果
-	 */
 	public StringBuilder toStringBuilder() {
 		return new StringBuilder(size).append(buffer, 0, size);
 	}
 
-	/**
-	 * 消除两端的空白字符
-	 *
-	 * @return this
-	 */
 	public TextStringBuilder trim() {
 		if (size == 0) {
 			return this;

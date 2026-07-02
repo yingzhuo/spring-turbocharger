@@ -3,19 +3,10 @@ package com.github.yingzhuo.turbocharger.jdbc.datasource;
 import org.jspecify.annotations.Nullable;
 import org.springframework.util.Assert;
 
-/**
- * 路由数据源查找策略
- *
- * @author 应卓
- * @since 3.4.1
- */
 public final class RoutingDataSourceLookup {
 
 	private static final ThreadLocal<String> DS_NAME_HOLDER = ThreadLocal.withInitial(() -> null);
 
-	/**
-	 * 私有构造方法
-	 */
 	private RoutingDataSourceLookup() {
 		super();
 	}

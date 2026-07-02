@@ -5,9 +5,6 @@ import com.github.yingzhuo.turbocharger.captcha.google.font.FontFactory;
 
 import java.awt.image.BufferedImage;
 
-/**
- * @since 1.0.0
- */
 public interface TextRenderer {
 
 	void setLeftMargin(int leftMargin);

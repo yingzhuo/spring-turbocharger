@@ -5,12 +5,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.AuthenticationException;
 
-/**
- * 认证失败事件
- *
- * @author 应卓
- * @since 2.0.5
- */
 public class AuthenticationFailureEvent extends AbstractSecurityEvent {
 
 	private final AuthenticationException authenticationException;

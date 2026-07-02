@@ -8,13 +8,6 @@ import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-/**
- * {@link java.util.StringTokenizer} 加强版
- *
- * @author 应卓
- * @see java.util.StringTokenizer
- * @since 2.0.2
- */
 public class StringTokenizer implements ListIterator<String>, Serializable, Cloneable {
 
 	private static final StringTokenizer CSV_TOKENIZER_PROTOTYPE;
@@ -58,165 +51,63 @@ public class StringTokenizer implements ListIterator<String>, Serializable, Clon
 
 	private boolean ignoreEmptyTokens = false;
 
-	/**
-	 * 构造方法
-	 *
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer() {
 		this.chars = null;
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param input 初始化内容
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer(@Nullable char[] input) {
 		this.chars = input != null ? input.clone() : null;
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer(@Nullable char[] input, char delimiter) {
 		this(input);
 		setDelimiterChar(delimiter);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param input     初始化内容
-	 * @param delimiter 分隔符
-	 * @param quote     引号
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer(@Nullable char[] input, char delimiter, char quote) {
 		this(input, delimiter);
 		setQuoteChar(quote);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param input     初始化内容
-	 * @param delimiter 分隔符
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer(@Nullable char[] input, String delimiter) {
 		this(input);
 		setDelimiterString(delimiter);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param input     初始化内容
-	 * @param delimiter 分隔符
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer(@Nullable char[] input, StringMatcher delimiter) {
 		this(input);
 		setDelimiterMatcher(delimiter);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param input     初始化内容
-	 * @param delimiter 分隔符
-	 * @param quote     引号
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer(@Nullable char[] input, final StringMatcher delimiter, final StringMatcher quote) {
 		this(input, delimiter);
 		setQuoteMatcher(quote);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param input 初始化内容
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer(@Nullable String input) {
 		this.chars = input != null ? input.toCharArray() : null;
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param input     初始化内容
-	 * @param delimiter 分隔符
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer(@Nullable String input, char delimiter) {
 		this(input);
 		setDelimiterChar(delimiter);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param input     初始化内容
-	 * @param delimiter 分隔符
-	 * @param quote     引号
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer(@Nullable String input, char delimiter, char quote) {
 		this(input, delimiter);
 		setQuoteChar(quote);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param input     初始化内容
-	 * @param delimiter 分隔符
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer(@Nullable String input, String delimiter) {
 		this(input);
 		setDelimiterString(delimiter);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param input     初始化内容
-	 * @param delimiter 分隔符
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer(@Nullable String input, StringMatcher delimiter) {
 		this(input);
 		setDelimiterMatcher(delimiter);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param input     初始化内容
-	 * @param delimiter 分隔符
-	 * @param quote     引号
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public StringTokenizer(@Nullable String input, StringMatcher delimiter, StringMatcher quote) {
 		this(input, delimiter);
 		setQuoteMatcher(quote);
@@ -226,37 +117,14 @@ public class StringTokenizer implements ListIterator<String>, Serializable, Clon
 		return (StringTokenizer) CSV_TOKENIZER_PROTOTYPE.clone();
 	}
 
-	/**
-	 * 返回CSV文件专用 {@link StringTokenizer}
-	 *
-	 * @return CSV文件专用 {@link StringTokenizer}
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public static StringTokenizer getCSVInstance() {
 		return getCSVClone();
 	}
 
-	/**
-	 * 返回CSV文件专用 {@link StringTokenizer}
-	 *
-	 * @param input 初始化内容
-	 * @return CSV文件专用 {@link StringTokenizer}
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public static StringTokenizer getCSVInstance(final char[] input) {
 		return getCSVClone().reset(input);
 	}
 
-	/**
-	 * 返回CSV文件专用 {@link StringTokenizer}
-	 *
-	 * @param input 初始化内容
-	 * @return CSV文件专用 {@link StringTokenizer}
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public static StringTokenizer getCSVInstance(final String input) {
 		return getCSVClone().reset(input);
 	}
@@ -265,73 +133,30 @@ public class StringTokenizer implements ListIterator<String>, Serializable, Clon
 		return (StringTokenizer) TSV_TOKENIZER_PROTOTYPE.clone();
 	}
 
-	/**
-	 * 获取实例
-	 *
-	 * @param input 初始化内容
-	 * @return 实例
-	 */
 	public static StringTokenizer newInstance(@Nullable char[] input) {
 		return new StringTokenizer(input);
 	}
 
-	/**
-	 * 获取实例
-	 *
-	 * @param input 初始化内容
-	 * @return 实例
-	 */
 	public static StringTokenizer newInstance(@Nullable String input) {
 		return new StringTokenizer(input);
 	}
 
-	/**
-	 * 获取实例
-	 *
-	 * @return 实例
-	 */
 	public static StringTokenizer newInstance() {
 		return new StringTokenizer();
 	}
 
-	/**
-	 * 返回TSV文件专用 {@link StringTokenizer}
-	 *
-	 * @return TSV文件专用 {@link StringTokenizer}
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public static StringTokenizer getTSVInstance() {
 		return getTSVClone();
 	}
 
-	/**
-	 * 返回TSV文件专用 {@link StringTokenizer}
-	 *
-	 * @param input 初始化内容
-	 * @return TSV文件专用 {@link StringTokenizer}
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public static StringTokenizer getTSVInstance(final char[] input) {
 		return getTSVClone().reset(input);
 	}
 
-	/**
-	 * 返回TSV文件专用 {@link StringTokenizer}
-	 *
-	 * @param input 初始化内容
-	 * @return TSV文件专用 {@link StringTokenizer}
-	 * @see #reset(char[])
-	 * @see #reset(String)
-	 */
 	public static StringTokenizer getTSVInstance(final String input) {
 		return getTSVClone().reset(input);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void add(String obj) {
 		throw new UnsupportedOperationException("add() is unsupported");
@@ -362,9 +187,6 @@ public class StringTokenizer implements ListIterator<String>, Serializable, Clon
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object clone() {
 		try {
@@ -392,153 +214,69 @@ public class StringTokenizer implements ListIterator<String>, Serializable, Clon
 		return new String(chars);
 	}
 
-	/**
-	 * 获取分隔符用匹配器
-	 *
-	 * @return 匹配器实例
-	 */
 	public StringMatcher getDelimiterMatcher() {
 		return this.delimMatcher;
 	}
 
-	/**
-	 * 设置分隔符用匹配器
-	 *
-	 * @param matcher 匹配器
-	 * @return this
-	 */
 	public StringTokenizer setDelimiterMatcher(StringMatcher matcher) {
 		this.delimMatcher = matcher;
 		return this;
 	}
 
-	/**
-	 * 获取忽略匹配器
-	 *
-	 * @return 匹配器实例
-	 */
 	public StringMatcher getIgnoredMatcher() {
 		return ignoredMatcher;
 	}
 
-	/**
-	 * 设置字符忽略匹配器
-	 *
-	 * @param matcher 匹配器
-	 * @return this
-	 */
 	public StringTokenizer setIgnoredMatcher(StringMatcher matcher) {
 		this.ignoredMatcher = matcher;
 		return this;
 	}
 
-	/**
-	 * 获取引号匹配器
-	 *
-	 * @return 匹配器实例
-	 */
 	public StringMatcher getQuoteMatcher() {
 		return quoteMatcher;
 	}
 
-	/**
-	 * 设置引号匹配器
-	 *
-	 * @param matcher 匹配器
-	 * @return this
-	 */
 	public StringTokenizer setQuoteMatcher(StringMatcher matcher) {
 		this.quoteMatcher = matcher;
 		return this;
 	}
 
-	/**
-	 * 获取 Trimmer字符匹配器
-	 *
-	 * @return 匹配器实例
-	 */
 	public StringMatcher getTrimmerMatcher() {
 		return trimmerMatcher;
 	}
 
-	/**
-	 * 设置 Trimmer字符匹配器
-	 *
-	 * @param matcher 匹配器
-	 * @return this
-	 */
 	public StringTokenizer setTrimmerMatcher(StringMatcher matcher) {
 		this.trimmerMatcher = matcher;
 		return this;
 	}
 
-	/**
-	 * 是否把空令牌当成 {@code null}
-	 *
-	 * @return 结果
-	 */
 	public boolean isEmptyTokenAsNull() {
 		return this.emptyAsNull;
 	}
 
-	/**
-	 * 设置是否把空令牌当成 {@code null}
-	 *
-	 * @param emptyAsNull 设置项
-	 * @return this
-	 */
 	public StringTokenizer setEmptyTokenAsNull(boolean emptyAsNull) {
 		this.emptyAsNull = emptyAsNull;
 		return this;
 	}
 
-	/**
-	 * 是否忽略空令牌
-	 *
-	 * @return 结果
-	 */
 	public boolean isIgnoreEmptyTokens() {
 		return ignoreEmptyTokens;
 	}
 
-	/**
-	 * 设置是否忽略空令牌
-	 *
-	 * @param ignoreEmptyTokens true
-	 * @return this
-	 */
 	public StringTokenizer setIgnoreEmptyTokens(boolean ignoreEmptyTokens) {
 		this.ignoreEmptyTokens = ignoreEmptyTokens;
 		return this;
 	}
 
-	/**
-	 * 获取所有的令牌
-	 *
-	 * @return 获取所有的令牌
-	 */
 	public String[] getTokenArray() {
 		checkTokenized();
 		return tokens.clone();
 	}
 
-	/**
-	 * 获取所有的令牌
-	 *
-	 * @param expectCount 期望的Token数量
-	 * @return 获取所有的Token
-	 */
 	public String[] getCheckedTokenArray(int expectCount) {
 		return getCheckedTokenArray(expectCount, () -> new IllegalArgumentException("expect count not match"));
 	}
 
-	/**
-	 * 获取所有的令牌
-	 *
-	 * @param expectCount       期望的Token数量
-	 * @param exceptionSupplier 当期望的Token数量不满足时如何抛出异常
-	 * @return 获取所有的Token
-	 */
 	public String[] getCheckedTokenArray(int expectCount, Supplier<RuntimeException> exceptionSupplier) {
 		checkTokenized();
 		if (tokens.length != expectCount) {
@@ -547,33 +285,15 @@ public class StringTokenizer implements ListIterator<String>, Serializable, Clon
 		return tokens.clone();
 	}
 
-	/**
-	 * 获取所有的令牌
-	 *
-	 * @return 获取所有的令牌
-	 */
 	public List<String> getTokenList() {
 		checkTokenized();
 		return Arrays.asList(tokens);
 	}
 
-	/**
-	 * 获取所有的令牌
-	 *
-	 * @param expectCount 期望的Token数量
-	 * @return 获取所有的Token
-	 */
 	public List<String> getCheckedTokenList(int expectCount) {
 		return getCheckedTokenList(expectCount, () -> new IllegalArgumentException("expect count not match"));
 	}
 
-	/**
-	 * 获取所有的令牌
-	 *
-	 * @param expectCount       期望的Token数量
-	 * @param exceptionSupplier 当期望的Token数量不满足时如何抛出异常
-	 * @return 获取所有的Token
-	 */
 	public List<String> getCheckedTokenList(int expectCount, Supplier<RuntimeException> exceptionSupplier) {
 		checkTokenized();
 		if (tokens.length != expectCount) {
@@ -582,28 +302,17 @@ public class StringTokenizer implements ListIterator<String>, Serializable, Clon
 		return Arrays.asList(tokens);
 	}
 
-	/**
-	 * 获取所有的令牌
-	 *
-	 * @return 获取所有的令牌
-	 */
 	public Stream<String> getTokenStream() {
 		checkTokenized();
 		return Stream.of(tokens);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean hasNext() {
 		checkTokenized();
 		return tokenPos < tokens.length;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean hasPrevious() {
 		checkTokenized();
@@ -620,9 +329,6 @@ public class StringTokenizer implements ListIterator<String>, Serializable, Clon
 		return true;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String next() {
 		if (hasNext()) {
@@ -631,17 +337,11 @@ public class StringTokenizer implements ListIterator<String>, Serializable, Clon
 		throw new NoSuchElementException();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int nextIndex() {
 		return tokenPos;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String previous() {
 		if (hasPrevious()) {
@@ -650,9 +350,6 @@ public class StringTokenizer implements ListIterator<String>, Serializable, Clon
 		throw new NoSuchElementException();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int previousIndex() {
 		return tokenPos - 1;
@@ -773,102 +470,50 @@ public class StringTokenizer implements ListIterator<String>, Serializable, Clon
 		return -1;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void remove() {
 		throw new UnsupportedOperationException("remove() is unsupported");
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void set(final String obj) {
 		throw new UnsupportedOperationException("set() is unsupported");
 	}
 
-	/**
-	 * 重置
-	 *
-	 * @return this
-	 */
 	public StringTokenizer reset() {
 		tokenPos = 0;
 		tokens = null;
 		return this;
 	}
 
-	/**
-	 * 重置
-	 *
-	 * @param input 新的内容
-	 * @return this
-	 */
 	public StringTokenizer reset(@Nullable char[] input) {
 		reset();
 		this.chars = input != null ? input.clone() : null;
 		return this;
 	}
 
-	/**
-	 * 重置
-	 *
-	 * @param input 新的内容
-	 * @return this
-	 */
 	public StringTokenizer reset(@Nullable String input) {
 		reset();
 		this.chars = input != null ? input.toCharArray() : null;
 		return this;
 	}
 
-	/**
-	 * 设置分隔符
-	 *
-	 * @param delimiter 分隔符
-	 * @return this
-	 */
 	public StringTokenizer setDelimiterChar(char delimiter) {
 		return setDelimiterMatcher(StringMatcher.charMatcher(delimiter));
 	}
 
-	/**
-	 * 设置分隔符
-	 *
-	 * @param delimiter 分隔符
-	 * @return this
-	 */
 	public StringTokenizer setDelimiterString(String delimiter) {
 		return setDelimiterMatcher(StringMatcher.stringMatcher(delimiter));
 	}
 
-	/**
-	 * 设置忽略字符
-	 *
-	 * @param ignored 要忽略的字符
-	 * @return this
-	 */
 	public StringTokenizer setIgnoredChar(char ignored) {
 		return setIgnoredMatcher(StringMatcher.charMatcher(ignored));
 	}
 
-	/**
-	 * 设置忽略字符
-	 *
-	 * @param quote 引号
-	 * @return this
-	 */
 	public StringTokenizer setQuoteChar(char quote) {
 		return setQuoteMatcher(StringMatcher.charMatcher(quote));
 	}
 
-	/**
-	 * 获取令牌个数
-	 *
-	 * @return 令牌个数
-	 */
 	public int size() {
 		checkTokenized();
 		return tokens.length;

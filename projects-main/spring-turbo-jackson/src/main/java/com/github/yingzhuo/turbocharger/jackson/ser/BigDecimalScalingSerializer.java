@@ -8,10 +8,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-/**
- * @author 应卓
- * @since 3.3.1
- */
 public abstract class BigDecimalScalingSerializer extends StdSerializer<BigDecimal> {
 
 	private final int scale;

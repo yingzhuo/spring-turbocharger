@@ -14,13 +14,6 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.EnumMap;
 
-/**
- * QRCode生成器默认实现
- *
- * @author 应卓
- * @see QRCodeGenerator
- * @since 1.0.0
- */
 public class QRCodeGeneratorImpl implements QRCodeGenerator {
 
 	@Override

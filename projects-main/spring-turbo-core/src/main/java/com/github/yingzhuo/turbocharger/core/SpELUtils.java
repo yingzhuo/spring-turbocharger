@@ -10,70 +10,28 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Map;
 
-/**
- * 简易SpEL相关工具 这个工具适用于一般绝大部分情况
- *
- * @author 应卓
- * @see AspectSpELTemplate
- * @since 3.4.0
- */
 @SuppressWarnings("unchecked")
 public final class SpELUtils {
 
-	/**
-	 * 私有构造方法
-	 */
 	private SpELUtils() {
 		super();
 	}
 
-	/**
-	 * 解析SpEL并获得其值
-	 *
-	 * @param expression 表达式
-	 * @param <T>        最终值的类型
-	 * @return 最终值或空值
-	 */
 	@Nullable
 	public static <T> T getValue(String expression) {
 		return getValue(expression, null, null);
 	}
 
-	/**
-	 * 解析SpEL并获得其值
-	 *
-	 * @param expression 表达式
-	 * @param rootObject 根数据
-	 * @param <T>        最终值的类型
-	 * @return 最终值或空值
-	 */
 	@Nullable
 	public static <T> T getValue(String expression, @Nullable Object rootObject) {
 		return getValue(expression, rootObject, null);
 	}
 
-	/**
-	 * 解析SpEL并获得其值
-	 *
-	 * @param expression 表达式
-	 * @param variables  其他变量
-	 * @param <T>        最终值的类型
-	 * @return 最终值或空值
-	 */
 	@Nullable
 	public static <T> T getValue(String expression, @Nullable Map<String, ?> variables) {
 		return getValue(expression, null, variables);
 	}
 
-	/**
-	 * 解析SpEL并获得其值
-	 *
-	 * @param expression 表达式
-	 * @param rootObject 根数据
-	 * @param variables  其他变量
-	 * @param <T>        最终值的类型
-	 * @return 最终值或空值
-	 */
 	@Nullable
 	public static <T> T getValue(String expression, @Nullable Object rootObject, @Nullable Map<String, ?> variables) {
 		Assert.hasText(expression, "expression is required");

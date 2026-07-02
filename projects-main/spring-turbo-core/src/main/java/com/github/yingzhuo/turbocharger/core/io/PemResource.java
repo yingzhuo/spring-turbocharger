@@ -14,32 +14,16 @@ import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-/**
- * @author 应卓
- * @see PemResourceProtocolResolver
- * @since 3.5.4
- */
 @SuppressWarnings("unchecked")
 public class PemResource extends DelegatingResource {
 
 	private final PemContent pemContent;
 	private final @Nullable String keypass;
 
-	/**
-	 * 构造方法
-	 *
-	 * @param delegatingResource 代理的资源
-	 */
 	public PemResource(Resource delegatingResource) {
 		this(delegatingResource, null);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param delegatingResource 代理的资源
-	 * @param keypass            私钥密码
-	 */
 	public PemResource(Resource delegatingResource, @Nullable String keypass) {
 		super(delegatingResource);
 		this.keypass = keypass;

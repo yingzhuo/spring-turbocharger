@@ -1,9 +1,5 @@
 package com.github.yingzhuo.turbocharger.captcha.google.size;
 
-/**
- * @author 应卓
- * @since 1.0.0
- */
 public class SingleSizeFactory implements SizeFactory {
 
 	private int width = 160;

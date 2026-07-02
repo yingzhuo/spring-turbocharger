@@ -16,61 +16,28 @@ import static com.github.yingzhuo.turbocharger.util.StringUtils.isNotBlank;
 import static java.util.regex.Pattern.DOTALL;
 import static java.util.regex.Pattern.MULTILINE;
 
-/**
- * @author 应卓
- * @since 3.3.1
- */
 public class TextVariables extends MutablePropertyValues implements Serializable {
 
 	private static final StringMatcher DEFAULT_DELIMITER = StringMatcher.charSetMatcher(SEMICOLON, LF);
 
-	/**
-	 * 构造方法
-	 *
-	 * @param text 文本
-	 */
 	public TextVariables(@Nullable String text) {
 		this(text, null);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param text      多个参数合成的字符串
-	 * @param delimiter 参数之间的分隔符
-	 * @see StringMatcher
-	 * @see StringMatcher#stringMatcher(String)
-	 */
 	public TextVariables(@Nullable String text, @Nullable StringMatcher delimiter) {
 		set(text, delimiter);
 	}
 
-	/**
-	 * 创建实例
-	 *
-	 * @param text 文本
-	 * @return 实例
-	 */
 	public static TextVariables valueOf(@Nullable String text) {
 		return new TextVariables(text, null);
 	}
 
-	/**
-	 * 转换成 {@link Map}
-	 *
-	 * @return {@link Map} 实例
-	 */
 	public Map<String, String> toMap() {
 		var map = new HashMap<String, String>();
 		stream().forEach(pv -> map.put(pv.getName(), (String) pv.getValue()));
 		return map;
 	}
 
-	/**
-	 * 转换成 {@link Properties}
-	 *
-	 * @return {@link Properties} 实例
-	 */
 	public Properties toProperties() {
 		var props = new Properties();
 		props.putAll(toMap());

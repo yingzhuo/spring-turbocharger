@@ -7,26 +7,12 @@ import org.springframework.core.type.AnnotationMetadata;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * {@link ImportSelector} 支持类
- *
- * @author 应卓
- * @see ImportBeanDefinitionRegistrarSupport
- * @see org.springframework.context.annotation.ImportAware
- * @since 3.5.3
- */
 public abstract class ImportSelectorSupport extends AbstractImportingSupport implements ImportSelector {
 
-	/**
-	 * 默认构造方法
-	 */
 	public ImportSelectorSupport() {
 		super();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public final String[] selectImports(AnnotationMetadata metadata) {
 		try {

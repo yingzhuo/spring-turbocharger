@@ -5,17 +5,8 @@ import com.github.yingzhuo.turbocharger.idgen.UUIDGenerator;
 
 import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
 
-/**
- * UUID生成工具
- *
- * @author 应卓
- * @since 3.4.4
- */
 public final class UUIDUtils {
 
-	/**
-	 * 私有构造方法
-	 */
 	private UUIDUtils() {
 		super();
 	}

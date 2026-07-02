@@ -7,9 +7,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-/**
- * @since 1.0.0
- */
 public class CurvesImageOp extends AbstractImageOp {
 
 	private float strokeMin;

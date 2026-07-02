@@ -13,36 +13,16 @@ import java.security.PublicKey;
 import java.security.cert.X509Certificate;
 import java.util.Base64;
 
-/**
- * 抽象的JWT签名算法基类
- *
- * @author 应卓
- * @since 3.5.3
- */
 public abstract class AbstractAlgorithm extends Algorithm implements Serializable {
 
-	/**
-	 * 构造方法
-	 *
-	 * @param name 算法名称
-	 */
 	protected AbstractAlgorithm(String name) {
 		this(name, name);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param name        算法名称
-	 * @param description 算法描述
-	 */
 	protected AbstractAlgorithm(String name, String description) {
 		super(name, description);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public final void verify(DecodedJWT jwt) throws SignatureVerificationException {
 
@@ -62,9 +42,6 @@ public abstract class AbstractAlgorithm extends Algorithm implements Serializabl
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public final byte[] sign(byte[] bytes) throws SignatureGenerationException {
 		try {
@@ -76,48 +53,16 @@ public abstract class AbstractAlgorithm extends Algorithm implements Serializabl
 		}
 	}
 
-	/**
-	 * 签名
-	 *
-	 * @param data 需要签名的数据
-	 * @return 签名后的数据
-	 */
 	protected abstract byte[] doSign(byte[] data) throws Exception;
 
-	/**
-	 * 验证
-	 *
-	 * @param data      需要验证的部分
-	 * @param signature 签名部分
-	 */
 	protected abstract void doVerify(byte[] data, byte[] signature) throws Exception;
 
-	/**
-	 * 获取证书
-	 *
-	 * @return 证书
-	 */
 	public abstract X509Certificate getCertificate();
 
-	/**
-	 * 获取公钥
-	 *
-	 * @return 公钥
-	 */
 	public abstract PublicKey getPublicKey();
 
-	/**
-	 * 获取私钥
-	 *
-	 * @return 私钥
-	 */
 	public abstract PrivateKey getPrivateKey();
 
-	/**
-	 * 获取密钥对
-	 *
-	 * @return 密钥对
-	 */
 	public final KeyPair getKeyPair() {
 		return new KeyPair(getPublicKey(), getPrivateKey());
 	}

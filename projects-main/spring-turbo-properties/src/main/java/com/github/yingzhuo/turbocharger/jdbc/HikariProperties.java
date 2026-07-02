@@ -7,10 +7,6 @@ import org.springframework.boot.jdbc.autoconfigure.JdbcConnectionDetails;
 
 import java.io.Serializable;
 
-/**
- * @author 应卓
- * @since 3.4.1
- */
 @Getter
 @Setter
 @ToString

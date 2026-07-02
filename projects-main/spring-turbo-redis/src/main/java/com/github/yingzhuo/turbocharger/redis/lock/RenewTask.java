@@ -8,14 +8,6 @@ import org.springframework.data.redis.core.script.RedisScript;
 import java.util.List;
 import java.util.TimerTask;
 
-/**
- * 分布式锁刷新TTL任务
- *
- * @author 应卓
- * @see java.util.Timer
- * @see DistributedReentrantLock
- * @since 3.4.0
- */
 final class RenewTask extends TimerTask {
 
 	private static final RedisScript<Boolean> RENEW_TTL =
@@ -26,14 +18,6 @@ final class RenewTask extends TimerTask {
 	private final String field;
 	private final long ttl;
 
-	/**
-	 * 构造方法
-	 *
-	 * @param redisOperations RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param key             key
-	 * @param field           Hash field
-	 * @param ttl             自动过期时间
-	 */
 	public RenewTask(RedisOperations<String, String> redisOperations, String key, String field, long ttl) {
 		this.redisOperations = redisOperations;
 		this.key = key;

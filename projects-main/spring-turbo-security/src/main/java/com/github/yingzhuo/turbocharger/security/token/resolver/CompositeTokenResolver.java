@@ -8,15 +8,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.*;
 
-/**
- * 组合型令牌解析器
- * <p>
- * 本类型解析器封装多个其他的解析器，如果之前的解析器不能解析出令牌，则尝试下一个。
- *
- * @author 应卓
- * @see TokenResolver#builder()
- * @since 1.0.0
- */
 public final class CompositeTokenResolver implements TokenResolver, Iterable<TokenResolver> {
 
 	private final List<TokenResolver> resolvers = new ArrayList<>();
@@ -35,9 +26,6 @@ public final class CompositeTokenResolver implements TokenResolver, Iterable<Tok
 		return new CompositeTokenResolver(resolvers);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Optional<Token> resolve(WebRequest request) {
 		for (TokenResolver it : this) {
@@ -49,9 +37,6 @@ public final class CompositeTokenResolver implements TokenResolver, Iterable<Tok
 		return Optional.empty();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Iterator<TokenResolver> iterator() {
 		return this.resolvers.iterator();

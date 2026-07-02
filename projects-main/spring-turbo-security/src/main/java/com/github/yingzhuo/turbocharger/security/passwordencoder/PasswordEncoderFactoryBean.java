@@ -10,18 +10,11 @@ import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author 应卓
- * @since 3.5.3
- */
 public class PasswordEncoderFactoryBean implements FactoryBean<PasswordEncoder>, EncodingIds {
 
 	private boolean enableDefaultEncoders = true;
 	private String idForEncode = bcrypt;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public PasswordEncoder getObject() {
 		var encodersInUse = enableDefaultEncoders ? getDefaultEncoders() : new HashMap<String, PasswordEncoder>();
@@ -37,9 +30,6 @@ public class PasswordEncoderFactoryBean implements FactoryBean<PasswordEncoder>,
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Class<?> getObjectType() {
 		return PasswordEncoder.class;

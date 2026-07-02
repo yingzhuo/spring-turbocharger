@@ -11,11 +11,6 @@ import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.Assert;
 
-/**
- * @author 应卓
- * @see AvoidRepeatedInvocation
- * @since 3.4.0
- */
 @Aspect
 public class AvoidRepeatedInvocationAdvice implements Ordered {
 
@@ -23,23 +18,10 @@ public class AvoidRepeatedInvocationAdvice implements Ordered {
 	private final RuntimeExceptionSupplier exceptionSupplier;
 	private final int order;
 
-	/**
-	 * 构造方法
-	 *
-	 * @param redisOperations   RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param exceptionSupplier 异常提供器，如果判断为重复调用。使用这个东西产生异常并抛出
-	 */
 	public AvoidRepeatedInvocationAdvice(RedisOperations<String, String> redisOperations, RuntimeExceptionSupplier exceptionSupplier) {
 		this(redisOperations, exceptionSupplier, HIGHEST_PRECEDENCE);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param redisOperations   RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param exceptionSupplier 异常提供器，如果判断为重复调用。使用这个东西产生异常并抛出
-	 * @param order             切面排序
-	 */
 	public AvoidRepeatedInvocationAdvice(RedisOperations<String, String> redisOperations, RuntimeExceptionSupplier exceptionSupplier, int order) {
 		Assert.notNull(redisOperations, "redisOperations is required");
 		Assert.notNull(exceptionSupplier, "exceptionSupplier is required");

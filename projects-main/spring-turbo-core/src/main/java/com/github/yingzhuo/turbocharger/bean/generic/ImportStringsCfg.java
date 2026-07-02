@@ -10,17 +10,8 @@ import org.springframework.util.Assert;
 
 import java.util.stream.Collectors;
 
-/**
- * @author 应卓
- * @see ImportString
- * @see ImportStrings
- * @since 3.5.3
- */
 class ImportStringsCfg extends ImportBeanDefinitionRegistrarSupport {
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void doRegister(AnnotationMetadata metadata, BeanDefinitionRegistry registry, BeanNameGenerator beanNameGen) {
 		getAnnotationAttributesSet(metadata, ImportString.class, ImportStrings.class)

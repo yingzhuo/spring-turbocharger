@@ -6,12 +6,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * 组合型比较器
- *
- * @param <T> 泛型
- * @author 应卓
- */
 public class CompositeComparator<T> implements Comparator<T> {
 
 	private final List<Comparator<T>> comparators;

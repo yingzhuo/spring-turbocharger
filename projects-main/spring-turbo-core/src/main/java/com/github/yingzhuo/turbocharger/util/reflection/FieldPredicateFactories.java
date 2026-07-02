@@ -7,16 +7,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.function.Predicate;
 
-/**
- * @author 应卓
- * @see FieldUtils
- * @since 1.2.1
- */
 public final class FieldPredicateFactories {
 
-	/**
-	 * 私有构造方法
-	 */
 	private FieldPredicateFactories() {
 	}
 

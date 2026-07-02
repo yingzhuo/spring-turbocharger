@@ -2,10 +2,6 @@ package com.github.yingzhuo.turbocharger.captcha.google.word;
 
 import java.io.Serializable;
 
-/**
- * @author 应卓
- * @since 1.0.8
- */
 public class Word implements Serializable {
 
 	private String stringForDrawing;

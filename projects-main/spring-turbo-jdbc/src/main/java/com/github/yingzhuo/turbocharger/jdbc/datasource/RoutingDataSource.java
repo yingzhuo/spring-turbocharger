@@ -10,14 +10,6 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 路由数据源
- *
- * @author 应卓
- * @see AbstractRoutingDataSource
- * @see RoutingDataSourceLookup
- * @since 3.4.1
- */
 public class RoutingDataSource extends AbstractRoutingDataSource implements DataSource, InitializingBean {
 
 	public RoutingDataSource(DataSource defaultDataSource, Map<String, DataSource> targetDataSources) {

@@ -11,31 +11,18 @@ import org.springframework.core.io.Resource;
 import java.io.IOException;
 import java.util.*;
 
-/**
- * @author 应卓
- * @since 2.1.3
- */
 @SuppressWarnings("unchecked")
 public class HoconPropertySourceLoader implements PropertySourceLoader {
 
-	/**
-	 * 默认构造方法
-	 */
 	public HoconPropertySourceLoader() {
 		super();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String[] getFileExtensions() {
 		return new String[]{"conf"};
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public List<PropertySource<?>> load(String name, Resource resource) throws IOException {
 		Config config = ConfigFactory.parseURL(resource.getURL());

@@ -4,18 +4,8 @@ import org.jspecify.annotations.Nullable;
 
 import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
 
-/**
- * {@link String} 默认值相关工具
- *
- * @author 应卓
- * @see StringUtils
- * @since 2.1.0
- */
 public final class StringDefaults {
 
-	/**
-	 * 私有构造方法
-	 */
 	private StringDefaults() {
 		super();
 	}

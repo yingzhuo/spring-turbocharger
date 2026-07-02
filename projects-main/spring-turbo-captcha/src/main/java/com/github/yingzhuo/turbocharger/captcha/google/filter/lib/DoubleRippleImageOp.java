@@ -1,8 +1,5 @@
 package com.github.yingzhuo.turbocharger.captcha.google.filter.lib;
 
-/**
- * @since 1.0.0
- */
 public class DoubleRippleImageOp extends RippleImageOp {
 
 	@Override

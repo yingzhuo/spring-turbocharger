@@ -6,11 +6,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.Ordered;
 
-/**
- * @author 应卓
- * @see DataSourceSwitch
- * @since 3.4.1
- */
 @Aspect
 public class DataSourceSwitchAdvice implements Ordered {
 

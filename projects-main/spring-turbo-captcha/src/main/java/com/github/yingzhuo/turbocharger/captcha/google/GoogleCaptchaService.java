@@ -8,10 +8,6 @@ import com.github.yingzhuo.turbocharger.captcha.google.font.RandomFontFactory;
 import com.github.yingzhuo.turbocharger.captcha.google.renderer.BestFitTextRenderer;
 import com.github.yingzhuo.turbocharger.captcha.google.word.AdaptiveRandomWordFactory;
 
-/**
- * @author 应卓
- * @since 1.0.0
- */
 public class GoogleCaptchaService extends AbstractGoogleCaptchaService implements CaptchaService {
 
 	public GoogleCaptchaService() {

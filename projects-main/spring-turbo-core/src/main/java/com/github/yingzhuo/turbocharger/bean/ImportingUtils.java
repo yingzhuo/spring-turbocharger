@@ -13,44 +13,18 @@ import org.springframework.util.ClassUtils;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
-/**
- * @author 应卓
- * @see Import
- * @see AnnotationMetadata
- * @see ClassMetadata
- * @see ImportAware#setImportMetadata(AnnotationMetadata)
- * @since 3.5.3
- */
 public final class ImportingUtils {
 
-	/**
-	 * 私有构造方法
-	 */
 	private ImportingUtils() {
 		super();
 	}
 
-	/**
-	 * 获取导入元注释的相关信息
-	 *
-	 * @param metadata            导入元信息
-	 * @param importingAnnotation 导入元注释类型
-	 * @return 导入元注释的相关信息
-	 */
 	public static Set<AnnotationAttributes> getAnnotationAttributesSet(
 		AnnotationMetadata metadata,
 		Class<? extends Annotation> importingAnnotation) {
 		return getAnnotationAttributesSet(metadata, importingAnnotation, null);
 	}
 
-	/**
-	 * 获取导入元注释的相关信息
-	 *
-	 * @param metadata                     导入元信息
-	 * @param importingAnnotation          导入元注释类型
-	 * @param importingContainerAnnotation 导入元注释类型 (repeatable)
-	 * @return 导入元注释的相关信息
-	 */
 	public static Set<AnnotationAttributes> getAnnotationAttributesSet(
 		AnnotationMetadata metadata,
 		Class<? extends Annotation> importingAnnotation,
@@ -69,45 +43,19 @@ public final class ImportingUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 获取导入类的名称
-	 *
-	 * @param metadata 导入元信息
-	 * @return 导入类的名称
-	 */
 	public static String getImportingClassName(ClassMetadata metadata) {
 		Assert.notNull(metadata, "metadata must not be null");
 		return metadata.getClassName();
 	}
 
-	/**
-	 * 获取导入类
-	 *
-	 * @param metadata 导入元信息
-	 * @return 导入类
-	 */
 	public static Class<?> getImportingClass(ClassMetadata metadata) {
 		return ClassUtils.resolveClassName(getImportingClassName(metadata), null);
 	}
 
-	/**
-	 * 获取导入类所在的包
-	 *
-	 * @param metadata 导入元信息
-	 * @return 导入类所在的包
-	 */
 	public static Package getImportingClassPackage(ClassMetadata metadata) {
 		return getImportingClass(metadata).getPackage();
 	}
 
-	/**
-	 * 获取导入类上的元注释
-	 *
-	 * @param metadata       导入元信息
-	 * @param annotationType 要查找的元注释类型
-	 * @return 结果
-	 * @see AnnotationUtils#findAnnotation(Class, Class)
-	 */
 	@Nullable
 	public static <A extends Annotation> A getAnnotationOfImportingClass(ClassMetadata metadata, Class<A> annotationType) {
 		return AnnotationUtils.findAnnotation(getImportingClass(metadata), annotationType);

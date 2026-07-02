@@ -10,20 +10,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.Timer;
 
-/**
- * 锁帧 <br>
- * 用于记录锁成功时的一些基本信息
- *
- * @author 应卓
- * @since 3.4.0
- */
 public final class LockFrame implements Serializable {
 
 	private static final DateTimeFormatter DEFAULT_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
 
-	/**
-	 * 锁成功时的时间戳
-	 */
 	@Getter
 	private final long creationTimestamp;
 

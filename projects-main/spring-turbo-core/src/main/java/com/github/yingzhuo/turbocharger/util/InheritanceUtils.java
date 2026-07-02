@@ -2,15 +2,8 @@ package com.github.yingzhuo.turbocharger.util;
 
 import org.springframework.util.Assert;
 
-/**
- * @author 应卓
- * @since 1.0.8
- */
 public final class InheritanceUtils {
 
-	/**
-	 * 私有构造方法
-	 */
 	private InheritanceUtils() {
 	}
 

@@ -12,32 +12,15 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Timer;
 
-/**
- * 基于Redis的可重入分布式锁 <br>
- * <em>特色</em>
- * <ul>
- *     <li>可重入</li>
- *     <li>实现了自动续期功能</li>
- * </ul>
- *
- * @author 应卓
- * @since 3.4.0
- */
 public final class DistributedReentrantLock implements Serializable {
 
 	/*
 	 * 本工具没有在高并发下严格测试，作者只为了自学与教学。请谨慎在生产环境上使用。
 	 */
 
-	/**
-	 * 加锁脚本
-	 */
 	private static final RedisScript<Long> TRY_LOCK =
 		RedisScript.of(new ClassPathResource("META-INF/Lock#lock.lua"), Long.class);
 
-	/**
-	 * 解锁脚本
-	 */
 	private static final RedisScript<Boolean> UNLOCK =
 		RedisScript.of(new ClassPathResource("META-INF/Lock#unlock.lua"), Boolean.class);
 
@@ -46,13 +29,6 @@ public final class DistributedReentrantLock implements Serializable {
 	private final long ttlInSeconds;
 	private final String lockKey;
 
-	/**
-	 * 构造方法
-	 *
-	 * @param redisOperations RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param lockKey         作为锁的键
-	 * @param ttlInSeconds    锁自动过期时间(秒)
-	 */
 	public DistributedReentrantLock(RedisOperations<String, String> redisOperations, String lockKey, long ttlInSeconds) {
 		Assert.notNull(redisOperations, "redisOperations is required");
 		Assert.hasText(lockKey, "lockKey is required");
@@ -64,11 +40,6 @@ public final class DistributedReentrantLock implements Serializable {
 		this.lockStack = new LockStack();
 	}
 
-	/**
-	 * 尝试加锁
-	 *
-	 * @return 加锁结果
-	 */
 	public boolean tryLock() {
 		var now = System.currentTimeMillis();
 		var lockField = CurrentThreadUtils.getTrait();
@@ -96,11 +67,6 @@ public final class DistributedReentrantLock implements Serializable {
 		}
 	}
 
-	/**
-	 * 尝试解锁
-	 *
-	 * @return 解锁结果
-	 */
 	public boolean unlock() {
 		var lockField = CurrentThreadUtils.getTrait();
 
@@ -123,9 +89,6 @@ public final class DistributedReentrantLock implements Serializable {
 		return success;
 	}
 
-	/**
-	 * 开启后台线程在到期时间2/3时，重置TTL
-	 */
 	public void renewTtl() {
 		var timer = new Timer(true);
 		var lockField = CurrentThreadUtils.getTrait();
@@ -135,11 +98,6 @@ public final class DistributedReentrantLock implements Serializable {
 		frame.setTimer(timer);
 	}
 
-	/**
-	 * 获取当前重入锁的帧
-	 *
-	 * @return 当前重入锁的帧
-	 */
 	@Nullable
 	public LockFrame getCurrentFrame() {
 		return lockStack.peek();

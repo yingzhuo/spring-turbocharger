@@ -6,9 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-/**
- * @since 1.0.0
- */
 public class RandomFontFactory implements FontFactory {
 
 	protected List<String> families;

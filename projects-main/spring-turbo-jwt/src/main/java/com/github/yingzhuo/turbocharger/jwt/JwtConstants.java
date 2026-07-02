@@ -2,12 +2,6 @@ package com.github.yingzhuo.turbocharger.jwt;
 
 import java.io.Serializable;
 
-/**
- * Jwt相关常量
- *
- * @author 应卓
- * @since 3.3.2
- */
 public interface JwtConstants extends Serializable {
 
 	// headers

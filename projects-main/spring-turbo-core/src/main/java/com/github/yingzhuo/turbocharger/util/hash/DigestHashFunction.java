@@ -5,77 +5,35 @@ import org.springframework.util.Assert;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * 基于信息摘要算法的哈希函数器
- *
- * @author 应卓
- * @since 3.4.0
- */
 public class DigestHashFunction implements HashFunction {
 
-	/**
-	 * 算法名称
-	 */
 	private final String algName;
 
-	/**
-	 * 构造方法
-	 *
-	 * @param algName 算法名称
-	 */
 	public DigestHashFunction(String algName) {
 		Assert.hasText(algName, "algName is null or null");
 		this.algName = algName;
 	}
 
-	/**
-	 * md5为基础的实例
-	 *
-	 * @return 哈希函数器
-	 */
 	public static HashFunction md5() {
 		return SyncAvoid.MD5;
 	}
 
-	/**
-	 * SHA-1为基础的实例
-	 *
-	 * @return 哈希函数器
-	 */
 	public static HashFunction sha1() {
 		return SyncAvoid.SHA1;
 	}
 
-	/**
-	 * SHA-256为基础的实例
-	 *
-	 * @return 哈希函数器
-	 */
 	public static HashFunction sha256() {
 		return SyncAvoid.SHA256;
 	}
 
-	/**
-	 * SHA-384为基础的实例
-	 *
-	 * @return 哈希函数器
-	 */
 	public static HashFunction sha384() {
 		return SyncAvoid.SHA384;
 	}
 
-	/**
-	 * SHA-512为基础的实例
-	 *
-	 * @return 哈希函数器
-	 */
 	public static HashFunction sha512() {
 		return SyncAvoid.SHA512;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Integer apply(String key) {
 		try {

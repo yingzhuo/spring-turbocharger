@@ -10,12 +10,6 @@ import org.springframework.core.io.support.PropertySourceFactory;
 
 import java.io.IOException;
 
-/**
- * (内部使用)
- *
- * @author 应卓
- * @since 2.1.3
- */
 public abstract class AbstractPropertySourceFactory implements PropertySourceFactory {
 
 	private final PropertySourceLoader loader;
@@ -24,9 +18,6 @@ public abstract class AbstractPropertySourceFactory implements PropertySourceFac
 		this.loader = loader;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public final PropertySource<?> createPropertySource(@Nullable String name, EncodedResource resource)
 		throws IOException {

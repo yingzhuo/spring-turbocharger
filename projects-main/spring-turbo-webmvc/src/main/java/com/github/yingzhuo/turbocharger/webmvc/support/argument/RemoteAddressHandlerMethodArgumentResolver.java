@@ -12,25 +12,14 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import java.util.Optional;
 
-/**
- * @author 应卓
- * @see RemoteAddress
- * @since 1.0.0
- */
 public class RemoteAddressHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		return parameter.hasParameterAnnotation(RemoteAddress.class) &&
 			parameter.getParameterType() == String.class;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Nullable
 	@Override
 	public Object resolveArgument(MethodParameter parameter,

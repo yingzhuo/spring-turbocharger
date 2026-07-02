@@ -12,10 +12,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
-/**
- * @author 应卓
- * @since 1.0.1
- */
 public abstract class AbstractHutoolCaptchaService implements CaptchaService {
 
 	@Override

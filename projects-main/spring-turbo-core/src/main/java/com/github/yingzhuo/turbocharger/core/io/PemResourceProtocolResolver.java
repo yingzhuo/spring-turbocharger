@@ -8,26 +8,14 @@ import org.springframework.util.StringUtils;
 
 import java.util.regex.Pattern;
 
-/**
- * @author 应卓
- * @see PemResource
- * @see org.springframework.boot.ssl.pem.PemContent
- * @since 3.5.4
- */
 public class PemResourceProtocolResolver implements ProtocolResolver {
 
 	private static final Pattern PATTERN = Pattern.compile("^pem:(.+?)(?:\\?keypass=(.*))?$");
 
-	/**
-	 * 默认构造方法
-	 */
 	public PemResourceProtocolResolver() {
 		super();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Nullable
 	@Override
 	public Resource resolve(String location, ResourceLoader resourceLoader) {

@@ -1,8 +1,5 @@
 package com.github.yingzhuo.turbocharger.captcha.google.filter.lib;
 
-/**
- * @since 1.0.0
- */
 public abstract class AbstractConvolveImageOp extends AbstractImageOp {
 
 	private final float[][] matrix;

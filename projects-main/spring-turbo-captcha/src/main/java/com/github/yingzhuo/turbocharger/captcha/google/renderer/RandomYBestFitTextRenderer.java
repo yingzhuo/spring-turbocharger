@@ -2,9 +2,6 @@ package com.github.yingzhuo.turbocharger.captcha.google.renderer;
 
 import java.util.Random;
 
-/**
- * @since 1.0.0
- */
 public class RandomYBestFitTextRenderer extends AbstractTextRenderer {
 
 	@Override

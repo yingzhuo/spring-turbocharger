@@ -15,12 +15,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * <a href="https://freemarker.apache.org/">Freemarker</a>实现
- *
- * @author 应卓
- * @since 3.4.3
- */
 public class StringTemplateRendererImpl implements StringTemplateRenderer, InitializingBean {
 
 	private final Configuration cfg = new Configuration(Configuration.VERSION_2_3_34);
@@ -28,9 +22,6 @@ public class StringTemplateRendererImpl implements StringTemplateRenderer, Initi
 	private String[] templateLoaderPaths = new String[]{"classpath:/templates/"};
 	private String suffix = ".ftl";
 
-	/**
-	 * 默认构造方法
-	 */
 	public StringTemplateRendererImpl() {
 		super();
 	}

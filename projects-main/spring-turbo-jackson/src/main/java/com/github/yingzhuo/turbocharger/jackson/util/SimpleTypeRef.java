@@ -4,13 +4,6 @@ import com.jayway.jsonpath.TypeRef;
 
 import java.lang.reflect.Type;
 
-/**
- * 简单{@link TypeRef}实现
- *
- * @param <T> 泛型类型
- * @author 应卓
- * @since 3.3.1
- */
 public final class SimpleTypeRef<T> extends TypeRef<T> {
 
 	private final Class<T> clz;

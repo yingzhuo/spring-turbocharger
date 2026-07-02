@@ -4,10 +4,6 @@ import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author 应卓
- * @since 1.0.0
- */
 public class CompositeFilterFactory implements FilterFactory {
 
 	private final List<FilterFactory> filterFactories;

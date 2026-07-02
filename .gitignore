@@ -11,6 +11,7 @@ hs_err_pid*
 *.hprof
 .classpath
 .metadata
+*.pid
 
 # --------------------------------------
 # idea
@@ -45,11 +46,18 @@ target/
 !/**/src/**/target
 
 # --------------------------------------
+# CLAUDE CODE
+# --------------------------------------
+.claude/settings.local.json
+docs/superpowers/
+
+# --------------------------------------
 # 构建产物等
 # --------------------------------------
 *.jar
 *.war
 *.zip
+*.gz
 *.tar.gz
 *.tgz
 *.rar

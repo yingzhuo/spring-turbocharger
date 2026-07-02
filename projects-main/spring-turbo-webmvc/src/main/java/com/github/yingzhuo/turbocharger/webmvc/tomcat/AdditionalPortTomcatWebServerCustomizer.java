@@ -4,10 +4,6 @@ import org.apache.catalina.connector.Connector;
 import org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 
-/**
- * @author 应卓
- * @since 3.3.1
- */
 public class AdditionalPortTomcatWebServerCustomizer implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
 
 	private int port = 8080;
@@ -21,9 +17,6 @@ public class AdditionalPortTomcatWebServerCustomizer implements WebServerFactory
 		this.protocol = protocol;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void customize(TomcatServletWebServerFactory factory) {
 		//factory.addAdditionalTomcatConnectors(createStanderConnector());

@@ -8,10 +8,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-/**
- * @author 应卓
- * @since 3.4.3
- */
 @AutoConfiguration
 @EnableConfigurationProperties(XXLJobProperties.class)
 @ConditionalOnProperty(prefix = "springturbo.xxljob", name = "enabled", havingValue = "true", matchIfMissing = true)

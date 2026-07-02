@@ -8,9 +8,6 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-/**
- * @since 1.0.0
- */
 public abstract class AbstractTextRenderer implements TextRenderer {
 
 	protected int leftMargin;

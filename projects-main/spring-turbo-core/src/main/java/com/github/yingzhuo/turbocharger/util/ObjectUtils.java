@@ -4,27 +4,11 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-/**
- * {@link Object} 相关工具
- *
- * @author 应卓
- * @since 1.0.0
- */
 public final class ObjectUtils {
 
-	/**
-	 * 私有构造方法
-	 */
 	private ObjectUtils() {
 	}
 
-	/**
-	 * 查找第一个非空值
-	 *
-	 * @param values 要查找的对象
-	 * @param <T>    对象类型泛型
-	 * @return 查钊结果或 {@code null}
-	 */
 	@Nullable
 	@SafeVarargs
 	public static <T> T firstNonNull(@Nullable final T... values) {
@@ -38,13 +22,6 @@ public final class ObjectUtils {
 		return null;
 	}
 
-	/**
-	 * 查找第一个非空值
-	 *
-	 * @param suppliers 要查找的对象的提供器
-	 * @param <T>       对象类型泛型
-	 * @return 查钊结果或 {@code null}
-	 */
 	@Nullable
 	@SafeVarargs
 	public static <T> T getFirstNonNull(@Nullable final Supplier<T>... suppliers) {
@@ -61,13 +38,6 @@ public final class ObjectUtils {
 		return null;
 	}
 
-	/**
-	 * 判断数组中是否存在 {@code null} 值
-	 *
-	 * @param objects 数组
-	 * @return 存在 {@code null} 值时返回 {@code true} 否则返回 {@code false}
-	 * @since 1.0.6
-	 */
 	public static boolean anyNull(@Nullable Object... objects) {
 		if (objects == null)
 			return true;
@@ -79,13 +49,6 @@ public final class ObjectUtils {
 		return false;
 	}
 
-	/**
-	 * 判断数组中是否全部为 {@code null} 值
-	 *
-	 * @param objects 数组
-	 * @return 全部为 {@code null} 值时返回 {@code true} 否则返回 {@code false}
-	 * @since 1.0.6
-	 */
 	public static boolean allNull(@Nullable Object... objects) {
 		if (objects == null)
 			return true;

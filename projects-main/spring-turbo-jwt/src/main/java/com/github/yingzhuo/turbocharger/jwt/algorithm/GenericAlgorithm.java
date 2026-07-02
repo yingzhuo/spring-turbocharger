@@ -11,16 +11,6 @@ import java.security.Signature;
 import java.security.cert.X509Certificate;
 import java.util.Map;
 
-/**
- * 通用型JWT算法 <br>
- * 签名/验证算法由PKCS#8格式的PEM文件决定
- *
- * @author 应卓
- * @see com.auth0.jwt.algorithms.Algorithm
- * @see PemContent
- * @see GenericAlgorithmFactoryBean
- * @since 3.5.3
- */
 public class GenericAlgorithm extends AbstractAlgorithm {
 
 	private static final Map<String, String> ALG_NAME_MAPPING;
@@ -41,21 +31,10 @@ public class GenericAlgorithm extends AbstractAlgorithm {
 	private final PrivateKey privateKey;
 	private final String sigAlgName;
 
-	/**
-	 * 构造方法
-	 *
-	 * @param pemContent pem文件内容
-	 */
 	public GenericAlgorithm(String pemContent) {
 		this(pemContent, null);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param pemContent pem文件内容
-	 * @param password   秘钥密码
-	 */
 	public GenericAlgorithm(String pemContent, @Nullable String password) {
 		super("<no name>", "<no description>");
 		var pc = PemContent.of(pemContent);
@@ -65,18 +44,12 @@ public class GenericAlgorithm extends AbstractAlgorithm {
 		this.privateKey = pc.getPrivateKey(password);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String getName() {
 		var newName = ALG_NAME_MAPPING.get(sigAlgName);
 		return newName != null ? newName : sigAlgName;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected byte[] doSign(byte[] data) throws Exception {
 		var s = Signature.getInstance(sigAlgName);
@@ -85,9 +58,6 @@ public class GenericAlgorithm extends AbstractAlgorithm {
 		return s.sign();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void doVerify(byte[] data, byte[] signature) throws Exception {
 		var s = Signature.getInstance(sigAlgName);
@@ -98,25 +68,16 @@ public class GenericAlgorithm extends AbstractAlgorithm {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public X509Certificate getCertificate() {
 		return this.certificate;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public PublicKey getPublicKey() {
 		return this.publicKey;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public PrivateKey getPrivateKey() {
 		return this.privateKey;

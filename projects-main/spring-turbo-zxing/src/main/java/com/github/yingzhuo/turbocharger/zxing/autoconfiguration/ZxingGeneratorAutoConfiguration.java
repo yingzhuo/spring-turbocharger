@@ -8,10 +8,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 
-/**
- * @author 应卓
- * @since 1.3.0
- */
 @AutoConfiguration
 public class ZxingGeneratorAutoConfiguration {
 

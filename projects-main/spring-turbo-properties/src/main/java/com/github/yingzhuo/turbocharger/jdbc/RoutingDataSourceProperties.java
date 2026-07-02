@@ -10,10 +10,6 @@ import org.springframework.util.Assert;
 import java.io.Serializable;
 import java.util.Map;
 
-/**
- * @author 应卓
- * @since 3.4.1
- */
 @Getter
 @Setter
 @ToString

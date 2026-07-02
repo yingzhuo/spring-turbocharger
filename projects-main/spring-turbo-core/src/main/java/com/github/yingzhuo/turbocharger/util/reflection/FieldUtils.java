@@ -6,20 +6,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 反射工具 - Field
- *
- * @author 应卓
- * @see FieldPredicateFactories
- * @see ConstructorUtils
- * @see MethodUtils
- * @since 1.2.1
- */
 public final class FieldUtils {
 
-	/**
-	 * 私有构造方法
-	 */
 	private FieldUtils() {
 		super();
 	}

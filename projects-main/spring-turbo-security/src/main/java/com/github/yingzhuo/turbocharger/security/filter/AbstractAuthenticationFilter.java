@@ -14,11 +14,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.util.Optional;
 
-/**
- * @author 应卓
- * @see TokenAuthenticationFilter
- * @since 1.2.3
- */
 public abstract class AbstractAuthenticationFilter extends OncePerRequestFilter {
 
 	protected SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();

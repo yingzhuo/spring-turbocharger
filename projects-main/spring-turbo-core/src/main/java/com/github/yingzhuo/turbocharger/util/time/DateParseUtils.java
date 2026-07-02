@@ -10,10 +10,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * @author 应卓
- * @since 1.0.10
- */
 public final class DateParseUtils {
 
 	private static final String PRIMARY_PATTERN = "yyyy-MM-dd";
@@ -39,9 +35,6 @@ public final class DateParseUtils {
 		"yyyy-M"
 	};
 
-	/**
-	 * 私有构造方法
-	 */
 	private DateParseUtils() {
 		super();
 	}

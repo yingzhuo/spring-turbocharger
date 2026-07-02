@@ -5,9 +5,6 @@ import java.awt.font.TextAttribute;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
 
-/**
- * @since 1.0.0
- */
 public class TextCharacter {
 
 	private double x;

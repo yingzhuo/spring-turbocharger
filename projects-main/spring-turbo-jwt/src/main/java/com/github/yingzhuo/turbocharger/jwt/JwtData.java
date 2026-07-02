@@ -8,38 +8,19 @@ import java.time.ZoneId;
 import java.util.*;
 import java.util.function.Supplier;
 
-/**
- * JWT签名所包含的信息
- *
- * @author 应卓
- * @see #newInstance()
- * @see JwtConstants
- * @since 3.1.1
- */
 public final class JwtData implements JwtConstants {
 
 	private final Map<String, Object> headerMap = new HashMap<>();
 	private final Map<String, Object> payloadMap = new HashMap<>();
 
-	/**
-	 * 默认构造方法
-	 */
 	public JwtData() {
 		addHeaderType("JWT");
 	}
 
-	/**
-	 * 创建新实例
-	 *
-	 * @return 新实例
-	 */
 	public static JwtData newInstance() {
 		return new JwtData();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean equals(Object o) {
 		if (o == null || getClass() != o.getClass()) return false;
@@ -47,9 +28,6 @@ public final class JwtData implements JwtConstants {
 		return Objects.equals(headerMap, jwtData.headerMap) && Objects.equals(payloadMap, jwtData.payloadMap);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(headerMap, payloadMap);

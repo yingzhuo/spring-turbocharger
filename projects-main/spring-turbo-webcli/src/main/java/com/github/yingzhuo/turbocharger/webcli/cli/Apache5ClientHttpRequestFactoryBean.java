@@ -15,21 +15,8 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 
 import java.util.Optional;
 
-/**
- * {@link ClientHttpRequestFactory} 的 <a href="https://hc.apache.org/httpcomponents-client-ga/">ApacheHttpComponents官方文档</a> 版本的实现 <br>
- * <em>注意: 使用本类产生的 ClientHttpRequestFactory 默认使用 {@link TrustAllStrategy}。自担风险</em>
- *
- * @author 杨洋
- * @author 应卓
- * @see org.springframework.web.client.RestClient
- * @see org.springframework.web.client.RestTemplate
- * @since 3.3.1
- */
 public class Apache5ClientHttpRequestFactoryBean extends AbstractClientHttpRequestFactoryBean {
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	@SuppressWarnings("deprecation")
 	public ClientHttpRequestFactory getObject() {

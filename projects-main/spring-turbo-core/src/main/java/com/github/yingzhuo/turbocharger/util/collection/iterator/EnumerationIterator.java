@@ -5,14 +5,6 @@ import org.springframework.util.Assert;
 import java.util.Enumeration;
 import java.util.Iterator;
 
-/**
- * Enumeration包装成Iterator
- *
- * @param <T> 泛型
- * @author 应卓
- * @see IteratorEnumeration
- * @since 1.2.2
- */
 public class EnumerationIterator<T> implements Iterator<T> {
 
 	private final Enumeration<T> innerEnumeration;

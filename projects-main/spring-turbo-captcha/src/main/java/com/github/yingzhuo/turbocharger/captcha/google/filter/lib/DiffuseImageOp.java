@@ -2,9 +2,6 @@ package com.github.yingzhuo.turbocharger.captcha.google.filter.lib;
 
 import java.util.Random;
 
-/**
- * @since 1.0.0
- */
 public class DiffuseImageOp extends AbstractTransformImageOp {
 
 	private double[] tx;

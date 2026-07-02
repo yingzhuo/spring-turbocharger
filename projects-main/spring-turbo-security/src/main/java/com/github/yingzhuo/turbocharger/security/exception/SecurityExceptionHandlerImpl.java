@@ -13,10 +13,6 @@ import org.springframework.security.web.firewall.RequestRejectedException;
 
 import java.io.IOException;
 
-/**
- * @author 应卓
- * @since 1.2.3
- */
 public class SecurityExceptionHandlerImpl implements SecurityExceptionHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(SecurityExceptionHandlerImpl.class);

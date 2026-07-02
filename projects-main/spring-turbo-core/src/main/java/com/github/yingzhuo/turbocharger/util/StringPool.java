@@ -1,12 +1,5 @@
 package com.github.yingzhuo.turbocharger.util;
 
-/**
- * 字符串池
- *
- * @author 应卓
- * @see CharPool
- * @since 3.5.0
- */
 public interface StringPool {
 
 	String EMPTY = "";

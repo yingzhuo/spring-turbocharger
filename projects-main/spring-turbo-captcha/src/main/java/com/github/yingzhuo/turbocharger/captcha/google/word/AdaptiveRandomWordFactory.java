@@ -10,10 +10,6 @@ package com.github.yingzhuo.turbocharger.captcha.google.word;
 
 import java.util.Random;
 
-/**
- * @author 应卓
- * @since 1.0.0
- */
 public class AdaptiveRandomWordFactory extends RandomWordFactory {
 
 	protected String wideCharacters;

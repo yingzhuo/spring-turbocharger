@@ -1,12 +1,5 @@
 package com.github.yingzhuo.turbocharger.util;
 
-/**
- * 字符池
- *
- * @author 应卓
- * @see StringPool
- * @since 3.5.0
- */
 public interface CharPool {
 
 	char SPACE = ' ';

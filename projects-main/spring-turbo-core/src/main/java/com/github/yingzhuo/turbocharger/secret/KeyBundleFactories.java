@@ -9,29 +9,12 @@ import org.springframework.util.Assert;
 
 import java.security.cert.X509Certificate;
 
-/**
- * {@link KeyBundle} 生成工具类
- *
- * @author 应卓
- * @see KeyBundle
- * @since 3.5.3
- */
 public final class KeyBundleFactories {
 
-	/**
-	 * 私有构造方法
-	 */
 	private KeyBundleFactories() {
 		super();
 	}
 
-	/**
-	 * 从PEM文件内容中加载
-	 *
-	 * @param pemContent PEM文件内容
-	 * @param keypass    私钥密码
-	 * @return {@link KeyBundle} 实例
-	 */
 	public static KeyBundle loadFromPemContent(String pemContent, @Nullable String keypass) {
 		Assert.hasText(pemContent, "pemContent must not be empty");
 
@@ -39,13 +22,6 @@ public final class KeyBundleFactories {
 		return new KeyBundleImpl(pc.getCertificates().get(0), pc.getPrivateKey(keypass));
 	}
 
-	/**
-	 * 从资源中加载
-	 *
-	 * @param location 资源位置
-	 * @param keypass  私钥密码
-	 * @return {@link KeyBundle} 实例
-	 */
 	public static KeyBundle loadFromPem(String location, @Nullable String keypass) {
 		Assert.hasText(location, "location must not be empty");
 
@@ -53,16 +29,6 @@ public final class KeyBundleFactories {
 		return new KeyBundleImpl(pc.getCertificates().get(0), pc.getPrivateKey(keypass));
 	}
 
-	/**
-	 * 从PKCS#12或JKS中加载
-	 *
-	 * @param location  资源位置
-	 * @param type      资源类型
-	 * @param storepass 库密码
-	 * @param alias     别名
-	 * @param keypass   私钥密码
-	 * @return {@link KeyBundle} 实例
-	 */
 	public static KeyBundle loadFromStore(String location, KeyStoreType type, String storepass, String alias, @Nullable String keypass) {
 		Assert.hasText(location, "location must not be empty");
 		Assert.notNull(type, "type must not be null");

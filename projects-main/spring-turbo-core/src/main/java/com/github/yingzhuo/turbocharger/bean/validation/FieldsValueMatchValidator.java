@@ -8,11 +8,6 @@ import org.springframework.util.Assert;
 
 import java.util.Objects;
 
-/**
- * @author 应卓
- * @see FieldsValueMatch
- * @since 1.0.0
- */
 public class FieldsValueMatchValidator implements ConstraintValidator<FieldsValueMatch, Object> {
 
 	@Nullable
@@ -27,9 +22,6 @@ public class FieldsValueMatchValidator implements ConstraintValidator<FieldsValu
 		this.fieldMatch = annotation.fieldMatch();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isValid(@Nullable Object value, ConstraintValidatorContext context) {
 		if (value == null) {

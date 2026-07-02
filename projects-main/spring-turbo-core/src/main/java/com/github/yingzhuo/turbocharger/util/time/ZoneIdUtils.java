@@ -9,13 +9,6 @@ import java.util.regex.Pattern;
 
 import static com.github.yingzhuo.turbocharger.util.StringUtils.isBlank;
 
-/**
- * {@link ZoneId} 相关工具
- *
- * @author 应卓
- * @see ZoneId#getAvailableZoneIds()
- * @since 1.1.3
- */
 public final class ZoneIdUtils {
 
 	// SYSTEM
@@ -29,9 +22,6 @@ public final class ZoneIdUtils {
 	public static final String ASIA_SHANGHAI_VALUE = "Asia/Shanghai";
 	public static final ZoneId ASIA_SHANGHAI = ZoneId.of(ASIA_SHANGHAI_VALUE);
 
-	/**
-	 * 私有构造方法
-	 */
 	private ZoneIdUtils() {
 		super();
 	}

@@ -11,14 +11,6 @@ import java.awt.*;
 import java.io.*;
 import java.util.Objects;
 
-/**
- * Logo
- *
- * @author 应卓
- * @see #builder()
- * @see java.awt.image.BufferedImage
- * @since 1.0.0
- */
 public final class Logo implements Serializable {
 
 	@Nullable
@@ -27,9 +19,6 @@ public final class Logo implements Serializable {
 	@Getter
 	private boolean compress = true;
 
-	/**
-	 * 私有构造方法
-	 */
 	private Logo() {
 		super();
 	}
@@ -42,9 +31,6 @@ public final class Logo implements Serializable {
 		return Objects.requireNonNull(image);
 	}
 
-	/**
-	 * 创建器
-	 */
 	public static final class Builder {
 
 		@Nullable

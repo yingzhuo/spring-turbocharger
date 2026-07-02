@@ -13,41 +13,13 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-/**
- * SPI加载工具
- *
- * @param <T> 要加载的抽象类型
- * @author 应卓
- * @see ServiceLoader
- * @see SpringFactoriesLoader
- * @see Builder
- * @see #builder(Class)
- * @see #builder(Class, ClassLoader)
- * @see ServiceLoaderUtils
- * @see SpringFactoriesUtils
- * @since 3.5.0
- */
 @FunctionalInterface
 public interface SPILoader<T> extends Supplier<Stream<T>> {
 
-	/**
-	 * 获取默认的加载器
-	 *
-	 * @param targetType 要加载的抽象类型
-	 * @return 加载的实例
-	 */
 	public static <T> SPILoader<T> getDefault(Class<T> targetType) {
 		return getDefault(targetType, null);
 	}
 
-	/**
-	 * 获取默认的加载器
-	 *
-	 * @param targetType 要加载的抽象类型
-	 * @param filter     过滤器
-	 * @param <T>        要加载的抽象类型
-	 * @return 加载的实例
-	 */
 	public static <T> SPILoader<T> getDefault(Class<T> targetType, @Nullable Predicate<Class<?>> filter) {
 		return builder(targetType)
 			.filter(filter != null ? filter : c -> true)
@@ -56,48 +28,20 @@ public interface SPILoader<T> extends Supplier<Stream<T>> {
 			.build();
 	}
 
-	/**
-	 * 生成创建器
-	 *
-	 * @param targetType 要加载的抽象类型
-	 * @param <T>        要加载的抽象类型
-	 * @return 创建器实例
-	 */
 	public static <T> Builder<T> builder(Class<T> targetType) {
 		return builder(targetType, null);
 	}
 
-	/**
-	 * 生成创建器
-	 *
-	 * @param targetType  要加载的抽象类型
-	 * @param classLoader 类型加载器
-	 * @param <T>         要加载的抽象类型
-	 * @return 创建器实例
-	 */
 	public static <T> Builder<T> builder(Class<T> targetType, @Nullable ClassLoader classLoader) {
 		return new Builder<>(targetType, classLoader);
 	}
 
-	/**
-	 * 加载SPI实例
-	 *
-	 * @return SPI实例
-	 */
 	public Stream<T> load();
 
-	/**
-	 * 加载SPI实例
-	 *
-	 * @return SPI实例
-	 */
 	public default List<T> loadAsList() {
 		return load().toList();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public default Stream<T> get() {
 		return load();
@@ -180,9 +124,6 @@ public interface SPILoader<T> extends Supplier<Stream<T>> {
 		 Predicate<Class<?>> filter,
 		@Nullable Comparator<? super T> comparator) implements SPILoader<T> {
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public Stream<T> load() {
 			Stream<T> result = Stream.empty();

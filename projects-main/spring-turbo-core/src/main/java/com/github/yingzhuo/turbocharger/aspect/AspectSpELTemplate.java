@@ -12,24 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * Aspect环绕式切面相关小工具
- *
- * @param <T> SpEL结果类型
- * @author 应卓
- * @see SpELUtils
- * @since 3.4.0
- */
 public final class AspectSpELTemplate<T> implements Serializable {
 
-	/**
-	 * SpringExpression
-	 */
 	private final String expression;
 
-	/**
-	 * SpringExpression 变量
-	 */
 	private final Map<String, Object> expressionVariables;
 
 	@Nullable

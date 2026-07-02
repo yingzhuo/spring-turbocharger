@@ -12,12 +12,6 @@ import java.security.PublicKey;
 import java.security.cert.X509Certificate;
 import java.util.Optional;
 
-/**
- * 国密SM2签名算法
- *
- * @author 应卓
- * @since 3.5.3
- */
 public class SM2Algorithm extends AbstractAlgorithm {
 
 	private static final byte[] DEFAULT_ID = "国密-SM2".getBytes(StandardCharsets.UTF_8);
@@ -25,23 +19,10 @@ public class SM2Algorithm extends AbstractAlgorithm {
 	private final SM2 sm2;
 	private final byte[] id;
 
-	/**
-	 * 构造方法
-	 *
-	 * @param publicKey  公钥 (HEX或者Base64)
-	 * @param privateKey 私钥 (HEX或者Base64)
-	 */
 	public SM2Algorithm(String publicKey, String privateKey) {
 		this(publicKey, privateKey, null);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param publicKey  公钥 (HEX或者Base64)
-	 * @param privateKey 私钥 (HEX或者Base64)
-	 * @param id         加密salt
-	 */
 	public SM2Algorithm(String publicKey, String privateKey, @Nullable String id) {
 		super("SM2");
 
@@ -53,9 +34,6 @@ public class SM2Algorithm extends AbstractAlgorithm {
 			.orElse(DEFAULT_ID);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void doVerify(byte[] data, byte[] signature) {
 		if (!sm2.verify(data, signature, id)) {
@@ -63,33 +41,21 @@ public class SM2Algorithm extends AbstractAlgorithm {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected byte[] doSign(byte[] data) {
 		return sm2.sign(data, id);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public X509Certificate getCertificate() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public PublicKey getPublicKey() {
 		return this.sm2.getPublicKey();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public PrivateKey getPrivateKey() {
 		return this.sm2.getPrivateKey();

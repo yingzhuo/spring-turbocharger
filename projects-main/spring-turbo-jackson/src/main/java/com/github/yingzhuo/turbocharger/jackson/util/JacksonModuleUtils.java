@@ -8,19 +8,8 @@ import org.springframework.util.ClassUtils;
 
 import java.util.function.Predicate;
 
-/**
- * Jackson模块加载工具
- *
- * @author 应卓
- * @see Module
- * @see <a href="https://github.com/FasterXML/jackson">Jackson官方文档</a>
- * @since 3.3.1
- */
 public final class JacksonModuleUtils {
 
-	/**
-	 * 私有构造方法
-	 */
 	private JacksonModuleUtils() {
 		super();
 	}

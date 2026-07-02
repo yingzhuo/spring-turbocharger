@@ -10,10 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
 
-/**
- * @author 应卓
- * @since 3.3.1
- */
 @AutoConfiguration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class SpringSecurityAutoConfiguration {

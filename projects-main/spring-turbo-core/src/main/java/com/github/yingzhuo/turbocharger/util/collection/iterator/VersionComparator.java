@@ -7,18 +7,8 @@ import org.springframework.util.StringUtils;
 import java.util.Comparator;
 import java.util.Objects;
 
-/**
- * 版本号比较器
- *
- * @author 应卓
- * @see #getInstance()
- * @since 1.1.4
- */
 public class VersionComparator implements Comparator<String> {
 
-	/**
-	 * 私有构造方法
-	 */
 	private VersionComparator() {
 		super();
 	}
@@ -27,24 +17,6 @@ public class VersionComparator implements Comparator<String> {
 		return SyncAvoid.INSTANCE;
 	}
 
-	/**
-	 * 比较两个版本<br>
-	 * null版本排在最小：即：
-	 *
-	 * <pre>
-	 * compare(null, "v1") &lt; 0
-	 * compare("v1", "v1") = 0
-	 * compare(null, null) = 0
-	 * compare("v1", null) &gt; 0
-	 * compare("1.0.0", "1.0.2") &lt; 0
-	 * compare("1.0.2", "1.0.2a") &lt; 0
-	 * compare("1.13.0", "1.12.1c") &gt; 0
-	 * compare("V0.0.20170102", "V0.0.20170101") &gt; 0
-	 * </pre>
-	 *
-	 * @param version1 版本1
-	 * @param version2 版本2
-	 */
 	@Override
 	public int compare(@Nullable String version1, @Nullable String version2) {
 		if (Objects.equals(version1, version2)) {

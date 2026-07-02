@@ -7,12 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-/**
- * 认证成功事件
- *
- * @author 应卓
- * @since 2.0.5
- */
 public class AuthenticationSuccessEvent extends AbstractSecurityEvent {
 
 	private final Collection<? extends GrantedAuthority> authorities;

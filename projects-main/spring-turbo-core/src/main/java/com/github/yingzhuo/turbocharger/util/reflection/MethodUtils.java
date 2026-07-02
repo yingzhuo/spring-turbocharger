@@ -7,20 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * 反射工具 - Method
- *
- * @author 应卓
- * @see MethodPredicateFactories
- * @see ConstructorUtils
- * @see FieldUtils
- * @since 1.2.1
- */
 public final class MethodUtils {
 
-	/**
-	 * 私有构造方法
-	 */
 	private MethodUtils() {
 		super();
 	}

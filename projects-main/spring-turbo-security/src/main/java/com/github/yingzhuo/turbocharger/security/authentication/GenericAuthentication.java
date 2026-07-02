@@ -12,12 +12,6 @@ import java.io.Serializable;
 import java.security.Principal;
 import java.util.Collection;
 
-/**
- * 通用型 {@link Authentication}
- *
- * @author 应卓
- * @since 3.5.3
- */
 public class GenericAuthentication implements Authentication, Serializable, Principal {
 
 	private final UserDetails userDetails;
@@ -25,32 +19,14 @@ public class GenericAuthentication implements Authentication, Serializable, Prin
 	private boolean authenticated = true;
 	private @Nullable Object details;
 
-	/**
-	 * 构造方法
-	 *
-	 * @param userDetails 用户
-	 */
 	public GenericAuthentication(UserDetails userDetails) {
 		this(userDetails, null, null);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param userDetails 用户
-	 * @param token       令牌
-	 */
 	public GenericAuthentication(UserDetails userDetails, @Nullable Token token) {
 		this(userDetails, token, null);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param userDetails 用户
-	 * @param token       令牌
-	 * @param details     其他认证信息
-	 */
 	public GenericAuthentication(UserDetails userDetails, @Nullable Token token, @Nullable Object details) {
 		Assert.notNull(userDetails, "userDetails must not be null");
 		this.userDetails = userDetails;
@@ -58,75 +34,46 @@ public class GenericAuthentication implements Authentication, Serializable, Prin
 		this.details = details;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return userDetails.getAuthorities();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object getCredentials() {
 		return token != null ? token.asString() : String.valueOf(System.identityHashCode(this));
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Nullable
 	@Override
 	public Object getDetails() {
 		return this.details;
 	}
 
-	/**
-	 * 设置其他认证信息
-	 *
-	 * @param details 其他认证信息
-	 */
 	public void setDetails(@Nullable Object details) {
 		this.details = details;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object getPrincipal() {
 		return this.userDetails;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isAuthenticated() {
 		return this.authenticated;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
 		this.authenticated = isAuthenticated;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String getName() {
 		return userDetails.getUsername();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		var creator = new ToStringCreator(this);

@@ -7,12 +7,6 @@ import com.github.yingzhuo.turbocharger.idgen.UUIDGenerator;
 
 import java.util.UUID;
 
-/**
- * {@link UUIDGenerator} 默认实现
- *
- * @author 应卓
- * @since 3.4.5
- */
 public class UUIDGeneratorImpl implements UUIDGenerator {
 
 	@Override

@@ -10,35 +10,16 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-/**
- * @author 应卓
- * @since 1.0.10
- */
 public final class DateUtils {
 
-	/**
-	 * Number of milliseconds in a standard second.
-	 */
 	public static final long MILLIS_PER_SECOND = 1000;
 
-	/**
-	 * Number of milliseconds in a standard minute.
-	 */
 	public static final long MILLIS_PER_MINUTE = 60 * MILLIS_PER_SECOND;
 
-	/**
-	 * Number of milliseconds in a standard hour.
-	 */
 	public static final long MILLIS_PER_HOUR = 60 * MILLIS_PER_MINUTE;
 
-	/**
-	 * Number of milliseconds in a standard day.
-	 */
 	public static final long MILLIS_PER_DAY = 24 * MILLIS_PER_HOUR;
 
-	/**
-	 * This is half a month, so this represents whether a date is in the top or bottom half of the month.
-	 */
 	public static final int SEMI_MONTH = 1001;
 
 	private static final int[][] fields = {{Calendar.MILLISECOND}, {Calendar.SECOND}, {Calendar.MINUTE},
@@ -46,9 +27,6 @@ public final class DateUtils {
 		/* Calendar.DAY_OF_YEAR, Calendar.DAY_OF_WEEK, Calendar.DAY_OF_WEEK_IN_MONTH */
 	}, {Calendar.MONTH, SEMI_MONTH}, {Calendar.YEAR}, {Calendar.ERA}};
 
-	/**
-	 * 私有构造方法
-	 */
 	private DateUtils() {
 		super();
 	}
@@ -428,24 +406,12 @@ public final class DateUtils {
 		return StringFormatter.format("{}-{}", year, weekOfYear);
 	}
 
-	/**
-	 * Calendar modification types.
-	 */
 	private enum ModifyType {
 
-		/**
-		 * Truncation.
-		 */
 		TRUNCATE,
 
-		/**
-		 * Rounding.
-		 */
 		ROUND,
 
-		/**
-		 * Ceiling.
-		 */
 		CEILING
 	}
 

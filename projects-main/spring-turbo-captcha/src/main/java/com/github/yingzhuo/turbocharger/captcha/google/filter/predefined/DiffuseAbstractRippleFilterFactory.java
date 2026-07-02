@@ -6,9 +6,6 @@ import java.awt.image.BufferedImageOp;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @since 1.0.0
- */
 public class DiffuseAbstractRippleFilterFactory extends AbstractRippleFilterFactory {
 
 	protected DiffuseImageOp diffuse = new DiffuseImageOp();

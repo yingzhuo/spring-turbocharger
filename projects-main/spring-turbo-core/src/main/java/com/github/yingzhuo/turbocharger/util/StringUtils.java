@@ -11,84 +11,37 @@ import java.util.stream.Stream;
 import static com.github.yingzhuo.turbocharger.util.StringPool.COMMA;
 import static com.github.yingzhuo.turbocharger.util.StringPool.EMPTY;
 
-/**
- * {@link String} 相关工具
- *
- * @author 应卓
- * @see RandomStringUtils
- * @see StringDefaults
- * @since 1.0.0
- */
 public final class StringUtils {
 
-	/**
-	 * 私有构造方法
-	 */
 	private StringUtils() {
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 判断字符串是否为空串
-	 *
-	 * @param string 字符串
-	 * @return 判断结果
-	 */
 	public static boolean isEmpty(@Nullable String string) {
 		return string == null || string.isEmpty();
 	}
 
-	/**
-	 * 判断字符串是否不为空串
-	 *
-	 * @param string 字符串
-	 * @return 判断结果
-	 */
 	public static boolean isNotEmpty(@Nullable String string) {
 		return !isEmpty(string);
 	}
 
-	/**
-	 * 判断字符串是否为空白串
-	 *
-	 * @param string 字符串
-	 * @return 判断结果
-	 */
 	public static boolean isBlank(@Nullable String string) {
 		return string == null || string.isBlank();
 	}
 
-	/**
-	 * 判断字符串是否不为空白串
-	 *
-	 * @param string 字符串
-	 * @return 判断结果
-	 */
 	public static boolean isNotBlank(@Nullable String string) {
 		return !isBlank(string);
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 获取字符串的长度
-	 *
-	 * @param string 字符串
-	 * @return 长度
-	 */
 	public static int length(@Nullable final String string) {
 		return string == null ? 0 : string.length();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 判断字符串是否包含白字符
-	 *
-	 * @param string 字符串
-	 * @return 判断结果
-	 */
 	public static boolean containsWhitespace(String string) {
 		Assert.notNull(string, "string is null");
 
@@ -101,13 +54,6 @@ public final class StringUtils {
 		return false;
 	}
 
-	/**
-	 * 判断字符串是否包含任意一个指定的字符
-	 *
-	 * @param string       字符串
-	 * @param charsToCheck 需要检查的字符集
-	 * @return 检测结果
-	 */
 	public static boolean containsAnyChars(String string, String charsToCheck) {
 		Assert.notNull(string, "string is null");
 
@@ -118,13 +64,6 @@ public final class StringUtils {
 		return toCharStream(charsToCheck).anyMatch(charSet::contains);
 	}
 
-	/**
-	 * 判断字符串是否包含所有的指定的字符
-	 *
-	 * @param string       字符串
-	 * @param charsToCheck 需要检查的字符集
-	 * @return 检测结果
-	 */
 	public static boolean containsAllChars(String string, String charsToCheck) {
 		Assert.notNull(string, "string is null");
 
@@ -135,13 +74,6 @@ public final class StringUtils {
 		return toCharStream(charsToCheck).allMatch(charSet::contains);
 	}
 
-	/**
-	 * 判断字符串是否不包含任意一个指定的字符
-	 *
-	 * @param string       字符串
-	 * @param charsToCheck 需要检查的字符集
-	 * @return 检测结果
-	 */
 	public static boolean containsNoneChars(String string, String charsToCheck) {
 		Assert.notNull(string, "string is null");
 
@@ -154,13 +86,6 @@ public final class StringUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 字符出现个数计数
-	 *
-	 * @param string 字符串
-	 * @param ch     要查找的字符
-	 * @return 结果
-	 */
 	public static int countMatches(String string, char ch) {
 		Assert.notNull(string, "string is null");
 
@@ -179,12 +104,6 @@ public final class StringUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 删除白字符
-	 *
-	 * @param string 字符串
-	 * @return 结果
-	 */
 	public static String deleteWhitespace(String string) {
 		Assert.notNull(string, "string is null");
 
@@ -209,13 +128,6 @@ public final class StringUtils {
 		return new String(chs, 0, count);
 	}
 
-	/**
-	 * 删除字符串中的指定字符
-	 *
-	 * @param string        字符串
-	 * @param charsToDelete 待删除的字符集合
-	 * @return 结果
-	 */
 	public static String deleteChars(String string, String charsToDelete) {
 		Assert.notNull(string, "string is null");
 
@@ -232,12 +144,6 @@ public final class StringUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 字符串转换为字符{@link Stream}
-	 *
-	 * @param string 字符串
-	 * @return 实例
-	 */
 	public static Stream<Character> toCharStream(@Nullable String string) {
 		if (string == null) {
 			return Stream.empty();
@@ -245,34 +151,16 @@ public final class StringUtils {
 		return string.chars().mapToObj(ch -> (char) ch);
 	}
 
-	/**
-	 * 字符串转换为字符{@link List}
-	 *
-	 * @param string 字符串
-	 * @return 实例
-	 */
 	public static List<Character> toCharList(@Nullable String string) {
 		return toCharStream(string).collect(Collectors.toList());
 	}
 
-	/**
-	 * 字符串转换为字符{@link Set}
-	 *
-	 * @param string 字符串
-	 * @return 实例
-	 */
 	public static Set<Character> toCharSet(@Nullable String string) {
 		return toCharStream(string).collect(Collectors.toSet());
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 字符串逆向
-	 *
-	 * @param string 字符串
-	 * @return 结果
-	 */
 	public static String reverse(String string) {
 		Assert.notNull(string, "string is null");
 		return new StringBuilder(string).reverse().toString();
@@ -280,23 +168,10 @@ public final class StringUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 逗号分隔字符串转化成字符串数组
-	 *
-	 * @param string 逗号分隔的字符串
-	 * @return 结果
-	 */
 	public static String[] commaDelimitedListToStringArray(@Nullable String string) {
 		return commaDelimitedListToStringArray(string, false);
 	}
 
-	/**
-	 * 逗号分隔字符串转化成字符串数组
-	 *
-	 * @param string          逗号分隔的字符串
-	 * @param trimAllElements 是否trim所有的子字符串
-	 * @return 结果
-	 */
 	public static String[] commaDelimitedListToStringArray(@Nullable String string, boolean trimAllElements) {
 		if (string == null || isBlank(string)) {
 			return new String[0];
@@ -312,13 +187,6 @@ public final class StringUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 首字母大写
-	 *
-	 * @param string 字符串
-	 * @return 结果
-	 * @see #uncapitalize(String)
-	 */
 	public static String capitalize(final String string) {
 		Assert.notNull(string, "string is null");
 
@@ -345,13 +213,6 @@ public final class StringUtils {
 		return new String(newCodePoints, 0, outOffset);
 	}
 
-	/**
-	 * 取消首字母大写
-	 *
-	 * @param string 字符串
-	 * @return 结果
-	 * @see #capitalize(String)
-	 */
 	public static String uncapitalize(final String string) {
 		Assert.notNull(string, "string is null");
 
@@ -380,52 +241,22 @@ public final class StringUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 非{@code null} 字符串加入集合
-	 *
-	 * @param collection 集合
-	 * @param element    字符串
-	 */
 	public static void nullSafeAdd(Collection<String> collection, @Nullable String element) {
 		CollectionUtils.nullSafeAdd(collection, element);
 	}
 
-	/**
-	 * 非{@code null} 字符串加入集合
-	 *
-	 * @param collection 集合
-	 * @param elements   字符串(多个)
-	 */
 	public static void nullSafeAddAll(Collection<String> collection, @Nullable String... elements) {
 		CollectionUtils.nullSafeAddAll(collection, elements);
 	}
 
-	/**
-	 * 非{@code null} 字符串加入集合
-	 *
-	 * @param collection 集合
-	 * @param elements   字符串(多个)
-	 */
 	public static void nullSafeAddAll(Collection<String> collection, @Nullable Collection<String> elements) {
 		CollectionUtils.nullSafeAddAll(collection, elements);
 	}
 
-	/**
-	 * 非空字符串加入集合
-	 *
-	 * @param collection 集合
-	 * @param element    字符串
-	 */
 	public static void emptySafeAdd(Collection<String> collection, @Nullable String element) {
 		emptySafeAddAll(collection, element);
 	}
 
-	/**
-	 * 非空字符串加入集合
-	 *
-	 * @param collection 集合
-	 * @param elements   字符串(多个)
-	 */
 	public static void emptySafeAddAll(Collection<String> collection, @Nullable String... elements) {
 		Assert.notNull(collection, "collection is required");
 
@@ -438,12 +269,6 @@ public final class StringUtils {
 		}
 	}
 
-	/**
-	 * 非空字符串加入集合
-	 *
-	 * @param collection 集合
-	 * @param elements   字符串(多个)
-	 */
 	public static void emptySafeAddAll(Collection<String> collection, @Nullable Collection<String> elements) {
 		Assert.notNull(collection, "collection is required");
 
@@ -456,22 +281,10 @@ public final class StringUtils {
 		}
 	}
 
-	/**
-	 * 非空白字符串加入集合
-	 *
-	 * @param collection 集合
-	 * @param element    字符串
-	 */
 	public static void blankSafeAdd(Collection<String> collection, @Nullable String element) {
 		blankSafeAddAll(collection, element);
 	}
 
-	/**
-	 * 非空白字符串加入集合
-	 *
-	 * @param collection 集合
-	 * @param elements   字符串(多个)
-	 */
 	public static void blankSafeAddAll(Collection<String> collection, @Nullable String... elements) {
 		Assert.notNull(collection, "collection is required");
 
@@ -484,12 +297,6 @@ public final class StringUtils {
 		}
 	}
 
-	/**
-	 * 非空白字符串加入集合
-	 *
-	 * @param collection 集合
-	 * @param elements   字符串(多个)
-	 */
 	public static void blankSafeAddAll(Collection<String> collection, @Nullable Collection<String> elements) {
 		Assert.notNull(collection, "collection is required");
 
@@ -504,13 +311,6 @@ public final class StringUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 多个元素拼接成一个字符串 (忽略null元素)
-	 *
-	 * @param elements  多个元素
-	 * @param separator 分隔符
-	 * @return 结果
-	 */
 	public static String nullSafeJoin(@Nullable Iterable<?> elements, @Nullable String separator) {
 		if (elements == null) {
 			return EMPTY;
@@ -525,13 +325,6 @@ public final class StringUtils {
 		return strJoiner.toString();
 	}
 
-	/**
-	 * 多个元素拼接成一个字符串 (忽略null元素)
-	 *
-	 * @param elements  多个元素
-	 * @param separator 分隔符
-	 * @return 结果
-	 */
 	public static String nullSafeJoin(@Nullable Iterator<?> elements, @Nullable String separator) {
 		if (elements == null) {
 			return EMPTY;
@@ -547,13 +340,6 @@ public final class StringUtils {
 		return strJoiner.toString();
 	}
 
-	/**
-	 * 多个元素拼接成一个字符串 (忽略null元素)
-	 *
-	 * @param elements  多个元素
-	 * @param separator 分隔符
-	 * @return 结果
-	 */
 	public static String nullSafeJoin(@Nullable Object[] elements, @Nullable String separator) {
 		if (elements == null) {
 			return EMPTY;
@@ -568,13 +354,6 @@ public final class StringUtils {
 		return strJoiner.toString();
 	}
 
-	/**
-	 * 多个元素拼接成一个字符串 (忽略null元素)
-	 *
-	 * @param elements  多个元素
-	 * @param separator 分隔符
-	 * @return 结果
-	 */
 	public static String nullSafeJoin(@Nullable String[] elements, @Nullable String separator) {
 		if (elements == null) {
 			return EMPTY;
@@ -591,13 +370,6 @@ public final class StringUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 判断一个字符串是否有指定的前缀
-	 *
-	 * @param string 字符串
-	 * @param prefix 前缀
-	 * @return 结果
-	 */
 	public static boolean startsWith(@Nullable String string, String prefix) {
 		Assert.notNull(prefix, "prefix is required");
 
@@ -606,13 +378,6 @@ public final class StringUtils {
 		return string.startsWith(prefix);
 	}
 
-	/**
-	 * 判断一个字符串是否有指定的后缀
-	 *
-	 * @param string 字符串
-	 * @param suffix 后缀
-	 * @return 结果
-	 */
 	public static boolean endsWith(@Nullable String string, String suffix) {
 		Assert.notNull(suffix, "suffix is required");
 
@@ -621,13 +386,6 @@ public final class StringUtils {
 		return string.endsWith(suffix);
 	}
 
-	/**
-	 * 判断一个字符串是否有指定的前缀 (大小写不敏感)
-	 *
-	 * @param string 字符串
-	 * @param prefix 前缀
-	 * @return 结果
-	 */
 	public static boolean startsWithIgnoreCase(@Nullable String string, String prefix) {
 		Assert.notNull(prefix, "prefix is required");
 
@@ -635,13 +393,6 @@ public final class StringUtils {
 			&& string.regionMatches(true, 0, prefix, 0, prefix.length()));
 	}
 
-	/**
-	 * 判断一个字符串是否有指定的后缀 (大小写不敏感)
-	 *
-	 * @param string 字符串
-	 * @param suffix 后缀
-	 * @return 结果
-	 */
 	public static boolean endsWithIgnoreCase(@Nullable String string, String suffix) {
 		Assert.notNull(suffix, "suffix is required");
 
@@ -651,13 +402,6 @@ public final class StringUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 重复字符串
-	 *
-	 * @param string 字符串
-	 * @param n      重复的次数
-	 * @return 结果
-	 */
 	public static String repeat(String string, int n) {
 		Assert.notNull(string, "string is required");
 		Assert.isTrue(n >= 1, "n must greater than 0");
@@ -675,25 +419,10 @@ public final class StringUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 比较两个字符串
-	 *
-	 * @param string1 字符串1
-	 * @param string2 字符串2
-	 * @return 结果
-	 */
 	public static int compare(@Nullable String string1, @Nullable String string2) {
 		return compare(string1, string2, true);
 	}
 
-	/**
-	 * 比较两个字符串
-	 *
-	 * @param string1    字符串1
-	 * @param string2    字符串2
-	 * @param nullIsLess 为{@code true}时 {@code null}排在前面
-	 * @return 结果
-	 */
 	public static int compare(@Nullable String string1, @Nullable String string2, final boolean nullIsLess) {
 		if (string1 == string2) {
 			return 0;
@@ -707,25 +436,10 @@ public final class StringUtils {
 		return string1.compareTo(string2);
 	}
 
-	/**
-	 * 比较两个字符串 (大小写不敏感)
-	 *
-	 * @param string1 字符串1
-	 * @param string2 字符串2
-	 * @return 结果
-	 */
 	public static int compareIgnoreCase(@Nullable String string1, @Nullable String string2) {
 		return compareIgnoreCase(string1, string2, true);
 	}
 
-	/**
-	 * 比较两个字符串 (大小写不敏感)
-	 *
-	 * @param string1    字符串1
-	 * @param string2    字符串2
-	 * @param nullIsLess 为{@code true}时 {@code null}排在前面
-	 * @return 结果
-	 */
 	public static int compareIgnoreCase(@Nullable String string1, @Nullable String string2, final boolean nullIsLess) {
 		if (string1 == string2) {
 			return 0;
@@ -741,12 +455,6 @@ public final class StringUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 查找第一个非Empty字符串
-	 *
-	 * @param strings 字符串组
-	 * @return 结果或 {@code null}
-	 */
 	@Nullable
 	public static String firstNonEmpty(@Nullable String... strings) {
 		if (strings != null) {
@@ -759,12 +467,6 @@ public final class StringUtils {
 		return null;
 	}
 
-	/**
-	 * 查找第一个非Blank字符串
-	 *
-	 * @param values 字符串组
-	 * @return 结果或 {@code null}
-	 */
 	@Nullable
 	public static String firstNonBlank(@Nullable String... values) {
 		if (values != null) {

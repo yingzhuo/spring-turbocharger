@@ -12,12 +12,6 @@ import javax.net.ssl.SSLContext;
 import java.security.KeyStore;
 import java.time.Duration;
 
-/**
- * 内部工具
- *
- * @author 应卓
- * @since 3.4.3
- */
 @Setter
 public abstract class AbstractClientHttpRequestFactoryBean implements FactoryBean<ClientHttpRequestFactory> {
 
@@ -34,16 +28,10 @@ public abstract class AbstractClientHttpRequestFactoryBean implements FactoryBea
 	@Nullable
 	private String keyPassword;
 
-	/**
-	 * 构造方法
-	 */
 	protected AbstractClientHttpRequestFactoryBean() {
 		super();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public final Class<?> getObjectType() {
 		return ClientHttpRequestFactory.class;

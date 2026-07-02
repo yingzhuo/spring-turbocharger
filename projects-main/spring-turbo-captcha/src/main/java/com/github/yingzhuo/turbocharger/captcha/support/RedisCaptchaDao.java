@@ -5,12 +5,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.time.Duration;
 
-/**
- * {@link CaptchaDao}的Redis相关实现
- *
- * @author 应卓
- * @since 1.0.1
- */
 public class RedisCaptchaDao implements CaptchaDao {
 
 	private final StringRedisTemplate redisTemplate;

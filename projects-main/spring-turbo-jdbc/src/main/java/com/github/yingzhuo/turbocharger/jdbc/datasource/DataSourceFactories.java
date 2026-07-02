@@ -9,19 +9,9 @@ import org.springframework.util.ClassUtils;
 
 import javax.sql.DataSource;
 
-/**
- * 数据源创建工具
- *
- * @author 应卓
- * @see HikariDataSource
- * @since 3.4.1
- */
 @SuppressWarnings("unchecked")
 public final class DataSourceFactories {
 
-	/**
-	 * 私有构造方法
-	 */
 	private DataSourceFactories() {
 		super();
 	}

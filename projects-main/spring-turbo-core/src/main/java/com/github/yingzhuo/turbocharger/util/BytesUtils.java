@@ -6,25 +6,12 @@ import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.stream.Stream;
 
-/**
- * @author 应卓
- * @since 3.5.3
- */
 public final class BytesUtils {
 
-	/**
-	 * 私有构造方法
-	 */
 	private BytesUtils() {
 		super();
 	}
 
-	/**
-	 * 拼接多个字节数组
-	 *
-	 * @param bytesArray 字节数组的数组
-	 * @return 拼接结果
-	 */
 	public static byte[] concat(@Nullable byte[]... bytesArray) {
 		if (bytesArray == null || bytesArray.length == 0) {
 			return new byte[0];
@@ -41,12 +28,6 @@ public final class BytesUtils {
 		return buffer.array();
 	}
 
-	/**
-	 * 拼接多个字节数组
-	 *
-	 * @param bytesCollection 字节数组的数组
-	 * @return 拼接结果
-	 */
 	public static byte[] concat(@Nullable Collection<byte[]> bytesCollection) {
 		if (bytesCollection == null || bytesCollection.isEmpty()) {
 			return new byte[0];

@@ -11,12 +11,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 
-/**
- * 自动配置类
- *
- * @author 应卓
- * @since 3.5.0
- */
 @AutoConfiguration
 @ConditionalOnBean(Algorithm.class)
 @ConditionalOnMissingBean(JwtService.class)

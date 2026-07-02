@@ -7,15 +7,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * 三元组
- *
- * @author 应卓
- * @see Pair
- * @see #ofNullable(Object, Object, Object)
- * @see #ofNonNull(Object, Object, Object)
- * @since 1.0.0
- */
 public final class Tuple<A, B, C> implements Serializable {
 
 	@Nullable
@@ -27,13 +18,6 @@ public final class Tuple<A, B, C> implements Serializable {
 	@Nullable
 	private final C c;
 
-	/**
-	 * 私有构造方法
-	 *
-	 * @param a a
-	 * @param b b
-	 * @param c c
-	 */
 	private Tuple(@Nullable A a, @Nullable B b, @Nullable C c) {
 		this.a = a;
 		this.b = b;
@@ -88,9 +72,6 @@ public final class Tuple<A, B, C> implements Serializable {
 		return Objects.requireNonNull(c);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -103,17 +84,11 @@ public final class Tuple<A, B, C> implements Serializable {
 		return Objects.equals(a, tuple.a) && Objects.equals(b, tuple.b) && Objects.equals(c, tuple.c);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(a, b, c);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		return StringFormatter.format("({}, {}, {})", a, b, c);

@@ -6,35 +6,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.DefaultBindingErrorProcessor;
 import org.springframework.validation.ObjectError;
 
-/**
- * {@link DefaultBindingErrorProcessor} 扩展
- *
- * @author 应卓
- * @see #getInstance()
- * @see org.springframework.validation.DataBinder
- * @see org.springframework.web.bind.WebDataBinder
- * @since 3.3.1
- */
 public final class SmartBindingErrorProcessor extends DefaultBindingErrorProcessor {
 
-	/**
-	 * 私有构造方法
-	 */
 	private SmartBindingErrorProcessor() {
 	}
 
-	/**
-	 * 获取本类型实例
-	 *
-	 * @return 单例实例
-	 */
 	public static SmartBindingErrorProcessor getInstance() {
 		return SyncAvoid.INSTANCE;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void processPropertyAccessException(PropertyAccessException ex, BindingResult bindingResult) {
 

@@ -17,88 +17,40 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 
-/**
- * ClassPath扫描器
- *
- * @author 应卓
- * @see PackageSet
- * @see GenericBeanDefinition
- * @see ClassPathScanningCandidateComponentProvider
- * @see ClassPathBeanDefinitionScanner
- * @since 3.5.3
- */
 public class ClassPathScanner {
 
 	private final ClassPathScannerCore core;
 	private ClassLoader classLoader = ClassPathScanner.class.getClassLoader();
 
-	/**
-	 * 默认构造方法
-	 */
 	public ClassPathScanner() {
 		this(false);
 	}
 
-	/**
-	 * 构造方法
-	 *
-	 * @param useDefaultFilters 是否启用默认类型过滤器
-	 */
 	public ClassPathScanner(boolean useDefaultFilters) {
 		this.core = new ClassPathScannerCore(useDefaultFilters);
 	}
 
-	/**
-	 * 设置资源加载器
-	 *
-	 * @param resourceLoader 资源加载器
-	 */
 	public void setResourceLoader(@Nullable ResourceLoader resourceLoader) {
 		core.setResourceLoader(Objects.requireNonNullElseGet(resourceLoader, ApplicationResourceLoader::get));
 	}
 
-	/**
-	 * 设置环境
-	 *
-	 * @param environment 环境
-	 */
 	public void setEnvironment(@Nullable Environment environment) {
 		core.setEnvironment(Objects.requireNonNullElseGet(environment, StandardEnvironment::new));
 	}
 
-	/**
-	 * 设置classLoader
-	 *
-	 * @param classLoader ClassLoader实例
-	 */
 	public void setClassLoader(ClassLoader classLoader) {
 		Assert.notNull(classLoader, "classLoader must not be null");
 		this.classLoader = classLoader;
 	}
 
-	/**
-	 * 重置所有过滤器
-	 */
 	public void resetFilters() {
 		core.resetFilters(false);
 	}
 
-	/**
-	 * 重置所有过滤器
-	 *
-	 * @param useDefaultFilters 是否包含Spring提供的默认过滤器
-	 */
 	public void resetFilters(boolean useDefaultFilters) {
 		core.resetFilters(useDefaultFilters);
 	}
 
-	/**
-	 * 添加包括型过滤器
-	 *
-	 * @param includeFilters 过滤器
-	 * @see TypeFilter
-	 * @see TypeFilterFactories
-	 */
 	public void addIncludeFilters(@Nullable TypeFilter... includeFilters) {
 		if (includeFilters != null) {
 			Stream.of(includeFilters)
@@ -107,13 +59,6 @@ public class ClassPathScanner {
 		}
 	}
 
-	/**
-	 * 添加排除型过滤器
-	 *
-	 * @param excludeFilters 过滤器
-	 * @see TypeFilter
-	 * @see TypeFilterFactories
-	 */
 	public void addExcludeFilters(@Nullable TypeFilter... excludeFilters) {
 		if (excludeFilters != null) {
 			Stream.of(excludeFilters)
@@ -122,13 +67,6 @@ public class ClassPathScanner {
 		}
 	}
 
-	/**
-	 * 扫描类路径
-	 *
-	 * @param packageSet 扫描起点 (多个起点)
-	 * @return 扫描结果
-	 * @see PackageSet
-	 */
 	public Set<GenericBeanDefinition> scan(@Nullable PackageSet packageSet) {
 		if (packageSet == null || packageSet.isEmpty()) {
 			return Set.of();

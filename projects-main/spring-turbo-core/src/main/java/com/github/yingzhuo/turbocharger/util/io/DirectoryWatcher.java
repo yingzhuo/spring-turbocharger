@@ -5,11 +5,6 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.*;
 
-/**
- * @author 应卓
- * @see #builder()
- * @since 2.1.0
- */
 public final class DirectoryWatcher {
 
 	private final Path directory;
@@ -20,11 +15,6 @@ public final class DirectoryWatcher {
 		this.listener = listener;
 	}
 
-	/**
-	 * 获取实例
-	 *
-	 * @return 实例
-	 */
 	public static Builder builder() {
 		return new Builder();
 	}
@@ -60,17 +50,11 @@ public final class DirectoryWatcher {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 创建器
-	 */
 	public static final class Builder {
 
 		private Path dir;
 		private Listener listener;
 
-		/**
-		 * 私有构造方法
-		 */
 		private Builder() {
 		}
 

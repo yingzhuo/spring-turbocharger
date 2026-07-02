@@ -7,16 +7,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.function.Predicate;
 
-/**
- * @author 应卓
- * @see MethodUtils
- * @since 1.2.1
- */
 public final class MethodPredicateFactories {
 
-	/**
-	 * 私有构造方法
-	 */
 	private MethodPredicateFactories() {
 		super();
 	}

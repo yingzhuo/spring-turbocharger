@@ -6,10 +6,6 @@ import com.github.yingzhuo.turbocharger.captcha.google.color.SingleColorFactory;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-/**
- * @author 应卓
- * @since 1.0.0
- */
 public class SingleColorBackgroundFactory implements BackgroundFactory {
 
 	private ColorFactory colorFactory;

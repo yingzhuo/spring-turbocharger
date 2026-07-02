@@ -6,18 +6,8 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import java.security.KeyStore;
 import java.time.Duration;
 
-/**
- * {@link HttpComponentsClientHttpRequestFactory} 生成工具
- *
- * @author 应卓
- * @see Apache5ClientHttpRequestFactoryBean
- * @since 3.4.3
- */
 public final class Apache5ClientHttpRequestFactoryFactories {
 
-	/**
-	 * 私有构造方法
-	 */
 	private Apache5ClientHttpRequestFactoryFactories() {
 	}
 

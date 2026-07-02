@@ -5,12 +5,6 @@ import org.springframework.context.MessageSourceResolvable;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.util.StringUtils;
 
-/**
- * 内部工具
- *
- * @author 应卓
- * @since 3.3.1
- */
 final class InternalConverterUtils {
 
 	public static <T extends RuntimeException> RuntimeException transform(T e) {

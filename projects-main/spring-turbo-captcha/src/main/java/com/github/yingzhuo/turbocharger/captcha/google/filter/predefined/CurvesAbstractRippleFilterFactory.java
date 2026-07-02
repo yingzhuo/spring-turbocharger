@@ -7,9 +7,6 @@ import java.awt.image.BufferedImageOp;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @since 1.0.0
- */
 public class CurvesAbstractRippleFilterFactory extends AbstractRippleFilterFactory {
 
 	protected CurvesImageOp curves = new CurvesImageOp();

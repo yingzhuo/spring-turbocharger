@@ -48,7 +48,7 @@
 		<!-- 空行使用规则 -->
 		<module name="EmptyLineSeparator">
 			<property name="tokens"
-								value="IMPORT, STATIC_IMPORT, CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
+			          value="IMPORT, STATIC_IMPORT, CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
                     STATIC_INIT, INSTANCE_INIT, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, RECORD_DEF,
                     COMPACT_CTOR_DEF"/>
 			<property name="allowNoEmptyLineBetweenFields" value="true"/>
@@ -60,7 +60,7 @@
 		<!-- 需要花括号块 -->
 		<module name="NeedBraces">
 			<property name="tokens"
-								value="LITERAL_DO, LITERAL_ELSE, LITERAL_FOR, LITERAL_IF, LITERAL_WHILE"/>
+			          value="LITERAL_DO, LITERAL_ELSE, LITERAL_FOR, LITERAL_IF, LITERAL_WHILE"/>
 		</module>
 
 		<!-- 定义顺序 -->

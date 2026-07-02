@@ -10,10 +10,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;
 
-/**
- * @author 应卓
- * @since 3.4.3
- */
 @Getter
 @Setter
 @ToString

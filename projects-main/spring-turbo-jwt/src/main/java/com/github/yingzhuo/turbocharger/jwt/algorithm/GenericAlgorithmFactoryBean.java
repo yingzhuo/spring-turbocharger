@@ -10,11 +10,6 @@ import org.springframework.util.Assert;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-/**
- * @author 应卓
- * @see GenericAlgorithm
- * @since 3.5.3
- */
 public class GenericAlgorithmFactoryBean implements FactoryBean<GenericAlgorithm>, ResourceLoaderAware {
 
 	private @Nullable ResourceLoader resourceLoader;
@@ -22,16 +17,10 @@ public class GenericAlgorithmFactoryBean implements FactoryBean<GenericAlgorithm
 	private @Nullable String password;
 	private Charset pemCharset = StandardCharsets.UTF_8;
 
-	/**
-	 * 默认构造方法
-	 */
 	public GenericAlgorithmFactoryBean() {
 		super();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public GenericAlgorithm getObject() throws Exception {
 		Assert.notNull(resourceLoader, "resourceLoader must not be null");
@@ -42,17 +31,11 @@ public class GenericAlgorithmFactoryBean implements FactoryBean<GenericAlgorithm
 		return new GenericAlgorithm(resource.getContentAsString(pemCharset), password);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Class<?> getObjectType() {
 		return Algorithm.class;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void setResourceLoader(ResourceLoader resourceLoader) {
 		this.resourceLoader = resourceLoader;

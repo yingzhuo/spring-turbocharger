@@ -2,10 +2,6 @@ package com.github.yingzhuo.turbocharger.idgen;
 
 import java.util.UUID;
 
-/**
- * @author 应卓
- * @since 3.4.3
- */
 public interface UUIDGenerator {
 
 	public UUID v1();

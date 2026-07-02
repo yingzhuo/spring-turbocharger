@@ -8,17 +8,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Objects;
 
-/**
- * Servlet相关工具
- *
- * @author 应卓
- * @since 1.0.0
- */
 public final class ServletUtils {
 
-	/**
-	 * 私有构造方法
-	 */
 	private ServletUtils() {
 	}
 

@@ -15,29 +15,16 @@ import java.nio.file.Path;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-/**
- * @author 应卓
- * @see #builder()
- * @since 1.0.1
- */
 public class AttachmentResponseEntity extends ResponseEntity<byte[]> {
 
 	private AttachmentResponseEntity(byte[] body, HttpHeaders headers, HttpStatus status) {
 		super(body, headers, status);
 	}
 
-	/**
-	 * 获取实例
-	 *
-	 * @return 实例
-	 */
 	public static Builder builder() {
 		return new Builder();
 	}
 
-	/**
-	 * 创建器
-	 */
 	public final static class Builder {
 
 		private HttpStatus status = HttpStatus.OK;

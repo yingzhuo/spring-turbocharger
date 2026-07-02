@@ -12,13 +12,6 @@ import java.security.Security;
 import static org.springframework.util.ClassUtils.forName;
 import static org.springframework.util.ClassUtils.getDefaultClassLoader;
 
-/**
- * 尝试安装BC Provider <br>
- * <a href="https://www.bouncycastle.org/documentation/documentation-java/">Bouncy Castle官方文档</a>
- *
- * @author 应卓
- * @since 3.3.2
- */
 public class BouncyCastleInstallingEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
 	private static final String BOUNCY_CASTLE_PROVIDER_CLASS = "org.bouncycastle.jce.provider.BouncyCastleProvider";
@@ -29,9 +22,6 @@ public class BouncyCastleInstallingEnvironmentPostProcessor implements Environme
 		this.log = logFactory.getLog(BouncyCastleInstallingEnvironmentPostProcessor.class);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
 		try {

@@ -7,12 +7,6 @@ import org.springframework.context.MessageSourceResolvable;
 
 import java.io.Serializable;
 
-/**
- * {@link MessageSourceResolvable} 简单实现
- *
- * @author 应卓
- * @since 3.3.1
- */
 public final class SimpleMessageSourceResolvable implements MessageSourceResolvable, Serializable {
 
 	@Nullable
@@ -30,27 +24,18 @@ public final class SimpleMessageSourceResolvable implements MessageSourceResolva
 		this.defaultMessages = StringUtils.blankToNull(defaultMessages);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Nullable
 	@Override
 	public String[] getCodes() {
 		return code != null ? new String[]{code} : null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Nullable
 	@Override
 	public Object[] getArguments() {
 		return arguments;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Nullable
 	@Override
 	public String getDefaultMessage() {

@@ -12,13 +12,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * {@link ConditionalGenericConverter} 辅助工具 <br>
- * 本类型将尝试转换{@link RuntimeException} 转换成 {@link org.springframework.context.MessageSourceResolvable}。
- *
- * @author 应卓
- * @since 3.3.1
- */
 public abstract class AbstractConditionalGenericConverter implements ConditionalGenericConverter {
 
 	private final Set<ConvertiblePair> convertibleTypes;
@@ -48,17 +41,11 @@ public abstract class AbstractConditionalGenericConverter implements Conditional
 		this.convertibleTypes = Collections.unmodifiableSet(set);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public final Set<ConvertiblePair> getConvertibleTypes() {
 		return this.convertibleTypes;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Nullable
 	@Override
 	public final Object convert(@Nullable Object source, TypeDescriptor sourceType, TypeDescriptor targetType) {
@@ -69,15 +56,6 @@ public abstract class AbstractConditionalGenericConverter implements Conditional
 		}
 	}
 
-	/**
-	 * 转换数据
-	 *
-	 * @param source     源数据
-	 * @param sourceType 源数据类型
-	 * @param targetType 目标类型
-	 * @return 转换结果
-	 * @throws DataBindingException 数据转换失败或数据非法
-	 */
 	@Nullable
 	protected abstract Object doConvert(@Nullable Object source, TypeDescriptor sourceType, TypeDescriptor targetType) throws DataBindingException;
 

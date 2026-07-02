@@ -7,11 +7,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.InitBinder;
 
-/**
- * @author 应卓
- * @see WebMvcAutoConfiguration
- * @since 3.3.1
- */
 @ControllerAdvice
 public class DataBinderInitializingAdvice {
 

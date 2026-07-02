@@ -17,27 +17,15 @@ import java.util.Base64;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-/**
- * @author 应卓
- * @since 2.2.4
- */
 public abstract class AbstractJwtTokenToUserConverter implements TokenToUserConverter {
 
 	private final JwtValidator jwtValidator;
 
-	/**
-	 * 构造方法
-	 *
-	 * @param jwtValidator JWT验证器
-	 */
 	protected AbstractJwtTokenToUserConverter(JwtValidator jwtValidator) {
 		Assert.notNull(jwtValidator, "jwtValidator is required");
 		this.jwtValidator = jwtValidator;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Nullable
 	@Override
 	public final UserDetails convert(@Nullable Token token) throws AuthenticationException {

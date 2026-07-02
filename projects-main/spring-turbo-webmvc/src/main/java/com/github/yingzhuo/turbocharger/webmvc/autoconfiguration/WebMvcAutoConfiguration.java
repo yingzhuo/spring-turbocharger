@@ -17,10 +17,6 @@ import org.springframework.web.servlet.view.BeanNameViewResolver;
 
 import java.util.List;
 
-/**
- * @author 应卓
- * @since 1.3.0
- */
 @AutoConfiguration
 @EnableConfigurationProperties(SpringTurboWebMvcProperties.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
@@ -33,17 +29,11 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
 		resolvers.add(new RemoteAddressHandlerMethodArgumentResolver());
 	}
 
-	/**
-	 * @since 2024-06-30
-	 */
 	@Bean
 	@ConditionalOnProperty(prefix = "springturbo.webmvc", name = "data-binder-initializing-advice", havingValue = "true", matchIfMissing = true)
 	public DataBinderInitializingAdvice dataBinderInitializingAdvice() {

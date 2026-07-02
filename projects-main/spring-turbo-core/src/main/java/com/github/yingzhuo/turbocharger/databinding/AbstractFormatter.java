@@ -5,19 +5,8 @@ import org.springframework.format.Formatter;
 
 import java.util.Locale;
 
-/**
- * {@link Formatter} 辅助工具 <br>
- * 本类型将尝试转换{@link RuntimeException} 转换成 {@link org.springframework.context.MessageSourceResolvable}。
- *
- * @param <T> 目标类型泛型
- * @author 应卓
- * @since 3.3.1
- */
 public abstract class AbstractFormatter<T> implements Formatter<T> {
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public final T parse(String text, Locale locale) {
 		try {
@@ -27,14 +16,6 @@ public abstract class AbstractFormatter<T> implements Formatter<T> {
 		}
 	}
 
-	/**
-	 * 转换数据
-	 *
-	 * @param text   源数据
-	 * @param locale locale
-	 * @return 转换结果
-	 * @throws DataBindingException 数据转换失败或数据非法
-	 */
 	protected abstract T doParse(String text, Locale locale) throws DataBindingException;
 
 }

@@ -10,12 +10,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 
-/**
- * 初始化 {@link JsonUtils}
- *
- * @author 应卓
- * @since 3.3.1
- */
 @ConditionalOnClass(name = {
 	"com.fasterxml.jackson.databind.ObjectMapper",
 	"com.jayway.jsonpath.Configuration"

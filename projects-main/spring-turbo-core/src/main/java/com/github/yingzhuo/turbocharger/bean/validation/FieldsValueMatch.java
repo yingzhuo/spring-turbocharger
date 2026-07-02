@@ -7,11 +7,6 @@ import java.lang.annotation.*;
 
 import static java.lang.annotation.ElementType.*;
 
-/**
- * @author 应卓
- * @see FieldsValueMatchValidator
- * @since 1.0.0
- */
 @Documented
 @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 @Retention(RetentionPolicy.RUNTIME)

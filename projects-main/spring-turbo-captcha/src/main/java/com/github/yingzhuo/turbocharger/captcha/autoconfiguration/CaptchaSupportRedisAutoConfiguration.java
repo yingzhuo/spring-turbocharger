@@ -8,10 +8,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
-/**
- * @author 应卓
- * @since 1.3.0
- */
 @AutoConfiguration
 @ConditionalOnMissingBean(CaptchaDao.class)
 @ConditionalOnBean(type = "org.springframework.data.redis.core.StringRedisTemplate")

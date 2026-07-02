@@ -8,10 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;
 
-/**
- * @author 应卓
- * @since 2024-07-10
- */
 @Getter
 @Setter
 @ToString

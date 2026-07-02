@@ -1,8 +1,5 @@
 package com.github.yingzhuo.turbocharger.captcha.google.filter.lib;
 
-/**
- * @since 1.0.0
- */
 public abstract class AbstractTransformImageOp extends AbstractImageOp {
 
 	private boolean initialized;

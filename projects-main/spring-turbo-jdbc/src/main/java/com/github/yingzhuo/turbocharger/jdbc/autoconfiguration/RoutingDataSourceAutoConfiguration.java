@@ -16,10 +16,6 @@ import org.springframework.util.Assert;
 import javax.sql.DataSource;
 import java.util.HashMap;
 
-/**
- * @author 应卓
- * @since 3.4.1
- */
 @AutoConfiguration
 @EnableConfigurationProperties(RoutingDataSourceProperties.class)
 @ConditionalOnProperty(prefix = "springturbo.routing-data-source", name = "enabled", havingValue = "true", matchIfMissing = true)

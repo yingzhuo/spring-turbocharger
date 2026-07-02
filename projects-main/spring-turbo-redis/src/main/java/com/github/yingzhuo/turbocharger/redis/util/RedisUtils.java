@@ -6,45 +6,21 @@ import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.Assert;
 
-/**
- * Redis相关工具
- *
- * @author 应卓
- * @since 3.4.0
- */
 public final class RedisUtils {
 
 	// 参考资料: https://cloud.tencent.com/developer/article/2410509
 
 	private static final int DEFAULT_DELETE_ELEMENT_COUNT_PER_STEP = 100;
 
-	/**
-	 * 私有构造方法
-	 */
 	private RedisUtils() {
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 按照匹配模式删除 string 类型的数据
-	 *
-	 * @param redisOperations RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param pattern         要匹配的模式
-	 * @param <V>             Value的泛型
-	 */
 	public static <V> void deleteValuesByPattern(RedisOperations<String, V> redisOperations, String pattern) {
 		deleteValuesByPattern(redisOperations, pattern, DEFAULT_DELETE_ELEMENT_COUNT_PER_STEP);
 	}
 
-	/**
-	 * 按照匹配模式删除 string 类型的数据
-	 *
-	 * @param redisOperations           RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param pattern                   要匹配的模式
-	 * @param deleteElementCountPerStep 每次删除的元素个数
-	 * @param <V>                       Value的泛型
-	 */
 	public static <V> void deleteValuesByPattern(RedisOperations<String, V> redisOperations, String pattern, int deleteElementCountPerStep) {
 		Assert.notNull(redisOperations, "redisOperations is null");
 		Assert.hasText(pattern, "pattern is null or blank");
@@ -68,25 +44,10 @@ public final class RedisUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 删除HASH类型BigKey
-	 *
-	 * @param redisOperations RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param key             要删除的键
-	 * @param <V>             Value的泛型
-	 */
 	public static <V> void deleteBigHash(RedisOperations<String, V> redisOperations, String key) {
 		deleteBigHash(redisOperations, key, DEFAULT_DELETE_ELEMENT_COUNT_PER_STEP);
 	}
 
-	/**
-	 * 删除HASH类型BigKey
-	 *
-	 * @param redisOperations           RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param key                       要删除的键
-	 * @param deleteElementCountPerStep 每次删除的元素个数
-	 * @param <V>                       Value的泛型
-	 */
 	public static <V> void deleteBigHash(RedisOperations<String, V> redisOperations, String key, int deleteElementCountPerStep) {
 		Assert.notNull(redisOperations, "redisOperations is null");
 		Assert.hasText(key, "key is null or blank");
@@ -113,25 +74,10 @@ public final class RedisUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 删除LIST类型的BigKey
-	 *
-	 * @param redisOperations RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param key             要删除的键
-	 * @param <V>             Value的泛型
-	 */
 	public static <V> void deleteBigList(RedisOperations<String, V> redisOperations, String key) {
 		deleteBigList(redisOperations, key, DEFAULT_DELETE_ELEMENT_COUNT_PER_STEP);
 	}
 
-	/**
-	 * 删除LIST类型的BigKey
-	 *
-	 * @param redisOperations           RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param key                       要删除的键
-	 * @param deleteElementCountPerStep 每次删除的元素个数
-	 * @param <V>                       Value的泛型
-	 */
 	public static <V> void deleteBigList(RedisOperations<String, V> redisOperations, String key, int deleteElementCountPerStep) {
 		Assert.notNull(redisOperations, "redisOperations is null");
 		Assert.notNull(key, "key is null or blank");
@@ -155,25 +101,10 @@ public final class RedisUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 删除SET类型的BigKey
-	 *
-	 * @param redisOperations RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param key             要删除的键
-	 * @param <V>             Value的泛型
-	 */
 	public static <V> void deleteBigSet(RedisOperations<String, V> redisOperations, String key) {
 		deleteBigSet(redisOperations, key, DEFAULT_DELETE_ELEMENT_COUNT_PER_STEP);
 	}
 
-	/**
-	 * 删除SET类型的BigKey
-	 *
-	 * @param redisOperations           RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param key                       要删除的键
-	 * @param deleteElementCountPerStep 每次删除的元素个数
-	 * @param <V>                       Value的泛型
-	 */
 	public static <V> void deleteBigSet(RedisOperations<String, V> redisOperations, String key, int deleteElementCountPerStep) {
 		Assert.notNull(redisOperations, "redisOperations is null");
 		Assert.hasText(key, "key is null or blank");
@@ -200,25 +131,10 @@ public final class RedisUtils {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
-	/**
-	 * 删除ZSET类型的BigKey
-	 *
-	 * @param redisOperations RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param key             要删除的键
-	 * @param <V>             Value的泛型
-	 */
 	public static <V> void deleteBigZset(RedisOperations<String, V> redisOperations, String key) {
 		deleteBigSet(redisOperations, key, DEFAULT_DELETE_ELEMENT_COUNT_PER_STEP);
 	}
 
-	/**
-	 * 删除ZSET类型的BigKey
-	 *
-	 * @param redisOperations           RedisOperations实例，通常是 {@link StringRedisTemplate}
-	 * @param key                       要删除的键
-	 * @param deleteElementCountPerStep 每次删除的元素个数
-	 * @param <V>                       Value的泛型
-	 */
 	public static <V> void deleteBigZset(RedisOperations<String, V> redisOperations, String key, int deleteElementCountPerStep) {
 		Assert.notNull(redisOperations, "redisOperations is null");
 		Assert.hasText(key, "key is null or blank");

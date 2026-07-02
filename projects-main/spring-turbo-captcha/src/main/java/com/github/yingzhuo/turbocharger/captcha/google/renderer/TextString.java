@@ -2,9 +2,6 @@ package com.github.yingzhuo.turbocharger.captcha.google.renderer;
 
 import java.util.ArrayList;
 
-/**
- * @since 1.0.0
- */
 public class TextString {
 
 	private final ArrayList<TextCharacter> characters = new ArrayList<>();

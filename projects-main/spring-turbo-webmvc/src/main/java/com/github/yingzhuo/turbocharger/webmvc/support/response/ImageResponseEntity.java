@@ -8,29 +8,16 @@ import org.springframework.http.ResponseEntity;
 
 import java.awt.image.BufferedImage;
 
-/**
- * @author 应卓
- * @see #builder()
- * @since 1.0.1
- */
 public final class ImageResponseEntity extends ResponseEntity<byte[]> {
 
 	private ImageResponseEntity(byte[] body, HttpHeaders headers, HttpStatus status) {
 		super(body, headers, status);
 	}
 
-	/**
-	 * 获取实例
-	 *
-	 * @return 实例
-	 */
 	public static Builder builder() {
 		return new Builder();
 	}
 
-	/**
-	 * 创建器
-	 */
 	public final static class Builder {
 
 		private HttpStatus status = HttpStatus.OK;

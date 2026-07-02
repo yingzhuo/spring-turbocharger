@@ -3,10 +3,6 @@ package com.github.yingzhuo.turbocharger.captcha.google.word;
 import com.github.yingzhuo.turbocharger.util.RandomUtils;
 import com.github.yingzhuo.turbocharger.util.StringFormatter;
 
-/**
- * @author 应卓
- * @since 1.0.9
- */
 public class MathWordFactory implements WordFactory {
 
 	public MathWordFactory() {

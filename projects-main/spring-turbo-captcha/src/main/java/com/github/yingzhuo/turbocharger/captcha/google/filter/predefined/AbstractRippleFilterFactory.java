@@ -7,9 +7,6 @@ import java.awt.image.BufferedImageOp;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @since 1.0.0
- */
 abstract class AbstractRippleFilterFactory extends AbstractFilterFactory {
 
 	protected List<BufferedImageOp> filters;

@@ -10,10 +10,6 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import java.awt.image.BufferedImage;
 import java.util.EnumMap;
 
-/**
- * @author 应卓
- * @since 3.4.3
- */
 public class BarCodeGeneratorImpl implements BarCodeGenerator {
 
 	@Override
