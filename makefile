@@ -11,8 +11,7 @@ endif
 .PHONY: \
 	clean clean-buildsrc purge rebuild-build-logic \
 	update-dependencies compile build publish install check test \
-	update-gradle-wrapper update-license-header \
-	stop-gradle-daemon \
+	update-gradle-wrapper stop-gradle-daemon \
 	push-to-vcs
 
 .SILENT:
@@ -40,7 +39,7 @@ compile:
 build:
 	$(GRADLEW) -x "check" -x "test" "build"
 
-install: update-license-header
+install:
 	$(GRADLEW) -x "test" -x "check" "publishToMavenLocal" --no-parallel
 
 publish: install
@@ -51,9 +50,6 @@ publish: install
 update-gradle-wrapper:
 	$(GRADLEW) "wrapper" -q
 
-update-license-header:
-	$(GRADLEW) "applyLicenses" -q
-
 test:
 	$(GRADLEW) "test"
 
@@ -63,5 +59,5 @@ check:
 stop-gradle-daemon:
 	$(GRADLEW) --stop -q
 
-push-to-vcs: update-license-header
+push-to-vcs:
 	$(GRADLEW) 'pushToVcs' -q

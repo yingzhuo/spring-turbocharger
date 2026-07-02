@@ -23,7 +23,4 @@ description = 'build logic'
 
 dependencies {
 	implementation "io.gitee.pkmer.pkmerboot-central-publisher:io.gitee.pkmer.pkmerboot-central-publisher.gradle.plugin:$mavenCentralPublisherPluginVersion"
-	implementation "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:$dependencyManagementPluginVersion"
-	implementation "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
-	implementation "dev.yumi.gradle.licenser:dev.yumi.gradle.licenser.gradle.plugin:$licensePluginVersion"
 }
