@@ -8,8 +8,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.Ordered;
 import org.springframework.data.redis.core.RedisOperations;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.Assert;
+
+import java.time.Duration;
 
 @Aspect
 public class AvoidRepeatedInvocationAdvice implements Ordered {
@@ -47,8 +48,9 @@ public class AvoidRepeatedInvocationAdvice implements Ordered {
 			.setRootObject(null)
 			.getValue();
 
+		var duration = Duration.of(annotation.leaseTime(), annotation.leaseTimeUnit().toChronoUnit());
 		var success = redisOperations.opsForValue()
-			.setIfAbsent(redisKey, "1", annotation.leaseTime(), annotation.leaseTimeUnit());
+			.setIfAbsent(redisKey, "1", duration);
 
 		if (Boolean.TRUE.equals(success)) {
 			return joinPoint.proceed();
