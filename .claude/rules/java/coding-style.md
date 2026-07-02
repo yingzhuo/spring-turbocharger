@@ -19,7 +19,7 @@ paths: "**/*.java"
 
 ## Jar 依赖
 
-- 禁止直接引入未在 BOM 子项目中管理的第三方依赖
+- 使用 `libs.versions.toml` 管理依赖
 
 ## 版权声明策略
 
