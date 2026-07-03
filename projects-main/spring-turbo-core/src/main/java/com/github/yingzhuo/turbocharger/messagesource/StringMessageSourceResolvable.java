@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
 import java.io.Serializable;
 
 public record StringMessageSourceResolvable(
-	String defaultMessage) implements MessageSourceResolvable, Serializable {
+	@Nullable String defaultMessage) implements MessageSourceResolvable, Serializable {
 
 	public StringMessageSourceResolvable {
 		Assert.hasText(defaultMessage, "defaultMessage is required");
@@ -25,8 +25,8 @@ public record StringMessageSourceResolvable(
 		return null;
 	}
 
-
 	@Override
+	@Nullable
 	public String getDefaultMessage() {
 		return defaultMessage;
 	}
