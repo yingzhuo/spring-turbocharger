@@ -1,7 +1,5 @@
 package com.github.yingzhuo.turbocharger.secret;
 
-import com.github.yingzhuo.turbocharger.util.SignatureUtils;
-
 import java.io.Serializable;
 import java.security.KeyPair;
 import java.security.PrivateKey;
